@@ -1,5 +1,5 @@
---- config/devd.c.orig	2014-12-16 23:03:10 UTC
-+++ config/devd.c
+--- config/devd.c.orig	2014-12-22 10:28:36.549499138 +0100
++++ config/devd.c	2014-12-22 10:56:42.593381919 +0100
 @@ -0,0 +1,530 @@
 +/*
 + * Copyright (c) 2012 Baptiste Daroussin
@@ -376,7 +376,7 @@
 +}
 +
 +static CARD32
-+reconnect_handler(OsTimerPtr timer, CARD32 time, pointer arg)
++reconnect_handler(OsTimerPtr timer, CARD32 time, void *arg)
 +{
 +	int newsock;
 +
