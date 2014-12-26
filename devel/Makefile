@@ -1200,6 +1200,7 @@
     SUBDIR += linux-c6-dbus-glib
     SUBDIR += linux-c6-dbus-libs
     SUBDIR += linux-c6-devtools
+    SUBDIR += linux-c6-libgfortran
     SUBDIR += linux-c6-libglade2
     SUBDIR += linux-c6-libpciaccess
     SUBDIR += linux-c6-libsigc++20
@@ -3726,6 +3727,7 @@
     SUBDIR += py-fake-factory
     SUBDIR += py-fam
     SUBDIR += py-fastimport
+    SUBDIR += py-filemagic
     SUBDIR += py-fileutils
     SUBDIR += py-five.customerize
     SUBDIR += py-five.formlib
@@ -3742,6 +3744,7 @@
     SUBDIR += py-fudge
     SUBDIR += py-funcparserlib
     SUBDIR += py-fusefs
+    SUBDIR += py-future
     SUBDIR += py-futures
     SUBDIR += py-game
     SUBDIR += py-gamin

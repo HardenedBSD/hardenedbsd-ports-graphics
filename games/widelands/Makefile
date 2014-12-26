@@ -3,7 +3,7 @@
 
 PORTNAME=	widelands
 DISTVERSION=	build18
-PORTREVISION=	5
+PORTREVISION=	6
 CATEGORIES=	games
 MASTER_SITES=	https://launchpadlibrarian.net/167260749/ \
 		http://mirror.amdmi3.ru/distfiles/
@@ -30,6 +30,8 @@ USE_SDL=	sdl mixer image net ttf gfx
 
 PLIST_FILES=	bin/widelands
 PORTDATA=	*
+PLIST_DIRS=	%%DATADIR%%/maps/Desert\ Tournament.wmf/scripting \
+		%%DATADIR%%/maps/Swamp\ Monks.wmf/scripting
 
 DESKTOP_ENTRIES="Widelands" \
 		"" \
