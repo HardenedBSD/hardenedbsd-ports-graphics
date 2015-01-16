@@ -1033,15 +1033,5 @@ bin/dm_zdump
 %%SITE_PERL%%/Date/Manip/TZdata.pod
 %%SITE_PERL%%/Date/Manip/Zones.pm
 %%SITE_PERL%%/Date/Manip/Zones.pod
-%%SITE_PERL%%/%%PERL_ARCH%%/auto/Date/Manip/.packlist
 man/man1/dm_date.1.gz
 man/man1/dm_zdump.1.gz
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Date/Manip
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Date
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%
-@dirrm %%SITE_PERL%%/Date/Manip/TZ
-@dirrm %%SITE_PERL%%/Date/Manip/Offset
-@dirrm %%SITE_PERL%%/Date/Manip/Lang
-@dirrm %%SITE_PERL%%/Date/Manip
-@dirrmtry %%SITE_PERL%%/Date

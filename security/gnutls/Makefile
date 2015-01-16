@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	gnutls
-PORTVERSION=	3.2.19
+PORTVERSION=	3.2.21
 CATEGORIES=	security net
 MASTER_SITES=	GNUPG/gnutls/v3.2
 

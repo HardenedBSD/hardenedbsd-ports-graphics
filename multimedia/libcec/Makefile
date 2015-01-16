@@ -17,7 +17,7 @@ GH_ACCOUNT=	Pulse-Eight
 GH_COMMIT=	81e3821
 GH_TAGNAME=	${PORTNAME}-${PORTVERSION}-repack
 
-USES=		pathfix pkgconfig libtool
+USES=		alias pathfix pkgconfig libtool
 PATHFIX_MAKEFILEIN=Makefile.am
 USE_AUTOTOOLS=	aclocal autoheader automake autoconf libtoolize
 ACLOCAL_ARGS=	-I.
@@ -27,5 +27,11 @@ INSTALL_TARGET=	install-strip
 
 post-patch:
 	${REINPLACE_CMD} 's;-Wno-psabi;;' ${WRKSRC}/configure.ac
+
+.include <bsd.port.options.mk>
+
+.if ${ARCH} == armv6
+CONFIGURE_ARGS=	--disable-rpi
+.endif
 
 .include <bsd.port.mk>

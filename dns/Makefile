@@ -53,6 +53,7 @@
     SUBDIR += firedns
     SUBDIR += fpdns
     SUBDIR += gdnsd
+    SUBDIR += gdnsd2
     SUBDIR += geta
     SUBDIR += getdns
     SUBDIR += ghtool
@@ -138,10 +139,10 @@
     SUBDIR += p5-pgeodns
     SUBDIR += pdnsd
     SUBDIR += pear-File_DNS
+    SUBDIR += pear-Horde_Idna
     SUBDIR += pear-Net_DNS
     SUBDIR += pear-Net_DNS2
     SUBDIR += powerdns
-    SUBDIR += powerdns-devel
     SUBDIR += powerdns-recursor
     SUBDIR += py-adns
     SUBDIR += py-bonjour
@@ -176,6 +177,7 @@
     SUBDIR += vizone
     SUBDIR += walker
     SUBDIR += wdns
+    SUBDIR += wrapsrv
     SUBDIR += yadifa
     SUBDIR += zkt
     SUBDIR += zonecheck

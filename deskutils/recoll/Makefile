@@ -3,7 +3,7 @@
 
 PORTNAME=	recoll
 PORTVERSION=	1.19.14
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	deskutils
 MASTER_SITES=	http://www.lesbonscomptes.com/${PORTNAME}/
 
@@ -16,7 +16,7 @@ BUILD_DEPENDS=	xapian-core>=0:${PORTSDIR}/databases/xapian-core
 RUN_DEPENDS:=	${BUILD_DEPENDS} \
 		antiword:${PORTSDIR}/textproc/antiword \
 		catdoc:${PORTSDIR}/textproc/catdoc \
-		wpd2html:${PORTSDIR}/textproc/libwpd \
+		wpd2html:${PORTSDIR}/textproc/libwpd010 \
 		xsltproc:${PORTSDIR}/textproc/libxslt \
 		unrar:${PORTSDIR}/archivers/unrar \
 		unrtf:${PORTSDIR}/textproc/unrtf
@@ -49,7 +49,7 @@ LATEX_RUN_DEPENDS=	detex:${PORTSDIR}/print/detex \
 			dvips:${PORTSDIR}/print/tex-dvipsk
 PDF_RUN_DEPENDS=	xpdf:${PORTSDIR}/graphics/xpdf
 PS_RUN_DEPENDS=		pstotext:${PORTSDIR}/print/pstotext
-PYTHON_USE=		python=yes
+PYTHON_USES=		python
 PYTHON_CONFIGURE_ENABLE=	python-module
 QT4_USE=		qt4=moc_build,qmake_build,rcc_build,uic_build \
 			qt4=iconengines_run,imageformats_run \

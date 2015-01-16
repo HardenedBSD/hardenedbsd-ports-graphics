@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	fluxbox
-PORTVERSION=	1.3.5
-PORTREVISION=	1
+PORTVERSION=	1.3.6
 CATEGORIES=	x11-wm
 MASTER_SITES=	SF
 DISTFILES=	${PORTNAME}-${PORTVERSION}${EXTRACT_SUFX}
@@ -65,7 +64,7 @@ PLIST_SUB+=		DOCPDF="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MIMLIB2}
-USE_EFL+=		imlib2
+LIB_DEPENDS+=		libImlib2.so:${PORTSDIR}/graphics/imlib2
 CONFIGURE_ARGS+=	--enable-imlib2
 .else
 CONFIGURE_ARGS+=	--disable-imlib2

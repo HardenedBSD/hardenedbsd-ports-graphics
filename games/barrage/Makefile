@@ -3,11 +3,11 @@
 
 PORTNAME=	barrage
 PORTVERSION=	1.0.4
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	games
 MASTER_SITES=	SF/lgames/${PORTNAME}/
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Destroy as many targets as possible
 
 LICENSE=	GPLv2 # or later

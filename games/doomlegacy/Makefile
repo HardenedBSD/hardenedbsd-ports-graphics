@@ -3,7 +3,7 @@
 
 PORTNAME=	doomlegacy
 DISTVERSION=	1.45_beta1
-PORTREVISION=	1
+PORTREVISION=	2
 PORTEPOCH=	1
 CATEGORIES=	games
 MASTER_SITES=	SF/${PORTNAME}/${DISTVERSION:S,_,%20,}/
@@ -11,7 +11,7 @@ DISTNAME=	${PORTNAME}_${DISTVERSION}_source
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
 		${PORTNAME}_${DISTVERSION}_common.zip
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Improved and extended version of Doom
 
 LICENSE=	GPLv2
@@ -22,6 +22,7 @@ USE_SDL=	mixer sdl
 
 CFLAGS+=	-DSVN_REV=\\\"1107\\\"
 WRKSRC=		${WRKDIR}/${DISTNAME:S,_beta1,,}/src
+MAKE_JOBS_UNSAFE=	yes
 
 PLIST_FILES=	bin/${PORTNAME} share/doom/legacy.wad
 PORTDOCS=	*

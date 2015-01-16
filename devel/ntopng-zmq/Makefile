@@ -9,10 +9,13 @@ MASTER_SITES=	http://download.zeromq.org/
 PKGNAMEPREFIX=	ntopng-
 DISTNAME=	zeromq-${DISTVERSION}
 
-MAINTAINER=	5u623l20@gmail.com
+MAINTAINER=	bofh@FreeBSD.org
 COMMENT=	NTOPNG specific ZMQ library
 
 LICENSE=	LGPL3
+
+DEPRECATED=	No longer required after net/ntopng 1.1
+EXPIRATION_DATE=	2015-02-04
 
 CONFIGURE_ARGS=	--disable-silent-rules --without-documentation
 GNU_CONFIGURE=	yes

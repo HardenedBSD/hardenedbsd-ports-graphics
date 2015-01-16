@@ -3,11 +3,12 @@
 
 PORTNAME=	Color-Rgb
 PORTVERSION=	1.4
+PORTREVISION=	1
 CATEGORIES=	graphics perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
 
-MAINTAINER=	rafan@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Simple rgb.txt parsing class
 
 USES=		perl5

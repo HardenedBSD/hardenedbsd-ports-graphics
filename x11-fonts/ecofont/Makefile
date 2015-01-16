@@ -7,7 +7,7 @@ CATEGORIES=	x11-fonts
 MASTER_SITES=	http://www.ecofont.com/assets/files/
 DISTNAME=	ecofont_vera_sans_regular
 
-MAINTAINER=	jsa@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Environmentally friendly, ink saving typeface
 
 BUILD_DEPENDS=	fc-cache:${PORTSDIR}/x11-fonts/fontconfig
@@ -17,7 +17,6 @@ USES=		zip
 NO_BUILD=	yes
 
 PLIST_FILES=	${ECOFONTDIR}/${ECOFONT}
-PLIST_DIRS=	${ECOFONTDIR}
 
 SUB_LIST=	ECOFONTDIR="${PREFIX}/${ECOFONTDIR}"
 SUB_FILES=	pkg-message

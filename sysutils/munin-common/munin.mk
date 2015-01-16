@@ -1,8 +1,7 @@
-MUNIN_VERSION=	2.0.23
+MUNIN_VERSION=	2.0.25
 MUNIN_SITES=	SF/${PORTNAME}/stable/${MUNIN_VERSION}
-MUNIN_DISTINFO=	${PORTSDIR}/sysutils/munin-common/distinfo
-MUNIN_PATCHES=	${PORTSDIR}/sysutils/munin-common/files/patch-Makefile \
-		${PORTSDIR}/sysutils/munin-common/files/patch-Makefile.config
+DISTINFO_FILE=	${PORTSDIR}/sysutils/munin-common/distinfo
+PATCHDIR=	${.CURDIR}/../../sysutils/munin-common/files
 
 PORTSCOUT=	limit:^2\.0\.
 

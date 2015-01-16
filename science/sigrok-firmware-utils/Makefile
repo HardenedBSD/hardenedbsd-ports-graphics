@@ -3,6 +3,7 @@
 
 PORTNAME=	firmware
 PORTVERSION=	20140418
+PORTREVISION=	1
 CATEGORIES=	science
 MASTER_SITES=	#none
 PKGNAMEPREFIX=	sigrok-
@@ -14,7 +15,7 @@ COMMENT=	Sigrok firmware extraction utils
 
 LICENSE=	GPLv2
 
-USE_PYTHON=	3
+USES=		python:3
 NO_BUILD=	yes
 
 PORTDOCS=	README.parsepe

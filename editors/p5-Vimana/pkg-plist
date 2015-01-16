@@ -28,7 +28,6 @@
 %%SITE_PERL%%/Vimana/VimOnline.pm
 %%SITE_PERL%%/Vimana/VimOnline/ScriptPage.pm
 %%SITE_PERL%%/Vimana/VimOnline/Search.pm
-%%SITE_PERL%%/%%PERL_ARCH%%/auto/Vimana/.packlist
 %%PERL5_MAN3%%/Vimana.3.gz
 %%PERL5_MAN3%%/Vimana::Command::Download.3.gz
 %%PERL5_MAN3%%/Vimana::Command::Install.3.gz
@@ -49,8 +48,3 @@ man/man1/vim_record.1.gz
 man/man1/vimana.1.gz
 bin/vimana
 bin/vim_record
-@dirrmtry %%SITE_PERL%%/Vimana/VimOnline
-@dirrmtry %%SITE_PERL%%/Vimana/Installer
-@dirrmtry %%SITE_PERL%%/Vimana/Command
-@dirrmtry %%SITE_PERL%%/Vimana
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Vimana

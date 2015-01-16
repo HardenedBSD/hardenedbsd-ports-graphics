@@ -4,14 +4,14 @@ PORTNAME=	nextgo
 PORTVERSION=	3.0
 PORTREVISION=	4
 CATEGORIES=	games gnustep
-MASTER_SITES=	${MASTER_SITE_SAVANNAH}
-MASTER_SITE_SUBDIR=	gap
+MASTER_SITES=	SAVANNAH/gap
 DISTNAME=	NeXTGo-${PORTVERSION}
 
 MAINTAINER=	ports@FreeBSD.org
-COMMENT=	classic Go game for OPENSTEP/GNUstep
+COMMENT=	Classic Go game for OPENSTEP/GNUstep
 
-LICENSE=	GPLv2
+LICENSE=	GPLv1
+LICENSE_FILE=	${WRKSRC}/COPYING
 
 USE_GNUSTEP=	yes
 USE_GNUSTEP_BACK=	yes
@@ -23,5 +23,8 @@ post-patch:
 		${WRKSRC}/GNUmakefile
 	${REINPLACE_CMD} -e 's|PSWait|myPSWait|' \
 		${WRKSRC}/Board.m
+
+post-install:
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/Local/Applications/NeXTGo.app/NeXTGo
 
 .include <bsd.port.mk>

@@ -296,8 +296,6 @@
 %%PYPY_LIBDIR%%/ctypes/test/test_checkretval.pyc
 %%PYPY_LIBDIR%%/ctypes/test/test_delattr.py
 %%PYPY_LIBDIR%%/ctypes/test/test_delattr.pyc
-%%PYPY_LIBDIR%%/ctypes/test/test_errcheck.py
-%%PYPY_LIBDIR%%/ctypes/test/test_errcheck.pyc
 %%PYPY_LIBDIR%%/ctypes/test/test_errno.py
 %%PYPY_LIBDIR%%/ctypes/test/test_errno.pyc
 %%PYPY_LIBDIR%%/ctypes/test/test_find.py
@@ -312,8 +310,6 @@
 %%PYPY_LIBDIR%%/ctypes/test/test_incomplete.pyc
 %%PYPY_LIBDIR%%/ctypes/test/test_init.py
 %%PYPY_LIBDIR%%/ctypes/test/test_init.pyc
-%%PYPY_LIBDIR%%/ctypes/test/test_integers.py
-%%PYPY_LIBDIR%%/ctypes/test/test_integers.pyc
 %%PYPY_LIBDIR%%/ctypes/test/test_internals.py
 %%PYPY_LIBDIR%%/ctypes/test/test_internals.pyc
 %%PYPY_LIBDIR%%/ctypes/test/test_keeprefs.py
@@ -1044,6 +1040,13 @@
 %%PYPY_LIBDIR%%/idlelib/IOBinding.pyc
 %%PYPY_LIBDIR%%/idlelib/Icons/folder.gif
 %%PYPY_LIBDIR%%/idlelib/Icons/idle.icns
+%%PYPY_LIBDIR%%/idlelib/Icons/idle.ico
+%%PYPY_LIBDIR%%/idlelib/Icons/idle_16.gif
+%%PYPY_LIBDIR%%/idlelib/Icons/idle_16.png
+%%PYPY_LIBDIR%%/idlelib/Icons/idle_32.gif
+%%PYPY_LIBDIR%%/idlelib/Icons/idle_32.png
+%%PYPY_LIBDIR%%/idlelib/Icons/idle_48.gif
+%%PYPY_LIBDIR%%/idlelib/Icons/idle_48.png
 %%PYPY_LIBDIR%%/idlelib/Icons/minusnode.gif
 %%PYPY_LIBDIR%%/idlelib/Icons/openfolder.gif
 %%PYPY_LIBDIR%%/idlelib/Icons/plusnode.gif
@@ -1131,10 +1134,16 @@
 %%PYPY_LIBDIR%%/idlelib/idle_test/README.txt
 %%PYPY_LIBDIR%%/idlelib/idle_test/__init__.py
 %%PYPY_LIBDIR%%/idlelib/idle_test/__init__.pyc
+%%PYPY_LIBDIR%%/idlelib/idle_test/htest.py
+%%PYPY_LIBDIR%%/idlelib/idle_test/htest.pyc
 %%PYPY_LIBDIR%%/idlelib/idle_test/mock_idle.py
 %%PYPY_LIBDIR%%/idlelib/idle_test/mock_idle.pyc
 %%PYPY_LIBDIR%%/idlelib/idle_test/mock_tk.py
 %%PYPY_LIBDIR%%/idlelib/idle_test/mock_tk.pyc
+%%PYPY_LIBDIR%%/idlelib/idle_test/test_autocomplete.py
+%%PYPY_LIBDIR%%/idlelib/idle_test/test_autocomplete.pyc
+%%PYPY_LIBDIR%%/idlelib/idle_test/test_autoexpand.py
+%%PYPY_LIBDIR%%/idlelib/idle_test/test_autoexpand.pyc
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_calltips.py
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_calltips.pyc
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_config_name.py
@@ -1145,8 +1154,12 @@
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_formatparagraph.pyc
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_grep.py
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_grep.pyc
+%%PYPY_LIBDIR%%/idlelib/idle_test/test_hyperparser.py
+%%PYPY_LIBDIR%%/idlelib/idle_test/test_hyperparser.pyc
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_idlehistory.py
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_idlehistory.pyc
+%%PYPY_LIBDIR%%/idlelib/idle_test/test_parenmatch.py
+%%PYPY_LIBDIR%%/idlelib/idle_test/test_parenmatch.pyc
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_pathbrowser.py
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_pathbrowser.pyc
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_rstrip.py
@@ -1155,6 +1168,8 @@
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_searchengine.pyc
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_text.py
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_text.pyc
+%%PYPY_LIBDIR%%/idlelib/idle_test/test_textview.py
+%%PYPY_LIBDIR%%/idlelib/idle_test/test_textview.pyc
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_warning.py
 %%PYPY_LIBDIR%%/idlelib/idle_test/test_warning.pyc
 %%PYPY_LIBDIR%%/idlelib/idlever.py
@@ -1260,10 +1275,18 @@
 %%PYPY_LIBDIR%%/lib-tk/test/runtktests.pyc
 %%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/__init__.py
 %%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/__init__.pyc
+%%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/test_geometry_managers.py
+%%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/test_geometry_managers.pyc
+%%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/test_images.py
+%%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/test_images.pyc
 %%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/test_loadtk.py
 %%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/test_loadtk.pyc
 %%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/test_text.py
 %%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/test_text.pyc
+%%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/test_variables.py
+%%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/test_variables.pyc
+%%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/test_widgets.py
+%%PYPY_LIBDIR%%/lib-tk/test/test_tkinter/test_widgets.pyc
 %%PYPY_LIBDIR%%/lib-tk/test/test_ttk/__init__.py
 %%PYPY_LIBDIR%%/lib-tk/test/test_ttk/__init__.pyc
 %%PYPY_LIBDIR%%/lib-tk/test/test_ttk/support.py
@@ -1276,6 +1299,8 @@
 %%PYPY_LIBDIR%%/lib-tk/test/test_ttk/test_style.pyc
 %%PYPY_LIBDIR%%/lib-tk/test/test_ttk/test_widgets.py
 %%PYPY_LIBDIR%%/lib-tk/test/test_ttk/test_widgets.pyc
+%%PYPY_LIBDIR%%/lib-tk/test/widget_tests.py
+%%PYPY_LIBDIR%%/lib-tk/test/widget_tests.pyc
 %%PYPY_LIBDIR%%/lib-tk/tkColorChooser.py
 %%PYPY_LIBDIR%%/lib-tk/tkColorChooser.pyc
 %%PYPY_LIBDIR%%/lib-tk/tkCommonDialog.py
@@ -1492,9 +1517,9 @@
 %%PYPY_LIBDIR%%/lib2to3/tests/test_util.pyc
 %%PYPY_LIBDIR%%/lib_pypy/__init__.py
 %%PYPY_LIBDIR%%/lib_pypy/__init__.pyc
-%%PYPY_LIBDIR%%/lib_pypy/__pycache__/_cffi__gb0420b02x359e5476.pypy-%%PYPY_VER%%.so
-%%PYPY_LIBDIR%%/lib_pypy/__pycache__/_cffi__gb1f15f1ex576c1bb2.pypy-%%PYPY_VER%%.so
-%%PYPY_LIBDIR%%/lib_pypy/__pycache__/_cffi__gf5132b8x39a3fadd.pypy-%%PYPY_VER%%.so
+%%PYPY_LIBDIR%%/lib_pypy/__pycache__/_cffi__g29b85a97xace1544d.pypy-%%PYPY_VER%%.so
+%%PYPY_LIBDIR%%/lib_pypy/__pycache__/_cffi__g5ebcbb41x576c1bb2.pypy-%%PYPY_VER%%.so
+%%PYPY_LIBDIR%%/lib_pypy/__pycache__/_cffi__g82f9edffx359e5476.pypy-%%PYPY_VER%%.so
 %%PYPY_LIBDIR%%/lib_pypy/_codecs_cn.py
 %%PYPY_LIBDIR%%/lib_pypy/_codecs_cn.pyc
 %%PYPY_LIBDIR%%/lib_pypy/_codecs_hk.py
@@ -2488,6 +2513,7 @@
 %%PYPY_LIBDIR%%/test/autotest.pyc
 %%PYPY_LIBDIR%%/test/bad_coding.py
 %%PYPY_LIBDIR%%/test/bad_coding2.py
+%%PYPY_LIBDIR%%/test/bad_coding3.py
 %%PYPY_LIBDIR%%/test/badcert.pem
 %%PYPY_LIBDIR%%/test/badkey.pem
 %%PYPY_LIBDIR%%/test/badsyntax_future3.py
@@ -2723,6 +2749,17 @@
 %%PYPY_LIBDIR%%/test/greyrgb.uue
 %%PYPY_LIBDIR%%/test/https_svn_python_org_root.pem
 %%PYPY_LIBDIR%%/test/ieee754.txt
+%%PYPY_LIBDIR%%/test/imghdrdata/python.bmp
+%%PYPY_LIBDIR%%/test/imghdrdata/python.gif
+%%PYPY_LIBDIR%%/test/imghdrdata/python.jpg
+%%PYPY_LIBDIR%%/test/imghdrdata/python.pbm
+%%PYPY_LIBDIR%%/test/imghdrdata/python.pgm
+%%PYPY_LIBDIR%%/test/imghdrdata/python.png
+%%PYPY_LIBDIR%%/test/imghdrdata/python.ppm
+%%PYPY_LIBDIR%%/test/imghdrdata/python.ras
+%%PYPY_LIBDIR%%/test/imghdrdata/python.sgi
+%%PYPY_LIBDIR%%/test/imghdrdata/python.tiff
+%%PYPY_LIBDIR%%/test/imghdrdata/python.xbm
 %%PYPY_LIBDIR%%/test/infinite_reload.py
 %%PYPY_LIBDIR%%/test/infinite_reload.pyc
 %%PYPY_LIBDIR%%/test/inspect_fodder.py
@@ -3155,6 +3192,8 @@
 %%PYPY_LIBDIR%%/test/test_imaplib.pyc
 %%PYPY_LIBDIR%%/test/test_imgfile.py
 %%PYPY_LIBDIR%%/test/test_imgfile.pyc
+%%PYPY_LIBDIR%%/test/test_imghdr.py
+%%PYPY_LIBDIR%%/test/test_imghdr.pyc
 %%PYPY_LIBDIR%%/test/test_imp.py
 %%PYPY_LIBDIR%%/test/test_imp.pyc
 %%PYPY_LIBDIR%%/test/test_import.py
@@ -3417,6 +3456,8 @@
 %%PYPY_LIBDIR%%/test/test_softspace.pyc
 %%PYPY_LIBDIR%%/test/test_sort.py
 %%PYPY_LIBDIR%%/test/test_sort.pyc
+%%PYPY_LIBDIR%%/test/test_spwd.py
+%%PYPY_LIBDIR%%/test/test_spwd.pyc
 %%PYPY_LIBDIR%%/test/test_sqlite.py
 %%PYPY_LIBDIR%%/test/test_sqlite.pyc
 %%PYPY_LIBDIR%%/test/test_ssl.py
@@ -3793,105 +3834,3 @@
 %%PYPY_LIBDIR%%/xmlrpclib.pyc
 %%PYPY_LIBDIR%%/zipfile.py
 %%PYPY_LIBDIR%%/zipfile.pyc
-@dirrm %%PYPY_LIBDIR%%/xml/sax
-@dirrm %%PYPY_LIBDIR%%/xml/parsers
-@dirrm %%PYPY_LIBDIR%%/xml/etree
-@dirrm %%PYPY_LIBDIR%%/xml/dom
-@dirrm %%PYPY_LIBDIR%%/xml
-@dirrm %%PYPY_LIBDIR%%/wsgiref
-@dirrm %%PYPY_LIBDIR%%/unittest/test
-@dirrm %%PYPY_LIBDIR%%/unittest
-@dirrm %%PYPY_LIBDIR%%/test/xmltestdata
-@dirrm %%PYPY_LIBDIR%%/test/tracedmodules
-@dirrm %%PYPY_LIBDIR%%/test/subprocessdata
-@dirrm %%PYPY_LIBDIR%%/test/leakers
-@dirrm %%PYPY_LIBDIR%%/test/decimaltestdata
-@dirrm %%PYPY_LIBDIR%%/test/data
-@dirrm %%PYPY_LIBDIR%%/test/crashers
-@dirrm %%PYPY_LIBDIR%%/test/cjkencodings
-@dirrm %%PYPY_LIBDIR%%/test/audiodata
-@dirrm %%PYPY_LIBDIR%%/test
-@dirrm %%PYPY_LIBDIR%%/sqlite3/test
-@dirrm %%PYPY_LIBDIR%%/sqlite3
-@dirrmtry %%PYPY_LIBDIR%%/site-packages
-@dirrm %%PYPY_LIBDIR%%/pydoc_data
-@dirrm %%PYPY_LIBDIR%%/plat-unixware7
-@dirrm %%PYPY_LIBDIR%%/plat-sunos5
-@dirrm %%PYPY_LIBDIR%%/plat-riscos
-@dirrm %%PYPY_LIBDIR%%/plat-os2emx
-@dirrm %%PYPY_LIBDIR%%/plat-next3
-@dirrm %%PYPY_LIBDIR%%/plat-netbsd1
-@dirrm %%PYPY_LIBDIR%%/plat-mac/lib-scriptpackages/_builtinSuites
-@dirrm %%PYPY_LIBDIR%%/plat-mac/lib-scriptpackages/Terminal
-@dirrm %%PYPY_LIBDIR%%/plat-mac/lib-scriptpackages/SystemEvents
-@dirrm %%PYPY_LIBDIR%%/plat-mac/lib-scriptpackages/StdSuites
-@dirrm %%PYPY_LIBDIR%%/plat-mac/lib-scriptpackages/Netscape
-@dirrm %%PYPY_LIBDIR%%/plat-mac/lib-scriptpackages/Finder
-@dirrm %%PYPY_LIBDIR%%/plat-mac/lib-scriptpackages/Explorer
-@dirrm %%PYPY_LIBDIR%%/plat-mac/lib-scriptpackages/CodeWarrior
-@dirrm %%PYPY_LIBDIR%%/plat-mac/lib-scriptpackages
-@dirrm %%PYPY_LIBDIR%%/plat-mac/Carbon
-@dirrm %%PYPY_LIBDIR%%/plat-mac
-@dirrm %%PYPY_LIBDIR%%/plat-linux2
-@dirrm %%PYPY_LIBDIR%%/plat-irix6
-@dirrm %%PYPY_LIBDIR%%/plat-irix5
-@dirrm %%PYPY_LIBDIR%%/plat-generic
-@dirrm %%PYPY_LIBDIR%%/plat-freebsd8
-@dirrm %%PYPY_LIBDIR%%/plat-freebsd7
-@dirrm %%PYPY_LIBDIR%%/plat-freebsd6
-@dirrm %%PYPY_LIBDIR%%/plat-freebsd5
-@dirrm %%PYPY_LIBDIR%%/plat-freebsd4
-@dirrm %%PYPY_LIBDIR%%/plat-darwin
-@dirrm %%PYPY_LIBDIR%%/plat-beos5
-@dirrm %%PYPY_LIBDIR%%/plat-atheos
-@dirrm %%PYPY_LIBDIR%%/plat-aix4
-@dirrm %%PYPY_LIBDIR%%/plat-aix3
-@dirrm %%PYPY_LIBDIR%%/multiprocessing/dummy
-@dirrm %%PYPY_LIBDIR%%/multiprocessing
-@dirrm %%PYPY_LIBDIR%%/msilib
-@dirrm %%PYPY_LIBDIR%%/logging
-@dirrm %%PYPY_LIBDIR%%/lib_pypy/pyrepl
-@dirrm %%PYPY_LIBDIR%%/lib_pypy/ctypes_config_cache
-@dirrm %%PYPY_LIBDIR%%/lib_pypy/cffi/_pycparser/ply
-@dirrm %%PYPY_LIBDIR%%/lib_pypy/cffi/_pycparser
-@dirrm %%PYPY_LIBDIR%%/lib_pypy/cffi
-@dirrm %%PYPY_LIBDIR%%/lib_pypy/_tkinter
-@dirrm %%PYPY_LIBDIR%%/lib_pypy/_ctypes
-@dirrm %%PYPY_LIBDIR%%/lib_pypy/__pycache__
-@dirrm %%PYPY_LIBDIR%%/lib_pypy
-@dirrm %%PYPY_LIBDIR%%/lib2to3/tests/data/fixers/myfixes
-@dirrm %%PYPY_LIBDIR%%/lib2to3/tests/data/fixers
-@dirrm %%PYPY_LIBDIR%%/lib2to3/tests/data
-@dirrm %%PYPY_LIBDIR%%/lib2to3/tests
-@dirrm %%PYPY_LIBDIR%%/lib2to3/pgen2
-@dirrm %%PYPY_LIBDIR%%/lib2to3/fixes
-@dirrm %%PYPY_LIBDIR%%/lib2to3
-@dirrm %%PYPY_LIBDIR%%/lib-tk/test/test_ttk
-@dirrm %%PYPY_LIBDIR%%/lib-tk/test/test_tkinter
-@dirrm %%PYPY_LIBDIR%%/lib-tk/test
-@dirrm %%PYPY_LIBDIR%%/lib-tk
-@dirrm %%PYPY_LIBDIR%%/json/tests
-@dirrm %%PYPY_LIBDIR%%/json
-@dirrm %%PYPY_LIBDIR%%/importlib
-@dirrm %%PYPY_LIBDIR%%/idlelib/idle_test
-@dirrm %%PYPY_LIBDIR%%/idlelib/Icons
-@dirrm %%PYPY_LIBDIR%%/idlelib
-@dirrm %%PYPY_LIBDIR%%/hotshot
-@dirrm %%PYPY_LIBDIR%%/encodings
-@dirrm %%PYPY_LIBDIR%%/email/test/data
-@dirrm %%PYPY_LIBDIR%%/email/test
-@dirrm %%PYPY_LIBDIR%%/email/mime
-@dirrm %%PYPY_LIBDIR%%/email
-@dirrm %%PYPY_LIBDIR%%/distutils/tests
-@dirrm %%PYPY_LIBDIR%%/distutils/command
-@dirrm %%PYPY_LIBDIR%%/distutils
-@dirrm %%PYPY_LIBDIR%%/curses
-@dirrm %%PYPY_LIBDIR%%/ctypes/test
-@dirrm %%PYPY_LIBDIR%%/ctypes/macholib
-@dirrm %%PYPY_LIBDIR%%/ctypes
-@dirrm %%PYPY_LIBDIR%%/compiler
-@dirrm %%PYPY_LIBDIR%%/bsddb/test
-@dirrm %%PYPY_LIBDIR%%/bsddb
-@dirrmtry %%PYPY_LIBDIR%%
-@dirrm %%PYPY_INCLUDEDIR%%/numpy
-@dirrmtry %%PYPY_INCLUDEDIR%%

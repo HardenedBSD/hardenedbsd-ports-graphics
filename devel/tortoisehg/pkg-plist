@@ -111,12 +111,12 @@ bin/thg
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/htmlui.py
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/htmlui.pyc
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/htmlui.pyo
-%%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/i18n.py
-%%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/i18n.pyc
-%%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/i18n.pyo
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/icons_rc.py
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/icons_rc.pyc
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/icons_rc.pyo
+%%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/infobar.py
+%%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/infobar.pyc
+%%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/infobar.pyo
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/lexers.py
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/lexers.pyc
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/lexers.pyo
@@ -153,6 +153,9 @@ bin/thg
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/postreview_ui.py
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/postreview_ui.pyc
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/postreview_ui.pyo
+%%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/prune.py
+%%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/prune.pyc
+%%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/prune.pyo
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/purge.py
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/purge.pyc
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/purge.pyo
@@ -264,9 +267,6 @@ bin/thg
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/thgstrip.py
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/thgstrip.pyc
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/thgstrip.pyo
-%%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/thread.py
-%%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/thread.pyc
-%%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/thread.pyo
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/update.py
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/update.pyc
 %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt/update.pyo
@@ -312,6 +312,9 @@ bin/thg
 %%PYTHON_SITELIBDIR%%/tortoisehg/util/gpg.py
 %%PYTHON_SITELIBDIR%%/tortoisehg/util/gpg.pyc
 %%PYTHON_SITELIBDIR%%/tortoisehg/util/gpg.pyo
+%%PYTHON_SITELIBDIR%%/tortoisehg/util/hgcommands.py
+%%PYTHON_SITELIBDIR%%/tortoisehg/util/hgcommands.pyc
+%%PYTHON_SITELIBDIR%%/tortoisehg/util/hgcommands.pyo
 %%PYTHON_SITELIBDIR%%/tortoisehg/util/hgdispatch.py
 %%PYTHON_SITELIBDIR%%/tortoisehg/util/hgdispatch.pyc
 %%PYTHON_SITELIBDIR%%/tortoisehg/util/hgdispatch.pyo
@@ -585,28 +588,3 @@ share/pixmaps/tortoisehg/icons/svg/thg_logo.svg
 share/pixmaps/tortoisehg/icons/thg_logo.ico
 share/pixmaps/tortoisehg/icons/thg_logo_92x50.png
 share/tortoisehg/mergetools.rc
-@dirrm share/tortoisehg
-@dirrm share/pixmaps/tortoisehg/icons/16x16/mimetypes
-@dirrm share/pixmaps/tortoisehg/icons/16x16/apps
-@dirrm share/pixmaps/tortoisehg/icons/16x16
-@dirrm share/pixmaps/tortoisehg/icons/22x22/actions
-@dirrm share/pixmaps/tortoisehg/icons/22x22
-@dirrm share/pixmaps/tortoisehg/icons/24x24/actions
-@dirrm share/pixmaps/tortoisehg/icons/24x24
-@dirrm share/pixmaps/tortoisehg/icons/32x32/actions
-@dirrm share/pixmaps/tortoisehg/icons/32x32
-@dirrm share/pixmaps/tortoisehg/icons/scalable/apps
-@dirrm share/pixmaps/tortoisehg/icons/scalable/actions
-@dirrm share/pixmaps/tortoisehg/icons/scalable/status
-@dirrm share/pixmaps/tortoisehg/icons/scalable
-@dirrm share/pixmaps/tortoisehg/icons/svg
-@dirrm share/pixmaps/tortoisehg/icons
-@dirrm share/pixmaps/tortoisehg
-%%NLS%%@dirrmtry share/locale/jv/LC_MESSAGES
-%%NLS%%@dirrmtry share/locale/jv
-@dirrm %%PYTHON_SITELIBDIR%%/tortoisehg/util
-@dirrm %%PYTHON_SITELIBDIR%%/tortoisehg/hgqt
-@dirrm %%PYTHON_SITELIBDIR%%/tortoisehg
-%%NAUTILUS%%@dirrmtry lib/nautilus/extensions-2.0/python
-%%NAUTILUS%%@dirrmtry lib/nautilus/extensions-2.0
-%%NAUTILUS%%@dirrmtry lib/nautilus

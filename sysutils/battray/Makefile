@@ -9,10 +9,13 @@ MASTER_SITES=	${MASTER_SITE_GOOGLE_CODE}
 MAINTAINER=	martin@arp242.net
 COMMENT=	Display notebook battery status in tray
 
-LICENSE=	BSD
+LICENSE=	CCS+
+LICENSE_NAME=	Creative Commons Sampling Plus
+LICENSE_TEXT=	http://creativecommons.org/licenses/sampling+/1.0/
+LICENSE_PERMS=	dist-mirror pkg-mirror auto-accept
 
 USE_GNOME=	pygtk2
-USE_PYTHON=	yes
-USE_PYDISTUTILS=yes
+USES=		python
+USE_PYTHON=	distutils
 
 .include <bsd.port.mk>

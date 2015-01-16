@@ -3,6 +3,7 @@
 
 PORTNAME=	MongoDB
 PORTVERSION=	0.702.2
+PORTREVISION=	1
 CATEGORIES=	databases perl5
 MASTER_SITES=	CPAN
 MASTER_SITE_SUBDIR=	CPAN:FRIEDO
@@ -24,6 +25,8 @@ TEST_DEPENDS=	p5-Data-Types>=0:${PORTSDIR}/devel/p5-Data-Types \
 		p5-JSON>=0:${PORTSDIR}/converters/p5-JSON \
 		p5-Test-Exception>=0:${PORTSDIR}/devel/p5-Test-Exception \
 		p5-Try-Tiny>=0:${PORTSDIR}/lang/p5-Try-Tiny
+
+PORTSCOUT=	limit:^[0-9\.]*$$
 
 MAKE_JOBS_UNSAFE=	yes
 USES=		perl5

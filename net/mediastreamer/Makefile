@@ -3,11 +3,11 @@
 
 PORTNAME=	mediastreamer
 PORTVERSION=	2.10.0
-PORTREVISION=	6
+PORTREVISION=	8
 CATEGORIES=	net
 MASTER_SITES=	SAVANNAH/linphone/mediastreamer
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	tijl@FreeBSD.org
 COMMENT=	Real-time audio and video streaming and processing
 
 LICENSE=	GPLv2
@@ -57,7 +57,7 @@ OPUS_CONFIGURE_ENABLE=	opus
 OPUS_LIB_DEPENDS=	libopus.so:${PORTSDIR}/audio/opus
 
 SPANDSP_CONFIGURE_ENABLE=	spandsp
-SPANDSP_LIB_DEPENDS=	libspandsp.so.2:${PORTSDIR}/comms/spandsp-devel
+SPANDSP_LIB_DEPENDS=	libspandsp.so:${PORTSDIR}/comms/spandsp
 
 SPEEX_CONFIGURE_ENABLE=	speex
 SPEEX_LIB_DEPENDS=	libspeex.so:${PORTSDIR}/audio/speex
@@ -69,6 +69,8 @@ UPNP_CONFIGURE_ENABLE=	upnp
 UPNP_LIB_DEPENDS=	libupnp.so:${PORTSDIR}/devel/upnp
 
 V4L_CONFIGURE_ENABLE=	libv4l1 libv4l2
+V4L_CONFIGURE_OFF=	ac_cv_header_linux_videodev_h=no \
+			ac_cv_header_linux_videodev2_h=no
 V4L_BUILD_DEPENDS=	v4l_compat>=1.0.20120501:${PORTSDIR}/multimedia/v4l_compat
 V4L_LIB_DEPENDS=	libv4l2.so:${PORTSDIR}/multimedia/libv4l
 

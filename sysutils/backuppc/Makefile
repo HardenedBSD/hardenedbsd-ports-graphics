@@ -3,14 +3,14 @@
 
 PORTNAME=	backuppc
 PORTVERSION=	3.3.0
-PORTREVISION=	7
+PORTREVISION=	8
 CATEGORIES=	sysutils
 MASTER_SITES=	SF
 MASTER_SITE_SUBDIR=	${PORTNAME}/${PORTNAME}/${PORTVERSION}
 DISTNAME=	BackupPC-${PORTVERSION}
 
 MAINTAINER=	moiseev@mezonplus.ru
-COMMENT=	System for backing PCs and laptops to a server
+COMMENT=	Multi-platform backup to disk-based storage
 
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE

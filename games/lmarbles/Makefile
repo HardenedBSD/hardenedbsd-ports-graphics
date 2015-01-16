@@ -3,14 +3,14 @@
 
 PORTNAME=	lmarbles
 PORTVERSION=	1.0.8
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	games
 MASTER_SITES=	SF/lgames/${PORTNAME} \
 		SF/nemysisfreebsdp/${CATEGORIES}/:icons
 DISTFILES=	${PORTNAME}-${DISTVERSION}${EXTRACT_SUFX} \
 		${PORTNAME}_icons${EXTRACT_SUFX}:icons
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Atomix-like game of moving marbles in puzzles
 
 LICENSE=	GPLv2

@@ -4,13 +4,14 @@
 PORTNAME=	netwalker-ircc
 PORTVERSION=	0.5.0
 CATEGORIES=	irc
-MASTER_SITES=	CRITICAL
-EXTRACT_SUFX=	.tgz
+MASTER_SITES=	LOCAL/ehaupt
 
 MAINTAINER=	ehaupt@FreeBSD.org
 COMMENT=	Lightweight curses-based IRC client
 
 LICENSE=	GPLv2
+
+USES=		tar:tgz
 
 LDFLAGS+=	-lncurses ${PTHREAD_LIBS}
 

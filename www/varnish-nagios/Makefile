@@ -7,7 +7,7 @@ CATEGORIES=	www
 MASTER_SITES=	http://repo.varnish-cache.org/source/ \
 		http://anders.fupp.net/distfiles/
 
-MAINTAINER=	anders@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Nagios plugin to check status of Varnish
 
 BUILD_DEPENDS=	${LOCALBASE}/include/varnish/varnishapi.h:${PORTSDIR}/www/varnish
@@ -18,7 +18,6 @@ GNU_CONFIGURE=	yes
 
 USES=		pkgconfig
 
-PLIST_DIRSTRY=	libexec/nagios
 PLIST_FILES=	libexec/nagios/check_varnish
 
 do-install:

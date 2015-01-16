@@ -51,6 +51,7 @@
     SUBDIR += baudline
     SUBDIR += beast
     SUBDIR += beets
+    SUBDIR += bcg729
     SUBDIR += blop
     SUBDIR += boodler
     SUBDIR += bristol
@@ -75,7 +76,6 @@
     SUBDIR += cmt
     SUBDIR += cmus
     SUBDIR += cmus-post.fm
-    SUBDIR += cowbell
     SUBDIR += cpige
     SUBDIR += cplay
     SUBDIR += cpp-xmms2
@@ -85,7 +85,6 @@
     SUBDIR += csound
     SUBDIR += csound6
     SUBDIR += ctronome
-    SUBDIR += cuberok
     SUBDIR += cue2toc
     SUBDIR += cueplayer
     SUBDIR += cuetools
@@ -148,6 +147,7 @@
     SUBDIR += festvox-rab16
     SUBDIR += festvox-rab8
     SUBDIR += festvox-russian
+    SUBDIR += filter_audio
     SUBDIR += firefly
     SUBDIR += flac
     SUBDIR += flac123
@@ -200,6 +200,7 @@
     SUBDIR += gnaural
     SUBDIR += gnome-audio
     SUBDIR += gnome-media
+    SUBDIR += gnome-music
     SUBDIR += gnomoradio
     SUBDIR += gnormalize
     SUBDIR += gnuitar
@@ -263,6 +264,7 @@
     SUBDIR += gstreamer1-plugins-modplug
     SUBDIR += gstreamer1-plugins-ogg
     SUBDIR += gstreamer1-plugins-opus
+    SUBDIR += gstreamer1-plugins-pulse
     SUBDIR += gstreamer1-plugins-shout2
     SUBDIR += gstreamer1-plugins-sidplay
     SUBDIR += gstreamer1-plugins-soundtouch
@@ -599,6 +601,7 @@
     SUBDIR += py-eyed3
     SUBDIR += py-eyed3-06
     SUBDIR += py-fastaudio
+    SUBDIR += py-gmusicapi
     SUBDIR += py-id3
     SUBDIR += py-karaoke
     SUBDIR += py-mad
@@ -692,6 +695,7 @@
     SUBDIR += sox
     SUBDIR += specimen
     SUBDIR += speex
+    SUBDIR += speexdsp
     SUBDIR += spek
     SUBDIR += sphinx
     SUBDIR += sphinx3

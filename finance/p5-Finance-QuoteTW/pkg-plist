@@ -1,4 +1,3 @@
-%%SITE_PERL%%/%%PERL_ARCH%%/auto/Finance/QuoteTW/.packlist
 %%SITE_PERL%%/Finance/QuoteTW.pm
 %%SITE_PERL%%/Finance/QuoteTW/Allianz.pm
 %%SITE_PERL%%/Finance/QuoteTW/Blackrock.pm
@@ -19,7 +18,3 @@
 %%PERL5_MAN3%%/Finance::QuoteTW::Paradigm.3.gz
 %%PERL5_MAN3%%/Finance::QuoteTW::Schroders.3.gz
 %%PERL5_MAN3%%/Finance::QuoteTW::Tisc.3.gz
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Finance/QuoteTW
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Finance
-@dirrmtry %%SITE_PERL%%/Finance/QuoteTW
-@dirrmtry %%SITE_PERL%%/Finance

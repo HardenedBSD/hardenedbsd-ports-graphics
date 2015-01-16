@@ -33,13 +33,4 @@ bin/xgettext.pl
 %%SITE_PERL%%/Locale/Maketext/Lexicon/Gettext.pm
 %%SITE_PERL%%/Locale/Maketext/Lexicon/Msgcat.pm
 %%SITE_PERL%%/Locale/Maketext/Lexicon/Tie.pm
-%%SITE_PERL%%/%%PERL_ARCH%%/auto/Locale/Maketext/Lexicon/.packlist
 man/man1/xgettext.pl.1.gz
-@dirrm %%SITE_PERL%%/%%PERL_ARCH%%/auto/Locale/Maketext/Lexicon
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Locale/Maketext
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Locale
-@dirrm %%SITE_PERL%%/Locale/Maketext/Lexicon
-@dirrmtry %%SITE_PERL%%/Locale/Maketext/Extract/Plugin
-@dirrmtry %%SITE_PERL%%/Locale/Maketext/Extract
-@dirrmtry %%SITE_PERL%%/Locale/Maketext
-@dirrmtry %%SITE_PERL%%/Locale

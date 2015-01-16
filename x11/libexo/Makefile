@@ -3,7 +3,7 @@
 
 PORTNAME=	libexo
 PORTVERSION=	0.10.2
-PORTREVISION=	3
+PORTREVISION=	5
 CATEGORIES=	x11 xfce
 MASTER_SITES=	${MASTER_SITE_XFCE}
 MASTER_SITE_SUBDIR=	src/xfce/exo/${PORTVERSION:R}
@@ -12,6 +12,11 @@ DIST_SUBDIR=	xfce4
 
 MAINTAINER=	xfce@FreeBSD.org
 COMMENT=	Application library for the Xfce desktop environment
+
+LICENSE=	GPLv2 LGPL21
+LICENSE_COMB=	multi
+LICENSE_DISTFILES=	${WRKSRC}/COPYING \
+	${WRKSRC}/COPYING.LIB
 
 BUILD_DEPENDS=	p5-URI>=1.60:${PORTSDIR}/net/p5-URI
 RUN_DEPENDS=	p5-URI>=1.60:${PORTSDIR}/net/p5-URI
@@ -22,7 +27,7 @@ DOCSDIR=	${PREFIX}/share/doc/${PORTNAME:S/lib//}
 GNU_CONFIGURE=	yes
 INSTALLS_ICONS=	yes
 INSTALL_TARGET=	install-strip
-USES=		desktop-file-utils gmake libtool:oldver pathfix perl5 \
+USES=		desktop-file-utils gmake libtool pathfix perl5 \
 		pkgconfig tar:bzip2
 USE_GNOME=	glib20 gtk20 intltool intlhack
 USE_LDCONFIG=	yes
@@ -49,5 +54,9 @@ PLIST_SUB+=	NLS=""
 CONFIGURE_ARGS+=--disable-nls
 PLIST_SUB+=	NLS="@comment "
 .endif
+
+post-patch:
+	${REINPLACE_CMD} -e 's|internet-mail|mail-send|' \
+		${WRKSRC}/exo-open/exo-mail-reader.desktop.in
 
 .include <bsd.port.mk>

@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	freeradius
-DISTVERSION=	3.0.4
+DISTVERSION=	3.0.6
+PORTREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.freeradius.org/pub/freeradius/%SUBDIR%/ \
 		ftp://ftp.ntua.gr/pub/net/radius/freeradius/%SUBDIR%/ \
@@ -139,7 +140,7 @@ PLIST_SUB+=	MYSQL="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MPGSQL}
-USE_PGSQL=	YES
+USES+=		pgsql
 CONFIGURE_ARGS+=--with-rlm_sql_postgresql
 PLIST_SUB+=	PGSQL=""
 _REQUIRE+=	postgresql
@@ -181,7 +182,7 @@ PLIST_SUB+=	RLMPERL="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MPYTHON}
-USE_PYTHON=	yes
+USES+=		python
 CONFIGURE_ARGS+=--with-rlm_python \
 		--with-rlm-python-lib-dir=${PYTHON_LIBDIR} \
 		--with-rlm-python-include-dir=${PYTHON_INCLUDEDIR}
@@ -333,6 +334,7 @@ CONFIGURE_ARGS+=--with-logdir=${LOGDIR} \
 		--without-rlm_yubikey \
 		--without-rlm_sql_oracle \
 		--without-rlm_securid \
+		--without-rlm_cache_memcached \
 		--with-vmps \
 		--with-collectdclient-lib-dir=/dev/null
 

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME?=	wireshark
-PORTVERSION=	1.12.1
+PORTVERSION=	1.12.3
 CATEGORIES=	net ipv6
 MASTER_SITES=	http://www.wireshark.org/download/src/ \
 		http://ftp.uni-kl.de/pub/wireshark/src/ \
@@ -161,8 +161,11 @@ CONFIGURE_ARGS+=--with-libgcrypt-prefix=${LOCALBASE}
 CONFIGURE_ARGS+=--with-krb5=no
 .endif
 
+PKG_MESSAGE=	${FILESDIR}/pkg-message
+
 post-patch:
 	@${REINPLACE_CMD} -e 's|llua|llua-${LUA_VER}|g ; \
+	    	s|-DGDK_PIXBUF_DISABLE_DEPRECATED||g ; \
 		s|-Wl,--as-needed|| ' \
 		${WRKSRC}/configure
 

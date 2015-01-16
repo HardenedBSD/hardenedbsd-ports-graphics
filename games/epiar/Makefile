@@ -3,10 +3,10 @@
 
 PORTNAME=	epiar
 PORTVERSION=	0.5.1
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	games
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Space trading/exploring sim with RPG elements
 
 LICENSE=	GPLv2 CCbyNCSA3

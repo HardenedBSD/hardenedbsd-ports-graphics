@@ -3,11 +3,11 @@
 
 PORTNAME=	madbomber
 PORTVERSION=	0.2.5
-PORTREVISION=	14
+PORTREVISION=	15
 CATEGORIES=	games
 MASTER_SITES=	ftp://ftp.tuxpaint.org/unix/x/madbomber/src/
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Clone of Activision's classic Atari 2600 console game "Kaboom!"
 
 LICENSE=	GPLv2

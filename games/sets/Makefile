@@ -3,7 +3,7 @@
 
 PORTNAME=	sets
 PORTVERSION=	1.0.0
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	games
 MASTER_SITES=	http://www.linuxmotors.com/sets/downloads/ \
 		SF/nemysisfreebsdp/${CATEGORIES}/:icons
@@ -11,7 +11,7 @@ DISTFILES=	${PORTNAME}-${DISTVERSION}${EXTRACT_SUFX} \
 		${PORTNAME}.png:icons
 EXTRACT_ONLY=	${PORTNAME}-${DISTVERSION}${EXTRACT_SUFX}
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	This is an implementation of the sets game
 
 LICENSE=	GPLv3

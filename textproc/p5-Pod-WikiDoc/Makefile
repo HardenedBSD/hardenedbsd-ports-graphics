@@ -3,11 +3,12 @@
 
 PORTNAME=	Pod-WikiDoc
 PORTVERSION=	0.20
+PORTREVISION=	1
 CATEGORIES=	textproc perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
 
-MAINTAINER=	mat@FreeBSD.org
+MAINTAINER=	perl@FreeBSD.org
 COMMENT=	Generate Pod from inline wiki style text
 
 LICENSE=	APACHE20

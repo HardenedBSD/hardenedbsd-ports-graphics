@@ -1,4 +1,3 @@
-%%SITE_PERL%%/%%PERL_ARCH%%/auto/MouseX/AttributeHelpers/.packlist
 %%SITE_PERL%%/MouseX/AttributeHelpers.pm
 %%SITE_PERL%%/MouseX/AttributeHelpers/Base.pm
 %%SITE_PERL%%/MouseX/AttributeHelpers/Bool.pm
@@ -23,8 +22,3 @@
 %%PERL5_MAN3%%/MouseX::AttributeHelpers::Number.3.gz
 %%PERL5_MAN3%%/MouseX::AttributeHelpers::String.3.gz
 %%PERL5_MAN3%%/MouseX::README.3.gz
-@dirrm %%SITE_PERL%%/MouseX/AttributeHelpers/Collection
-@dirrm %%SITE_PERL%%/MouseX/AttributeHelpers
-@dirrmtry %%SITE_PERL%%/MouseX
-@dirrm %%SITE_PERL%%/%%PERL_ARCH%%/auto/MouseX/AttributeHelpers
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/MouseX

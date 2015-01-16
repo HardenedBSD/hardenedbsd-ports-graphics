@@ -7,7 +7,7 @@ PORTREVISION=	2
 CATEGORIES=	print audio
 MASTER_SITES=	http://download.linuxaudio.org/lilypond/sources/v${PORTVERSION:R}/
 
-MAINTAINER=	gahr@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	The GNU music typesetter
 
 LICENSE=	GPLv3
@@ -47,10 +47,9 @@ INFO=		internals \
 		lilypond-web \
 		music-glossary
 
-USES=		bison:build gettext gmake pkgconfig perl5
+USES=		bison:build gettext gmake pkgconfig perl5 python:-3
 USE_GHOSTSCRIPT=9
 USE_TEX=	latex
-USE_PYTHON=	-3
 USE_PERL5=	build
 USE_GNOME=	pango
 

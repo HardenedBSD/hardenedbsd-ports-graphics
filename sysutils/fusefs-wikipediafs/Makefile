@@ -8,17 +8,15 @@ CATEGORIES=	sysutils
 MASTER_SITES=	SF
 PKGNAMEPREFIX=	fusefs-
 
-MAINTAINER=	5u623l20@gmail.com
+MAINTAINER=	bofh@FreeBSD.org
 COMMENT=	Mount mediawikis
 
 LICENSE=	GPLv2
 
 RUN_DEPENDS=	py*-fusefs>=0.2:${PORTSDIR}/devel/py-fusefs
 
-USES=		fuse
-USE_PYTHON=	yes
-USE_PYDISTUTILS=yes
-PYDISTUTILS_AUTOPLIST=yes
+USES=		fuse python
+USE_PYTHON=	distutils autoplist
 PORTDOCS=	AUTHORS ChangeLog HACKING NEWS README TODO
 
 OPTIONS_DEFINE=	DOCS

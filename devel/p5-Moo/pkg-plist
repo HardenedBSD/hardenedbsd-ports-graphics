@@ -3,7 +3,6 @@
 %%PERL5_MAN3%%/Sub::Defer.3.gz
 %%PERL5_MAN3%%/Sub::Quote.3.gz
 %%PERL5_MAN3%%/oo.3.gz
-%%SITE_PERL%%/%%PERL_ARCH%%/auto/Moo/.packlist
 %%SITE_PERL%%/Method/Generate/Accessor.pm
 %%SITE_PERL%%/Method/Generate/BuildAll.pm
 %%SITE_PERL%%/Method/Generate/Constructor.pm
@@ -21,9 +20,3 @@
 %%SITE_PERL%%/Sub/Defer.pm
 %%SITE_PERL%%/Sub/Quote.pm
 %%SITE_PERL%%/oo.pm
-@dirrmtry %%SITE_PERL%%/Sub
-@dirrmtry %%SITE_PERL%%/Moo/HandleMoose
-@dirrmtry %%SITE_PERL%%/Moo
-@dirrmtry %%SITE_PERL%%/Method/Generate
-@dirrmtry %%SITE_PERL%%/Method
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Moo

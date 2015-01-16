@@ -3,7 +3,7 @@
 
 PORTNAME=	defendguin
 PORTVERSION=	0.0.12
-PORTREVISION=	5
+PORTREVISION=	6
 CATEGORIES=	games
 MASTER_SITES=	ftp://ftp.tuxpaint.org/unix/x/defendguin/src/ \
 		SF/nemysisfreebsdp/${CATEGORIES}/:icons
@@ -12,7 +12,7 @@ DISTFILES=	${PORTNAME}-${DISTVERSION}${EXTRACT_SUFX} \
 DIST_SUBDIR=	${PORTNAME}
 EXTRACT_ONLY=	${PORTNAME}-${DISTVERSION}${EXTRACT_SUFX}
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Your mission is to defend little penguinoids
 
 LICENSE=	GPLv2

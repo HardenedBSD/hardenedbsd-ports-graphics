@@ -104,8 +104,7 @@ MASTER_SITE_APACHE_XML+= \
 
 .if !defined(IGNORE_MASTER_SITE_BERLIOS)
 MASTER_SITE_BERLIOS+= \
-	http://download.berlios.de/%SUBDIR%/ \
-	http://download2.berlios.de/%SUBDIR%/
+	${MASTER_SITE_SOURCEFORGE}
 .endif
 
 .if !defined(IGNORE_MASTER_SITE_CENKES)
@@ -125,15 +124,6 @@ MASTER_SITE_CHEESESHOP+= \
 MASTER_SITE_COMP_SOURCES+= \
 	ftp://gatekeeper.dec.com/pub/usenet/comp.sources.%SUBDIR%/ \
 	ftp://ftp.uu.net/usenet/comp.sources.%SUBDIR%/
-.endif
-
-.if !defined(IGNORE_MASTER_SITE_CRITICAL)
-MASTER_SITE_CRITICAL+= \
-	http://critical.ch/distfiles/%SUBDIR%/ \
-	http://energy.critical.ch/distfiles/%SUBDIR%/ \
-	http://snow.critical.ch/distfiles/%SUBDIR%/ \
-	http://fneu.fr/distfiles/%SUBDIR%/ \
-	ftp://ftp.c.saper.info/distfiles/%SUBDIR%/
 .endif
 
 .if !defined(IGNORE_MASTER_SITE_CSME)
@@ -253,7 +243,7 @@ MASTER_SITE_EXIM+= \
 .if !defined(IGNORE_MASTER_SITE_CENTOS_LINUX)
 MASTER_SITE_CENTOS_LINUX+= \
 	http://mirror.centos.org/centos/6/os/i386/Packages/ \
-	http://vault.centos.org/6.5/os/Source/SPackages/ \
+	http://vault.centos.org/6.6/os/Source/SPackages/ \
 	http://mirror.centos.org/%SUBDIR%/ \
 	http://vault.centos.org/%SUBDIR%/
 
@@ -262,7 +252,7 @@ MASTER_SITE_CENTOS_LINUX+= \
 .if !defined(IGNORE_MASTER_SITE_CENTOS_LINUX)
 MASTER_SITE_CENTOS_LINUX_UPDATES+= \
 	http://mirror.centos.org/centos/6/updates/i386/Packages/ \
-	http://vault.centos.org/6.5/updates/Source/SPackages/
+	http://vault.centos.org/${LINUX_DIST_VER}/updates/Source/SPackages/
 .endif
 
 .if !defined(IGNORE_MASTER_SITE_EPEL)
@@ -545,18 +535,16 @@ IGNORE?=	Using master as GH_TAGNAME is invalid. \
 MASTER_SITE_GITHUB+=		https://codeload.github.com/%SUBDIR% \
 				http://codeload.github.com/%SUBDIR%
 MASTER_SITE_GITHUB_CLOUD+=	http://cloud.github.com/downloads/%SUBDIR%
-.if !defined(MASTER_SITES) || !${MASTER_SITES:MGH} && !${MASTER_SITES:MGHC}
-MASTER_SITES+=	GH GHC
+MASTER_SITE_GITHUB_RELEASE+=	https://github.com/%SUBDIR%
+
+.if !defined(MASTER_SITES) || !${MASTER_SITES:MGH} && !${MASTER_SITES:MGHC} && !${MASTER_SITES:MGHR}
+MASTER_SITES+=	GH GHC GHR
 .endif
+GH_ACCOUNT?=	${PORTNAME}
 GH_PROJECT?=	${PORTNAME}
 GH_TAGNAME?=	${DISTVERSION}
 .endif
 .endif
-#
-# GitHub files can also be obtained, without the need for any of the above, by doing:
-#
-# MASTER_SITES=	http://github.com/accountname/${PORTNAME}/archive/${PORTVERSION}.tar.gz?dummy=/
-#
 
 .if !defined(IGNORE_MASTER_SITE_GNOME)
 MASTER_SITE_GNOME+= \
@@ -575,6 +563,16 @@ MASTER_SITE_GNOME+= \
 	ftp://ftp.mirrorservice.org/sites/ftp.gnome.org/pub/GNOME/%SUBDIR%/ \
 	ftp://ftp.nara.wide.ad.jp/pub/X11/GNOME/%SUBDIR%/ \
 	http://ftp.gnome.org/pub/GNOME/%SUBDIR%/
+.endif
+
+.if !defined(IGNORE_MASTER_SITE_GIMP)
+MASTER_SITE_GIMP+= \
+	http://gimp.mirrors.hoobly.com/pub/%SUBDIR%/ \
+	http://gimper.net/downloads/pub/%SUBDIR%/ \
+	http://mirror.hessmo.com/gimp/pub/%SUBDIR%/ \
+	http://de-mirror.gimper.net/pub/%SUBDIR%/ \
+	http://gimp.afri.cc/pub/%SUBDIR%/ \
+	http://download.gimp.org/pub/%SUBDIR%/
 .endif
 
 .if !defined(IGNORE_MASTER_SITE_GNU)
@@ -1128,12 +1126,6 @@ MASTER_SITE_RUBY+= \
 	ftp://ftp.iDaemons.org/pub/mirror/ftp.ruby-lang.org/ruby/%SUBDIR%/
 .endif
 
-# See http://rubyforge.org/credits/
-.if !defined(IGNORE_MASTER_SITE_RUBYFORGE)
-MASTER_SITE_RUBYFORGE+= \
-	http://files.rubyforge.vm.bytemark.co.uk/%SUBDIR%/
-.endif
-
 # See http://rubygems.org/pages/about
 .if !defined(IGNORE_MASTER_SITE_RUBYGEMS)
 MASTER_SITE_RUBYGEMS+= \
@@ -1153,13 +1145,14 @@ MASTER_SITE_SAMBA+= \
 # List:	http://download.savannah.gnu.org/mirmon/
 .if !defined(IGNORE_MASTER_SITE_SAVANNAH)
 MASTER_SITE_SAVANNAH+= \
+	http://download.savannah.gnu.org/releases/%SUBDIR%/ \
+	http://download-mirror.savannah.gnu.org/releases/%SUBDIR%/ \
 	http://nongnu.askapache.com/%SUBDIR%/ \
 	http://mirror.lihnidos.org/GNU/savannah/%SUBDIR%/ \
 	http://ftp.twaren.net/Unix/NonGNU/%SUBDIR%/ \
 	ftp://ftp.twaren.net/Unix/NonGNU/%SUBDIR%/ \
 	http://gnu.mirrors.pair.com/savannah/savannah/%SUBDIR%/ \
-	ftp://gnu.mirrors.pair.com/savannah/%SUBDIR%/ \
-	http://download-mirror.savannah.gnu.org/releases/%SUBDIR%/
+	ftp://gnu.mirrors.pair.com/savannah/%SUBDIR%/
 .endif
 
 # List:		http://sourceforge.net/apps/trac/sourceforge/wiki/Mirrors
@@ -1390,26 +1383,34 @@ MASTER_SITE_TUCOWS+= \
 .endif
 
 # List:		http://www.vim.org/mirrors.php
-# Updated:	2014-02-28
+# Updated:	2015-01-03
+# Please make sure mirrors end in /unix/
 .if !defined(IGNORE_MASTER_SITE_VIM)
 MASTER_SITE_VIM+= \
-	http://ftp.vim.org/pub/vim/unix/ \
-	http://vim.mirrors.hostinginnederland.nl/unix/ \
-	http://ftp.tw.vim.org/pub/vim/unix/ \
-	http://ftp2.tw.vim.org/pub/vim/unix/ \
-	http://artfiles.org/vim.org/unix/ \
-	http://vim.cybermirror.org/unix/ \
-	http://ftp.vim.ossmirror.de/pub/vim/unix/ \
-	http://tweedo.com/mirror/ftp.vim.org/unix/ \
-	http://vim.mirror.fr/unix/ \
-	http://ftp.gr.vim.org/pub/vim/unix/ \
-	http://mirror.netinch.com/pub/vim/unix/ \
-	http://servingzone.com/mirrors/vim/unix/ \
-	http://ftp2.uk.vim.org/pub/vim/unix/ \
-	http://ftp2.jp.vim.org/pub/vim/unix/ \
-	http://ftp2.kr.vim.org/pub/vim/unix/ \
 	http://mirrors-usa.go-parts.com/pub/vim/unix/ \
-	ftp://ftp.home.vim.org/pub/vim/unix/
+	http://ftp2.uk.vim.org/pub/vim/unix/ \
+	http://ftp.vim.ossmirror.de/pub/vim/unix/ \
+	http://ftp.stust.edu.tw/vim/unix/ \
+	http://vim.cybermirror.org/unix/ \
+	http://www.netgull.com/vim/unix/ \
+	http://ftp2.jp.vim.org/pub/vim/unix/ \
+	http://mirrors.go-parts.com/pub/vim/unix/ \
+	http://artfiles.org/vim.org/unix/ \
+	http://ftp2.kr.vim.org/pub/vim/unix/ \
+	http://mirror.netinch.com/pub/vim/unix/ \
+	http://ftp.es.vim.org/pub/vim/unix/ \
+	http://ftp.gr.vim.org/pub/vim/unix/ \
+	http://tweedo.com/mirror/ftp.vim.org/unix/ \
+	http://mirrors-br.go-parts.com/pub/vim/unix/ \
+	http://ftp2.tw.vim.org/pub/vim/unix/ \
+	http://mirrors-au.go-parts.com/pub/vim/unix/ \
+	http://mirrors-uk.go-parts.com/pub/vim/unix/ \
+	http://ftp.tw.vim.org/pub/vim/unix/ \
+	http://funnyshare.org/mirrors/vim/unix/ \
+	http://mirrors-ru.go-parts.com/pub/vim/unix/ \
+	http://servingzone.com/mirrors/vim/unix/ \
+	http://ftp.ro.vim.org/mirrors/ftp.vim.org/unix/ \
+	http://vim.mirror.fr/unix/
 .endif
 
 .if !defined(IGNORE_MASTER_SITE_WINDOWMAKER)
@@ -1506,14 +1507,14 @@ MASTER_SITE_KERNEL_ORG+= \
 MASTER_SITES_ABBREVS=	CPAN:PERL_CPAN \
 			GH:GITHUB \
 			GHC:GITHUB_CLOUD \
+			GHR:GITHUB_RELEASE \
 			LODEV:LIBREOFFICE_DEV \
 			NL:NETLIB \
 			SF:SOURCEFORGE \
 			SFJP:SOURCEFORGE_JP \
-			RG:RUBYGEMS \
-			RF:RUBYFORGE
+			RG:RUBYGEMS
 MASTER_SITES_SUBDIRS=	APACHE_JAKARTA:${PORTNAME:S,-,/,}/source \
-			BERLIOS:${PORTNAME:tl} \
+			BERLIOS:${PORTNAME:tl}.berlios \
 			CENKES:myports \
 			CHEESESHOP:source/${DISTNAME:C/(.).*/\1/}/${DISTNAME:C/(.*)-[0-9].*/\1/} \
 			CSME:myports \
@@ -1521,7 +1522,9 @@ MASTER_SITES_SUBDIRS=	APACHE_JAKARTA:${PORTNAME:S,-,/,}/source \
 			GCC:releases/${DISTNAME} \
 			GITHUB:${GH_ACCOUNT}/${GH_PROJECT}/legacy.tar.gz/${GH_TAGNAME}?dummy=/ \
 			GITHUB_CLOUD:${GH_ACCOUNT}/${GH_PROJECT}/ \
+			GITHUB_RELEASE:${GH_ACCOUNT}/${GH_PROJECT}/archive/${DISTVERSIONPREFIX}${DISTVERSION:C/:(.)/\1/g}${DISTVERSIONSUFFIX}${EXTRACT_SUFX}?dummy=/ \
 			GNOME:sources/${PORTNAME}/${PORTVERSION:C/^([0-9]+\.[0-9]+).*/\1/} \
+			GIMP:${PORTNAME}/${PORTVERSION:R}/ \
 			GNU:${PORTNAME} \
 			GNU_ALPHA:${PORTNAME} \
 			HORDE:${PORTNAME} \
@@ -1535,8 +1538,7 @@ MASTER_SITES_SUBDIRS=	APACHE_JAKARTA:${PORTNAME:S,-,/,}/source \
 			RUBY_DBI:${RUBY_DBI_MASTER_SITE_SUBDIR} \
 			RUBY_GNOME:${RUBY_GNOME_MASTER_SITE_SUBDIR} \
 			SAVANNAH:${PORTNAME:tl} \
-			SOURCEFORGE:${PORTNAME:tl}/${PORTNAME:tl}/${PORTVERSION} \
-			RUBYFORGE:${PORTNAME:tl}
+			SOURCEFORGE:${PORTNAME:tl}/${PORTNAME:tl}/${PORTVERSION}
 
 .if defined(MASTER_SITES) && ${MASTER_SITES:N*\:/*}
 
@@ -1576,5 +1578,46 @@ MASTER_SITES_EXP:=	${MASTER_SITES_EXP}
 .	endif
 .endfor
 MASTER_SITES=	${MASTER_SITES_EXP}
+
+.endif
+
+.if defined(PATCH_SITES) && ${PATCH_SITES:N*\:/*}
+
+.for _site__ in ${PATCH_SITES}
+_site_=${_site__}
+.	if ${_site_:M*\:/*}
+PATCH_SITES_EXP+=	${_site_}
+PATCH_SITES_EXP:=	${PATCH_SITES_EXP}
+.	else
+_site_urlpath_=	${_site_:C@^(.*):[^/:]+$@\1@}
+.		if ${_site_urlpath_:M*/*}
+_site_url_=		${_site_urlpath_:C@^([^/]+)/.*$@\1@}
+_site_subdir_=	${_site_urlpath_:S/^${_site_urlpath_:C@^([^/]+)/.*$@\1@}//:S!^/!!:S!/$!!}
+.		else
+_site_url_=		${_site_urlpath_}
+.undef _site_subdir_
+.		endif
+_site_group_=	${_site_:S/^${_site_:C@^(.*):[^/:]+$@\1@}//:S/^://}
+.		for _abbrev_ in ${MASTER_SITES_ABBREVS}
+.			if ${_site_url_} == ${_abbrev_:C/:.*//}
+_site_url_=	${_abbrev_:C/.*://}
+.			endif
+.		endfor
+.		for _subdir_ in ${MASTER_SITES_SUBDIRS}
+.			if ${_site_url_} == ${_subdir_:C/:.*//} && !defined(MASTER_SITE_SUBDIR)
+_site_subdir_?=	${_subdir_:C/.*://}
+.			endif
+.		endfor
+.		ifdef MASTER_SITE_${_site_url_}
+.			ifdef _site_subdir_
+PATCH_SITES_EXP+=	${MASTER_SITE_${_site_url_}:S^%SUBDIR%^${_site_subdir_}^:S/$/:${_site_group_}/:S/:$//}
+.			else
+PATCH_SITES_EXP+=	${MASTER_SITE_${_site_url_}:S/$/:${_site_group_}/:S/:$//}
+.			endif
+PATCH_SITES_EXP:=	${PATCH_SITES_EXP}
+.		endif
+.	endif
+.endfor
+PATCH_SITES=	${PATCH_SITES_EXP}
 
 .endif

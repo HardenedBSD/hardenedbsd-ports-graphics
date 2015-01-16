@@ -3,7 +3,7 @@
 
 PORTNAME=	unison
 PORTVERSION=	2.32.52
-PORTREVISION=	6
+PORTREVISION=	7
 CATEGORIES=	net
 MASTER_SITES=	http://www.cis.upenn.edu/~bcpierce/unison/download/releases/${DISTNAME}/
 PKGNAMESUFFIX=	232
@@ -44,7 +44,6 @@ RUN_DEPENDS+=	lablgtk2:${PORTSDIR}/x11-toolkits/ocaml-lablgtk2
 PATCH_DEPENDS+=	${BUILD_DEPENDS}
 CONFLICTS+=	ocaml-nox11*
 SUB_FILES+=	${PORTNAME}.desktop
-PLIST_FILES+=	share/pixmaps/${PORTNAME}${PKGNAMESUFFIX}.png
 .else
 MAKE_ARGS+=	UISTYLE=text
 PLIST_SUB+=	TEXT="@comment "

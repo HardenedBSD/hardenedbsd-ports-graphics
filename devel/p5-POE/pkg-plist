@@ -90,7 +90,6 @@
 %%SITE_PERL%%/POE/Wheel/ReadWrite.pm
 %%SITE_PERL%%/POE/Wheel/Run.pm
 %%SITE_PERL%%/POE/Wheel/SocketFactory.pm
-%%SITE_PERL%%/%%PERL_ARCH%%/auto/POE/.packlist
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/README.samples
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/create.perl
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/fakelogin.perl
@@ -107,16 +106,3 @@
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/thrash.perl
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/watermarks.perl
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/wheels2.perl
-%%PORTEXAMPLES%%@dirrmtry %%EXAMPLESDIR%%
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/POE
-@dirrmtry %%SITE_PERL%%/POE/Wheel
-@dirrmtry %%SITE_PERL%%/POE/Resource
-@dirrmtry %%SITE_PERL%%/POE/Queue
-@dirrmtry %%SITE_PERL%%/POE/Pipe
-@dirrmtry %%SITE_PERL%%/POE/Loop
-@dirrmtry %%SITE_PERL%%/POE/Filter
-@dirrmtry %%SITE_PERL%%/POE/Driver
-@dirrmtry %%SITE_PERL%%/POE/Component/Server
-@dirrmtry %%SITE_PERL%%/POE/Component/Client
-@dirrmtry %%SITE_PERL%%/POE/Component
-@dirrmtry %%SITE_PERL%%/POE

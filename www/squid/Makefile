@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	squid
-PORTVERSION=	3.4.8
+PORTVERSION=	3.4.10
 PORTREVISION=	2
 CATEGORIES=	www ipv6
 MASTER_SITES=	http://www.squid-cache.org/Versions/v3/${PORTVERSION:R}/ \
@@ -29,10 +29,9 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 
 CONFLICTS_INSTALL=	squid33-*
 
-USES=		cpe perl5 tar:xz shebangfix
+USES=		compiler cpe perl5 shebangfix tar:xz
 CPE_VENDOR=	squid-cache
 SHEBANG_FILES=	scripts/*.pl contrib/*.pl src/*.pl tools/*.pl \
-		helpers/external_acl/kerberos_ldap_group/cert_tool \
 		helpers/ssl/cert_valid.pl
 GNU_CONFIGURE=	yes
 USE_RC_SUBR=	squid
@@ -48,8 +47,8 @@ SUB_FILES+=	pkg-install pkg-message
 OPTIONS_SUB=	yes
 OPTIONS_DEFINE=	ARP_ACL AUTH_KERB AUTH_LDAP AUTH_NIS AUTH_SASL AUTH_SMB \
 		AUTH_SQL CACHE_DIGESTS DEBUG DELAY_POOLS DNS_HELPER ECAP ESI \
-		FOLLOW_XFF FS_AUFS FS_DISKD FS_ROCK HTCP ICAP ICMP IDENT IPV6 KQUEUE \
-		LARGEFILE SNMP SSL SSL_CRTD STACKTRACES LAX_HTTP \
+		FOLLOW_XFF FS_AUFS FS_DISKD FS_ROCK HTCP ICAP ICMP IDENT IPV6 \
+		KQUEUE LARGEFILE NETTLE SNMP SSL SSL_CRTD STACKTRACES LAX_HTTP \
 		TP_IPF TP_IPFW TP_PF VIA_DB WCCP WCCPV2 DOCS EXAMPLES
 
 # Note: FS_FCOSS was removed from OPTIONS, it is broken and only experimental
@@ -92,10 +91,13 @@ IPV6_CONFIGURE_ENABLE=		ipv6
 KQUEUE_CONFIGURE_ENABLE=	kqueue
 LARGEFILE_CONFIGURE_WITH=	large-files
 LAX_HTTP_CONFIGURE_ENABLE=	http-violations
+NETTLE_LIB_DEPENDS=		libnettle.so:${PORTSDIR}/security/nettle
+NETTLE_CONFIGURE_OFF=		--without-nettle
 SNMP_CONFIGURE_ENABLE=		snmp
 SSL_CONFIGURE_ENABLE=		ssl
 SSL_CRTD_CONFIGURE_ENABLE=	ssl-crtd
 STACKTRACES_CONFIGURE_ENABLE=	stacktraces
+STACKTRACES_LIB_DEPENDS=	libunwind.so:${PORTSDIR}/devel/libunwind
 TP_IPFW_CONFIGURE_ENABLE=	ipfw-transparent
 TP_IPF_CONFIGURE_ENABLE=	ipf-transparent
 TP_PF_CONFIGURE_ENABLE=		pf-transparent
@@ -131,6 +133,7 @@ ICMP_DESC=		ICMP pinging and network measurement
 IDENT_DESC=		Ident lookups (RFC 931)
 KQUEUE_DESC=		Kqueue(2) support
 LARGEFILE_DESC=		Support large (>2GB) cache and log files
+NETTLE_DESC=		Nettle MD5 algorithm support
 SNMP_DESC=		SNMP support
 SSL_CRTD_DESC=		Use ssl_crtd to handle SSL cert requests
 SSL_DESC=		SSL gatewaying support
@@ -173,7 +176,7 @@ CONFIGURE_ARGS=	--with-default-user=squid \
 		--sysconfdir=${ETCDIR} \
 		--with-logdir=/var/log/squid \
 		--with-pidfile=/var/run/squid/squid.pid \
-		--with-swapdir=/var/squid/cache/squid \
+		--with-swapdir=/var/squid/cache \
 		--enable-auth \
 		--enable-build-info \
 		--enable-loadable-modules \
@@ -185,11 +188,6 @@ CONFIGURE_ARGS=	--with-default-user=squid \
 		--disable-arch-native
 
 .include <bsd.port.options.mk>
-
-.if ${CC:T:Mclang*} || ${CXX:T:Mclang++*} \
-	|| ${OPSYS} == FreeBSD && ${OSVERSION} >= 1000024
-CXXFLAGS+=	-Wno-unused-private-field
-.endif
 
 # Authentication methods and modules:
 
@@ -226,6 +224,7 @@ basic_auth+=	NIS
 negotiate_auth=	kerberos wrapper
 . if ${OPSYS} == DragonFly
 LIB_DEPENDS+=	libkrb5.so:${PORTSDIR}/security/krb5
+CFLAGS+=	-I${LOCALBASE}/include
 . endif
 # the kerberos_ldap_group external helper also depends on LDAP and SASL:
 . if ${PORT_OPTIONS:MAUTH_LDAP} && ${PORT_OPTIONS:MAUTH_SASL}
@@ -302,7 +301,9 @@ LDFLAGS+=		-L${OPENSSLLIB}
 
 .if ${PORT_OPTIONS:MSTACKTRACES}
 CFLAGS+=	-g
+LDFLAGS+=	-lunwind -L${LOCALBASE}/lib
 STRIP=
+EXTRA_PATCHES+=	${FILESDIR}/extra-patch-gen-stacktrace
 .endif
 
 .if ${PORT_OPTIONS:MDEBUG} || defined(WITH_DEBUG)
@@ -341,5 +342,15 @@ post-install:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	(cd ${WRKSRC} && ${INSTALL_DATA} ${MYDOCS} ${STAGEDIR}${DOCSDIR})
 	${MKDIR} ${STAGEDIR}/var/squid/logs
+	${RMDIR} ${STAGEDIR}/var/run/squid
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${COMPILER_TYPE} == clang
+CXXFLAGS+=	-Wno-unused-private-field
+.if ${COMPILER_VERSION} >= 35
+CXXFLAGS+=	-Wno-undefined-bool-conversion -Wno-tautological-undefined-compare -Wno-dynamic-class-memaccess
+.endif
+.endif
+
+.include <bsd.port.post.mk>

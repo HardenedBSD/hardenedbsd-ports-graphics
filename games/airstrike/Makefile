@@ -3,12 +3,12 @@
 
 PORTNAME=	airstrike
 PORTVERSION=	c7
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	games
 MASTER_SITES=	SF/nemysisfreebsdp/${CATEGORIES}/${PORTNAME}/
 DISTNAME=	${PORTNAME}-pre6a-src_freebsd_and_v${DISTVERSION}
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	2d biplane dogfight game
 
 LICENSE=	GPLv2

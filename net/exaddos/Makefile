@@ -11,7 +11,7 @@ EXTRACT_SUFX=	.tgz
 MAINTAINER=	zi@FreeBSD.org
 COMMENT=	Monitor your network for DDoS
 
-LICENSE=	BSD
+LICENSE=	BSD3CLAUSE
 
 RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}snmp4-mibs>=0.1.4:${PORTSDIR}/net-mgmt/py-snmp4-mibs \
     		${PYTHON_PKGNAMEPREFIX}snmp4>=4.2.3:${PORTSDIR}/net-mgmt/py-snmp4
@@ -20,7 +20,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	Exa-Networks
 GH_TAGNAME=	${PORTVERSION}
 GH_COMMIT=	4e93fc1
-USE_PYTHON=	yes
+USES=		python
 SUB_FILES=	pkg-message exaddos.sh exaddos.conf.sample
 SUB_LIST=	PYTHON_LIBDIR=${PYTHON_LIBDIR} PYTHON_CMD=${PYTHON_CMD} \
 		PYTHON_SITELIBDIR=${PYTHON_SITELIBDIR}

@@ -3,7 +3,7 @@
 
 PORTNAME=	popstar
 PORTVERSION=	0.0.2
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	games
 MASTER_SITES=	ftp://ftp.tuxpaint.org/unix/x/popstar/ \
 		SF/nemysisfreebsdp/${CATEGORIES}/${PORTNAME}/:icons
@@ -11,7 +11,7 @@ DISTFILES=	${PORTNAME}-${DISTVERSION}${EXTRACT_SUFX} \
 		${PORTNAME}.png:icons
 EXTRACT_ONLY=	${PORTNAME}-${DISTVERSION}${EXTRACT_SUFX}
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Simple puzzle game involving floating stars
 
 LICENSE=	GPLv2 CCbyNCSA3

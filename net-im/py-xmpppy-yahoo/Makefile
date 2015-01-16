@@ -19,7 +19,7 @@ EJABBERD_DESC=	transport with ejabberd
 RUN_DEPENDS+=	${PYTHON_SITELIBDIR}/xmpp/__init__.py:${PORTSDIR}/net-im/py-xmpppy \
 		${PYTHON_SITELIBDIR}/DNS/__init__.py:${PORTSDIR}/dns/py-dns
 
-USE_PYTHON=	yes
+USES=		python
 NO_BUILD=	yes
 FILES=		adhoc.py config.py jep0133.py roomlist.py xmlconfig.py \
 		yahoo_helpers.py avatar.py htmlutils.py migratespool.py toolbox.py \
@@ -28,7 +28,6 @@ FILES_CURPHOO=	YahooMD5.py __init__.py cpformat.py md5crypt.py pysha.py yahoo_fn
 PFILES=		${FILES:S.^.%%PYTHON_SITELIBDIR%%/xmpp/yahoo/.} \
 		${FILES_CURPHOO:S.^.%%PYTHON_SITELIBDIR%%/xmpp/yahoo/curphoo/.}
 PLIST_FILES=	${PFILES} ${PFILES:S.$.c.} ${PFILES:S.$.o.} etc/${UNIQUENAME:S.-._.}.conf.sample
-PLIST_DIRS=	%%PYTHON_SITELIBDIR%%/xmpp/yahoo/curphoo %%PYTHON_SITELIBDIR%%/xmpp/yahoo
 SUB_LIST+=	PYTHON_CMD=${PYTHON_CMD} BINDIR=${PYTHON_SITELIBDIR}/xmpp/yahoo \
 		JABBER_USER=${JABBER_USER}
 USE_RC_SUBR=	${UNIQUENAME:S/-/_/}

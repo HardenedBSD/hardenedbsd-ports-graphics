@@ -29,13 +29,12 @@
     SUBDIR += cfortran
     SUBDIR += chicken
     SUBDIR += cint
+    SUBDIR += cjs
     SUBDIR += clang-cheri
     SUBDIR += clang-devel
-    SUBDIR += clang32
     SUBDIR += clang33
     SUBDIR += clang34
     SUBDIR += clang35
-    SUBDIR += clay
     SUBDIR += clojure
     SUBDIR += clojure-mode.el
     SUBDIR += cmucl
@@ -48,12 +47,12 @@
     SUBDIR += dlv
     SUBDIR += dmd1
     SUBDIR += dmd2
+    SUBDIR += duktape
     SUBDIR += ecl
     SUBDIR += elan
     SUBDIR += elixir
     SUBDIR += elk
     SUBDIR += emacs-lisp-intro
-    SUBDIR += embryo
     SUBDIR += erlang
     SUBDIR += erlang-runtime15
     SUBDIR += erlang-runtime16
@@ -116,7 +115,6 @@
     SUBDIR += intel2gas
     SUBDIR += intercal
     SUBDIR += io
-    SUBDIR += ironpython
     SUBDIR += itcl
     SUBDIR += itcl4
     SUBDIR += jakarta-commons-jelly
@@ -125,7 +123,6 @@
     SUBDIR += js_of_ocaml
     SUBDIR += jython
     SUBDIR += kawa
-    SUBDIR += kroc
     SUBDIR += kturtle
     SUBDIR += lafontaine
     SUBDIR += libhx
@@ -211,7 +208,6 @@
     SUBDIR += pbasic
     SUBDIR += pcc
     SUBDIR += pecl-perl
-    SUBDIR += perl5.14
     SUBDIR += perl5.16
     SUBDIR += perl5.18
     SUBDIR += perl5.20
@@ -322,7 +318,6 @@
     SUBDIR += v8
     SUBDIR += v8-devel
     SUBDIR += vala
-    SUBDIR += vala-vapigen
     SUBDIR += visualworks
     SUBDIR += whitespace
     SUBDIR += x10

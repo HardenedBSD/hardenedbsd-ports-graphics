@@ -8,10 +8,10 @@ CATEGORIES=	games
 MASTER_SITES=	http://download.gna.org/pokersource/sources/
 DISTNAME=	${PORTNAME}-${PORTVERSION:E}.0
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	C library to evaluate poker hands
 
-LICENSE=	GPLv3
+LICENSE=	GPLv3 # or later
 LICENSE_FILE=	${WRKSRC}/COPYING
 
 GNU_CONFIGURE=	yes

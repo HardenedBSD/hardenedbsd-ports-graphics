@@ -3,11 +3,11 @@
 
 PORTNAME=	rsnapshot
 PORTVERSION=	1.3.1
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	sysutils
 MASTER_SITES=	http://www.rsnapshot.org/downloads/
 
-MAINTAINER=	r.vdooren@snow.nl
+MAINTAINER=	ralfvd@gmail.com
 COMMENT=	Filesystem snapshot utility based on rsync(1)
 
 BUILD_DEPENDS=	rsync:${PORTSDIR}/net/rsync

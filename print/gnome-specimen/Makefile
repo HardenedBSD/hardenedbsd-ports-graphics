@@ -10,11 +10,12 @@ MASTER_SITES=	http://uwstopia.nl/geek/projects/gnome-specimen/releases/
 MAINTAINER=	swills@FreeBSD.org
 COMMENT=	Gnome Specimen is a simple tool to preview and compare installed fonts
 
+BROKEN=		Uses unknown GNOME component pygnomedesktop
+
 GNU_CONFIGURE=	yes
 USE_GNOME=	pygnomedesktop
 GCONF_SCHEMAS=	gnome-specimen.schemas
-USE_PYTHON=	yes
-USES=		gettext gmake
+USES=		gettext gmake python
 USE_AUTOTOOLS=	automake:env
 INSTALLS_ICONS=	yes
 

@@ -8,10 +8,11 @@ CATEGORIES=	games
 MASTER_SITES=	SF/bub-n-bros/bub-n-bros/${PORTVERSION}
 DIST_SUBDIR=	python
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Multiplayer clone of the famous Bubble Bobble game
 
 LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 RUN_DEPENDS=	${PYGAME}
 BUILD_DEPENDS:=	${RUN_DEPENDS}
@@ -51,7 +52,7 @@ do-install:
 .endfor
 	${INSTALL_SCRIPT} ${WRKSRC}/BubBob.py ${STAGEDIR}${DATADIR}
 	# build different colors
-	@${FIND} ${STAGEDIR}${DATADIR} -name "*.ppm" -exec chmod u+w {} \;
+	@${FIND} ${STAGEDIR}${DATADIR} -name "*.ppm" -exec ${CHMOD} u+w {} \;
 	@${PYTHON_CMD} ${STAGEDIR}${DATADIR}/bubbob/images/buildcolors.py
 	${LN} -sf ${DATADIR}/http2/data/bob.png \
 		${STAGEDIR}${PREFIX}/share/pixmaps/${PORTNAME}.png

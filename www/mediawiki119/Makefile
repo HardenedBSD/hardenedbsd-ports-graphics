@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	mediawiki
-PORTVERSION=	1.19.20
+PORTVERSION=	1.19.23
+PORTREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://releases.wikimedia.org/mediawiki/${PORTVERSION:R}/
 PKGNAMESUFFIX=	119
@@ -21,14 +22,17 @@ MEDIAWIKIDIR?=	www/mediawiki
 NO_BUILD=	yes
 PLIST=		${WRKDIR}/plist
 
+SUB_FILES=	pkg-message
+SUB_LIST=	MEDIAWIKIDIR=${PREFIX}/${MEDIAWIKIDIR}
+
 OPTIONS_DEFINE=	MYSQL PGSQL SQLITE LDAP MEMCACHED APC EACCEL XCACHE IMAGICK
 OPTIONS_DEFAULT=MYSQL
 
-MEMCACHED_DESC=	use memcached
-APC_DESC=	use pecl-APC(Mediawiki recommended)
-EACCEL_DESC=	use eAccelerator (instead of pecl-APC)
-XCACHE_DESC=	use xCache (instead of pecl-APC)
-IMAGICK_DESC=	use ImageMagick
+MEMCACHED_DESC=	Use memcached
+APC_DESC=	Use pecl-APC (Mediawiki recommended)
+EACCEL_DESC=	Use eAccelerator (instead of pecl-APC)
+XCACHE_DESC=	Use xCache (instead of pecl-APC)
+IMAGICK_DESC=	Use ImageMagick
 
 .include <bsd.port.options.mk>
 
@@ -76,8 +80,5 @@ pre-install:
 do-install:
 	@${MKDIR} ${STAGEDIR}${PREFIX}/${MEDIAWIKIDIR}
 	${CP} -r ${WRKSRC}/ ${STAGEDIR}${PREFIX}/${MEDIAWIKIDIR}
-
-post-install:
-	@${SED} -e 's|%%MEDIAWIKIDIR%%|${PREFIX}/${MEDIAWIKIDIR}|' ${PKGMESSAGE}
 
 .include <bsd.port.mk>

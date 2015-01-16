@@ -8,7 +8,7 @@ CATEGORIES=	print audio
 MASTER_SITES=	http://download.linuxaudio.org/lilypond/sources/v${PORTVERSION:R}/
 PKGNAMESUFFIX=	-devel
 
-MAINTAINER=	gahr@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	The GNU music typesetter
 
 LICENSE=	GPLv3
@@ -46,11 +46,10 @@ INFO=		internals \
 		lilypond-web \
 		music-glossary
 
-USES=		bison:build gettext gmake pkgconfig perl5 compiler:c++11-lib
+USES=		bison:build gettext gmake pkgconfig perl5 compiler:c++11-lib python:-3
 USE_CXXSTD=	c++11
 USE_GHOSTSCRIPT=9
 USE_TEX=	latex
-USE_PYTHON=	-3
 USE_PERL5=	build
 USE_GNOME=	pango
 

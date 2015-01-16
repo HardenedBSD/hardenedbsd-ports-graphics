@@ -10,12 +10,13 @@ PKGNAMEPREFIX=	${Q3PKGNAMEPREFIX}
 DISTNAME=	linuxq3apoint-${DISTVERSION}.x86
 EXTRACT_SUFX=	.run
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Quake III Arena data files
 
 DATADIR=	${Q3DIR}
 NO_BUILD=	yes
 NO_WRKSUBDIR=	yes
+NO_ARCH=	yes
 
 SUB_FILES=	pkg-message
 

@@ -3,7 +3,7 @@
 
 PORTNAME=	monitoring-plugins
 PORTVERSION=	2.0
-PORTREVISION=	2
+PORTREVISION=	5
 CATEGORIES=	net-mgmt
 MASTER_SITES=	https://www.monitoring-plugins.org/download/ LOCAL/mat/${PORTNAME}
 
@@ -16,9 +16,10 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 CONFLICTS_INSTALL=	nagios-plugins-*
 
 USES=		charsetfix gmake perl5 libtool
+USE_OPENSSL=	yes
 USE_SUBMAKE=	yes
 
-OPTIONS_DEFINE=	QSTAT FPING NETSNMP RADIUS MYSQL PGSQL LDAP IPV6 JAIL NLS DBI EXTRAOPTS
+OPTIONS_DEFINE=	QSTAT FPING NETSNMP RADIUS MYSQL PGSQL LDAP IPV6 NLS DBI EXTRAOPTS SSH_PORTABLE
 OPTIONS_SINGLE=	DNS
 OPTIONS_SINGLE_DNS=	DNS_BASE DNS_BINDTOOLS DNS_BIND99 DNS_BIND910
 OPTIONS_DEFAULT=IPV6 EXTRAOPTS DNS_BASE
@@ -31,9 +32,9 @@ RADIUS_DESC=	Radius support (check_radius)
 MYSQL_DESC=	MySQL support (check_mysql)
 PGSQL_DESC=	PostgreSQL support (check_pgsql)
 LDAP_DESC=	OpenLDAP support (check_ldap)
-JAIL_DESC=	Compilation within jail(8) (see help)
 DBI_DESC=	Check database using DBI
 EXTRAOPTS_DESC=	Parsing of plugins ini config files for extra options
+SSH_PORTABLE_DESC=	Build check_ssh with ports openssh (instead of base)
 
 DNS_DESC=	Configuration of check_dig and check_dns (see help)
 
@@ -52,9 +53,6 @@ NAGIOSWWWDIR?=	www/nagios
 NAGIOSHTMURL?=	/nagios
 NAGIOSCGIURL?=	${NAGIOSHTMURL}/cgi-bin
 
-NAGIOSPOLLIP?=	127.0.0.1
-NAGIOSPOLLIP6?=	::1
-
 CONFIGURE_ARGS+=--with-cgiurl=${NAGIOSCGIURL} \
 		--sbindir=${PREFIX}/${NAGIOSWWWDIR}/cgi-bin \
 		--libexecdir=${PREFIX}/libexec/nagios \
@@ -66,7 +64,12 @@ CONFIGURE_ARGS+=--with-cgiurl=${NAGIOSCGIURL} \
 
 # Also, force some commands with their expected paths so that they don't get
 # disabled.
-CONFIGURE_ARGS+=--with-qmail-qstat-command=/var/qmail/bin/qmail-qstat
+CONFIGURE_ARGS+=ac_cv_path_PATH_TO_QMAIL_QSTAT=/var/qmail/bin/qmail-qstat \
+		ac_cv_path_PATH_TO_PING=/sbin/ping \
+		ac_cv_path_PATH_TO_PING6=/sbin/ping6 \
+		--with-ping-command="/sbin/ping -n -c %d %s" \
+		--with-ping6-command="/sbin/ping6 -n -c %d %s" \
+		ac_cv_path_PATH_TO_SMBCLIENT=${LOCALBASE}/bin/smbclient
 
 CPPFLAGS+=	-I${LOCALBASE}/include
 LIBS+=		-L${LOCALBASE}/lib
@@ -94,19 +97,16 @@ RADIUS_LIB_DEPENDS=	libradiusclient-ng.so:${PORTSDIR}/net/radiusclient
 RADIUS_CONFIGURE_WITH=	radius
 
 MYSQL_USE=	mysql=yes
-MYSQL_CONFIGURE_ON=	--with-mysql=${LOCALBASE}
-MYSQL_CONFIGURE_OFF=	--without-mysql
+MYSQL_CONFIGURE_WITH=	mysql=${LOCALBASE}
 
 PGSQL_USES=	pgsql
-PGSQL_CONFIGURE_ON=	--with-pgsql=${LOCALBASE}
-PGSQL_CONFIGURE_OFF=	--without-pgsql
+PGSQL_CONFIGURE_WITH=	pgsql=${LOCALBASE}
 
 LDAP_USE=	openldap=yes
 LDAP_CONFIGURE_WITH=	ldap
 
 NLS_USES=	gettext
 NLS_CONFIGURE_ENABLE=	nls
-NLS_USES_OFF=	gettext:build
 
 DBI_LIB_DEPENDS=	libdbi.so:${PORTSDIR}/databases/libdbi
 DBI_CONFIGURE_WITH=	dbi
@@ -121,11 +121,16 @@ DNS_BIND910_BUILD_DEPENDS=	${LOCALBASE}/bin/dig:${PORTSDIR}/dns/bind910
 DNS_BIND910_CONFIGURE_ON=	--with-dig-command=${LOCALBASE}/bin/dig \
 				--with-nslookup-command=${LOCALBASE}/bin/nslookup
 
+SSH_PORTABLE_BUILD_DEPENDS=	${LOCALBASE}/bin/ssh:${PORTSDIR}/security/openssh-portable
+SSH_PORTABLE_RUN_DEPENDS:=	${SSH_PORTABLE_BUILD_DEPENDS}
+SSH_PORTABLE_CONFIGURE_ON=	--with-ssh-command=${LOCALBASE}/bin/ssh
+
 .include <bsd.port.options.mk>
 
 .if ${OSVERSION} > 1000055 && ${PORT_OPTIONS:MDNS_BASE}
 EXTRA_PATCHES+=	${FILESDIR}/extra-patch-dig-to-drill.diff
-CONFIGURE_ARGS+=--with-dig-command=/usr/bin/drill
+CONFIGURE_ARGS+=--with-dig-command=/usr/bin/drill \
+		ac_cv_path_PATH_TO_NSLOOKUP=
 PLIST_SUB+=	CHECK_DNS="@comment "
 .else
 .  if ${PORT_OPTIONS:MDNS_BASE}
@@ -135,7 +140,7 @@ CONFIGURE_ARGS+=	--with-dig-command=/usr/bin/dig \
 PLIST_SUB+=	CHECK_DNS=""
 .endif
 
-.if !exists(/usr/bin/ssh)
+.if !exists(/usr/bin/ssh) && empty(PORT_OPTIONS:MSSH_PORTABLE)
 PLIST_SUB+=	SSH="@comment "
 .else
 PLIST_SUB+=	SSH=""
@@ -149,9 +154,5 @@ post-patch:
 	@${REINPLACE_CMD} -e 's|setlocale (LC_ALL, "");|setlocale (LC_ALL, ""); setlocale(LC_NUMERIC, "C");|g' ${WRKSRC}/plugins/${file}
 .endfor
 	@${REINPLACE_CMD} -e 's|chown root|${TRUE}|g' ${WRKSRC}/plugins-root/Makefile.in
-.if ${PORT_OPTIONS:MJAIL}
-	@${REINPLACE_CMD} -e 's# 127\.0\.0\.1 # ${NAGIOSPOLLIP} #g' ${WRKSRC}/configure
-	@${REINPLACE_CMD} -e 's# ::1 # ${NAGIOSPOLLIP6} #g' ${WRKSRC}/configure
-.endif
 
 .include <bsd.port.mk>

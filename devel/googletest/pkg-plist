@@ -2,6 +2,7 @@ bin/gtest-config
 include/gtest/gtest-death-test.h
 include/gtest/gtest-message.h
 include/gtest/gtest-param-test.h
+include/gtest/gtest-printers.h
 include/gtest/gtest-spi.h
 include/gtest/gtest-test-part.h
 include/gtest/gtest-typed-test.h
@@ -27,5 +28,3 @@ lib/libgtest_main.so
 lib/libgtest_main.so.0
 lib/libgtest_main.so.0.0.0
 share/aclocal/gtest.m4
-@dirrm include/gtest/internal
-@dirrm include/gtest

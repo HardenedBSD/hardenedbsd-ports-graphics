@@ -2,12 +2,16 @@
 
 PORTNAME=	Log-Any-Adapter
 PORTVERSION=	0.11
+PORTREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
 
 MAINTAINER=	kuriyama@FreeBSD.org
 COMMENT=	Perl extension to log anywhere
+
+DEPRECATED=	devel/p5-Log-Any-Adapter merged into devel/p5-Log-Any by upstream
+EXPIRATION_DATE=	2015-01-26
 
 RUN_DEPENDS=	\
 	p5-Log-Any>=0.10:${PORTSDIR}/devel/p5-Log-Any \

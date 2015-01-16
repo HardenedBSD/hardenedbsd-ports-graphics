@@ -3,10 +3,11 @@
 
 PORTNAME=	arkanoidsb
 PORTVERSION=	1.3.2.10
+PORTREVISION=	1
 CATEGORIES=	games
 MASTER_SITES=	http://www.wegroup.org/downloads/
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Arkanoid and space game
 
 WRKSRC=		${WRKDIR}/${PORTNAME}

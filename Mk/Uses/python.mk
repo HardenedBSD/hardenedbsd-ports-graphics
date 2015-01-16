@@ -198,17 +198,6 @@
 # Deprecated variables, which exist for compatibility and will be removed
 # soon:
 #
-# USE_PYDISTUTILS	- Deprecated, use USE_PYTHON=distutils instead
-#
-# PYDISTUTILS_AUTOPLIST
-#			- Deprecated, use USE_PYTHON=autoplist instead
-#
-# PYTHON_PY3K_PLIST_HACK
-#			- Deprecated, use USE_PYTHON=py3kplist instead
-#
-# PYDISTUTILS_NOEGGINFO
-#			- Deprecated, use USE_PYTHON=noegginfo instead
-#
 # PYTHON_DEFAULT_VERSION
 # PYTHON2_DEFAULT_VERSION
 # PYTHON3_DEFAULT_VERSION
@@ -218,11 +207,6 @@
 # PYTHON_PKGNAMESUFFIX
 #			- Deprecated, use PYTHON_PKGNAMEPREFIX instead
 #			  default: -py${PYTHON_SUFFIX}
-#
-# PYTHON_CONCURRENT_INSTALL
-#			- Deprecated, use USE_PYTHON=concurrent instead
-#
-# USE_PYTHON_PREFIX	- Deprecated, use USE_PYTHON=pythonprefix instead
 #
 # PYDISTUTILS_INSTALLNOSINGLE
 #			- Deprecated without replacement
@@ -237,74 +221,6 @@ _PYTHON_VERSIONS=		2.7 3.4 3.3 3.2	# preferred first
 _PYTHON_PORTBRANCH=		2.7		# ${_PYTHON_VERSIONS:[1]}
 _PYTHON_BASECMD=		${LOCALBASE}/bin/python
 _PYTHON_RELPORTDIR=		${PORTSDIR}/lang/python
-
-# COMPAT KNOBS, remove them, once the tree is cleaned
-.undef _PY_COMPAT_OLD
-# We will reuse USE_PYTHON with a different meaning, so make sure that, while
-# we are in the transition phase from USE_PYTHON -> USES=python, it is mapped
-# and reassigned correctly
-.if defined(USE_PYTHON_BUILD) || defined(USE_PYTHON_RUN)
-# old style
-_PY_COMPAT_OLD= yes
-.elif defined(USE_PYTHON)
-.if ${USE_PYTHON} == "yes"
-# old style
-_PY_COMPAT_OLD= yes
-.elif ${USE_PYTHON:C/[-0-9.+]*//} == ""
-# old style X.Y, X.Y+, X.Y-, -X.Y, X.Y-Z.A
-_PY_COMPAT_OLD=	yes
-.endif # ${USE_PYTHON} == "yes" ...
-.endif # defined(USE_PYTHON_BUILD) || defined(USE_PYTHON_RUN)
-
-.if defined(_PY_COMPAT_OLD)
-.if defined(USE_PYTHON)
-.if ${USE_PYTHON} != "yes"
-python_ARGS:=	${USE_PYTHON}
-.endif
-.else
-.if defined(USE_PYTHON_BUILD)
-.if ${USE_PYTHON_BUILD} != "yes"
-python_ARGS=	${USE_PYTHON_BUILD},build
-.else
-python_ARGS=	build
-.endif
-.endif # defined(USE_PYTHON_BUILD)
-.if defined(USE_PYTHON_RUN)
-.if ${USE_PYTHON_RUN} != "yes"
-python_ARGS+=	${USE_PYTHON_RUN},run
-.else
-python_ARGS+=	run
-.endif
-.endif # defined(USE_PYTHON_RUN)
-.endif # defined(USE_PYTHON)
-# Everything passed to python_ARGS, undef USE_PYTHON, since we will reuse
-# it with a different meaning below
-.undef USE_PYTHON
-.endif # defined(_PY_COMPAT_OLD)
-.undef _PY_COMPAT_OLD
-
-.if !defined(USE_PYTHON)
-USE_PYTHON=
-.if defined(USE_PYDISTUTILS)
-USE_PYTHON+=	distutils
-.endif
-.if defined(PYDISTUTILS_AUTOPLIST)
-USE_PYTHON+=	autoplist
-.endif
-.if defined(PYTHON_PY3K_PLIST_HACK)
-USE_PYTHON+=	py3kplist
-.endif
-.if defined(PYTHON_CONCURRENT_INSTALL)
-USE_PYTHON+=	concurrent
-.endif
-.if defined(USE_PYTHON_PREFIX)
-USE_PYTHON+=	pythonprefix
-.endif
-.if defined(PYDISTUTILS_NOEGGINFO)
-USE_PYTHON+=	noegginfo
-.endif
-.endif # !defined(USE_PYTHON)
-# COMPAT KNOBS END
 
 # Make each individual feature available as _PYTHON_FEATURE_<FEATURENAME>
 .for var in ${USE_PYTHON}
@@ -448,6 +364,16 @@ IGNORE=		needs an unsupported version of Python
 PYTHON_VERSION?=	python${_PYTHON_VERSION}
 DEPENDS_ARGS+=		PYTHON_VERSION=${PYTHON_VERSION}
 
+# NOTE:
+#
+#  PYTHON_VERSION will hold whatever is passed down the dependency chain.
+#  If a user runs `make PYTHON_VERSION=python3.3, PYTHON_VERSION will be
+#  set to 'python3.3'. A port however may require a different version,
+#  which is stored (above) in _PYTHON_VERSION.
+#  Every python bit below hence should use python${_PYTHON_VERSION}, since
+#  this is the value, the _port_ requires
+#
+
 # Got the correct python version, set some publicly accessible variables
 PYTHON_VER=		${_PYTHON_VERSION}
 PYTHON_SUFFIX=		${_PYTHON_VERSION:S/.//g}
@@ -467,8 +393,8 @@ PYTHON_ABIVER!=		${PYTHON_CMD}-config --abiflags
 PYTHONBASE!=	(${PYTHON_CMD} -c 'import sys; print(sys.prefix)' \
 			2> /dev/null || ${ECHO_CMD} ${LOCALBASE}) | ${TAIL} -1
 
-PYTHON_INCLUDEDIR=	${PYTHONBASE}/include/${PYTHON_VERSION}${PYTHON_ABIVER}
-PYTHON_LIBDIR=		${PYTHONBASE}/lib/${PYTHON_VERSION}
+PYTHON_INCLUDEDIR=	${PYTHONBASE}/include/python${_PYTHON_VERSION}${PYTHON_ABIVER}
+PYTHON_LIBDIR=		${PYTHONBASE}/lib/python${_PYTHON_VERSION}
 PYTHON_PLATFORM=	${OPSYS:tl}${OSREL:C/\.[0-9.]*//}
 PYTHON_SITELIBDIR=	${PYTHON_LIBDIR}/site-packages
 PYTHON_PKGNAMEPREFIX=	py${PYTHON_SUFFIX}-
@@ -626,7 +552,7 @@ PLIST_SUB+=	PYTHON_INCLUDEDIR=${PYTHONPREFIX_INCLUDEDIR:S;${PREFIX}/;;} \
 		PYTHON_LIBDIR=${PYTHONPREFIX_LIBDIR:S;${PREFIX}/;;} \
 		PYTHON_PLATFORM=${PYTHON_PLATFORM} \
 		PYTHON_SITELIBDIR=${PYTHONPREFIX_SITELIBDIR:S;${PREFIX}/;;} \
-		PYTHON_VERSION=${PYTHON_VERSION} \
+		PYTHON_VERSION=python${_PYTHON_VERSION} \
 		PYTHON_VER=${PYTHON_VER}
 
 _USES_POST+=	python

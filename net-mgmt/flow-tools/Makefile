@@ -7,7 +7,7 @@ PORTREVISION=	7
 CATEGORIES=	net-mgmt
 MASTER_SITES=	ftp://ftp.eng.oar.net/pub/flow-tools/
 
-MAINTAINER=	5u623l20@gmail.com
+MAINTAINER=	bofh@FreeBSD.org
 COMMENT=	Suite of tools and library to work with netflow data
 
 PORTSCOUT=	skipv:0.411
@@ -16,8 +16,8 @@ OPTIONS_DEFINE=	MYSQL OPENSSL PGSQL
 
 CONFLICTS=	flow-tools-ng-[0-9]*
 
+USES=		python:run
 USE_GCC=	any
-USE_PYTHON_RUN=	yes
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+=--localstatedir="${PREFIX}"
 
@@ -42,7 +42,7 @@ FLOW_CAPTURE_PIDDIR=	${VARDIR}/run/flow-capture
 
 .if ${PORT_OPTIONS:MPGSQL}
 CONFIGURE_ARGS+=--with-pgsql="${PREFIX}"
-USE_PGSQL=	yes
+USES+=		pgsql
 .endif
 
 .if ${PORT_OPTIONS:MMYSQL}

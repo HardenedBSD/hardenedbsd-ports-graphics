@@ -1,8 +1,4 @@
 %%PERL5_MAN3%%/Net::LibIDN.3.gz
-%%SITE_PERL%%/%%PERL_ARCH%%/Net/LibIDN.pm
-%%SITE_PERL%%/%%PERL_ARCH%%/auto/Net/LibIDN/.packlist
-%%SITE_PERL%%/%%PERL_ARCH%%/auto/Net/LibIDN/LibIDN.so
-%%SITE_PERL%%/%%PERL_ARCH%%/auto/Net/LibIDN/autosplit.ix
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Net/LibIDN
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Net
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/Net
+%%SITE_ARCH%%/Net/LibIDN.pm
+%%SITE_ARCH%%/auto/Net/LibIDN/LibIDN.so
+%%SITE_ARCH%%/auto/Net/LibIDN/autosplit.ix

@@ -3,7 +3,7 @@
 
 PORTNAME=	sdl_lopan
 PORTVERSION=	10
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	games
 MASTER_SITES=	http://www.linuxmotors.com/sdllopan/downloads/ \
 		SF/nemysisfreebsdp/${CATEGORIES}/:icons
@@ -12,7 +12,7 @@ DISTFILES=	sdllopan-${DISTVERSION}.tgz \
 DIST_SUBDIR=	${PORTNAME}
 EXTRACT_ONLY=	sdllopan-${DISTVERSION}.tgz
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Mahjong game remake
 
 WRKSRC=		${WRKDIR}/sdllopan-${PORTVERSION}

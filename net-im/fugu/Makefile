@@ -7,7 +7,7 @@ PORTREVISION=	1
 CATEGORIES=	net-im python
 MASTER_SITES=	http://fugu.gale.org/dist/
 
-MAINTAINER=	5u623l20@gmail.com
+MAINTAINER=	bofh@FreeBSD.org
 COMMENT=	Graphical client for the Gale instant messaging system
 
 LICENSE=	GPLv2
@@ -15,8 +15,7 @@ LICENSE=	GPLv2
 RUN_DEPENDS+=	${PYTHON_SITELIBDIR}/Pmw:${PORTSDIR}/x11-toolkits/py-Pmw
 
 USE_OPENSSL=	yes
-USE_PYTHON=	yes
-USE_PYDISTUTILS=	yes
-PYDISTUTILS_AUTOPLIST=	yes
+USES=		python
+USE_PYTHON=	distutils autoplist
 
 .include <bsd.port.mk>

@@ -3,12 +3,12 @@
 
 PORTNAME=	SVN-Simple
 PORTVERSION=	0.28
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	devel perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
 
-MAINTAINER=	rafan@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Simple interface to SVN::Delta::Editor
 
 BUILD_DEPENDS=	p5-subversion>=0:${PORTSDIR}/devel/p5-subversion

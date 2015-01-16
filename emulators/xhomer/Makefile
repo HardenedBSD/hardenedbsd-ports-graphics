@@ -20,8 +20,9 @@ SUB_FILES=	pkg-message
 PKGMESSAGE=	${WRKDIR}/pkg-message
 
 PLIST_FILES=	bin/xhomer %%EXAMPLESDIR%%/xhomer.cfg
-PLIST_DIRS=	%%EXAMPLESDIR%%
 PORTDOCS=	README LICENSE SIMH
+
+MAKE_JOBS_UNSAFE=	yes
 
 post-install:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}

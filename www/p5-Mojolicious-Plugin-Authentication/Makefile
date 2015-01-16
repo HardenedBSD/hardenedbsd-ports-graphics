@@ -3,12 +3,12 @@
 
 PORTNAME=	Mojolicious-Plugin-Authentication
 PORTVERSION=	1.26
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	www perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
 
-MAINTAINER=	mat@FreeBSD.org
+MAINTAINER=	perl@FreeBSD.org
 COMMENT=	Mojolicious plugin to make authentication a bit easier
 
 LICENSE=	ART10 GPLv1

@@ -3,11 +3,11 @@
 
 PORTNAME=	kajaani-kombat
 PORTVERSION=	0.7
-PORTREVISION=	5
+PORTREVISION=	6
 CATEGORIES=	games
 MASTER_SITES=	http://kombat.kajaani.net/dl/
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Funny multiplayer game... and much more
 
 LICENSE=	GPLv2 # or later

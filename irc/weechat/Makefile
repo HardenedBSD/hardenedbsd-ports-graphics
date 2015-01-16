@@ -3,7 +3,7 @@
 
 PORTNAME=	weechat
 PORTVERSION=	1.0.1
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	irc
 MASTER_SITES=	http://weechat.org/files/src/ \
 		http://perturb.me.uk/distfiles/weechat/:mandocs \
@@ -89,7 +89,6 @@ BUILD_DEPENDS+=	xsltproc:${PORTSDIR}/textproc/libxslt \
 CMAKE_ARGS+=	-DENABLE_MAN=yes -DMANDIR=${MANPREFIX}/man -DENABLE_DOC=yes
 .else
 CMAKE_ARGS+=	-DENABLE_MAN=no -DENABLE_DOC=no
-CFLAGS+=		-Qunused-arguments
 .endif
 
 .include <bsd.port.options.mk>

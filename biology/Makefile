@@ -10,7 +10,6 @@
     SUBDIR += biococoa
     SUBDIR += biojava
     SUBDIR += blat
-    SUBDIR += boinc-simap
     SUBDIR += chemeq
     SUBDIR += clustalw
     SUBDIR += consed
@@ -26,6 +25,7 @@
     SUBDIR += gperiodic
     SUBDIR += grappa
     SUBDIR += hmmer
+    SUBDIR += htslib
     SUBDIR += iolib
     SUBDIR += jalview
     SUBDIR += lagan
@@ -40,7 +40,7 @@
     SUBDIR += mrbayes
     SUBDIR += mummer
     SUBDIR += muscle
-    SUBDIR += ncbi-blast
+    SUBDIR += ncbi-blast+
     SUBDIR += ncbi-toolkit
     SUBDIR += njplot
     SUBDIR += ortep3
@@ -75,6 +75,7 @@
     SUBDIR += python-nexus
     SUBDIR += recombine
     SUBDIR += ruby-bio
+    SUBDIR += samtools
     SUBDIR += seaview
     SUBDIR += seqan
     SUBDIR += seqio

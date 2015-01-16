@@ -3,6 +3,7 @@
 
 PORTNAME=	monetdb
 PORTVERSION=	11.15.19
+PORTREVISION=	1
 CATEGORIES=	databases
 MASTER_SITES=	http://www.monetdb.org/downloads/sources/Feb2013-SP6/
 DISTNAME=	MonetDB-${PORTVERSION}
@@ -169,6 +170,9 @@ IGNORE=	testing option requires both Python2 and Perl
 
 .if ${PORT_OPTIONS:MPYTHON2} || ${PORT_OPTIONS:MPYTHON3}
 CATEGORIES+=	python
+PLIST_SUB+=	PYTHON=
+.else
+PLIST_SUB+=	PYTHON="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MPYTHON2}
@@ -182,6 +186,7 @@ CONFIGURE_ARGS+=	--without-python2
 
 .if ${PORT_OPTIONS:MPYTHON3}
 USES+=		python:3
+USE_PYTHON=	py3kplist
 PLIST_SUB+=	PYTHON_VER=${PYTHON_VER}
 CONFIGURE_ARGS+=	--with-python3=${PYTHON_CMD} \
 			--without-python2
@@ -221,8 +226,8 @@ pre-install:
 		${STAGEDIR}${MONETDB_RUNDIR} \
 		${STAGEDIR}${DOCSDIR}
 .if ${PORT_OPTIONS:MPERL}
-	${MKDIR} ${STAGEDIR}/${SITE_PERL}/${PERL_ARCH}/DBD/monetdb \
-		${STAGEDIR}/${SITE_PERL}/${PERL_ARCH}/MonetDB
+	${MKDIR} ${STAGEDIR}${PREFIX}/${SITE_ARCH_REL}/DBD/monetdb \
+		${STAGEDIR}${PREFIX}/${SITE_ARCH_REL}/MonetDB
 .endif
 	${INSTALL_DATA} ${WRKSRC}/sql/dump-restore.* ${STAGEDIR}${DOCSDIR}
 
@@ -234,13 +239,13 @@ post-install:
 	${RMDIR} ${STAGEDIR}${PREFIX}/var
 .if ${PORT_OPTIONS:MPERL}
 	${MV} ${STAGEDIR}${PREFIX}/Mapi.pm \
-		${STAGEDIR}${SITE_PERL}/${PERL_ARCH}
+		${STAGEDIR}${PREFIX}/${SITE_ARCH_REL}
 	${MV} ${STAGEDIR}${PREFIX}/DBD/monetdb.pm \
-		${STAGEDIR}${SITE_PERL}/${PERL_ARCH}/DBD
+		${STAGEDIR}${PREFIX}/${SITE_ARCH_REL}/DBD
 	${MV} ${STAGEDIR}${PREFIX}/DBD/monetdb/*.pm \
-		${STAGEDIR}${SITE_PERL}/${PERL_ARCH}/DBD/monetdb
+		${STAGEDIR}${PREFIX}/${SITE_ARCH_REL}/DBD/monetdb
 	${MV} ${STAGEDIR}${PREFIX}/MonetDB \
-		${STAGEDIR}${SITE_PERL}/${PERL_ARCH}
+		${STAGEDIR}${PREFIX}/${SITE_ARCH_REL}
 	${RM} -r ${STAGEDIR}${PREFIX}/DBD
 .endif
 .if ${PORT_OPTIONS:MPYTHON2} || ${PORT_OPTIONS:MPYTHON3}

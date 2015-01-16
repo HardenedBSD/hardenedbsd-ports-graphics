@@ -11,9 +11,10 @@ COMMENT=	Exposes the fundamental aspects of Salt control to external sources
 
 LICENSE=	APACHE20
 
-USE_PYTHON=	2
-USE_PYDISTUTILS=	yes
-PYDISTUTILS_AUTOPLIST=	yes
+BROKEN=		Conflicts with py27-salt-2014.7.0
+
+USES=		python:2
+USE_PYTHON=	distutils autoplist
 
 BUILD_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}salt>0:${PORTSDIR}/sysutils/py-salt
 RUN_DEPENDS:=	${BUILD_DEPENDS}

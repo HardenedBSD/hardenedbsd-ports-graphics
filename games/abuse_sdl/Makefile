@@ -3,13 +3,13 @@
 
 PORTNAME=	abuse_sdl
 PORTVERSION=	0.8
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	games
 MASTER_SITES=	GENTOO/distfiles \
 		http://abuse.zoy.org/raw-attachment/wiki/download/
 DISTNAME=	abuse-${DISTVERSION}
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	SDL port of the Abuse game engine
 
 LICENSE=	GPLv2

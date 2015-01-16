@@ -3,12 +3,15 @@
 
 PORTNAME=	q2pro
 PORTVERSION=	${SVN_REV}
-PORTREVISION=	8
+PORTREVISION=	10
 CATEGORIES=	games
 MASTER_SITES=	LOCAL/alepulver
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	danfe@FreeBSD.org
 COMMENT=	Quake II engine modification compatible with R1Q2
+
+LICENSE=	GPLv2 # or later
+LICENSE_FILE=	${WRKSRC}/gnu.txt
 
 USES=		dos2unix gmake tar:bzip2
 WRKSRC=		${WRKDIR}/${PORTNAME}

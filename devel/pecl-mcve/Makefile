@@ -3,19 +3,21 @@
 
 PORTNAME=	mcve
 PORTVERSION=	7.0.3
+PORTREVISION=	1
 CATEGORIES=	devel pear
 MASTER_SITES=	http://pecl.php.net/get/
 PKGNAMEPREFIX=	pecl-
 EXTRACT_SUFX=	.tgz
 DIST_SUBDIR=	PECL
 
-MAINTAINER=	miwi@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	PECL Extension for Interface the MCVE/Monetra API
 
 LIB_DEPENDS=	libmonetra.so:${PORTSDIR}/devel/libmonetra
 
 LICENSE=	PHP30
 
+USE_OPENSSL=	yes
 USE_PHP=	yes
 USE_PHPEXT=	yes
 DEFAULT_PHP_VER=53

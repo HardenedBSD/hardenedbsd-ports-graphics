@@ -1,4 +1,3 @@
-%%SITE_PERL%%/%%PERL_ARCH%%/auto/Rcs/.packlist
 %%SITE_PERL%%/Rcs.pm
 %%PERL5_MAN3%%/Rcs.3.gz
 share/examples/p5-Rcs/project/RCS/Rcs.pm,v
@@ -24,8 +23,3 @@ share/examples/p5-Rcs/test1.pl
 share/examples/p5-Rcs/test2.pl
 share/examples/p5-Rcs/test3.pl
 share/examples/p5-Rcs/unlock.pl
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Rcs
-@dirrm share/examples/p5-Rcs/project/RCS
-@dirrm share/examples/p5-Rcs/project/src
-@dirrm share/examples/p5-Rcs/project
-@dirrm share/examples/p5-Rcs

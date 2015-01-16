@@ -2,12 +2,15 @@
 # $FreeBSD$
 
 PORTNAME=	ntp
-PORTVERSION=	4.2.7p476
+PORTVERSION=	4.2.8p1b5
 CATEGORIES=	net ipv6
-MASTER_SITES=	http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-dev/ \
-		http://archive.ntp.org/ntp4/ntp-dev/
+MASTER_SITES=	http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ \
+		http://archive.ntp.org/ntp4/ntp-4.2/ \
+ 		ftp://ftp.netlab.is.tsukuba.ac.jp/pub/network/ntp/ntp4/
 PKGNAMESUFFIX=	-devel
-DISTNAME=	${PORTNAME}-dev-${PORTVERSION:S/.r/-rc/}
+DISTNAME=	${PORTNAME}-${PORTVERSION:S/P/p/:S/.r/-RC/:S/b/-beta/}
+# XXX
+WRKSRC=		${WRKDIR}/${DISTNAME:S/beta4$/beta5/}
 
 MAINTAINER=	cy@FreeBSD.org
 COMMENT=	The Network Time Protocol Distribution
@@ -46,10 +49,6 @@ CONFIGURE_ARGS+=	--enable-${D}
 .endif
 .endfor
 
-.if ${PORT_OPTIONS:MMX4200}
-BROKEN=		Fails to compile when MX4200 is enabled.
-.endif
- 
 DOCSDIR=	${PREFIX}/share/doc/${PORTNAME}4
 
 # XXX Temporary hack. Remember to remove this next commit.

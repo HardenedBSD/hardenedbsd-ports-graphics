@@ -7,13 +7,13 @@ CATEGORIES=	net-mgmt python
 MASTER_SITES=	GOOGLE_CODE
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
-MAINTAINER=	5u623l20@gmail.com
+MAINTAINER=	bofh@FreeBSD.org
 COMMENT=	Validator and code generator for YANG (RFC 4741)
 
-LICENSE=	BSD
+LICENSE=	MIT
 
-USE_PYTHON=	yes
-USE_PYDISTUTILS=yes
+USES=		python
+USE_PYTHON=	distutils
 
 DATADIR=	${PREFIX}/share/yang
 

@@ -3,12 +3,13 @@
 
 PORTNAME=	POE-Filter-SSL
 PORTVERSION=	0.28
+PORTREVISION=	2
 CATEGORIES=	security perl5
 MASTER_SITES=	CPAN
 MASTER_SITE_SUBDIR=	CPAN:PRIVI
 PKGNAMEPREFIX=	p5-
 
-MAINTAINER=	mat@FreeBSD.org
+MAINTAINER=	perl@FreeBSD.org
 COMMENT=	The easiest and flexiblest way to SSL in POEIntegrate SSL into POE
 
 LICENSE=	ART10 GPLv1
@@ -22,5 +23,7 @@ TEST_DEPENDS=	p5-Test-Simple>=0:${PORTSDIR}/devel/p5-Test-Simple
 
 USES=		perl5
 USE_PERL5=	configure
+USE_OPENSSL=	yes
+MAKE_ARGS+=	PASTHRU_INC=-I${OPENSSLINC}
 
 .include <bsd.port.mk>

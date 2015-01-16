@@ -16,7 +16,6 @@
 %%SITE_PERL%%/Devel/Events/Handler/Log/Memory.pm
 %%SITE_PERL%%/Devel/Events/Handler/Multiplex.pm
 %%SITE_PERL%%/Devel/Events/Match.pm
-%%SITE_PERL%%/%%PERL_ARCH%%/auto/Devel/Events/.packlist
 %%PERL5_MAN3%%/Devel::Events.3.gz
 %%PERL5_MAN3%%/Devel::Events::Filter.3.gz
 %%PERL5_MAN3%%/Devel::Events::Filter::Callback.3.gz
@@ -35,11 +34,3 @@
 %%PERL5_MAN3%%/Devel::Events::Handler::Log::Memory.3.gz
 %%PERL5_MAN3%%/Devel::Events::Handler::Multiplex.3.gz
 %%PERL5_MAN3%%/Devel::Events::Match.3.gz
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Devel/Events
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Devel
-@dirrmtry %%SITE_PERL%%/Devel/Events/Handler/Log
-@dirrmtry %%SITE_PERL%%/Devel/Events/Handler
-@dirrmtry %%SITE_PERL%%/Devel/Events/Generator
-@dirrmtry %%SITE_PERL%%/Devel/Events/Filter
-@dirrmtry %%SITE_PERL%%/Devel/Events
-@dirrmtry %%SITE_PERL%%/Devel

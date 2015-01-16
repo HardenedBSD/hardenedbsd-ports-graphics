@@ -3,6 +3,7 @@
 
 PORTNAME=		Text-MeCab
 PORTVERSION=		0.20009
+PORTREVISION=	1
 CATEGORIES=		japanese textproc perl5
 MASTER_SITES=		CPAN
 
@@ -38,5 +39,9 @@ post-configure:
 .include <bsd.port.pre.mk>
 
 PKGNAMEPREFIX:=	${PKGNAMEPREFIX}p5-
+
+.if ${PERL_VER} >= 5.18
+BROKEN=		Does not build with Perl 5.18 or above
+.endif
 
 .include <bsd.port.post.mk>

@@ -2,6 +2,7 @@
 
 PORTNAME=	bind
 PORTVERSION=	${ISCVERSION:S/-P/P/}
+PORTREVISION=	3
 CATEGORIES=	dns net ipv6
 MASTER_SITES=	ISC/bind9/${ISCVERSION}
 PKGNAMESUFFIX=	99
@@ -13,7 +14,7 @@ COMMENT=	BIND DNS suite with updated DNSSEC and DNS64
 LICENSE=	ISCL
 
 # ISC releases things like 9.8.0-P1, which our versioning doesn't like
-ISCVERSION=	9.9.6
+ISCVERSION=	9.9.6-P1
 
 MAKE_JOBS_UNSAFE=	yes
 
@@ -36,7 +37,9 @@ ETCDIR=		${PREFIX}/etc/namedb
 
 CONFLICTS=	bind9*-9.[45678].* bind9*-sdb-9.[45678].* bind-tools-9.*
 
-OPTIONS_DEFAULT=	IPV6 SSL THREADS GSSAPI_NONE RRL
+SUB_FILES=	pkg-message
+
+OPTIONS_DEFAULT=	IPV6 SSL THREADS SIGCHASE IDN GSSAPI_NONE RRL
 OPTIONS_DEFINE=		SSL IDN REPLACE_BASE LARGE_FILE FIXED_RRSET SIGCHASE \
 			IPV6 THREADS FILTER_AAAA GOST PYTHON \
 			LINKS RPZ_NSIP RPZ_NSDNAME RRL DOCS RPZ_PATCH NEWSTATS
@@ -49,7 +52,7 @@ OPTIONS_SINGLE_GSSAPI=	GSSAPI_BASE GSSAPI_HEIMDAL GSSAPI_MIT GSSAPI_NONE
 OPTIONS_SUB=	yes
 
 SSL_DESC=		Build with OpenSSL (Required for DNSSEC)
-REPLACE_BASE_DESC=	Replace base BIND (FreeBSD 9.x and earlier)
+REPLACE_BASE_DESC=	EOL, no longer supported
 LARGE_FILE_DESC=	64-bit file support
 FIXED_RRSET_DESC=	Enable fixed rrset ordering
 SIGCHASE_DESC=		dig/host/nslookup will do DNSSEC validation
@@ -100,7 +103,7 @@ PYTHON_CONFIGURE_WITH=	python
 PYTHON_USES=	python
 
 DLZ_POSTGRESQL_CONFIGURE_ON=	--with-dlz-postgres=yes
-DLZ_POSTGRESQL_USE=		pgsql=yes
+DLZ_POSTGRESQL_USES=		pgsql
 
 FIXED_RRSET_CONFIGURE_ENABLE=	fixed-rrset
 
@@ -108,7 +111,7 @@ RPZ_NSIP_CONFIGURE_ENABLE=	rpz-nsip
 
 RPZ_NSDNAME_CONFIGURE_ENABLE=	rpz-nsdname
 
-RPZ_PATCH_PATCHFILES=	9.9.6-rpz2+rl.14038.05.patch:vix
+RPZ_PATCH_PATCHFILES=	${ISCVERSION}-rpz2+rl.14038.05.patch:vix
 RPZ_PATCH_PATCH_SITES=	http://ss.vix.su/~vjs/:vix ${MASTER_SITE_LOCAL:S/%SUBDIR%/mat\/bind/:S/$/:vix/}
 
 RRL_CONFIGURE_ENABLE=	rrl
@@ -139,7 +142,7 @@ GSSAPI_NONE_CONFIGURE_ON=	--without-gssapi
 
 .include <bsd.port.options.mk>
 
-.if !${PORT_OPTIONS:MLINKS} || ${PORT_OPTIONS:MREPLACE_BASE}
+.if !${PORT_OPTIONS:MLINKS}
 PKGINSTALL=${NONEXISTENT}
 .endif
 
@@ -150,66 +153,42 @@ CONFIGURE_ARGS+=	--disable-threads
 .endif
 
 .if ${PORT_OPTIONS:MREPLACE_BASE}
-.if ${OPSYS} == FreeBSD && ${OSVERSION} >= 1000100
-IGNORE=		REPLACE_BASE option is not supported on this release
-.else # >= 10.0
-# Move to BROKEN after expiration.
-DEPRECATED=		REPLACE_BASE option will be removed.  There is no real need for foot-shooting.
-EXPIRATION_DATE=	2015-01-01
-.endif # >= 10.0
-PKGNAMESUFFIX=	-base
-PREFIX=		/usr
-PLIST_SUB+=	SHARE_MAN="share/"
-NO_MTREE=	yes
-BIND_DESTETC=	/etc/namedb
-.else # REPLACE_BASE
-PLIST_SUB+=	SHARE_MAN=""
-.if ${OPSYS} == FreeBSD && ${OSVERSION} >= 1000100
-BIND_DESTETC=	${PREFIX}/etc/namedb
-PKGINSTALL=	${NONEXISTENT}
-.else # >= 10.0
-BIND_DESTETC=	${PREFIX}/etc
-.endif # >= 10.0
+IGNORE=		REPLACE_BASE is no longer supported
 .endif # REPLACE_BASE
 
-PKGDEINSTALL=	${PKGINSTALL}
-
-CONFIGURE_ARGS+=	--prefix=${PREFIX} \
-			--sysconfdir=${BIND_DESTETC}
-SUB_LIST+=	BIND_DESTETC="${BIND_DESTETC}"
-
-PORTDOCS=	*
-
 .if ${OPSYS} == FreeBSD && ${OSVERSION} >= 1000100
+PKGINSTALL=	${NONEXISTENT}
 PLIST_SUB+=	NOBASE="" BASE="@comment "
+SUB_LIST+=	NOBASE="" BASE="@comment "
 USE_RC_SUBR+=	named
 SUB_FILES+=	named.conf
 .if ${PORT_OPTIONS:MGOST}
 WITH_OPENSSL_PORT=yes
 .endif
 .else
+ETCDIR=		${PREFIX}/etc
 PLIST_SUB+=	NOBASE="@comment " BASE=""
+SUB_LIST+=	NOBASE="@comment " BASE=""
 .if ${PORT_OPTIONS:MSSL}
 WITH_OPENSSL_PORT=	yes
 .endif
 .endif
 
+PKGDEINSTALL=	${PKGINSTALL}
+
+CONFIGURE_ARGS+=	--prefix=${PREFIX} \
+			--sysconfdir=${ETCDIR}
+
+PORTDOCS=	*
+
 post-patch:
 .for FILE in check/named-checkconf.8 named/named.8 nsupdate/nsupdate.1 \
 	rndc/rndc.8
-	@${MV} ${WRKSRC}/bin/${FILE} ${WRKSRC}/bin/${FILE}.Dist
-	@${SED} -e 's#/etc/named.conf#${BIND_DESTETC}/named.conf#g' \
-		-e 's#/etc/rndc.conf#${BIND_DESTETC}/rndc.conf#g' \
+	@${REINPLACE_CMD} -e 's#/etc/named.conf#${ETCDIR}/named.conf#g' \
+		-e 's#/etc/rndc.conf#${ETCDIR}/rndc.conf#g' \
 		-e "s#/var\/run\/named\/named.pid#/var/run/named/pid#" \
-		${WRKSRC}/bin/${FILE}.Dist > ${WRKSRC}/bin/${FILE}
+		${WRKSRC}/bin/${FILE}
 .endfor
-	@${MV} ${WRKSRC}/Makefile.in ${WRKSRC}/Makefile.in.Dist
-	@${SED} -e 's#.*bind\.keys.*##' ${WRKSRC}/Makefile.in.Dist > \
-		${WRKSRC}/Makefile.in
-	@${MV} ${WRKSRC}/bin/named/Makefile.in ${WRKSRC}/bin/named/Makefile.in.Dist
-	@${SED} -e 's/$${PERL}/#/' -e 's/bind.keys.h/#/g' -e 's/bind9.xsl.h/#/g' \
-		${WRKSRC}/bin/named/Makefile.in.Dist > \
-		${WRKSRC}/bin/named/Makefile.in
 
 post-configure:
 	@${REINPLACE_CMD} -e '/^SO_LDFLAGS/s/-Wl,-rpath,/-rpath /' ${WRKSRC}/bin/tests/system/dlzexternal/Makefile
@@ -233,7 +212,8 @@ post-install:
 	${INSTALL_DATA} ${FILESDIR}/empty.db ${STAGEDIR}${ETCDIR}/master
 	${INSTALL_DATA} ${FILESDIR}/localhost-forward.db ${STAGEDIR}${ETCDIR}/master
 	${INSTALL_DATA} ${FILESDIR}/localhost-reverse.db ${STAGEDIR}${ETCDIR}/master
-	${INSTALL_DATA} ${WRKSRC}/bin/rndc/rndc.conf ${STAGEDIR}${ETCDIR}/rndc.conf.sample
 .endif
+	${INSTALL_DATA} ${WRKSRC}/bin/rndc/rndc.conf \
+		${STAGEDIR}${ETCDIR}/rndc.conf.sample
 
 .include <bsd.port.mk>

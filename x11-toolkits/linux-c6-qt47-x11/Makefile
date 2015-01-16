@@ -3,6 +3,7 @@
 
 PORTNAME=	qt47-x11
 PORTVERSION=	4.7.2
+PORTREVISION=	1
 CATEGORIES=	x11-toolkits linux
 MASTER_SITES=	${MASTER_SITE_LOCAL}
 MASTER_SITE_SUBDIR=	xmj
@@ -35,5 +36,8 @@ USE_LINUX_APPS+=	dri
 
 
 DESCR=	${.CURDIR}/../../devel/qt4/pkg-descr
+
+post-patch:
+	${RM} -f ${WRKDIR}/usr/share/qt47/translations/qt_help_*.qm
 
 .include <bsd.port.mk>

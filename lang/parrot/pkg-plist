@@ -1,6 +1,6 @@
-bin/ops2c
 bin/parrot
 bin/parrot-nqp
+bin/parrot-ops2c
 bin/parrot-prove
 bin/parrot_config
 bin/parrot_nci_thunk_gen
@@ -60,6 +60,7 @@ include/parrot/%%PARROT_VER%%/parrot/longopt.h
 include/parrot/%%PARROT_VER%%/parrot/memory.h
 include/parrot/%%PARROT_VER%%/parrot/misc.h
 include/parrot/%%PARROT_VER%%/parrot/multidispatch.h
+include/parrot/%%PARROT_VER%%/parrot/namealias.h
 include/parrot/%%PARROT_VER%%/parrot/namespace.h
 include/parrot/%%PARROT_VER%%/parrot/nci.h
 include/parrot/%%PARROT_VER%%/parrot/oo.h
@@ -111,7 +112,6 @@ include/parrot/%%PARROT_VER%%/pmc/pmc_continuation.h
 include/parrot/%%PARROT_VER%%/pmc/pmc_coroutine.h
 include/parrot/%%PARROT_VER%%/pmc/pmc_default.h
 include/parrot/%%PARROT_VER%%/pmc/pmc_env.h
-include/parrot/%%PARROT_VER%%/pmc/pmc_eval.h
 include/parrot/%%PARROT_VER%%/pmc/pmc_eventhandler.h
 include/parrot/%%PARROT_VER%%/pmc/pmc_exception.h
 include/parrot/%%PARROT_VER%%/pmc/pmc_exceptionhandler.h
@@ -577,6 +577,19 @@ lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Test/Util.pm
 lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Test/Util/Runloop.pm
 lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Vtable.pm
 lib/parrot/%%PARROT_VER%%/tools/myconfig
+man/man1/parrot-nqp.1.gz
+man/man1/parrot-ops2c.1.gz
+man/man1/parrot-prove.1.gz
+man/man1/parrot.1.gz
+man/man1/parrot_config.1.gz
+man/man1/parrot_nci_thunk_gen.1.gz
+man/man1/parrotbug.1.gz
+man/man1/pbc_disassemble.1.gz
+man/man1/pbc_dump.1.gz
+man/man1/pbc_merge.1.gz
+man/man1/pbc_to_exe.1.gz
+man/man1/plumage.1.gz
+man/man1/winxed.1.gz
 %%PARROT_DOCS%%/CREDITS
 %%PARROT_DOCS%%/DONORS.pod
 %%PARROT_DOCS%%/LICENSE
@@ -589,16 +602,6 @@ lib/parrot/%%PARROT_VER%%/tools/myconfig
 %%PARROT_DOCS%%/TODO
 %%DATADIR%%/%%PARROT_VER%%/MANIFEST
 %%DATADIR%%/%%PARROT_VER%%/MANIFEST.dev
-man/man1/ops2c.1.gz
-man/man1/parrot-nqp.1.gz
-man/man1/parrot-prove.1.gz
-man/man1/parrot.1.gz
-man/man1/parrot_config.1.gz
-man/man1/parrot_nci_thunk_gen.1.gz
-man/man1/parrotbug.1.gz
-man/man1/pbc_to_exe.1.gz
-man/man1/plumage.1.gz
-man/man1/winxed.1.gz
 src/parrot/%%PARROT_VER%%/config_lib.pir
 src/parrot/%%PARROT_VER%%/pmc/addrregistry.dump
 src/parrot/%%PARROT_VER%%/pmc/alarm.dump
@@ -616,7 +619,6 @@ src/parrot/%%PARROT_VER%%/pmc/continuation.dump
 src/parrot/%%PARROT_VER%%/pmc/coroutine.dump
 src/parrot/%%PARROT_VER%%/pmc/default.dump
 src/parrot/%%PARROT_VER%%/pmc/env.dump
-src/parrot/%%PARROT_VER%%/pmc/eval.dump
 src/parrot/%%PARROT_VER%%/pmc/eventhandler.dump
 src/parrot/%%PARROT_VER%%/pmc/exception.dump
 src/parrot/%%PARROT_VER%%/pmc/exceptionhandler.dump
@@ -698,90 +700,3 @@ src/parrot/%%PARROT_VER%%/pmc/undef.dump
 src/parrot/%%PARROT_VER%%/pmc/unmanagedstruct.dump
 src/parrot/%%PARROT_VER%%/vtable.dump
 src/parrot/%%PARROT_VER%%/vtable.tbl
-@dirrm src/parrot/%%PARROT_VER%%/pmc
-@dirrm src/parrot/%%PARROT_VER%%
-@dirrm src/parrot
-@dirrm src
-@dirrm %%DATADIR%%/%%PARROT_VER%%
-@dirrm %%DATADIR%%
-@dirrm %%PARROT_DOCS%%
-@dirrm share/doc/parrot
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Test/Util
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Test/Pod
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Test
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Pmc2c/PMC
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Pmc2c
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/IO
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Headerizer
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Harness
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Git
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Docs/Section
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Docs
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Configure/Step
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Configure/Options/Test
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Configure/Options/Conf
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Configure/Options
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Configure
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot/Config
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/Parrot
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib/File
-@dirrm lib/parrot/%%PARROT_VER%%/tools/lib
-@dirrm lib/parrot/%%PARROT_VER%%/tools/dev
-@dirrm lib/parrot/%%PARROT_VER%%/tools/build
-@dirrm lib/parrot/%%PARROT_VER%%/tools
-@dirrm lib/parrot/%%PARROT_VER%%/library/YAML/Dumper
-@dirrm lib/parrot/%%PARROT_VER%%/library/YAML
-@dirrm lib/parrot/%%PARROT_VER%%/library/URI
-@dirrm lib/parrot/%%PARROT_VER%%/library/Test/Builder
-@dirrm lib/parrot/%%PARROT_VER%%/library/Test
-@dirrm lib/parrot/%%PARROT_VER%%/library/TAP
-@dirrm lib/parrot/%%PARROT_VER%%/library/String
-@dirrm lib/parrot/%%PARROT_VER%%/library/Stream
-@dirrm lib/parrot/%%PARROT_VER%%/library/SDL
-@dirrm lib/parrot/%%PARROT_VER%%/library/ProfTest
-@dirrm lib/parrot/%%PARROT_VER%%/library/Parrot
-@dirrm lib/parrot/%%PARROT_VER%%/library/PGE
-@dirrm lib/parrot/%%PARROT_VER%%/library/PCT
-@dirrm lib/parrot/%%PARROT_VER%%/library/OpenGL
-@dirrm lib/parrot/%%PARROT_VER%%/library/NCI
-@dirrm lib/parrot/%%PARROT_VER%%/library/Math
-@dirrm lib/parrot/%%PARROT_VER%%/library/MIME
-@dirrm lib/parrot/%%PARROT_VER%%/library/LWP
-@dirrm lib/parrot/%%PARROT_VER%%/library/HTTP
-@dirrm lib/parrot/%%PARROT_VER%%/library/Getopt
-@dirrm lib/parrot/%%PARROT_VER%%/library/Digest
-@dirrm lib/parrot/%%PARROT_VER%%/library/Data/Dumper
-@dirrm lib/parrot/%%PARROT_VER%%/library/Data
-@dirrm lib/parrot/%%PARROT_VER%%/library/Configure
-@dirrm lib/parrot/%%PARROT_VER%%/library/Config
-@dirrm lib/parrot/%%PARROT_VER%%/library/CGI
-@dirrm lib/parrot/%%PARROT_VER%%/library/Archive
-@dirrm lib/parrot/%%PARROT_VER%%/library
-@dirrm lib/parrot/%%PARROT_VER%%/languages/winxed
-@dirrm lib/parrot/%%PARROT_VER%%/languages/tge/TGE
-@dirrm lib/parrot/%%PARROT_VER%%/languages/tge
-@dirrm lib/parrot/%%PARROT_VER%%/languages/pge/PGE
-@dirrm lib/parrot/%%PARROT_VER%%/languages/pge
-@dirrm lib/parrot/%%PARROT_VER%%/languages/pct/src/POST
-@dirrm lib/parrot/%%PARROT_VER%%/languages/pct/src/PCT
-@dirrm lib/parrot/%%PARROT_VER%%/languages/pct/src/PAST
-@dirrm lib/parrot/%%PARROT_VER%%/languages/pct/src
-@dirrm lib/parrot/%%PARROT_VER%%/languages/pct
-@dirrm lib/parrot/%%PARROT_VER%%/languages/parrot
-@dirrm lib/parrot/%%PARROT_VER%%/languages/data_json/data_json
-@dirrm lib/parrot/%%PARROT_VER%%/languages/data_json
-@dirrm lib/parrot/%%PARROT_VER%%/languages/JSON
-@dirrmtry lib/parrot/%%PARROT_VER%%/languages
-@dirrm lib/parrot/%%PARROT_VER%%/include
-@dirrmtry lib/parrot/%%PARROT_VER%%/dynext
-@dirrm lib/parrot/%%PARROT_VER%%/bin
-@dirrmtry lib/parrot/%%PARROT_VER%%
-@dirrmtry lib/parrot
-@dirrm include/parrot/%%PARROT_VER%%/pmc
-@dirrm include/parrot/%%PARROT_VER%%/parrot/oplib
-@dirrm include/parrot/%%PARROT_VER%%/parrot/atomic
-@dirrm include/parrot/%%PARROT_VER%%/parrot
-@dirrm include/parrot/%%PARROT_VER%%/imcc
-@dirrm include/parrot/%%PARROT_VER%%/dynpmc
-@dirrm include/parrot/%%PARROT_VER%%
-@dirrm include/parrot

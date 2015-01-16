@@ -16,7 +16,7 @@ LICENSE=	GPLv3
 RUN_DEPENDS=	bash:${PORTSDIR}/shells/bash
 
 NO_BUILD=	yes
-USE_PYTHON_RUN=	yes
+USES=		python:run
 SUB_FILES=	pkg-install
 
 PLIST_FILES=	bin/autojump \
@@ -25,7 +25,6 @@ PLIST_FILES=	bin/autojump \
 		share/autojump/autojump.bash \
 		share/autojump/autojump.zsh \
 		share/autojump/icon.png
-PLIST_DIRS=	share/autojump
 
 OPTIONS_DEFINE=		ZSH
 OPTIONS_DEFAULT=	ZSH

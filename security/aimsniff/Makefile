@@ -3,6 +3,7 @@
 
 PORTNAME=	aimsniff
 PORTVERSION=	0.9d
+PORTREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	SF/${PORTNAME}/AIM%20Sniff/${PORTVERSION}
 
@@ -22,16 +23,13 @@ SUID_ROOT_DESC=	Install aimsniff with set-uid bit
 
 PORTDOCS=	README table.struct rc.aimsniff
 
-USES=		perl5
+USES=		perl5 shebangfix
+SHEBANG_FILES=	aimSniff.pl
 NO_BUILD=	yes
 
 PLIST_FILES=	bin/aimsniff
 
 .include <bsd.port.options.mk>
-
-.if !exists(${LOCALBASE}/lib/perl5/${PERL_VER}/${PERL_ARCH}/GDBM_File.pm)
-#IGNORE=		You need perl compiled with GDBM support
-.endif
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/aimSniff.pl ${STAGEDIR}${PREFIX}/bin/aimsniff

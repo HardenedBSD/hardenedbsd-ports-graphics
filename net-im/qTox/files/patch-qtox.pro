@@ -1,9 +1,9 @@
---- qtox.pro.orig	2014-10-18 16:44:41 UTC
+--- qtox.pro
 +++ qtox.pro
-@@ -186,3 +186,15 @@
-     src/cameraworker.cpp \
-     src/widget/videosurface.cpp \
-     src/netvideosource.cpp
+@@ -223,3 +223,15 @@
+     src/misc/serialize.cpp \
+     src/widget/form/settings/advancedform.cpp \
+     src/audio.cpp
 +
 +unix {
 +    target.path  = $$PREFIX/bin

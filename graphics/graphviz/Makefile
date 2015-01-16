@@ -3,7 +3,7 @@
 
 PORTNAME=	graphviz
 PORTVERSION=	2.38.0
-PORTREVISION=	2
+PORTREVISION=	6
 CATEGORIES=	graphics tk
 MASTER_SITES=	http://www.graphviz.org/pub/graphviz/ARCHIVE/
 
@@ -12,13 +12,13 @@ COMMENT=	Graph Visualization Software from AT&T and Bell Labs
 
 LIB_DEPENDS=	libltdl.so:${PORTSDIR}/devel/libltdl \
 		libjpeg.so:${PORTSDIR}/graphics/jpeg \
-		libpng15.so:${PORTSDIR}/graphics/png \
+		libpng.so:${PORTSDIR}/graphics/png \
 		libfreetype.so:${PORTSDIR}/print/freetype2 \
 		libfontconfig.so:${PORTSDIR}/x11-fonts/fontconfig \
 		libexpat.so:${PORTSDIR}/textproc/expat2 \
 		libgd.so:${PORTSDIR}/${GD_PORT}
 
-USES=		gmake bison libtool:oldver pkgconfig pathfix shebangfix
+USES=		gmake bison libtool:keepla pkgconfig pathfix shebangfix
 GNU_CONFIGURE=	yes
 LDFLAGS+=	-L${LOCALBASE}/lib
 CPPFLAGS+=	-I${LOCALBASE}/include
@@ -88,13 +88,13 @@ PANGOCAIRO_USE=	GNOME=pango XORG=xrender,x11,xau,xdmcp
 LIBRSVG2_USE=	GNOME=librsvg2 GL=gl,glu,glut
 GTK2_USE=	XORG=sm,ice,xext,xinerama,xi,xrandr,xcursor,xfixes GNOME=gtk20
 GNOMEUI_USE=	GNOME=libgnomeui
-SMYRNA_USE=	GNOME=libglade2
+SMYRNA_USE=	GNOME=libglade2 GL=glut
 GVEDIT_USE=	qt4=qmake_build,moc_build,rcc_build,uic_build \
 		qt4=linguist_build,corelib,gui
 GHOSTSCRIPT_USE=GHOSTSCRIPT=yes
 PERL_USES=	perl5
 PHP_USE=	PHP=yes PHP_BUILD=yes
-PYTHON_USE=	PYTHON_BUILD=2.7
+PYTHON_USES=	python:2.7,build
 RUBY_USE=	RUBY=yes
 LUA_USES=	lua
 TCL_USES=	tcl:build
@@ -309,6 +309,8 @@ post-patch:
 		-e '/if test/ s| == | = |g' ${WRKSRC}/configure
 	${REINPLACE_CMD} -e 's|#include "gui.h"|#include "gui/gui.h"|' \
 		${WRKSRC}/cmd/smyrna/tvnodes.h
+	${REINPLACE_CMD} -e 's|GTS_LIBS)|GTS_LIBS) $$(MATH_LIBS)|' \
+		${WRKSRC}/cmd/smyrna/Makefile.in
 	${CP} ${WRKSRC}/lib/cgraph/cgraph.h ${WRKSRC}/plugin/ming/
 .if ! ${PORT_OPTIONS:MDOCS}
 	${REINPLACE_CMD} -e 's| install-txtDATA$$||' \

@@ -8,10 +8,10 @@ MASTER_SITES=	http://www.csie.ntu.edu.tw/~cjlin/libsvm/ \
 		http://www.csie.ntu.edu.tw/~cjlin/libsvm/oldfiles/
 DISTNAME=	${PORTNAME}-${PORTVERSION:C/0$//}
 
-MAINTAINER=	rafan@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Library for Support Vector Machines
 
-LICENSE=	BSD
+LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/COPYRIGHT
 
 OPTIONS_DEFINE=	OPTIMIZED_CFLAGS DOCS
@@ -25,7 +25,7 @@ ALL_TARGET=	all lib
 .if defined(PKGNAMESUFFIX) && ${PKGNAMESUFFIX} == "-python"
 CATEGORIES+=	python
 
-USE_PYTHON=	yes
+USES+=		python
 
 MAKE_ARGS=	PYTHON_INCLUDEDIR=${PYTHON_INCLUDEDIR}
 

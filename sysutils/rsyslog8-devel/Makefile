@@ -1,15 +1,19 @@
 # $FreeBSD$
 
 PORTNAME=	rsyslog
-PORTVERSION=	8.3.2
-PORTREVISION=	4
+PORTVERSION=	8.5.0
+PORTREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	http://www.rsyslog.com/files/download/rsyslog/
 
 MAINTAINER=	brd@FreeBSD.org
 COMMENT=	Syslogd supporting SQL, TCP, and TLS
 
-BUILD_DEPENDS=	libgcrypt-config:${PORTSDIR}/security/libgcrypt
+DEPRECATED=	EoL, use sysutils/rsyslog8
+EXPIRATION_DATE=	2015-02-13
+
+BUILD_DEPENDS=	libgcrypt-config:${PORTSDIR}/security/libgcrypt \
+		rst2man:${PORTSDIR}/textproc/py-docutils
 
 LIB_DEPENDS=	libee.so:${PORTSDIR}/devel/libee \
 		libestr.so:${PORTSDIR}/devel/libestr \
@@ -35,8 +39,6 @@ RFC3195_DESC=	RFC3195 input support for rsyslog
 SNMP_DESC=	SNMP trap sender for rsyslog
 
 USES=		libtool pkgconfig
-
-BROKEN=		fails to build with new json-c
 
 .include <bsd.port.options.mk>
 
@@ -75,7 +77,7 @@ CONFIGURE_ARGS+=--disable-mysql
 .endif
 
 .if ${PORT_OPTIONS:MPGSQL}
-USE_PGSQL=	yes
+USES+=		pgsql
 CONFIGURE_ARGS+=--enable-pgsql
 PLIST_FILES+=	lib/rsyslog/ompgsql.so
 .else

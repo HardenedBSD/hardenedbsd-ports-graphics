@@ -3,7 +3,7 @@
 
 PORTNAME=	impossible_mission_puzzle
 PORTVERSION=	1.0.1
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	games
 MASTER_SITES=	http://www.linuxmotors.com/puzzle/downloads/ \
 		SF/nemysisfreebsdp/${CATEGORIES}/:icons
@@ -12,7 +12,7 @@ DISTFILES=	puzzle-${DISTVERSION}.tgz \
 DIST_SUBDIR=	${PORTNAME}
 EXTRACT_ONLY=	puzzle-${DISTVERSION}.tgz
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	This is a puzzle from the old C64 Impossible Mission game
 
 LICENSE=	GPLv2

@@ -2,12 +2,16 @@
 %%OCAML_SITELIBDIR%%/pcre/dllpcre_stubs.so
 %%OCAML_SITELIBDIR%%/pcre/libpcre_stubs.a
 %%OCAML_SITELIBDIR%%/pcre/pcre.a
+%%OCAML_SITELIBDIR%%/pcre/pcre.annot
 %%OCAML_SITELIBDIR%%/pcre/pcre.cma
 %%OCAML_SITELIBDIR%%/pcre/pcre.cmi
+%%OCAML_SITELIBDIR%%/pcre/pcre.cmt
+%%OCAML_SITELIBDIR%%/pcre/pcre.cmti
 %%OCAML_SITELIBDIR%%/pcre/pcre.cmx
 %%OCAML_SITELIBDIR%%/pcre/pcre.cmxa
 %%OCAML_SITELIBDIR%%/pcre/pcre.cmxs
 %%OCAML_SITELIBDIR%%/pcre/pcre.mli
+%%OCAML_SITELIBDIR%%/pcre/pcre_compat.cmx
 %%PORTDOCS%%%%DOCSDIR%%/api/Pcre.html
 %%PORTDOCS%%%%DOCSDIR%%/api/index.html
 %%PORTDOCS%%%%DOCSDIR%%/api/index_attributes.html
@@ -29,14 +33,3 @@
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/pcregrep/pcregrep.ml
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/subst/README.md
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/subst/subst.ml
-%%PORTEXAMPLES%%@dirrmtry %%EXAMPLESDIR%%/subst
-%%PORTEXAMPLES%%@dirrmtry %%EXAMPLESDIR%%/pcregrep
-%%PORTEXAMPLES%%@dirrmtry %%EXAMPLESDIR%%/count_hash
-%%PORTEXAMPLES%%@dirrmtry %%EXAMPLESDIR%%/cloc
-%%PORTEXAMPLES%%@dirrmtry %%EXAMPLESDIR%%
-@dirrmtry share/examples/ocaml
-%%PORTDOCS%%@dirrmtry %%DOCSDIR%%/api
-%%PORTDOCS%%@dirrmtry %%DOCSDIR%%
-@dirrmtry %%OCAML_SITELIBDIR%%/pcre
-@dirrmtry %%OCAML_SITELIBDIR%%
-@dirrmtry lib/ocaml

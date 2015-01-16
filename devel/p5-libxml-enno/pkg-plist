@@ -48,7 +48,6 @@ bin/xql.pl
 %%SITE_PERL%%/XML/XQL/Plus.pm
 %%SITE_PERL%%/XML/XQL/Parser.pm
 %%SITE_PERL%%/XML/XQL.pm
-%%SITE_PERL%%/%%PERL_ARCH%%/auto/libxml-enno/.packlist
 %%PERL5_MAN3%%/XML::Checker.3.gz
 %%PERL5_MAN3%%/XML::Checker::Parser.3.gz
 %%PERL5_MAN3%%/XML::DOM.3.gz
@@ -89,8 +88,3 @@ bin/xql.pl
 %%PERL5_MAN3%%/XML::XQL::Date.3.gz
 %%PERL5_MAN3%%/XML::XQL::Query.3.gz
 %%PERL5_MAN3%%/XML::XQL::Tutorial.3.gz
-@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/libxml-enno
-@dirrmtry %%SITE_PERL%%/XML/XQL
-@dirrmtry %%SITE_PERL%%/XML/Filter
-@dirrmtry %%SITE_PERL%%/XML/Checker
-@dirrmtry %%SITE_PERL%%/XML/DOM

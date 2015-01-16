@@ -3,7 +3,7 @@
 
 PORTNAME=	palomino
 PORTVERSION=	20131231
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	games
 MASTER_SITES=	http://www.palomino3d.org/software/${PORTNAME}/
 DISTFILES=	${PORTNAME}_src_${PORTVERSION}.txz \
@@ -12,7 +12,7 @@ DISTFILES=	${PORTNAME}_src_${PORTVERSION}.txz \
 		${PORTNAME}_data_sounds_${SOUNDS_VER}${EXTRACT_SUFX} \
 		${PORTNAME}_data_terrain_${TERRAIN_VER}${EXTRACT_SUFX}
 
-MAINTAINER=	games@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Action flight simulation computer program using OSG
 
 LICENSE=	GPLv2

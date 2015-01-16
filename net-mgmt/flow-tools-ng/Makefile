@@ -16,7 +16,7 @@ LICENSE=	BSD2CLAUSE
 OPTIONS_DEFINE=	MYSQL OPENSSL PGSQL
 PGSQL_CONFIGURE_OFF=	--without-postgresql
 PGSQL_CONFIGURE_ON=	--with-postgresql
-PGSQL_USE=		PGSQL=yes
+PGSQL_USES=		pgsql
 MYSQL_CONFIGURE_OFF=	--without-mysql
 MYSQL_CONFIGURE_ON=	--with-mysql="${PREFIX}"
 MYSQL_USE=		MYSQL=yes
@@ -26,9 +26,8 @@ OPENSSL_USE=		OPENSSL=yes
 
 CONFLICTS=	flow-tools-[0-9]*
 
-USES=		gmake libtool tar:bzip2
+USES=		gmake libtool python:run tar:bzip2
 USE_LDCONFIG=	yes
-USE_PYTHON_RUN=	yes
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
 

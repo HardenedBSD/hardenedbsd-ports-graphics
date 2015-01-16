@@ -10,6 +10,8 @@ DISTNAME=	dungeonmaker-${PORTVERSION}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Program/library that "grows" dungeons for use in isometric games
 
+LICENSE=	GPLv1
+
 USE_LDCONFIG=	yes
 
 SUB_FILES=	pkg-message
@@ -17,6 +19,12 @@ SUB_FILES=	pkg-message
 MAKEFILE=	Makefile.bsd
 
 OPTIONS_DEFINE=	DOCS EXAMPLES
+
+.include <bsd.port.pre.mk>
+
+.if ${OPSYS} == FreeBSD && ${OSVERSION} >= 1000024 && ${OSVERSION} < 1000705
+BROKEN=		doesn't build with clang 3.3 (e.g. on FreeBSD 10.0)
+.endif
 
 do-install:
 	${INSTALL_LIB} ${WRKSRC}/libdungeonmaker.a ${STAGEDIR}${PREFIX}/lib
@@ -29,4 +37,4 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/design* ${STAGEDIR}${EXAMPLESDIR}
 	${INSTALL_DATA} ${WRKSRC}/main.cpp ${STAGEDIR}${EXAMPLESDIR}
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

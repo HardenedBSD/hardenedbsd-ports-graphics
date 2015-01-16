@@ -2,12 +2,12 @@
 
 PORTNAME=	linphone
 PORTVERSION=	3.7.0
-PORTREVISION=	1
+PORTREVISION=	3
 PORTEPOCH=	1
 CATEGORIES=	net
 MASTER_SITES=	SAVANNAH/linphone/3.7.x/sources
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	tijl@FreeBSD.org
 COMMENT=	SIP client supporting voice/video calls and text messaging
 
 LIB_DEPENDS=	libbellesip.so:${PORTSDIR}/net/belle-sip \
@@ -19,14 +19,15 @@ LIB_DEPENDS=	libbellesip.so:${PORTSDIR}/net/belle-sip \
 CONFLICTS_INSTALL=	linphone-base-[0-9]*
 
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS=	--disable-deplibs-link --disable-strict --disable-tutorials \
+CONFIGURE_ARGS=	--disable-deplibs-link --disable-speex --disable-strict \
+		--disable-tutorials \
 		--enable-external-mediastreamer --enable-external-ortp \
 		--with-readline=${LOCALBASE}
 CPPFLAGS+=	-I${LOCALBASE}/include
 LIBS+=		-L${LOCALBASE}/lib
 INSTALL_TARGET=	install-strip
 USES=		gmake libtool pathfix pkgconfig readline:port
-USE_GNOME=	gnomehier gtk20 intltool libxml2
+USE_GNOME=	gtk20 intltool libxml2
 USE_LDCONFIG=	yes
 
 OPTIONS_DEFINE=	IPV6 NLS NOTIFY UPNP VIDEO

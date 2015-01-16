@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	icinga
-PORTVERSION=	1.11.7
+PORTVERSION=	1.12.0
+PORTREVISION=	1
 CATEGORIES=	net-mgmt
 MASTER_SITES=	https://github.com/Icinga/${PORTNAME}-core/releases/download/v${PORTVERSION}/
 
@@ -92,6 +93,7 @@ CONFIGURE_ARGS+=	--enable-idoutils \
 			--with-dbi-lib=${LOCALBASE}/lib \
 			--with-dbi-inc=${LOCALBASE}/include
 INSTALL_TARGET+=	install-idoutils
+USE_OPENSSL=		yes
 USE_RC_SUBR+=		ido2db
 PLIST_SUB+=		IDOUTILS=""
 .else

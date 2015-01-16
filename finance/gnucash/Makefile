@@ -2,8 +2,7 @@
 #   $MCom: ports/finance/gnucash/Makefile,v 1.26 2008/12/31 03:25:18 mezz Exp $
 
 PORTNAME=	gnucash
-PORTVERSION=	2.6.4
-PORTREVISION=	1
+PORTVERSION=	2.6.5
 CATEGORIES=	finance gnome
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}%20%28stable%29/${PORTVERSION}
 
@@ -47,7 +46,7 @@ DATABASE_RUN_DEPENDS=	libdbi-drivers>=0:${PORTSDIR}/databases/libdbi-drivers
 DATABASE_CONFIGURE_ON=	--with-dbi-dbd-dir=${LOCALBASE}/lib/dbd
 LOCALE_TAX_CONFIGURE_ON=--enable-locale-specific-tax
 PYTHON_CONFIGURE_ON=	--enable-python
-PYTHON_USE=		PYTHON=yes
+PYTHON_USES=		python
 GTKMM_USE=		GNOME=gtkmm24
 GTKMM_CONFIGURE_ON=	--enable-gtkmm
 GTKMM_CONFIGURE_OFF=	--disable-gtkmm
@@ -95,6 +94,11 @@ GLIB_SCHEMAS+=	org.gnucash.dialogs.import.hbci.gschema.xml
 
 .if ${PORT_OPTIONS:MOFX}
 GLIB_SCHEMAS+=	org.gnucash.dialogs.import.ofx.gschema.xml
+.endif
+
+# because webkit-gtk2 needs it
+.if ${OSVERSION} < 1000000
+USES+= compiler:c++11-lib
 .endif
 
 post-install:

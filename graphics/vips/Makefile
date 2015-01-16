@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	vips
-PORTVERSION=	7.40.11
+PORTVERSION=	7.42.1
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.vips.ecs.soton.ac.uk/supported/${PORTVERSION:R}/
 
@@ -18,7 +18,7 @@ LIB_DEPENDS=	libcfitsio.so:${PORTSDIR}/astro/cfitsio \
 		libjpeg.so:${PORTSDIR}/graphics/jpeg \
 		liblcms2.so:${PORTSDIR}/graphics/lcms2 \
 		libexif.so:${PORTSDIR}/graphics/libexif	\
-		libpng15.so:${PORTSDIR}/graphics/png \
+		libpng.so:${PORTSDIR}/graphics/png \
 		libtiff.so:${PORTSDIR}/graphics/tiff \
 		libwebp.so:${PORTSDIR}/graphics/webp \
 		libfftw3.so:${PORTSDIR}/math/fftw3 \
@@ -48,5 +48,7 @@ OPTIONS_SUB=		yes
 DOCS_CONFIGURE_ENABLE=	docs
 PYTHON_USES=		python
 PYTHON_CONFIGURE_WITH=	python
+PYTHON_CONFIGURE_ENABLE=	pyvips8
+PYTHON_USE=			GNOME=pygobject3
 
 .include <bsd.port.mk>

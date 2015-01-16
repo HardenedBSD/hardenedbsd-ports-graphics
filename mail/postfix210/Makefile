@@ -13,13 +13,18 @@ MASTER_SITE_SUBDIR=	. old related/postfix
 PKGNAMESUFFIX=	210
 DIST_SUBDIR=	${PORTNAME}
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	mandree@FreeBSD.org
 COMMENT=	Secure alternative to widely-used Sendmail
+
+DEPRECATED=	Use mail/postfix instead.
+EXPIRATION_DATE=2015-01-31
 
 LICENSE=	IPL10
 LICENSE_NAME=	IBM PUBLIC LICENSE VERSION 1.0
 LICENSE_FILE=	${WRKSRC}/LICENSE
 LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
+
+PORTSCOUT=	limit:^2\.10\.
 
 VDAVERSION=	2.10.0
 CONFLICTS=	courier-0.* postfix-1.* postfix2[789]-* \
@@ -172,7 +177,7 @@ _REQUIRE+=		mysql
 .endif
 
 .if ${PORT_OPTIONS:MPGSQL}
-USE_PGSQL=		yes
+USES+=			pgsql
 POSTFIX_CCARGS+=	-DHAS_PGSQL -I${LOCALBASE}/include -I${LOCALBASE}/pgsql/include
 POSTFIX_AUXLIBS+=	-L${LOCALBASE}/lib -L${LOCALBASE}/pgsql/lib -lpq -lcrypt
 _REQUIRE+=		postgresql

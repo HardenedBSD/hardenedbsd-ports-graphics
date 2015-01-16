@@ -3,6 +3,7 @@
 
 PORTNAME=	Cdk
 PORTVERSION=	5.20120324
+PORTREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	ftp://dickey.his.com/cdk/
 PKGNAMEPREFIX=	p5-
@@ -22,7 +23,10 @@ INSTALL_TARGET=	pure_install
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 
-post-stage:
-	@${SED} -i '' -e 's,${STAGEDIR},,g' ${STAGEDIR}${SITE_PERL}/${PERL_ARCH}/auto/Cdk/.packlist
+.include <bsd.port.pre.mk>
 
-.include <bsd.port.mk>
+.if ${PERL_VER} >= 5.18
+BROKEN=		Does not build with Perl 5.18 or above
+.endif
+
+.include <bsd.port.post.mk>

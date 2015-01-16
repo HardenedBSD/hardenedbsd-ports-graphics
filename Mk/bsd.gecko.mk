@@ -85,21 +85,29 @@ MOZILLA_VER?=	${PORTVERSION}
 MOZILLA_BIN?=	${PORTNAME}-bin
 MOZILLA_EXEC_NAME?=${MOZILLA}
 MOZ_RPATH?=	${MOZILLA}
-USES+=		cpe compiler:c++11-lib gmake iconv perl5 pkgconfig \
-			python:2,build desktop-file-utils
+USES+=		cpe compiler:c++11-lang gmake iconv perl5 pkgconfig \
+			python:2.7,build desktop-file-utils
 CPE_VENDOR?=mozilla
 USE_PERL5=	build
 USE_XORG=	xext xrender xt
+
+.if ${MOZILLA} != "libxul"
+BUNDLE_LIBS=	yes
+.endif
 
 MOZILLA_SUFX?=	none
 MOZSRC?=	${WRKSRC}
 WRKSRC?=	${WRKDIR}/mozilla
 PLISTF?=	${WRKDIR}/plist_files
 
+MOZ_OBJDIR?=	${WRKSRC}/obj-${CONFIGURE_TARGET}
+
 MOZ_PIS_DIR?=		lib/${MOZILLA}/init.d
 
 PORT_MOZCONFIG?=	${FILESDIR}/mozconfig.in
 MOZCONFIG?=		${WRKSRC}/.mozconfig
+# XXX Not ?= because fmake uses MAKEFILE internally
+MAKEFILE=		${WRKSRC}/client.mk
 MOZILLA_PLIST_DIRS?=	bin lib share/pixmaps share/applications
 PKGINSTALL?=	${WRKDIR}/pkg-install
 PKGDEINSTALL?=	${WRKDIR}/pkg-deinstall
@@ -109,16 +117,20 @@ PKGDEINSTALL_INC?=	${.CURDIR}/../../www/firefox/files/pkg-deinstall.in
 MOZ_PKGCONFIG_FILES?=	${MOZILLA}-gtkmozembed ${MOZILLA}-js \
 			${MOZILLA}-xpcom ${MOZILLA}-plugin
 
+ALL_TARGET?=	build
+
+CONFIGURE_TARGET:=${ARCH:C/amd64/x86_64/}-portbld-${OPSYS:tl}${OSREL}
 MOZ_EXPORT+=	${CONFIGURE_ENV} \
 				PERL="${PERL}"
-MOZ_OPTIONS+=	--prefix="${PREFIX}"
+MOZ_OPTIONS+=	${CONFIGURE_TARGET} --prefix="${PREFIX}"
+MOZ_MK_OPTIONS+=MOZ_OBJDIR="${MOZ_OBJDIR}"
 
 CPPFLAGS+=		-isystem${LOCALBASE}/include
 LDFLAGS+=		-L${LOCALBASE}/lib -Wl,-rpath,${PREFIX}/lib/${MOZILLA}
 
 # use jemalloc 3.0.0 API for stats/tuning
 MOZ_EXPORT+=	MOZ_JEMALLOC3=1
-.if ${OSVERSION} < 1000012
+.if ${OSVERSION} < 1000012 || ${MOZILLA_VER:R:R} >= 37
 MOZ_OPTIONS+=	--enable-jemalloc
 .endif
 
@@ -168,7 +180,7 @@ opus_MOZ_OPTIONS=	--with-system-opus
 pixman_LIB_DEPENDS=	libpixman-1.so:${PORTSDIR}/x11/pixman
 pixman_MOZ_OPTIONS=	--enable-system-pixman
 
-png_LIB_DEPENDS=	libpng15.so:${PORTSDIR}/graphics/png
+png_LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png
 png_MOZ_OPTIONS=	--with-system-png=${LOCALBASE}
 
 .if exists(${FILESDIR}/patch-z-bug517422) || exists(${FILESDIR}/patch-zz-bug517422)
@@ -310,15 +322,6 @@ MOZ_OPTIONS+=	--enable-gnomeui
 MOZ_OPTIONS+=	--disable-gnomeui
 .endif
 
-.if ${PORT_OPTIONS:MGNOMEVFS2}
-BUILD_DEPENDS+=	${gnomevfs2_DETECT}:${gnomevfs2_LIB_DEPENDS:C/.*://}
-USE_GNOME+=		gnomevfs2:build
-MOZ_OPTIONS+=	--enable-gnomevfs
-MOZ_OPTIONS:=	${MOZ_OPTIONS:C/(extensions)=(.*)/\1=\2,gnomevfs/}
-.else
-MOZ_OPTIONS+=	--disable-gnomevfs
-.endif
-
 .if ${PORT_OPTIONS:MLIBPROXY}
 LIB_DEPENDS+=	libproxy.so:${PORTSDIR}/net/libproxy
 MOZ_OPTIONS+=	--enable-libproxy
@@ -330,8 +333,6 @@ MOZ_OPTIONS+=	--disable-libproxy
 USES:=		compiler:gcc-c++11-lib ${USES:Ncompiler*c++11*}
 USE_DISPLAY=yes
 
-.undef GNU_CONFIGURE
-MAKEFILE=	${WRKSRC}/client.mk
 ALL_TARGET=	profiledbuild
 MOZ_EXPORT+=MOZ_OPTIMIZE_FLAGS="-Os" MOZ_PGO_OPTIMIZE_FLAGS="${CFLAGS:M-O*}"
 .endif
@@ -428,7 +429,6 @@ MOZ_SED_ARGS+=	-e's|@CPPFLAGS@|${CPPFLAGS}|g'		\
 MOZCONFIG_SED?= ${SED} ${MOZ_SED_ARGS}
 
 .if ${ARCH} == amd64
-CONFIGURE_TARGET=x86_64-unknown-${OPSYS:tl}${OSREL}
 . if ${USE_MOZILLA:M-nss}
 USE_BINUTILS=	# intel-gcm.s
 CFLAGS+=	-B${LOCALBASE}/bin
@@ -448,17 +448,6 @@ CFLAGS+=	-mminimal-toc
 .elif ${ARCH} == "sparc64"
 # Work around miscompilation/mislinkage of the sCanonicalVTable hacks.
 MOZ_OPTIONS+=	--disable-v1-string-abi
-.endif
-
-.if defined(OBJDIR_BUILD)
-CONFIGURE_SCRIPT=../configure
-
-MOZ_OBJDIR=		${WRKSRC}/obj-${CONFIGURE_TARGET}
-CONFIGURE_WRKSRC=${MOZ_OBJDIR}
-BUILD_WRKSRC=	${MOZ_OBJDIR}
-INSTALL_WRKSRC=	${MOZ_OBJDIR}
-.else
-MOZ_OBJDIR=		${WRKSRC}
 .endif
 
 .else # bsd.port.post.mk
@@ -540,10 +529,9 @@ gecko-post-patch:
 	@if [ -f ${WRKSRC}/config/baseconfig.mk ] ; then \
 		${REINPLACE_CMD} -e 's|%%MOZILLA%%|${MOZILLA}|g' \
 			${WRKSRC}/config/baseconfig.mk; \
-	else \
-		${REINPLACE_CMD} -e 's|%%MOZILLA%%|${MOZILLA}|g' \
-			${WRKSRC}/config/autoconf.mk.in; \
 	fi
+	@${REINPLACE_CMD} -e 's|%%MOZILLA%%|${MOZILLA}|g' \
+			${MOZSRC}/config/baseconfig.mk
 	@${REINPLACE_CMD} -e 's|%%PREFIX%%|${PREFIX}|g ; \
 		s|%%LOCALBASE%%|${LOCALBASE}|g' \
 			${MOZSRC}/build/unix/run-mozilla.sh
@@ -566,17 +554,14 @@ gecko-moz-pis-patch:
 	@${MOZCONFIG_SED} < ${FILESDIR}/${moz} > ${WRKDIR}/${moz}
 .endfor
 
-pre-configure: gecko-pre-configure
+do-configure: gecko-do-configure
 
-gecko-pre-configure:
-.if defined(OBJDIR_BUILD)
-	${MKDIR} ${MOZ_OBJDIR}
-.endif
-
-post-configure: gecko-post-configure
-
-gecko-post-configure:
-	@${ECHO_CMD} "#define JNIIMPORT" >> ${MOZSRC}/mozilla-config.h
+gecko-do-configure:
+		@(if ! ${CONFIGURE_ENV} ${DO_MAKE_BUILD} configure; then \
+			 ${ECHO_MSG} "===>  Script \"${CONFIGURE_SCRIPT}\" failed unexpectedly."; \
+			 (${ECHO_CMD} ${CONFIGURE_FAIL_MESSAGE}) | ${FMT} 75 79 ; \
+			 ${FALSE}; \
+		fi)
 
 pre-install: gecko-moz-pis-pre-install
 post-install-script: gecko-create-plist

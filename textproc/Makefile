@@ -118,6 +118,7 @@
     SUBDIR += docbook-xsl
     SUBDIR += docbook-xsl-ns
     SUBDIR += docbook2X
+    SUBDIR += docbook2mdoc
     SUBDIR += docbook2odf
     SUBDIR += docbookide.el
     SUBDIR += docdiff
@@ -139,7 +140,10 @@
     SUBDIR += el-aspell
     SUBDIR += el-hyphen
     SUBDIR += elasticsearch
+    SUBDIR += elasticsearch-plugin-head
+    SUBDIR += elasticsearch-plugin-hq
     SUBDIR += elasticsearch-plugin-marvel
+    SUBDIR += elasticsearch-river-rabbitmq
     SUBDIR += emacs-wiki
     SUBDIR += en-aspell
     SUBDIR += en-hunspell
@@ -204,8 +208,8 @@
     SUBDIR += gsed
     SUBDIR += gtk-doc
     SUBDIR += gtkspell
-    SUBDIR += gtkspell3
     SUBDIR += gtkspell-reference
+    SUBDIR += gtkspell3
     SUBDIR += gu-aspell
     SUBDIR += gutenmark
     SUBDIR += gv-aspell
@@ -362,10 +366,8 @@
     SUBDIR += liblrdf
     SUBDIR += libmrss
     SUBDIR += libmrss-php
-    SUBDIR += libmwaw
     SUBDIR += libmwaw03
     SUBDIR += libnxml
-    SUBDIR += libodfgen
     SUBDIR += libodfgen01
     SUBDIR += libparsifal
     SUBDIR += librevenge
@@ -379,6 +381,7 @@
     SUBDIR += libtextcat
     SUBDIR += libtranslate
     SUBDIR += libtre
+    SUBDIR += libucl
     SUBDIR += libunibreak
     SUBDIR += libuninameslist
     SUBDIR += libvisio
@@ -415,6 +418,7 @@
     SUBDIR += luaexpat
     SUBDIR += lucene
     SUBDIR += lucene4
+    SUBDIR += luceneplusplus
     SUBDIR += lv-aspell
     SUBDIR += m17n-im-config
     SUBDIR += makefaq
@@ -515,6 +519,7 @@
     SUBDIR += p5-Geo-Parse-OSM
     SUBDIR += p5-Getopt-Lucid
     SUBDIR += p5-Google-Data-JSON
+    SUBDIR += p5-Groonga-API
     SUBDIR += p5-HTML-CTPP2
     SUBDIR += p5-HTML-Copy
     SUBDIR += p5-HTML-Entities-ImodePictogram
@@ -729,6 +734,7 @@
     SUBDIR += p5-String-Fraction
     SUBDIR += p5-String-HexConvert
     SUBDIR += p5-String-Koremutake
+    SUBDIR += p5-String-Print
     SUBDIR += p5-String-RewritePrefix
     SUBDIR += p5-String-Scanf
     SUBDIR += p5-String-ShellQuote
@@ -790,6 +796,7 @@
     SUBDIR += p5-Text-DoubleMetaphone
     SUBDIR += p5-Text-Emoticon
     SUBDIR += p5-Text-Emoticon-GoogleTalk
+    SUBDIR += p5-Text-Emoticon-MSN
     SUBDIR += p5-Text-EtText
     SUBDIR += p5-Text-Extract-Word
     SUBDIR += p5-Text-ExtractWords
@@ -1089,6 +1096,7 @@
     SUBDIR += pear-XML_HTMLSax
     SUBDIR += pear-XML_Wddx
     SUBDIR += pear-YAML
+    SUBDIR += pecl-cld
     SUBDIR += pecl-ctemplate
     SUBDIR += pecl-doublemetaphone
     SUBDIR += pecl-enchant
@@ -1141,6 +1149,7 @@
     SUBDIR += plover
     SUBDIR += po4a
     SUBDIR += pocketreader
+    SUBDIR += pod2mdoc
     SUBDIR += popup
     SUBDIR += popup-stacks
     SUBDIR += ppower4
@@ -1190,11 +1199,13 @@
     SUBDIR += py-pss
     SUBDIR += py-pyctpp2
     SUBDIR += py-pyelasticsearch
+    SUBDIR += py-pyes
     SUBDIR += py-pygments
     SUBDIR += py-pygtail
     SUBDIR += py-pyscss
     SUBDIR += py-pysrt
     SUBDIR += py-pystache
+    SUBDIR += py-python-augeas
     SUBDIR += py-pytidylib
     SUBDIR += py-pyx12
     SUBDIR += py-qt4-xml
@@ -1216,6 +1227,7 @@
     SUBDIR += py-stripogram
     SUBDIR += py-syck
     SUBDIR += py-texttable
+    SUBDIR += py-tinycss
     SUBDIR += py-trans
     SUBDIR += py-transifex-client
     SUBDIR += py-translationstring
@@ -1283,7 +1295,6 @@
     SUBDIR += rtfx
     SUBDIR += rubber
     SUBDIR += ruby-deplate
-    SUBDIR += ruby-diff
     SUBDIR += ruby-escape
     SUBDIR += ruby-format
     SUBDIR += ruby-htmlrepair
@@ -1320,6 +1331,7 @@
     SUBDIR += rubygem-fast_xs
     SUBDIR += rubygem-fast_xs073
     SUBDIR += rubygem-ferret
+    SUBDIR += rubygem-fog-xml
     SUBDIR += rubygem-gemoji
     SUBDIR += rubygem-gherkin
     SUBDIR += rubygem-github-linguist
@@ -1392,6 +1404,7 @@
     SUBDIR += s5
     SUBDIR += sablotron
     SUBDIR += sagasu
+    SUBDIR += sansi
     SUBDIR += sarep
     SUBDIR += sary
     SUBDIR += sassc
@@ -1497,6 +1510,7 @@
     SUBDIR += txt2html
     SUBDIR += txt2man
     SUBDIR += txt2tags
+    SUBDIR += uchardet
     SUBDIR += uim
     SUBDIR += uim-el
     SUBDIR += uim-gtk
@@ -1530,8 +1544,6 @@
     SUBDIR += wv
     SUBDIR += wv2
     SUBDIR += xalan-j
-    SUBDIR += xerces-c2
-    SUBDIR += xerces-c2-devel
     SUBDIR += xerces-c3
     SUBDIR += xerces-j
     SUBDIR += xfce4-dict-plugin
@@ -1549,9 +1561,9 @@
     SUBDIR += xml-i18n-tools
     SUBDIR += xml-lite.el
     SUBDIR += xml-parse.el
-    SUBDIR += xml_ez_out
     SUBDIR += xml2
     SUBDIR += xml2rfc
+    SUBDIR += xml_ez_out
     SUBDIR += xmlada
     SUBDIR += xmlcatmgr
     SUBDIR += xmlcharent

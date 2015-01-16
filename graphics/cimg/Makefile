@@ -3,7 +3,7 @@
 
 PORTNAME=	cimg
 PORTVERSION=	1.5.9
-PORTREVISION=	6
+PORTREVISION=	8
 PORTEPOCH=	3
 CATEGORIES=	graphics devel
 MASTER_SITES=	SF/${PORTNAME}		\
@@ -28,6 +28,15 @@ ONLY_FOR_ARCHS_REASON=	"invokes i386 asm"
 
 TARBALLREVISION=3
 USES=		zip
+
+.if !defined(WITHOUT_LAPACK)
+. if defined(WITH_ATLAS)
+USES+=		blaslapack:atlas
+. else
+USES+=		blaslapack
+. endif
+.endif
+
 WRKSRC=		${WRKDIR}/${DISTNAME:C/_/-/}
 BUILD_WRKSRC=	${WRKSRC}/examples
 MAKE_ENV=	X11PATH=${LOCALBASE} LOCALBASE=${LOCALBASE}
@@ -44,7 +53,7 @@ REINPLACE_ARGS=	-i ""
 LIB_DEPENDS+=	libboard.so:${PORTSDIR}/graphics/libboard
 
 . if !defined(WITH_DEBUG)
-LIB_DEPENDS+=	libpng15.so:${PORTSDIR}/graphics/png		\
+LIB_DEPENDS+=	libpng.so:${PORTSDIR}/graphics/png		\
 		libjpeg.so:${PORTSDIR}/graphics/jpeg		\
 		libtiff.so:${PORTSDIR}/graphics/tiff		\
 		libIlmImf.so:${PORTSDIR}/graphics/OpenEXR	\
@@ -92,22 +101,6 @@ NO_BUILD=	yes
 
 .include <bsd.port.pre.mk>
 
-.if ${PORT_OPTIONS:MDOCS}
-. if !defined(WITHOUT_LAPACK)
-.  if exists(${LOCALBASE}/lib/libatlas.so) && !defined(WITH_BLAS)
-WITH_ATLAS=	yes
-.  endif
-.  if defined(WITH_ATLAS)
-LIB_DEPENDS+=	libatlas.so:${PORTSDIR}/math/atlas
-LAPACK_LIB=	-L${LOCALBASE}/lib -lalapack -lcblas -lf77blas
-.  else
-LIB_DEPENDS+=	libblas.so:${PORTSDIR}/math/blas
-LIB_DEPENDS+=	liblapack.so:${PORTSDIR}/math/lapack
-LAPACK_LIB=	-L${LOCALBASE}/lib -llapack -lblas
-.  endif
-. endif
-.endif
-
 pre-configure:
 .if ${PORT_OPTIONS:MDOCS}
 	${REINPLACE_CMD} -e 's|make|${MAKE_CMD}|' ${BUILD_WRKSRC}/Makefile
@@ -120,9 +113,9 @@ pre-configure:
 		${BUILD_WRKSRC}/Makefile
 . endif
 . if !defined(WITHOUT_LAPACK)
-	${REINPLACE_CMD} -e 's|#CIMG_LAPACK_CFLAGS|CIMG_LAPACK_CFLAGS|'	\
-		-e 's|#CIMG_LAPACK_LDFLAGS|CIMG_LAPACK_LDFLAGS|'	\
-		-e 's|-lblas -llapack|${LAPACK_LIB}|'			\
+	${REINPLACE_CMD} -e 's|#CIMG_LAPACK_CFLAGS|CIMG_LAPACK_CFLAGS|'			\
+		-e 's|#CIMG_LAPACK_LDFLAGS|CIMG_LAPACK_LDFLAGS|'			\
+		-e 's|-lblas -llapack|-L${LOCALBASE}/lib ${BLASLIB} ${LAPACKLIB}|'	\
 		${BUILD_WRKSRC}/Makefile
 . endif
 . if defined(WITH_XSHM)

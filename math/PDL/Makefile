@@ -3,28 +3,29 @@
 
 PORTNAME=	PDL
 PORTVERSION=	2.007
-PORTREVISION=	1
+PORTREVISION=	3
 CATEGORIES=	math perl5
 MASTER_SITES=	CPAN/${PORTNAME} SF/pdl/PDL_2013/PDL-${PORTVERSION}
-DISTFILES=	${PORTNAME}-${PORTVERSION}${EXTRACT_SUFX}
 
 MAINTAINER=	perl@FreeBSD.org
 COMMENT=	Perl Data Language
 
+LICENSE=	ART10 GPLv1
+LICENSE_COMB=	dual
+
 BUILD_DEPENDS=	p5-Astro-FITS-Header>=0:${PORTSDIR}/astro/p5-Astro-FITS-Header \
 		p5-Convert-UU>=0:${PORTSDIR}/converters/p5-Convert-UU \
 		p5-File-Map>=0.47:${PORTSDIR}/devel/p5-File-Map \
-		p5-Module-Compile>=0.23:${PORTSDIR}/devel/p5-Module-Compile \
-		p5-Inline>=0.43:${PORTSDIR}/devel/p5-Inline
+		p5-Inline>=0.43:${PORTSDIR}/devel/p5-Inline \
+		p5-Module-Compile>=0.23:${PORTSDIR}/devel/p5-Module-Compile
 RUN_DEPENDS:=	${BUILD_DEPENDS}
 
 USES=		gmake perl5
 USE_PERL5=	configure
 MAKE_ENV=	PERL5LIB=${WRKSRC}/blib/lib
-PLIST_DIRS=	${SITE_PERL_REL}/${PERL_ARCH}/Inline
 PLIST_FILES=	bin/pdl bin/pdldoc bin/perldl bin/pptemplate \
-		${SITE_PERL_REL}/${PERL_ARCH}/Inline/Pdlpp.pm \
-		${SITE_PERL_REL}/${PERL_ARCH}/Inline/MakePdlppInstallable.pm
+		${SITE_ARCH_REL}/Inline/Pdlpp.pm \
+		${SITE_ARCH_REL}/Inline/MakePdlppInstallable.pm
 MAKE_JOBS_UNSAFE=	yes
 
 OPTIONS_DEFINE=	PGPLOT PLPLOT OPENGL GD FFTW GSL HDF PROJ F77 READLINE SINK
@@ -70,9 +71,6 @@ post-patch:
 	@${REINPLACE_CMD} -e "/POSIX_THREADS_LIBS/ s|undef|'${PTHREAD_LIBS}'|" \
 		${WRKSRC}/perldl.conf
 
-test: build
-	@cd ${WRKSRC}; ${SETENV} ${MAKE_ENV} make test
-
 # autogen plist
 post-install:
 	@(cd ${WRKSRC}; ${PERL} -Iblib/lib -Iblib/arch Doc/scantree.pl)
@@ -81,13 +79,9 @@ post-install:
 		>> ${TMPPLIST} ; \
 	  cd ${WRKSRC}/blib/man1 ; \
 	  ${FIND} *.1 | ${SED} "s,^,man/man1/,;s/1$$/1.gz/" >> ${TMPPLIST})
-	@(${FIND} ${STAGEDIR}${SITE_PERL}/${PERL_ARCH}/PDL* -type f | \
+	@(${FIND} ${STAGEDIR}${PREFIX}/${SITE_ARCH_REL}/PDL* -type f | \
 		${SED} "s,^${STAGEDIR}${PREFIX}/,," >> ${TMPPLIST} ; \
-	  ${FIND} ${STAGEDIR}${SITE_PERL}/${PERL_ARCH}/auto/PDL -type f ! -name '*.bs' | \
-		${SED} "s,^${STAGEDIR}${PREFIX}/,," >> ${TMPPLIST} ; \
-	  ${FIND} ${STAGEDIR}${SITE_PERL}/${PERL_ARCH}/PDL* -type d | ${SORT} -r | \
-		${SED} "s,^${STAGEDIR}${PREFIX}/,@dirrm ," >> ${TMPPLIST} ; \
-	  ${FIND} ${STAGEDIR}${SITE_PERL}/${PERL_ARCH}/auto/PDL -type d | ${SORT} -r | \
-		${SED} "s,^${STAGEDIR}${PREFIX}/,@dirrm ," >> ${TMPPLIST})
+	  ${FIND} ${STAGEDIR}${PREFIX}/${SITE_ARCH_REL}/auto/PDL -type f | \
+		${SED} "s,^${STAGEDIR}${PREFIX}/,," >> ${TMPPLIST})
 
 .include <bsd.port.mk>

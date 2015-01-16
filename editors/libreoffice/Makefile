@@ -2,7 +2,7 @@
 
 .include "${.CURDIR}/Makefile.common"
 
-PORTREVISION=	0
+PORTREVISION=	2
 
 COMMENT=	Full integrated office productivity suite
 
@@ -16,6 +16,7 @@ BUILD_DEPENDS=	p5-Archive-Zip>=0:${PORTSDIR}/archivers/p5-Archive-Zip \
 		gpatch:${PORTSDIR}/devel/patch \
 		ucpp:${PORTSDIR}/devel/ucpp \
 		vigra-config:${PORTSDIR}/graphics/vigra \
+		${LOCALBASE}/include/glm/glm.hpp:${PORTSDIR}/math/glm \
 		bash:${PORTSDIR}/shells/bash \
 		gsed:${PORTSDIR}/textproc/gsed
 
@@ -32,8 +33,10 @@ LIB_DEPENDS=	libapr-1.so:${PORTSDIR}/devel/apr1 \
 		libcdr-0.1.so:${PORTSDIR}/graphics/libcdr01 \
 		libetonyek-0.1.so:${PORTSDIR}/graphics/libetonyek01 \
 		libfreehand-0.1.so:${PORTSDIR}/graphics/libfreehand \
+		libgltf-0.0.so:${PORTSDIR}/graphics/libgltf \
 		libwpg-0.3.so:${PORTSDIR}/graphics/libwpg03 \
-		libpng15.so:${PORTSDIR}/graphics/png \
+		libGeneratedSaxParser.so:${PORTSDIR}/graphics/opencollada \
+		libpng.so:${PORTSDIR}/graphics/png \
 		libpoppler.so:${PORTSDIR}/graphics/poppler \
 		liblpsolve55.so:${PORTSDIR}/math/lp_solve \
 		libcmis-0.4.so:${PORTSDIR}/net/libcmis \
@@ -83,14 +86,24 @@ DISTFILES+=	${PORTNAME}-help-${LOVERSION}${EXTRACT_SUFX}
 
 EXTRACT_ONLY:=	${DISTFILES}
 
-DISTFILES+=	1f24ab1d39f4a51faf22244c94a6203f-xmlsec1-1.2.14.tar.gz:src
+DISTFILES+=	1f24ab1d39f4a51faf22244c94a6203f-xmlsec1-1.2.14.tar.gz:src \
+		4b87018f7fff1d054939d19920b751a0-collada2gltf-master-cb1d97788a.tar.bz2:src
 
 DIST_SUBDIR=	libreoffice
+EXTRA_PATCHES=	${FILESDIR}/enable-opencollada:-p1
 WRKSRC=		${WRKDIR}/${PORTNAME}-${LOVERSION}
+
+COLLADA_MODS=		COLLADABaseUtils COLLADAFramework \
+			COLLADASaxFrameworkLoader GeneratedSaxParser
+COLLADA_CFLAGS=		${COLLADA_MODS:S|^|-I${LOCALBASE}/include/opencollada/|}
+COLLADA_LIBS=		-L${LOCALBASE}/lib/opencollada \
+			${COLLADA_MODS:S|^COLLADA|OpenCOLLADA|:S|^|-l|}
 
 CONFIGURE_ENV=		DMAKE=${LOCALBASE}/bin/dmake \
 			GNUTAR="${TAR}" \
 			GPERF=${LOCALBASE}/bin/gperf \
+			OPENCOLLADA_CFLAGS="${COLLADA_CFLAGS}" \
+			OPENCOLLADA_LIBS="${COLLADA_LIBS}" \
 			OPENSSL_CFLAGS="-I/usr/include" \
 			OPENSSL_LIBS="-lcrypto -lssl" \
 			PYTHON_CFLAGS="`${PYTHON_VERSION}-config --cflags`" \
@@ -111,7 +124,7 @@ CONFIGURE_ARGS+=	--disable-coinmp \
 			--disable-epm \
 			--disable-firebird-sdbc \
 			--disable-gnome-vfs \
-			--disable-gstreamer \
+			--disable-gstreamer-0-10 \
 			--disable-kde \
 			--disable-kdeab \
 			--disable-mergelibs \
@@ -133,6 +146,7 @@ CONFIGURE_ARGS+=	--disable-coinmp \
 			--with-system-dicts \
 			--with-system-expat \
 			--with-system-glew \
+			--with-system-glm \
 			--with-system-graphite \
 			--with-system-harfbuzz \
 			--with-system-hunspell \
@@ -146,6 +160,7 @@ CONFIGURE_ARGS+=	--disable-coinmp \
 			--with-system-libetonyek \
 			--with-system-libexttextcat \
 			--with-system-libfreehand \
+			--with-system-libgltf \
 			--with-system-liblangtag \
 			--with-system-libmspub \
 			--with-system-libmwaw \
@@ -163,6 +178,7 @@ CONFIGURE_ARGS+=	--disable-coinmp \
 			--with-system-mythes \
 			--with-system-neon \
 			--with-system-nss \
+			--with-system-opencollada \
 			--with-system-openldap \
 			--with-system-openssl \
 			--with-system-orcus \
@@ -183,7 +199,7 @@ OPTIONS_DEFINE=	CUPS DEBUG GNOME GTK2 GTK3 JAVA KDE4 MMEDIA PGSQL SDK \
 		SYSTRAY TEST VERBOSE WEBDAV
 OPTIONS_DEFAULT=CUPS GTK2
 
-JAVA_DESC=	Add java support (XML Filters, macros)
+JAVA_DESC=	Add Java support (XML filters, macros)
 MMEDIA_DESC=	Enable multimedia backend for impress
 PGSQL_DESC=	Build with PostgreSQL-SDBC driver
 SDK_DESC=	Build with SDK
@@ -236,21 +252,18 @@ JAVA_CONFIGURE_ON=	--enable-ext-wiki-publisher \
 			--with-jdk-home="${JAVA_HOME}" \
 			--with-junit=${JAVAJARDIR}/junit.jar
 JAVA_CONFIGURE_OFF=	--without-java
-# LibreOffice works only with Java 6 -- which may not be the default
-# if you specify the JAVA_VENDOR variable
 JAVA_BUILD=	yes
-JAVA_VERSION=	1.6
 JAVA_USE=	JAVA=yes
 
-KDE4_USE=	KDE4=kdelibs QT4=moc_build QT4=qmake_build
+KDE4_USE=	KDE4=kdelibs QT4=moc_build,qmake_build
 KDE4_CONFIGURE_ENABLE=	kde4
 KDE4_CONFIGURE_ENV=	KDE4DIR="${KDE4_PREFIX}" \
 			QT4DIR="${QT_PREFIX}" \
 			QT4INC="${QT_INCDIR}" \
 			QT4LIB="${QT_LIBDIR}"
 
-MMEDIA_USE=	GSTREAMER=yes
-MMEDIA_CONFIGURE_ENABLE=	gstreamer-0-10
+MMEDIA_USE=	GSTREAMER1=yes
+MMEDIA_CONFIGURE_ENABLE=	gstreamer
 
 PGSQL_USES=	pgsql:9.0+
 PGSQL_CONFIGURE_ENABLE=	postgresql-sdbc
@@ -266,13 +279,15 @@ SYSTRAY_CONFIGURE_ENABLE=	systray
 
 TEST_CONFIGURE_ENABLE=	cve-tests
 
-WEBDAV_LIB_DEPENDS=	libneon.so:${PORTSDIR}/www/neon29
+WEBDAV_LIB_DEPENDS=	libneon.so:${PORTSDIR}/www/neon
 WEBDAV_CONFIGURE_ENABLE=	neon
 
 .include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MDEBUG}
 IGNORE=			is broken with DEBUG option
+.else
+EXTRA_PATCHES+=		${FILESDIR}/extra-Makefile.in
 .endif
 
 .if ${PORT_OPTIONS:MDEBUG} || ${PORT_OPTIONS:MVERBOSE}
@@ -302,21 +317,8 @@ EXTRA_PATCHES+=	${FILESDIR}/extra-libc++:-p1
 EXTRA_PATCHES+=	${FILESDIR}/extra-libc++.i386:-p0
 .endif
 
-.if ${COMPILER_FEATURES:Mlibstdc++} && ${CHOSEN_COMPILER_TYPE} == clang
-DISTFILES+=	bae83fa5dc7f081768daace6e199adc3-glm-0.9.4.6-libreoffice.zip:src
-# XXX fdo#84008 (fixed in 4.3.3)
-CONFIGURE_ARGS+=	--disable-collada \
-			--disable-gltf
-.else
-DISTFILES+=	4b87018f7fff1d054939d19920b751a0-collada2gltf-master-cb1d97788a.tar.bz2:src \
-		OpenCOLLADA-master-6509aa13af.tar.bz2:src
-BUILD_DEPENDS+=		${LOCALBASE}/include/glm/glm.hpp:${PORTSDIR}/math/glm
-LIB_DEPENDS+=	libgltf-0.0.so:${PORTSDIR}/graphics/libgltf
-EXTRA_PATCHES+=	${FILESDIR}/extra-collada
-CONFIGURE_ARGS+=	--enable-collada \
-			--enable-gltf \
-			--with-system-glm \
-			--with-system-libgltf
+.if ${COMPILER_FEATURES:Mlibstdc++}
+EXTRA_PATCHES+=	${FILESDIR}/extra-configure.ac
 .endif
 
 .if ${OSVERSION} < 900506

@@ -82,8 +82,10 @@ include/xmltooling/validation/ValidatorSuite.h
 include/xmltooling/version.h
 lib/libxmltooling-lite.so
 lib/libxmltooling-lite.so.6
+lib/libxmltooling-lite.so.6.0.3
 lib/libxmltooling.so
 lib/libxmltooling.so.6
+lib/libxmltooling.so.6.0.3
 libdata/pkgconfig/xmltooling.pc
 share/xml/xmltooling/catalog.xml
 share/xml/xmltooling/soap-envelope.xsd
@@ -93,13 +95,3 @@ share/xml/xmltooling/xml.xsd
 share/xml/xmltooling/xmldsig-core-schema.xsd
 share/xml/xmltooling/xmldsig11-schema.xsd
 share/xml/xmltooling/xmltooling.xsd
-@dirrmtry include/xmltooling/encryption
-@dirrmtry include/xmltooling/impl
-@dirrmtry include/xmltooling/io
-@dirrmtry include/xmltooling/security
-@dirrmtry include/xmltooling/signature
-@dirrmtry include/xmltooling/soap
-@dirrmtry include/xmltooling/util
-@dirrmtry include/xmltooling/validation
-@dirrmtry include/xmltooling
-@dirrmtry share/xml/xmltooling

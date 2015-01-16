@@ -11,11 +11,12 @@ MASTER_SITES=	http://0pointer.de/~sebest/
 MAINTAINER=	gnome@FreeBSD.org
 COMMENT=	GNOME applet that shows available network services using mDNS
 
+BROKEN=		Uses unknown GNOME component pygnomedesktop
+
 BUILD_DEPENDS=	${PYTHON_SITELIBDIR}/avahi/__init__.py:${PORTSDIR}/net/py-avahi
 RUN_DEPENDS=	${PYTHON_SITELIBDIR}/avahi/__init__.py:${PORTSDIR}/net/py-avahi
 
-USES=		gettext gmake pathfix
-USE_PYTHON=	yes
+USES=		gettext gmake pathfix python
 USE_GNOME=	gnomeprefix intlhack pygnomedesktop
 GNU_CONFIGURE=	yes
 INSTALLS_ICONS=	yes

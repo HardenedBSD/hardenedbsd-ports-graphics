@@ -3,25 +3,25 @@
 #
 
 PORTNAME=	kamailio
-PORTVERSION=	4.1.6
+PORTVERSION=	4.2.2
+PORTREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	http://www.kamailio.org/pub/kamailio/${PORTVERSION}/src/
 DISTNAME=	${PORTNAME}-${PORTVERSION}_src
 
-MAINTAINER=	olivermahmoudi@gmail.com
+MAINTAINER=	pi@FreeBSD.org
 COMMENT=	Very fast and configurable open source SIP proxy
 
 LICENSE=	GPLv2
 
-USES=		gmake shebangfix
+LIB_DEPENDS=	libexpat.so:${PORTSDIR}/textproc/expat2 \
+		libxml2.so:${PORTSDIR}/textproc/libxml2
+RUN_DEPENDS=	${LOCALBASE}/bin/bash:${PORTSDIR}/shells/bash
+
+USES=		gmake shebangfix readline
 USE_LDCONFIG=	yes
 SHEBANG_FILES=	utils/kamctl/kamctl utils/kamctl/kamdbctl
 CFLAGS+=	-Wall
-
-LIB_DEPENDS+=	libexpat.so:${PORTSDIR}/textproc/expat2 \
-		libxml2.so:${PORTSDIR}/textproc/libxml2
-
-RUN_DEPENDS+=	${LOCALBASE}/bin/bash:${PORTSDIR}/shells/bash
 
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 
@@ -41,6 +41,7 @@ PGSQL_USES=	pgsql
 JITSI_RUN_DEPENDS=	jitsi:${PORTSDIR}/net-im/jitsi
 UNIXODBC_LIB_DEPENDS=	libodbc.so:${PORTSDIR}/databases/unixODBC
 RADIUS_LIB_DEPENDS=	libradiusclient-ng.so:${PORTSDIR}/net/radiusclient
+TLS_USE=		OPENSSL=yes
 
 .include <bsd.port.options.mk>
 
@@ -118,7 +119,8 @@ post-stage:
 	htable topoh auth sms async \
 	prefix_route speeddial registrar mtree uid_avp_db \
 	xlog sipt siptrace qos pdb xprint auth_radius \
-	sanity uid_gflags db_text sdpops sipcapture
+	sanity uid_gflags db_text sdpops sipcapture \
+	tsilo nosip rtpengine jsonrpc-s
 	@if [ -e ${STAGEDIR}${PREFIX}/lib/${PORTNAME}/modules/${i}.so ]; then \
 		${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/${PORTNAME}/modules/${i}.so; \
 	fi

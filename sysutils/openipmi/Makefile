@@ -3,7 +3,7 @@
 
 PORTNAME=	openipmi
 PORTVERSION=	2.0.19
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	sysutils
 MASTER_SITES=	SF/${PORTNAME}/OpenIPMI%202.0%20Library
 DISTNAME=	OpenIPMI-${PORTVERSION}
@@ -11,12 +11,11 @@ DISTNAME=	OpenIPMI-${PORTVERSION}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Complex IPMI management software
 
-LIB_DEPENDS=	libexecinfo.so:${PORTSDIR}/devel/libexecinfo \
-		libpopt.so:${PORTSDIR}/devel/popt
+LIB_DEPENDS=	libpopt.so:${PORTSDIR}/devel/popt
 
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
-USES=		gmake libtool pathfix pkgconfig
+USES=		execinfo gmake libtool pathfix pkgconfig
 USE_LDCONFIG=	yes
 
 CPPFLAGS+=	-I${LOCALBASE}/include
@@ -57,7 +56,7 @@ CONFIGURE_ARGS+=	--with-openssl=no
 .endif
 
 .if ${PORT_OPTIONS:MTKINTER}
-USE_PYTHON=		yes
+USES+=			python
 WITH_PYTHON=		yes
 BUILD_DEPENDS+=		${PYTHON_PKGNAMEPREFIX}tkinter>0:${PORTSDIR}/x11-toolkits/py-tkinter \
 			${LOCALBASE}/lib/Tix8.4.3/Tix.tcl:${PORTSDIR}/x11-toolkits/tix
@@ -79,8 +78,8 @@ PLIST_SUB+=		PERL="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MPYTHON}
-USE_PYTHON=		yes
-CONFIGURE_ARGS+=	--with-python --with-swig
+USES+=			python
+CONFIGURE_ARGS+=	--with-python --with-swig ac_cv_path_pythonprog=${PYTHON_CMD}
 BUILD_DEPENDS+=		swig:${PORTSDIR}/devel/swig13
 PLIST_SUB+=		PYTHON=""
 .else

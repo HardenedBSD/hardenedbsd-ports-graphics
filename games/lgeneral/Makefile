@@ -3,7 +3,7 @@
 
 PORTNAME=	lgeneral
 PORTVERSION=	1.2.3
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	games
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME} \
 		SF/${PORTNAME}/${PORTNAME}-data:data
@@ -13,13 +13,8 @@ DISTFILES=	${DISTNAME}${EXTRACT_SUFX}:DEFAULT \
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Turn-based strategy engine inspired by Panzer General
 
-LICENSE=	GPLv2
-
-CONFLICTS=	lgeneral-data-[0-9]*
-
-OPTIONS_DEFINE=	SOUND NLS DOCS
-OPTIONS_DEFAULT=	SOUND
-SOUND_DESC=	Enable sound support
+LICENSE=	GPLv2 # or later
+LICENSE_FILE=	${WRKSRC}/COPYING
 
 USE_SDL=	sdl
 USES=		gmake
@@ -28,6 +23,10 @@ USE_CSTD=	gnu89
 
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
+
+OPTIONS_DEFINE=	SOUND NLS DOCS
+OPTIONS_DEFAULT=	SOUND
+SOUND_DESC=	Enable sound support
 
 .include <bsd.port.options.mk>
 
@@ -46,8 +45,6 @@ CONFIGURE_ARGS+=--disable-nls
 PLIST_SUB+=	NLS="@comment "
 .endif
 
-.include <bsd.port.pre.mk>
-
 .if ${ARCH} == "ia64" || ${ARCH} == "powerpc" || ${ARCH} == "sparc64"
 BROKEN=		Does not install on ia64, powerpc, or sparc64
 .endif
@@ -57,7 +54,6 @@ post-patch:
 
 post-install:
 	${STAGEDIR}${PREFIX}/bin/lgc-pg -s ${WRKDIR}/pg-data -d ${STAGEDIR}${DATADIR}
-	@${FIND} ${STAGEDIR}${DATADIR} | ${XARGS} ${CHOWN} ${SHAREOWN}:${SHAREGRP}
 	@${FIND} ${STAGEDIR}${DATADIR} -type d | ${XARGS} ${CHMOD} a+rx
 	@${FIND} ${STAGEDIR}${DATADIR} -type f | ${XARGS} ${CHMOD} ${SHAREMODE}
 .if ${PORT_OPTIONS:MDOCS}
@@ -65,4 +61,4 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/README.* ${STAGEDIR}${DOCSDIR}
 .endif
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>
