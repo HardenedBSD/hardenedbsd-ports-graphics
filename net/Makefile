@@ -40,6 +40,7 @@
     SUBDIR += avahi-sharp
     SUBDIR += axa
     SUBDIR += babeld
+    SUBDIR += balance
     SUBDIR += beacon
     SUBDIR += beanstalkd
     SUBDIR += belle-sip
@@ -133,6 +134,7 @@
     SUBDIR += freerdp
     SUBDIR += freevrrpd
     SUBDIR += fspclient
+    SUBDIR += fspd
     SUBDIR += fsplib
     SUBDIR += g2ipmsg
     SUBDIR += geoclue
@@ -151,6 +153,7 @@
     SUBDIR += gnome-online-miners
     SUBDIR += gnu-dico
     SUBDIR += gnu-radius
+    SUBDIR += go-amqp
     SUBDIR += go-cs
     SUBDIR += go.net
     SUBDIR += gofish
@@ -464,7 +467,7 @@
     SUBDIR += ossp-sa
     SUBDIR += ostinato
     SUBDIR += owamp
-    SUBDIR += owncloud-csync
+    SUBDIR += p5-Acme-HTTP
     SUBDIR += p5-AddressBook
     SUBDIR += p5-Amazon-SQS-Simple
     SUBDIR += p5-AnyEvent-MPRPC
@@ -747,6 +750,7 @@
     SUBDIR += p5-URI-SmartURI
     SUBDIR += p5-URI-Template
     SUBDIR += p5-URI-Template-Restrict
+    SUBDIR += p5-URI-ws
     SUBDIR += p5-Validate-Net
     SUBDIR += p5-WebService-Dropbox
     SUBDIR += p5-WebService-Prowl
@@ -756,6 +760,7 @@
     SUBDIR += p5-XML-Compile-SOAP-AnyEvent
     SUBDIR += p5-XML-Compile-SOAP-Daemon
     SUBDIR += p5-XML-Compile-SOAP-WSA
+    SUBDIR += p5-XML-Compile-WSDL11
     SUBDIR += p5-XML-Fast
     SUBDIR += p5-XML-RPC
     SUBDIR += p5-XML-RPC-Fast
@@ -851,6 +856,7 @@
     SUBDIR += php56-sockets
     SUBDIR += php56-xmlrpc
     SUBDIR += phpldapadmin
+    SUBDIR += pimd
     SUBDIR += pimdd
     SUBDIR += pipsecd
     SUBDIR += pjsip
@@ -1250,6 +1256,7 @@
     SUBDIR += widentd
     SUBDIR += wireshark
     SUBDIR += wireshark-lite
+    SUBDIR += wireshark-qt5
     SUBDIR += wizd
     SUBDIR += wlan2eth
     SUBDIR += wmlj
@@ -1279,6 +1286,7 @@
     SUBDIR += xprobe
     SUBDIR += xpvm
     SUBDIR += xrdesktop
+    SUBDIR += xrdesktop2
     SUBDIR += xrdp
     SUBDIR += xrdp-devel
     SUBDIR += yami4

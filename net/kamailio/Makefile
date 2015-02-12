@@ -3,7 +3,7 @@
 #
 
 PORTNAME=	kamailio
-PORTVERSION=	4.2.1
+PORTVERSION=	4.2.2
 PORTREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	http://www.kamailio.org/pub/kamailio/${PORTVERSION}/src/
@@ -14,15 +14,14 @@ COMMENT=	Very fast and configurable open source SIP proxy
 
 LICENSE=	GPLv2
 
+LIB_DEPENDS=	libexpat.so:${PORTSDIR}/textproc/expat2 \
+		libxml2.so:${PORTSDIR}/textproc/libxml2
+RUN_DEPENDS=	${LOCALBASE}/bin/bash:${PORTSDIR}/shells/bash
+
 USES=		gmake shebangfix readline
 USE_LDCONFIG=	yes
 SHEBANG_FILES=	utils/kamctl/kamctl utils/kamctl/kamdbctl
 CFLAGS+=	-Wall
-
-LIB_DEPENDS+=	libexpat.so:${PORTSDIR}/textproc/expat2 \
-		libxml2.so:${PORTSDIR}/textproc/libxml2
-
-RUN_DEPENDS+=	${LOCALBASE}/bin/bash:${PORTSDIR}/shells/bash
 
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 
@@ -42,6 +41,7 @@ PGSQL_USES=	pgsql
 JITSI_RUN_DEPENDS=	jitsi:${PORTSDIR}/net-im/jitsi
 UNIXODBC_LIB_DEPENDS=	libodbc.so:${PORTSDIR}/databases/unixODBC
 RADIUS_LIB_DEPENDS=	libradiusclient-ng.so:${PORTSDIR}/net/radiusclient
+TLS_USE=		OPENSSL=yes
 
 .include <bsd.port.options.mk>
 

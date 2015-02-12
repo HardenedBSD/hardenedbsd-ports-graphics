@@ -246,7 +246,6 @@
     SUBDIR += mpeg_stat
     SUBDIR += mpgtx
     SUBDIR += mplayer
-    SUBDIR += mplayer-fonts
     SUBDIR += mplayer-skins
     SUBDIR += mplayer2
     SUBDIR += mplex
@@ -365,7 +364,6 @@
     SUBDIR += umph
     SUBDIR += umplayer
     SUBDIR += umr
-    SUBDIR += universal-media-server
     SUBDIR += v4l-utils
     SUBDIR += v4l_compat
     SUBDIR += vamps
