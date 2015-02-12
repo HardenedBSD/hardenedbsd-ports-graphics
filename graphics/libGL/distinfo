@@ -1,4 +1,4 @@
 SHA256 (MesaLib-9.1.7.tar.bz2) = 30e6b878b457c716221a9730b179b2846c38cfd5aa1b02d54aff685f50b844a0
 SIZE (MesaLib-9.1.7.tar.bz2) = 6134393
-SHA256 (MesaLib-10.4.4.tar.bz2) = f18a967e9c4d80e054b2fdff8c130ce6e6d1f8eecfc42c9f354f8628d8b4df1c
-SIZE (MesaLib-10.4.4.tar.bz2) = 7507100
+SHA256 (mesa-10.5.0-rc1.tar.xz) = 4047cdc87488e7a94ab97a507baa4b91f8f84418445aab47e5b29fe3cc49c4bd
+SIZE (mesa-10.5.0-rc1.tar.xz) = 6914148

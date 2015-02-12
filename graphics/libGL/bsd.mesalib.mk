@@ -30,34 +30,40 @@ MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_MESA)
-MESABASEVERSION=	10.4.4
+MESABASEVERSION=	10.5.0
 # if there is a subversion, don't include the '-' between 7.11-rc2.
-MESASUBVERSION=
+MESASUBVERSION=	rc1
 
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
 PLIST_SUB+=	OLD="@comment " NEW=""
 
 # work around libarchive bug?
-EXTRACT_CMD=		${LOCALBASE}/bin/gtar
-EXTRACT_DEPENDS+=	gtar:${PORTSDIR}/archivers/gtar
+#EXTRACT_CMD=		${LOCALBASE}/bin/gtar
+#EXTRACT_DEPENDS+=	gtar:${PORTSDIR}/archivers/gtar
+
+USES+=		tar:xz
+
+DISTFILES=	mesa-${MESADISTVERSION}${EXTRACT_SUFX}
 
 .else
 MESABASEVERSION=	9.1.7
 MESASUBVERSION=		
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/older-versions/${MESABASEVERSION:R:R}.x/${MESABASEVERSION}/
 PLIST_SUB+=	OLD="" NEW="@comment "
-.endif
+
+BUILD_DEPENDS+=	${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
+USES+=		bison python:2,build tar:bzip2
 
 DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}
+.endif
+
 MAINTAINER=	x11@FreeBSD.org
 
-BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
-		${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
+BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend
 
 LIB_DEPENDS+=	libdevq.so:${PORTSDIR}/devel/libdevq
 
-USES+=		bison gettext-tools gmake libtool pathfix pkgconfig \
-		python:2,build shebangfix tar:bzip2
+USES+=		gettext-tools gmake libtool pathfix pkgconfig shebangfix
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
 
@@ -67,7 +73,7 @@ LDFLAGS+=	-Wl,-Y${LOCALBASE}/lib
 PKGINSTALL=	${.CURDIR}/pkg-install
 PKGDEINSTALL=	${.CURDIR}/pkg-deinstall
 
-.if ${OSVERSION} < 1000033
+.if ${OSVERSION} < 1000033 && !defined(WITH_NEW_MESA)
 BUILD_DEPENDS+=	${LOCALBASE}/bin/flex:${PORTSDIR}/textproc/flex
 CONFIGURE_ENV+=	ac_cv_prog_LEX=${LOCALBASE}/bin/flex
 .endif
@@ -91,7 +97,7 @@ PATCHDIR=		${MASTERDIR}/files-old
 .endif
 DESCR=			${.CURDIR}/pkg-descr
 PLIST=			${.CURDIR}/pkg-plist
-WRKSRC=			${WRKDIR}/Mesa-${MESADISTVERSION}
+WRKSRC=			${WRKDIR}/mesa-${MESADISTVERSION}
 INSTALL_TARGET=		install-strip
 
 COMPONENT=		${PORTNAME:tl:C/^lib//:C/mesa-//}
