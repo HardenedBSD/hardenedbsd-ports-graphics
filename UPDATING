@@ -5,6 +5,32 @@ they are unavoidable.
 You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
+20150220:
+  AFFECTS: users of PHP
+
+  The default PHP version has been updated from 5.4 to 5.6.
+
+  If you use binary packages you should make a list of php packages
+  before running 'pkg upgrade':
+
+  # pkg info php5\* > ~/installed-php-ports-list
+
+  After the upgrade, check with such list if all your php extensions
+  are still installed, and reinstall them if needed.
+
+20150213:
+  AFFECTS: users who upgraded from FreeBSD 7.x or older with "make world" but never ran "make delete-old"
+  AUTHOR: antoine@FreeBSD.org
+
+  Dependency registration has been reworked.
+  If you encounter the following error,  you may have stale magic files
+  for file(1):
+
+    ===>   bar-x depends on shared library: libfoo.so - not found
+
+  You can remove the stale /usr/share/misc/magic.mime{,.mgc} files
+  manually or run "make delete-old" in ${SRCDIR}.
+
 20150207:
   AFFECTS: users of mail/opensmtpd-devel
   AUTHOR: ashish@FreeBSD.org
@@ -24,8 +50,8 @@ you update your ports collection, before attempting any port upgrades.
   AFFECTS: users of net/serviio
   AUTHOR: netchild@FreeBSD.org
 
-  The java dependency changed from java 7 (lang/openjdk7 if you haven't
-  installed another java 7 implementation) to java 8 (e.g. lang/openjdk8).
+  The java dependency changed from java 7 (java/openjdk7 if you haven't
+  installed another java 7 implementation) to java 8 (e.g. java/openjdk8).
   If serviio is the only reason that java 7 is installed, you can delete
   java 7 after the update to serviio 1.5.0.
 
@@ -50,7 +76,7 @@ you update your ports collection, before attempting any port upgrades.
 
   If you wish to update to the new default version, you need to first stop any
   running server instance. Then, you will need to follow these steps, depending
-  on intalled packages.
+  on installed packages.
 
   # pkg set -o databases/mysql55-client:databases/mysql56-client
   # pkg set -o databases/mysql55-server:databases/mysql56-server

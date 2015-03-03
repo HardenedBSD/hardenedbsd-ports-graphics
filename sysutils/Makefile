@@ -757,6 +757,7 @@
     SUBDIR += py-ranger
     SUBDIR += py-salt
     SUBDIR += py-salt-api
+    SUBDIR += py-shutilwhich
     SUBDIR += py-stdiff
     SUBDIR += py-supervisor
     SUBDIR += py-zdaemon
@@ -802,9 +803,7 @@
     SUBDIR += rsyncmanager
     SUBDIR += rsyncrypto
     SUBDIR += rsyslog7
-    SUBDIR += rsyslog7-devel
     SUBDIR += rsyslog8
-    SUBDIR += rsyslog8-devel
     SUBDIR += rtty
     SUBDIR += ruby-quota
     SUBDIR += rubygem-SyslogLogger
@@ -973,6 +972,9 @@
     SUBDIR += tw_cli
     SUBDIR += tzdialog
     SUBDIR += u-boot-beaglebone
+    SUBDIR += u-boot-cubox-hummingboard
+    SUBDIR += u-boot-duovero
+    SUBDIR += u-boot-pandaboard
     SUBDIR += u-boot-rpi
     SUBDIR += u-boot-wandboard
     SUBDIR += ua
@@ -1016,6 +1018,7 @@
     SUBDIR += virtualmin
     SUBDIR += vlogger
     SUBDIR += vmdktool
+    SUBDIR += vmtouch
     SUBDIR += vobcopy
     SUBDIR += volman
     SUBDIR += vordog

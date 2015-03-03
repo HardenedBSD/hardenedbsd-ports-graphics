@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	rlvm
-PORTVERSION=	0.14
+PORTVERSION=	0.14.0.20150223
 CATEGORIES=	devel games
 
 MAINTAINER=	jbeich@FreeBSD.org
@@ -14,16 +14,13 @@ BUILD_DEPENDS=	${LOCALBASE}/include/utf8.h:${PORTSDIR}/devel/utf8cpp
 LIB_DEPENDS=	libvorbisfile.so:${PORTSDIR}/audio/libvorbis \
 		libboost_serialization.so:${PORTSDIR}/devel/boost-libs \
 		libguichan.so:${PORTSDIR}/devel/guichan \
-		libGLEW.so:${PORTSDIR}/graphics/glew \
-		libjpeg.so:${PORTSDIR}/graphics/jpeg \
-		libpng.so:${PORTSDIR}/graphics/png \
-		libsmpeg.so:${PORTSDIR}/multimedia/smpeg
+		libGLEW.so:${PORTSDIR}/graphics/glew
 RUN_DEPENDS=	${LOCALBASE}/lib/X11/fonts/dejavu/DejaVuSans.ttf:${PORTSDIR}/x11-fonts/dejavu
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	eglaysher
-GH_TAGNAME=	release-${PORTVERSION}
-GH_COMMIT=	b88bfe0
+GH_TAGNAME=	${GH_COMMIT} # release-${PORTVERSION}
+GH_COMMIT=	589e3d2
 
 USES=		compiler:c++11-lib pkgconfig scons
 USE_GL=		yes
@@ -97,10 +94,8 @@ do-install:
 		. ${STAGEDIR}${PREFIX}/share/locale)
 .endif
 .if ${PORT_OPTIONS:MDOCS}
-	${MKDIR} ${STAGEDIR}${DOCSDIR}
-. for f in ${PORTDOCS:Nnotes}
-	${INSTALL_MAN} ${WRKSRC}/${f} ${STAGEDIR}${DOCSDIR}
-. endfor
+	(cd ${WRKSRC} && ${COPYTREE_SHARE} \
+		"${PORTDOCS:Nnotes}" ${STAGEDIR}${DOCSDIR})
 	(cd ${WRKSRC}/doc && ${COPYTREE_SHARE} \
 		notes ${STAGEDIR}${DOCSDIR})
 .endif

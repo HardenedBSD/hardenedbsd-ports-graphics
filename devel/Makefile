@@ -676,6 +676,7 @@
     SUBDIR += hs-ReadArgs
     SUBDIR += hs-STMonadTrans
     SUBDIR += hs-SafeSemaphore
+    SUBDIR += hs-ShellCheck
     SUBDIR += hs-Stream
     SUBDIR += hs-TypeCompose
     SUBDIR += hs-abstract-deque
@@ -1516,6 +1517,7 @@
     SUBDIR += p5-Attribute-Persistent
     SUBDIR += p5-AutoLoader
     SUBDIR += p5-AutoXS-Header
+    SUBDIR += p5-B-C
     SUBDIR += p5-B-Compiling
     SUBDIR += p5-B-Deobfuscate
     SUBDIR += p5-B-Flags
@@ -2284,6 +2286,7 @@
     SUBDIR += p5-JQuery
     SUBDIR += p5-JSON-Hyper
     SUBDIR += p5-JSON-Path
+    SUBDIR += p5-JSON-Pointer
     SUBDIR += p5-JSON-RPC
     SUBDIR += p5-JSON-RPC-Common
     SUBDIR += p5-JSON-RPC-Dispatcher
@@ -2364,6 +2367,7 @@
     SUBDIR += p5-Logfile-Rotate
     SUBDIR += p5-Luka
     SUBDIR += p5-Lvalue
+    SUBDIR += p5-MCE
     SUBDIR += p5-MRO-Compat
     SUBDIR += p5-MRO-Define
     SUBDIR += p5-Mac-FileSpec-Unixish
@@ -2385,6 +2389,8 @@
     SUBDIR += p5-Module-Build
     SUBDIR += p5-Module-Build-Convert
     SUBDIR += p5-Module-Build-Kwalitee
+    SUBDIR += p5-Module-Build-Pluggable
+    SUBDIR += p5-Module-Build-Pluggable-ReadmeMarkdownFromPod
     SUBDIR += p5-Module-Build-Tiny
     SUBDIR += p5-Module-Build-XSUtil
     SUBDIR += p5-Module-CPANTS-Analyse
@@ -2951,6 +2957,7 @@
     SUBDIR += p5-Test-Exception-LessClever
     SUBDIR += p5-Test-Expect
     SUBDIR += p5-Test-FailWarnings
+    SUBDIR += p5-Test-Fake-HTTPD
     SUBDIR += p5-Test-Fatal
     SUBDIR += p5-Test-File
     SUBDIR += p5-Test-File-Contents
@@ -3539,10 +3546,12 @@
     SUBDIR += phpbt
     SUBDIR += phpsh
     SUBDIR += phptags
+    SUBDIR += phpunit
     SUBDIR += physfs
     SUBDIR += physfs-devel
     SUBDIR += picp
     SUBDIR += picprog
+    SUBDIR += pig
     SUBDIR += piklab
     SUBDIR += pinba_engine
     SUBDIR += pipestatus
@@ -3675,6 +3684,7 @@
     SUBDIR += py-archetypes.querywidget
     SUBDIR += py-archetypes.referencebrowserwidget
     SUBDIR += py-archetypes.schemaextender
+    SUBDIR += py-argcomplete
     SUBDIR += py-argh
     SUBDIR += py-argparse
     SUBDIR += py-args
@@ -3952,6 +3962,7 @@
     SUBDIR += py-pytest-runner
     SUBDIR += py-python-statsd
     SUBDIR += py-pythonbrew
+    SUBDIR += py-pytrie
     SUBDIR += py-pytz
     SUBDIR += py-pyutil
     SUBDIR += py-pyxml2obj

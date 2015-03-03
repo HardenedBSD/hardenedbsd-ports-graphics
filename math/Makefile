@@ -306,6 +306,7 @@
     SUBDIR += octave-forge-interval
     SUBDIR += octave-forge-io
     SUBDIR += octave-forge-irsa
+    SUBDIR += octave-forge-level-set
     SUBDIR += octave-forge-linear-algebra
     SUBDIR += octave-forge-lssa
     SUBDIR += octave-forge-ltfat
@@ -603,7 +604,6 @@
     SUBDIR += rpy
     SUBDIR += rpy2
     SUBDIR += ruby-algebra
-    SUBDIR += ruby-numru_units
     SUBDIR += rubygem-fftw3
     SUBDIR += rubygem-narray
     SUBDIR += rubygem-narray_miss
