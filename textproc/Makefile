@@ -858,6 +858,7 @@
     SUBDIR += p5-Text-Similarity
     SUBDIR += p5-Text-SimpleTable
     SUBDIR += p5-Text-SimpleTemplate
+    SUBDIR += p5-Text-Soundex
     SUBDIR += p5-Text-SpellChecker
     SUBDIR += p5-Text-SpellChecker-GUI
     SUBDIR += p5-Text-Striphigh
@@ -1191,6 +1192,7 @@
     SUBDIR += py-mako
     SUBDIR += py-markdown
     SUBDIR += py-markdown2
+    SUBDIR += py-mistune
     SUBDIR += py-openpyxl
     SUBDIR += py-openpyxl1
     SUBDIR += py-paragrep
@@ -1485,6 +1487,7 @@
     SUBDIR += tex2im
     SUBDIR += texi2db
     SUBDIR += texi2html
+    SUBDIR += texi2mdoc
     SUBDIR += textogif
     SUBDIR += the_silver_searcher
     SUBDIR += ti-hunspell

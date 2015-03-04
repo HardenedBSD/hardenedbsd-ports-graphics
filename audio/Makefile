@@ -58,6 +58,7 @@
     SUBDIR += btc
     SUBDIR += calf
     SUBDIR += cam
+    SUBDIR += cantata
     SUBDIR += caps-plugins
     SUBDIR += ccaudio2
     SUBDIR += cd-console
@@ -598,6 +599,7 @@
     SUBDIR += py-ao
     SUBDIR += py-apetag
     SUBDIR += py-cddb
+    SUBDIR += py-discid
     SUBDIR += py-discogs-client
     SUBDIR += py-eyed3
     SUBDIR += py-fastaudio
@@ -666,6 +668,7 @@
     SUBDIR += sdl_mixer
     SUBDIR += sdl_sound
     SUBDIR += sfront
+    SUBDIR += shairplay
     SUBDIR += shairport
     SUBDIR += shntool
     SUBDIR += shorten

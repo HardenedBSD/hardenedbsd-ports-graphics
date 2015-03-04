@@ -27,6 +27,7 @@
     SUBDIR += asio
     SUBDIR += aslookup
     SUBDIR += asterisk
+    SUBDIR += asterisk-g72x
     SUBDIR += asterisk11
     SUBDIR += asterisk13
     SUBDIR += avahi
@@ -107,6 +108,7 @@
     SUBDIR += drawterm
     SUBDIR += dropbox-api-command
     SUBDIR += dropbox-uploader
+    SUBDIR += dshell
     SUBDIR += dtcp
     SUBDIR += dtcpclient
     SUBDIR += e169-stats
@@ -302,6 +304,7 @@
     SUBDIR += libkfbapi
     SUBDIR += libkvkontakte
     SUBDIR += libmateweather
+    SUBDIR += libmaxminddb
     SUBDIR += libmediawiki
     SUBDIR += libmms
     SUBDIR += libmxp
@@ -921,6 +924,7 @@
     SUBDIR += py-pcs
     SUBDIR += py-port-for
     SUBDIR += py-pybeanstalk
+    SUBDIR += py-pygeoip
     SUBDIR += py-pynsq
     SUBDIR += py-pypcap
     SUBDIR += py-pysendfile
@@ -944,6 +948,7 @@
     SUBDIR += py-twitter
     SUBDIR += py-twitter-tools
     SUBDIR += py-txamqp
+    SUBDIR += py-uritemplate
     SUBDIR += py-urllib3
     SUBDIR += py-wolframalpha
     SUBDIR += py-xmlrpc
@@ -1021,11 +1026,18 @@
     SUBDIR += rubygem-connection_pool
     SUBDIR += rubygem-domain_name
     SUBDIR += rubygem-dropbox-sdk
+    SUBDIR += rubygem-epp-client-afnic
+    SUBDIR += rubygem-epp-client-base
+    SUBDIR += rubygem-epp-client-rgp
+    SUBDIR += rubygem-epp-client-secdns
+    SUBDIR += rubygem-epp-client-smallregistry
     SUBDIR += rubygem-fog-atmos
+    SUBDIR += rubygem-fog-aws
     SUBDIR += rubygem-fog-ecloud
     SUBDIR += rubygem-fog-profitbricks
     SUBDIR += rubygem-fog-radosgw
     SUBDIR += rubygem-fog-sakuracloud
+    SUBDIR += rubygem-fog-serverlove
     SUBDIR += rubygem-fog-softlayer
     SUBDIR += rubygem-fog-storm_on_demand
     SUBDIR += rubygem-fog-terremark
@@ -1139,7 +1151,6 @@
     SUBDIR += spread-j
     SUBDIR += spread4
     SUBDIR += sprinkle
-    SUBDIR += spserver
     SUBDIR += sqtop
     SUBDIR += ss5
     SUBDIR += ssldump
@@ -1285,7 +1296,6 @@
     SUBDIR += xorp
     SUBDIR += xprobe
     SUBDIR += xpvm
-    SUBDIR += xrdesktop
     SUBDIR += xrdesktop2
     SUBDIR += xrdp
     SUBDIR += xrdp-devel

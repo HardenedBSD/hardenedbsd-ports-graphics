@@ -544,6 +544,7 @@
     SUBDIR += git
     SUBDIR += git-bzr-ng
     SUBDIR += git-extras
+    SUBDIR += git-lite
     SUBDIR += git-merge-changelog
     SUBDIR += git-modes
     SUBDIR += git-review
@@ -676,6 +677,7 @@
     SUBDIR += hs-ReadArgs
     SUBDIR += hs-STMonadTrans
     SUBDIR += hs-SafeSemaphore
+    SUBDIR += hs-ShellCheck
     SUBDIR += hs-Stream
     SUBDIR += hs-TypeCompose
     SUBDIR += hs-abstract-deque
@@ -1111,6 +1113,7 @@
     SUBDIR += liborcus07
     SUBDIR += libosinfo
     SUBDIR += libosmo-abis
+    SUBDIR += libosmo-netif
     SUBDIR += libosmo-sccp
     SUBDIR += libosmocore
     SUBDIR += libowfat
@@ -1516,6 +1519,7 @@
     SUBDIR += p5-Attribute-Persistent
     SUBDIR += p5-AutoLoader
     SUBDIR += p5-AutoXS-Header
+    SUBDIR += p5-B-C
     SUBDIR += p5-B-Compiling
     SUBDIR += p5-B-Deobfuscate
     SUBDIR += p5-B-Flags
@@ -2225,6 +2229,7 @@
     SUBDIR += p5-IO-Pager
     SUBDIR += p5-IO-Pipely
     SUBDIR += p5-IO-Prompt
+    SUBDIR += p5-IO-Prompt-Simple
     SUBDIR += p5-IO-Prompt-Tiny
     SUBDIR += p5-IO-Prompter
     SUBDIR += p5-IO-Pty-Easy
@@ -2284,6 +2289,7 @@
     SUBDIR += p5-JQuery
     SUBDIR += p5-JSON-Hyper
     SUBDIR += p5-JSON-Path
+    SUBDIR += p5-JSON-Pointer
     SUBDIR += p5-JSON-RPC
     SUBDIR += p5-JSON-RPC-Common
     SUBDIR += p5-JSON-RPC-Dispatcher
@@ -2364,6 +2370,7 @@
     SUBDIR += p5-Logfile-Rotate
     SUBDIR += p5-Luka
     SUBDIR += p5-Lvalue
+    SUBDIR += p5-MCE
     SUBDIR += p5-MRO-Compat
     SUBDIR += p5-MRO-Define
     SUBDIR += p5-Mac-FileSpec-Unixish
@@ -2385,6 +2392,8 @@
     SUBDIR += p5-Module-Build
     SUBDIR += p5-Module-Build-Convert
     SUBDIR += p5-Module-Build-Kwalitee
+    SUBDIR += p5-Module-Build-Pluggable
+    SUBDIR += p5-Module-Build-Pluggable-ReadmeMarkdownFromPod
     SUBDIR += p5-Module-Build-Tiny
     SUBDIR += p5-Module-Build-XSUtil
     SUBDIR += p5-Module-CPANTS-Analyse
@@ -2575,6 +2584,7 @@
     SUBDIR += p5-PAR-Dist
     SUBDIR += p5-PAR-Packer
     SUBDIR += p5-PCSC-Card
+    SUBDIR += p5-PerlX-Maybe
     SUBDIR += p5-PHP-Serialization
     SUBDIR += p5-POE
     SUBDIR += p5-POE-API-Hooks
@@ -2881,6 +2891,7 @@
     SUBDIR += p5-TAP-SimpleOutput
     SUBDIR += p5-Taint-Runtime
     SUBDIR += p5-Taint-Util
+    SUBDIR += p5-Task-Tiny
     SUBDIR += p5-Task-Weaken
     SUBDIR += p5-Tee
     SUBDIR += p5-Template-Provider-Encode
@@ -2951,6 +2962,7 @@
     SUBDIR += p5-Test-Exception-LessClever
     SUBDIR += p5-Test-Expect
     SUBDIR += p5-Test-FailWarnings
+    SUBDIR += p5-Test-Fake-HTTPD
     SUBDIR += p5-Test-Fatal
     SUBDIR += p5-Test-File
     SUBDIR += p5-Test-File-Contents
@@ -3539,10 +3551,12 @@
     SUBDIR += phpbt
     SUBDIR += phpsh
     SUBDIR += phptags
+    SUBDIR += phpunit
     SUBDIR += physfs
     SUBDIR += physfs-devel
     SUBDIR += picp
     SUBDIR += picprog
+    SUBDIR += pig
     SUBDIR += piklab
     SUBDIR += pinba_engine
     SUBDIR += pipestatus
@@ -3675,6 +3689,7 @@
     SUBDIR += py-archetypes.querywidget
     SUBDIR += py-archetypes.referencebrowserwidget
     SUBDIR += py-archetypes.schemaextender
+    SUBDIR += py-argcomplete
     SUBDIR += py-argh
     SUBDIR += py-argparse
     SUBDIR += py-args
@@ -3952,6 +3967,7 @@
     SUBDIR += py-pytest-runner
     SUBDIR += py-python-statsd
     SUBDIR += py-pythonbrew
+    SUBDIR += py-pytrie
     SUBDIR += py-pytz
     SUBDIR += py-pyutil
     SUBDIR += py-pyxml2obj
@@ -4221,6 +4237,7 @@
     SUBDIR += qt4-help-tools
     SUBDIR += qt4-libqtassistantclient
     SUBDIR += qt4-linguist
+    SUBDIR += qt4-linguisttools
     SUBDIR += qt4-makeqpf
     SUBDIR += qt4-moc
     SUBDIR += qt4-porting
@@ -4423,6 +4440,7 @@
     SUBDIR += rubygem-fastthread
     SUBDIR += rubygem-fattr
     SUBDIR += rubygem-ffi
+    SUBDIR += rubygem-ffi-compiler
     SUBDIR += rubygem-ffi-yajl
     SUBDIR += rubygem-file-tail
     SUBDIR += rubygem-filemagic

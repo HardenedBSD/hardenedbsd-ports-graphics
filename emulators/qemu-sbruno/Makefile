@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	qemu
-PORTVERSION=	2.2.50.g20150211
+PORTVERSION=	2.2.50.g20150215
+PORTREVISION=	1
 CATEGORIES=	emulators
 MASTER_SITES=	GH GHC \
 		LOCAL/nox \
@@ -20,7 +21,7 @@ COMMENT?=	QEMU CPU Emulator - github bsd-user branch
 USE_GITHUB=	yes
 GH_ACCOUNT=	seanbruno
 GH_PROJECT=	${PORTNAME}-bsd-user
-GH_COMMIT=	0f9b152
+GH_COMMIT=	87de5f9
 GH_TAGNAME=	${GH_COMMIT}
 HAS_CONFIGURE=	yes
 USES=		gmake pkgconfig bison perl5 python:2,build
@@ -49,6 +50,13 @@ OPTIONS_DEFAULT=X11 GTK2 OPENGL GNUTLS SASL JPEG PNG CDROM_DMA CURL PCAP
 
 .if !defined(QEMU_USER_STATIC)
 CONFLICTS_INSTALL=	qemu-[0-9]* qemu-devel-*
+.endif
+
+.if defined(QEMU_USER_STATIC)
+.if exists(/usr/sbin/binmiscctl)
+USE_RC_SUBR=	qemu_user_static
+SUB_LIST=	NAME=qemu_user_static
+.endif
 .endif
 
 .include <bsd.port.options.mk>
