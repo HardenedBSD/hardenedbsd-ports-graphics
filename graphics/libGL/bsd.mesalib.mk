@@ -32,7 +32,7 @@ MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 .if defined(WITH_NEW_MESA)
 MESABASEVERSION=	10.5.0
 # if there is a subversion, don't include the '-' between 7.11-rc2.
-MESASUBVERSION=	rc3
+MESASUBVERSION=	
 
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
 PLIST_SUB+=	OLD="@comment " NEW=""
@@ -92,12 +92,13 @@ MASTERDIR=		${.CURDIR}/../../graphics/libGL
 .if defined(WITH_NEW_MESA)
 PATCHDIR=		${MASTERDIR}/files
 CONFIGURE_ARGS+=	--disable-dri3
+WRKSRC=			${WRKDIR}/mesa-${MESADISTVERSION}
 .else
 PATCHDIR=		${MASTERDIR}/files-old
+WRKSRC=			${WRKDIR}/Mesa-${MESADISTVERSION}
 .endif
 DESCR=			${.CURDIR}/pkg-descr
 PLIST=			${.CURDIR}/pkg-plist
-WRKSRC=			${WRKDIR}/mesa-${MESADISTVERSION}
 INSTALL_TARGET=		install-strip
 
 COMPONENT=		${PORTNAME:tl:C/^lib//:C/mesa-//}
