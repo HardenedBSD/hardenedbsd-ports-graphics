@@ -404,6 +404,7 @@
     SUBDIR += epm
     SUBDIR += epydoc
     SUBDIR += eric4
+    SUBDIR += eric6
     SUBDIR += eris
     SUBDIR += esdl
     SUBDIR += etcd
@@ -492,12 +493,15 @@
     SUBDIR += gdcm
     SUBDIR += geany
     SUBDIR += geany-plugin-addons
+    SUBDIR += geany-plugin-autoclose
     SUBDIR += geany-plugin-codenav
     SUBDIR += geany-plugin-commander
     SUBDIR += geany-plugin-debugger
+    SUBDIR += geany-plugin-defineformat
     SUBDIR += geany-plugin-devhelp
     SUBDIR += geany-plugin-doc
     SUBDIR += geany-plugin-extrasel
+    SUBDIR += geany-plugin-geanypy
     SUBDIR += geany-plugin-gendoc
     SUBDIR += geany-plugin-geniuspaste
     SUBDIR += geany-plugin-gproject
@@ -509,7 +513,9 @@
     SUBDIR += geany-plugin-miniscript
     SUBDIR += geany-plugin-multiterm
     SUBDIR += geany-plugin-numberedbookmarks
+    SUBDIR += geany-plugin-pairtaghighlighter
     SUBDIR += geany-plugin-pg
+    SUBDIR += geany-plugin-pohelper
     SUBDIR += geany-plugin-pretty-printer
     SUBDIR += geany-plugin-prj
     SUBDIR += geany-plugin-scope
@@ -1774,6 +1780,7 @@
     SUBDIR += p5-Data-Grouper
     SUBDIR += p5-Data-HashArray
     SUBDIR += p5-Data-HexDump
+    SUBDIR += p5-Data-HexDump-Range
     SUBDIR += p5-Data-Hexdumper
     SUBDIR += p5-Data-Hexify
     SUBDIR += p5-Data-Hierarchy
@@ -2334,6 +2341,7 @@
     SUBDIR += p5-Log-Any-Adapter-Log4perl
     SUBDIR += p5-Log-Any-Adapter-Syslog
     SUBDIR += p5-Log-Any-App
+    SUBDIR += p5-Log-Any-IfLOG
     SUBDIR += p5-Log-Contextual
     SUBDIR += p5-Log-Defer
     SUBDIR += p5-Log-Dispatch
@@ -2359,6 +2367,7 @@
     SUBDIR += p5-Log-Handler
     SUBDIR += p5-Log-Log4perl
     SUBDIR += p5-Log-Log4perl-Appender-RabbitMQ
+    SUBDIR += p5-Log-Log4perl-Tiny
     SUBDIR += p5-Log-Message
     SUBDIR += p5-Log-Message-Simple
     SUBDIR += p5-Log-Minimal
@@ -2792,6 +2801,7 @@
     SUBDIR += p5-Scalar-Listify
     SUBDIR += p5-Scalar-String
     SUBDIR += p5-Scalar-Util-LooksLikeNumber
+    SUBDIR += p5-Scalar-Util-Numeric
     SUBDIR += p5-Scope-Guard
     SUBDIR += p5-Scope-Upper
     SUBDIR += p5-Script-isAperlScript
@@ -3146,6 +3156,7 @@
     SUBDIR += p5-Tree-Simple
     SUBDIR += p5-Tree-Simple-View
     SUBDIR += p5-Tree-Simple-VisitorFactory
+    SUBDIR += p5-Tree-Trie
     SUBDIR += p5-Type-Tie
     SUBDIR += p5-Type-Tiny
     SUBDIR += p5-Type-Tiny-XS
@@ -3700,6 +3711,7 @@
     SUBDIR += py-astroid
     SUBDIR += py-async
     SUBDIR += py-asyncio
+    SUBDIR += py-atomicwrites
     SUBDIR += py-avro
     SUBDIR += py-babel
     SUBDIR += py-babelfish
