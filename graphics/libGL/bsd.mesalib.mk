@@ -37,14 +37,11 @@ MESASUBVERSION=
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
 PLIST_SUB+=	OLD="@comment " NEW=""
 
-# work around libarchive bug?
-#EXTRACT_CMD=		${LOCALBASE}/bin/gtar
-#EXTRACT_DEPENDS+=	gtar:${PORTSDIR}/archivers/gtar
-
-USES+=		python:2,build tar:xz
+USES+=		tar:xz
 
 DISTFILES=	mesa-${MESADISTVERSION}${EXTRACT_SUFX}
 
+BUILD_DEPENDS+=	py27-mako>=0:${PORTSDIR}/textproc/py-mako
 .else
 MESABASEVERSION=	9.1.7
 MESASUBVERSION=		
