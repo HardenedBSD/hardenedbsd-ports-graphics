@@ -41,7 +41,7 @@ PLIST_SUB+=	OLD="@comment " NEW=""
 #EXTRACT_CMD=		${LOCALBASE}/bin/gtar
 #EXTRACT_DEPENDS+=	gtar:${PORTSDIR}/archivers/gtar
 
-USES+=		tar:xz
+USES+=		python:2,build tar:xz
 
 DISTFILES=	mesa-${MESADISTVERSION}${EXTRACT_SUFX}
 
