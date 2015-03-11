@@ -527,6 +527,7 @@
     SUBDIR += p5-HTML-Entities-Numbered
     SUBDIR += p5-HTML-EscapeEvil
     SUBDIR += p5-HTML-Format
+    SUBDIR += p5-HTML-FormatExternal
     SUBDIR += p5-HTML-FormatText-WithLinks
     SUBDIR += p5-HTML-FormatText-WithLinks-AndTables
     SUBDIR += p5-HTML-Fraction
@@ -784,6 +785,7 @@
     SUBDIR += p5-Text-CharWidth
     SUBDIR += p5-Text-Chomp
     SUBDIR += p5-Text-ClearSilver
+    SUBDIR += p5-Text-Colorizer
     SUBDIR += p5-Text-Context
     SUBDIR += p5-Text-Context-EitherSide
     SUBDIR += p5-Text-DHCPLeases
@@ -858,6 +860,7 @@
     SUBDIR += p5-Text-Similarity
     SUBDIR += p5-Text-SimpleTable
     SUBDIR += p5-Text-SimpleTemplate
+    SUBDIR += p5-Text-Soundex
     SUBDIR += p5-Text-SpellChecker
     SUBDIR += p5-Text-SpellChecker-GUI
     SUBDIR += p5-Text-Striphigh
@@ -1165,7 +1168,6 @@
     SUBDIR += py-asciinema
     SUBDIR += py-asv
     SUBDIR += py-bugzillatools
-    SUBDIR += py-charade
     SUBDIR += py-chardet
     SUBDIR += py-cloud_sptheme
     SUBDIR += py-creole
@@ -1192,6 +1194,7 @@
     SUBDIR += py-mako
     SUBDIR += py-markdown
     SUBDIR += py-markdown2
+    SUBDIR += py-mistune
     SUBDIR += py-openpyxl
     SUBDIR += py-openpyxl1
     SUBDIR += py-paragrep
@@ -1208,6 +1211,7 @@
     SUBDIR += py-python-augeas
     SUBDIR += py-pytidylib
     SUBDIR += py-pyx12
+    SUBDIR += py-qrcode
     SUBDIR += py-qt4-xml
     SUBDIR += py-qt4-xmlpatterns
     SUBDIR += py-rdflib
@@ -1485,6 +1489,7 @@
     SUBDIR += tex2im
     SUBDIR += texi2db
     SUBDIR += texi2html
+    SUBDIR += texi2mdoc
     SUBDIR += textogif
     SUBDIR += the_silver_searcher
     SUBDIR += ti-hunspell

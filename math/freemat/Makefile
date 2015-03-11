@@ -21,7 +21,7 @@ LIB_DEPENDS=	libarpack.so:${PORTSDIR}/math/arpack			\
 		libfftw3.so:${PORTSDIR}/math/fftw3			\
 		libfftw3f.so:${PORTSDIR}/math/fftw3-float		\
 		libpcre.so:${PORTSDIR}/devel/pcre			\
-		libportaudio.so:${PORTSDIR}/audio/portaudio		\
+		libportaudio.so.0:${PORTSDIR}/audio/portaudio		\
 		libumfpack.so:${PORTSDIR}/math/suitesparse
 
 USES=		blaslapack cmake:outsource dos2unix fortran pkgconfig python:build
@@ -40,7 +40,6 @@ LDFLAGS+=	-L${LOCALBASE}/llvm33/lib
 DATADIR=	${PREFIX}/share/${PORTNAME}-${PORTVERSION}
 DESKTOP_ENTRIES="FreeMat" "" "${PREFIX}/share/pixmaps/freemat.png"	\
 		"FreeMat" "Science;Math;NumericalAnalysis;" true
-PLIST_FILES=	bin/FreeMat bin/blas.ini share/pixmaps/freemat.png
 PORTDATA=	*
 
 post-install:

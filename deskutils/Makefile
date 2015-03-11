@@ -6,6 +6,7 @@
     SUBDIR += affiche
     SUBDIR += akamaru
     SUBDIR += alacarte
+    SUBDIR += anamnesis
     SUBDIR += appwrapper
     SUBDIR += aspostit
     SUBDIR += autocutsel
@@ -102,6 +103,7 @@
     SUBDIR += griffith
     SUBDIR += growl-for-linux
     SUBDIR += gruler
+    SUBDIR += gsimplecal
     SUBDIR += gtg
     SUBDIR += gtimer
     SUBDIR += gtodo
@@ -200,6 +202,7 @@
     SUBDIR += preferences
     SUBDIR += py-pystash
     SUBDIR += py-send2trash
+    SUBDIR += py-spice-gtk
     SUBDIR += py-vobject
     SUBDIR += pybookreader
     SUBDIR += pypanel
@@ -215,10 +218,12 @@
     SUBDIR += rubrica
     SUBDIR += rubygem-taskjuggler
     SUBDIR += semantik
+    SUBDIR += shutter
     SUBDIR += silence
     SUBDIR += simpleagenda
     SUBDIR += simplegroupware
     SUBDIR += sliderule
+    SUBDIR += spice-gtk
     SUBDIR += steadyflow
     SUBDIR += strigi
     SUBDIR += strigiclient

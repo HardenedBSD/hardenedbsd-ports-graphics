@@ -2,16 +2,19 @@
 # $FreeBSD$
 
 PORTNAME=	postfix
-DISTVERSION=	2.12-20141228
+DISTVERSION=	3.0-20150208
 PORTEPOCH=	4
 CATEGORIES=	mail ipv6
-MASTER_SITES=	ftp://ftp.porcupine.org/mirrors/postfix-release/experimental/ \
-		ftp://postfix.mirrors.pair.com/experimental/ \
-		ftp://ftp.tux.org/pub/net/postfix/experimental/ \
-		http://mirrors.rootservices.net/postfix/experimental/ \
-		ftp://ftp.samurai.com/pub/postfix/experimental/ \
-		http://ftp.unicamp.br/pub/postfix/experimental/
+MASTER_SITES=	ftp://ftp.porcupine.org/mirrors/postfix-release/ \
+		http://de.postfix.org/ftpmirror/ \
+		http://cdn.postfix.johnriley.me/mirrors/postfix-release/ \
+		http://www.artfiles.org/postfix.org/postfix-release/ \
+		http://mirror.lhsolutions.nl/postfix-release/ \
+		ftp://postfix.mirrors.pair.com/
+#MASTER_SITES:=	${MASTER_SITES:S|$|experimental/|}
+MASTER_SITES:=	${MASTER_SITES:S|$|official/|}
 PKGNAMESUFFIX=	-current
+DISTNAME=	${PORTNAME}-3.0.0
 DIST_SUBDIR=	${PORTNAME}
 
 MAINTAINER=	sahil@FreeBSD.org
@@ -22,9 +25,10 @@ LICENSE_NAME=	IBM PUBLIC LICENSE VERSION 1.0
 LICENSE_FILE=	${WRKSRC}/LICENSE
 LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
-CONFLICTS_INSTALL=	courier-0.* postfix-1.* postfix-2.* postfix-base-2.* postfix2[789]-* \
-		postfix21?-* sendmail-8.* sendmail+*-8.* smail-3.* zmailer-2.* \
-		opensmtpd-[0-9]* postfix-tls-*
+CONFLICTS_INSTALL?=	courier-0.* opensmtpd-[0-9]* \
+		postfix-2.* postfix-base-2.* postfix2[789]-* \
+		postfix21?-* postfix-tls-* \
+		sendmail-8.* sendmail+*-8.* smail-3.* zmailer-2.*
 
 USERS=		postfix
 GROUPS=		mail maildrop postfix
@@ -43,7 +47,7 @@ OPTIONS_DEFINE=	BDB CDB DOCS EAI INST_BASE LDAP_SASL LMDB MYSQL NIS \
 OPTIONS_RADIO=		RG1 RG2
 OPTIONS_RADIO_RG1=	DOVECOT DOVECOT2
 OPTIONS_RADIO_RG2=	SASLKRB5 SASLKMIT
-OPTIONS_DEFAULT=	PCRE
+OPTIONS_DEFAULT=	PCRE TLS
 
 PCRE_DESC=	Perl Compatible Regular Expressions
 EAI_DESC=	Email Address Internationalization (EAI, RFC 6531..6533)
@@ -89,7 +93,7 @@ IS_INTERACTIVE=	yes
 MAKEFILEFLAGS+=	DEBUG=
 .endif
 
-MAKEFILEFLAGS+=	CC="${CC}" OPT="${CFLAGS}"
+MAKEFILEFLAGS+=	pie=yes CC="${CC}" OPT="${CFLAGS}"
 
 .if ${PORT_OPTIONS:MINST_BASE}
 PKGNAMESUFFIX=	-base
@@ -183,10 +187,12 @@ POSTFIX_AUXLIBS+=	-Wl,--rpath,$${KRB5_HOME:-${LOCALBASE}}/lib -lkrb5 -lcrypto -l
 .endif
 
 .if ${PORT_OPTIONS:MTLS}
-.include "${PORTSDIR}/Mk/bsd.openssl.mk"
+USE_OPENSSL=		yes
 POSTFIX_CCARGS+=	-DUSE_TLS -I${OPENSSLINC}
-# XXX LDFLAGS possible distrubs dynamic building 
+# XXX LDFLAGS possible breaks dynamic building
 POSTFIX_AUXLIBS+=	-L${OPENSSLLIB} ${LDFLAGS} -lssl -lcrypto
+.else
+POSTFIX_CCARGS+=	-DNO_TLS
 .endif
 
 .if ${PORT_OPTIONS:MSPF}
@@ -198,9 +204,6 @@ PATCHFILES+=		postfix-2.8.0-libspf2-1.2.x-0.patch.gz
 PATCH_DIST_STRIP=	-p1
 POSTFIX_CCARGS+=	-DHAVE_NS_TYPE -DHAS_SPF -I${LOCALBASE}/include
 POSTFIX_AUXLIBS+=	-L${LOCALBASE}/lib -lspf2
-PLIST_SUB+=		SPF=""
-.else
-PLIST_SUB+=		SPF="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MBDB}
@@ -263,9 +266,6 @@ BROKEN=		At the moment, VDA support is unavailable for ${PORTNAME}-${DISTVERSION
 .if ${PORT_OPTIONS:MTEST}
 BINTEST=	qmqp-sink qmqp-source smtp-sink smtp-source
 MANTEST=	qmqp-sink.1 qmqp-source.1 smtp-sink.1 smtp-source.1
-PLIST_SUB+=	TEST=""
-.else
-PLIST_SUB+=	TEST="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MLMDB}
@@ -335,7 +335,8 @@ do-configure:
 	${MAKEFILEFLAGS} CCARGS="${POSTFIX_CCARGS}" \
 	shared=yes shlib_directory=${SHLIB_DIRECTORY} \
 	dynamicmaps=yes \
-	${POSTFIX_DYN_AUXLIBS} AUXLIBS="${POSTFIX_AUXLIBS}" && \
+	${POSTFIX_DYN_AUXLIBS} \
+	AUXLIBS="${POSTFIX_AUXLIBS}" && \
 	${ECHO} "all: default" >> Makefile)
 
 pre-install:

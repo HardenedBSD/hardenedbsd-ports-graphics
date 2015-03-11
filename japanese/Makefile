@@ -162,7 +162,6 @@
     SUBDIR += ming
     SUBDIR += monafonts
     SUBDIR += monafonts-ttf
-    SUBDIR += mozc-additions
     SUBDIR += mozc-el
     SUBDIR += mozc-server
     SUBDIR += mozc-tool
@@ -191,6 +190,7 @@
     SUBDIR += p5-DateTime-Calendar-Japanese-Era
     SUBDIR += p5-DateTime-Format-Japanese
     SUBDIR += p5-Encode-EUCJPMS
+    SUBDIR += p5-Encode-ISO2022
     SUBDIR += p5-Encode-JP-Emoji
     SUBDIR += p5-Encode-JP-Mobile
     SUBDIR += p5-HTML-MobileJp
@@ -288,7 +288,6 @@
     SUBDIR += wwasw-fpw
     SUBDIR += xdtp
     SUBDIR += xgate
-    SUBDIR += xlockmore
     SUBDIR += xpdf
     SUBDIR += xshodou
     SUBDIR += xtr

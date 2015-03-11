@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME?=	mariadb
-PORTVERSION=	10.0.15
+PORTVERSION=	10.0.17
 CATEGORIES=	databases ipv6
 MASTER_SITES=	http://ftp.osuosl.org/pub/${SITESDIR}/ \
 		http://mirrors.supportex.net/${SITESDIR}/ \
@@ -16,11 +16,13 @@ PKGNAMESUFFIX?=	100-server
 MAINTAINER=	spil.oss@gmail.com
 COMMENT?=	Multithreaded SQL database (server)
 
+LICENSE=	GPLv2
+
 SUB_FILES=	pkg-message
 PKGMESSAGE=	${WRKDIR}/pkg-message
 
 SLAVEDIRS=	databases/mariadb100-client
-USES=		bison:build cmake execinfo gmake shebangfix
+USES=		bison:build cmake execinfo gmake shebangfix cpe
 SHEBANG_FILES=	scripts/*.sh
 SITESDIR=	mariadb/mariadb-${PORTVERSION}/source
 
@@ -33,8 +35,8 @@ OPTIONS_DEFAULT+=	OPENSSL
 NO_OPTIONS_SORT=	yes
 
 BUNDLED_SSL_DESC=	SSL/TLS support via (bundled) CyaSSL
-FASTMTX_DESC=           Replace mutexes with spinlocks
-WITHOUT_SSL_DESC=       No SSL/TLS support
+FASTMTX_DESC=		Replace mutexes with spinlocks
+WITHOUT_SSL_DESC=	No SSL/TLS support
 
 CMAKE_ARGS+=	-DINSTALL_DOCDIR="share/doc/mysql" \
 		-DINSTALL_DOCREADMEDIR="share/doc/mysql" \
@@ -70,14 +72,14 @@ OPTIONS_DEFINE+=	INNODB MAXKEY MROONGA OQGRAPH
 OPTIONS_DEFAULT+=	MAXKEY
 OPTIONS_SUB=		yes
 
-INNODB_DESC=            Build InnoDB engine next to XtraDB
-MAXKEY_DESC=            Change max key length from 1000 to 4000
+INNODB_DESC=		Build InnoDB engine next to XtraDB
+MAXKEY_DESC=		Change max key length from 1000 to 4000
 MROONGA_DESC=		Mroonga Full Text Search engine (gcc)
 OQGRAPH_DESC=		Open Query Graph Computation engine (gcc)
 .endif
 
-BUNDLED_SSL_CMAKE_ON=   -DWITH_SSL=bundled
-FASTMX_CMAKE_ON=	-DWITH_FAST_MUTEXES=1
+BUNDLED_SSL_CMAKE_ON=	-DWITH_SSL=bundled
+FASTMTX_CMAKE_ON=	-DWITH_FAST_MUTEXES=1
 OPENSSL_CMAKE_ON=	-DWITH_SSL=yes
 OPENSSL_USE=	OPENSSL=yes
 WITHOUT_SSL_CMAKE_ON=	-DWITH_SSL=no
@@ -102,11 +104,9 @@ CMAKE_ARGS+=	-DWITH_EMBEDDED_SERVER="ON" \
 		-DWITHOUT_EXAMPLE_STORAGE_ENGINE=1
 
 INNODB_CMAKE_OFF=	-DWITHOUT_INNOBASE=1
-MAXKEY_EXTRA_PATCHES+=  ${FILESDIR}/extra-patch-include_my_compare.h
+MAXKEY_EXTRA_PATCHES+=	${FILESDIR}/extra-patch-include_my_compare.h
 MROONGA_CMAKE_OFF=	-DWITHOUT_MROONGA=1
-MROONGA_USE=	GCC=yes
 OQGRAPH_CMAKE_OFF=	-DWITHOUT_OQGRAPH=1
-OQGRAPH_USE=	GCC=yes
 OQGRAPH_LIB_DEPENDS=	libboost_system.so:${PORTSDIR}/devel/boost-libs
 
 post-install:
@@ -122,14 +122,14 @@ post-install:
 .include <bsd.port.pre.mk>
 
 .if ${OPSYS} == FreeBSD && ${OSVERSION} >= 1000012
-CMAKE_ARGS+=   -DWITH_JEMALLOC="system"
+CMAKE_ARGS+=	-DWITH_JEMALLOC="system"
 .else
-CMAKE_ARGS+=   -DWITH_JEMALLOC="no"
+CMAKE_ARGS+=	-DWITH_JEMALLOC="no"
 .endif
 
 # Server segfaults on i386 when built with clang >= 3.4
 .if ${ARCH} == 'i386' && ${OSVERSION} >= 1001000
-USE_GCC=        yes
+USE_GCC=	yes
 .endif
 
 post-patch:

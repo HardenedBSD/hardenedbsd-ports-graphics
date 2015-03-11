@@ -48,8 +48,10 @@
     SUBDIR += automount
     SUBDIR += automounter
     SUBDIR += autopsy
+    SUBDIR += avfs
     SUBDIR += azure-agent
     SUBDIR += b43-fwcutter
+    SUBDIR += backupchecker
     SUBDIR += backuppc
     SUBDIR += backuppc-devel
     SUBDIR += bacula-bat
@@ -83,7 +85,6 @@
     SUBDIR += boxbackup
     SUBDIR += boxbackup-devel
     SUBDIR += brasero
-    SUBDIR += brebis
     SUBDIR += bsd-splash-changer
     SUBDIR += bsdadminscripts
     SUBDIR += bsdconfig
@@ -160,6 +161,7 @@
     SUBDIR += cronolog
     SUBDIR += cronolog-devel
     SUBDIR += curly
+    SUBDIR += currtime
     SUBDIR += cw
     SUBDIR += daa2iso
     SUBDIR += dae
@@ -461,6 +463,7 @@
     SUBDIR += liburcu
     SUBDIR += libutempter
     SUBDIR += libzeitgeist
+    SUBDIR += life-preserver
     SUBDIR += lineak-defaultplugin
     SUBDIR += lineak-xosdplugin
     SUBDIR += lineakd
@@ -652,9 +655,13 @@
     SUBDIR += password-store
     SUBDIR += patchelf
     SUBDIR += pax-utils
+    SUBDIR += pbi-manager
     SUBDIR += pbimaker
+    SUBDIR += pcbsd-appweb
+    SUBDIR += pcbsd-libsh
+    SUBDIR += pcbsd-syscache
     SUBDIR += pcbsd-utils
-    SUBDIR += pcbsd-utils-qt4
+    SUBDIR += pcbsd-utils-qt5
     SUBDIR += pcfclock
     SUBDIR += pciutils
     SUBDIR += pcpustat
@@ -676,6 +683,7 @@
     SUBDIR += pecl-proctitle
     SUBDIR += pefs-kmod
     SUBDIR += personality
+    SUBDIR += pesign
     SUBDIR += pflogx
     SUBDIR += pfstat
     SUBDIR += pftables
@@ -749,6 +757,7 @@
     SUBDIR += py-ranger
     SUBDIR += py-salt
     SUBDIR += py-salt-api
+    SUBDIR += py-shutilwhich
     SUBDIR += py-stdiff
     SUBDIR += py-supervisor
     SUBDIR += py-zdaemon
@@ -760,6 +769,7 @@
     SUBDIR += qlogtools
     SUBDIR += qpxtool
     SUBDIR += qsynergy
+    SUBDIR += qt5-qtpaths
     SUBDIR += quicksynergy
     SUBDIR += qzeitgeist
     SUBDIR += racktables
@@ -793,9 +803,7 @@
     SUBDIR += rsyncmanager
     SUBDIR += rsyncrypto
     SUBDIR += rsyslog7
-    SUBDIR += rsyslog7-devel
     SUBDIR += rsyslog8
-    SUBDIR += rsyslog8-devel
     SUBDIR += rtty
     SUBDIR += ruby-quota
     SUBDIR += rubygem-SyslogLogger
@@ -829,6 +837,7 @@
     SUBDIR += rubygem-log4r
     SUBDIR += rubygem-logify
     SUBDIR += rubygem-mogilefs-client
+    SUBDIR += rubygem-mothra
     SUBDIR += rubygem-murder
     SUBDIR += rubygem-ohai
     SUBDIR += rubygem-parallel
@@ -848,6 +857,7 @@
     SUBDIR += rundeck
     SUBDIR += runit
     SUBDIR += runwhen
+    SUBDIR += s6
     SUBDIR += safe-rm
     SUBDIR += safecat
     SUBDIR += samefile
@@ -963,6 +973,9 @@
     SUBDIR += tw_cli
     SUBDIR += tzdialog
     SUBDIR += u-boot-beaglebone
+    SUBDIR += u-boot-cubox-hummingboard
+    SUBDIR += u-boot-duovero
+    SUBDIR += u-boot-pandaboard
     SUBDIR += u-boot-rpi
     SUBDIR += u-boot-wandboard
     SUBDIR += ua
@@ -1006,12 +1019,14 @@
     SUBDIR += virtualmin
     SUBDIR += vlogger
     SUBDIR += vmdktool
+    SUBDIR += vmtouch
     SUBDIR += vobcopy
     SUBDIR += volman
     SUBDIR += vordog
     SUBDIR += vpnc-scripts
     SUBDIR += vstrip
     SUBDIR += vttest
+    SUBDIR += warden
     SUBDIR += wait_on
     SUBDIR += watchdog
     SUBDIR += watchfolder

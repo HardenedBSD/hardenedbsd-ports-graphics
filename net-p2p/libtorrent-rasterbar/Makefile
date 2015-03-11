@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	libtorrent-rasterbar
-PORTVERSION=	0.16.17
-PORTREVISION=	1
+PORTVERSION=	0.16.19
 CATEGORIES?=	net-p2p ipv6
 MASTER_SITES=	SF/${PORTNAME:S/-rasterbar//}/${PORTNAME:S/-rasterbar//}/
 
@@ -34,8 +33,6 @@ CONFIGURE_ARGS=	--disable-static \
 
 SHLIB_VER=	7
 PLIST_SUB+=	SHLIB_VER="${SHLIB_VER}"
-
-SUB_FILES=	pkg-message
 
 PORTDOCS=	*
 

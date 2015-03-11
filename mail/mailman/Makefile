@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	mailman
-DISTVERSION=	2.1.18-1
-PORTREVISION=	7
+DISTVERSION=	2.1.19
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_GNU} \
 		SF/${PORTNAME}/Mailman%202.1%20%28stable%29/${PORTVERSION} \
@@ -181,8 +180,10 @@ post-install:
 	@${RM} -f ${STAGEDIR}${MAILMANDIR}/Mailman/mm_cfg.pyc
 	@${MKDIR} ${STAGEDIR}${PREFIX}/${IMGDIR}
 	${CP} -p ${STAGEDIR}${MAILMANDIR}/icons/* ${STAGEDIR}${PREFIX}/${IMGDIR}
-	${INSTALL_DATA} ${FILESDIR}/powerlogo.gif \
-	  ${STAGEDIR}${PREFIX}/${IMGDIR}/powerlogo.gif
+	${INSTALL_DATA} ${FILESDIR}/powerlogo.png \
+	  ${STAGEDIR}${PREFIX}/${IMGDIR}/
+	${INSTALL_DATA} ${FILESDIR}/powerlogo.png \
+	  ${STAGEDIR}${MAILMANDIR}/icons/
 .if ${PORT_OPTIONS:MDOCS}
 	${CP} -R ${WRKSRC}/doc/* ${WRKSRC}/
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}

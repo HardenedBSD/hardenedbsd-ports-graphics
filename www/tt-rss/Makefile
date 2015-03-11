@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	tt-rss
-PORTVERSION=	1.15.3
+PORTVERSION=	1.15.3.150208
 CATEGORIES=	www
 
 MAINTAINER=	thierry@FreeBSD.org
@@ -13,7 +13,8 @@ LICENSE=	GPLv2
 USE_GITHUB=	yes
 GH_ACCOUNT=	gothfox
 GH_PROJECT=	Tiny-Tiny-RSS
-GH_COMMIT=	d8895ec
+GH_TAGNAME=	${GH_COMMIT}
+GH_COMMIT=	4ca621a
 
 NO_BUILD=	yes
 NO_ARCH=	yes
@@ -92,5 +93,8 @@ do-install:
 	${MKDIR} ${STAGEDIR}${WWWDIR}/icons/	# Not used for fresh installation
 	${TOUCH} ${STAGEDIR}${WWWDIR}/icons/.empty
 	${INSTALL_DATA} ${WRKDIR}/httpd-tt-rss.conf ${STAGEDIR}${DATADIR}
+
+post-install:
+	${MV} ${STAGEDIR}${WWWDIR}/config.php-dist ${STAGEDIR}${WWWDIR}/config.php.sample
 
 .include <bsd.port.mk>

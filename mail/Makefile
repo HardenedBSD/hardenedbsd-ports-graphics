@@ -159,6 +159,7 @@
     SUBDIR += gotmail
     SUBDIR += grepmail
     SUBDIR += greyfix
+    SUBDIR += greylite
     SUBDIR += gubby
     SUBDIR += hashcash
     SUBDIR += hbiff
@@ -486,8 +487,6 @@
     SUBDIR += postfix-policyd-spf-python
     SUBDIR += postfix-policyd-weight
     SUBDIR += postfix-postfwd
-    SUBDIR += postfix-tls
-    SUBDIR += postfix210
     SUBDIR += postfixadmin
     SUBDIR += postgrey
     SUBDIR += postsrsd

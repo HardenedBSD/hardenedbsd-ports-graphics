@@ -141,25 +141,21 @@ libexec/postfix/virtual
 sbin/postalias
 sbin/postcat
 sbin/postconf
+@(,maildrop,2755) sbin/postdrop
 sbin/postfix
 sbin/postkick
 sbin/postlock
 sbin/postlog
 sbin/postmap
 sbin/postmulti
-@group maildrop
-@mode 2755
-sbin/postdrop
-sbin/postqueue
-@group
-@mode
+@(,maildrop,2755) sbin/postqueue
 sbin/postsuper
 sbin/posttls-finger
 sbin/sendmail
 @dir libexec/postfix/dynamicmaps.cf.d
 @dir libexec/postfix/postfix-files.d
 @dir %%PFETC%%
-@dir /var/db/postfix
+@dir(postfix,,700) /var/db/postfix
 @dir(postfix,,700) /var/spool/postfix/active
 @dir(postfix,,700) /var/spool/postfix/bounce
 @dir(postfix,,700) /var/spool/postfix/corrupt
