@@ -18,6 +18,7 @@
     SUBDIR += awka
     SUBDIR += bas2tap
     SUBDIR += basic256
+    SUBDIR += beignet
     SUBDIR += bf2c
     SUBDIR += bigloo
     SUBDIR += bsh
@@ -36,8 +37,10 @@
     SUBDIR += clang34
     SUBDIR += clang35
     SUBDIR += clang36
+    SUBDIR += clinfo
     SUBDIR += clojure
     SUBDIR += clojure-mode.el
+    SUBDIR += clover
     SUBDIR += cmucl
     SUBDIR += cmucl-extra
     SUBDIR += cocor
@@ -175,6 +178,7 @@
     SUBDIR += ocaml
     SUBDIR += ocaml-autoconf
     SUBDIR += ocaml-nox11
+    SUBDIR += ocl-icd
     SUBDIR += ofc
     SUBDIR += ohugs
     SUBDIR += onyx

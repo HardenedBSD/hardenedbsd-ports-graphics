@@ -121,7 +121,8 @@ CONFIGURE_ARGS+=	--enable-egl
 .if ${COMPONENT:Mclover} == ""
 CONFIGURE_ARGS+=	--disable-opencl
 .else
-CONFIGURE_ARGS+=	--enable-opencl
+CONFIGURE_ARGS+=	--enable-opencl \
+			--enable-opencl-icd
 .endif
 
 .if ${COMPONENT:Mdri} == "" && ${COMPONENT:Mclover} == ""

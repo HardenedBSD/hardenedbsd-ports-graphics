@@ -1,0 +1,17 @@
+Remove --no-undefined, it makes the build with at least clang fail:
+
+/usr/local/llvm35/lib/libLLVMSupport.a(Program.o): In function `Execute(llvm::sys::ProcessInfo&, llvm::StringRef, char const**, char const**, llvm::StringRef const**, unsigned int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >*)':
+Program.cpp:(.text._ZL7ExecuteRN4llvm3sys11ProcessInfoENS_9StringRefEPPKcS6_PPKS3_jPNSt3__112basic_stringIcNSA_11char_traitsIcEENSA_9allocatorIcEEEE+0x70c): undefined reference to `environ'
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+
+--- CMakeLists.txt.orig	2015-01-30 16:09:41.348387000 +0100
++++ CMakeLists.txt	2015-01-30 16:09:56.211747000 +0100
+@@ -96,7 +96,7 @@
+ #INCLUDE(CMake/FindLLVM.cmake)
+ Find_Package(LLVM 3.3)
+ 
+-set (CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined ${LLVM_LDFLAGS}")
++set (CMAKE_SHARED_LINKER_FLAGS "${LLVM_LDFLAGS}")
+ 
+ # XLib
+ Find_Package(X11)
