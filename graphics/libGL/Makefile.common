@@ -106,8 +106,13 @@ MESA_LLVM_VER=35
 MESA_LLVM_VER=33
 .endif
 
+CONFIGURE_ARGS+=	--enable-gbm
+
+# libEGL, dri and clover need gallium enabled.
+# the third option in --with-egl-platforms is wayland.
+CONFIGURE_ARGS+=	--enable-egl --with-egl-platforms=x11,drm
+
 CONFIGURE_ARGS+=	--enable-gles2
-CONFIGURE_ARGS+=	--enable-egl
 
 CONFIGURE_ARGS+=	--enable-opencl \
 			--enable-opencl-icd
@@ -123,10 +128,6 @@ CONFIGURE_ARGS+=--enable-gallium-llvm \
                 --enable-xvmc \
                 --with-gallium-drivers=r300,r600,radeonsi,svga,swrast
 
-# libEGL, dri and clover need gallium enabled.
-# the third option in --with-egl-platforms is wayland.
-CONFIGURE_ARGS+=	--enable-egl --with-egl-platforms=x11,drm
-
 .if !(${ARCH} == amd64 || ${ARCH} == i386)
 CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
@@ -137,4 +138,3 @@ CONFIGURE_ARGS+=--disable-vdpau
 .else
 CONFIGURE_ARGS+=--enable-vdpau
 .endif
-
