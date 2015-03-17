@@ -28,8 +28,8 @@ include/GL/internal/dri_interface.h
 %%I965_DRIVER%%lib/dri/i965_dri.so
 lib/dri/kms_swrast_dri.so
 %%R200_DRIVER%%lib/dri/r200_dri.so
-%%R300_DRIVER%%lib/dri/r300_dri.so
-%%R600_DRIVER%%lib/dri/r600_dri.so
+lib/dri/r300_dri.so
+lib/dri/r600_dri.so
 %%RADEON_DRIVER%%lib/dri/radeon_dri.so
 lib/dri/radeonsi_dri.so
 %%SWRAST_DRIVER%%lib/dri/swrast_dri.so
