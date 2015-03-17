@@ -19,7 +19,7 @@ LIB_DEPENDS+=	libexpat.so:${PORTSDIR}/textproc/expat2 \
 		libdrm.so:${PORTSDIR}/graphics/libdrm
 
 .include <bsd.port.options.mk>
-.include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
+.include "${.CURDIR}/../../graphics/libGL/Makefile.common"
 
 .if defined (WITH_NEW_MESA)
 LIBGLAPI_REVISION=	0
@@ -28,11 +28,18 @@ LIBGLAPI_REVISION=	2
 .endif
 
 .if defined (WITH_NEW_MESA)
-BUILD_WRKSRC=	${WRKSRC}/src/mapi
-INSTALL_WRKSRC=	${WRKSRC}/src/mapi
+MESA_BUILD_WRKSRC=	src/mapi
+MESA_INSTALL_WRKSRC=	src/mapi
 .else
-BUILD_WRKSRC=	${WRKSRC}/src/mapi/shared-glapi
-INSTALL_WRKSRC=	${WRKSRC}/src/mapi/shared-glapi
+MESA_BUILD_WRKSRC=	src/mapi/shared-glapi
+MESA_INSTALL_WRKSRC=	src/mapi/shared-glapi
 .endif
+
+.include "${.CURDIR}/../../graphics/libGL/Makefile.targets"
+
+post-install:
+	@${RM} -rf ${STAGEDIR}${PREFIX}/include/GLES*
+	@${RM} -f ${STAGEDIR}${PREFIX}/lib/libGLESv2.so*
+	@${RM} -f ${STAGEDIR}${PREFIX}/libdata/pkgconfig/glesv2.pc
 
 .include <bsd.port.mk>

@@ -106,65 +106,35 @@ MESA_LLVM_VER=35
 MESA_LLVM_VER=33
 .endif
 
-.if ${COMPONENT:Mglesv2} == ""
-CONFIGURE_ARGS+=	--disable-gles2
-.else
 CONFIGURE_ARGS+=	--enable-gles2
-.endif
-
-.if ${COMPONENT:Megl} == ""
-CONFIGURE_ARGS+=	--disable-egl
-.else
 CONFIGURE_ARGS+=	--enable-egl
-.endif
 
-.if ${COMPONENT:Mclover} == ""
-CONFIGURE_ARGS+=	--disable-opencl
-.else
 CONFIGURE_ARGS+=	--enable-opencl \
 			--enable-opencl-icd
-.endif
 
-.if ${COMPONENT:Mdri} == "" && ${COMPONENT:Mclover} == ""
-CONFIGURE_ARGS+=--with-dri-drivers=no
-CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers
-.else
-# done in the dri port
-# need to enable this globaly because it also used in dri ..
-# the third possible option is wayland.
+# gallium
+BUILD_DEPENDS+= llvm${MESA_LLVM_VER}>=0:${PORTSDIR}/devel/llvm${MESA_LLVM_VER}
+.if ${COMPONENT:Mdri} != "" || ${COMPONENT:Mclover} != "" || ${COMPONENT:Megl} != ""
+RUN_DEPENDS+=   llvm${MESA_LLVM_VER}>=0:${PORTSDIR}/devel/llvm${MESA_LLVM_VER}
+.endif
+CONFIGURE_ENV+= LLVM_CONFIG=${LOCALBASE}/bin/llvm-config${MESA_LLVM_VER}
+
+CONFIGURE_ARGS+=--enable-gallium-llvm \
+                --enable-xvmc \
+                --with-gallium-drivers=r300,r600,radeonsi,svga,swrast
+
+# libEGL, dri and clover need gallium enabled.
+# the third option in --with-egl-platforms is wayland.
 CONFIGURE_ARGS+=	--enable-egl --with-egl-platforms=x11,drm
+
+.if !(${ARCH} == amd64 || ${ARCH} == i386)
+CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 
+# what to do with this one? Currently disabled in dri.
 .if ${COMPONENT:Mvdpau} == ""
 CONFIGURE_ARGS+=--disable-vdpau
 .else
 CONFIGURE_ARGS+=--enable-vdpau
-.endif
-
-post-patch:
-	@${REINPLACE_CMD} -e 's|-ffast-math|${FAST_MATH}|' -e 's|x86_64|amd64|' \
-		${WRKSRC}/configure
-	@${REINPLACE_CMD} -e 's|/etc/|${PREFIX}/etc/|g' \
-		${WRKSRC}/src/mesa/drivers/dri/common/xmlconfig.c
-.if !defined(WITH_NEW_MESA)
-	@${REINPLACE_CMD} -e 's|#!/usr/bin/python|#!${PYTHON_CMD}|g' \
-		${WRKSRC}/src/mesa/drivers/dri/common/xmlpool/gen_xmlpool.py \
-		${WRKSRC}/src/glsl/builtins/tools/*.py
-.else
-	@${REINPLACE_CMD} -e 's|#!/use/bin/python|#!${PYTHON_CMD}|g' \
-		${WRKSRC}/src/mesa/drivers/dri/common/xmlpool/gen_xmlpool.py
-.endif
-	@${REINPLACE_CMD} -e 's|!/use/bin/python2|!${PYTHON_CMD}|g' \
-		${WRKSRC}/src/mesa/main/get_hash_generator.py \
-		${WRKSRC}/src/mapi/glapi/gen/gl_enums.py \
-		${WRKSRC}/src/mapi/glapi/gen/gl_table.py
-
-pre-build: pre-mesa-build
-
-pre-mesa-build:
-.if defined(WITH_NEW_MESA)
-# do propper gmake target.
-	@cd ${WRKSRC}/src/mesa/drivers/dri/common/xmlpool && ${MAKE_CMD}
-	@cd ${WRKSRC}/src/loader && ${MAKE_CMD} libloader.la
 .endif
 

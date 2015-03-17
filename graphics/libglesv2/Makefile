@@ -17,7 +17,7 @@ USE_XORG+=	glproto dri2proto xext xdamage xfixes presentproto \
 		xshmfence
 
 .include <bsd.port.options.mk>
-.include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
+.include "${.CURDIR}/../../graphics/libGL/Makefile.common"
 
 .if defined(WITH_NEW_MESA)
 LIBGLES_REVISION=	0
@@ -33,12 +33,12 @@ BUILD_WRKSRC=	${WRKSRC}/src/mapi/es2api
 INSTALL_WRKSRC=	${WRKSRC}/src/mapi/es2api
 .endif
 
+.include "${.CURDIR}/../../graphics/libGL/Makefile.targets"
+
 .if !defined(WITH_NEW_MESA)
 pre-build:
 	@cd ${WRKSRC}/src/mapi/shared-glapi && ${MAKE_CMD} ${_MAKE_JOBS}
 .endif
-
-post-install:
 
 post-install:
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/.mesa

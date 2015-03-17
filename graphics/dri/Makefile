@@ -18,12 +18,6 @@ USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto \
 OPTIONS_DEFINE=	TEXTURE
 OPTIONS_DEFAULT=TEXTURE
 
-OPTIONS_DEFINE_i386=	GALLIUM
-OPTIONS_DEFAULT_i386=	GALLIUM
-OPTIONS_DEFINE_amd64=	GALLIUM
-OPTIONS_DEFAULT_amd64=	GALLIUM
-
-GALLIUM_DESC=	Gallium (llvm backed) dri drivers
 TEXTURE_DESC=	Enable texture-float support (patent encumbered)
 VDPAU_DESC=	VDPAU (GPU video acceleration) support (needs Gallium)
 
@@ -44,7 +38,11 @@ USE_GCC=yes
 
 ALL_DRI_DRIVERS=I915 I965 R200 RADEON SWRAST
 
-.include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
+.include "${.CURDIR}/../../graphics/libGL/Makefile.common"
+
+#src/mesa/libmesagallium.la
+#MESA_BUILD_WRKSRC=	src/util src/gallium
+#MESA_INSTALL_WRKSRC=	src/gallium
 
 PLIST_SUB+=	VERSION=${MESADISTVERSION}
 
@@ -58,21 +56,6 @@ PLIST=	${.CURDIR}/pkg-plist
 .else
 DRIREVISION=	6
 PLIST=	${.CURDIR}/pkg-plist-old
-.endif
-
-.if ${PORT_OPTIONS:MGALLIUM}
-BUILD_DEPENDS+=	llvm${MESA_LLVM_VER}>=0:${PORTSDIR}/devel/llvm${MESA_LLVM_VER}
-RUN_DEPENDS+=	llvm${MESA_LLVM_VER}>=0:${PORTSDIR}/devel/llvm${MESA_LLVM_VER}
-CONFIGURE_ENV+=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config${MESA_LLVM_VER}
-
-CONFIGURE_ARGS+=--enable-gallium-llvm \
-		--enable-xvmc \
-		--with-gallium-drivers=r300,r600,radeonsi,svga,swrast
-PLIST_SUB+=	GALLIUM=""
-.else
-CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers \
-		--disable-gallium-egl
-PLIST_SUB+=	GALLIUM="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MTEXTURE}
@@ -109,9 +92,11 @@ PLIST_SUB+=	${_d}_DRIVER="@comment "
 . endif
 .endfor
 
-.if !(${ARCH} == amd64 || ${ARCH} == i386)
-CONFIGURE_ARGS+=--disable-gallium-intel
-.endif
 CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:tl}"
+
+.include "${.CURDIR}/../../graphics/libGL/Makefile.targets"
+
+post-install:
+	@${RM} -rf ${STAGEDIR}/etc/OpenCL
 
 .include <bsd.port.mk>

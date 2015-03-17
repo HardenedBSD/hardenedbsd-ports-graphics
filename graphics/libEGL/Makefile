@@ -20,11 +20,11 @@ USE_XORG+=	glproto dri2proto xext xdamage xfixes presentproto \
 		xshmfence
 
 .include <bsd.port.options.mk>
-.include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
+.include "${.CURDIR}/../../graphics/libGL/Makefile.common"
 
 .if defined(WITH_NEW_MESA)
-BUILD_WRKSRC=	src/egl/drivers/dri2 src/egl/main
-INSTALL_WRKSRC=	src/egl/drivers/dri2 src/egl/main
+MESA_BUILD_WRKSRC=	src/mapi src/gbm src/egl/drivers/dri2 src/egl/main
+MESA_INSTALL_WRKSRC=	src/egl/drivers/dri2 src/egl/main
 .else
 BUILD_WRKSRC=	${WRKSRC}/src/egl
 INSTALL_WRKSRC=	${WRKSRC}/src/egl
@@ -36,22 +36,7 @@ LIBEGL_REVISION=	0
 LIBEGL_REVISION=	5
 .endif
 
-.if defined(WITH_NEW_MESA)
-do-build: egl-do-build
-do-install: egl-do-install
-
-egl-do-build:
-. for dir in ${BUILD_WRKSRC}
-	@(cd ${WRKSRC}/${dir}; ${DO_MAKE_BUILD} ${ALL_TARGET};)
-. endfor
-
-egl-do-install:
-. for dir in ${INSTALL_WRKSRC}
-	@(cd ${WRKSRC}/${dir} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} \
-		${MAKE_FLAGS} ${MAKEFILE} ${MAKE_ARGS} ${INSTALL_TARGET})
-
-. endfor
-.endif
+.include "${.CURDIR}/../../graphics/libGL/Makefile.targets"
 
 post-install:
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/.mesa
