@@ -1,4 +1,4 @@
-# bsd.mesalib.mk - shared code between MesaLib ports.
+# Makefile.common - shared code between MesaLib ports.
 #
 # !!! Here be dragons !!! (they seem to be everywhere these days)
 #
@@ -116,6 +116,8 @@ CONFIGURE_ARGS+=	--enable-gles2
 
 CONFIGURE_ARGS+=	--enable-opencl \
 			--enable-opencl-icd
+
+CONFIGURE_ARGS+=	--enable-osmesa
 
 # gallium
 BUILD_DEPENDS+= llvm${MESA_LLVM_VER}>=0:${PORTSDIR}/devel/llvm${MESA_LLVM_VER}
