@@ -3,8 +3,9 @@
 
 PORTNAME=	qemu
 PORTVERSION=	2.2.50.g20150310
+PORTREVISION=	1
 CATEGORIES=	emulators
-MASTER_SITES=	GH GHC \
+MASTER_SITES=	GHL \
 		LOCAL/nox \
 		LOCAL/nox:dtc \
 		http://people.freebsd.org/~nox/tmp/distfiles/ \
@@ -28,7 +29,7 @@ USE_PERL5=	build
 USE_XORG=	pixman
 USE_GNOME+=	glib20
 PATCH_STRIP=	-p1
-MAKE_ENV+=	BSD_MAKE="${MAKE}"
+MAKE_ENV+=	BSD_MAKE="${BSDMAKE}"
 ONLY_FOR_ARCHS=	amd64 i386 powerpc powerpc64 # XXX someone wants to debug sparc64 hosts?
 
 OPTIONS_DEFINE=	SAMBA X11 GTK2 OPENGL GNUTLS SASL JPEG PNG CURL \
