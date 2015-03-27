@@ -15,44 +15,20 @@
 #
 # $FreeBSD$
 
-# hw context support in the i915kms driver
-.if ${OPSYS} == FreeBSD && \
- (${OSVERSION} >= 1000717 && ${OSVERSION} < 1100000 || \
-  ${OSVERSION} >= 1100035)
-WITH_NEW_MESA=1
-.endif
-
-.if ${OPSYS} == DragonFly && ${DFLYVERSION} >= 300901
-WITH_NEW_MESA=1
-.endif
-
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
-.if defined(WITH_NEW_MESA)
 MESABASEVERSION=	10.5.1
 # if there is a subversion, don't include the '-' between 7.11-rc2.
 MESASUBVERSION=	
 
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
-PLIST_SUB+=	OLD="@comment " NEW=""
 
 USES+=		tar:xz compiler:c++11-lib
 
 DISTFILES=	mesa-${MESADISTVERSION}${EXTRACT_SUFX}
 
 BUILD_DEPENDS+=	py27-mako>=0:${PORTSDIR}/textproc/py-mako
-.else
-MESABASEVERSION=	9.1.7
-MESASUBVERSION=		
-MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/older-versions/${MESABASEVERSION:R:R}.x/${MESABASEVERSION}/
-PLIST_SUB+=	OLD="" NEW="@comment "
-
-BUILD_DEPENDS+=	${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
-USES+=		bison python:2,build tar:bzip2
-
-DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}
-.endif
 
 MAINTAINER=	x11@FreeBSD.org
 
@@ -70,7 +46,7 @@ LDFLAGS+=	-Wl,-Y${LOCALBASE}/lib
 PKGINSTALL=	${.CURDIR}/pkg-install
 PKGDEINSTALL=	${.CURDIR}/pkg-deinstall
 
-.if ${OSVERSION} < 1000033 && !defined(WITH_NEW_MESA)
+.if ${OSVERSION} < 1000033
 BUILD_DEPENDS+=	${LOCALBASE}/bin/flex:${PORTSDIR}/textproc/flex
 CONFIGURE_ENV+=	ac_cv_prog_LEX=${LOCALBASE}/bin/flex
 .endif
@@ -81,30 +57,19 @@ SHEBANG_FILES=	src/gallium/*/*/*.py src/gallium/tools/trace/*.py \
 		src/gallium/drivers/svga/svgadump/svga_dump.py \
 		src/glsl/tests/compare_ir src/mapi/glapi/gen/*.py
 
-.if defined(WITH_NEW_MESA)
 SHEBANG_FILES+=	src/mapi/mapi_abi.py
-.endif
 
 MASTERDIR=		${.CURDIR}/../../graphics/libGL
-.if defined(WITH_NEW_MESA)
 PATCHDIR=		${MASTERDIR}/files
 CONFIGURE_ARGS+=	--disable-dri3
 WRKSRC=			${WRKDIR}/mesa-${MESADISTVERSION}
-.else
-PATCHDIR=		${MASTERDIR}/files-old
-WRKSRC=			${WRKDIR}/Mesa-${MESADISTVERSION}
-.endif
 DESCR=			${.CURDIR}/pkg-descr
 PLIST=			${.CURDIR}/pkg-plist
 INSTALL_TARGET=		install-strip
 
 COMPONENT=		${PORTNAME:tl:C/^lib//:C/mesa-//}
 
-.if defined(WITH_NEW_MESA)
 MESA_LLVM_VER=35
-.else
-MESA_LLVM_VER=33
-.endif
 
 CONFIGURE_ARGS+=	--enable-gbm
 

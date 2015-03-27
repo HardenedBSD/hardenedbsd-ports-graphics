@@ -3,7 +3,7 @@
 
 PORTNAME=	libGL
 PORTVERSION=	${MESAVERSION}
-PORTREVISION=	${LIBGLREVISION}
+PORTREVISION=	0
 CATEGORIES=	graphics
 
 COMMENT=	OpenGL library that renders using GLX or DRI
@@ -20,12 +20,6 @@ USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto:both \
 
 MESA_BUILD_WRKSRC=	src/mapi src/glx
 MESA_INSTALL_WRKSRC=	src/glx
-
-.if defined(WITH_NEW_MESA)
-LIBGLREVISION=	0
-.else
-LIBGLREVISION=	4
-.endif
 
 .include "${.CURDIR}/Makefile.targets"
 

@@ -3,7 +3,7 @@
 
 PORTNAME=	libEGL
 PORTVERSION=	${MESAVERSION}
-PORTREVISION=	${LIBEGL_REVISION}
+PORTREVISION=	0
 CATEGORIES=	graphics
 
 COMMENT=	OpenEGL library
@@ -23,19 +23,8 @@ USE_XORG+=	glproto dri2proto xext xdamage xfixes presentproto \
 .include <bsd.port.options.mk>
 .include "${.CURDIR}/../../graphics/libGL/Makefile.common"
 
-.if defined(WITH_NEW_MESA)
 MESA_BUILD_WRKSRC=	src/mapi src/gbm src/egl/drivers/dri2 src/egl/main
 MESA_INSTALL_WRKSRC=	src/egl/drivers/dri2 src/egl/main
-.else
-BUILD_WRKSRC=	${WRKSRC}/src/egl
-INSTALL_WRKSRC=	${WRKSRC}/src/egl
-.endif
-
-.if defined(WITH_NEW_MESA)
-LIBEGL_REVISION=	0
-.else
-LIBEGL_REVISION=	5
-.endif
 
 .include "${.CURDIR}/../../graphics/libGL/Makefile.targets"
 

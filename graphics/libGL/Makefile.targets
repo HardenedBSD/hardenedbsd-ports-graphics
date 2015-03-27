@@ -5,14 +5,8 @@ post-patch:
 		${WRKSRC}/configure
 	@${REINPLACE_CMD} -e 's|/etc/|${PREFIX}/etc/|g' \
 		${WRKSRC}/src/mesa/drivers/dri/common/xmlconfig.c
-.if !defined(WITH_NEW_MESA)
-	@${REINPLACE_CMD} -e 's|#!/usr/bin/python|#!${PYTHON_CMD}|g' \
-		${WRKSRC}/src/mesa/drivers/dri/common/xmlpool/gen_xmlpool.py \
-		${WRKSRC}/src/glsl/builtins/tools/*.py
-.else
 	@${REINPLACE_CMD} -e 's|#!/use/bin/python|#!${PYTHON_CMD}|g' \
 		${WRKSRC}/src/mesa/drivers/dri/common/xmlpool/gen_xmlpool.py
-.endif
 	@${REINPLACE_CMD} -e 's|!/use/bin/python2|!${PYTHON_CMD}|g' \
 		${WRKSRC}/src/mesa/main/get_hash_generator.py \
 		${WRKSRC}/src/mapi/glapi/gen/gl_enums.py \
@@ -27,14 +21,14 @@ mesa-pre-build:
 	@cd ${WRKSRC}/src/loader && ${MAKE_CMD}
 # libloader.la
 
-.if defined(WITH_NEW_MESA) && defined(MESA_BUILD_WRKSRC)
+.if defined(MESA_BUILD_WRKSRC)
 do-build:
 . for dir in ${MESA_BUILD_WRKSRC}
 	(cd ${WRKSRC}/${dir}; ${DO_MAKE_BUILD} ${ALL_TARGET};)
 . endfor
 .endif
 
-.if defined(WITH_NEW_MESA) && defined(MESA_INSTALL_WRKSRC)
+.if defined(MESA_INSTALL_WRKSRC)
 do-install:
 . for dir in ${MESA_INSTALL_WRKSRC}
 	(cd ${WRKSRC}/${dir} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} \
