@@ -51,6 +51,9 @@ lib/dri/vmwgfx_dri.so
 @comment lib/libMesaOpenCL.so
 @comment lib/libMesaOpenCL.so.1
 @comment lib/libMesaOpenCL.so.1.0.0
+@comment lib/libOSMesa.so
+@comment lib/libOSMesa.so.8
+@comment lib/libOSMesa.so.8.0.0
 lib/libXvMCr600.so
 lib/libXvMCr600.so.1
 lib/libXvMCr600.so.1.0
@@ -78,3 +81,4 @@ libdata/pkgconfig/dri.pc
 @comment libdata/pkgconfig/gbm.pc
 @comment libdata/pkgconfig/gl.pc
 @comment libdata/pkgconfig/glesv2.pc
+@comment libdata/pkgconfig/osmesa.pc
