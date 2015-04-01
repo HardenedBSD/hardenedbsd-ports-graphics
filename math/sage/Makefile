@@ -3,6 +3,7 @@
 
 PORTNAME=	sage
 PORTVERSION=	6.5
+PORTREVISION=	1
 CATEGORIES=	math
 MASTER_SITES=	http://boxen.math.washington.edu/home/sagemath/sage-mirror/src/ \
 		http://mirrors.xmission.com/sage/src/ \
@@ -25,8 +26,6 @@ LIB_DEPENDS=	libatlas.so:${PORTSDIR}/math/atlas \
 		liblapack.so:${PORTSDIR}/math/lapack \
 		libjpeg.so:${PORTSDIR}/graphics/jpeg
 RUN_DEPENDS=	bash:${PORTSDIR}/shells/bash
-
-BROKEN=		https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=198893 but try "make -DTRYBROKEN" because it might work for you
 
 pre-extract:
 	@${ECHO_MSG}
@@ -56,11 +55,14 @@ LATEST_LINK=	sage-math	# Conflicts with graphics/sage.
 MAKE_ARGS+=	ARCH="${AR}"
 
 post-patch:
-	${REINPLACE_CMD} 's/$$MAKE $$gettext/$$MAKE PTHREAD_LIBS=-lpthread $$gettext/' ${WRKSRC}/build/pkgs/git/spkg-install
-
 # Create wrapper for invocation of make.
 	@${MKDIR} ${WRKSRC}/local/bin
 	@${LN} -s -f ${LOCALBASE}/bin/gmake ${WRKSRC}/local/bin/make
+
+# Create wrapper for invocation of ld.
+	@${SED} -e 's#%%LD%%#${LOCALBASE}/bin/ld#' \
+		${FILESDIR}/ld.in > ${WRKSRC}/local/bin/ld
+	@${CHMOD} +x ${WRKSRC}/local/bin/ld
 
 post-build:
 	${RM} -rf ${WRKSRC}/tmp/.sage
@@ -94,10 +96,6 @@ post-install:
 		${SED} -e 's#${STAGEDIR}${PREFIX}/#@dirrm #' >> ${TMPPLIST}
 
 .include <bsd.port.pre.mk>
-
-.if ${OSVERSION} < 701106
-BROKEN=		POSIX semaphores are required, and the support only works in FreeBSD 7-STABLE and later
-.endif
 
 MAKE_ENV+=	MAKE="${MAKE} -j${MAKE_JOBS_NUMBER}"
 
