@@ -1,26 +1,20 @@
-Remove --no-undefined, it makes the build with at least clang fail:
-
-/usr/local/llvm35/lib/libLLVMSupport.a(Program.o): In function `Execute(llvm::sys::ProcessInfo&, llvm::StringRef, char const**, char const**, llvm::StringRef const**, unsigned int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >*)':
-Program.cpp:(.text._ZL7ExecuteRN4llvm3sys11ProcessInfoENS_9StringRefEPPKcS6_PPKS3_jPNSt3__112basic_stringIcNSA_11char_traitsIcEENSA_9allocatorIcEEEE+0x70c): undefined reference to `environ'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-
---- CMakeLists.txt.orig	2015-01-19 00:54:05.000000000 +0100
-+++ CMakeLists.txt	2015-03-13 08:52:38.908234000 +0100
-@@ -88,7 +88,7 @@
+--- CMakeLists.txt.orig	2015-03-16 05:39:34.000000000 +0100
++++ CMakeLists.txt	2015-03-27 20:29:34.695731000 +0100
+@@ -101,7 +101,7 @@
  ENDIF (USE_STANDALONE_GBE_COMPILER STREQUAL "true")
  
  
--set (CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined ${LLVM_LDFLAGS}")
-+set (CMAKE_SHARED_LINKER_FLAGS "${LLVM_LDFLAGS}")
+-set (CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-Bsymbolic -Wl,--no-undefined ${LLVM_LDFLAGS}")
++set (CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-Bsymbolic ${LLVM_LDFLAGS}")
  
  # XLib
  Find_Package(X11)
-@@ -177,7 +177,7 @@
+@@ -190,7 +190,7 @@
      "intel-beignet.icd.in"
-     "intel-beignet.icd"
+     "${ICD_FILE_NAME}"
    )
--  install (FILES ${CMAKE_CURRENT_BINARY_DIR}/intel-beignet.icd DESTINATION /etc/OpenCL/vendors)
-+  install (FILES ${CMAKE_CURRENT_BINARY_DIR}/intel-beignet.icd DESTINATION ${CMAKE_INSTALL_PREFIX}/etc/OpenCL/vendors)
+-  install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${ICD_FILE_NAME} DESTINATION /etc/OpenCL/vendors)
++  install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${ICD_FILE_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/etc/OpenCL/vendors)
  ELSE(OCLIcd_FOUND)
    MESSAGE(STATUS "Looking for OCL ICD header file - not found")
  ENDIF(OCLIcd_FOUND)

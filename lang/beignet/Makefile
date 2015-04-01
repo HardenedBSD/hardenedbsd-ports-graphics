@@ -2,10 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	beignet
-PORTVERSION=	1.0.1
+PORTVERSION=	1.0.2
 CATEGORIES=	lang
 MASTER_SITES=	https://01.org/sites/default/files/
-DISTVERSIONSUFFIX=	-src
+DISTVERSIONSUFFIX=	-source
 
 MAINTAINER=	kwm@FreeBSD.org
 COMMENT=	OpenCL library for Intel GPUs
@@ -17,7 +17,7 @@ LIB_DEPENDS=	libOpenCL.so:${PORTSDIR}/lang/ocl-icd \
 WRKSRC=		${WRKDIR}/Beignet-${PORTVERSION}-Source
 
 USES=		cmake gmake pkgconfig shebangfix
-USE_XORG=	ice x11 xext xfixes
+USE_XORG=	sm ice x11 xext xfixes
 USE_GL=		gl
 SHEBANG_FILES=	src/git_sha1.sh backend/kernels/compile.sh
 LLVMVER=	35
@@ -28,5 +28,8 @@ post-patch:
 	@${REINPLACE_CMD} -e 's|llvm-as|llvm-as${LLVMVER}|g; \
 		s|llvm-link|llvm-link${LLVMVER}|g' \
 		${WRKSRC}/backend/src/libocl/CMakeLists.txt
+	@${REINPLACE_CMD} -e 's|clang |clang${LLVMVER} |g' \
+		${WRKSRC}/backend/src/libocl/CMakeLists.txt \
+		${WRKSRC}/backend/kernels/compile.sh
 
 .include <bsd.port.mk>
