@@ -91,6 +91,7 @@
     SUBDIR += atf
     SUBDIR += atlas
     SUBDIR += atlas-devel
+    SUBDIR += atlassian-plugin-sdk
     SUBDIR += autobook
     SUBDIR += autoconf
     SUBDIR += autoconf-archive
@@ -470,6 +471,7 @@
     SUBDIR += frama-c
     SUBDIR += freeocl
     SUBDIR += frink
+    SUBDIR += fstrm
     SUBDIR += ftjam
     SUBDIR += ftnchek
     SUBDIR += fuel
@@ -1155,6 +1157,7 @@
     SUBDIR += librevisa
     SUBDIR += librevisa-vish
     SUBDIR += librevisa-vxi
+    SUBDIR += librolegen
     SUBDIR += libruin
     SUBDIR += libs11n
     SUBDIR += libsearpc
@@ -1348,6 +1351,7 @@
     SUBDIR += msp430mcu
     SUBDIR += mspdebug
     SUBDIR += msrc0
+    SUBDIR += mtbl
     SUBDIR += nana
     SUBDIR += nant
     SUBDIR += nasm
@@ -1416,6 +1420,7 @@
     SUBDIR += oniguruma5
     SUBDIR += onscripter
     SUBDIR += onscripter-1byte
+    SUBDIR += oozie
     SUBDIR += open-beagle
     SUBDIR += open-usp-tukubai
     SUBDIR += opencl
@@ -2624,6 +2629,7 @@
     SUBDIR += p5-POE-Component-Syndicator
     SUBDIR += p5-POE-Component-TSTP
     SUBDIR += p5-POE-Devel-Profiler
+    SUBDIR += p5-POE-Loop-AnyEvent
     SUBDIR += p5-POE-Loop-Glib
     SUBDIR += p5-POE-Loop-Tk
     SUBDIR += p5-POE-Quickie
@@ -3984,12 +3990,14 @@
     SUBDIR += py-pyflakes
     SUBDIR += py-pygit2
     SUBDIR += py-pygithub
+    SUBDIR += py-pygitup
     SUBDIR += py-pygpx
     SUBDIR += py-pykde4
     SUBDIR += py-pykdeuic4
     SUBDIR += py-pyke
     SUBDIR += py-pymarc
     SUBDIR += py-pympler
+    SUBDIR += py-pymtbl
     SUBDIR += py-pyparsing15
     SUBDIR += py-pyro
     SUBDIR += py-pyshapelib
@@ -4477,7 +4485,6 @@
     SUBDIR += rubygem-ffi-compiler
     SUBDIR += rubygem-ffi-yajl
     SUBDIR += rubygem-file-tail
-    SUBDIR += rubygem-filemagic
     SUBDIR += rubygem-fluent-logger
     SUBDIR += rubygem-fog
     SUBDIR += rubygem-fog-brightbox
@@ -4632,6 +4639,7 @@
     SUBDIR += rubygem-rb-kqueue
     SUBDIR += rubygem-rbtrace
     SUBDIR += rubygem-rdoc
+    SUBDIR += rubygem-rdoc3
     SUBDIR += rubygem-recaptcha
     SUBDIR += rubygem-redis-activesupport
     SUBDIR += rubygem-redis-store
@@ -4652,6 +4660,7 @@
     SUBDIR += rubygem-rspec-support
     SUBDIR += rubygem-rubigen
     SUBDIR += rubygem-ruby-bugzilla
+    SUBDIR += rubygem-ruby-filemagic
     SUBDIR += rubygem-ruby-ole
     SUBDIR += rubygem-ruby-prof
     SUBDIR += rubygem-ruby-sdl-ffi
@@ -4686,6 +4695,7 @@
     SUBDIR += rubygem-sprockets
     SUBDIR += rubygem-sprockets-rails
     SUBDIR += rubygem-sprockets211
+    SUBDIR += rubygem-sprockets22
     SUBDIR += rubygem-spruz
     SUBDIR += rubygem-state_machine
     SUBDIR += rubygem-statsd
@@ -4720,7 +4730,7 @@
     SUBDIR += rubygem-tins
     SUBDIR += rubygem-tins0
     SUBDIR += rubygem-toml
-    SUBDIR += rubygem-transactionsimple
+    SUBDIR += rubygem-transaction-simple
     SUBDIR += rubygem-travis
     SUBDIR += rubygem-treetop
     SUBDIR += rubygem-trollop

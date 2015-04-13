@@ -163,6 +163,8 @@
     SUBDIR += x49gp
     SUBDIR += xbraitenberg
     SUBDIR += xcpc
+    SUBDIR += xen
+    SUBDIR += xen-kernel
     SUBDIR += xhomer
     SUBDIR += xsystem35
     SUBDIR += xzx

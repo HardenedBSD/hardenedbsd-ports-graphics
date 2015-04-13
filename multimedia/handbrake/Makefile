@@ -29,6 +29,8 @@ COMMENT=	Versatile DVD ripper and video transcoder
 
 LICENSE=	GPLv2
 
+BROKEN=		Fails to build
+
 BUILD_DEPENDS=	yasm:${PORTSDIR}/devel/yasm
 LIB_DEPENDS=	libfontconfig.so:${PORTSDIR}/x11-fonts/fontconfig \
 		libfreetype.so:${PORTSDIR}/print/freetype2 \
@@ -40,7 +42,9 @@ LIB_DEPENDS=	libfontconfig.so:${PORTSDIR}/x11-fonts/fontconfig \
 		libvorbisenc.so:${PORTSDIR}/audio/libvorbis \
 		libtheoradec.so:${PORTSDIR}/multimedia/libtheora \
 		libtheoraenc.so:${PORTSDIR}/multimedia/libtheora \
-		libsamplerate.so:${PORTSDIR}/audio/libsamplerate
+		libsamplerate.so:${PORTSDIR}/audio/libsamplerate \
+		libvpx.so:${PORTSDIR}/multimedia/libvpx \
+		libx264.so:${PORTSDIR}/multimedia/libx264
 .if !defined(PACKAGE_BUILDING)
 # DVDCSS version hardcoded in contrib/libdvdread/libdvdread/src/dvd_input.c (dlopen'ed)
 LIB_DEPENDS+=	libdvdcss.so.2:${PORTSDIR}/multimedia/libdvdcss
@@ -70,8 +74,7 @@ OPTIONS_DEFAULT=	X11
 
 # Recent GNU binutils are required to handle inline SSSE3 asm (in x264), and
 # to support --exclude-libs option for ld(1) when building GUI program
-.if ${PORT_OPTIONS:MX11} || ${OSVERSION} < 802509 || \
-	${OSVERSION} >= 900000 && ${OSVERSION} < 900033
+.if ${PORT_OPTIONS:MX11}
 BUILD_DEPENDS+=	${LOCALBASE}/bin/ld:${PORTSDIR}/devel/binutils
 CONFIGURE_ENV+=	COMPILER_PATH=${LOCALBASE}/bin
 MAKE_ENV+=	COMPILER_PATH=${LOCALBASE}/bin

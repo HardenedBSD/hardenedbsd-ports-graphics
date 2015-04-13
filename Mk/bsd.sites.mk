@@ -386,6 +386,11 @@ MASTER_SITE_FEDORA_LINUX+= \
 	ftp://mirrors.tummy.com/pub/fedora.redhat.com/fedora/linux/core/%SUBDIR%/
 .endif
 
+.if !defined(IGNORE_MASTER_SITE_FARSIGHT)
+MASTER_SITE_FARSIGHT+= \
+	https://dl.farsightsecurity.com/dist/%SUBDIR%/
+.endif
+
 .if !defined(IGNORE_MASTER_SITE_FESTIVAL)
 MASTER_SITE_FESTIVAL+= \
 	http://www.festvox.org/packed/festival/%SUBDIR%/ \
@@ -1094,7 +1099,7 @@ MASTER_SITE_SAVANNAH+= \
 MASTER_SITE_SOURCEFORGE+= http://downloads.sourceforge.net/project/%SUBDIR%/
 .for mirror in heanet sunet iweb switch freefr garr aarnet jaist master \
 	nchc ncu internode waix hivelocity superb-dca3 ufpr tenet \
-	netcologne ignum kent kaz
+	netcologne ignum kent
 MASTER_SITE_SOURCEFORGE+= \
 	http://${mirror}.dl.sourceforge.net/project/%SUBDIR%/
 .endfor
@@ -1337,6 +1342,7 @@ MASTER_SITES_SUBDIRS=	APACHE_JAKARTA:${PORTNAME:S,-,/,}/source \
 			BERLIOS:${PORTNAME:tl}.berlios \
 			CHEESESHOP:source/${DISTNAME:C/(.).*/\1/}/${DISTNAME:C/(.*)-[0-9].*/\1/} \
 			DEBIAN:pool/main/${PORTNAME:C/^((lib)?.).*$/\1/}/${PORTNAME} \
+			FARSIGHT:${PORTNAME} \
 			GCC:releases/${DISTNAME} \
 			GITHUB:${GH_ACCOUNT}/${GH_PROJECT}/tar.gz/${GH_TAGNAME}?dummy=/ \
 			GITHUB_CLOUD:${GH_ACCOUNT}/${GH_PROJECT}/ \

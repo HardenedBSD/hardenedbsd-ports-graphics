@@ -306,6 +306,7 @@
     SUBDIR += p5-DBI-Shell
     SUBDIR += p5-DBICx-Deploy
     SUBDIR += p5-DBICx-MapMaker
+    SUBDIR += p5-DBICx-Sugar
     SUBDIR += p5-DBICx-TestDatabase
     SUBDIR += p5-DBICx-TxnInsert
     SUBDIR += p5-DBIWrapper
@@ -897,6 +898,7 @@
     SUBDIR += slony1v2
     SUBDIR += soci
     SUBDIR += spatialite
+    SUBDIR += spatialite-tools
     SUBDIR += spatialite_gui
     SUBDIR += speedtables
     SUBDIR += sqlbuddy

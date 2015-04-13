@@ -23,7 +23,7 @@ PERLMAN=	${SITE_PERL_REL:S/site_perl\///}
 
 USE_RC_SUBR=	imapd
 
-USES=		perl5 libtool
+USES=		cpe libtool perl5
 USE_OPENSSL=	yes
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--sysconfdir=${PREFIX}/etc \
@@ -38,6 +38,9 @@ CONFIGURE_ARGS=	--sysconfdir=${PREFIX}/etc \
 CONFIGURE_ENV+=	LIBS="-L${LOCALBASE}/lib"
 CPPFLAGS+=	-I${LOCALBASE}/include
 MAKE_JOBS_UNSAFE=	yes
+
+CPE_VENDOR=	cmu
+CPE_PRODUCT=	cyrus_imap_server
 
 OPTIONS_DEFINE=		AUTOCREATE BDB HTTP IDLED LDAP MURDER MYSQL \
 			NETSCAPEHACK NNTP PGSQL REPLICATION SNMP SQLITE DOCS \
@@ -123,9 +126,7 @@ PLIST_SUB+=	CLAMAV="@comment "
 
 .if ${PORT_OPTIONS:MDRAC}
 IGNORE=		DRAC is not available
-# .if ${OSVERSION} >= 800037
 # EXTRA_PATCHES+=	${FILESDIR}/extra-patch-cmulocal__sasl2.m4
-# .endif
 # USE_AUTOTOOLS=	autoconf autoheader
 .endif
 

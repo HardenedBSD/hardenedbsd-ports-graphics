@@ -96,6 +96,7 @@
     SUBDIR += coppermine
     SUBDIR += cowboy
     SUBDIR += cplanet
+    SUBDIR += cppcms
     SUBDIR += crawl
     SUBDIR += crp
     SUBDIR += css-mode.el
@@ -1814,7 +1815,6 @@
     SUBDIR += rubygem-feed-normalizer
     SUBDIR += rubygem-feedjira
     SUBDIR += rubygem-flowdock
-    SUBDIR += rubygem-form_data
     SUBDIR += rubygem-geminabox
     SUBDIR += rubygem-gitlab-flowdock-git-hook
     SUBDIR += rubygem-gitlab-gollum-lib
@@ -2039,7 +2039,6 @@
     SUBDIR += trac-advancedticketworkflow
     SUBDIR += trac-attachmentpolicy
     SUBDIR += trac-autocomplete
-    SUBDIR += trac-batchmodify
     SUBDIR += trac-bzr
     SUBDIR += trac-ccselector
     SUBDIR += trac-childtickets
@@ -2132,7 +2131,6 @@
     SUBDIR += twms
     SUBDIR += typo3
     SUBDIR += typo3-lts
-    SUBDIR += typo345
     SUBDIR += typolight
     SUBDIR += udmsearch
     SUBDIR += uglifyjs

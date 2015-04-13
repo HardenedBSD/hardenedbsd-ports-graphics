@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	wine
-DISTVERSION=	1.7.39
+DISTVERSION=	1.7.40
 PORTEPOCH=	1
 CATEGORIES=	emulators
 MASTER_SITES=	SF/${PORTNAME}/Source \
@@ -37,7 +37,7 @@ CONFIGURE_ARGS+=--verbose --disable-tests \
 		--without-sane \
 		--without-tiff \
 		--without-xinerama
-CONFIGURE_ENV=	FLEX="${LOCALBASE}/bin/flex"
+CONFIGURE_ENV=	CPPBIN="${CPP}" FLEX="${LOCALBASE}/bin/flex"
 WINELIBDIR?=	${PREFIX}/lib
 .if !defined(USE_LDCONFIG32)
 USE_LDCONFIG=	${WINELIBDIR} ${WINELIBDIR}/wine
@@ -120,7 +120,7 @@ X11_LIB_DEPENDS=	libfontconfig.so:${PORTSDIR}/x11-fonts/fontconfig \
 CONFIGURE_ARGS+=	--enable-win64 --libdir=${PREFIX}/lib
 PLIST_SUB+=		WINE32="@comment " WINE64=""
 
-.if ${COMPILER_TYPE} == clang
+.if ${CHOSEN_COMPILER_TYPE} == clang
 CPPFLAGS+=		-D__builtin_ms_va_list=__builtin_va_list \
 			-D__builtin_ms_va_start=__builtin_va_start \
 			-D__builtin_ms_va_end=__builtin_va_end \
@@ -131,7 +131,7 @@ CPPFLAGS+=		-D__builtin_ms_va_list=__builtin_va_list \
 post-patch:
 	${REINPLACE_CMD} 's|/wine|/wine64|g' ${WRKSRC}/tools/wineapploader.in
 
-.else 
+.else
 PLIST_SUB+=		WINE32="" WINE64="@comment "
 .endif
 
@@ -140,13 +140,13 @@ MASTER_SITES+=	https://github.com/compholio/wine-compholio-daily/archive/:cho
 COMP_DIST=	v${DISTVERSION}.tar.gz
 DISTFILES+=	${COMP_DIST}:cho
 
-BUILD_DEPENDS+=	bash:${PORTSDIR}/shells/bash \
+EXTRACT_DEPENDS=bash:${PORTSDIR}/shells/bash \
 		git:${PORTSDIR}/devel/git
 
 CONFIGURE_ARGS+=--without-pulse
 USE_AUTOTOOLS=	autoconf
 
-pre-configure:
+post-extract:
 	cd ${WRKSRC} && ${TAR} xf ${DISTDIR}/${COMP_DIST} --strip-components 1
 	cd ${WRKSRC} && bash ./patches/patchinstall.sh --backend=patch DESTDIR=${WRKSRC} --all
 .endif

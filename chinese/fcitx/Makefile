@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	fcitx
-PORTVERSION=	4.2.8.5
+PORTVERSION=	4.2.8.6
 CATEGORIES=	chinese x11
 MASTER_SITES=	http://download.fcitx-im.org/fcitx/:fcitx \
 		http://download.fcitx-im.org/data/:data
@@ -33,10 +33,9 @@ CONFLICTS=	zh-scim-fcitx-3.*
 USE_GNOME=	pango intltool libxml2 introspection
 USE_XORG=	x11 xext xkbfile
 USE_LDCONFIG=	yes
-USES=		tar:xz cmake desktop-file-utils execinfo gettext iconv \
+USES=		tar:xz cmake desktop-file-utils execinfo gettext iconv:wchar_t \
 		pathfix pkgconfig shared-mime-info
 INSTALLS_ICONS=	yes
-LDFLAGS+=	-L${LOCALBASE}/lib ${ICONV_LIB}
 
 OPTIONS_DEFINE=	GTK2 GTK3 QT4 OPENCC TPUNC DOCS
 OPTIONS_DEFAULT=GTK2 QT4
@@ -113,10 +112,5 @@ post-patch:
 	@${CP} ${_DISTDIR}/py_stroke-${_PYSTROKE_VER}.tar.gz ${WRKSRC}/src/module/pinyin-enhance/data/.
 	@${CP} ${_DISTDIR}/py_table-${_PYTABLE_VER}.tar.gz ${WRKSRC}/src/module/pinyin-enhance/data/.
 	@${CP} ${_DISTDIR}/table.tar.gz ${WRKSRC}/src/im/table/data/.
-.if ${OSVERSION} < 800067
-# getline() is GNU extension which FreeBSD only recently adopted
-EXTRA_PATCHES+=	${FILESDIR}/getline-src_lib_fcitx-utils_utils.c \
-		${FILESDIR}/getline-src_lib_fcitx-utils_utils.h
-.endif
 
 .include <bsd.port.mk>
