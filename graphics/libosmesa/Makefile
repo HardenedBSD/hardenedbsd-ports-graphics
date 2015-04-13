@@ -3,7 +3,7 @@
 
 PORTNAME=	libosmesa
 PORTVERSION=	${MESAVERSION}
-PORTREVISION=	1
+PORTREVISION=	0
 CATEGORIES=	graphics
 
 COMMENT=	Off-Screen Mesa implementation of the OpenGL API
@@ -25,9 +25,9 @@ MESA_INSTALL_WRKSRC=	src/mesa/drivers/osmesa
 
 .include "${.CURDIR}/../../graphics/libGL/Makefile.targets"
 
-#post-install:
-#	@${MKDIR} ${STAGEDIR}${PREFIX}/include/GL
-#	${INSTALL_DATA} ${WRKSRC}/include/GL/osmesa.h \
-#		${STAGEDIR}${PREFIX}/include/GL/
+post-install:
+	@${MKDIR} ${STAGEDIR}${PREFIX}/include/GL
+	${INSTALL_DATA} ${WRKSRC}/include/GL/osmesa.h \
+		${STAGEDIR}${PREFIX}/include/GL
 
 .include <bsd.port.mk>
