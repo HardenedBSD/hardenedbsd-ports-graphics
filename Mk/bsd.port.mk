@@ -511,10 +511,10 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				    - PREFIX can't have a trailing slash.
 #
 # BUNDLE_LIBS	  Teach pkg(8) to not automatically add all shared libraries
-# 				  installed by a port as a "provided" shared libraries provided
-# 				  for other packages (prevent them from being exposed in the
-# 				  solver). This has to be used for ports that bundle third
-# 				  party libraries for internal usage.
+# 				  installed by a port as shared libraries "provided" for
+#				  other packages (i.e., do not expose them in the solver).
+#				  This has to be used for ports that bundle third party
+#				  libraries for internal usage.
 # MASTERDIR		- Where the port finds patches, package files, etc.  Define
 #				  this is you have two or more ports that share most of the
 #				  files.
@@ -1176,10 +1176,13 @@ OSVERSION!=	${AWK} '/^\#define[[:blank:]]__FreeBSD_version/ {print $$3}' < ${SRC
 # Convert OSVERSION to major release number
 _OSVERSION_MAJOR=	${OSVERSION:C/([0-9]?[0-9])([0-9][0-9])[0-9]{3}/\1/}
 # Sanity checks for chroot/jail building.
+# Skip if OSVERSION specified on cmdline for testing. Only works for bmake.
+.if !defined(.MAKEOVERRIDES) || !${.MAKEOVERRIDES:MOSVERSION}
 .if ${_OSVERSION_MAJOR} != ${UNAMER:R}
 .error UNAME_r (${UNAMER}) and OSVERSION (${OSVERSION}) do not agree on major version number.
 .elif ${_OSVERSION_MAJOR} != ${OSREL:R}
 .error OSREL (${OSREL}) and OSVERSION (${OSVERSION}) do not agree on major version number.
+.endif
 .endif
 
 # Only define tools here (for transition period with between pkg tools)

@@ -267,6 +267,7 @@
     SUBDIR += libassuan
     SUBDIR += libbeid
     SUBDIR += libbf
+    SUBDIR += libbzrtp
     SUBDIR += libecc
     SUBDIR += libfprint
     SUBDIR += libgcrypt
@@ -718,10 +719,6 @@
     SUBDIR += php5-hash
     SUBDIR += php5-mcrypt
     SUBDIR += php5-openssl
-    SUBDIR += php53-filter
-    SUBDIR += php53-hash
-    SUBDIR += php53-mcrypt
-    SUBDIR += php53-openssl
     SUBDIR += php55-filter
     SUBDIR += php55-hash
     SUBDIR += php55-mcrypt

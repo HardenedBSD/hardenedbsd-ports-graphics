@@ -15,6 +15,7 @@
     SUBDIR += CaribbeanStud
     SUBDIR += HeroesOfMightAndMagic
     SUBDIR += KnightCap
+    SUBDIR += abbayedesmorts
     SUBDIR += abe
     SUBDIR += abuse_sdl
     SUBDIR += acm
@@ -672,6 +673,7 @@
     SUBDIR += openarena-oax
     SUBDIR += openarena-server
     SUBDIR += openastromenace
+    SUBDIR += openbor
     SUBDIR += openbubbles
     SUBDIR += opencity
     SUBDIR += openclonk

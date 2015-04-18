@@ -19,12 +19,12 @@ WARNING+=	"WITH_NEW_MESA was removed and have no effect"
 WARNING+=	"WITH_NEW_XORG and WITHOUT_NEW_XORG knobs were removed and have no effect"
 .endif
 
-.if ${.CURDIR:M${PORTSDIR}*}
+.if exists(${.CURDIR}/../../Mk/bsd.port.mk)
 .if ${.CURDIR:H:T} != ${PKGCATEGORY}
 DEV_ERROR+=	"The first entry in CATEGORIES should be the directory where the port lives"
 .endif
 .else
-WARNING+=	"Not validating first entry in CATEGORIES due to being outside of PORTSDIR. Please ensure this is proper when committing."
+DEV_WARNING+=	"Not validating first entry in CATEGORIES due to being outside of PORTSDIR. Please ensure this is proper when committing."
 .endif
 
 #.if defined(WITHOUT_X11)
