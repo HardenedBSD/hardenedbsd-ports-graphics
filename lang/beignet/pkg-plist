@@ -1,16 +1,4 @@
 etc/OpenCL/vendors/intel-beignet.icd
-include/CL/cl.h
-include/CL/cl.hpp
-include/CL/cl_d3d10.h
-include/CL/cl_d3d11.h
-include/CL/cl_dx9_media_sharing.h
-include/CL/cl_egl.h
-include/CL/cl_ext.h
-include/CL/cl_gl.h
-include/CL/cl_gl_ext.h
-include/CL/cl_intel.h
-include/CL/cl_platform.h
-include/CL/opencl.h
 lib/beignet/beignet.bc
 lib/beignet/beignet.pch
 lib/beignet/include/ocl.h

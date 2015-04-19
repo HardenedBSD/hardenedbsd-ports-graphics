@@ -1,15 +1,4 @@
 etc/OpenCL/vendors/mesa.icd
-include/CL/cl.h
-include/CL/cl.hpp
-include/CL/cl_d3d10.h
-include/CL/cl_d3d11.h
-include/CL/cl_dx9_media_sharing.h
-include/CL/cl_egl.h
-include/CL/cl_ext.h
-include/CL/cl_gl.h
-include/CL/cl_gl_ext.h
-include/CL/cl_platform.h
-include/CL/opencl.h
 lib/gallium-pipe/pipe_r300.so
 lib/gallium-pipe/pipe_r600.so
 lib/gallium-pipe/pipe_radeonsi.so
