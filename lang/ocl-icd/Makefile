@@ -3,17 +3,29 @@
 
 PORTNAME=	ocl-icd
 PORTVERSION=	2.2.3
-CATEGORIES=	lang
+CATEGORIES=	lang devel
 MASTER_SITES=	https://forge.imag.fr/frs/download.php/598/
 
-MAINTAINER=	x11@FreeBSD.org
-COMMENT=	TBD
+MAINTAINER=	ohartman@zedat.fu-berlin.de
+COMMENT=	OpenCL Installable Client Driver
 
-USES=		gmake libtool
-GNU_CONFIGURE=	yes
-USE_CSTD=	gnu89
+LICENSE=	BSD2CLAUSE
+
+BUILD_DEPENDS=	opencl>=0:${PORTSDIR}/devel/opencl
+
+CONFLICTS=	freeocl-[0-9]* opencl-icd-[0-9]*
+
 USE_RUBY=	yes
+USE_LDCONFIG=	yes
+GNU_CONFIGURE=	yes
 RUBY_NO_RUN_DEPENDS=yes
+USES=		gmake pathfix libtool
+INSTALL_TARGET=	install-strip
+
+CONFIGURE_ARGS+=--disable-official-khronos-headers
+
+CPPFLAGS+=	-I${LOCALBASE}/include
+LDFLAGS+=	-L${LOCALBASE}/lib
 
 OPTIONS_DEFINE=	MANPAGES
 OPTIONS_DEFAULT=MANPAGES
