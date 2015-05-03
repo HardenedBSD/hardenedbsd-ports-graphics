@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	freeradius
-DISTVERSION=	2.2.6
-PORTREVISION=	3
+DISTVERSION=	2.2.7
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.freeradius.org/pub/freeradius/%SUBDIR%/ \
 		ftp://ftp.ntua.gr/pub/net/radius/freeradius/%SUBDIR%/ \
@@ -113,7 +112,7 @@ LIB_DEPENDS+=	libkrb5.so:${PORTSDIR}/security/heimdal
 .endif
 CONFIGURE_ARGS+=--enable-heimdal-krb5
 .else
-LIB_DEPENDS+=	libkrb5.so:${PORTSDIR}/security/krb5
+LIB_DEPENDS+=	libkrb5support.so:${PORTSDIR}/security/krb5
 .endif
 CONFIGURE_ARGS+=--with-rlm_krb5
 .if ${PORT_OPTIONS:MHEIMDAL} && empty(PORT_OPTIONS:MHEIMDAL_PORT)

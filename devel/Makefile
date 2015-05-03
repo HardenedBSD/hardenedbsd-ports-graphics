@@ -1325,7 +1325,11 @@
     SUBDIR += mingw32-pthreads
     SUBDIR += mingw32-zlib
     SUBDIR += mips-binutils
+    SUBDIR += mips-gcc
+    SUBDIR += mips-xtoolchain-gcc
     SUBDIR += mips64-binutils
+    SUBDIR += mips64-gcc
+    SUBDIR += mips64-xtoolchain-gcc
     SUBDIR += mk
     SUBDIR += mk-configure
     SUBDIR += mkcmd
@@ -1379,6 +1383,7 @@
     SUBDIR += ocaml-annexlib
     SUBDIR += ocaml-calendar
     SUBDIR += ocaml-camljava
+    SUBDIR += ocaml-camlp4
     SUBDIR += ocaml-camlp5
     SUBDIR += ocaml-camomile
     SUBDIR += ocaml-camomile-examples
@@ -1396,6 +1401,7 @@
     SUBDIR += ocaml-ounit
     SUBDIR += ocaml-pcre
     SUBDIR += ocaml-pomap
+    SUBDIR += ocaml-ppx-tools
     SUBDIR += ocaml-react
     SUBDIR += ocaml-res
     SUBDIR += ocaml-sdl
@@ -1988,7 +1994,6 @@
     SUBDIR += p5-Devel-PatchPerl
     SUBDIR += p5-Devel-Pointer
     SUBDIR += p5-Devel-Profile
-    SUBDIR += p5-Devel-Profiler
     SUBDIR += p5-Devel-REPL
     SUBDIR += p5-Devel-Refactor
     SUBDIR += p5-Devel-Refcount
@@ -2812,6 +2817,7 @@
     SUBDIR += p5-SVN-Statistics
     SUBDIR += p5-SVN-Web
     SUBDIR += p5-Safe-Isa
+    SUBDIR += p5-Sah
     SUBDIR += p5-Scalar-Defer
     SUBDIR += p5-Scalar-Does
     SUBDIR += p5-Scalar-Listify
@@ -3195,6 +3201,7 @@
     SUBDIR += p5-UUID-Random-Patch-UseMRS
     SUBDIR += p5-UUID-Tiny
     SUBDIR += p5-Uniq
+    SUBDIR += p5-Unix-Groups
     SUBDIR += p5-Unix-Statgrab
     SUBDIR += p5-Unix-Uptime
     SUBDIR += p5-User-Identity
@@ -3228,7 +3235,6 @@
     SUBDIR += p5-autodie
     SUBDIR += p5-autovivification
     SUBDIR += p5-bareword-filehandles
-    SUBDIR += p5-base
     SUBDIR += p5-boolean
     SUBDIR += p5-capitalization
     SUBDIR += p5-carton
@@ -3236,6 +3242,7 @@
     SUBDIR += p5-constant
     SUBDIR += p5-constant-boolean
     SUBDIR += p5-constant-def
+    SUBDIR += p5-constant-defer
     SUBDIR += p5-constant-lexical
     SUBDIR += p5-cpan-listchanges
     SUBDIR += p5-enum
@@ -3941,6 +3948,7 @@
     SUBDIR += py-parsedatetime
     SUBDIR += py-parsing
     SUBDIR += py-path.py
+    SUBDIR += py-pathlib
     SUBDIR += py-pathtools
     SUBDIR += py-paver
     SUBDIR += py-pbr
@@ -4522,7 +4530,6 @@
     SUBDIR += rubygem-ice_nine
     SUBDIR += rubygem-igraph
     SUBDIR += rubygem-inflecto
-    SUBDIR += rubygem-inline
     SUBDIR += rubygem-interact
     SUBDIR += rubygem-io-like
     SUBDIR += rubygem-iobuffer
@@ -4656,6 +4663,7 @@
     SUBDIR += rubygem-ruby_parser
     SUBDIR += rubygem-rubygame
     SUBDIR += rubygem-rubygems-tasks
+    SUBDIR += rubygem-rubyinline
     SUBDIR += rubygem-rubyinlineaccel
     SUBDIR += rubygem-rubytree
     SUBDIR += rubygem-rufus-scheduler

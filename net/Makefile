@@ -376,6 +376,7 @@
     SUBDIR += miniupnpc
     SUBDIR += miniupnpd
     SUBDIR += miredo
+    SUBDIR += miruo
     SUBDIR += mono-zeroconf
     SUBDIR += mopd
     SUBDIR += morebalance
@@ -435,7 +436,6 @@
     SUBDIR += ntopng
     SUBDIR += ntp
     SUBDIR += ntp-devel
-    SUBDIR += ntp-rc
     SUBDIR += ntraceroute
     SUBDIR += nusoap
     SUBDIR += nxproxy
