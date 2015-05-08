@@ -6,7 +6,7 @@ PORTVERSION=	0.3.11
 CATEGORIES=	ftp
 MASTER_SITES=	http://www.bareftp.org/release/
 
-MAINTAINER=	chris@bsdjunk.com
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	FTP client made in C sharp
 
 GNU_CONFIGURE=	yes
@@ -16,7 +16,7 @@ CONFIGURE_ARGS=	--datarootdir="${PREFIX}/share" \
 		--includedir="${LOCALBASE}/include"
 
 INSTALLS_ICONS=	yes
-USES=		gettext gmake libtool pkgconfig
+USES=		cpe gettext gmake libtool pkgconfig
 USE_GNOME=	gtksharp20 gnomesharp20
 
 USE_LDCONFIG=	yes

@@ -3,7 +3,6 @@
 PORTNAME=	cairo-dock-plugins
 PORTVERSION=	3.4.0
 CATEGORIES=	deskutils
-MASTER_SITES=	http://pazzle.otdux.com.ua/
 DISTFILES=	${DISTNAME}.git20141115${EXTRACT_SUFX} ${ICONS_PACKAGE}${EXTRACT_SUFX}
 
 MAINTAINER=	fidaj@ukr.net
@@ -12,7 +11,7 @@ COMMENT=	Cairo-Dock-Plugins for Cairo-Dock
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BROKEN=		Checksum and size mismatch
+BROKEN=		Icons unfetchable
 
 RUN_DEPENDS=	wget:${PORTSDIR}/ftp/wget
 LIB_DEPENDS=	libgldi.so:${PORTSDIR}/deskutils/cairo-dock
@@ -22,10 +21,7 @@ DATADIR=	${PREFIX}/share/cairo-dock
 USE_GITHUB=	yes
 GH_ACCOUNT=	Cairo-Dock
 GH_PROJECT=	cairo-dock-plug-ins
-GH_COMMIT=	0ade052
 GH_TAGNAME=	0ade052
-
-WRKSRC=		${WRKDIR}/${GH_ACCOUNT}-cairo-dock-plug-ins-${GH_COMMIT}
 
 ICONS_PACKAGE=	cairo-dock-plugins-png-icons
 GNU_CONFIGURE=	yes

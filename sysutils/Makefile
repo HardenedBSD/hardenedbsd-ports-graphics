@@ -189,6 +189,7 @@
     SUBDIR += di
     SUBDIR += dim
     SUBDIR += dirdiff
+    SUBDIR += direnv
     SUBDIR += dirvish
     SUBDIR += diskcheckd
     SUBDIR += diskimage-tools
@@ -835,6 +836,7 @@
     SUBDIR += rubygem-hammer_cli_foreman_salt
     SUBDIR += rubygem-hammer_cli_foreman_ssh
     SUBDIR += rubygem-hiera
+    SUBDIR += rubygem-hiera-file
     SUBDIR += rubygem-librarian-puppet
     SUBDIR += rubygem-log4r
     SUBDIR += rubygem-logify
@@ -885,6 +887,7 @@
     SUBDIR += searchmonkey
     SUBDIR += seatools
     SUBDIR += sec
+    SUBDIR += serf
     SUBDIR += setcdboot
     SUBDIR += setquota
     SUBDIR += sformat

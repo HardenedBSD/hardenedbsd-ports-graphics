@@ -24,6 +24,7 @@
     SUBDIR += R-cran-gtools
     SUBDIR += R-cran-iterators
     SUBDIR += R-cran-itertools
+    SUBDIR += R-cran-magrittr
     SUBDIR += R-cran-memoise
     SUBDIR += R-cran-microbenchmark
     SUBDIR += R-cran-plyr
@@ -406,6 +407,8 @@
     SUBDIR += eric4
     SUBDIR += eric6
     SUBDIR += eris
+    SUBDIR += erlang-msgpack
+    SUBDIR += erlang-protobuffs
     SUBDIR += esdl
     SUBDIR += etcd
     SUBDIR += etcdctl
@@ -482,6 +485,7 @@
     SUBDIR += gauche-readline
     SUBDIR += gaul
     SUBDIR += gazpacho
+    SUBDIR += gb
     SUBDIR += gcc-arm-embedded
     SUBDIR += gccmakedep
     SUBDIR += gconf2
@@ -592,6 +596,7 @@
     SUBDIR += gnulibiberty
     SUBDIR += gnustep
     SUBDIR += gnustep-make
+    SUBDIR += go-bindata
     SUBDIR += go-flags
     SUBDIR += go-hashicorp-logutils
     SUBDIR += go-json-rest
@@ -1073,6 +1078,7 @@
     SUBDIR += libical
     SUBDIR += libical-glib
     SUBDIR += libinotify
+    SUBDIR += libiomp5
     SUBDIR += libiqxmlrpc
     SUBDIR += libisofs
     SUBDIR += libixp
@@ -3498,6 +3504,7 @@
     SUBDIR += pecl-intl
     SUBDIR += pecl-jsmin
     SUBDIR += pecl-jsonc
+    SUBDIR += pecl-jsond
     SUBDIR += pecl-judy
     SUBDIR += pecl-libevent
     SUBDIR += pecl-mcve
@@ -3598,6 +3605,7 @@
     SUBDIR += poco-devel
     SUBDIR += poco-ssl
     SUBDIR += ponscripter-sekai
+    SUBDIR += poolboy
     SUBDIR += popt
     SUBDIR += poslib
     SUBDIR += powerpc64-binutils
@@ -4439,6 +4447,7 @@
     SUBDIR += rubygem-crack
     SUBDIR += rubygem-cri
     SUBDIR += rubygem-cucumber
+    SUBDIR += rubygem-cucumber-core
     SUBDIR += rubygem-daemon_controller
     SUBDIR += rubygem-daemons
     SUBDIR += rubygem-debugger
@@ -4498,6 +4507,7 @@
     SUBDIR += rubygem-generator_spec
     SUBDIR += rubygem-generator_spec-rails4
     SUBDIR += rubygem-georuby
+    SUBDIR += rubygem-get_process_mem
     SUBDIR += rubygem-getopt
     SUBDIR += rubygem-gettext
     SUBDIR += rubygem-gh
@@ -4567,10 +4577,8 @@
     SUBDIR += rubygem-metaclass
     SUBDIR += rubygem-metaid
     SUBDIR += rubygem-method_source
-    SUBDIR += rubygem-mini_portile
     SUBDIR += rubygem-minitest
     SUBDIR += rubygem-minitest4
-    SUBDIR += rubygem-mirror
     SUBDIR += rubygem-mixlib-authentication
     SUBDIR += rubygem-mixlib-cli
     SUBDIR += rubygem-mixlib-config
@@ -4662,6 +4670,7 @@
     SUBDIR += rubygem-ruby2ruby
     SUBDIR += rubygem-ruby_parser
     SUBDIR += rubygem-rubygame
+    SUBDIR += rubygem-rubygems-mirror
     SUBDIR += rubygem-rubygems-tasks
     SUBDIR += rubygem-rubyinline
     SUBDIR += rubygem-rubyinlineaccel
