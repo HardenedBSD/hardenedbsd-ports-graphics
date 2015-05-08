@@ -59,7 +59,6 @@ SHEBANG_FILES+=	src/mapi/mapi_abi.py
 
 MASTERDIR=		${.CURDIR}/../../graphics/libGL
 PATCHDIR=		${MASTERDIR}/files
-CONFIGURE_ARGS+=	--disable-dri3
 WRKSRC=			${WRKDIR}/mesa-${MESADISTVERSION}
 DESCR=			${.CURDIR}/pkg-descr
 PLIST=			${.CURDIR}/pkg-plist
@@ -67,7 +66,10 @@ INSTALL_TARGET=		install-strip
 
 COMPONENT=		${PORTNAME:tl:C/^lib//:C/mesa-//}
 
-MESA_LLVM_VER?=34
+MESA_LLVM_VER=35
+
+# DRI3 needs PRIME support in the kernel to work
+CONFIGURE_ARGS+=	--disable-dri3
 
 CONFIGURE_ARGS+=	--enable-gbm
 
@@ -78,7 +80,7 @@ CONFIGURE_ARGS+=	--enable-egl --with-egl-platforms=x11,drm
 CONFIGURE_ARGS+=	--enable-gles2
 
 # Clover (OpenCL).
-.if ${OPSYS} == FreeBSD && ${OSVERSION} >= 1000000
+.if ${OPSYS} == DragonFly || (${OPSYS} == FreeBSD && ${OSVERSION} >= 1000000)
 BUILD_DEPENDS+=	libclc>=0.0.r222830:${PORTSDIR}/devel/libclc
 
 # We need the clang port too even if it is not used to compile because

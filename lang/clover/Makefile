@@ -19,10 +19,6 @@ USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto \
 ONLY_FOR_ARCHS=	i386 amd64
 
 .include <bsd.port.options.mk>
-
-# temp until all mesa ports can use llvm35+ (needs 8.4 EOL)
-MESA_LLVM_VER=35
-
 .include "${.CURDIR}/../../graphics/libGL/Makefile.common"
 
 #MESA_BUILD_WRKSRC=	src/util src/glsl src/mesa src/gallium
