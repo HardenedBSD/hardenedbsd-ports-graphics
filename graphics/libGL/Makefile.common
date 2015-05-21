@@ -80,7 +80,7 @@ CONFIGURE_ARGS+=	--enable-egl --with-egl-platforms=x11,drm
 CONFIGURE_ARGS+=	--enable-gles2
 
 # Clover (OpenCL).
-.if ${OPSYS} == DragonFly || (${OPSYS} == FreeBSD && ${OSVERSION} >= 1000000)
+.if ${OPSYS} == DragonFly || (${OPSYS} == FreeBSD && ${OSVERSION} >= 900000)
 BUILD_DEPENDS+=	libclc>=0.0.r222830:${PORTSDIR}/devel/libclc
 
 # We need the clang port too even if it is not used to compile because
