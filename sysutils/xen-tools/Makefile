@@ -25,12 +25,12 @@ ONLY_FOR_ARCHS=	amd64
 ONLY_FOR_ARCHS_REASON=	"not yet ported to anything other than amd64"
 
 SEABIOSVERSION=	1.8.1
-DISTFILES+=	${PORTNAME}-${PORTVERSION}.tar.gz \
+DISTFILES+=	${DISTNAME}.tar.gz \
 		seabios-${SEABIOSVERSION}.tar.gz:seabios
 
 WRKSRC=		${WRKDIR}/xen-${PORTVERSION}
 
-USES=		gmake perl5 python shebangfix libtool pkgconfig
+USES=		cpe gmake perl5 python shebangfix libtool pkgconfig
 USE_GNOME=	glib20
 GNU_CONFIGURE=	yes
 CONFIGURE_ENV=	HOSTCC="${CC}" CC="${CC}" \

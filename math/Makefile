@@ -30,6 +30,7 @@
     SUBDIR += R-cran-inline
     SUBDIR += R-cran-labeling
     SUBDIR += R-cran-memisc
+    SUBDIR += R-cran-minqa
     SUBDIR += R-cran-mvtnorm
     SUBDIR += R-cran-nnls
     SUBDIR += R-cran-outliers
@@ -89,6 +90,7 @@
     SUBDIR += cloog
     SUBDIR += clp
     SUBDIR += cminpack
+    SUBDIR += cmlib
     SUBDIR += coinmp
     SUBDIR += concorde
     SUBDIR += convertall
@@ -425,6 +427,7 @@
     SUBDIR += p5-Math-Geometry-Planar
     SUBDIR += p5-Math-Geometry-Planar-GPC
     SUBDIR += p5-Math-Geometry-Planar-GPC-Polygon
+    SUBDIR += p5-Math-Geometry-Planar-GPC-PolygonXS
     SUBDIR += p5-Math-Geometry-Planar-Offset
     SUBDIR += p5-Math-Geometry-Voronoi
     SUBDIR += p5-Math-Gradient

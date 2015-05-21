@@ -35,13 +35,12 @@ UPLOADSCRIPT_DESC=	Uploadscript daemon support
 UTF8_DESC=		UTF-8 filenames
 VIRTUALCHROOT_DESC=	Follow symlinks outside a chroot jail
 
-CONFIGURE_ARGS=	--localstatedir=/var --sysconfdir=${PREFIX}/etc \
+CONFIGURE_ARGS=	--sysconfdir=${PREFIX}/etc \
 		--with-altlog --with-cookie --with-diraliases \
 		--with-everything --with-extauth --with-ftpwho \
 		--with-language=${LANG} --with-paranoidmsg --with-puredb \
 		--with-quotas --with-ratios
 GNU_CONFIGURE=	yes
-USE_OPENSSL=	yes
 USE_PERL5=	run
 USE_RC_SUBR=	pure-ftpd
 USES=		cpe perl5 shebangfix tar:bzip2
@@ -86,6 +85,7 @@ TLS_CONFIGURE_OFF=	--without-tls
 TLS_CONFIGURE_ON=	--with-certfile=${TLS_CERTFILE} --with-tls
 TLS_CPPFLAGS=		-I${OPENSSLINC}
 TLS_LDFLAGS=		-L${OPENSSLLIB}
+TLS_USE=		OPENSSL=yes
 UPLOADSCRIPT_CONFIGURE_WITH=	uploadscript
 UTF8_CONFIGURE_WITH=	rfc2640
 UTF8_USES=		iconv

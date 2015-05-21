@@ -22,7 +22,7 @@ OPTIONS_DEFAULT=	CA_BUNDLE COOKIES GSSAPI_BASE IPV6 OPENSSL PROXY RESOLV THREADE
 CA_BUNDLE_DESC=		Install CA bundle for OpenSSL
 COOKIES_DESC=		Cookies support
 CURL_DEBUG_DESC=	cURL debug memory tracking
-GSSAPI_BASE_DESC=	GSSAPI support via base system
+GSSAPI_BASE_DESC=	GSSAPI support via base system (Kerberos required)
 GSSAPI_HEIMDAL_DESC=	GSSAPI support via security/heimdal
 GSSAPI_MIT_DESC=	GSSAPI support via security/krb5
 GSSAPI_NONE_DESC=	Disable GSSAPI support
@@ -154,7 +154,7 @@ IGNORE=		only supports TLS-SRP with either OpenSSL or GnuTLS
 IGNORE=		only supports LDAPS with LDAP
 .endif
 
-.if ${PORT_OPTIONS:MLDAPS} && !${PORT_OPTIONS:MGNUTLS} && !${PORT_OPTIONS:MNSS} && !${PORT_OPTIONS:MOPENSSL} && !${PORT_OPTIONS:MPOLARSSL} && !${PORT_OTIONS:MWOLFSSL}
+.if ${PORT_OPTIONS:MLDAPS} && !${PORT_OPTIONS:MGNUTLS} && !${PORT_OPTIONS:MNSS} && !${PORT_OPTIONS:MOPENSSL} && !${PORT_OPTIONS:MPOLARSSL} && !${PORT_OPTIONS:MWOLFSSL}
 IGNORE=		only supports LDAPS with SSL
 .endif
 

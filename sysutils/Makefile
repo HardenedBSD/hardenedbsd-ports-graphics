@@ -15,6 +15,7 @@
     SUBDIR += accountsservice
     SUBDIR += acpi_call
     SUBDIR += acpica-tools
+    SUBDIR += acts
     SUBDIR += adtool
     SUBDIR += afbinit
     SUBDIR += afflib
@@ -581,6 +582,7 @@
     SUBDIR += openipmi
     SUBDIR += openupsd
     SUBDIR += ori
+    SUBDIR += osquery
     SUBDIR += p5-BSD-Jail-Object
     SUBDIR += p5-BSD-Process
     SUBDIR += p5-BSD-Sysctl

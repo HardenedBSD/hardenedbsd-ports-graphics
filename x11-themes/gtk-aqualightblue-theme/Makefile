@@ -5,14 +5,15 @@ PORTNAME=	gtk-aqualightblue-theme
 PORTVERSION=	0.1
 PORTREVISION=	11
 CATEGORIES=	x11-themes gnome
-MASTER_SITES=	${MASTER_SITE_THEMES}
-MASTER_SITE_SUBDIR=	aqualightblue-gtk2
+MASTER_SITES=	THEMES/aqualightblue-gtk2
 DISTNAME=	aqualightblue-gtk2-default
 
 MAINTAINER=	philip@FreeBSD.org
 COMMENT=	Port of the GTK+ AquaLightBlue theme to GTK+ 2.0
 
 BROKEN=		No public distfiles
+DEPRECATED=	Upstream disappeared
+EXPIRATION_DATE=2015-06-01
 
 WRKSRC=		${WRKDIR}/AquaLightBlue
 

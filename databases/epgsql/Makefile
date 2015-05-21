@@ -17,8 +17,6 @@ RUN_DEPENDS=	erl:${PORTSDIR}/lang/erlang
 PLIST_SUB=	VERSION="${PORTVERSION}"
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	epgsql
-GH_PROJECT=	epgsql
 
 OPTIONS_DEFINE=	DOCS
 
@@ -29,12 +27,12 @@ do-install:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${WRKSRC}/README.md ${STAGEDIR}${DOCSDIR}
 .endif
-	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/erlang/lib/epgsql-${PORTVERSION}
-	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/erlang/lib/epgsql-${PORTVERSION}/ebin
-	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/erlang/lib/epgsql-${PORTVERSION}/include
-	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/erlang/lib/epgsql-${PORTVERSION}/src
-	${INSTALL_DATA} ${WRKSRC}/ebin/* ${STAGEDIR}${PREFIX}/lib/erlang/lib/epgsql-${PORTVERSION}/ebin
-	${INSTALL_DATA} ${WRKSRC}/include/* ${STAGEDIR}${PREFIX}/lib/erlang/lib/epgsql-${PORTVERSION}/include
-	${INSTALL_DATA} ${WRKSRC}/src/* ${STAGEDIR}${PREFIX}/lib/erlang/lib/epgsql-${PORTVERSION}/src
+	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/erlang/lib/${PORTNAME}-${PORTVERSION}
+	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/erlang/lib/${PORTNAME}-${PORTVERSION}/ebin
+	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/erlang/lib/${PORTNAME}-${PORTVERSION}/include
+	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/erlang/lib/${PORTNAME}-${PORTVERSION}/src
+	${INSTALL_DATA} ${WRKSRC}/ebin/* ${STAGEDIR}${PREFIX}/lib/erlang/lib/${PORTNAME}-${PORTVERSION}/ebin
+	${INSTALL_DATA} ${WRKSRC}/include/* ${STAGEDIR}${PREFIX}/lib/erlang/lib/${PORTNAME}-${PORTVERSION}/include
+	${INSTALL_DATA} ${WRKSRC}/src/* ${STAGEDIR}${PREFIX}/lib/erlang/lib/${PORTNAME}-${PORTVERSION}/src
 
 .include <bsd.port.mk>
