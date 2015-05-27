@@ -83,10 +83,6 @@ CONFIGURE_ARGS+=	--enable-gles2
 .if ${OPSYS} == DragonFly || (${OPSYS} == FreeBSD && ${OSVERSION} >= 900000)
 BUILD_DEPENDS+=	libclc>=0.0.r222830:${PORTSDIR}/devel/libclc
 
-# We need the clang port too even if it is not used to compile because
-# Clover needs some of the clang includes to build.
-BUILD_DEPENDS+=	clang${MESA_LLVM_VER}>=0:${PORTSDIR}/lang/clang${MESA_LLVM_VER}
-
 CONFIGURE_ARGS+=	--enable-opencl \
 			--enable-opencl-icd
 .else
