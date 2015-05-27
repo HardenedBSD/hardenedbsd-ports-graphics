@@ -85,7 +85,9 @@ BUILD_DEPENDS+=	libclc>=0.0.r222830:${PORTSDIR}/devel/libclc
 
 # We need the clang port too even if it is not used to compile because
 # Clover needs some of the clang includes to build.
+.if ${COMPONENT:Mdri} != "" || ${COMPONENT:Mclover} != "" || ${COMPONENT:Mosmesa} != ""
 BUILD_DEPENDS+=	clang${MESA_LLVM_VER}>=0:${PORTSDIR}/lang/clang${MESA_LLVM_VER}
+.endif
 
 CONFIGURE_ARGS+=	--enable-opencl \
 			--enable-opencl-icd
