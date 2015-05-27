@@ -8,8 +8,6 @@ CATEGORIES=	lang
 COMMENT=	Mesa "Clover" OpenCL library
 
 BUILD_DEPENDS=	opencl>=0:${PORTSDIR}/devel/opencl
-# We need the clang port too even if it is not used to compile because
-BUILD_DEPENDS+= clang${MESA_LLVM_VER}>=0:${PORTSDIR}/lang/clang${MESA_LLVM_VER}
 LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 		libOpenCL.so:${PORTSDIR}/lang/ocl-icd \
 		libexpat.so:${PORTSDIR}/textproc/expat2
