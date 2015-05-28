@@ -3,7 +3,7 @@
 
 PORTNAME=	snmp
 PORTVERSION=	5.7.3
-PORTREVISION=	5
+PORTREVISION=	7
 CATEGORIES=	net-mgmt ipv6
 MASTER_SITES=	SF/net-${PORTNAME}/net-${PORTNAME}/${PORTVERSION}
 PKGNAMEPREFIX=	net-
@@ -37,7 +37,8 @@ GNU_CONFIGURE=	yes
 USE_RC_SUBR=	snmpd snmptrapd
 USE_OPENSSL=	yes
 USE_LDCONFIG=	yes
-USES=		perl5 libtool
+USES=		cpe perl5 libtool
+CPE_VENDOR=	net-snmp
 USE_PERL5=	build run
 USE_CSTD=	c99
 
@@ -51,6 +52,7 @@ CONFIGURE_ARGS+=--enable-shared --enable-internal-md5 \
 		--with-logfile="${NET_SNMP_LOGFILE}" \
 		--with-persistent-directory="${NET_SNMP_PERSISTENTDIR}" \
 		--with-gnu-ld --with-libwrap \
+		--with-libs="-lssp_nonshared" \
 		--with-ldflags="-lm -lkvm -ldevstat -L${PKG_PREFIX}/lib -L${LOCALBASE}/lib ${LCRYPTO}"
 SUB_FILES=	pkg-message
 
@@ -145,18 +147,14 @@ NET_SNMP_SYS_CONTACT?=	nobody@nowhere.invalid
 NET_SNMP_SYS_LOCATION?=	somewhere
 NET_SNMP_LOGFILE?=	/var/log/snmpd.log
 NET_SNMP_PERSISTENTDIR?=/var/net-snmp
-NET_SNMP_WITH_MIB_MODULE_LIST+=	host disman/event-mib mibII/mta_sendmail mibII/tcpTable ucd-snmp/diskio
+NET_SNMP_WITH_MIB_MODULE_LIST+=	host disman/event-mib mibII/mta_sendmail mibII/tcpTable ucd-snmp/diskio sctp-mib
 
-.if ${OSVERSION} >= 700028
-NET_SNMP_WITH_MIB_MODULE_LIST+=	sctp-mib
-.endif
-
-.if ${OSVERSION} >= 800000
-CONFIGURE_ARGS+=	--with-libs="-lssp_nonshared"
-.endif
-
-.if ${OSVERSION} >= 1000000
+.if ${OSVERSION} >= 1000000 && ${OSVERSION} < 1100062
 CFLAGS+=	-D_WANT_IFADDR
+.endif
+
+.if ${OSVERSION} >= 1100062
+CONFIGURE_ARGS+=	--with-out-mib-modules="mibII/ipv6"
 .endif
 
 .if ${PORT_OPTIONS:MMFD_REWRITES}
@@ -274,7 +272,7 @@ post-build:
 	${REINPLACE_CMD} -e 's| perlinstall||' ${WRKSRC}/Makefile
 .endif
 
-post-install: strip-files install-config-files install-doc-files display-message
+post-install: strip-files install-config-files install-doc-files
 	@${MKDIR} ${STAGEDIR}/var/agentx
 	@(cd ${STAGEDIR}${PREFIX}/lib && ${LN} -sf libnetsnmp.so.${SHLIB_VERSION} libnetsnmp.so)
 	@(cd ${STAGEDIR}${PREFIX}/lib && ${LN} -sf libnetsnmpagent.so.${SHLIB_VERSION} libnetsnmpagent.so)
@@ -297,10 +295,6 @@ install-doc-files:
 	${INSTALL_DATA} ${WRKSRC}/${filename} ${STAGEDIR}${DOCSDIR}
 . endfor
 .endif
-
-display-message:
-	${ECHO_MSG}
-	${CAT} ${PKGMESSAGE}
 
 # Maintainer's note:
 #   Don't forget to bump library version in these ports.

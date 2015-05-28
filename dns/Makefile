@@ -15,6 +15,7 @@
     SUBDIR += bundy
     SUBDIR += c-ares
     SUBDIR += checkdns
+    SUBDIR += cli53
     SUBDIR += credns
     SUBDIR += crossip
     SUBDIR += curvedns
@@ -41,6 +42,7 @@
     SUBDIR += dnsperf
     SUBDIR += dnsproxy
     SUBDIR += dnsreflector
+    SUBDIR += dnstable
     SUBDIR += dnstop
     SUBDIR += dnstracer
     SUBDIR += dnsutl
@@ -68,6 +70,7 @@
     SUBDIR += ipcheck
     SUBDIR += ironsides
     SUBDIR += knot
+    SUBDIR += knot2
     SUBDIR += ldapdns
     SUBDIR += ldns
     SUBDIR += ldnsm
@@ -96,6 +99,8 @@
     SUBDIR += opendnssec
     SUBDIR += opendnssec13
     SUBDIR += openresolv
+    SUBDIR += p5-AnyEvent-CacheDNS
+    SUBDIR += p5-AnyEvent-DNS-EtcHosts
     SUBDIR += p5-BIND-Conf_Parser
     SUBDIR += p5-BIND-Config-Parser
     SUBDIR += p5-DNS-Config
@@ -156,6 +161,8 @@
     SUBDIR += py-ldns
     SUBDIR += py-namebench
     SUBDIR += py-publicsuffix
+    SUBDIR += py-pydnstable
+    SUBDIR += py-pywdns
     SUBDIR += py-twistedNames
     SUBDIR += radns
     SUBDIR += rbldnsd

@@ -3,7 +3,7 @@
 
 PORTNAME=		Ice
 PORTVERSION=		3.5.1
-PORTREVISION=		6
+PORTREVISION=		7
 CATEGORIES=		devel
 MASTER_SITES=		http://download.zeroc.com/Ice/3.5/
 
@@ -77,7 +77,7 @@ MAKE_ENV+=		NOICEDOCS=yes
 
 .include <bsd.port.pre.mk>
 
-.if defined(PYTHON_REL) && ${PYTHON_REL} >= 320
+.if defined(PYTHON_REL) && ${PYTHON_REL} >= 3200
 PLIST_SUB+=	PYTHON32=""
 PLIST_SUB+=	PYTHONPRE32="@comment "
 .else
@@ -135,10 +135,10 @@ post-patch:
 
 .if ${PORT_OPTIONS:MTESTS}
 TEST_CMD=		@cd ${BUILD_WRKSRC} && ${PYTHON_CMD} ./allTests.py
-post-build:
+check regression-test test: build
 	${TEST_CMD}
-regression-test test: build
-	${TEST_CMD}
+
+pre-install: regression-test
 .endif
 
 .include <bsd.port.post.mk>

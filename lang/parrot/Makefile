@@ -2,10 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	parrot
-PORTVERSION=	7.0.2
+PORTVERSION=	7.3.0
 CATEGORIES=	lang
-MASTER_SITES=	ftp://ftp.parrot.org/pub/parrot/releases/stable/${PORTVERSION}/ \
-		ftp://ftp.parrot.org/pub/parrot/releases/supported/${PORTVERSION}/ \
+MASTER_SITES=	ftp://ftp.parrot.org/pub/parrot/releases/supported/${PORTVERSION}/ \
 		LOCAL/sunpoet
 
 MAINTAINER=	perl@FreeBSD.org
@@ -22,7 +21,8 @@ LIB_DEPENDS=	libgmp.so:${PORTSDIR}/math/gmp \
 OPTIONS_DEFINE=	DOCS
 
 ALL_TARGET=	installable
-CONFIGURE_ARGS=	--cc=${CC} --ccflags="${CFLAGS}" --cxx=${CXX} --link=${CXX} \
+CONFIGURE_ARGS=	--cc=${CC} --cxx=${CXX} --link=${CXX} \
+		--ccflags="${CFLAGS} -I${LOCALBASE}/include" \
 		--ld=${CC} --ldflags="${LDFLAGS} -L${LIBDIR} -L${LOCALBASE}/lib" \
 		--gc=gms --inline --optimize --parrot_is_shared --verbose \
 		--prefix=${PREFIX} \
@@ -35,27 +35,20 @@ MAKE_JOBS_UNSAFE=	yes
 USE_LDCONFIG=	yes
 USES=		bison gmake perl5 tar:bzip2
 
-PARROT_SHARE_DIR=	share/doc/${PORTNAME}/${PORTVERSION}
-PARROT_DOCS=		${PARROT_SHARE_DIR}
-PLIST_SUB=	PARROT_VER="${PORTVERSION}" \
-		PARROT_DOCS="${PARROT_DOCS}"
+DOCSDIR=	share/doc/${PORTNAME}/${PORTVERSION}
+PLIST_SUB=	PARROT_VER="${PORTVERSION}"
 
 BROKEN_ia64=	Does not compile on ia64
 
-.include <bsd.port.options.mk>
-
-post-patch:
-.if ${PORT_OPTIONS:MDOCS}
-	@${REINPLACE_CMD} -e '/^installable: / s| docs | |' ${WRKSRC}/config/gen/makefiles/root.in
-.endif
-
 do-configure:
-	cd ${WRKSRC} && ${PERL} ${CONFIGURE_SCRIPT} ${CONFIGURE_ARGS}
+	(cd ${WRKSRC} && ${PERL} ${CONFIGURE_SCRIPT} ${CONFIGURE_ARGS})
 
 post-install:
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/* ${STAGEDIR}${PREFIX}/lib/libparrot.so.${PORTVERSION} ${STAGEDIR}${PREFIX}/lib/parrot/${PORTVERSION}/dynext/*.so
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/* \
+		${STAGEDIR}${PREFIX}/lib/libparrot.so.${PORTVERSION} \
+		${STAGEDIR}${PREFIX}/lib/parrot/${PORTVERSION}/dynext/*.so
 
 regression-test test: build
-	cd ${WRKSRC} && ${MAKE} test
+	(cd ${WRKSRC} && ${MAKE} test)
 
 .include <bsd.port.mk>

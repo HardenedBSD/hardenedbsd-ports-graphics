@@ -10,8 +10,7 @@ MASTER_SITES=	APACHE/perl
 PKGNAMEPREFIX=	${APACHE_PKGNAMEPREFIX}
 PKGNAMESUFFIX=	2
 
-PATCH_SITES=	${MASTER_SITE_LOCAL}
-PATCH_SITE_SUBDIR=	ohauer
+PATCH_SITES=	LOCAL/ohauer
 
 MAINTAINER=	apache@FreeBSD.org
 COMMENT=	Embeds a Perl interpreter in the Apache2 server
@@ -24,9 +23,10 @@ RUN_DEPENDS:=	${BUILD_DEPENDS}
 SUB_FILES=	pkg-message
 SUB_LIST=	APACHEMODDIR=${APACHEMODDIR}
 USE_APACHE=	22+
-USES=		gmake perl5
+USES=		cpe gmake perl5
 USE_PERL5=	configure
 USE_CSTD=	gnu89
+CPE_VENDOR=	apache
 
 .include <bsd.port.pre.mk>
 

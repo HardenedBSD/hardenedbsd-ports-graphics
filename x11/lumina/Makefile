@@ -2,12 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	lumina
-PORTVERSION=	0.8.2.${GITVERSION}
+PORTVERSION=	0.8.4
+PORTREVISION=	1
 PORTEPOCH=	1
 CATEGORIES=	x11
-MASTER_SITES=	http://www.pcbsd.org/~kris/software/ \
-		ftp://ftp.pcbsd.org/pub/software/
-DISTNAME=	${PORTNAME}-${GITVERSION}
 
 MAINTAINER=	kmoore@FreeBSD.org
 COMMENT=	Lumina Desktop Environment
@@ -30,20 +28,22 @@ MULTIMEDIA_DESC=	Install multimedia support backend (gstreamer)
 .include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MMULTIMEDIA}
-RUN_DEPENDS+=	gstreamer-plugins>=0:${PORTSDIR}/multimedia/gstreamer-plugins
+RUN_DEPENDS+=	gstreamer-plugins-core>=0:${PORTSDIR}/multimedia/gstreamer-plugins-core \
+		gstreamer-plugins-ogg>=0:${PORTSDIR}/audio/gstreamer-plugins-ogg \
+		gstreamer-plugins-vorbis>=0:${PORTSDIR}/audio/gstreamer-plugins-vorbis
 .endif
 
 MAKE_JOBS_UNSAFE=yes
 
-GITVERSION=	1424293520
 USE_XORG=	x11 xcomposite xdamage xrender
 USE_XCB=		x11extras wm
 USE_LDCONFIG=	yes
 USE_QT5=	core gui network svg linguist multimedia imageformats \
 		buildtools x11extras
-USES=		qmake tar:bzip2
-
-WRKSRC=		${WRKDIR}/lumina
+USES=		qmake
+USE_GITHUB=	yes
+GH_ACCOUNT=	pcbsd
+GH_TAGNAME=	v0.8.4-Release-P1
 
 QMAKE_ARGS=	CONFIG+="configure"
 

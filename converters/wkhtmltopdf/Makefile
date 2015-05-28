@@ -3,9 +3,9 @@
 
 PORTNAME=	wkhtmltopdf
 PORTVERSION=	0.12.2.1
+PORTREVISION=	1
 CATEGORIES=	converters
-MASTER_SITES=	SF
-MASTER_SITE_SUBDIR=	${PORTNAME}/${PORTVERSION}
+MASTER_SITES=	SF/${PORTNAME}/${PORTVERSION}
 DISTNAME=	wkhtmltox-${PORTVERSION}
 
 MAINTAINER=	mm@FreeBSD.org
@@ -54,10 +54,6 @@ MAKE_ARGS+=	INSTALL_ROOT="${STAGEDIR}${PREFIX}"
 
 .include <bsd.port.pre.mk>
 
-.if ${OSVERSION} < 800000
-BROKEN=		fails to extract on FreeBSD 7.X
-.endif
-
 .if ${ARCH} == "powerpc"
 BROKEN=		Does not link on powerpc
 .endif
@@ -81,8 +77,5 @@ post-build:
 		${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${MAKE_FLAGS} ${MAKEFILE} \
 		${_MAKE_JOBS} ${MAKE_ARGS:C,^${DESTDIRNAME}=.*,,g} \
 		${ALL_TARGET}
-
-post-install:
-	@${CAT} ${PKGMESSAGE}
 
 .include <bsd.port.post.mk>

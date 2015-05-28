@@ -7,7 +7,6 @@ PORTVERSION=	0.34.7
 PORTREVISION?=	1
 CATEGORIES=	x11-toolkits gnome
 MASTER_SITES=	GNOME
-MASTER_SITE_SUBDIR=	sources/${PORTNAME:S/gnome-pty-helper/vte/}/${PORTVERSION:R}
 DISTNAME=	vte-${PORTVERSION}
 PKGNAMESUFFIX?=	3-290
 DIST_SUBDIR=	gnome3
@@ -16,6 +15,7 @@ MAINTAINER?=	gnome@FreeBSD.org
 COMMENT?=	Gtk 3 based terminal widget with accessibility and I18N support
 
 USES+=		tar:xz
+PORTSCOUT=	ignore:1
 
 .if !defined(REFERENCE_PORT)
 VTE3_SLAVE?=	no

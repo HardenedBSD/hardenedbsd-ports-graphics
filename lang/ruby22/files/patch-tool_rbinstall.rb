@@ -1,5 +1,5 @@
---- tool/rbinstall.rb.orig	2014-10-14 20:39:17.000000000 +0800
-+++ tool/rbinstall.rb	2014-12-28 03:26:30.432471677 +0800
+--- tool/rbinstall.rb.orig	2015-03-25 03:33:14.000000000 +0000
++++ tool/rbinstall.rb	2015-04-13 18:16:00.160952000 +0000
 @@ -311,6 +311,7 @@
  libdir = CONFIG[CONFIG.fetch("libdirname", "libdir"), true]
  rubyhdrdir = CONFIG["rubyhdrdir", true]
@@ -17,7 +17,7 @@
      install pc, pkgconfigdir, :mode => $data_mode
    end
  end
-@@ -653,78 +654,6 @@
+@@ -653,86 +654,6 @@
  end
  # :startdoc:
  
@@ -77,20 +77,28 @@
 -end
 -
 -install?(:ext, :comm, :gem) do
--  require 'pathname'
--  gem_dir = Gem.default_dir
--  directories = Gem.ensure_gem_subdirectories(gem_dir, :mode => $dir_mode)
--  prepare "bundle gems", gem_dir, directories
--  Dir.glob(srcdir+'/gems/*.gem').each do |gem|
--    Gem.install gem, Gem::Requirement.default, :install_dir => with_destdir(Gem.dir), :domain => :local, :ignore_dependencies => true
--    gemname = Pathname(gem).basename
--    puts "#{" "*30}#{gemname}"
+-  begin
+-    require "zlib"
+-  rescue LoadError
 -  end
--  # fix directory permissions
--  # TODO: Gem.install should accept :dir_mode option or something
--  File.chmod($dir_mode, *Dir.glob(with_destdir(Gem.dir)+"/**/"))
--  # fix .gemspec permissions
--  File.chmod($data_mode, *Dir.glob(with_destdir(Gem.dir)+"/specifications/*.gemspec"))
+-  if defined?(Zlib)
+-    require 'pathname'
+-    gem_dir = Gem.default_dir
+-    directories = Gem.ensure_gem_subdirectories(gem_dir, :mode => $dir_mode)
+-    prepare "bundle gems", gem_dir, directories
+-    Dir.glob(srcdir+'/gems/*.gem').each do |gem|
+-      Gem.install gem, Gem::Requirement.default, :install_dir => with_destdir(Gem.dir), :domain => :local, :ignore_dependencies => true
+-      gemname = Pathname(gem).basename
+-      puts "#{" "*30}#{gemname}"
+-    end
+-    # fix directory permissions
+-    # TODO: Gem.install should accept :dir_mode option or something
+-    File.chmod($dir_mode, *Dir.glob(with_destdir(Gem.dir)+"/**/"))
+-    # fix .gemspec permissions
+-    File.chmod($data_mode, *Dir.glob(with_destdir(Gem.dir)+"/specifications/*.gemspec"))
+-  else
+-    puts "skip installing bundle gems because of lacking zlib"
+-  end
 -end
 -
  parse_args()

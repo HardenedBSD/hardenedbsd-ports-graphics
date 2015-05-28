@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	puppet
-PORTVERSION=	3.7.4
+PORTVERSION=	3.7.5
+PORTREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	http://downloads.puppetlabs.com/puppet/
 
@@ -14,9 +15,11 @@ LICENSE=	APACHE20
 BUILD_DEPENDS=	rubygem-facter>=0:${PORTSDIR}/sysutils/rubygem-facter \
 		rubygem-hiera>=0:${PORTSDIR}/sysutils/rubygem-hiera
 RUN_DEPENDS=	rubygem-facter>=0:${PORTSDIR}/sysutils/rubygem-facter \
-		rubygem-ruby-augeas>=0:${PORTSDIR}/textproc/rubygem-augeas \
+		rubygem-ruby-augeas>=0:${PORTSDIR}/textproc/rubygem-ruby-augeas \
 		rubygem-hiera>=0:${PORTSDIR}/sysutils/rubygem-hiera
 
+USES=		cpe
+CPE_VENDOR=	puppetlabs
 CONFLICTS=	puppet-2*
 NO_BUILD=	yes
 USE_RUBY=	yes
@@ -31,8 +34,8 @@ SUB_LIST=	RUBY=${RUBY}
 
 OPTIONS_DEFINE=		DOCS EXAMPLES
 OPTIONS_DEFAULT=	PACKAGE_ORIGIN
-OPTIONS_SINGLE=		PATCHES
-OPTIONS_SINGLE_PATCHES=	PACKAGE_ORIGIN PACKAGE_ROOT
+OPTIONS_RADIO=		PATCHES
+OPTIONS_RADIO_PATCHES=	PACKAGE_ORIGIN PACKAGE_ROOT
 PACKAGE_ORIGIN_DESC=	Use port origin as package name
 PACKAGE_ROOT_DESC=	Use PACKAGEROOT instead of PACKAGESITE
 PATCHES_DESC=		Optional exclusive patches

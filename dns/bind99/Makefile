@@ -1,8 +1,9 @@
 # $FreeBSD$
+# pkg-help formatted with fmt 59 63
 
 PORTNAME=	bind
 PORTVERSION=	${ISCVERSION:S/-P/P/}
-PORTREVISION=	0
+PORTREVISION=	3
 CATEGORIES=	dns net ipv6
 MASTER_SITES=	ISC/bind9/${ISCVERSION}
 PKGNAMESUFFIX=	99
@@ -14,7 +15,7 @@ COMMENT=	BIND DNS suite with updated DNSSEC and DNS64
 LICENSE=	ISCL
 
 # ISC releases things like 9.8.0-P1, which our versioning doesn't like
-ISCVERSION=	9.9.6-P2
+ISCVERSION=	9.9.7
 
 MAKE_JOBS_UNSAFE=	yes
 
@@ -32,7 +33,8 @@ GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--localstatedir=/var --disable-linux-caps \
 		--disable-symtable \
 		--with-randomdev=/dev/random \
-		--with-libxml2=${LOCALBASE}
+		--with-libxml2=${LOCALBASE} \
+		--sysconfdir=${ETCDIR}
 ETCDIR=		${PREFIX}/etc/namedb
 
 CONFLICTS=	bind9*-9.[45678].* bind9*-sdb-9.[45678].* bind-tools-9.*
@@ -57,7 +59,7 @@ LARGE_FILE_DESC=	64-bit file support
 FIXED_RRSET_DESC=	Enable fixed rrset ordering
 SIGCHASE_DESC=		dig/host/nslookup will do DNSSEC validation
 FILTER_AAAA_DESC=	Enable filtering of AAAA records
-GOST_DESC=		Enable GOST ciphers, needs SSL (see help)
+GOST_DESC=		Enable GOST ciphers, needs SSL (see help on 8 and 9)
 PYTHON_DESC=		Build with Python utilities
 
 LINKS_DESC=		Create conf file symlinks in ${PREFIX}
@@ -156,7 +158,7 @@ CONFIGURE_ARGS+=	--disable-threads
 IGNORE=		REPLACE_BASE is no longer supported
 .endif # REPLACE_BASE
 
-.if ${OPSYS} == FreeBSD && ${OSVERSION} >= 1000100
+.if ${OPSYS} == DragonFly || (${OPSYS} == FreeBSD && ${OSVERSION} >= 1000100)
 PKGINSTALL=	${NONEXISTENT}
 PLIST_SUB+=	NOBASE="" BASE="@comment "
 SUB_LIST+=	NOBASE="" BASE="@comment "
@@ -166,7 +168,6 @@ SUB_FILES+=	named.conf
 WITH_OPENSSL_PORT=yes
 .endif
 .else
-ETCDIR=		${PREFIX}/etc
 PLIST_SUB+=	NOBASE="@comment " BASE=""
 SUB_LIST+=	NOBASE="@comment " BASE=""
 .if ${PORT_OPTIONS:MSSL}
@@ -175,9 +176,6 @@ WITH_OPENSSL_PORT=	yes
 .endif
 
 PKGDEINSTALL=	${PKGINSTALL}
-
-CONFIGURE_ARGS+=	--prefix=${PREFIX} \
-			--sysconfdir=${ETCDIR}
 
 PORTDOCS=	*
 
@@ -202,7 +200,8 @@ post-install:
 		${WRKSRC}/HISTORY ${WRKSRC}/README ${STAGEDIR}${DOCSDIR}
 .endif
 
-.if ${OPSYS} == FreeBSD && ${OSVERSION} >= 1000100
+.if ${OPSYS} == DragonFly || (${OPSYS} == FreeBSD && ${OSVERSION} >= 1000100)
+	${MKDIR} ${STAGEDIR}${PREFIX}/etc/mtree
 	${MKDIR} ${STAGEDIR}${ETCDIR}
 .for i in dynamic master slave working
 	@${MKDIR} ${STAGEDIR}${ETCDIR}/$i
@@ -212,6 +211,8 @@ post-install:
 	${INSTALL_DATA} ${FILESDIR}/empty.db ${STAGEDIR}${ETCDIR}/master
 	${INSTALL_DATA} ${FILESDIR}/localhost-forward.db ${STAGEDIR}${ETCDIR}/master
 	${INSTALL_DATA} ${FILESDIR}/localhost-reverse.db ${STAGEDIR}${ETCDIR}/master
+	${INSTALL_DATA} ${FILESDIR}/BIND.chroot.dist ${STAGEDIR}${PREFIX}/etc/mtree
+	${INSTALL_DATA} ${FILESDIR}/BIND.chroot.local.dist ${STAGEDIR}${PREFIX}/etc/mtree
 .endif
 	${INSTALL_DATA} ${WRKSRC}/bin/rndc/rndc.conf \
 		${STAGEDIR}${ETCDIR}/rndc.conf.sample

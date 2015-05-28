@@ -3,7 +3,7 @@
 
 PORTNAME=	mpb
 PORTVERSION=	1.5
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	science
 MASTER_SITES=	http://ab-initio.mit.edu/mpb/
 
@@ -43,7 +43,7 @@ CONFIGURE_ARGS+=	--with-lapack=-llapack
 .endif
 
 post-patch:
-	@${REINPLACE_CMD} -e 's|-lhdf5 |-lhdf5 ${PTHREAD_LIBS} |g' \
+	@${REINPLACE_CMD} -e 's|-lhdf5 |-lhdf5 -lpthread |g' \
 		${WRKSRC}/configure
 	@${REINPLACE_CMD} \
 		-e '/INSTALL/s/$$(prefix)/$$(DESTDIR)$$(prefix)/' \

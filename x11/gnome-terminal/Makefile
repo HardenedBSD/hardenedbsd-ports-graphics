@@ -3,7 +3,7 @@
 #   $MCom: ports/trunk/x11/gnome-terminal/Makefile 20059 2014-11-10 21:24:07Z gusi $
 
 PORTNAME=	gnome-terminal
-PORTVERSION=	3.14.2
+PORTVERSION=	3.14.3
 CATEGORIES=	x11 gnome
 MASTER_SITES=	GNOME
 DIST_SUBDIR=	gnome3
@@ -19,7 +19,7 @@ LIB_DEPENDS=	libstartup-notification-1.so:${PORTSDIR}/x11/startup-notification \
 		libuuid.so:${PORTSDIR}/misc/e2fsprogs-libuuid
 RUN_DEPENDS=	gsettings-desktop-schemas>=0:${PORTSDIR}/devel/gsettings-desktop-schemas
 
-USES=		gettext gmake libtool pathfix pkgconfig tar:xz
+USES=		cpe gettext gmake libtool pathfix pkgconfig tar:xz
 USE_GNOME=	dconf gnomeprefix gtk30 intlhack nautilus3 vte3
 USE_XORG=	sm ice
 GNU_CONFIGURE=	yes
@@ -27,6 +27,7 @@ CONFIGURE_ARGS=	--disable-search-provider
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 INSTALL_TARGET=	install-strip
+CPE_VENDOR=	gnome
 
 GLIB_SCHEMAS=	org.gnome.Terminal.gschema.xml
 

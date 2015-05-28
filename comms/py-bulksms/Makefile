@@ -4,7 +4,7 @@
 PORTNAME=	bulksms
 PORTVERSION=	0.1
 CATEGORIES=	comms python
-MASTER_SITES=	http://ngsoftwareltd.com/freebsd/distfiles/
+MASTER_SITES=	http://bsdtec.com/freebsd/distfiles/
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
 MAINTAINER=	craig001@lerwick.hopto.org

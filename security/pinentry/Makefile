@@ -2,8 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	pinentry
-PORTVERSION=	0.9.0
-PORTREVISION?=	2
+PORTVERSION=	0.9.2
+PORTREVISION?=	0
 CATEGORIES=	security
 MASTER_SITES=	GNUPG/pinentry
 
@@ -67,7 +67,15 @@ GNU_CONFIGURE=	yes
 CFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 
+OPTIONS_DEFINE=	LIBSECRET
+
+LIBSECRET_DESC=	Saving the passphrase with libsecret
+LIBSECRET_CONFIGURE_ENABLE=	libsecret
+LIBSECRET_LIB_DEPENDS=	libsecret-1.so:${PORTSDIR}/security/libsecret
+
 .if ${PINENTRY_GUI} == "qt4"
+USES+=		compiler:c++11-lib
+USE_CXXSTD=	c++11
 . if exists(/usr/lib/libc++.so)
 IGNORE=		does not compile with libc++
 . endif
@@ -78,6 +86,7 @@ CONFIGURE_ARGS+=--disable-pinentry-qt4
 .endif
 
 .if ${PINENTRY_GUI} == "gtk2"
+OPTIONS_DEFAULT+=	LIBSECRET
 USE_GNOME+=	gtk20
 PLIST_FILES=	bin/pinentry-gtk-2
 .else

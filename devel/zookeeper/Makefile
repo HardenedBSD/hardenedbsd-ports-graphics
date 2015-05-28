@@ -3,10 +3,9 @@
 
 PORTNAME=	zookeeper
 PORTVERSION=	3.4.6
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	devel java
-MASTER_SITES=	${MASTER_SITE_APACHE}
-MASTER_SITE_SUBDIR=	zookeeper/zookeeper-${PORTVERSION}
+MASTER_SITES=	APACHE/zookeeper/zookeeper-${PORTVERSION}
 
 MAINTAINER=	skreuzer@FreeBSD.org
 COMMENT=	Service for maintaining distributed configuration, naming and locks
@@ -16,6 +15,8 @@ LICENSE=	APACHE20
 LIB_DEPENDS=	libcppunit.so:${PORTSDIR}/devel/cppunit
 RUN_DEPENDS=	bash:${PORTSDIR}/shells/bash
 
+USES+=	cpe
+CPE_VENDOR=	apache
 USE_JAVA=	yes
 JAVA_VERSION=	1.7
 JAVA_VENDOR=	openjdk

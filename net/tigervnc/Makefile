@@ -2,17 +2,15 @@
 # $FreeBSD$
 
 PORTNAME=	tigervnc
-PORTVERSION=	1.3.1
-PORTREVISION=	9
+PORTVERSION=	1.4.3
+DISTVERSIONPREFIX=	v
 CATEGORIES=	net x11-servers
-MASTER_SITES=	SF:tigervnc
-MASTER_SITE_SUBDIR=	${PORTNAME}/${PORTNAME}/${PORTVERSION}/:tigervnc
-DISTFILES=	${PORTNAME}-${PORTVERSION}${EXTRACT_SUFX}:tigervnc
 
 MAINTAINER=	meta+ports@vmeta.jp
 COMMENT=	High-performance, platform-neutral implementation of VNC
 
 LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/LICENCE.TXT
 
 PATCH_DEPENDS=	${NONEXISTENT}:${PORTSDIR}/x11-servers/xorg-server:patch
 BUILD_DEPENDS=	${LOCALBASE}/include/GL/internal/dri_interface.h:${PORTSDIR}/graphics/dri \
@@ -26,11 +24,12 @@ CONFLICTS=	tridiavnc-[0-9]* \
 		tightvnc-[0-9]* \
 		vnc-[0-9]*
 
-USES=		cmake gmake libtool pkgconfig python
+USES=		autoreconf:build cmake cpe gmake libtool pkgconfig python
 USE_GL=		gl
-USE_AUTOTOOLS=	autoconf:env automake:env libtoolize:env
 USE_LDCONFIG=	yes
 USE_OPENSSL=	yes
+USE_GITHUB=	yes
+GH_ACCOUNT=	TigerVNC
 
 USE_XORG+=	bigreqsproto compositeproto damageproto fixesproto fontsproto glproto \
 		inputproto kbproto pixman randrproto renderproto resourceproto \
@@ -79,7 +78,7 @@ CMAKE_ARGS+=	-DBUILD_VIEWER=1
 LIB_DEPENDS+=	libpng.so:${PORTSDIR}/graphics/png \
 		libfltk.so:${PORTSDIR}/x11-toolkits/fltk
 # ImageMagick is required to generate icons during build process
-BUILD_DEPENDS+= ${LOCALBASE}/bin/convert:${PORTSDIR}/graphics/ImageMagick
+BUILD_DEPENDS+=	${LOCALBASE}/bin/convert:${PORTSDIR}/graphics/ImageMagick
 USE_XORG+=	xcursor xfixes xft xinerama
 PLIST_SUB+=	VIEWER=""
 INSTALLS_ICONS=	yes
@@ -118,9 +117,10 @@ TIGERVNC_XORG_PATCH_VER=	114
 
 # import from x11-server/xorg-server/Makefile
 .ifdef WITH_OPENSSL_BASE
-# The reason why I use this is cause openssl from base doesn't install a .pc file
-# and configure will fail trying to find it. Setting both of those variables to
-# a *non-empty* value by-passes the pkg-config check.
+# The reason why I use this is cause openssl from base doesn't
+# install a .pc file and configure will fail trying to find it.
+# Setting both of those variables to a *non-empty* value by-passes
+# the pkg-config check.
 CONFIGURE_ENV=	SHA1_LIB="-L/usr/lib -lcrypto" SHA1_CFLAGS="-I/usr/include"
 .endif
 
@@ -133,7 +133,7 @@ post-patch:
 	@cd ${WRKSRC}/unix/xserver/ && ${PATCH} -p1 < ${WRKSRC}/unix/xserver${TIGERVNC_XORG_PATCH_VER}.patch
 
 post-configure:
-	@cd ${WRKSRC}/unix/xserver/ && ${SETENV} ${CONFIGURE_ENV} ${AUTORECONF} -fiv
+	@cd ${WRKSRC}/unix/xserver/ && ${SETENV} ${CONFIGURE_ENV} ${LOCALBASE}/bin/autoreconf -fiv
 	@cd ${WRKSRC}/unix/xserver/ && ${SETENV} ${CONFIGURE_ENV} ./configure ${CONFIGURE_ARGS}
 
 post-build:

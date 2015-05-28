@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	nghttp2
-PORTVERSION=	0.7.4
+PORTVERSION=	0.7.15
 CATEGORIES=	www net
 MASTER_SITES=	https://github.com/tatsuhiro-t/${PORTNAME}/releases/download/v${PORTVERSION}/ \
 		LOCAL/sunpoet
@@ -20,7 +20,7 @@ LIB_DEPENDS=	libev.so:${PORTSDIR}/devel/libev \
 		libspdylay.so:${PORTSDIR}/www/spdylay
 RUN_DEPENDS:=	${BUILD_DEPENDS}
 
-OPTIONS_DEFINE=	ASIO HPACK
+OPTIONS_DEFINE=	ASIO DOCS HPACK
 OPTIONS_DEFAULT=HPACK
 OPTIONS_SUB=	yes
 
@@ -42,8 +42,9 @@ USE_CXXSTD=	c++11
 USE_GNOME=	libxml2
 USE_LDCONFIG=	yes
 USE_OPENSSL=	yes
-USES=		compiler:c++11-lang libtool pathfix pkgconfig tar:xz
+USES=		compiler:c++11-lib gmake libtool pathfix pkgconfig tar:xz
 
+PORTDATA=	fetch-ocsp-response
 PORTDOCS=	*
 
 ASIO_BUILD_DEPENDS=	boost-libs>=1.54.0:${PORTSDIR}/devel/boost-libs
@@ -56,8 +57,8 @@ HPACK_LIB_DEPENDS=	libjansson.so:${PORTSDIR}/devel/jansson
 
 .include <bsd.port.pre.mk>
 
-.if ${OSVERSION} < 1000000
-BROKEN=		Does not build
+.if ${OSVERSION} <= 1000000
+CPPFLAGS+=	-D_GLIBCXX_USE_C99
 .endif
 
 .if ${OPSYS} == FreeBSD && ${OSVERSION} >= 1000000
@@ -66,6 +67,5 @@ CONFIGURE_ARGS+=--with-jemalloc
 
 post-patch:
 	@${REINPLACE_CMD} -e '/JEMALLOC_LIBS/ s|-ljemalloc||' ${WRKSRC}/configure
-	@${REINPLACE_CMD} -e 's|^DEFAULT_INCLUDES = |&-I${WRKSRC}/src/includes |' ${WRKSRC}/examples/Makefile.in ${WRKSRC}/src/Makefile.in
 
 .include <bsd.port.post.mk>

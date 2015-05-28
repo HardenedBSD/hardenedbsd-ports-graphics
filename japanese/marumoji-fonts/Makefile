@@ -3,10 +3,9 @@
 
 PORTNAME=	marumoji-fonts
 PORTVERSION=	1.0
-PORTREVISION=	6
+PORTREVISION=	7
 CATEGORIES=	japanese x11-fonts
-MASTER_SITES=	${MASTER_SITE_LOCAL}
-MASTER_SITE_SUBDIR=	yoichi
+MASTER_SITES=	LOCAL/yoichi
 DISTFILES=	maru14.bdf.v13.gz maru18.bdf.v10.gz \
 		m18to16.sed \
 		7x14maru.bdf.gz 7x14rkmr.bdf.gz \
@@ -19,17 +18,16 @@ COMMENT=	Japanese marumoji fonts
 
 BUILD_DEPENDS=	mkbold:${PORTSDIR}/x11-fonts/mkbold-mkitalic \
 		bdftopcf:${PORTSDIR}/x11-fonts/bdftopcf
-RUN_DEPENDS=	mkfontdir:${PORTSDIR}/x11-fonts/mkfontdir
 
+USES=		fonts
 NO_WRKSUBDIR=	yes
-FONTSDIR=	lib/X11/fonts/local
+FONTNAME=	marumoji
 
 EXTRACT_CMD=		${CP}
 EXTRACT_BEFORE_ARGS=	-p
 EXTRACT_AFTER_ARGS=	${WRKDIR}
 
-MAKE_ENV=	FONTSDIR=${FONTSDIR}
-PLIST_SUB=	FONTSDIR=${FONTSDIR}
+MAKE_ENV=	FONTSDIR=${FONTSDIR:S,${PREFIX},,}
 
 OPTIONS_DEFINE=	DOCS
 

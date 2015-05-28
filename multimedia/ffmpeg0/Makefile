@@ -25,7 +25,7 @@ PORTSCOUT=	limit:^0\.7.*
 
 HAS_CONFIGURE=	yes
 CONFIGURE_LOG=	config.err
-USES=		gmake perl5 pkgconfig tar:bzip2
+USES=		cpe gmake perl5 pkgconfig tar:bzip2
 WANT_SDL=	yes
 USE_LDCONFIG=	${PREFIX}/lib/ffmpeg${FFMPEG_SUFFIX}
 USE_PERL5=	build
@@ -118,7 +118,7 @@ CONFIGURE_ARGS+=--prefix="${PREFIX}" \
 		--cc="${CC}" \
 		--extra-cflags="${FFMPEG_CFLAGS} -I${LOCALBASE}/include" \
 		--extra-ldflags="-L${LOCALBASE}/lib ${FFMPEG_LDFLAGS}" \
-		--extra-libs="${PTHREAD_LIBS}"
+		--extra-libs="-lpthread"
 SHLIB_VER=	1
 PLIST_SUB+=	SHLIB_VER=${SHLIB_VER}
 
@@ -411,7 +411,6 @@ post-patch:
 	@${REINPLACE_CMD} -E \
 		-e "s|(EXTRALIBS[[:space:]]*=)|\1-L${LOCALBASE}/lib |g; \
 		s|%%LOCALBASE%%|${LOCALBASE}|g; \
-		s|-pthread|${PTHREAD_LIBS}|g; \
 		s|gsm/gsm.h|gsm.h|g" \
 		${CONFIGURE_WRKSRC}/${CONFIGURE_SCRIPT}
 	@${REINPLACE_CMD} -e 's|-ldl||; s|$$(LIBMAJOR)|${SHLIB_VER}|g;' \

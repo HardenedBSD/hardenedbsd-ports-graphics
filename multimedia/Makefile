@@ -54,11 +54,12 @@
     SUBDIR += dvdrip
     SUBDIR += dvdstyler
     SUBDIR += dvts
+    SUBDIR += emby-server
     SUBDIR += emotion_generic_players-vlc
     SUBDIR += emovix
     SUBDIR += ffmpeg
     SUBDIR += ffmpeg0
-    SUBDIR += ffmpeg25
+    SUBDIR += ffmpeg26
     SUBDIR += ffmpeg2theora
     SUBDIR += ffmpegthumbnailer
     SUBDIR += flvmeta
@@ -161,6 +162,7 @@
     SUBDIR += kdenlive
     SUBDIR += kissdx
     SUBDIR += kmplayer-kde4
+    SUBDIR += kodi
     SUBDIR += kplayer-kde4
     SUBDIR += libaacs
     SUBDIR += libass
@@ -219,7 +221,6 @@
     SUBDIR += lxdvdrip
     SUBDIR += m2tstoavi
     SUBDIR += m2vrequantiser
-    SUBDIR += mediabrowser
     SUBDIR += mediadownloader
     SUBDIR += mediainfo
     SUBDIR += mencoder
@@ -253,11 +254,14 @@
     SUBDIR += mps-youtube
     SUBDIR += mpv
     SUBDIR += msdl
+    SUBDIR += msopenh264
+    SUBDIR += msx264
     SUBDIR += mxflib
     SUBDIR += mythtv
     SUBDIR += mythtv-frontend
     SUBDIR += naludump
     SUBDIR += nxtvepg
+    SUBDIR += obs-studio
     SUBDIR += oggvideotools
     SUBDIR += ogmrip
     SUBDIR += ogmtools
@@ -321,6 +325,10 @@
     SUBDIR += qt4-mobility
     SUBDIR += qt4-multimedia
     SUBDIR += qt5-multimedia
+    SUBDIR += qt5-phonon4
+    SUBDIR += qt5-phonon4-designerplugin
+    SUBDIR += qt5-phonon4-gstreamer
+    SUBDIR += qt5-phonon4-vlc
     SUBDIR += quark
     SUBDIR += quodlibet
     SUBDIR += quvi
@@ -400,6 +408,7 @@
     SUBDIR += vic
     SUBDIR += vid.stab
     SUBDIR += vlc
+    SUBDIR += vlc-qt4
     SUBDIR += vstream-client
     SUBDIR += vtkmpeg2encode
     SUBDIR += w_scan
@@ -409,7 +418,6 @@
     SUBDIR += x265
     SUBDIR += xanim
     SUBDIR += xawtv
-    SUBDIR += xbmc
     SUBDIR += xbmc-addon-pvr
     SUBDIR += xfce4-parole
     SUBDIR += xine

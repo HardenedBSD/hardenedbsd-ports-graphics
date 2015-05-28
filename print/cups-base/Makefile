@@ -19,7 +19,8 @@ CONFLICTS=	LPRng-[0-9]*
 
 UNIQUENAME=	${PORTNAME}${PKGNAMESUFFIX}
 
-USES+=		gmake pkgconfig tar:bzip2
+USES+=		cpe gmake pkgconfig tar:bzip2
+CPE_VENDOR=	apple
 DESTDIRNAME=	DSTROOT
 GNU_CONFIGURE=	yes
 CPPFLAGS+=	-I${LOCALBASE}/include
@@ -235,8 +236,7 @@ post-patch:
 .endif
 	@${REINPLACE_CMD} -e '/SILENT/d' ${WRKSRC}/Makedefs.in
 	@${REINPLACE_CMD} -e 's|/etc/cups|${LOCALBASE}/etc/cups|g' ${WRKSRC}/man/*.man*
-	@${REINPLACE_CMD} -e 's|-lpthreads.*;|${PTHREAD_LIBS};|g' \
-		-e 's|/private/etc/pam.d|${LOCALBASE}/etc/pam.d|' \
+	@${REINPLACE_CMD} -e 's|/private/etc/pam.d|${LOCALBASE}/etc/pam.d|' \
 		-e 's|-D_LARGEFILE64_SOURCE||g' \
 		${WRKSRC}/${CONFIGURE_SCRIPT}
 	@${REINPLACE_CMD} -e 's|\.default|.sample|'\

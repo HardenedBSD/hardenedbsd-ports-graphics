@@ -8,7 +8,7 @@ CATEGORIES=	cad
 MASTER_SITES=	SF/${PORTNAME}/Tochnog%20Latest%20January%202014
 DISTFILES=	Sources${EXTRACT_SUFX} gid${EXTRACT_SUFX} \
 		tools${EXTRACT_SUFX} test${EXTRACT_SUFX}
-DIST_SUBDIR=	${PORTNAME}-${PORTVERSION}
+DIST_SUBDIR=	${DISTNAME}
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Free explicit/implicit Finite Element Program
@@ -22,7 +22,6 @@ ATLAS_DESC=	Use ATLAS instead of BLAS/LAPACK
 
 WRKSRC=		${WRKDIR}/Sources/Tochnog-Latest-jan-2014
 MAKEFILE=	makefile
-MAKE_ENV=	PTHREAD_LIBS=${PTHREAD_LIBS} PTHREAD_CFLAGS=${PTHREAD_CFLAGS}
 USES=		fortran zip dos2unix
 DOS2UNIX_FILES=	time.cc time.h tnlapack.h tnsuplu.h
 

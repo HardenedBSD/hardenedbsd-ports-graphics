@@ -2,6 +2,7 @@
 
 PORTNAME=	lci
 PORTVERSION=	0.11.2
+PORTREVISION=	2
 CATEGORIES=	lang
 
 MAINTAINER=	che@bein.link
@@ -12,10 +13,10 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	justinmeza
-GH_COMMIT=	2464d0c
 GH_TAGNAME=	v${PORTVERSION}
 
-USES=		cmake
+USES=		cmake readline
+CFLAGS+=	${CPPFLAGS}
 PLIST_FILES=	bin/lci
 
 .include <bsd.port.mk>

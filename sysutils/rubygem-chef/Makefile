@@ -3,6 +3,7 @@
 
 PORTNAME=	chef
 PORTVERSION=	11.14.6
+PORTREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	RG
 
@@ -31,7 +32,6 @@ RUN_DEPENDS=	rubygem-chef-zero>=2.1.0:${PORTSDIR}/sysutils/rubygem-chef-zero \
 
 USE_RUBY=		yes
 USE_RUBYGEMS=		yes
-USE_RUBY_FEATURES=	iconv
 RUBYGEM_AUTOPLIST=	yes
 
 SUB_LIST=	RUBY=${RUBY}

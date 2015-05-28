@@ -3,7 +3,7 @@
 
 PORTNAME=	vagrant
 PORTVERSION=	1.6.5
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	sysutils rubygems devel
 MASTER_SITES=	LOCAL/swills https://codeload.github.com/mitchellh/vagrant/legacy.tar.gz/v${PORTVERSION}?dummy=/
 
@@ -79,10 +79,4 @@ do-build:
 post-install:
 	${RMDIR} ${STAGEDIR}${PREFIX}/lib/ruby/gems/${RUBY_VER}/doc
 
-.include <bsd.port.pre.mk>
-
-.if (${RUBY_VER} == "1.9")
-IGNORE=		not supported with Ruby 1.9, Ruby 2.0 or 2.1 is needed
-.endif
-
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

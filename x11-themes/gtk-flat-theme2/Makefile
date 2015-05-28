@@ -5,12 +5,15 @@ PORTNAME=	gtk-flat-theme2
 PORTVERSION=	0.1
 PORTREVISION=	14
 CATEGORIES=	x11-themes
-MASTER_SITES=	${MASTER_SITE_THEMES}
-MASTER_SITE_SUBDIR=	gtk2flat
+MASTER_SITES=	THEMES/gtk2flat
 DISTNAME=	gtk2flat-default
 
 MAINTAINER=	philip@FreeBSD.org
 COMMENT=	Port of the Flat GTK+ engine to GTK+ 2.0
+
+BROKEN=		No public distfiles
+DEPRECATED=	Upstream disappeared
+EXPIRATION_DATE=2015-06-01
 
 WRKSRC=		${WRKDIR}/gtk-flat-theme-2.0
 

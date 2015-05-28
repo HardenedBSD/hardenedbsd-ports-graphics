@@ -7,7 +7,7 @@ PORTREVISION=	2
 CATEGORIES=	deskutils www
 MASTER_SITES=	http://www.planscalendar.com/release/:plans \
 		http://www.planscalendar.com/addons/:addons \
-		http://www.freebsd.org/gifs/:logo CENKES:plans,addons,logo
+		http://www.freebsd.org/gifs/:logo
 DISTNAME=	${PORTNAME}_${DISTVERSION}
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}:plans \
 		cz_czech.pl:addons \
@@ -60,6 +60,5 @@ do-install:
 	(cd ${WRKSRC} && ${COPYTREE_SHARE} . ${STAGEDIR}${WWWDIR})
 	@${FIND} ${STAGEDIR}${WWWDIR} -name '*.cgi' -exec ${CHMOD} 755 {} \;
 	@${FIND} ${STAGEDIR}${WWWDIR} -name '*.xml.sample' -exec ${CHMOD} 664 {} \;
-	@${CAT} ${PKGMESSAGE}
 
 .include <bsd.port.mk>

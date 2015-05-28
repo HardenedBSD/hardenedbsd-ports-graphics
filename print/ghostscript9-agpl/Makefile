@@ -8,7 +8,6 @@ MASTER_SITES=	http://downloads.ghostscript.com/public/:gs_srcs \
 		SF/ghostscript/GPL%20Ghostscript/${PORTVERSION}:gs_srcs \
 		ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/GPL/gs${PORTVERSION:S/.//}/:gs_srcs \
 		http://www.humblesoft.com/pub/:epag
-MASTER_SITE_SUBDIR=	ghostscript/:gs_srcs
 PKGNAMESUFFIX=	9-agpl
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}:gs_srcs ${EPAG_SRCS}:epag
 DIST_SUBDIR=	${PORTNAME}
@@ -60,9 +59,8 @@ CPPFLAGS+=	-DUPD_SIGNAL=0 -I. \
 		-I${WRKSRC}/openjpeg/src/lib/openjp2 \
 		-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
-XCFLAGS=	${PTHREAD_CFLAGS} \
-		-DA4
-XLDFLAGS=	${PTHREAD_LIBS}
+XCFLAGS=	-DA4
+XLDFLAGS=	-lpthread
 
 PLIST_SUB=	GS_VERSION="${PORTVERSION}" \
 		X11BITS=${X11BITS}

@@ -3,7 +3,7 @@
 
 PORTNAME=	libiconv
 PORTVERSION=	1.14
-PORTREVISION=	6
+PORTREVISION=	8
 CATEGORIES=	converters devel
 MASTER_SITES=	GNU
 
@@ -12,10 +12,9 @@ COMMENT=	Character set conversion library
 
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--enable-static \
-		--without-libintl-prefix \
-		--docdir=${DOCSDIR}
-CONFIGURE_ENV=	am_cv_func_iconv="yes" \
-		am_cv_proto_iconv_arg1="const"
+		--disable-nls \
+		--docdir=${DOCSDIR} \
+		am_cv_func_iconv=no
 INSTALL_TARGET=	install-strip
 MAKE_JOBS_UNSAFE=	yes
 USES=		libtool
@@ -35,8 +34,7 @@ CONFIGURE_ARGS+=	--enable-extra-encodings
 
 .if ${PORT_OPTIONS:MPATCHES}
 PATCH_SITES+=	http://apolloron.org/software/libiconv-1.14-ja/
-PATCH_SITES+=	${MASTER_SITE_LOCAL}
-PATCH_SITE_SUBDIR+=	kwm
+PATCH_SITES+=	LOCAL/kwm
 PATCHFILES+=	${DISTNAME}-ja-1.patch.gz
 PATCH_DIST_STRIP+=	-p1
 .endif

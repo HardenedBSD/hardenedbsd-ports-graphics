@@ -2,13 +2,13 @@
 # $FreeBSD$
 
 PORTNAME=	evas_generic_loaders
-PORTVERSION=	1.13.0
+PORTVERSION=	1.13.2
 CATEGORIES=	graphics enlightenment
 MASTER_SITES=	# none
 DISTFILES=	# none
 EXTRACT_ONLY=	# none
 
-MAINTAINER=	gblach@FreeBSD.org
+MAINTAINER=	enlightenment@FreeBSD.org
 COMMENT=	Additional loaders for Evas (meta-port)
 
 NO_BUILD=	yes

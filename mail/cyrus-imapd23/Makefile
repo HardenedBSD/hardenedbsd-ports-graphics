@@ -23,7 +23,7 @@ PERLMAN=	${SITE_PERL_REL:S/site_perl\///}
 
 USE_RC_SUBR=	imapd
 
-USES=		perl5
+USES=		cpe perl5
 USE_OPENSSL=	yes
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--sysconfdir=${PREFIX}/etc \
@@ -38,6 +38,9 @@ CONFIGURE_ARGS=	--sysconfdir=${PREFIX}/etc \
 CPPFLAGS+=	-I${LOCALBASE}/include
 LIBS+=		-L${LOCALBASE}/lib
 MAKE_JOBS_UNSAFE=	yes
+
+CPE_VENDOR=	cmu
+CPE_PRODUCT=	cyrus_imap_server
 
 OPTIONS_DEFINE=		AUTOCREATE AUTOSIEVE BDB DRAC IDLED \
 			LDAP_PTLOADER LISTEXT MURDER MYSQL \
@@ -62,8 +65,8 @@ LISTEXT_DESC=		Enable IMAP List extensions
 LISTEXT_CONFIGURE_ENABLE=listext
 MURDER_DESC=		Enable IMAP Murder support
 MURDER_CONFIGURE_ENABLE=murder
-MURDER_CFLAGS=		${PTHREAD_CFLAGS}
-MURDER_MAKE_ENV=	PTHREAD_LIBS=${PTHREAD_LIBS}
+MURDER_CFLAGS=
+MURDER_MAKE_ENV=	PTHREAD_LIBS="-lpthread"
 MYSQL_USE=		MYSQL=yes
 MYSQL_CONFIGURE_ON=	--with-mysql=yes \
 			--with-mysql-libdir=${LOCALBASE}/lib/mysql \
@@ -115,9 +118,7 @@ BDB_LIB_NAME=	no
 EXTRA_PATCHES+=	${WRKSRC}/contrib/drac_auth.patch
 EXTRA_PATCHES+=	${FILESDIR}/extra-patch-configure.in \
 		${FILESDIR}/extra-patch-cmulocal::ucdsnmp.m4
-.if ${OSVERSION} >= 800037
 EXTRA_PATCHES+=	${FILESDIR}/extra-patch-cmulocal::sasl2.m4
-.endif
 USE_AUTOTOOLS=	autoconf autoheader
 .endif
 
@@ -129,10 +130,6 @@ PLIST_SUB+=	MANCONF="@comment "
 
 .if !exists(/usr/lib/libkrb5.a)
 CONFIGURE_ARGS+=--disable-gssapi
-.endif
-
-.if ${OSVERSION} >= 800037
-EXTRA_PATCHES+=	${FILESDIR}/extra-patch-configure
 .endif
 
 CYRUS_USER?=	cyrus
@@ -184,8 +181,6 @@ post-patch:
 	@${REINPLACE_CMD} -e "s|/etc/|${PREFIX}/etc/|g" \
 			  -e "s|/usr/sieve|/var/imap/sieve|g" \
 		${WRKSRC}/tools/masssievec
-	@${REINPLACE_CMD} -e "s|-lpthread|\$$(PTHREAD_LIBS)|g" \
-		${WRKSRC}/imap/Makefile.in
 	@${SED} -e "s|%%PREFIX%%|${PREFIX}|g;" \
 		${FILESDIR}/cyrus-imapd-man.conf \
 		> ${WRKDIR}/cyrus-imapd-man.conf
@@ -202,9 +197,6 @@ post-install:
 	@${GZIP_CMD} ${STAGEDIR}${PREFIX}/cyrus/man/man8/${f}
 	@${ECHO_CMD} cyrus/man/man8/${f}.gz >>${TMPPLIST}
 .endfor
-	@${ECHO_CMD} "@dirrm cyrus/man/man8" >>${TMPPLIST}
-	@${ECHO_CMD} "@dirrm cyrus/man" >>${TMPPLIST}
-	@${ECHO_CMD} "@dirrm cyrus" >>${TMPPLIST}
 .if ${PORT_OPTIONS:MDOCS}
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}/man
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}/text
@@ -229,9 +221,6 @@ post-install:
 		${STAGEDIR}${DOCSDIR}/text
 	@${ECHO_CMD} share/doc/${PORTNAME}/text/${f} >>${TMPPLIST}
 .endfor
-	@${ECHO_CMD} "@dirrm share/doc/${PORTNAME}/text" >>${TMPPLIST}
-	@${ECHO_CMD} "@dirrm share/doc/${PORTNAME}/man" >>${TMPPLIST}
-	@${ECHO_CMD} "@dirrm share/doc/${PORTNAME}" >>${TMPPLIST}
 .endif
 	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
 	@${INSTALL_DATA} ${FILESDIR}/imapd.conf \
@@ -241,8 +230,6 @@ post-install:
 		${STAGEDIR}${EXAMPLESDIR}
 	@${ECHO_CMD} ${EXAMPLESDIR:S,^${PREFIX}/,,}/${f} >>${TMPPLIST}
 .endfor
-	@${ECHO_CMD} @dirrm ${EXAMPLESDIR:S,^${PREFIX}/,,} \
-		>>${TMPPLIST}
 	@${INSTALL_SCRIPT} ${WRKSRC}/tools/mkimap \
 		${STAGEDIR}${PREFIX}/cyrus/bin/mkimap
 	@${INSTALL_SCRIPT} ${WRKSRC}/tools/masssievec \

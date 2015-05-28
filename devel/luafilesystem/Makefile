@@ -12,11 +12,11 @@ COMMENT=	Library to access directory structure and file attributes
 LICENSE=	MIT
 
 USES?=		lua
+USES+=		gmake
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	keplerproject
 GH_TAGNAME=	v_${PORTVERSION:S/./_/g}
-GH_COMMIT=	8014725
 
 ALL_TARGET=	lib
 

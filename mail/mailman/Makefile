@@ -2,13 +2,11 @@
 # $FreeBSD$
 
 PORTNAME=	mailman
-DISTVERSION=	2.1.18-1
-PORTREVISION=	8
+DISTVERSION=	2.1.20
 CATEGORIES=	mail
-MASTER_SITES=	${MASTER_SITE_GNU} \
+MASTER_SITES=	GNU \
 		SF/${PORTNAME}/Mailman%202.1%20%28stable%29/${PORTVERSION} \
 		https://launchpad.net/mailman/${DISTVERSION:R}/${DISTVERSION}/+download/
-MASTER_SITE_SUBDIR=	${PORTNAME}
 DIST_SUBDIR=	mailman
 
 PATCH_DIST_STRIP=	-p1
@@ -21,10 +19,12 @@ LICENSE_FILE=	${WRKSRC}/gnu-COPYING-GPL
 
 CONFLICTS=	ja-mailman-2.1.*
 
-USES=		python:2 tar:tgz
-USE_AUTOTOOLS=	autoconf
+USES=		autoreconf cpe fakeroot python:2 tar:tgz
 USE_RC_SUBR=	mailman
 
+CPE_VENDOR=	gnu
+
+GNU_CONFIGURE=	yes
 GNU_CONFIGURE_PREFIX=	${MAILMANDIR}
 CONFIGURE_ARGS+=--with-python=${PYTHON_CMD} \
 		--with-username=${MM_USERNAME} \
@@ -108,10 +108,8 @@ MAIL_GID?=	_smtpd
 .endif
 
 .if ${PORT_OPTIONS:MHTDIG}
-PATCH_SITES+=	http://www.openinfo.co.uk/mm/patches/444879/:patch1 \
-		http://www.openinfo.co.uk/mm/patches/444884/:patch2
-PATCHFILES+=	indexing-2.1.12-0.1.patch.gz:patch1 \
-		htdig-2.1.12-0.1.patch.gz:patch2
+PATCH_SITES+=	http://www.msapiro.net/mm/
+PATCHFILES+=	index_htdig.patch.2.1.20
 PKGNAMESUFFIX+=	-with-htdig
 RUN_DEPENDS+=	htdig:${PORTSDIR}/textproc/htdig
 PLIST_SUB+=	SUB_HTDIG=""

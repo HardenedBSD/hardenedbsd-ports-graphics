@@ -12,6 +12,8 @@ COMMENT=	Convenient command and access tool
 LICENSE=	GPLv3
 
 BROKEN=		Uses unknown GNOME component pygnomedesktop
+DEPRECATED=	Broken since update to gnome3
+EXPIRATION_DATE=	2015-06-02
 
 BUILD_DEPENDS=	rst2html:${PORTSDIR}/textproc/py-docutils \
 		xml2po:${PORTSDIR}/textproc/gnome-doc-utils \
@@ -24,13 +26,12 @@ RUN_DEPENDS=	keybinder>=0:${PORTSDIR}/x11/keybinder \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	GNOME
-GH_PROJECT=	kupfer
-GH_TAGNAME=	${GH_COMMIT}
-GH_COMMIT=	0268e36
+GH_TAGNAME=	0268e36
 
-USES=		desktop-file-utils python shared-mime-info
+USES=		desktop-file-utils python shared-mime-info waf
 USE_GNOME=	gvfs intltool pygtk2 pygnomedesktop
 INSTALLS_ICONS=	yes
+CONFIGURE_ARGS=	--${PREFIX}/man
 
 PORTDOCS=	*
 
@@ -62,16 +63,6 @@ post-patch:
 .if ! ${PORT_OPTIONS:MNLS}
 	@${REINPLACE_CMD} -e '/^build_subdirs/s|po||g' ${WRKSRC}/wscript
 .endif
-
-do-configure:
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ./waf configure \
-		--prefix=${STAGEDIR}${PREFIX} --mandir=${STAGEDIR}${PREFIX}/man
-
-do-build:
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ./waf build
-
-do-install:
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ./waf install
 
 post-install:
 	${INSTALL_MAN} ${WRKSRC}/build/${PORTNAME}.1 \

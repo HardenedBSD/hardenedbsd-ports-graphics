@@ -2,11 +2,11 @@
 # $FreeBSD$
 
 PORTNAME=	kafo
-PORTVERSION=	0.6.5
+PORTVERSION=	0.6.6
 CATEGORIES=	devel ruby
 MASTER_SITES=	RG
 
-MAINTAINER=	kvedulv@kvedulv.de
+MAINTAINER=	mmoll@FreeBSD.org
 COMMENT=	Ruby framework to create installers
 
 LICENSE=	GPLv3

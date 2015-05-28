@@ -45,4 +45,12 @@ post-patch:
 	${REINPLACE_CMD} -e '1 s|^.*/|/|g' \
 		${WRKSRC}/knotes/configdialog/knotecollectionconfigwidget.cpp
 
+post-install:
+	${MKDIR} ${STAGEDIR}${PREFIX}/include/kleo
+	${INSTALL_DATA} ${WRKSRC}/libkleo/kleo/*.h \
+		${STAGEDIR}${PREFIX}/include/kleo
+	${MKDIR} ${STAGEDIR}${PREFIX}/include/kleo/ui
+	${INSTALL_DATA} ${WRKSRC}/libkleo/ui/*.h \
+		${STAGEDIR}${PREFIX}/include/kleo/ui
+
 .include <bsd.port.mk>

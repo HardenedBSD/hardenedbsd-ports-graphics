@@ -5,7 +5,6 @@ PORTVERSION=	0.60
 PORTREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	http://www.wanlink.com/spamilter/download/
-MASTER_SITE_SUBDIR=	dinoex
 
 MAINTAINER=	dinoex@FreeBSD.org
 COMMENT=	Sendmail LibMilter filter to block spam
@@ -20,8 +19,7 @@ HAS_CONFIGURE=	yes
 CONFIGURE_ARGS=	--have-resn
 USE_RC_SUBR=	spamilter
 
-CFLAGS+=	${PTHREAD_CFLAGS:S=""==}
-LDFLAGS+=	${PTHREAD_LIBS}
+LDFLAGS+=	-lpthread
 MAKE_ENV+=	__MAKE_CONF=/dev/null
 
 BINFILES=	spamilter-system-report spamilter-user-report

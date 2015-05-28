@@ -59,12 +59,12 @@ BROKEN=			incompatible OpenLDAP version: ${WANT_OPENLDAP_VER}
 .endif
 
 PORTREVISION_CLIENT=	1
-PORTREVISION_SERVER=	3
+PORTREVISION_SERVER=	4
 OPENLDAP_SHLIB_MAJOR=	2
 OPENLDAP_SHLIB_MINOR=	10.3
 OPENLDAP_MAJOR=		${DISTVERSION:R}
 
-OPTIONS_DEFINE=		FETCH GSSAPI
+OPTIONS_DEFINE=		DEBUG FETCH GSSAPI
 
 FETCH_DESC=		Enable fetch(3) support
 GSSAPI_DESC=		With GSSAPI support (implies SASL support)
@@ -77,6 +77,7 @@ OPTIONS_DEFINE+=	DEREF DYNGROUP DYNLIST MEMBEROF PPOLICY PROXYCACHE
 OPTIONS_DEFINE+=	REFINT RETCODE RWM SEQMOD SSSVLV SYNCPROV TRANSLUCENT
 OPTIONS_DEFINE+=	UNIQUE VALSORT SMBPWD SHA2 DYNAMIC_BACKENDS SASL
 OPTIONS_DEFINE+=	LMPASSWD
+OPTIONS_DEFINE+=	OUTLOOK
 
 OPTIONS_DEFAULT=	MDB SYNCPROV DYNAMIC_BACKENDS
 
@@ -120,6 +121,7 @@ SMBPWD_DESC=		With Samba Password hashes overlay
 SHA2_DESC=		With SHA2 Password hashes overlay
 LMPASSWD_DESC=		With LM hash password support (DEPRECATED)
 DYNAMIC_BACKENDS_DESC=	Build dynamic backends
+OUTLOOK_DESC=		Force caseIgnoreOrderingMatch on name attribute (experimental)
 .endif
 
 .if defined(CLIENT_ONLY)
@@ -273,6 +275,12 @@ CONFIGURE_ARGS+=	--enable-constraint=${OVERLAY_ENABLE}
 .if ${PORT_OPTIONS:MDDS}
 CONFIGURE_ARGS+=	--enable-dds=${OVERLAY_ENABLE}
 .endif
+
+.if ${PORT_OPTIONS:MDEBUG}
+CONFIGURE_ARGS+=	--enable-debug=yes
+.endif
+
+MAKE_ENV+=		STRIP=${STRIP}
 
 .if ${PORT_OPTIONS:MDEREF}
 CONFIGURE_ARGS+=	--enable-deref=${OVERLAY_ENABLE}
@@ -431,6 +439,7 @@ CONFIGURE_ARGS+=	--enable-spasswd
 CONFIGURE_ARGS+=	--enable-sql=${BACKEND_ENABLE}
 PLIST_SUB+=		BACK_SQL=${BACKEND_PLIST}
 LIB_DEPENDS+=		libodbc.so:${PORTSDIR}/databases/unixODBC
+LDFLAGS+=		-L${LOCALBASE}/lib
 .else
 PLIST_SUB+=		BACK_SQL="@comment "
 .endif
@@ -470,6 +479,13 @@ LIB_DEPENDS+=		libslp.so:${PORTSDIR}/net/openslp
 # Include tcp-wrapper support
 .if ${PORT_OPTIONS:MTCP_WRAPPERS}
 CONFIGURE_ARGS+=	--enable-wrappers
+.endif
+
+# Force using caseIgnoreOrderingMatch on 'name' attribute.
+# This may be a violation of RFC 4519 2.18 definition.
+# See http://www.openldap.org/lists/openldap-technical/201211/msg00175.html
+.if ${PORT_OPTIONS:MOUTLOOK}
+EXTRA_PATCHES+=		${FILESDIR}/extrapatch-outlook-servers__slapd__schema_prep.c
 .endif
 
 # end of client/server specific configuration

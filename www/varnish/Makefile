@@ -1,12 +1,13 @@
 # $FreeBSD$
 
 PORTNAME=	varnish
-PORTVERSION=	3.0.6
+PORTVERSION=	3.0.7
+PORTREVISION=	0
 CATEGORIES=	www
 MASTER_SITES=	http://repo.varnish-cache.org/source/
 
-MAINTAINER=	koobs@FreeBSD.org
-COMMENT=	The Varnish high-performance HTTP accelerator
+MAINTAINER=	feld@FreeBSD.org
+COMMENT=	High-performance HTTP accelerator
 
 LICENSE=	BSD2CLAUSE
 
@@ -14,7 +15,8 @@ LIB_DEPENDS=	libpcre.so:${PORTSDIR}/devel/pcre
 
 CONFLICTS=	varnish-2.*
 
-USES=		autoreconf gmake libtool readline pkgconfig python:build
+USES=		autoreconf cpe gmake libtool pkgconfig python:build readline 
+CPE_VENDOR=	varnish-cache
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--localstatedir=${PREFIX} --enable-tests
 CONFIGURE_ENV=	RST2MAN=true
@@ -27,6 +29,9 @@ SUB_FILES=	pkg-message
 BAD_TESTS+=	r00832
 EXTRA_PATCHES+=	${FILESDIR}/no-inet6.patch
 .endif
+
+DEPRECATED=	Varnish 3.0.7 is the last release of Varnish 3.0. Please upgrade to www/varnish4
+EXPIRATION_DATE=	2015-06-15
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|\$$(libdir)/pkgconfig|\$$(prefix)/libdata/pkgconfig|' \

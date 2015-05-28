@@ -2,13 +2,18 @@
 # $FreeBSD$
 
 PORTNAME=	pyramid
-PORTVERSION=	1.5.1
+PORTVERSION=	1.5.7
 CATEGORIES=	www python
 MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	jun-g@daemonfreaks.com
 COMMENT=	Small, fast, web development framework by the Pylons community
+
+LICENSE=	REPOZE
+LICENSE_NAME=	Repoze License
+LICENSE_FILE=	${WRKSRC}/LICENSE.txt
+LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
 BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}PasteDeploy>=1.5.0:${PORTSDIR}/www/py-pastedeploy \
 		${PYTHON_PKGNAMEPREFIX}repoze.lru>=0.4:${PORTSDIR}/devel/py-repoze.lru \

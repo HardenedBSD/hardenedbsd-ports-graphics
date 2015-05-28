@@ -4,8 +4,7 @@
 PORTNAME=	apr
 PORTVERSION=	${APR_VERSION}.${APU_VERSION}
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_APACHE}
-MASTER_SITE_SUBDIR=	apr
+MASTER_SITES=	APACHE/apr
 DISTFILES=	apr-${APR_VERSION}.tar.gz \
 		apr-util-${APU_VERSION}.tar.gz
 
@@ -188,9 +187,9 @@ do-configure:
 
 do-build:
 	@${ECHO_MSG} "# ===> ${.TARGET} apr-${APR_VERSION}"
-	(cd ${APR_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE} ${_MAKE_JOBS})
+	(cd ${APR_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${_MAKE_JOBS})
 	@${ECHO_MSG} "# ===> ${.TARGET} apr-util-${APU_VERSION}"
-	(cd ${APU_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE} ${_MAKE_JOBS})
+	(cd ${APU_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${_MAKE_JOBS})
 
 pre-install:
 # always create the modules directory
@@ -199,18 +198,18 @@ pre-install:
 
 do-install:
 	@${ECHO_MSG} "# ===> ${.TARGET} apr-${APR_VERSION}"
-	(cd ${APR_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE} ${INSTALL_TARGET} ${MAKE_ARGS})
+	(cd ${APR_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${INSTALL_TARGET} ${MAKE_ARGS})
 	@${ECHO_MSG} "# ===> ${.TARGET} apr-util-${APU_VERSION}"
-	(cd ${APU_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE} ${INSTALL_TARGET} ${MAKE_ARGS})
+	(cd ${APU_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${INSTALL_TARGET} ${MAKE_ARGS})
 
 post-install:
 	-${FIND} ${STAGEDIR}${PREFIX}/lib/ -name \*.so | ${XARGS} ${STRIP_CMD}
 
 test: build
 	@${ECHO_MSG} "# ===> ${.TARGET} apr-${APR_VERSION}"
-	-(cd ${APR_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE} test)
+	-(cd ${APR_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} test)
 	@${ECHO_MSG} "# ===> ${.TARGET} apr-util-${APU_VERSION}"
-	-(cd ${APU_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE} test)
+	-(cd ${APU_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} test)
 
 #regression-test: test
 

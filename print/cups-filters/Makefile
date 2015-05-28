@@ -1,8 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	cups-filters
-PORTVERSION=	1.0.62
-PORTREVISION=	1
+PORTVERSION=	1.0.68
 CATEGORIES=	print
 MASTER_SITES=	http://www.openprinting.org/download/cups-filters/
 
@@ -25,7 +24,8 @@ LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg \
 		libpoppler.so:${PORTSDIR}/graphics/poppler
 
 MAKE_JOBS_UNSAFE=YES
-USES=		compiler:c++11-lib libtool pathfix pkgconfig shebangfix tar:xz
+USES=		compiler:c++11-lib cpe libtool pathfix pkgconfig shebangfix tar:xz
+CPE_VENDOR=	linuxfoundation
 SHEBANG_FILES=	filter/textonly
 USE_GNOME=	glib20
 USE_GHOSTSCRIPT=	yes
@@ -35,13 +35,13 @@ CUPS_SOCKET?=	/var/run/cups.sock
 CONFIGURE_ARGS=	--with-cups-domainsocket=${CUPS_SOCKET}
 CONFIGURE_ENV=	ZLIB_CFLAGS="-I/usr/include" ZLIB_LIBS="-lz" \
 		LIBQPDF_CFLAGS="-I${LOCALBASE}/include" LIBQPDF_LIBS="-lqpdf"
+INSTALL_TARGET=	install-strip
 
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 USE_LDCONFIG=	yes
 
 OPTIONS_DEFINE=	AVAHI
-OPTIONS_DEFAULT=	AVAHI
 
 AVAHI_CONFIGURE_ENABLE=	avahi
 AVAHI_LIB_DEPENDS=	libavahi-client.so:${PORTSDIR}/net/avahi-app
@@ -60,8 +60,7 @@ post-configure:
 
 post-install:
 	@${RM} -rf ${STAGEDIR}${PREFIX}/libexec/cups/filter/foomatic-rip \
+		${STAGEDIR}${PREFIX}/bin/foomatic-rip \
 		${STAGEDIR}${PREFIX}/man/man1/foomatic-rip.1
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libcupsfilters.so.1 \
-		${STAGEDIR}${PREFIX}/lib/libfontembed.so.1
 
 .include <bsd.port.mk>

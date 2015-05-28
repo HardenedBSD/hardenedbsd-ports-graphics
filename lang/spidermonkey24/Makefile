@@ -3,10 +3,10 @@
 
 PORTNAME=		spidermonkey24
 PORTVERSION=		24.2.0
+PORTREVISION=		1
 CATEGORIES=		lang
-MASTER_SITES=		${MASTER_SITE_MOZILLA}
+MASTER_SITES=		MOZILLA/js
 #http://people.mozilla.org/~sstangl/
-MASTER_SITE_SUBDIR=	js
 DISTNAME=		mozjs-${PORTVERSION}
 
 MAINTAINER=		kwm@FreeBSD.org
@@ -18,7 +18,7 @@ LIB_DEPENDS=		libnspr4.so:${PORTSDIR}/devel/nspr
 CONFLICTS=		njs-[0-9]*
 
 GNU_CONFIGURE=		yes
-USES=			compiler:c11 gmake pathfix perl5 python:2,build \
+USES=			compiler:c++11-lib gmake pathfix perl5 python:2,build \
 			readline tar:bzip2
 USE_PERL5=		build
 USE_LDCONFIG=		yes

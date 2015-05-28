@@ -2,11 +2,11 @@
 # $FreeBSD$
 
 PORTNAME=	hiawatha
-PORTVERSION=	9.11
+PORTVERSION=	9.12
 CATEGORIES=	www
 MASTER_SITES=	SF/fbsdports/hiawatha/
 
-MAINTAINER=	chris@bsdjunk.com
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Advanced and secure webserver for Unix
 
 LICENSE=	GPLv2
@@ -73,7 +73,7 @@ post-install:
 	${INSTALL_DATA} ${PORTDOCS:S,^,${WRKSRC}/,} ${STAGEDIR}${DOCSDIR}/
 
 .for FILE in ${CONFIG_FILES}
-	@${INSTALL_DATA} ${WRKSRC}/config/${FILE} ${STAGEDIR}${PREFIX}/etc/hiawatha/${FILE}.sample
+	${INSTALL_DATA} ${WRKSRC}/config/${FILE} ${STAGEDIR}${PREFIX}/etc/hiawatha/${FILE}.sample
 .endfor
 
 	@${MKDIR} ${STAGEDIR}${WWWDIR} ; \

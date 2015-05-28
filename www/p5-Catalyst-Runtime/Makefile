@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	Catalyst-Runtime
-PORTVERSION=	5.90083
+PORTVERSION=	5.90092
 CATEGORIES=	www perl5
 MASTER_SITES=	CPAN
 MASTER_SITE_SUBDIR=	CPAN:JJNAPIORK
@@ -26,7 +26,7 @@ BUILD_DEPENDS=	p5-CGI-Simple>=1.109:${PORTSDIR}/www/p5-CGI-Simple \
 		p5-Data-Dump>=0:${PORTSDIR}/devel/p5-Data-Dump \
 		p5-Data-OptList>=0:${PORTSDIR}/devel/p5-Data-OptList \
 		p5-HTML-Parser>=0:${PORTSDIR}/www/p5-HTML-Parser \
-		p5-HTTP-Body>=1.06:${PORTSDIR}/www/p5-HTTP-Body \
+		p5-HTTP-Body>=1.22:${PORTSDIR}/www/p5-HTTP-Body \
 		p5-HTTP-Message>=5.814:${PORTSDIR}/www/p5-HTTP-Message \
 		p5-HTTP-Request-AsCGI>=1.0:${PORTSDIR}/www/p5-HTTP-Request-AsCGI \
 		p5-Hash-MultiValue>=0:${PORTSDIR}/devel/p5-Hash-MultiValue \
@@ -35,13 +35,13 @@ BUILD_DEPENDS=	p5-CGI-Simple>=1.109:${PORTSDIR}/www/p5-CGI-Simple \
 		p5-MRO-Compat>=0:${PORTSDIR}/devel/p5-MRO-Compat \
 		p5-Moose>=2:${PORTSDIR}/devel/p5-Moose \
 		p5-MooseX-Emulate-Class-Accessor-Fast>=0.00903:${PORTSDIR}/devel/p5-MooseX-Emulate-Class-Accessor-Fast \
-		p5-MooseX-Getopt>=0.30:${PORTSDIR}/devel/p5-MooseX-Getopt \
+		p5-MooseX-Getopt>=0.48:${PORTSDIR}/devel/p5-MooseX-Getopt \
 		p5-MooseX-MethodAttributes>=0.24:${PORTSDIR}/devel/p5-MooseX-MethodAttributes \
 		p5-MooseX-Role-WithOverloading>=0.09:${PORTSDIR}/devel/p5-MooseX-Role-WithOverloading \
 		p5-Path-Class>=0.09:${PORTSDIR}/devel/p5-Path-Class \
 		p5-Plack>=0.9991:${PORTSDIR}/www/p5-Plack \
 		p5-Plack-Middleware-FixMissingBodyInRedirect>=0.09:${PORTSDIR}/www/p5-Plack-Middleware-FixMissingBodyInRedirect \
-		p5-Plack-Middleware-MethodOverride>=0:${PORTSDIR}/www/p5-Plack-Middleware-MethodOverride \
+		p5-Plack-Middleware-MethodOverride>=0.12:${PORTSDIR}/www/p5-Plack-Middleware-MethodOverride \
 		p5-Plack-Middleware-RemoveRedundantBody>=0.03:${PORTSDIR}/www/p5-Plack-Middleware-RemoveRedundantBody \
 		p5-Plack-Middleware-ReverseProxy>=0.04:${PORTSDIR}/www/p5-Plack-Middleware-ReverseProxy \
 		p5-Plack-Test-ExternalServer>=0:${PORTSDIR}/www/p5-Plack-Test-ExternalServer \
@@ -61,8 +61,10 @@ BUILD_DEPENDS=	p5-CGI-Simple>=1.109:${PORTSDIR}/www/p5-CGI-Simple \
 		p5-namespace-clean>=0.23:${PORTSDIR}/devel/p5-namespace-clean
 RUN_DEPENDS:=	${BUILD_DEPENDS}
 TEST_DEPENDS=	p5-IO-stringy>=0:${PORTSDIR}/devel/p5-IO-stringy \
+		p5-Term-Size-Any>=0:${PORTSDIR}/devel/p5-Term-Size-Any \
 		p5-Test-Fatal>=0:${PORTSDIR}/devel/p5-Test-Fatal \
 		p5-Test-Without-Module>=0:${PORTSDIR}/devel/p5-Test-Without-Module \
+		p5-Type-Tiny>=0:${PORTSDIR}/devel/p5-Type-Tiny \
 		p5-YAML>=0:${PORTSDIR}/textproc/p5-YAML
 
 PORTSCOUT=	limit:^[0-9\.]*$$

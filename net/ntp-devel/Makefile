@@ -2,23 +2,27 @@
 # $FreeBSD$
 
 PORTNAME=	ntp
-PORTVERSION=	4.2.8p1r2
+PORTVERSION=	4.3.33
 CATEGORIES=	net ipv6
-MASTER_SITES=	http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ \
-		http://archive.ntp.org/ntp4/ntp-4.2/ \
- 		ftp://ftp.netlab.is.tsukuba.ac.jp/pub/network/ntp/ntp4/
+MASTER_SITES=	http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-dev/ \
+		http://archive.ntp.org/ntp4/ntp-dev/
 PKGNAMESUFFIX=	-devel
-DISTNAME=	${PORTNAME}-${PORTVERSION:S/P/p/:S/r/-RC/:S/b/-beta/}
+DISTNAME=	${PORTNAME}-dev-${PORTVERSION:S/P/p/:S/r/-RC/:S/b/-beta/}
 
 MAINTAINER=	cy@FreeBSD.org
 COMMENT=	The Network Time Protocol Distribution
 
+CONFLICTS=	ntp-[0-9].* ntp-rc-*
+
 GNU_CONFIGURE=	yes
 OPTIONS_SUB=	yes
-USES=		pathfix shebangfix libtool
+USES=		cpe pathfix shebangfix libtool pkgconfig
 LIB_DEPENDS=	libevent.so:${PORTSDIR}/devel/libevent2
 
-NTP_SHEBANG_FILES=	sbin/ntp-wait sbin/ntptrace
+SHEBANG_FILES=	scripts/ntptrace/ntptrace.in \
+		scripts/ntp-wait/ntp-wait.in \
+		scripts/update-leap/update-leap
+perl_OLD_CMD=	@PATH_PERL@
 
 .include "Makefile.inc"
 
@@ -59,7 +63,5 @@ post-install:
 	@${FIND} ${WRKSRC}/html -type f | ${XARGS} ${CHMOD} ${SHAREMODE}
 	@cd ${WRKSRC}/html && ${FIND} . -print | \
 		${CPIO} -pdu -R ${SHAREOWN}:${SHAREGRP} --quiet ${STAGEDIR}${DOCSDIR}
-	@cd ${STAGEDIR}${PREFIX}; \
-		${ECHO_CMD} ${NTP_SHEBANG_FILES} | ${XARGS} ${SED} -i '' ${_SHEBANG_REINPLACE_ARGS}
 
 .include <bsd.port.post.mk>

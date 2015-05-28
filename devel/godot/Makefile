@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	godot
-PORTVERSION=	1.0
+PORTVERSION=	1.1
+DISTVERSIONSUFFIX=	-stable
 CATEGORIES=	devel games
 
 MAINTAINER=	FreeBSD@Shaneware.biz
@@ -15,16 +16,11 @@ LIB_DEPENDS=	libfreetype.so:${PORTSDIR}/print/freetype2 \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	okamstudio
-GH_PROJECT=	godot
-GH_TAGNAME=	${PORTVERSION}-stable
-GH_COMMIT=	7eb5d04
 
 USES=		scons pkgconfig compiler
-USE_XORG=	x11 xcursor
+USE_XORG=	x11 xcursor xinerama
 USE_GL=		glu
 USE_OPENSSL=	yes
-# uses pkg-config to find ssl - pkg-config only finds port version
-WITH_OPENSSL_PORT=	yes
 
 MAKE_ARGS+=	platform=x11
 
@@ -44,14 +40,14 @@ BITSUF=	.64
 BITSUF=	.32
 .endif
 
-.if ${COMPILER_TYPE} == clang
+.if ${CHOSEN_COMPILER_TYPE} == clang
 .if ${OSVERSION} < 900000
 BROKEN=	clang fails to link on 8.x
 .endif
 LLSUF=	.llvm
 MAKE_ARGS+=	use_llvm=yes
 .else  # clang
-USE_GCC=	4.8+
+USE_GCC=	yes
 .if ${ARCH} == i386
 CXXFLAGS+=	-march=i586
 .endif

@@ -28,8 +28,9 @@ RUN_DEPENDS=	iso-codes>=0:${PORTSDIR}/misc/iso-codes \
 		gnome-icon-theme-symbolic>=0:${PORTSDIR}/x11-themes/gnome-icon-theme-symbolic \
 		gnome-icon-theme>=0:${PORTSDIR}/misc/gnome-icon-theme
 
-USES=		desktop-file-utils gettext gmake libtool pathfix \
+USES=		cpe desktop-file-utils gettext gmake libtool pathfix \
 		pkgconfig python:3 tar:xz
+CPE_VENDOR=	gnome
 USE_GNOME=	gnomedesktop3 gnomeprefix intlhack libwnck3 libxml2 libxslt
 USE_XORG=	ice x11 sm
 INSTALLS_ICONS=	yes
@@ -51,10 +52,7 @@ PLIST_SUB+=	EPHY_VERSION=${PORTVERSION:R}
 CONFIGURE_ARGS+=	--enable-compile-warnings=no
 
 post-patch:
-	@${FIND} ${WRKSRC} -name "Makefile.in*" | ${XARGS} ${REINPLACE_CMD} -e \
-		 's|-lpthread|${PTHREAD_LIBS}|g'
-	@${REINPLACE_CMD} -e 's|execinfo.h|#|g ; \
-	    	s|-ldl"$$|"|g' \
+	@${REINPLACE_CMD} -e 's|execinfo.h|#|g ; s|-ldl"$$|"|g' \
 		${WRKSRC}/configure
 
 .include <bsd.port.mk>

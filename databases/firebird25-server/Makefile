@@ -3,7 +3,7 @@
 
 PORTNAME=	firebird
 PORTVERSION=	2.5.3
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES?=	databases
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTVERSION:S/.0//}-Release/
 PKGNAMESUFFIX?=	${PORTVERSION:R:S/.//}-server
@@ -38,8 +38,7 @@ CONFIGURE_ARGS=	--with-system-editline \
 		--with-fbsbin=${PREFIX}/sbin \
 		--with-fbsecure-db=${LOCALSTATEDIR} \
 		--with-fbudf=${LIBEXECDIR}/UDF
-CONFIGURE_ENV+=	PTHREAD_CFLAGS="${PTHREAD_CFLAGS}" \
-		PTHREAD_LIBS="${PTHREAD_LIBS}"
+CONFIGURE_ENV+=	PTHREAD_LIBS="-lpthread"
 
 CFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib

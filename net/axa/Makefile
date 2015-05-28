@@ -1,30 +1,29 @@
 # $FreeBSD$
 
 PORTNAME=	axa
-PORTVERSION=	1.0.0
+PORTVERSION=	1.1.1
 CATEGORIES=	net dns
+MASTER_SITES=	FARSIGHT LOCAL/truckman/farsight
 
 MAINTAINER=	truckman@FreeBSD.org
 COMMENT=	AXA library and tools
 
 LICENSE=	APACHE20
+LICENSE_FILE=	${WRKSRC}/copyright
 
 BUILD_DEPENDS=	bash:${PORTSDIR}/shells/bash \
 		sie-nmsg>0:${PORTSDIR}/net/sie-nmsg
 LIB_DEPENDS=	libprotobuf-c.so:${PORTSDIR}/devel/protobuf-c \
 		libnmsg.so:${PORTSDIR}/net/nmsg \
 		libwdns.so:${PORTSDIR}/dns/wdns
-
-USE_GITHUB=	yes
-GH_ACCOUNT=	farsightsec
-GH_COMMIT=	bf9c038
-GH_TAGNAME=	${GH_COMMIT}
+RUN_DEPENDS=	sie-nmsg>0:${PORTSDIR}/net/sie-nmsg
 
 GNU_CONFIGURE=	yes
-USES=		autoreconf gmake libtool pathfix pkgconfig
+USES=		gmake libtool pathfix pkgconfig
 CONFIGURE_SHELL=	${LOCALBASE}/bin/bash
-INSTALL_TARGET=	install-strip
 USE_LDCONFIG=	yes
+USE_OPENSSL=	yes
+WITH_OPENSSL_PORT=	yes
 
 PORTDOCS=	*
 
@@ -39,7 +38,9 @@ DOXYGEN_ALL_TARGET=	html-local
 
 .if ${PORT_OPTIONS:MDOXYGEN}
 post-install:
-	(cd ${WRKSRC}/doc/doxygen && ${COPYTREE_SHARE} html ${STAGEDIR}${DOCSDIR})
+	# install-strip does not strip libaxa.so
+	${STRIP_CMD} ${STAGEDIR}/${PREFIX}/lib/libaxa.so.0.0.0
+	(cd ${WRKSRC} && ${COPYTREE_SHARE} html ${STAGEDIR}${DOCSDIR})
 .endif
 
 .include <bsd.port.mk>

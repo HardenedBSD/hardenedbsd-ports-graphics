@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	thunderbird
-DISTVERSION=	31.4.0
-PORTREVISION=	2
+DISTVERSION=	31.7.0
 CATEGORIES=	mail news net-im ipv6
 MASTER_SITES=	MOZILLA/${PORTNAME}/releases/${DISTVERSION}/source \
 		https://ftp.mozilla.org/pub/mozilla.org/${PORTNAME}/candidates/${DISTVERSION}-candidates/build1/source/
@@ -14,13 +13,13 @@ MAINTAINER=	gecko@FreeBSD.org
 COMMENT=	Mozilla Thunderbird is standalone mail and news that stands above
 
 BUILD_DEPENDS=	nspr>=4.10.6:${PORTSDIR}/devel/nspr \
-		nss>=3.16:${PORTSDIR}/security/nss \
+		nss>=3.16.2.3:${PORTSDIR}/security/nss \
 		libevent2>=2.0.21_2:${PORTSDIR}/devel/libevent2 \
 		cairo>=1.12.16_1,2:${PORTSDIR}/graphics/cairo \
 		soundtouch>=1.8.0:${PORTSDIR}/audio/soundtouch \
 		harfbuzz>=0.9.25:${PORTSDIR}/print/harfbuzz \
 		graphite2>=1.2.4:${PORTSDIR}/graphics/graphite2 \
-		libvorbis>=1.3.4:${PORTSDIR}/audio/libvorbis \
+		libvorbis>=1.3.5:${PORTSDIR}/audio/libvorbis \
 		opus>=1.1:${PORTSDIR}/audio/opus \
 		libvpx>=1.3.0:${PORTSDIR}/multimedia/libvpx \
 		sqlite3>=3.8.4.2:${PORTSDIR}/databases/sqlite3 \
@@ -32,8 +31,8 @@ BUILD_DEPENDS=	nspr>=4.10.6:${PORTSDIR}/devel/nspr \
 
 LIB_DEPENDS=	libv4l2.so:${PORTSDIR}/multimedia/libv4l
 
-EM_VERSION=	1.7.2
-L_VERSION=	3.3.4
+EM_VERSION=	1.8.2
+L_VERSION=	3.3.7
 
 SSP_UNSAFE=	yes
 USE_GECKO=	gecko
@@ -59,7 +58,7 @@ SYSTEM_PREFS=	${FAKEDIR}/lib/${PORTNAME}/defaults/pref/${PORTNAME}.js
 MOZ_PIS_SCRIPTS=moz_pis_S50cleanhome
 
 OPTIONS_DEFINE=	ENIGMAIL LIGHTNING
-OPTIONS_DEFAULT=ENIGMAIL LIGHTNING
+OPTIONS_DEFAULT=CANBERRA ENIGMAIL LIGHTNING
 
 .include "${.CURDIR}/../../www/firefox/Makefile.options"
 

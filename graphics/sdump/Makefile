@@ -2,6 +2,7 @@
 
 PORTNAME=	sdump
 PORTVERSION=	2015.01.16
+PORTREVISION=	1
 CATEGORIES=	graphics
 
 MAINTAINER=	sue@iwmt.org
@@ -16,9 +17,7 @@ LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	uobikiemukot
-GH_PROJECT=	sdump
-GH_TAGNAME=	${GH_COMMIT}
-GH_COMMIT=	c5fb55b
+GH_TAGNAME=	c5fb55b
 
 PLIST_FILES=	bin/sdump libexec/w3m/yaimg-sixel
 

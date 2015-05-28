@@ -6,8 +6,7 @@ PORTVERSION=	${SNAPSHOT}
 PORTREVISION=	1
 CATEGORIES=	lang
 MASTER_SITES=	http://downloads.dragonlace.net/src/:boot \
-		${MASTER_SITE_GCC}
-MASTER_SITE_SUBDIR=	releases/gcc-${GCC_VERSION}
+		GCC/releases/gcc-${GCC_VERSION}
 DISTFILES=	gcc-${GCC_VERSION}.tar.bz2
 
 MAINTAINER=	marino@FreeBSD.org
@@ -15,6 +14,9 @@ COMMENT=	Version of GCC ${GCC_BRANCH} with full Ada support
 
 LICENSE=	GPLv3 GPLv3RLE
 LICENSE_COMB=	multi
+
+DEPRECATED=	GCC 4.7 branch closed June 2014, move to lang/gcc-aux
+EXPIRATION_DATE=	2015-05-31
 
 .include "${.CURDIR}/Makefile.common"
 

@@ -29,6 +29,7 @@
     SUBDIR += cassandra2
     SUBDIR += cdb
     SUBDIR += cego
+    SUBDIR += cegobridge
     SUBDIR += couchdb
     SUBDIR += courier-authlib-mysql
     SUBDIR += courier-authlib-pgsql
@@ -51,6 +52,7 @@
     SUBDIR += dbview
     SUBDIR += emma
     SUBDIR += epgsql
+    SUBDIR += eredis
     SUBDIR += erlang-mysql
     SUBDIR += evolution-data-server
     SUBDIR += fastdb
@@ -147,6 +149,7 @@
     SUBDIR += libmongo-client
     SUBDIR += libodbc++
     SUBDIR += libpbl
+    SUBDIR += libpqtypes
     SUBDIR += libsdb
     SUBDIR += libzdb
     SUBDIR += linux-c6-sqlite3
@@ -177,7 +180,6 @@
     SUBDIR += mongodb
     SUBDIR += mrtg-mysql-load
     SUBDIR += mtop
-    SUBDIR += my2cego
     SUBDIR += mydbf2mysql
     SUBDIR += mydumper
     SUBDIR += mysac
@@ -305,6 +307,7 @@
     SUBDIR += p5-DBI-Shell
     SUBDIR += p5-DBICx-Deploy
     SUBDIR += p5-DBICx-MapMaker
+    SUBDIR += p5-DBICx-Sugar
     SUBDIR += p5-DBICx-TestDatabase
     SUBDIR += p5-DBICx-TxnInsert
     SUBDIR += p5-DBIWrapper
@@ -414,6 +417,7 @@
     SUBDIR += p5-MLDBM
     SUBDIR += p5-MLDBM-Sync
     SUBDIR += p5-MR-Tarantool
+    SUBDIR += p5-Mango
     SUBDIR += p5-Memcached-libmemcached
     SUBDIR += p5-Metadata
     SUBDIR += p5-Mojo-Pg
@@ -582,24 +586,6 @@
     SUBDIR += php5-sqlite3
     SUBDIR += php5-sybase_ct
     SUBDIR += php5-tarantool
-    SUBDIR += php53-dba
-    SUBDIR += php53-interbase
-    SUBDIR += php53-mssql
-    SUBDIR += php53-mysql
-    SUBDIR += php53-mysqli
-    SUBDIR += php53-odbc
-    SUBDIR += php53-pdo
-    SUBDIR += php53-pdo_dblib
-    SUBDIR += php53-pdo_firebird
-    SUBDIR += php53-pdo_mysql
-    SUBDIR += php53-pdo_odbc
-    SUBDIR += php53-pdo_pgsql
-    SUBDIR += php53-pdo_sqlite
-    SUBDIR += php53-pgsql
-    SUBDIR += php53-redis
-    SUBDIR += php53-sqlite
-    SUBDIR += php53-sqlite3
-    SUBDIR += php53-sybase_ct
     SUBDIR += php55-dba
     SUBDIR += php55-interbase
     SUBDIR += php55-mssql
@@ -756,6 +742,7 @@
     SUBDIR += py-postgresql
     SUBDIR += py-psycopg
     SUBDIR += py-psycopg2
+    SUBDIR += py-psycogreen
     SUBDIR += py-pyPgSQL
     SUBDIR += py-pyhs
     SUBDIR += py-pylibmc
@@ -783,7 +770,6 @@
     SUBDIR += py-tarantool
     SUBDIR += py-umemcache
     SUBDIR += py-whisper
-    SUBDIR += pydbdesigner
     SUBDIR += pydbx
     SUBDIR += pymongo
     SUBDIR += pyspatialite
@@ -896,6 +882,7 @@
     SUBDIR += slony1v2
     SUBDIR += soci
     SUBDIR += spatialite
+    SUBDIR += spatialite-tools
     SUBDIR += spatialite_gui
     SUBDIR += speedtables
     SUBDIR += sqlbuddy

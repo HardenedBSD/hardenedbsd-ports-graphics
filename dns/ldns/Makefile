@@ -3,7 +3,7 @@
 
 PORTNAME=	ldns
 PORTVERSION=	1.6.17
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	dns
 MASTER_SITES=	http://www.nlnetlabs.nl/downloads/ldns/ \
 		LOCAL/ehaupt
@@ -15,7 +15,8 @@ LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 GNU_CONFIGURE=	yes
-USES=		gmake libtool
+USES=		cpe gmake libtool
+CPE_VENDOR=	nlnetlabs
 USE_OPENSSL=	yes
 USE_LDCONFIG=	yes
 
@@ -80,6 +81,7 @@ INSTALL_TARGET+=install-manpages
 .if ${PORT_OPTIONS:MGOST}
 . if ${OSVERSION} < 1000015
 BUILD_DEPENDS+=	openssl>=1.0:${PORTSDIR}/security/openssl
+CONFLICTS+=	libressl-*
 . endif
 .else
 NO_GOST=	--disable-gost

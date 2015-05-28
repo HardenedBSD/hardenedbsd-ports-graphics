@@ -2,38 +2,49 @@
 # $FreeBSD$
 
 PORTNAME=	worker
-PORTVERSION=	3.6.0
+PORTVERSION=	3.7.0
 CATEGORIES=	x11-fm
 MASTER_SITES=	http://www.boomerangsworld.de/cms/worker/downloads/
 
 MAINTAINER=	mp39590@gmail.com
-COMMENT=	X11 File Manager based on Directory Opus
+COMMENT=	X11 file manager based on Directory Opus of AmigaOS
 
 LICENSE=	GPLv2
 
-RUN_DEPENDS+=	bash:${PORTSDIR}/shells/bash
+RUN_DEPENDS=	bash:${PORTSDIR}/shells/bash
 
+USES=		compiler:c++11-lib pkgconfig shebangfix tar:bzip2
 GNU_CONFIGURE=	yes
-USE_XORG=	x11
+USE_XORG=	x11 xinerama
+# From version 3.7.0 worker automatically detects proper pthread flags
+# which should be passed to compiler, for FreeBSD it properly sets
+# PTHREAD_CFLAGS to '-pthread', but leaves PTHREAD_LIBS variable empty,
+# making linker scream and fail about unresolved pthread_* functions.
+# This hack helps to pass proper flags to the linker.
+CONFIGURE_ENV=	PTHREAD_LIBS="-pthread"
 
-USES=	shebangfix tar:bzip2
 SHEBANG_FILES=	${WRKSRC}/scripts/*.sh \
 		${WRKSRC}/scripts/xeditor
 
-OPTIONS_DEFINE=	XFT AVFS
+OPTIONS_DEFINE=	AVFS HAL INOTIFY LUA XFT
+OPTIONS_DEFAULT=	AVFS INOTIFY
 
+OPTIONS_EXCLUDE_DragonFly=	AVFS
+
+INOTIFY_DESC=	Monitor directory changes via libinotify
 AVFS_DESC=	Use AVFS library to access an archives
+
 AVFS_LIB_DEPENDS=	libavfs.so:${PORTSDIR}/sysutils/avfs
-XFT_CONFIGURE_ENABLE=	xft
+
+HAL_LIB_DEPENDS=	libhal-storage.so:${PORTSDIR}/sysutils/hal \
+			libdbus-glib-1.so:${PORTSDIR}/devel/dbus-glib
+INOTIFY_LIB_DEPENDS=	libinotify.so:${PORTSDIR}/devel/libinotify
+INOTIFY_LDFLAGS=	-L${LOCALBASE}/lib
+
+LUA_CONFIGURE_OFF=	--disable-lua
+LUA_USES=	lua:51
+
+XFT_CONFIGURE_OFF=	--disable-xft
 XFT_USE=	XORG=xft
 
-.include <bsd.port.pre.mk>
-
-.if ${OSVERSION} < 1000024
-USE_GCC=	yes
-.else
-CONFIGURE_ARGS+=	--disable-cxx-check
-CXXFLAGS+=	-std=c++11
-.endif
-
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

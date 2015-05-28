@@ -8,7 +8,7 @@ MASTER_SITES=	http://download.enlightenment.org/rel/bindings/python/
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 DISTNAME=	python-efl-${PORTVERSION}
 
-MAINTAINER=	gblach@FreeBSD.org
+MAINTAINER=	enlightenment@FreeBSD.org
 COMMENT=	Python bindings for EFL and Elementary
 
 LICENSE=	GPLv3 LGPL3
@@ -23,7 +23,7 @@ USE_PYTHON=	autoplist distutils
 
 .include <bsd.port.pre.mk>
 
-.if ${PYTHON_REL} < 300
+.if ${PYTHON_REL} < 3000
 BUILD_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}dbus>=0.83:${PORTSDIR}/devel/py-dbus
 RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}dbus>=0.83:${PORTSDIR}/devel/py-dbus
 .else

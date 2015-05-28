@@ -15,6 +15,7 @@
     SUBDIR += accountsservice
     SUBDIR += acpi_call
     SUBDIR += acpica-tools
+    SUBDIR += acts
     SUBDIR += adtool
     SUBDIR += afbinit
     SUBDIR += afflib
@@ -146,6 +147,7 @@
     SUBDIR += conky-awesome
     SUBDIR += consolehm
     SUBDIR += consolekit
+    SUBDIR += consul
     SUBDIR += contractor
     SUBDIR += copytape
     SUBDIR += coreutils
@@ -188,6 +190,7 @@
     SUBDIR += di
     SUBDIR += dim
     SUBDIR += dirdiff
+    SUBDIR += direnv
     SUBDIR += dirvish
     SUBDIR += diskcheckd
     SUBDIR += diskimage-tools
@@ -475,6 +478,7 @@
     SUBDIR += livecd
     SUBDIR += lmmon
     SUBDIR += lmon
+    SUBDIR += lnav
     SUBDIR += log_analysis
     SUBDIR += loganalyzer
     SUBDIR += logrotate
@@ -578,6 +582,7 @@
     SUBDIR += openipmi
     SUBDIR += openupsd
     SUBDIR += ori
+    SUBDIR += osquery
     SUBDIR += p5-BSD-Jail-Object
     SUBDIR += p5-BSD-Process
     SUBDIR += p5-BSD-Sysctl
@@ -691,12 +696,11 @@
     SUBDIR += phantom
     SUBDIR += php5-fileinfo
     SUBDIR += php5-posix
-    SUBDIR += php53-fileinfo
-    SUBDIR += php53-posix
     SUBDIR += php55-fileinfo
     SUBDIR += php55-posix
     SUBDIR += php56-fileinfo
     SUBDIR += php56-posix
+    SUBDIR += pick
     SUBDIR += pidof
     SUBDIR += pipemeter
     SUBDIR += plasma-applet-apcups
@@ -726,7 +730,6 @@
     SUBDIR += puppet
     SUBDIR += puppet-lint
     SUBDIR += puppet-mode.el
-    SUBDIR += puppet27
     SUBDIR += pv
     SUBDIR += pwd_unmkdb
     SUBDIR += pwgen
@@ -760,6 +763,7 @@
     SUBDIR += py-shutilwhich
     SUBDIR += py-stdiff
     SUBDIR += py-supervisor
+    SUBDIR += py-tmuxp
     SUBDIR += py-zdaemon
     SUBDIR += py-zfs
     SUBDIR += pydf
@@ -831,8 +835,10 @@
     SUBDIR += rubygem-hammer_cli
     SUBDIR += rubygem-hammer_cli_foreman
     SUBDIR += rubygem-hammer_cli_foreman_bootdisk
+    SUBDIR += rubygem-hammer_cli_foreman_salt
     SUBDIR += rubygem-hammer_cli_foreman_ssh
     SUBDIR += rubygem-hiera
+    SUBDIR += rubygem-hiera-file
     SUBDIR += rubygem-librarian-puppet
     SUBDIR += rubygem-log4r
     SUBDIR += rubygem-logify
@@ -857,6 +863,7 @@
     SUBDIR += rundeck
     SUBDIR += runit
     SUBDIR += runwhen
+    SUBDIR += s6
     SUBDIR += safe-rm
     SUBDIR += safecat
     SUBDIR += samefile
@@ -882,6 +889,7 @@
     SUBDIR += searchmonkey
     SUBDIR += seatools
     SUBDIR += sec
+    SUBDIR += serf
     SUBDIR += setcdboot
     SUBDIR += setquota
     SUBDIR += sformat
@@ -976,6 +984,7 @@
     SUBDIR += u-boot-duovero
     SUBDIR += u-boot-pandaboard
     SUBDIR += u-boot-rpi
+    SUBDIR += u-boot-rpi2
     SUBDIR += u-boot-wandboard
     SUBDIR += ua
     SUBDIR += ucspi-ipc
@@ -1025,10 +1034,11 @@
     SUBDIR += vpnc-scripts
     SUBDIR += vstrip
     SUBDIR += vttest
-    SUBDIR += warden
     SUBDIR += wait_on
+    SUBDIR += warden
     SUBDIR += watchdog
     SUBDIR += watchfolder
+    SUBDIR += watchman
     SUBDIR += watchmen
     SUBDIR += webjob
     SUBDIR += webmin
@@ -1060,6 +1070,7 @@
     SUBDIR += xcpustate
     SUBDIR += xdu
     SUBDIR += xe-guest-utilities
+    SUBDIR += xen-guest-tools
     SUBDIR += xen-tools
     SUBDIR += xfburn
     SUBDIR += xfce4-battery-plugin

@@ -2,22 +2,22 @@
 # $FreeBSD$
 
 PORTNAME=	mono
-PORTVERSION=	3.10.0
-PORTREVISION=	2
+PORTVERSION=	4.0.1.28
 CATEGORIES=	lang
 MASTER_SITES=	http://download.mono-project.com/sources/${PORTNAME}/
 
-PATCHFILES=	fb3468e61c943790ddad0f8cfb3e0cb0e3a00d0d.patch
+PATCHFILES=	#
 PATCH_SITES=	https://github.com/mono/mono/commit/
 PATCH_DIST_STRIP=-p1
 
+WRKSRC=	${WRKDIR}/mono-4.0.1
 MAINTAINER=	mono@FreeBSD.org
 COMMENT=	Open source implementation of .NET Development Framework
 
 BUILD_DEPENDS=	p5-XML-Parser>=0:${PORTSDIR}/textproc/p5-XML-Parser \
 		bash:${PORTSDIR}/shells/bash
 
-USES=		bison compiler:c11 gettext gmake iconv libtool pathfix perl5 tar:bzip2
+USES=		bison compiler:c11 cpe gettext gmake iconv libtool pathfix perl5 tar:bzip2
 USE_GNOME=	glib20
 USE_PERL5=	build
 GNU_CONFIGURE=	yes
@@ -36,7 +36,7 @@ MONO_SHARED_DIR=${WRKDIR}
 # strange crashes.
 MAKE_ENV=	MONO_SHARED_DIR="${MONO_SHARED_DIR}" \
 		INSTALL_STRIP_FLAG="${STRIP}" \
-		LC_ALL=C
+		LC_ALL=C TZ=UTC
 
 ONLY_FOR_ARCHS=	i386 amd64 powerpc
 

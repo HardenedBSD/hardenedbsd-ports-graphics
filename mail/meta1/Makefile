@@ -1,11 +1,11 @@
 # $FreeBSD$
 
 PORTNAME=	meta1
-PORTVERSION=	1.0.0b.0.0
+PORTVERSION=	1.1.0a.1.0
 PORTREVISION=	2
-DISTVERSION=	1.0.Beta0.0
+DISTVERSION=	1.1.Alpha1.0
 CATEGORIES=	mail ipv6
-MASTER_SITES=	http://www.MeTA1.org/download/.beta/proto/
+MASTER_SITES=	http://www.MeTA1.org/download/.alpha/authpar/
 PKGNAMESUFFIX?=	${TLS_SUFFIX}${SASL_SUFFIX}${BERKELEYDB_SUFFIX}${PMILTER_SUFFIX}${PKGNAMESUFFIX2}
 
 MAINTAINER=	dinoex@FreeBSD.org
@@ -15,6 +15,7 @@ NOT_FOR_ARCHS=	ia64
 MAKE_JOBS_UNSAFE=	yes
 CONFLICTS=	smx-*
 NEED_ROOT=	yes
+MANUAL_PACKAGE_BUILD=	needs hostname
 
 .if !defined(SENDMAIL_WITHOUT_SHMEM) && !defined(BUILDING_INDEX)
 IPCCHECK!=	ipcrm -q 0 2>&1 || true
@@ -23,8 +24,7 @@ IGNORE=		your system does not support sysvipc
 .endif
 .endif
 
-MANUAL_PACKAGE_BUILD=	needs hostname
-
+USES=	libtool
 WRKSRC=		${WRKDIR}/${PORTNAME}-${DISTVERSION}
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+=	--disable-dependency-tracking
@@ -98,7 +98,7 @@ SASL_SUFFIX?=	-nosasl
 
 .if ${PORT_OPTIONS:MSASL2AUTHD}
 .if empty(PORT_OPTIONS:MSASL2)
-IGNORE=		Option SASL2AUTHD needs option SASL2
+IGNORE=		option SASL2AUTHD needs option SASL2
 .endif
 .endif
 
@@ -106,20 +106,16 @@ IGNORE=		Option SASL2AUTHD needs option SASL2
 TLS_SUFFIX?=	-notls
 .endif
 
-post-patch:
-	${REINPLACE_CMD} -e 's|echo aout|echo elf|' \
-		${WRKSRC}/db-4.3.28.NC/dist/configure
-
 post-configure:
 	@${CP} ${WRKSRC}/misc/sm.check.sh ${WRKSRC}/misc/sm.setup.sh \
 		${WRKDIR}/
-	 @${REINPLACE_CMD} -e 's|/etc/meta1|${META1CONFDIR}|g' \
+	@${REINPLACE_CMD} -e 's|/etc/meta1|${META1CONFDIR}|g' \
 		-e 's|$${SD}/misc|${PREFIX}/bin|' \
 		-e 's|$${SD}/libcheck|${PREFIX}/sbin|' \
 		-e 's|$${SD}/libmta|${PREFIX}/sbin|' \
 		-e 's|$${SD}/checks|${PREFIX}/sbin|' \
 		${WRKDIR}/sm.check.sh
-	 @${REINPLACE_CMD} -e 's|/etc/meta1|${META1CONFDIR}|g' \
+	@${REINPLACE_CMD} -e 's|/etc/meta1|${META1CONFDIR}|g' \
 		-e 's|[.]/misc|${PREFIX}/bin|' \
 		-e 's|$${S}/libconf|${PREFIX}/sbin|' \
 		-e 's|[.]/libmta|${PREFIX}/sbin|' \
@@ -129,7 +125,7 @@ post-configure:
 
 test:
 	(cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-	${MAKE} ${MAKE_FLAGS} ${MAKEFILE} ${MAKE_ARGS} check)
+		${MAKE_CMD} ${MAKE_FLAGS} ${MAKEFILE} ${MAKE_ARGS} check)
 
 #fails on bento
 #regression-test:	test

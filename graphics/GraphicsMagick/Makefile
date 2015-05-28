@@ -3,12 +3,11 @@
 
 PORTNAME=	GraphicsMagick
 PORTVERSION=	1.3.20
-PORTREVISION=	2
+PORTREVISION=	4
 PORTEPOCH=	1
 CATEGORIES=	graphics
 MASTER_SITES=	SF \
 		ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/1.3/
-MASTER_SITE_SUBDIR=	${PORTNAME:tl}/${PORTNAME:tl}/${PORTVERSION}
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Fast image processing tools based on ImageMagick
@@ -27,10 +26,11 @@ USES=		iconv libtool tar:bzip2
 USE_GNOME=	libxml2
 USE_GHOSTSCRIPT=yes
 GNU_CONFIGURE=	yes
-CONFIGURE_ENV=	PTHREAD_CFLAGS="${PTHREAD_CFLAGS}" PTHREAD_LIBS="${PTHREAD_LIBS}"
+CONFIGURE_ENV=	PTHREAD_LIBS="-lpthread"
 CONFIGURE_ARGS=	--without-perl --enable-shared --enable-static \
 		--with-quantum-depth="${QD}" \
 		--with-windows-font-dir="${WINDOWS_FONT_DIR}"
+INSTALL_TARGET=	install-strip
 USE_LDCONFIG=	yes
 
 PLIST_SUB=	Q="${QD}"
@@ -95,7 +95,7 @@ LIBWMF_PORT=	libwmf-nox11
 
 .if !defined(WINDOWS_FONT_DIR)
 # Use fonts installed by x11-fonts/webfonts by default
-WINDOWS_FONT_DIR=${LOCALBASE}/lib/X11/fonts/webfonts
+WINDOWS_FONT_DIR=${LOCALBASE}/share/fonts/webfonts
 .endif
 
 .if ${PORT_OPTIONS:MTESTS}

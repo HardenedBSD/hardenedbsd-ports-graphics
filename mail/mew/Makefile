@@ -3,7 +3,7 @@
 
 PORTNAME=	mew
 PORTVERSION=	6.6
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	mail elisp
 MASTER_SITES=	http://www.mew.org/Release/
 PKGNAMESUFFIX=	-${EMACS_PORT_NAME}
@@ -50,6 +50,5 @@ post-install:
 		)
 	${CHOWN} -R ${SHAREOWN}:${SHAREGRP} ${STAGEDIR}${DOCSDIR}
 .endif
-	@${CAT} ${PKGMESSAGE}
 
 .include <bsd.port.mk>

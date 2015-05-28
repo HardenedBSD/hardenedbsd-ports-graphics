@@ -6,8 +6,7 @@ PORTVERSION=	${RUBY_PORTVERSION}
 PORTREVISION=	${RUBY_PORTREVISION}
 PORTEPOCH=	${RUBY_PORTEPOCH}
 CATEGORIES=	lang ruby ipv6
-MASTER_SITES=		${MASTER_SITE_RUBY}
-MASTER_SITE_SUBDIR=	${MASTER_SITE_SUBDIR_RUBY}
+MASTER_SITES=		RUBY/${MASTER_SITE_SUBDIR_RUBY}
 DISTNAME=	${RUBY_DISTNAME}
 DIST_SUBDIR=	ruby
 
@@ -83,7 +82,7 @@ _SUF1=	_${PORTREVISION}
 
 CPPFLAGS+=	-I${LOCALBASE}/include
 # Keep this, else ruby will fail to load libraries dependent op libpthread.
-LIBS+=		-L${LOCALBASE}/lib ${PTHREAD_LIBS}
+LIBS+=		-lpthread -L${LOCALBASE}/lib
 
 .if ${OPSYS} == "FreeBSD"
 .if exists(/usr/sbin/dtrace) && (${OSVERSION} > 1100032) && (${ARCH} == "amd64" || ${ARCH} == "i386")
@@ -91,6 +90,10 @@ CONFIGURE_ARGS+=	--enable-dtrace
 .else
 CONFIGURE_ARGS+=	--disable-dtrace
 .endif
+.endif
+
+.if ${ARCH} == "armv6" || ${ARCH} == "armv6hf"
+CONFIGURE_ARGS+=	--with-setjmp-type=_setjmp
 .endif
 
 CONFIGURE_ENV=	debugflags=
@@ -137,7 +140,7 @@ RB_SET_CONF_VAR=${SH} -c '${REINPLACE_CMD} -E -e "s,(CONFIG\[\"$$0\"\][[:space:]
 
 post-patch:
 	@${REINPLACE_CMD} -E \
-		-e 's,-l$$pthread_lib,${PTHREAD_LIBS},g' \
+		-e 's,-l$$pthread_lib,-lpthread,g' \
 		-e '/^RUBY_LIB_PATH/s,\.\$$\{TEENY\},,' \
 		-e '/^RUBY_SITE_LIB_PATH2/s,\.\$$\{TEENY\},,' \
 		-e '/^RUBY_VENDOR_LIB_PATH2/s,\.\$$\{TEENY\},,' \
@@ -174,7 +177,7 @@ post-build:
 # privilegies
 #
 	@${RB_SET_CONF_VAR} "prefix" "ENV['PREFIX'] || \3"
-	@${RB_SET_CONF_VAR} "INSTALL" "ENV['RB_USER_INSTALL'] ? '/usr/bin/install -c' : '/usr/bin/install -c ${_BINOWNGRP}'"
+	@${RB_SET_CONF_VAR} "INSTALL" "'/usr/bin/install -c'"
 	@${RB_SET_CONF_VAR} "INSTALL_PROGRAM" "ENV['RB_USER_INSTALL'] ? '${INSTALL} ${COPY} ${STRIP} -m ${BINMODE}' : '${INSTALL_PROGRAM}'"
 	@${RB_SET_CONF_VAR} "INSTALL_SCRIPT" "ENV['RB_USER_INSTALL'] ? '${INSTALL} ${COPY} -m ${BINMODE}' : '${INSTALL_SCRIPT}'"
 	@${RB_SET_CONF_VAR} "INSTALL_DATA" "ENV['RB_USER_INSTALL'] ? '${INSTALL} ${COPY} -m ${SHAREMODE}' : '${INSTALL_DATA}'"
@@ -212,7 +215,7 @@ post-install:
 #
 .if ${RUBY_VER} == ${RUBY_DEFAULT_VER}
 . for FILE in ${INSTALLED_SCRIPTS}
-	${LN} -f ${STAGEDIR}${PREFIX}/bin/${FILE}${RUBY_SUFFIX} ${STAGEDIR}${PREFIX}/bin/${FILE}
+	${LN} -fs ${FILE}${RUBY_SUFFIX} ${STAGEDIR}${PREFIX}/bin/${FILE}
 . endfor
 .endif
 

@@ -2,13 +2,13 @@
 # $FreeBSD$
 
 PORTNAME=	ps
-PORTVERSION=	1.13.0
+PORTVERSION=	1.13.2
 CATEGORIES=	graphics enlightenment
 MASTER_SITES=	http://download.enlightenment.org/rel/libs/${PKGNAMEPREFIX:S/-//}/
 PKGNAMEPREFIX=	evas_generic_loaders-
 DISTNAME=	${PKGNAMEPREFIX}${DISTVERSION}
 
-MAINTAINER=	gblach@FreeBSD.org
+MAINTAINER=	enlightenment@FreeBSD.org
 COMMENT=	Additional loader for Evas (ps)
 
 LICENSE=	GPLv2

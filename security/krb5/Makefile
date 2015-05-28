@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=		krb5
-PORTVERSION=		1.13.1
+PORTVERSION=		1.13.2
 PORTREVISION=		1
 CATEGORIES=		security
 MASTER_SITES=		http://web.mit.edu/kerberos/dist/${PORTNAME}/${PORTVERSION:C/^[0-9]*\.[0-9]*/&X/:C/X\.[0-9]*$//:C/X//}/
@@ -26,11 +26,15 @@ USE_PERL5=		build
 USE_LDCONFIG=		yes
 USE_CSTD=		gnu99
 GNU_CONFIGURE=		yes
-USES=			gettext gmake perl5 libtool:build
+USES=			cpe gettext gmake perl5 libtool:build
 CONFIGURE_ARGS?=	--enable-shared --without-system-verto \
-			--disable-rpath
+			--disable-rpath --localstatedir="${PREFIX}/var"
 CONFIGURE_ENV=		INSTALL="${INSTALL}" INSTALL_LIB="${INSTALL_LIB}" YACC="${YACC}"
 MAKE_ARGS=		INSTALL="${INSTALL}" INSTALL_LIB="${INSTALL_LIB}"
+
+CPE_VENDOR=		mit
+CPE_VERSION=		5-${PORTVERSION}
+CPE_PRODUCT=		kerberos
 
 OPTIONS_DEFINE=		KRB5_PDF KRB5_HTML DNS_FOR_REALM LDAP READLINE
 OPTIONS_DEFAULT=	KRB5_PDF KRB5_HTML

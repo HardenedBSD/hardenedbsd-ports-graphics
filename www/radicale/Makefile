@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=		radicale
-PORTVERSION=		0.8
+PORTVERSION=		0.10
 PORTREVISION=		1
 CATEGORIES=		www python
 MASTER_SITES=		CHEESESHOP
@@ -20,7 +20,7 @@ PYDISTUTILS_PKGNAME=	Radicale
 USERS=			radicale
 GROUPS=			radicale
 USE_RC_SUBR=		radicale
-SUB_LIST+=		USERS="${USERS}"
+SUB_LIST+=		USERS="${USERS}" PYTHON_CMD="${PYTHON_CMD}"
 
 OPTIONS_DEFINE=		HTTP LDAP
 HTTP_DESC=		HTTP authentication support
@@ -34,7 +34,7 @@ USES+=		python
 .endif
 
 .if ${PORT_OPTIONS:MHTTP}
-RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}requests1>=0:${PORTSDIR}/www/py-requests1	
+RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}requests1>=0:${PORTSDIR}/www/py-requests1
 .endif
 
 .if ${PORT_OPTIONS:MLDAP}
@@ -47,6 +47,7 @@ post-patch:
 
 post-install:
 	${MKDIR} ${STAGEDIR}/${ETCDIR}
+	${MKDIR} ${STAGEDIR}/${DATADIR}
 	${INSTALL_DATA} ${WRKSRC}/config ${STAGEDIR}/${ETCDIR}/config.sample
 	${INSTALL_DATA} ${WRKSRC}/logging ${STAGEDIR}/${ETCDIR}/logging.sample
 

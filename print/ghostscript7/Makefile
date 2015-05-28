@@ -7,10 +7,7 @@ PORTREVISION=	31
 CATEGORIES=	print
 MASTER_SITES=	SF/ghostscript/gnu-gs/${PORTVERSION}:gs_srcs \
 		ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/gnu/gs${PORTVERSION:S/.//}/:gs_srcs \
-		${MASTER_SITE_PORTS_JP:S/$/:ports_jp,ports_jp_gs/}
-MASTER_SITE_SUBDIR= \
-		ghostscript/:gs_srcs \
-		./:ports_jp
+		PORTS_JP:ports_jp,ports_jp_gs
 PKGNAMESUFFIX=	7
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}:gs_srcs
 DIST_SUBDIR=	${PORTNAME}
@@ -48,9 +45,10 @@ MAKE_ENV=	CFLAGS_STANDARD="${CFLAGS}" \
 CPPFLAGS+=	-fPIC -DUPD_SIGNAL=0 -I. -I${WRKSRC}/gimp-print		\
 		-I${LOCALBASE}/include
 LDFLAGS+=	${XLDFLAGS}
-XCFLAGS=	${PTHREAD_CFLAGS}
-XLDFLAGS=	-L${LOCALBASE}/lib -L${WRKSRC}/gimp-print ${PTHREAD_LIBS}
+XLDFLAGS=	-lpthread -L${LOCALBASE}/lib -L${WRKSRC}/gimp-print
 PLIST_SUB=	GS_VERSION="${PORTVERSION}"
+
+MAKE_JOBS_UNSAFE=	yes
 
 OPTIONS_DEFINE=	X11 DOCS A4SIZE
 OPTIONS_DEFAULT=X11 DOCS A4SIZE

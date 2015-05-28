@@ -80,6 +80,7 @@
     SUBDIR += cvsmail
     SUBDIR += cyrus-imapd23
     SUBDIR += cyrus-imapd24
+    SUBDIR += cyrus-imapd25
     SUBDIR += cyrus2courier
     SUBDIR += cyrus2dovecot
     SUBDIR += davmail
@@ -159,6 +160,7 @@
     SUBDIR += gotmail
     SUBDIR += grepmail
     SUBDIR += greyfix
+    SUBDIR += greylite
     SUBDIR += gubby
     SUBDIR += hashcash
     SUBDIR += hbiff
@@ -456,7 +458,6 @@
     SUBDIR += pfqueue
     SUBDIR += pgpsendmail
     SUBDIR += php5-imap
-    SUBDIR += php53-imap
     SUBDIR += php55-imap
     SUBDIR += php56-imap
     SUBDIR += phplist
@@ -486,7 +487,6 @@
     SUBDIR += postfix-policyd-spf-python
     SUBDIR += postfix-policyd-weight
     SUBDIR += postfix-postfwd
-    SUBDIR += postfix-tls
     SUBDIR += postfixadmin
     SUBDIR += postgrey
     SUBDIR += postsrsd
@@ -501,6 +501,7 @@
     SUBDIR += py-apolicy
     SUBDIR += py-authres
     SUBDIR += py-cyruslib
+    SUBDIR += py-dkimpy
     SUBDIR += py-libgmail
     SUBDIR += py-milter
     SUBDIR += py-ppolicy
@@ -580,8 +581,8 @@
     SUBDIR += rubygem-mail25
     SUBDIR += rubygem-mailfactory
     SUBDIR += rubygem-pony
-    SUBDIR += rubygem-qmail
     SUBDIR += rubygem-rmail
+    SUBDIR += rubygem-ruby-qmail
     SUBDIR += rubygem-tmail
     SUBDIR += rubygem-vmail
     SUBDIR += sa-stats

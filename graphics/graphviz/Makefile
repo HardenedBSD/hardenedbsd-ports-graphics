@@ -18,7 +18,7 @@ LIB_DEPENDS=	libltdl.so:${PORTSDIR}/devel/libltdl \
 		libexpat.so:${PORTSDIR}/textproc/expat2 \
 		libgd.so:${PORTSDIR}/${GD_PORT}
 
-USES=		gmake bison libtool:keepla pkgconfig pathfix shebangfix
+USES=		cpe gmake bison libtool:keepla pkgconfig pathfix shebangfix
 GNU_CONFIGURE=	yes
 LDFLAGS+=	-L${LOCALBASE}/lib
 CPPFLAGS+=	-I${LOCALBASE}/include
@@ -148,8 +148,7 @@ TK_CPPFLAGS=		-I${TK_INCLUDEDIR}
 TK_CONFIGURE_ON=	--with-wish=${WISH}
 TK_CONFIGURE_ENV=	TKCONFIG="${TK_LIBDIR}/tkConfig.sh"
 GUILE_CONFIGURE_ENABLE=		guile
-NVTHREADS_CFLAGS+=	${PTHREAD_CFLAGS}
-NVTHREADS_LDFLAGS+=	${PTHREAD_LIBS}
+NVTHREADS_LDFLAGS=	-lpthread
 
 .include <bsd.port.options.mk>
 
@@ -172,10 +171,6 @@ BROKEN=	guile is too old
 
 .if ${PORT_OPTIONS:MMING}
 BROKEN=	Ming incomplete, uses removed libgraph
-.endif
-
-.if ${PORT_OPTIONS:MRUBY}
-BROKEN=	illegal macro in libdata/pkgconfig/ruby-1.9.pc
 .endif
 
 .if ${OSVERSION} > 1100000
@@ -303,6 +298,7 @@ post-patch:
 	${REINPLACE_CMD} -e "s|/usr/include/php|${LOCALBASE}/include/php|g" \
 		-e "s|vendorarchdir|sitearchdir|g" \
 		-e "s|-lruby|-lruby${RUBY_SUFFIX}|g" \
+		-e "s|ruby-1[.]9|ruby-${RUBY_VER}|g" \
 		-e "s|Config::|RbConfig::|" \
 		-e 's|PHP_INSTALL_DIR=.*|PHP_INSTALL_DIR="${PREFIX}/lib/php/${PHP_EXT_DIR}"|' \
 		-e 's|PHP_INSTALL_DATADIR=.*|PHP_INSTALL_DATADIR="${PREFIX}/share/php"|' \

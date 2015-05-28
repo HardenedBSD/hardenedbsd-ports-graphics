@@ -2,11 +2,11 @@
 # $FreeBSD$
 
 PORTNAME=	efl
-PORTVERSION=	1.13.0
+PORTVERSION=	1.13.2
 CATEGORIES=	devel enlightenment
 MASTER_SITES=	http://download.enlightenment.org/rel/libs/${PORTNAME}/
 
-MAINTAINER=	gblach@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Enlightenment Foundation Libraries
 
 LICENSE=	BSD2CLAUSE LGPL21

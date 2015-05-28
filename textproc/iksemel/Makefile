@@ -5,21 +5,20 @@ PORTNAME=	iksemel
 PORTVERSION=	1.4
 PORTREVISION=	6
 CATEGORIES=	textproc
-MASTER_SITES=	${MASTER_SITE_GOOGLE_CODE}
+MASTER_SITES=	GOOGLE_CODE
 
 MAINTAINER=	rhaamo@gruik.at
 COMMENT=	XML parser library mainly designed for Jabber applications
 
 LIB_DEPENDS=	libgnutls.so:${PORTSDIR}/security/gnutls
 
-USES=		libtool makeinfo pathfix pkgconfig
+USES=		autoreconf libtool makeinfo pathfix pkgconfig
 PATHFIX_MAKEFILEIN=	Makefile.am
-USE_AUTOTOOLS=	libtoolize aclocal autoconf autoheader automake
-AUTOMAKE_ARGS=	--add-missing --copy --force
 GNU_CONFIGURE=	yes
 CPPFLAGS+=	${CXXFLAGS} -I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 USE_LDCONFIG=	yes
+INSTALL_TARGET=	install-strip
 
 INFO=	iksemel
 

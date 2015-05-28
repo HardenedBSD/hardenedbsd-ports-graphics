@@ -356,7 +356,6 @@
     SUBDIR += pecl-timezonedb
     SUBDIR += pfm
     SUBDIR += php5-calendar
-    SUBDIR += php53-calendar
     SUBDIR += php55-calendar
     SUBDIR += php56-calendar
     SUBDIR += phraze
@@ -382,6 +381,7 @@
     SUBDIR += qt4-l10n
     SUBDIR += qt4-qtconfig
     SUBDIR += qt4-qtdemo
+    SUBDIR += qt5ct
     SUBDIR += quotes
     SUBDIR += ree
     SUBDIR += rfc
@@ -394,6 +394,7 @@
     SUBDIR += rubygem-iesd
     SUBDIR += rubygem-mime-types
     SUBDIR += rubygem-mime-types1
+    SUBDIR += rubygem-mimemagic
     SUBDIR += rubygem-rabbit
     SUBDIR += rubygem-vpim
     SUBDIR += rump
@@ -445,6 +446,7 @@
     SUBDIR += usbrh-libusb
     SUBDIR += utftools
     SUBDIR += valspeak
+    SUBDIR += vdmfec
     SUBDIR += vera
     SUBDIR += vifm
     SUBDIR += viz

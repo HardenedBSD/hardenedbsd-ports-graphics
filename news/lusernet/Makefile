@@ -4,8 +4,7 @@ PORTNAME=	lusernet
 PORTVERSION=	0.4.2
 PORTREVISION=	4
 CATEGORIES=	news gnustep
-MASTER_SITES=	${MASTER_SITE_LOCAL}
-MASTER_SITE_SUBDIR=	dinoex
+MASTER_SITES=	LOCAL/dinoex
 DISTNAME=	LuserNET-${PORTVERSION}
 
 MAINTAINER=	ports@FreeBSD.org
@@ -13,12 +12,8 @@ COMMENT=	GNUstep news reader
 
 LICENSE=	GPLv2
 
-USE_GNUSTEP=	yes
-USE_GNUSTEP_BACK=	yes
-USE_GNUSTEP_BUILD=	yes
-USE_GNUSTEP_INSTALL=	yes
-USE_GNUSTEP_LOCAL_LIBS+=	Pantomime:${PANTOMIME_PORT}
-
-PANTOMIME_PORT?=	mail/pantomime
+USES=		gnustep
+USE_GNUSTEP=	back build
+LIB_DEPENDS=	libPantomime.so:${PORTSDIR}/mail/pantomime
 
 .include <bsd.port.mk>

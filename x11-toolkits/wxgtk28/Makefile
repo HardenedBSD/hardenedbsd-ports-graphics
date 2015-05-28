@@ -17,7 +17,7 @@ LIB_DEPENDS+=	libpng.so:${PORTSDIR}/graphics/png\
 		libtiff.so:${PORTSDIR}/graphics/tiff\
 		libexpat.so:${PORTSDIR}/textproc/expat2
 
-USES=		iconv gmake pkgconfig tar:bzip2
+USES=		compiler iconv gmake pkgconfig tar:bzip2
 USE_XORG=	x11 sm xxf86vm xinerama
 USE_GL=		glu
 USE_GNOME=	gtk20 pangox-compat
@@ -33,8 +33,7 @@ CONFIGURE_ARGS=	--with-libpng=sys\
 		--enable-mediactrl\
 		--disable-backtrace\
 		--enable-graphics_ctx
-CONFIGURE_ENV=	PTHREAD_LIBS="${PTHREAD_LIBS}"\
-		X11BASE="${LOCALBASE}"
+CONFIGURE_ENV=	X11BASE="${LOCALBASE}"
 CPPFLAGS+=	-I${LOCALBASE}/include
 LIBS+=		-L${LOCALBASE}/lib
 PLIST=		${.CURDIR}/pkg-plist
@@ -101,10 +100,17 @@ pre-configure:
 CONFIGURE_ARGS+=--enable-unicode
 .endif
 
+.include <bsd.port.pre.mk>
+
+# GCC is broken with PCH: https://lists.freebsd.org/pipermail/svn-src-all/2015-March/101722.html
+.if ${COMPILER_TYPE} == gcc
+CONFIGURE_ARGS+=	--disable-precomp-headers
+.endif
+
 post-patch:
 	@${REINPLACE_CMD} -e 's|pkg_config_args --cflags|pkg_config_args pangox --cflags|g ; \
 		s|pkg_config_args --libs|pkg_config_args pangox --libs|g' \
 		-e 's|png_check_sig|png_sig_cmp|g' \
 			${WRKSRC}/configure
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

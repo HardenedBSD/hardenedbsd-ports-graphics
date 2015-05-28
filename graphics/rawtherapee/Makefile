@@ -3,7 +3,7 @@
 
 PORTNAME=	rawtherapee
 PORTVERSION=	4.2
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	http://rawtherapee.com/shared/source/
 
@@ -27,9 +27,9 @@ USES=		cmake:outsource pkgconfig compiler:features desktop-file-utils dos2unix t
 DOS2UNIX_REGEX=	.*\.(cc|h)
 USE_GNOME=	gtk20 glib20
 USE_LDCONFIG=	yes
-CFLAGS+=	-I${LOCALBASE}/include -fPIC ${PTHREAD_CFLAGS}
-CXXFLAGS+=	-I${LOCALBASE}/include -fPIC ${PTHREAD_CFLAGS}
-LDFLAGS+=	-L${LOCALBASE}/lib ${PTHREAD_LIBS}
+CFLAGS+=	-I${LOCALBASE}/include -fPIC
+CXXFLAGS+=	-I${LOCALBASE}/include -fPIC
+LDFLAGS+=	-lpthread -L${LOCALBASE}/lib
 CMAKE_ENV=	CFLAGS="${CFLAGS}" \
 		LDFLAGS="${LDFLAGS:C|-Wl,-rpath=${_GCC_RUNTIME}||:C|-L${_GCC_RUNTIME}||}"
 CMAKE_ARGS+=	-DDOCDIR="${DOCSDIR}" \
@@ -95,6 +95,8 @@ post-patch:
 		${WRKSRC}/rtgui/icmpanel.h
 	@${REINPLACE_CMD} -e 's#DESTINATION "$${CMAKE_INSTALL_PREFIX}/share/man/man1"#DESTINATION "${MANPREFIX}/man/man1/"#' \
 		${WRKSRC}/CMakeLists.txt
+	${RM} ${WRKSRC}/rtengine/dcraw.patch \
+		${WRKSRC}/rtengine/dcraw.c
 
 # paranoia: run rawtherapee --help to be sure it finds all its
 # shared libraries (this hinges on proper RPATH setting and propagation)

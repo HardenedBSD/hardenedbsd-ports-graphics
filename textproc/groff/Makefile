@@ -5,8 +5,7 @@ PORTNAME=	groff
 PORTVERSION=	1.22.2
 PORTREVISION=	1
 CATEGORIES=	textproc
-MASTER_SITES=	${MASTER_SITE_GNU}
-MASTER_SITE_SUBDIR=	groff
+MASTER_SITES=	GNU
 
 MAINTAINER=	uqs@FreeBSD.org
 COMMENT=	Software typesetting package
@@ -17,11 +16,12 @@ BUILD_DEPENDS=	${LOCALBASE}/bin/psselect:${PORTSDIR}/print/psutils
 RUN_DEPENDS:=	${BUILD_DEPENDS}
 
 USE_GHOSTSCRIPT=yes
-USES=		gmake perl5 shebangfix
+USES=		cpe gmake perl5 shebangfix
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+=	--with-awk=/usr/bin/awk
 CONFIGURE_ENV+=	PERLPATH=${perl_CMD} # shebangfix
 
+CPE_VENDOR=	gnu
 SHEBANG_FILES=	src/utils/afmtodit/afmtodit.pl \
 		contrib/mm/mmroff.pl \
 
@@ -72,7 +72,7 @@ post-configure:
 	    ${SET_LATE_CONFIGURE_ARGS} \
 	    if ! ${SETENV} CC="${CC}" CPP="${CPP}" CXX="${CXX}" \
 	    CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" \
-	    INSTALL="/usr/bin/install -c ${_BINOWNGRP}" \
+	    INSTALL="/usr/bin/install -c" \
 	    INSTALL_DATA="${INSTALL_DATA}" \
 	    INSTALL_LIB="${INSTALL_LIB}" \
 	    INSTALL_PROGRAM="${INSTALL_PROGRAM}" \

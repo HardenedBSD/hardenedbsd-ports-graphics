@@ -16,9 +16,8 @@ LICENSE=	BSD3CLAUSE
 USE_OPENSSL=	yes
 
 USE_GITHUB=	yes
-GH_COMMIT=	2bb8bcb
 GH_ACCOUNT=	corecode
-GH_TAGNAME=	${GH_COMMIT}
+GH_TAGNAME=	2bb8bcb
 
 CFLAGS+=	-I${OPENSSLINC} \
 		-DCONF_PATH='\"${PREFIX}/etc/dma\"' \
@@ -26,7 +25,7 @@ CFLAGS+=	-I${OPENSSLINC} \
 		-DDMA_GROUP='\"mail\"'
 LDFLAGS+=	-L${OPENSSLLIB}
 
-MAKE_ENV=	__MAKE_CONF=/dev/null SRCCONF=/dev/null
+MAKE_ENV=	__MAKE_CONF=/dev/null SRCCONF=/dev/null NO_WERROR=defined
 
 USE_RC_SUBR=	dma_flushq
 SUB_FILES=	pkg-message

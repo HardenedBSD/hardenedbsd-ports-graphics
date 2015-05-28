@@ -214,6 +214,7 @@
     SUBDIR += gdtclft
     SUBDIR += geeqie
     SUBDIR += gegl
+    SUBDIR += gegl3
     SUBDIR += generic_image_decoder
     SUBDIR += geoapi
     SUBDIR += geomorph
@@ -622,6 +623,7 @@
     SUBDIR += osgearth
     SUBDIR += oyranos
     SUBDIR += p5-Acme-Steganography-Image-Png
+    SUBDIR += p5-Barcode-ZBar
     SUBDIR += p5-CAD-Drawing
     SUBDIR += p5-CAD-Drawing-Template
     SUBDIR += p5-Cairo
@@ -652,7 +654,6 @@
     SUBDIR += p5-Geo-GDAL
     SUBDIR += p5-Geo-GML
     SUBDIR += p5-Geo-Gpx
-    SUBDIR += p5-Geo-KML
     SUBDIR += p5-Geo-Point
     SUBDIR += p5-Geo-Proj4
     SUBDIR += p5-Geometry-Primitive
@@ -715,6 +716,7 @@
     SUBDIR += p5-URI-GoogleChart
     SUBDIR += p5-VCG
     SUBDIR += p5-Visio
+    SUBDIR += p5-feedgnuplot
     SUBDIR += p5-ming
     SUBDIR += panoglview
     SUBDIR += panomatic
@@ -751,8 +753,6 @@
     SUBDIR += php5-ffmpeg
     SUBDIR += php5-gd
     SUBDIR += php5-swfed
-    SUBDIR += php53-exif
-    SUBDIR += php53-gd
     SUBDIR += php55-exif
     SUBDIR += php55-gd
     SUBDIR += php56-exif
@@ -838,6 +838,7 @@
     SUBDIR += py-paint
     SUBDIR += py-pillow
     SUBDIR += py-pivy
+    SUBDIR += py-plotly
     SUBDIR += py-png
     SUBDIR += py-poppler
     SUBDIR += py-poppler-qt4
@@ -878,6 +879,7 @@
     SUBDIR += qt5-opengl
     SUBDIR += qt5-pixeltool
     SUBDIR += qt5-svg
+    SUBDIR += qtawesome
     SUBDIR += qtgtl
     SUBDIR += quat
     SUBDIR += quat-gui
@@ -913,13 +915,14 @@
     SUBDIR += rubygem-flamegraph
     SUBDIR += rubygem-gd2
     SUBDIR += rubygem-gdk_pixbuf2
+    SUBDIR += rubygem-gemojione
     SUBDIR += rubygem-geokit
     SUBDIR += rubygem-gitlab_emoji
     SUBDIR += rubygem-goocanvas
-    SUBDIR += rubygem-graphviz
     SUBDIR += rubygem-gruff
     SUBDIR += rubygem-image_science
     SUBDIR += rubygem-imagesize
+    SUBDIR += rubygem-mini_magick
     SUBDIR += rubygem-objectdetect
     SUBDIR += rubygem-opengl
     SUBDIR += rubygem-pdfkit
@@ -927,6 +930,7 @@
     SUBDIR += rubygem-railroad
     SUBDIR += rubygem-rmagick
     SUBDIR += rubygem-rsvg2
+    SUBDIR += rubygem-ruby-graphviz
     SUBDIR += rubygem-scruffy
     SUBDIR += rubyphoto
     SUBDIR += s10sh
@@ -1004,6 +1008,7 @@
     SUBDIR += uniconvw
     SUBDIR += unpaper
     SUBDIR += urt
+    SUBDIR += variety
     SUBDIR += vcg
     SUBDIR += viewnior
     SUBDIR += vigra

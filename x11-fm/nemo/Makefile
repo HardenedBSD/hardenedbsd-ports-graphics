@@ -2,9 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	nemo
-PORTVERSION=	2.4.4
+PORTVERSION=	2.4.5
 CATEGORIES=	x11-fm gnome
-MASTER_SITES=	http://github.com/linuxmint/${PORTNAME}/archive/${PORTVERSION}.tar.gz?dummy=/
 DIST_SUBDIR=	gnome3
 
 MAINTAINER=	gnome@FreeBSD.org
@@ -26,11 +25,13 @@ USES=		autoreconf:build desktop-file-utils gettext gmake libtool pathfix \
 		pkgconfig python:2 shared-mime-info
 USE_GNOME=	gnomedesktop3 gnomeprefix intlhack introspection:build \
 		libxml2 pygobject3
+USE_GITHUB=	yes
+GH_ACCOUNT=	linuxmint
 GNU_CONFIGURE=	yes	
 INSTALLS_ICONS=	yes
 USE_LDCONFIG=	yes
 CPPFLAGS+=	-I${LOCALBASE}/include
-LDFLAGS+=	-L${LOCALBASE}/lib ${PTHREAD_LIBS}
+LDFLAGS+=	-L${LOCALBASE}/lib -lpthread
 INSTALL_TARGET=	install-strip
 CONFIGURE_ARGS=	--enable-static --disable-packagekit
 

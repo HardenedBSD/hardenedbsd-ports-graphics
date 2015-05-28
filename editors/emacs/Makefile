@@ -3,11 +3,9 @@
 
 PORTNAME=	emacs
 PORTVERSION=	${EMACS_VER}
-PORTREVISION=	6
 PORTEPOCH=	3
 CATEGORIES=	editors ipv6
-MASTER_SITES=	${MASTER_SITE_GNU}
-MASTER_SITE_SUBDIR=	${PORTNAME}
+MASTER_SITES=	GNU
 PKGNAMESUFFIX?= 24
 
 PATCH_SITE_SUBDIR+=	ashish
@@ -24,13 +22,14 @@ CONFLICTS=	emacs-19.* emacs21-[0-9]* emacs22-[0-9]* emacs23-[0-9]* \
 		xemacs-devel-mule-[0-9]* \
 		emacs-devel-[0-9]*
 
-EMACS_VER=	24.4
+EMACS_VER=	24.5
 GNU_CONFIGURE=	yes
-USES=		gmake makeinfo ncurses pkgconfig shebangfix tar:xz
+USES=		cpe gmake makeinfo ncurses pkgconfig shebangfix tar:xz
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 INFO_PATH=	${DATADIR_REL}/info
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
+CPE_VENDOR=	gnu
 
 SUB_FILES=	pkg-install
 SUB_LIST+=	ARCHLIBDIR=${PREFIX}/libexec/emacs/${EMACS_VER}/${CONFIGURE_TARGET}
@@ -86,7 +85,7 @@ OPTIONS_SUB=		SOURCES
 CANNA_CONFIGURE_ON=	--with-canna \
 			--with-canna-includes=${LOCALBASE}/include \
 			--with-canna-libraries=${LOCALBASE}/lib
-CANNA_PATCH_SITES=	http://distfiles.pirateparty.in/%SUBDIR%/ ${MASTER_SITE_LOCAL}
+CANNA_PATCH_SITES=	http://distfiles.pirateparty.in/%SUBDIR%/ LOCAL
 CANNA_PATCHFILES=	emacs24.4canna-20141030.diff.gz
 CANNA_LIB_DEPENDS=	libcanna.so:${PORTSDIR}/japanese/canna-lib
 
@@ -178,8 +177,11 @@ FILENOTIFY_USE=		GNOME=glib20
 # clang is broken on i386 platform in -O2, due to use of alloca, and stack realignment
 # and %esi as frame pointer register
 # http://llvm.org/bugs/show_bug.cgi?id=18171
+# fixed in r263312 (11-CURRENT), and fixed in r263765 (10-STABLE)
 .if ${ARCH} == "i386"
+.if (${OSVERSION} < 1000706) || (${OSVERSION} >= 1100000 && ${OSVERSION} < 1100015)
 USE_GCC=		any
+.endif
 .endif
 
 DBUS_PTHREAD_LIBS=	${CC} -dumpspecs | ${GREP} -m 1 pthread: | ${SED} -e 's|^.*%{\!pg: %{pthread:||' -e 's|}.*$$||' || ${TRUE}

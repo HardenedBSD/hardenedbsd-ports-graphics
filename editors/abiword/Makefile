@@ -6,8 +6,7 @@ PORTNAME=	abiword
 PORTVERSION=	2.8.6
 PORTREVISION=	10
 CATEGORIES=	editors
-MASTER_SITES=	http://www.abisource.com/downloads/%SUBDIR%/${PORTVERSION}/source/
-MASTER_SITE_SUBDIR=	abiword
+MASTER_SITES=	http://www.abisource.com/downloads/abiword/${PORTVERSION}/source/
 DIST_SUBDIR=	AbiWord
 
 MAINTAINER=	gnome@FreeBSD.org
@@ -21,7 +20,7 @@ LIB_DEPENDS=	libpopt.so:${PORTSDIR}/devel/popt \
 		libfribidi.so:${PORTSDIR}/converters/fribidi \
 		libpsiconv.so:${PORTSDIR}/converters/psiconv \
 		libgoffice-0.8.so:${PORTSDIR}/devel/goffice
-RUN_DEPENDS=	${LOCALBASE}/lib/X11/fonts/dejavu/DejaVuSerif.ttf:${PORTSDIR}/x11-fonts/dejavu
+RUN_DEPENDS=	${LOCALBASE}/share/fonts/dejavu/DejaVuSerif.ttf:${PORTSDIR}/x11-fonts/dejavu
 
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/COPYING

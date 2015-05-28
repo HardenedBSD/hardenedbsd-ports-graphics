@@ -17,9 +17,8 @@ BUILD_DEPENDS=	cython:${PORTSDIR}/lang/cython
 
 MAKE_ENV=	KIVY_NO_CONFIG=yes KIVY_NO_FILELOG=yes PYTHONPATH=${WRKSRC}
 MAKE_JOBS_UNSAFE=	yes  # does not (really) use make
+
 USE_GITHUB=	yes
-GH_ACCOUNT=	${PORTNAME}
-GH_COMMIT=	d602d4b
 USES=		python:2.7+ shebangfix
 USE_GL=		gl
 PYDISTUTILS_BUILD_TARGET=	build_ext
@@ -71,8 +70,6 @@ TEST_BUILD_DEPENDS=	nosetests:${PORTSDIR}/devel/py-nose
 TEST_USES=		display:build
 X11_MAKE_ENV=		USE_X11=1
 X11_USE=		XORG=x11
-
-BROKEN=		fails to build with cython-0.22
 
 .if !defined(ARCH)
 ARCH!=		uname -p

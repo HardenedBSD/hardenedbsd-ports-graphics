@@ -6,7 +6,7 @@ PORTVERSION=	1.6.2
 CATEGORIES=	devel rubygems
 MASTER_SITES=	RG
 
-MAINTAINER=	wulf@cicgroup.ru
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Fast implementation of the standard Ruby debugger
 
 LICENSE=	BSD2CLAUSE
@@ -30,7 +30,7 @@ post-install:
 
 .include <bsd.port.pre.mk>
 
-.if ${RUBY_VER} == 2.1
+.if ${RUBY_VER} >= 2.1
 BROKEN=		Does not build with Ruby 2.1
 .endif
 

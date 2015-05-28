@@ -2,12 +2,12 @@
 # $FreeBSD$
 
 PORTNAME=	telegram-purple
-PORTVERSION=	02092015
+PORTVERSION=	05222015
 CATEGORIES=	net-im
 MASTER_SITES=	http://www.pcbsd.org/~kris/software/ \
 		ftp://ftp.pcbsd.org/pub/software/
 
-MAINTAINER=	kmoore@freebsd.org
+MAINTAINER=	kmoore@FreeBSD.org
 COMMENT=	Libpurple plugin for Telegram messenger
 
 LICENSE=	GPLv3

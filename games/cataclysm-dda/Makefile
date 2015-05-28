@@ -5,12 +5,11 @@ PORTNAME=	cataclysm-dda
 PORTVERSION=	0.B
 PORTEPOCH=	1
 CATEGORIES=	games
-MASTER_SITES=	https://codeload.github.com/${GH_ACCOUNT}/${GH_PROJECT}/legacy.tar.gz/${GH_TAGNAME}?dummy=/:game \
-		http://azmodean.polehammer.com/:sound
-DISTFILES=	${PORTNAME}-${PORTVERSION}.tar.gz:game
-EXTRACT_ONLY=	${PORTNAME}-${PORTVERSION}.tar.gz
+MASTER_SITES=	GH http://azmodean.polehammer.com/:sound
+DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
+EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
 
-MAINTAINER=	wulf@cicgroup.ru
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Fork/variant of Cataclysm Roguelike by Whales
 
 LICENSE=	CCPL.BY-SA.30
@@ -22,15 +21,13 @@ USES=		gmake shebangfix compiler:c++11-lib execinfo
 SHEBANG_FILES=	lang/*.sh
 bash_CMD=	/bin/sh
 
+USE_GITHUB=	yes
 GH_ACCOUNT=	CleverRaven
 GH_PROJECT=	Cataclysm-DDA
-GH_TAGNAME=	${PORTVERSION}
-GH_COMMIT=	293f250
 MAKE_ARGS+=	PREFIX=${PREFIX} RELEASE=1 USE_HOME_DIR=1
 CXXFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-Wl,-rpath=${_GCC_RUNTIME} -L${LOCALBASE}/lib -lexecinfo
 
-WRKSRC=		${WRKDIR}/${GH_ACCOUNT}-${GH_PROJECT}-${GH_COMMIT}
 
 MAKE_JOBS_UNSAFE=	yes
 
@@ -58,6 +55,10 @@ LUA_USES=	lua:51 pkgconfig
 LUA_MAKE_ARGS=	LUA=1
 
 .include <bsd.port.pre.mk>
+
+.if ${COMPILER_TYPE} == clang && ${COMPILER_VERSION} >= 36
+CXXFLAGS+=	-Wno-inconsistent-missing-override
+.endif
 
 .if ${PORT_OPTIONS:MSOUND}
 .if ${PORT_OPTIONS:MSDL}

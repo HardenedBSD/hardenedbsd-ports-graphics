@@ -16,7 +16,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	bash:${PORTSDIR}/shells/bash \
 		yasm:${PORTSDIR}/devel/yasm
 
-USES=		gmake perl5 tar:bzip2
+USES=		cpe gmake perl5 tar:bzip2
+CPE_VENDOR=	john_koleszar
 HAS_CONFIGURE=	yes
 USE_PERL5=	build
 USE_LDCONFIG=	yes
@@ -89,7 +90,5 @@ post-patch:
 	       	${WRKSRC}/build/make/Makefile ${WRKSRC}/libs.mk
 	@${GREP} -Rl '^#!/bin/bash' ${WRKSRC} |${XARGS} ${REINPLACE_CMD} \
 		-e 's,#!/bin/bash,#!/usr/bin/env bash,g'
-	@${GREP} -Rl -- '-l\?pthread' ${WRKSRC} |${XARGS} ${REINPLACE_CMD} -E \
-		-e 's/-l?pthread/${PTHREAD_LIBS}/g'
 
 .include <bsd.port.mk>

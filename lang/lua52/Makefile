@@ -2,13 +2,12 @@
 # $FreeBSD$
 
 PORTNAME=	lua
-PORTVERSION=	5.2.3
-PORTREVISION=	4
+PORTVERSION=	5.2.4
 CATEGORIES=	lang
 MASTER_SITES=	http://www.lua.org/ftp/
 PKGNAMESUFFIX=	52
 
-MAINTAINER=	lua@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Small, compilable scripting language providing easy access to C code
 
 LICENSE=	MIT

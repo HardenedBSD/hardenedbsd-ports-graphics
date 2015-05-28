@@ -2,16 +2,18 @@
 # $FreeBSD$
 
 PORTNAME=	redmine
-PORTVERSION=	2.5.2
-PORTREVISION=	1
+PORTVERSION=	2.6.3
+PORTREVISION=	2
 CATEGORIES=	www
 MASTER_SITES=	http://www.redmine.org/releases/
 
 MAINTAINER=	ruby@FreeBSD.org
 COMMENT=	Flexible project management web application
 
+LICENSE=	GPLv2
+
 RUN_DEPENDS=	rubygem-rubytree>=0:${PORTSDIR}/devel/rubygem-rubytree \
-		rubygem-i18n>=0.4.2:${PORTSDIR}/devel/rubygem-i18n \
+		rubygem-i18n>=0.7.0:${PORTSDIR}/devel/rubygem-i18n \
 		rubygem-rake>=0:${PORTSDIR}/devel/rubygem-rake \
 		rubygem-bundler>=0:${PORTSDIR}/sysutils/rubygem-bundler \
 		rubygem-rails>=3.2.16:${PORTSDIR}/www/rubygem-rails \
@@ -20,12 +22,13 @@ RUN_DEPENDS=	rubygem-rubytree>=0:${PORTSDIR}/devel/rubygem-rubytree \
 		rubygem-fastercsv>=1.5.0:${PORTSDIR}/devel/rubygem-fastercsv \
 		rubygem-builder>=3.0.0:${PORTSDIR}/devel/rubygem-builder \
 		rubygem-redcarpet>0:${PORTSDIR}/textproc/rubygem-redcarpet \
-		rubygem-awesome_nested_set>0:${PORTSDIR}/databases/rubygem-awesome_nested_set \
-		rubygem-net-ldap>=0.3.1:${PORTSDIR}/net/rubygem-net-ldap
+		rubygem-net-ldap>=0.3.1:${PORTSDIR}/net/rubygem-net-ldap \
+		rubygem-rbpdf>=0:${PORTSDIR}/print/rubygem-rbpdf \
+		rubygem-request_store>=1.1.0:${PORTSDIR}/devel/rubygem-request_store
 
+USES=		cpe
 USE_RUBY=	yes
-USE_RUBY_FEATURES=	iconv
-USE_RAKE=	yes
+#USE_RAKE=	yes
 NO_BUILD=	yes
 SUB_LIST+=	RUBY_NAME=${RUBY_NAME}
 USERS=		${WWWOWN}
@@ -43,7 +46,7 @@ PASSENGER_DESC=	Use Apache/Nginx WEB server
 MYSQL2_DESC=	MySQL database support (via mysql2 rubygem)
 NO_OPTIONS_SORT=yes
 
-.include <bsd.port.pre.mk>
+.include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MMYSQL}
 RUN_DEPENDS+=	rubygem-mysql>=2.8.1:${PORTSDIR}/databases/rubygem-mysql
@@ -91,11 +94,9 @@ do-install:
 
 post-install:
 	${TOUCH} ${STAGEDIR}${WWWDIR}/Gemfile.lock
-	
 	if ! [ -r ${STAGEDIR}${WWWDIR}/config/settings.yml ]; then		\
 		${INSTALL_DATA} ${STAGEDIR}${WWWDIR}/config/settings.yml-dist	\
 			${STAGEDIR}${WWWDIR}/config/settings.yml;		\
 	fi
-	@${CAT} ${PKGMESSAGE}
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

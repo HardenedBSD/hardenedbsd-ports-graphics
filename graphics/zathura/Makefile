@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	zathura
-PORTVERSION=	0.3.2
+PORTVERSION=	0.3.3
 CATEGORIES=	graphics print
 MASTER_SITES=	http://pwmt.org/projects/zathura/download/
 
@@ -48,7 +48,6 @@ post-patch:	.SILENT
 		${WRKSRC}/Makefile
 .endif
 	${REINPLACE_CMD} -e 's|/usr/include|${LOCALBASE}/include|' \
-		-e 's/-lpthread/${PTHREAD_LIBS}/' \
 		-e 's/-lc//' \
 		-e 's/DL_LIB /#&/' \
 		${WRKSRC}/config.mk

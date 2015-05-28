@@ -3,11 +3,10 @@
 
 PORTNAME=	qemu
 PORTVERSION=	0.11.1
-PORTREVISION=	18
+PORTREVISION=	19
 CATEGORIES=	emulators
-MASTER_SITES=	${MASTER_SITE_SAVANNAH} \
+MASTER_SITES=	SAVANNAH \
 		http://bellard.org/qemu/
-MASTER_SITE_SUBDIR=	qemu
 DIST_SUBDIR=	qemu
 
 MAINTAINER=	nox@FreeBSD.org
@@ -149,14 +148,12 @@ post-patch:
 		-e "1s|^(#! )/usr/bin/perl|\1${PERL}|" \
 		${WRKSRC}/texi2pod.pl
 
-.if ${OSVERSION} >= 800091
 # XXX need to disable usb host code on head while it's not ported to the
 # new usb stack yet
 post-configure:
 	@${REINPLACE_CMD} -E \
 		-e "s|^(HOST_USB=)bsd|\1stub|" \
 		${WRKSRC}/config-host.mak
-.endif
 
 post-install:
 	@${INSTALL_SCRIPT} ${FILESDIR}/qemu-ifup.sample ${STAGEDIR}${PREFIX}/etc

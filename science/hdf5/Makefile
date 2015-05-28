@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	hdf5
-PORTVERSION=	1.8.14
-PORTREVISION=	1
+PORTVERSION=	1.8.15
 CATEGORIES=	science archivers graphics
 MASTER_SITES=	http://www.hdfgroup.org/ftp/HDF5/current/src/ \
 		ftp://ftp.hdfgroup.org/HDF5/current/src/ \
@@ -19,6 +18,7 @@ LICENSE=	BSD4CLAUSE
 CONFLICTS_INSTALL=	hdf-4.[0-9]* hdf5-1.6.[0-9]*
 
 OPTIONS_DEFINE=	DEBUG EXAMPLES FORTRAN SZIP
+OPTIONS_DEFAULT=SZIP
 OPTIONS_SUB=	yes
 
 CONFIGURE_ARGS=	--enable-cxx \
@@ -48,7 +48,6 @@ SZIP_CONFIGURE_ON=	--with-szlib=${LOCALBASE}
 SZIP_LIB_DEPENDS=	libsz.so:${PORTSDIR}/science/szip
 
 post-patch:
-	@${REINPLACE_CMD} -e 's|-lpthread|-pthread|g' ${WRKSRC}/configure
 	@${REINPLACE_CMD} -e 's|-O3||g' ${WRKSRC}/config/gnu-flags
 	@${REINPLACE_CMD} \
 		-e '/LD_LIBRARY_PATH/ s|^|#|' \

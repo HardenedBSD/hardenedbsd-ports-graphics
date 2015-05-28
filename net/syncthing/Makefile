@@ -2,15 +2,16 @@
 # $FreeBSD$
 
 PORTNAME=	syncthing
-PORTVERSION=	0.10.22
+PORTVERSION=	0.11.5
+DISTVERSIONPREFIX=	v
 CATEGORIES=	net
-MASTER_SITES=	https://github.com/${PORTNAME}/${PORTNAME}/archive/v${PORTVERSION}.tar.gz?dummy=/
 
 MAINTAINER=	swills@FreeBSD.org
 COMMENT=	Encrypted file sync tool
 
 BUILD_DEPENDS=	${LOCALBASE}/bin/go:${PORTSDIR}/lang/go
 
+USE_GITHUB=	yes
 USE_RC_SUBR=	syncthing
 PLIST_FILES=	bin/syncthing
 PORTDOCS=	*

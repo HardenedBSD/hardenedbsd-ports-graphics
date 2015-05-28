@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	gdb
-PORTVERSION=	7.8.2
-PORTREVISION=	1
+PORTVERSION=	7.9
 CATEGORIES=	devel
 MASTER_SITES=	GNU
 
@@ -12,8 +11,9 @@ COMMENT=	GNU GDB of newer version than comes with the system
 
 LICENSE=	GPLv3
 
-USES=		iconv gmake libtool tar:xz
+USES=		cpe iconv gmake libtool tar:xz
 USE_CSTD=	gnu89
+CPE_VENDOR=	gnu
 GNU_CONFIGURE=	yes
 CONFIGURE_ENV=	CONFIGURED_M4=m4 CONFIGURED_BISON=byacc
 CONFIGURE_ARGS=	--program-suffix=${PORTVERSION:S/.//g} \
@@ -26,6 +26,12 @@ CFLAGS:=	${CFLAGS:C/ +$//}	# blanks at EOL creep in sometimes
 CFLAGS+=	-DRL_NO_COMPAT -Wno-unused-function -Wno-unused-variable
 EXCLUDE=	dejagnu expect sim texinfo intl
 EXTRACT_AFTER_ARGS=	${EXCLUDE:S/^/--exclude /}
+EXTRA_PATCHES=	${FILESDIR}/commit-c5cb74e \
+		${FILESDIR}/commit-cf424ae \
+		${FILESDIR}/commit-773eacf \
+		${FILESDIR}/commit-2526815 \
+		${FILESDIR}/commit-3ce5b6e \
+		${FILESDIR}/commit-97de354
 
 VER=		${PORTVERSION:S/.//g}
 PLIST_SUB=	VER=${VER}
@@ -60,7 +66,6 @@ GUILE_LIB_DEPENDS=	libguile-2.0.so:${PORTSDIR}/lang/guile2
 PYTHON_CONFIGURE_ON=	--with-python=${PYTHON_CMD}
 PYTHON_CONFIGURE_OFF=	--without-python
 PYTHON_USES=		python:2
-PORT_READLINE_EXTRA_PATCHES=	${FILESDIR}/extrapatch-gdb-tui-tui-io.c
 PORT_READLINE_USES=	readline:port
 TUI_CONFIGURE_ENABLE=	tui
 
@@ -100,6 +105,12 @@ do-install:
 	(cd ${WRKSRC}/gdb; ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${MAKE_ARGS} install-python )
 	(cd ${WRKSRC}/gdb/data-directory ; \
 		${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${MAKE_ARGS} install-python )
+.endif
+
+.if ${PORT_OPTIONS:MGUILE}
+	(cd ${WRKSRC}/gdb; ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${MAKE_ARGS} install-guile )
+	(cd ${WRKSRC}/gdb/data-directory ; \
+		${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${MAKE_ARGS} install-guile )
 .endif
 
 .if ${PORT_OPTIONS:MPYTHON}

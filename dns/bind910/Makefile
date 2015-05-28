@@ -1,4 +1,5 @@
 # $FreeBSD$
+# pkg-help formatted with fmt 59 63
 
 PORTNAME=	bind
 PORTVERSION=	${ISCVERSION:S/-P/P/}
@@ -7,7 +8,7 @@ PORTVERSION=	${ISCVERSION:S/-P/P/}
 PORTREVISION=	0
 .else
 # dns/bind910 here
-PORTREVISION=	0
+PORTREVISION=	4
 .endif
 CATEGORIES=	dns net ipv6
 MASTER_SITES=	ISC/bind9/${ISCVERSION}
@@ -20,7 +21,7 @@ COMMENT?=	BIND DNS suite with updated DNSSEC and DNS64
 LICENSE=	ISCL
 
 # ISC releases things like 9.8.0-P1, which our versioning doesn't like
-ISCVERSION=	9.10.1-P2
+ISCVERSION=	9.10.2
 
 MAKE_JOBS_UNSAFE=	yes
 
@@ -38,7 +39,8 @@ GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+=	--localstatedir=/var --disable-linux-caps \
 		--disable-symtable \
 		--with-randomdev=/dev/random \
-		--with-libxml2=${LOCALBASE}
+		--with-libxml2=${LOCALBASE} \
+		--sysconfdir=${ETCDIR}
 ETCDIR=		${PREFIX}/etc/namedb
 
 CONFLICTS+=	bind9*-9.[456789].* bind9*-sdb-9.[456789].*
@@ -48,10 +50,11 @@ SUB_FILES=	pkg-message
 .endif
 
 OPTIONS_DEFAULT=	IPV6 SSL THREADS SIGCHASE IDN GSSAPI_NONE
-OPTIONS_DEFINE=		IDN LARGE_FILE GOST PYTHON \
+OPTIONS_DEFINE=		IDN LARGE_FILE PYTHON \
 			FIXED_RRSET SIGCHASE IPV6 THREADS FILTER_AAAA
-OPTIONS_RADIO=	CRYPTO
+OPTIONS_RADIO=	CRYPTO GOSTDEF
 OPTIONS_RADIO_CRYPTO=	SSL NATIVE_PKCS11
+OPTIONS_RADIO_GOSTDEF=	GOST GOST_ASN1
 
 .if !defined(BIND_TOOLS_SLAVE)
 OPTIONS_DEFAULT+=	RRL
@@ -73,7 +76,9 @@ FILTER_AAAA_DESC=	Enable filtering of AAAA records
 CRYPTO_DESC=		Choose which crypto engine to use
 NATIVE_PKCS11_DESC=	Use PKCS\#11 native API (**READ HELP**)
 GEOIP_DESC=		Allow geographically based ACL.
-GOST_DESC=		Enable GOST ciphers, needs SSL (see help)
+GOSTDEF_DESC=		Enable GOST ciphers, needs SSL (see help on 8 and 9)
+GOST_DESC=		GOST raw keys (new default)
+GOST_ASN1_DESC=		GOST using ASN.1
 PYTHON_DESC=		Build with Python utilities
 
 LINKS_DESC=		Create conf file symlinks in ${PREFIX}
@@ -88,10 +93,10 @@ DLZ_BDB_DESC=		DLZ BDB driver
 DLZ_LDAP_DESC=		DLZ LDAP driver
 DLZ_FILESYSTEM_DESC=	DLZ filesystem driver
 DLZ_STUB_DESC=		DLZ stub driver
-GSSAPI_BASE_DESC=	${GSSAPI_DESC} (Heimdal in base)
-GSSAPI_HEIMDAL_DESC=	${GSSAPI_DESC} (security/heimdal)
-GSSAPI_MIT_DESC=	${GSSAPI_DESC} (security/krb5)
-GSSAPI_NONE_DESC=	No ${GSSAPI_DESC}
+GSSAPI_BASE_DESC=	Using Heimdal in base
+GSSAPI_HEIMDAL_DESC=	Using security/heimdal
+GSSAPI_MIT_DESC=	Using security/krb5
+GSSAPI_NONE_DESC=	Disable
 
 .if !defined(BIND_TOOLS_SLAVE)
 CONFLICTS+=		bind-tools-9.*
@@ -121,7 +126,8 @@ NATIVE_PKCS11_CONFIGURE_ENABLE=	native-pkcs11
 GEOIP_CONFIGURE_WITH=	geoip
 GEOIP_LIB_DEPENDS=	libGeoIP.so:${PORTSDIR}/net/GeoIP
 
-GOST_CONFIGURE_WITH=	gost
+GOST_CONFIGURE_ON=	--with-gost
+GOST_ASN1_CONFIGURE_ON=	--with-gost=asn1
 
 PYTHON_CONFIGURE_WITH=	python
 PYTHON_USES=	python
@@ -163,6 +169,10 @@ GSSAPI_NONE_CONFIGURE_ON=	--without-gssapi
 
 .include <bsd.port.options.mk>
 
+.if !${PORT_OPTIONS:MGOST} && !${PORT_OPTIONS:MGOST_ASN1}
+CONFIGURE_ARGS+=	--without-gost
+.endif
+
 .if !${PORT_OPTIONS:MLINKS}
 PKGINSTALL=${NONEXISTENT}
 .endif
@@ -173,7 +183,7 @@ CONFIGURE_ARGS+=	--enable-threads
 CONFIGURE_ARGS+=	--disable-threads
 .endif
 
-.if ${OPSYS} == FreeBSD && ${OSVERSION} >= 1000100
+.if ${OPSYS} == DragonFly || (${OPSYS} == FreeBSD && ${OSVERSION} >= 1000100)
 PKGINSTALL=	${NONEXISTENT}
 PLIST_SUB+=	NOBASE="" BASE="@comment "
 SUB_LIST+=	NOBASE="" BASE="@comment "
@@ -181,11 +191,10 @@ SUB_LIST+=	NOBASE="" BASE="@comment "
 USE_RC_SUBR+=	named
 SUB_FILES+=	named.conf
 .endif # !defined(BIND_TOOLS_SLAVE)
-.if ${PORT_OPTIONS:MGOST}
+.if ${PORT_OPTIONS:MGOST} || ${PORT_OPTIONS:MGOST_ASN1}
 WITH_OPENSSL_PORT=yes
 .endif
 .else
-ETCDIR=		${PREFIX}/etc
 PLIST_SUB+=	NOBASE="@comment " BASE=""
 SUB_LIST+=	NOBASE="@comment " BASE=""
 .if ${PORT_OPTIONS:MSSL}
@@ -195,8 +204,6 @@ WITH_OPENSSL_PORT=	yes
 
 PKGDEINSTALL=	${PKGINSTALL}
 
-CONFIGURE_ARGS+=	--prefix=${PREFIX} \
-			--sysconfdir=${ETCDIR}
 
 PORTDOCS=	*
 
@@ -219,7 +226,8 @@ post-install:
 		${WRKSRC}/HISTORY ${WRKSRC}/README ${STAGEDIR}${DOCSDIR}
 .endif
 
-.if ${OPSYS} == FreeBSD && ${OSVERSION} >= 1000100
+.if ${OPSYS} == DragonFly || (${OPSYS} == FreeBSD && ${OSVERSION} >= 1000100)
+	${MKDIR} ${STAGEDIR}${PREFIX}/etc/mtree
 	${MKDIR} ${STAGEDIR}${ETCDIR}
 .for i in dynamic master slave working
 	@${MKDIR} ${STAGEDIR}${ETCDIR}/$i
@@ -229,6 +237,8 @@ post-install:
 	${INSTALL_DATA} ${FILESDIR}/empty.db ${STAGEDIR}${ETCDIR}/master
 	${INSTALL_DATA} ${FILESDIR}/localhost-forward.db ${STAGEDIR}${ETCDIR}/master
 	${INSTALL_DATA} ${FILESDIR}/localhost-reverse.db ${STAGEDIR}${ETCDIR}/master
+	${INSTALL_DATA} ${FILESDIR}/BIND.chroot.dist ${STAGEDIR}${PREFIX}/etc/mtree
+	${INSTALL_DATA} ${FILESDIR}/BIND.chroot.local.dist ${STAGEDIR}${PREFIX}/etc/mtree
 .endif
 	${INSTALL_DATA} ${WRKSRC}/bin/rndc/rndc.conf \
 		${STAGEDIR}${ETCDIR}/rndc.conf.sample

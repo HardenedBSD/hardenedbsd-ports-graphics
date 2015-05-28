@@ -18,7 +18,7 @@ OPTIONS_DEFAULT=	VIDEO
 
 NO_BUILD=	yes
 
-USES=		desktop-file-utils tar:bzip2
+USES=		cpe desktop-file-utils tar:bzip2
 USE_LINUX=	yes
 USE_LINUX_APPS+= fontconfig xorglibs qt47 qt47-x11 qt47-webkit libsndfile openssl-compat pulseaudio-libs tcp_wrappers-libs flac libasyncns
 
@@ -31,6 +31,8 @@ SUB_FILES=	skype.sh
 SUB_LIST+=	SKYPEDIR=${SKYPEDIR}
 
 BROKEN=		Skype 4.3 is missing several Linux syscalls.
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-05-26
 
 #NVIDIA_GL_RUN_DEPENDS=	${LINUXBASE}/usr/lib/libGL.so.1:${PORTSDIR}/x11/nvidia-driver
 #NVIDIA_GL_USE=		LINUX_APPS=xorglibs

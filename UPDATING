@@ -5,6 +5,388 @@ they are unavoidable.
 You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
+20150527:
+  AFFECTS: users of sysutils/xfce4-power-manager
+  AUTHOR: olivierd@FreeBSD.org
+
+  Before upgrading, you must stop xfce4-power-manager daemon:
+
+    xfce4-power-manager --quit
+
+20150519:
+  AFFECTS: users of sysutils/webmin and sysutils/usermin
+  AUTHOR: olgeni@FreeBSD.org
+
+  After upgrading to Perl 5.20 the /usr/bin/perl link will no longer
+  be available. You will have to check your perl-path files and
+  change the path of the Perl interpreter to "/usr/local/bin/perl":
+
+    /usr/local/etc/webmin/perl-path
+    /usr/local/etc/usermin/perl-path
+
+20150513:
+  AFFECTS: users of lang/perl5*
+  AUTHOR: mat@FreeBSD.org
+
+  The default Perl version has been switched to Perl 5.20.  If you are using
+  binary packages to upgrade your system, you do not have anything to do, pkg
+  upgrade will do the right thing.  For the other people, assuming you are
+  migrating from 5.18 to 5.20, do:
+
+  Portupgrade users:
+	portupgrade -o lang/perl5.20 -f lang/perl5.18
+
+	portupgrade -f `pkg shlib -R libperl.so.5.18|tail +2`
+
+  Portmaster users:
+	portmaster -o lang/perl5.20 lang/perl5.18
+
+	portmaster -f `pkg shlib -R libperl.so.5.18|tail +2`
+
+  NOTE:
+    Perl has been removed from base more than ten years ago, so it was way past
+    time for the /usr/bin/perl symlink to be removed from the port.  If for
+    some strange reason, you still need it, you will have to create it
+    manually.
+
+  IMPORTANT:
+    In case you have not updated your system in a while, and specifically,
+    followed the 20141126 instructions regarding the new Perl layout, you
+    should follow those more extensive instructions rather than the
+    conservative presented here.
+
+20150510:
+  AFFECTS: users of mail/postfix mail/postfix-current
+  AUTHOR: ohauer@FreeBSD.org
+
+  The following OPTIONS where renamed to match the default used in most all other ports
+  - SASL2 -> SASL
+  - OPENLDAP -> LDAP
+
+  If any of the old OPTIONS was enabled before, please re-run "make config".
+
+20150508:
+  AFFECTS: users of www/iojs
+  AUTHOR: linpct@gmail.com
+
+  iojs has been updated to 2.0.0. The binary modules may need to be
+  rebuilt due to V8 version ABI change.
+
+20150506:
+  AFFECTS: users of net/asterisk13 with PJSIP (default on) and SRTP (default off) options enabled
+  AUTHOR: madpilot@FreeBSD.org
+
+  This applies ONLY TO USERS COMPILING FROM PORTS:
+  To avoid dependency problems, you must remove the pjsip port
+  before upgrading asterisk13.
+
+    # pkg delete pjsip
+    # portmaster -a
+
+  These steps are unnecessary for those using binary packages.
+
+  Please see the 20150323 entry for background about this problem.
+
+20150501:
+  AFFECTS: users of graphics/qgis
+  AUTHOR: brd@FreeBSD.org
+
+  Following OPTIONS have been renamed in 2.8.1_1 to match upstream:
+
+  - MAPSERVER to SERVER
+
+20150427:
+  AFFECTS: users of mail/opensmtpd
+  AUTHOR: ashish@FreeBSD.org
+
+  Following OPTIONS are being removed in 5.4.5p1:
+
+  - LDAP
+  - SQLITE
+  - MYSQL
+  - PGSQL
+  - REDIS 
+ 
+  They are disabled/removed in upstream since 5.4.4p1, but did not get removed
+  from port.
+
+20150420:
+  AFFECTS: users of devel/icu
+  AUTHOR: bapt@FreeBSD.org
+
+  icu has been updated to 55.1. Please rebuild all ports that depends on it
+
+  If you use portmaster:
+        portmaster -w -r icu
+  If you use portupgrade:
+        portupgrade -fr devel/icu
+
+20150419
+  AFFECTS: Users of emulators/wine-devel
+  AUTHOR: gerald@FreeBSD.org
+
+
+  The COMPHOLIO option in emulators/wine-devel has been renamed to
+  STAGING to align with the upstream evolution of that project.
+
+20150417:
+  AFFECTS: Users of audio/bcg729
+  AUTHOR: tijl@FreeBSD.org
+
+  The Mediastreamer plugin included in this package has been separated into
+  a new port audio/msbcg729.
+
+20150409:
+  AFFECTS: User of security/sguil
+  AUTHOR: feld@FreeBSD.org
+
+  security/sguil was erroneously provisioned a UID that conflicted with
+  the dns/dnscrypt-proxy port. A new UID and GID of 991 has been issued.
+
+  Existing users will be able to upgrade the sguil packages without
+  issue. The existing UID will continue to be used. If you do a clean
+  install of security/sguil on a new server and migrate files or
+  intentionally delete the sguil user and group and reinstall you may
+  run into permissions issues.
+
+  Examples include the /var/run/sguild and /usr/local/etc/sguild directories.
+
+20150406:
+  AFFECTS: User of emulators/xen emulators/xl and sysutils/xen-tools
+  AUTHOR: bapt@FreeBSD.org
+
+  sysutils/xen-tools has been renamed sysutils/xen-guest-tools
+  emulators/xl has been renamed sysutils/xen-tools
+  emulators/xen has been renamed emulators/xen-kernel
+  A new emulators/xen has been introduced, it is a metaport that depends on
+  emulators/xen-kernel and sysutils/xen-tools
+
+20150403:
+  AFFECTS: Users of irc/rbot
+  AUTHOR: bdrewery@FreeBSD.org
+
+  Ruby Bot now has a new upstream maintainer.  The project has been updated
+  to work with Ruby 2.0+.  Some migration is needed to move away from
+  BDB regristry files.  The guide for that is at
+  https://github.com/ruby-rbot/rbot/wiki/MigrationGuide
+
+  rbotdb can be used to backup a BDB database and then restore it to a working
+  format for the new rbot. Update your conf.yaml after with 'core.db: tc'
+  once converted.
+
+20150331:
+AUTHOR: ohauer@FreeBSD.org
+
+  Subversion modules are no longer activated in httpd.conf!
+  To activate the subversion apache modules a dedicated file
+  will be installed as modules.d/220_subversion.conf
+
+20150324:
+  AFFECTS: Users of dns/bind9*
+  AUTHOR: mat@FreeBSD.org
+
+  This is only for FreeBSD 10.0+.
+
+  BIND auto chroot has been added back to the named rc script.  As enabling it
+  by default would most certainly break people's setup, it is not.  To enable
+  it, and chroot it in /var/named, add the following line to your rc.conf file:
+
+  named_chrootdir="/var/named"
+
+  On first launch, the rc script will move the /usr/local/etc/namedb directory
+  into the chroot, and create a symlink to it.
+
+  Note that, if you're running from within a jail, you need to have a
+  /var/named/dev devfs created beforehand, with the null and random devices.
+
+20150323:
+  AFFECTS: Users of net/asterisk* and net/pjsip ports
+  AUTHOR: madpilot@FreeBSD.org
+
+  Due to conflicts between base OpenSSL and ports provided OpenSSL
+  library, which is required by net/libsrtp, the srtp support has
+  to be removed from the default asterisk13 port configuration,
+  otherwise a not working binary would be generated.
+
+  To get SRTP support working in the asterisk ports make sure all
+  dependencies are linked against the same SSL library implementation
+  to avoid runtime conflicts. On 10.1 everything will work fine
+  unless ports SSL libraries are explicitly installed. On older OS
+  versions(10.0 and earlier) you will need to compile all ports
+  with WITH_OPENSSL_PORT=yes.
+
+  To get working SRTP support in asterisk13 with the pjsip backend
+  it is also needed to enable the EXTSRTP option in the pjsip port.
+
+  If the CURL option is enabled also make sure the ftp/curl port
+  is using a GSSAPI implementation linking to the same SSL
+  implementation the other ports are using (BASE or NONE if you're
+  using base OpenSSL, GSSAPI_HEIMDAL GSSAPI_MIT otherwise). If an
+  incompatible option is being used the curl module will cause
+  asterisk to fail on startup due to mixing calls to OpenSSL from
+  base and from ports.
+
+20150322:
+  AFFECTS: Users of security/openssh-portable
+  AUTHOR: bdrewery@FreeBSD.org
+
+  The port now uses VersionAddendum for the port version string. Setting
+  the value to "none" in your sshd_config and restarting openssh will allow
+  removing the version from the banner.
+
+20150321:
+  AFFECTS: Users of x11-servers/xorg-server and other X servers
+  AUTHOR: bapt@FreeBSD.org
+
+  All fonts ports have been modified to respect XDG and install in
+  share/fonts
+
+  The Xorg servers now are looking there by default
+
+  If you experience font related issues, view the output of
+
+  # fc-list
+
+  If the list appears incomplete or has fonts still pointing to
+  /usr/local/lib/X11/fonts you may forcibly update the font cache:
+
+  # fc-cache -fs
+
+20150317:
+  AFFECTS: users of editors/openoffice-4 and editors/openoffice-devel
+  AUTHOR: truckman@FreeBSD.org
+
+  Contrary to what is stated in pkg-message, openoffice-4 and
+  openoffice-devel have stored user settings in ~/.openoffice.org-devel/4
+  since r325370 (2013-08-25). This update expects user settings to reside
+  in the more standard ~/.openoffice.org/4.
+
+  To preserve your user settings, rename or copy them from
+  ~/.openoffice.org-devel/4 to ~/.openoffice.org/4. when installing this
+  update to apache-openoffice-4.1.1_7 or
+  apache-openoffice-devel-4.2.1652526_2,3.
+
+20150313:
+  AFFECTS: users of net/serviio
+  AUTHOR: netchild@FreeBSD.org
+
+  The Java Polling Watch Service used in Serviio 1.5.1 is fixed. If you
+  unchecked "Keep library automatically updated" with 1.5 (as recommended
+  in the 20150206 entry) you can enable it again.
+
+20150309:
+  AFFECTS: users of net-mgmt/netdisco
+  AUTHOR: dgeo@centrale-marseille.fr
+
+  netdisco version has been upgraded to netdisco2
+
+  After upgrading, you will need to review all your configuration, as
+  this new version won't read old config files.
+  You'll be able to keep your data though netdisco-deploy command
+
+20150305:
+  AFFECTS: users of x11-wm/xfce4 and multimedia/xfce4-parole
+  AUTHOR: olivierd@FreeBSD.org
+
+  Xfce 4.12 has been imported. Please use the following instructions to
+  upgrade.
+
+  For package users:
+  # pkg upgrade
+
+  For ports users:
+  # portmaster -a
+  # portmaster x11-wm/xfce4
+
+  GStreamer 1.0 is enabled by default in Parole media player.
+
+  Xfce 4.12 now depends of Adwaita icon theme. If you are upgrading from
+  Xfce 4.10 you probably still have the Tango or GNOME theme selected.
+  Open the Settings Manager and select Appearance. Inside dialog box switch
+  to the Icons tag and select the "Adwaita" entry in the list.
+
+20150304:
+  AFFECTS: users of security/libressl
+  AUTHOR: vsevolod@highsecure.ru
+
+  After upgrading of libressl you should manually update all packages that
+  depending on this library since its version has been changed. Normally,
+  you could obtain the list of dependent software by running the following
+  command:
+
+  pkg query -e '%n = libressl' %ro
+
+  Then you should rebuild all ports depending on libressl to avoid dangling
+  shared library dependencies.
+
+20150301:
+  AFFECTS: users of lang/ruby20
+  AUTHOR: swills@FreeBSD.org
+
+  The default ruby version has been updated from 2.0 to 2.1.
+
+  If you compile your own ports you may keep 2.0 as the default version by
+  adding the following lines to your /etc/make.conf file:
+
+  #
+  # Keep ruby 2.0 as default version
+  #
+  DEFAULT_VERSIONS+=ruby=2.0
+
+  If you wish to update to the new default version, you need to first stop any
+  software that uses ruby. Then, you will need to follow these steps, depending
+  upon how you manage your system.
+
+  If you use pkgng, simply upgrade:
+  # pkg upgrade -f
+
+  If you use portmaster, install new ruby, then rebuild all ports that depend
+  on ruby:
+  # portmaster -o lang/ruby21 lang/ruby20
+  # portmaster -R -r ruby-2.1
+
+  If you use portupgrade, install new ruby, then rebuild all ports that depend
+  on ruby:
+
+  # pkg delete -f ruby portupgrade
+  # make -C /usr/ports/ports-mgmt/portupgrade install clean
+  # pkg set -o lang/ruby20:lang/ruby21
+  # portupgrade -x ruby-2.1.\* -fr lang/ruby21
+
+20150227:
+  AFFECTS: Users of games/trigger
+  AUTHOR: makc@FreeBSD.org
+
+  games/trigger has been split and renamed to games/trigger-rally
+  and games/trigger-data ports. Deinstall previous version
+  before upgrading.
+
+20150224:
+  AFFECTS: Users of devel/qt4-linguist
+  AUTHOR: makc@FreeBSD.org
+
+  Linguist tools have been moved from qt4-linguist port to new
+  devel/qt4-linguisttools port. Deinstall qt4-linguist before
+  upgrading.
+
+20150224:
+  AFFECTS: Users of lang/ruby19
+
+  lang/ruby19 has reached its end-of-life and has been removed.  The
+  default version has been 2.0 for a while.  Other available versions
+  are Ruby 2.1 and Ruby 2.2.
+
+  Users who have DEFAULT_VERSIONS=ruby=1.9 in their /etc/make.conf are
+  encouraged to remove it or change it to an available version.
+
+20150224:
+  AFFECTS: Users of net-p2p/bitcoin (cli utilities)
+
+  The bitcoin-cli and bitcoin-tx utilities have been re-packaged into
+  a separate port. If you require these programs, or use the bitcoin-cli
+  program to access the daemon or the GUI, install net-p2p/bitcoin-utils
+  to reinstall them.
+
 20150220:
   AFFECTS: users of PHP
 
@@ -11432,5 +11814,7 @@ or
   The default installation is now configured for running bitlbee as user
   'nobody' by default.  Make sure any existing configuration files are
   readable by that user.
+
+
 
 $FreeBSD$

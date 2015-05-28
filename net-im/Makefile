@@ -13,6 +13,7 @@
     SUBDIR += climm
     SUBDIR += coccinella
     SUBDIR += convey
+    SUBDIR += corebird
     SUBDIR += echat
     SUBDIR += ejabberd
     SUBDIR += ekiga
@@ -128,6 +129,7 @@
     SUBDIR += py-punjab
     SUBDIR += py-pyxmpp
     SUBDIR += py-skype4py
+    SUBDIR += py-slackclient
     SUBDIR += py-sleekxmpp
     SUBDIR += py-twistedWords
     SUBDIR += py-xmpppy
@@ -178,6 +180,7 @@
     SUBDIR += uTox
     SUBDIR += vacuum-im
     SUBDIR += vqcc-gtk
+    SUBDIR += xmpp-client
     SUBDIR += yoono
     SUBDIR += zephyr
 

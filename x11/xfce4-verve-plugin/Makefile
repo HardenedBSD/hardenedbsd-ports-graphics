@@ -3,9 +3,9 @@
 
 PORTNAME=	verve-plugin
 PORTVERSION=	1.0.1
+PORTREVISION=	1
 CATEGORIES=	x11 xfce
-MASTER_SITES=	${MASTER_SITE_XFCE}
-MASTER_SITE_SUBDIR=src/panel-plugins/${PKGNAMEPREFIX}${PORTNAME}/${PORTVERSION:R}
+MASTER_SITES=	XFCE/src/panel-plugins/${PKGNAMEPREFIX}${PORTNAME}/${PORTVERSION:R}
 PKGNAMEPREFIX=	xfce4-
 DISTNAME=	${PKGNAMEPREFIX}${PORTNAME}-${PORTVERSION}
 DIST_SUBDIR=	xfce4
@@ -19,9 +19,9 @@ LIB_DEPENDS=	libpcre.so:${PORTSDIR}/devel/pcre \
 	libdbus-glib-1.so:${PORTSDIR}/devel/dbus-glib
 
 GNU_CONFIGURE=	yes
-USES=		gmake libtool pkgconfig tar:bzip2
+USES=		gmake libtool pkgconfig xfce tar:bzip2
 USE_GNOME=	glib20 intltool intlhack
-USE_XFCE=	configenv libexo libmenu libutil panel
+USE_XFCE=	panel
 
 CONFIGURE_ARGS=--enable-dbus
 

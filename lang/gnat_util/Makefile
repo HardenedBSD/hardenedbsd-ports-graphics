@@ -5,8 +5,7 @@ PORTNAME=	gnat_util
 PORTVERSION=	${SNAPSHOT}
 PORTREVISION=	${UTIL_PR}
 CATEGORIES=	lang
-MASTER_SITES=	${MASTER_SITE_GCC}
-MASTER_SITE_SUBDIR= ${MS_SUBDIR}
+MASTER_SITES=	GCC/${MS_SUBDIR}
 DISTNAME=	${IDENTIFICATION}
 
 MAINTAINER=	marino@FreeBSD.org
@@ -17,12 +16,17 @@ LICENSE_COMB=	multi
 
 USES=		ada tar:bzip2
 NO_MTREE=	yes
-DISTINFO_FILE=	${.CURDIR}/../gcc-aux/distinfo
+DISTINFO_FILE=	${.CURDIR}/../${ADAXX}-aux/distinfo
 WRKSRC=		${WRKDIR}/${PORTNAME}
 MAKE_ENV=	MAKEOBJDIR=${WRKSRC}/obj
 
 .include "${.CURDIR}/Makefile.sources"
+
+.if defined(ADA_DEFAULT) && ${ADA_DEFAULT} == 5
+.include "${.CURDIR}/../gcc5-aux/Makefile.version"
+.else
 .include "${.CURDIR}/../gcc-aux/Makefile.version"
+.endif
 
 post-extract:
 	@${MKDIR} ${WRKSRC}/obj
@@ -38,6 +42,10 @@ post-install:
 	# impunit is needed for GPS menus, just provide the source files
 	${INSTALL_DATA} ${WRKDIR}/${DISTNAME}/gcc/ada/impunit.* \
 		${STAGEDIR}${PREFIX}/include/gnat_util
+	# gnat_ugn.texi is used to generate gnat_switches.py for GPS
+	@${MKDIR} ${STAGEDIR}${DATADIR}
+	${INSTALL_DATA} ${WRKDIR}/${DISTNAME}/gcc/ada/gnat_ugn.texi \
+		${STAGEDIR}${DATADIR}
 	@(cd ${STAGEDIR}${PREFIX}; ${FIND} * \( -type f -or -type l \) | \
 		${SORT} >> ${TMPPLIST})
 

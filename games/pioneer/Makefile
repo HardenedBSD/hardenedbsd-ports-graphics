@@ -4,7 +4,6 @@
 PORTNAME=	pioneer
 PORTVERSION=	0.0.${GH_TAGNAME}
 CATEGORIES=	games
-MASTER_SITES=	http://github.com/${GH_ACCOUNT}/${GH_PROJECT}/archive/${GH_TAGNAME}${EXTRACT_SUFX}?dummy=/
 
 MAINTAINER=	lightside@gmx.com
 COMMENT=	Space adventure game set in the Milky Way galaxy
@@ -30,17 +29,17 @@ LICENSE_PERMS_IUP=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 LICENSE_PERMS_SIL=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
 BUILD_DEPENDS=	${LOCALBASE}/include/GL/glu.h:${PORTSDIR}/graphics/libGLU
-LIB_DEPENDS=	libsigc-2.0.so:${PORTSDIR}/devel/libsigc++20 \
+LIB_DEPENDS=	libcurl.so:${PORTSDIR}/ftp/curl \
+		libsigc-2.0.so:${PORTSDIR}/devel/libsigc++20 \
 		libfreetype.so:${PORTSDIR}/print/freetype2 \
 		libvorbisfile.so:${PORTSDIR}/audio/libvorbis \
 		libpng.so:${PORTSDIR}/graphics/png \
 		libassimp.so:${PORTSDIR}/multimedia/assimp
 
+USE_GITHUB=	yes
 GH_ACCOUNT=	pioneerspacesim
-GH_PROJECT=	${PORTNAME}
-GH_TAGNAME=	20150201
+GH_TAGNAME=	20150314
 
-WRKSRC=		${WRKDIR}/${GH_PROJECT}-${GH_TAGNAME}
 
 USES=		autoreconf gmake pkgconfig
 USE_GL=		gl

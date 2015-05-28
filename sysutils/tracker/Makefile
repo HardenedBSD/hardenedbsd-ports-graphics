@@ -3,8 +3,8 @@
 #    $MCom: ports/trunk/sysutils/tracker/Makefile 20045 2014-11-10 06:23:59Z gusi $
 
 PORTNAME=	tracker
-PORTVERSION=	1.2.5
-PORTREVISION=	3
+PORTVERSION=	1.2.6
+PORTREVISION=	1
 CATEGORIES=	sysutils gnome
 MASTER_SITES=	GNOME
 

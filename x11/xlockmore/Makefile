@@ -2,16 +2,15 @@
 # $FreeBSD$
 
 PORTNAME=	xlockmore
-PORTVERSION=	5.45
+PORTVERSION=	5.46
 CATEGORIES?=	x11
-MASTER_SITES=	http://www.tux.org/~bagleyd/xlock/${PORTNAME}-${PORTVERSION}/ \
-		ftp://ibiblio.org/pub/Linux/X11/screensavers/ \
-		LOCAL/ehaupt
+MASTER_SITES=	http://www.tux.org/~bagleyd/xlock/ \
+		LOCAL/jgh/x11/${PORTNAME}/
 
 MAINTAINER=	jgh@FreeBSD.org
 COMMENT=	Like XLock session locker/screen saver, but just more
 
-USES=		tar:bzip2
+USES=		tar:xz
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--without-motif --without-ttf --without-editres \
 		--without-dtsaver --without-rplay --without-nas \
@@ -21,7 +20,6 @@ USE_GNOME=	#
 USE_XORG=	x11 xaw ice
 
 LIB_DEPENDS+=	libfreetype.so:${PORTSDIR}/print/freetype2
-CONFIGURE_ENV+=	ac_freetype_includes="${LOCALBASE}/include/freetype2"
 
 OPTIONS_DEFINE=	MESAGL MB SYSLOG DISABLE_ALLOW_ROOT NICE_ONLY BLANK_ONLY \
 		KERBEROS4 BAD_PAM GTK2 TIME_BOMB CUSTOMIZATION MAGICK JP
@@ -64,7 +62,7 @@ KRB5LIB=	-L${KRB5_HOME}/lib
 
 .if ${PORT_OPTIONS:MMESAGL}
 CONFIGURE_ARGS+=	--with-mesa
-MESALIB=${PTHREAD_LIBS}
+MESALIB=	-lpthread
 USE_GL=	yes
 CFLAGS+=	-I${LOCALBASE}/include/FTGL
 .else

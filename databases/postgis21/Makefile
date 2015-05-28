@@ -1,11 +1,11 @@
 # $FreeBSD$
 
 PORTNAME=	postgis
-PORTVERSION=	2.1.5
+PORTVERSION=	2.1.7
 CATEGORIES=	databases geography
 MASTER_SITES=	http://download.osgeo.org/postgis/source/
 
-MAINTAINER=	trevor@bitba.se
+MAINTAINER=	harrison.grundy@astrodoggroup.com
 COMMENT=	Geographic objects support for PostgreSQL databases
 
 LICENSE=	GPLv2
@@ -36,6 +36,7 @@ TOPOLOGY_DESC=	Topology support
 SFCGAL_DESC=	Enable sfcgal
 LOADERGUI_CONFIGURE_WITH=	gui
 LOADERGUI_USE=	GNOME=gtk20
+RASTER_USES=	alias
 RASTER_CONFIGURE_WITH=	raster
 RASTER_LIB_DEPENDS=		libgdal.so:${PORTSDIR}/graphics/gdal
 RASTER_CONFIGURE_ON=	--with-gdalconfig=${LOCALBASE}/bin/gdal-config

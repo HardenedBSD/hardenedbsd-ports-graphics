@@ -2,11 +2,10 @@
 
 PORTNAME=	weechat
 PORTVERSION=	20140213
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	irc
 MASTER_SITES=	http://perturb.me.uk/distfiles/weechat-devel/ \
-		${MASTER_SITE_LOCAL}
-MASTER_SITE_SUBDIR=	jase/weechat-devel
+		LOCAL/jase/weechat-devel
 PKGNAMESUFFIX=	-devel
 DISTNAME=	weechat-devel-${GITREV}
 DISTFILES=	${DISTNAME}.txz

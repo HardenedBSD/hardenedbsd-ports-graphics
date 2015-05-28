@@ -5,8 +5,7 @@ PORTNAME=	wolfpack
 PORTVERSION=	4.3.32
 PORTREVISION=	1
 CATEGORIES=	games
-MASTER_SITES=	SF
-MASTER_SITE_SUBDIR=	empserver/${DISTNAME}
+MASTER_SITES=	SF/empserver/${DISTNAME}
 DISTNAME=	empire-${PORTVERSION}
 
 MAINTAINER=	johans@FreeBSD.org
@@ -17,8 +16,7 @@ USES=		gmake perl5
 USE_PERL5=	build
 GNU_CONFIGURE=	yes
 BINDIR=		${PREFIX}/lib/${PORTNAME}
-VARDIR=		${PREFIX}/var/${PORTNAME}
-CONFIGURE_ARGS+=	--bindir=${BINDIR} --sbindir=${BINDIR}
+CONFIGURE_ARGS=	--bindir=${BINDIR} --sbindir=${BINDIR} --localstatedir="${PREFIX}/var"
 
 CONFLICTS_INSTALL=	empire-[0-9]*
 

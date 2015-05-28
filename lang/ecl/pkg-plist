@@ -229,8 +229,7 @@ lib/ecl-%%VERSION%%/serve-event.fas
 %%SOCKETS%%lib/ecl-%%VERSION%%/sockets.fas
 lib/libecl.so
 lib/libecl.so.15
-lib/libecl.so.15.2
-lib/libecl.so.15.2.21
+lib/libecl.so.15.3
+lib/libecl.so.15.3.7
 man/man1/ecl-config.1.gz
 man/man1/ecl.1.gz
-@dir include/ecl/gc/private

@@ -2,9 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	cinnamon
-PORTVERSION=	2.4.5
+PORTVERSION=	2.4.6
+PORTREVISION=	1
 CATEGORIES=	x11 gnome
-MASTER_SITES=	http://github.com/linuxmint/${PORTNAME}/archive/${PORTVERSION}.tar.gz?dummy=/
 DIST_SUBDIR=	gnome3
 
 MAINTAINER=	gnome@FreeBSD.org
@@ -32,7 +32,7 @@ RUN_DEPENDS=	py*-dbus>=0:${PORTSDIR}/devel/py-dbus \
 		cinnamon-translations>=0:${PORTSDIR}/misc/cinnamon-translations \
 		cinnamon-screensaver:${PORTSDIR}/x11/cinnamon-screensaver \
 		nemo:${PORTSDIR}/x11-fm/nemo \
-		py*-imaging>=0:${PORTSDIR}/graphics/py-imaging \
+		py*-pillow>=0:${PORTSDIR}/graphics/py-pillow \
 		py*-lxml>=0:${PORTSDIR}/devel/py-lxml
 
 WRKSRC=		${WRKDIR}/Cinnamon-${PORTVERSION}
@@ -41,6 +41,8 @@ USES=		autoreconf:build compiler:c11 gettext gmake libtool \
 		pathfix pkgconfig python shebangfix
 USE_GNOME=	evolutiondataserver3 gconf2 gnomedesktop3 \
 		gnomeprefix gtk30 intlhack introspection:build
+USE_GITHUB=	yes
+GH_ACCOUNT=	linuxmint
 # this happens before moving the file to ${PREFIX} (which then will be copied to ${STAGEDIR}${PREFIX})
 SHEBANG_FILES=	files/usr/bin/cinnamon2d
 USE_XORG=	x11 xfixes sm

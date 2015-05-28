@@ -4,11 +4,12 @@ PORTNAME=	gnustep-examples
 PORTVERSION=	1.4.0
 PORTREVISION=	3
 CATEGORIES=	misc gnustep
-MASTER_SITES=	${MASTER_SITE_GNUSTEP}
-MASTER_SITE_SUBDIR=	usr-apps
+MASTER_SITES=	GNUSTEP/usr-apps
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	GNUstep example applications
+
+BROKEN=		Not converted to USES=gnustep
 
 USE_GNUSTEP=	yes
 USE_GNUSTEP_BACK=	yes

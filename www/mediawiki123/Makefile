@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	mediawiki
-PORTVERSION=	1.23.8
+PORTVERSION=	1.23.9
 PORTREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://releases.wikimedia.org/mediawiki/${PORTVERSION:R}/
@@ -13,9 +13,18 @@ COMMENT=	Wiki engine used by Wikipedia
 
 LICENSE=	GPLv2
 
-CONFLICTS=	mediawiki119-[0-9]* mediawiki12[24]-[0-9]*
+CONFLICTS=	mediawiki119-[0-9]* mediawiki12[45]-[0-9]*
 
-USE_PHP=	ctype iconv mbstring pcre session xml zlib readline dom json
+DEPRECATED=		Please upgrade to mediawiki-1.25
+EXPIRATION_DATE=	2015-11-27
+
+USES=		shebangfix
+SHEBANG_FILES=	maintenance/dev/*.sh \
+		maintenance/hiphop/run-server
+SHEBANG_LANG=	hhvm
+hhvm_OLD_CMD=	/usr/bin/hhvm
+hhvm_CMD=	${LOCALBASE}/bin/hhvm # not installed by anything yet
+USE_PHP=	ctype hash iconv mbstring pcre session xml zlib readline dom json
 WANT_PHP_WEB=	yes
 MEDIAWIKIDIR?=	www/mediawiki
 

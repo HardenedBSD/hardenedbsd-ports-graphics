@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	chromium
-PORTVERSION=	40.0.2214.115
+PORTVERSION=	43.0.2357.65
 CATEGORIES=	www
 MASTER_SITES=	http://commondatastorage.googleapis.com/chromium-browser-official/
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
@@ -13,14 +13,16 @@ COMMENT=	Google web browser based on WebKit
 LICENSE=	BSD3CLAUSE LGPL21 MPL
 LICENSE_COMB=	multi
 
-CFLAGS+=	-isystem${LOCALBASE}/include
+CFLAGS+=	-isystem${LOCALBASE}/include -I${PREFIX}/include/atk-1.0
 
 BUILD_DEPENDS=	${LOCALBASE}/bin/gperf:${PORTSDIR}/devel/gperf \
 		bash:${PORTSDIR}/shells/bash \
 		yasm:${PORTSDIR}/devel/yasm \
 		flock:${PORTSDIR}/sysutils/flock \
 		${LOCALBASE}/include/linux/videodev2.h:${PORTSDIR}/multimedia/v4l_compat \
-		${LOCALBASE}/share/usbids/usb.ids:${PORTSDIR}/misc/usbids
+		${LOCALBASE}/share/usbids/usb.ids:${PORTSDIR}/misc/usbids \
+		${PYTHON_PKGNAMEPREFIX}Jinja2>0:${PORTSDIR}/devel/py-Jinja2 \
+		${PYTHON_PKGNAMEPREFIX}ply>0:${PORTSDIR}/devel/py-ply
 
 LIB_DEPENDS=	libcairo.so:${PORTSDIR}/graphics/cairo \
 		libdbus-1.so:${PORTSDIR}/devel/dbus \
@@ -60,7 +62,7 @@ CPE_VENDOR=	google
 CPE_PRODUCT=	chrome
 USE_PERL5=	build
 USE_XORG=	scrnsaverproto x11 xproto xscrnsaver xtst
-USE_GNOME=	glib20 gtk20 dconf libxslt
+USE_GNOME=	atk glib20 gtk20 dconf libxslt
 SHEBANG_FILES=	chrome/tools/build/linux/chrome-wrapper
 ALL_TARGET=	chrome
 INSTALLS_ICONS=	yes
@@ -110,7 +112,8 @@ GYP_DEFINES+=	\
 		use_system_snappy=1 \
 		use_system_speex=1 \
 		use_system_xdg_utils=1 \
-		use_system_yasm=1
+		use_system_yasm=1 \
+		v8_use_external_startup_data=0
 # allow removal of third_party/adobe
 GYP_DEFINES+=	flapper_version_h_file='${WRKSRC}/flapper_version.h'
 
@@ -259,6 +262,7 @@ pre-configure:
 		'net/third_party/mozilla_security_manager' \
 		'net/third_party/nss' \
 		'third_party/WebKit' \
+		'third_party/analytics' \
 		'third_party/angle' \
 		'third_party/angle/src/third_party' \
 		'third_party/blanketjs' \
@@ -268,7 +272,7 @@ pre-configure:
 		'third_party/cld' \
 		'third_party/cros_system_api' \
 		'third_party/dom_distiller_js' \
-		'third_party/dom_distiller_js/package/proto_gen/third_party/dom_distiller_js' \
+		'third_party/dom_distiller_js/dist/proto_gen/third_party/dom_distiller_js' \
 		'third_party/ffmpeg' \
 		'third_party/gardiner_mod' \
 		'third_party/fips181' \
@@ -289,7 +293,6 @@ pre-configure:
 		'third_party/libsrtp' \
 		'third_party/libvpx' \
 		'third_party/libvpx/source/libvpx/third_party/x86inc' \
-		'third_party/libwebm' \
 		'third_party/libxml/chromium' \
 		'third_party/libXNVCtrl' \
 		'third_party/libyuv' \
@@ -297,6 +300,7 @@ pre-configure:
 		'third_party/lzma_sdk' \
 		'third_party/markupsafe' \
 		'third_party/mesa' \
+		'third_party/mojo' \
 		'third_party/modp_b64' \
 		'third_party/mt19937ar' \
 		'third_party/npapi' \
@@ -324,6 +328,7 @@ pre-configure:
 		'third_party/trace-viewer/third_party/tvcm/third_party' \
 		'third_party/undoview' \
 		'third_party/usrsctp' \
+		'third_party/web-animations-js' \
 		'third_party/webdriver' \
 		'third_party/webrtc' \
 		'third_party/widevine' \
@@ -367,8 +372,6 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/out/${BUILDTYPE}/chrome \
 		${STAGEDIR}${DATADIR}
 	${INSTALL_LIB} ${WRKSRC}/out/${BUILDTYPE}/libffmpegsumo.so \
-		${STAGEDIR}${DATADIR}
-	${INSTALL_LIB} ${WRKSRC}/out/${BUILDTYPE}/libpdf.so \
 		${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/out/${BUILDTYPE} && \
 		${COPYTREE_SHARE} "locales resources" ${STAGEDIR}${DATADIR}

@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	ufraw
-PORTVERSION=	0.19.2
-PORTREVISION=	6
+PORTVERSION=	0.21
 CATEGORIES=	graphics
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTNAME}-${PORTVERSION}
 
@@ -22,7 +21,7 @@ CONFIGURE_ARGS=	--disable-silent-rules --enable-extras
 USES=		gettext pkgconfig gmake desktop-file-utils
 
 CPPFLAGS+=	-I${LOCALBASE}/include
-LDFLAGS+=	-L${LOCALBASE}/lib ${PTHREAD_LIBS}
+LDFLAGS+=	-lpthread -L${LOCALBASE}/lib
 PC_FALSE=	cinepaint
 
 OPTIONS_DEFINE=	CONTRAST DST EXIV2 LENSFUN FITS GIMP GTK2 GNOME

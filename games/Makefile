@@ -6,14 +6,17 @@
     SUBDIR += 0ad
     SUBDIR += 0verkill
     SUBDIR += 2048
+    SUBDIR += 2048-qt
     SUBDIR += 3dc
     SUBDIR += 3dpong
     SUBDIR += 3omns
     SUBDIR += 4stattack
     SUBDIR += 54321
+    SUBDIR += 7kaa
     SUBDIR += CaribbeanStud
     SUBDIR += HeroesOfMightAndMagic
     SUBDIR += KnightCap
+    SUBDIR += abbayedesmorts
     SUBDIR += abe
     SUBDIR += abuse_sdl
     SUBDIR += acm
@@ -24,7 +27,6 @@
     SUBDIR += affenspiel
     SUBDIR += afternoonstalker
     SUBDIR += agame
-    SUBDIR += airstrike
     SUBDIR += aisleriot
     SUBDIR += alephone
     SUBDIR += alephone-data
@@ -273,6 +275,7 @@
     SUBDIR += fortunate
     SUBDIR += fotaq
     SUBDIR += four-in-a-row
+    SUBDIR += freeblocks
     SUBDIR += freecell-solver
     SUBDIR += freeciv
     SUBDIR += freeciv-nox11
@@ -370,6 +373,7 @@
     SUBDIR += greed
     SUBDIR += gretools
     SUBDIR += grhino
+    SUBDIR += griels-quest
     SUBDIR += gru
     SUBDIR += grubik
     SUBDIR += gshisen
@@ -671,6 +675,7 @@
     SUBDIR += openarena-oax
     SUBDIR += openarena-server
     SUBDIR += openastromenace
+    SUBDIR += openbor
     SUBDIR += openbubbles
     SUBDIR += opencity
     SUBDIR += openclonk
@@ -768,6 +773,7 @@
     SUBDIR += pycadia
     SUBDIR += pyching
     SUBDIR += pydance
+    SUBDIR += pyfa
     SUBDIR += pykawari
     SUBDIR += pysolfc
     SUBDIR += pyspacewar
@@ -828,6 +834,7 @@
     SUBDIR += r1q2
     SUBDIR += railroad-rampage
     SUBDIR += redeclipse
+    SUBDIR += redeclipse-data
     SUBDIR += reminiscence
     SUBDIR += rescue
     SUBDIR += residualvm
@@ -909,6 +916,7 @@
     SUBDIR += starfighter
     SUBDIR += starlanes
     SUBDIR += steelstorm
+    SUBDIR += stendhal
     SUBDIR += stepmania-devel
     SUBDIR += stockfish
     SUBDIR += stonesoup
@@ -933,6 +941,7 @@
     SUBDIR += tali
     SUBDIR += tanglet
     SUBDIR += tank
+    SUBDIR += tanks-of-freedom
     SUBDIR += tbclock
     SUBDIR += tbe
     SUBDIR += tecnoballz
@@ -966,7 +975,8 @@
     SUBDIR += traindirector
     SUBDIR += traingame
     SUBDIR += tremulous
-    SUBDIR += trigger
+    SUBDIR += trigger-data
+    SUBDIR += trigger-rally
     SUBDIR += trimines
     SUBDIR += triplane
     SUBDIR += trojka
@@ -1028,7 +1038,6 @@
     SUBDIR += widelands
     SUBDIR += wizznic
     SUBDIR += wmeyes
-    SUBDIR += wmfortune
     SUBDIR += wmminichess
     SUBDIR += wmpuzzle
     SUBDIR += wmqstat
@@ -1041,6 +1050,8 @@
     SUBDIR += worldofpadman
     SUBDIR += wtf
     SUBDIR += wxlauncher
+    SUBDIR += wyrmgus
+    SUBDIR += wyrmsun
     SUBDIR += xabacus
     SUBDIR += xasteroids
     SUBDIR += xataxx

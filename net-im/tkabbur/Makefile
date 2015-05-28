@@ -4,14 +4,14 @@
 PORTNAME=	tkabbur
 PORTVERSION=	0.8
 CATEGORIES=	net-im
-MASTER_SITES=	${MASTER_SITE_GOOGLE_CODE}
+MASTER_SITES=	GOOGLE_CODE
 DISTNAME=	${PORTNAME}-${PORTVERSION}.src
 
 MAINTAINER=	dhn@FreeBSD.org
 COMMENT=	Is a modification of XMPP/Jabber client Tkabber
 
 RUN_DEPENDS=	dtplite:${PORTSDIR}/devel/tcllib \
-		${LOCALBASE}/lib/tls1.6/pkgIndex.tcl:${PORTSDIR}/devel/tcltls \
+		tcltls>0:${PORTSDIR}/devel/tcltls \
 		${LOCALBASE}/lib/bwidget/pkgIndex.tcl:${PORTSDIR}/x11-toolkits/bwidget
 
 WRKSRC=		${WRKDIR}/${DISTNAME}

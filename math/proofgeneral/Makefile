@@ -3,7 +3,7 @@
 
 PORTNAME=	proofgeneral
 PORTVERSION=	4.1
-PORTREVISION=	9
+PORTREVISION=	10
 CATEGORIES=	math elisp
 MASTER_SITES=	http://proofgeneral.inf.ed.ac.uk/releases/
 PKGNAMESUFFIX=	-${EMACS_NAME}
@@ -73,8 +73,5 @@ pre-build:
 #.if defined(BYTE_COMPILE)
 	@${RM} ${WRKSRC}/.byte-compile || ${TRUE}
 #.endif
-
-post-install:
-	@${CAT} ${PKGMESSAGE}
 
 .include <bsd.port.post.mk>

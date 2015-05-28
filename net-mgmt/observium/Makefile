@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	observium
-PORTVERSION=	0.14.4.5229
+PORTVERSION=	0.14.11.6000
 PORTREVISION=	2
 CATEGORIES=	net-mgmt
 MASTER_SITES=	http://www.observium.org/
@@ -16,12 +16,12 @@ LICENSE=	GPLv3
 
 WRKSRC=		${WRKDIR}/${PORTNAME}
 
-USES=		shebangfix
+USES=		python shebangfix
 SHEBANG_FILES=	mibs/process.pl html/js/makemini.pl \
 		scripts/watchmaillog/watchmaillog.pl \
 		scripts/agent-local/postgresql.pl \
 		scripts/removespikes.pl scripts/add_ds.pl
-USE_PHP=	snmp ctype gd mysql session xml
+USE_PHP=	ctype filter gd json mcrypt mysql session snmp tokenizer xml
 WANT_PHP_CLI=	yes
 
 NO_BUILD=	yes
@@ -34,10 +34,23 @@ RUN_DEPENDS+=	rrdtool:${PORTSDIR}/databases/rrdtool \
 		${LOCALBASE}/share/pear/Net/IPv6.php:${PORTSDIR}/net/pear-Net_IPv6 \
 		snmpget:${PORTSDIR}/net-mgmt/net-snmp
 
-OPTIONS_DEFINE=	APACHEMOD MYSQLD
-OPTIONS_DEFAULT=	APACHEMOD
+OPTIONS_DEFINE=	APACHEMOD FPING IPMITOOL LIBVIRT MYSQLD NAGPLUGINS NMAP PYPOLLER SVN WMIC
+OPTIONS_DEFAULT=	APACHEMOD FPING IPMITOOL LIBVIRT NAGPLUGINS NMAP PYPOLLER SVN WMIC
 APACHEMOD_DESC=	Use PHP with Apache 2.2+ module
+FPING_DESC=	Enable fping support ping monitoring
+IPMITOOL_DESC=	Enable support for monitoring hardware IPMI
 MYSQLD_DESC=	Use local MySQL server
+WMIC_DESC=	Enable support for WMI polling
+PYPOLLER_DESC=	Enable Python Poller Wrapper
+
+FPING_RUN_DEPENDS=	fping:${PORTSDIR}/net/fping
+IPMITOOL_RUN_DEPENDS=	ipmitool:${PORTSDIR}/sysutils/ipmitool
+LIBVIRT_RUN_DEPENDS=	virsh:${PORTSDIR}/devel/libvirt
+NAGPLUGINS_RUN_DEPENDS=	${LOCALBASE}/libexec/nagios/check_nagios:${PORTSDIR}/net-mgmt/nagios-plugins
+NMAP_RUN_DEPENDS=	nmap:${PORTSDIR}/security/nmap
+PYPOLLER_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}MySQLdb>0:${PORTSDIR}/databases/py-MySQLdb
+SVN_RUN_DEPENDS=	svn:${PORTSDIR}/devel/subversion
+WMIC_RUN_DEPENDS=	wmic:${PORTSDIR}/net-mgmt/wmi-client
 
 .include <bsd.port.options.mk>
 
@@ -67,6 +80,9 @@ USE_MYSQL=	server
 USE_MYSQL=	client
 .endif
 
+post-patch:
+	${REINPLACE_CMD} 's|%%LOCALBASE%%|${LOCALBASE}|g' ${WRKSRC}/poller-wrapper.py ${WRKSRC}/poller.php
+
 do-install:
 	@${MKDIR} ${STAGEDIR}/${WWWDIR}
 .for dir in ${ROOT_DIRS}
@@ -80,6 +96,10 @@ do-install:
 	@${MKDIR} ${STAGEDIR}/${WWWDIR}/rrd
 	# Files in scripts dir should be executable
 	@${FIND} ${STAGEDIR}/${WWWDIR}/scripts -type f -exec ${CHMOD} +x {} \;
+	# Ensure PHP and Python scripts are executable
+	@${FIND} ${STAGEDIR}/${WWWDIR} -type f -name '*.py' -or -type f -name '*.php' -exec ${CHMOD} +x {} \;
+	# Rename for @sample
+	@${MV} ${STAGEDIR}/${WWWDIR}/config.php.default ${STAGEDIR}/${WWWDIR}/config.php.default.sample
 
 .if ${PORT_OPTIONS:MDOCS}
 	@${MKDIR} ${STAGEDIR}/${DOCSDIR}

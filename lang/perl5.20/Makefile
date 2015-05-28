@@ -3,9 +3,9 @@
 
 PORTNAME=	perl
 PORTVERSION=	${PERL_VERSION}
+PORTREVISION=	4
 CATEGORIES=	lang devel perl5
-MASTER_SITES=	CPAN
-MASTER_SITE_SUBDIR=	../../src
+MASTER_SITES=	CPAN/../../src/5.0
 DIST_SUBDIR=	perl
 
 MAINTAINER=	perl@FreeBSD.org
@@ -30,7 +30,7 @@ GDBM_DESC=	GDBM_File extension
 PERL_MALLOC_DESC=	Use Perl malloc
 PERL_64BITINT_DESC=	Use 64 bit integers (on i386)
 THREADS_DESC=		Build threaded perl
-PTHREAD_DESC=		Build with -pthread
+PTHREAD_DESC=		Build with -lpthread
 MULTIPLICITY_DESC=	Use multiplicity
 SITECUSTOMIZE_DESC=	Run-time customization of @INC
 
@@ -49,10 +49,8 @@ THREADS_CONFIGURE_OFF=	-Dusethreads=n
 PERL_MALLOC_CONFIGURE_ON=	-Dusemymalloc=y
 PERL_MALLOC_CONFIGURE_OFF=	-Dusemymalloc=n
 
-# For the latest Perl port, this should be:
-PORTSCOUT=	limitw:1,even
 # For the older Perl ports, this should be:
-#PORTSCOUT=	limit:^${PERL_VER}.
+PORTSCOUT=	limit:^${PERL_VER}.
 
 # Remember to update Mk/Uses/perl5.mk too.
 PERL_VERSION=	5.20.2
@@ -83,7 +81,9 @@ CONFIGURE_ARGS=	-sde -Dprefix=${PREFIX} \
 	-Dsiteman3dir=${SITE_MAN3} \
 	-Dsiteman1dir=${PREFIX}/man/man1 \
 	-Ui_malloc -Ui_iconv -Uinstallusrbinperl -Dusenm=n \
-	-Dcc="${CC}" -Duseshrplib -Dinc_version_list=none
+	-Dcc="${CC}" -Duseshrplib -Dinc_version_list=none \
+	-Dcf_by=${MAINTAINER:C,@.*,,} -Dcf_email=${MAINTAINER} \
+	-Dcf_time="`env LANG=C ${STAT} -t \"%a %b %d %T %Z %Y\" -f %Sm ${_DISTDIR}/${DISTNAME}${EXTRACT_SUFX}`"
 # Keep the following two in sync.
 # lddlflags is used for all .so linking
 # shrpldflags is used for libperl.so, so remove all the extra bits inherited from lddlflags.
@@ -108,25 +108,9 @@ SUB_LIST+=	PERL_VERSION=${PERL_VERSION} \
 		SITEMAN3PREFIX=${SITE_MAN3_PREFIX} \
 		PERL_ARCH=${PERL_ARCH}
 
-SUB_FILES=	perl5_version use.perl perl-man.conf
+SUB_FILES=	perl5_version
 
-PKGINSTALL=	${WRKDIR}/use.perl
-PKGDEINSTALL=	${WRKDIR}/use.perl
 INSTALL_TARGET=	install-strip
-
-.include <bsd.port.pre.mk>
-.include "${PORTSDIR}/Mk/bsd.default-versions.mk"
-
-# if this port is default due PERL5_DEFAULT
-# change PKGNAME to reflect this
-.if ${PERL_VER} == ${PERL5_DEFAULT}
-PKGNAMESUFFIX=	${PERL_VERSION:C/\.[0-9]+\.[0-9]+$//}
-.else
-# make PKGNAME unique among other lang/perl5.x
-PKGNAMESUFFIX=	${PERL_VER}
-# always add default perl5 pkgname to conflicts
-CONFLICTS_INSTALL+=	perl5-*
-.endif
 
 .if defined(PERL_VENDOR_PREFIX)
 CONFIGURE_ARGS+=	\
@@ -160,19 +144,34 @@ PLIST_SUB+=	PERL_VERSION=${PERL_VERSION} \
 		PRIV_LIB=${_PRIV_LIB} \
 		ARCH_LIB=${_ARCH_LIB}
 
-.if ${PORT_OPTIONS:MDEBUG}
-STRIP=
-STRIP_CMD=	${TRUE}
+.include <bsd.port.pre.mk>
+.include "${PORTSDIR}/Mk/bsd.default-versions.mk"
+
+# if this port is default due PERL5_DEFAULT
+# change PKGNAME to reflect this
+.if ${PERL_VER} == ${PERL5_DEFAULT}
+PKGNAMESUFFIX=	${PERL_VERSION:C/\.[0-9]+\.[0-9]+$//}
+.else
+# make PKGNAME unique among other lang/perl5.x
+PKGNAMESUFFIX=	${PERL_VER}
+# always add default perl5 pkgname to conflicts
+CONFLICTS_INSTALL+=	perl5-*
 .endif
 
 .if ${OSVERSION} >= 900022
+SUB_FILES+=	perl-man.conf
 PLIST_SUB+=	MANCONF=""
 .else
+# FIXME when 8.4 goes out, remove this
+SUB_FILES+=	use.perl
 PLIST_SUB+=	MANCONF="@comment "
+PKGINSTALL=	${WRKDIR}/use.perl
+PKGDEINSTALL=	${WRKDIR}/use.perl
 .endif
 
-.if ${PORT_OPTIONS:MTHREADS}
-WITH_PTHREAD=		yes
+.if ${PORT_OPTIONS:MDEBUG}
+STRIP=
+STRIP_CMD=	${TRUE}
 .endif
 
 # Put a symlink to the future libperl.so.x.yy so that -lperl works.
@@ -184,12 +183,10 @@ post-patch:
 	${REINPLACE_CMD} -e 's|/usr/local|${LOCALBASE}|g' \
 		${WRKSRC}/Configure ${WRKSRC}/hints/freebsd.sh
 .if ${PORT_OPTIONS:MPTHREAD}
-	${REINPLACE_CMD} -e 's|%%PTHREAD_LIBS%%|${PTHREAD_LIBS}|g;' \
-		-e 's|%%PTHREAD_CFLAGS%%|${PTHREAD_CFLAGS}|g;' \
+	${REINPLACE_CMD} -e 's|%%PTHREAD_LIBS%%|-lpthread|g;' \
 		${WRKSRC}/hints/freebsd.sh
 .else
 	${REINPLACE_CMD} -e 's|%%PTHREAD_LIBS%%||g;' \
-		-e 's|%%PTHREAD_CFLAGS%%||g;' \
 		${WRKSRC}/hints/freebsd.sh
 .endif
 

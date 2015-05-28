@@ -57,7 +57,8 @@ shebang() {
 	# Use heredoc to avoid losing rc from find|while subshell
 	done <<-EOF
 	$(find ${STAGEDIR}${PREFIX}/bin ${STAGEDIR}${PREFIX}/sbin \
-	    ${STAGEDIR}${PREFIX}/libexec -type f -perm +111 2>/dev/null)
+	    ${STAGEDIR}${PREFIX}/libexec ${STAGEDIR}${PREFIX}/www \
+	    -type f -perm +111 2>/dev/null)
 	EOF
 
 	# Split stat(1) result into 2 lines and read each line separately to
@@ -77,8 +78,8 @@ shebang() {
 	# Use heredoc to avoid losing rc from find|while subshell
 	done <<-EOF
 	$(find ${STAGEDIR}${PREFIX}/bin ${STAGEDIR}${PREFIX}/sbin \
-	    ${STAGEDIR}${PREFIX}/libexec -type l \
-	    -exec stat -f "%N${LF}%Y" {} + 2>/dev/null)
+	    ${STAGEDIR}${PREFIX}/libexec ${STAGEDIR}${PREFIX}/www \
+	    -type l -exec stat -f "%N${LF}%Y" {} + 2>/dev/null)
 	EOF
 
 	return ${rc}
@@ -142,11 +143,11 @@ stripped() {
 	# Split file and result into 2 lines and read separately to ensure
 	# files with spaces are kept intact.
 	find ${STAGEDIR} -type f \
-	    -exec /usr/bin/file -nNF "${LF}" {} + |
+	    -exec /usr/bin/file --exclude ascii -nNF "${LF}" {} + |
 	    while read f; do
 		    read output
 		case "${output}" in
-			ELF\ *\ executable,\ *FreeBSD*,\ not\ stripped*|ELF\ *\ shared\ object,\ *FreeBSD*,\ not\ stripped*)
+			*ELF\ *\ executable,\ *FreeBSD*,\ not\ stripped*|*ELF\ *\ shared\ object,\ *FreeBSD*,\ not\ stripped*)
 				warn "'${f#${STAGEDIR}${PREFIX}/}' is not stripped consider trying INSTALL_TARGET=install-strip or using \${STRIP_CMD}"
 				;;
 		esac
@@ -255,7 +256,13 @@ libperl() {
 	fi
 }
 
-checks="shebang symlinks paths stripped desktopfileutils sharedmimeinfo suidfiles libtool libperl"
+prefixvar() {
+	if test -d ${STAGEDIR}${PREFIX}/var; then
+		warn "port uses ${PREFIX}/var instead of /var"
+	fi
+}
+
+checks="shebang symlinks paths stripped desktopfileutils sharedmimeinfo suidfiles libtool libperl prefixvar"
 
 ret=0
 cd ${STAGEDIR}

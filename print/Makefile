@@ -208,10 +208,10 @@
     SUBDIR += rtf2latex2e
     SUBDIR += rubygem-afm
     SUBDIR += rubygem-color
-    SUBDIR += rubygem-colortools
+    SUBDIR += rubygem-color-tools
     SUBDIR += rubygem-pdf-core
     SUBDIR += rubygem-pdf-reader
-    SUBDIR += rubygem-pdfwriter
+    SUBDIR += rubygem-pdf-writer
     SUBDIR += rubygem-prawn
     SUBDIR += rubygem-prawn-core
     SUBDIR += rubygem-prawn-flexible-table
@@ -221,6 +221,7 @@
     SUBDIR += rubygem-prawn-layout
     SUBDIR += rubygem-prawn-security
     SUBDIR += rubygem-prawn-svg
+    SUBDIR += rubygem-rbpdf
     SUBDIR += rubygem-ttfunk
     SUBDIR += scribus
     SUBDIR += sgf2tex

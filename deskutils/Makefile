@@ -103,6 +103,7 @@
     SUBDIR += griffith
     SUBDIR += growl-for-linux
     SUBDIR += gruler
+    SUBDIR += gsimplecal
     SUBDIR += gtg
     SUBDIR += gtimer
     SUBDIR += gtodo
@@ -139,7 +140,6 @@
     SUBDIR += launchy
     SUBDIR += libgcal
     SUBDIR += libopensync-plugin-file
-    SUBDIR += libopensync-plugin-python
     SUBDIR += libopensync-plugin-sunbird
     SUBDIR += libopensync-plugin-vformat-devel
     SUBDIR += libstreamanalyzer
@@ -153,11 +153,9 @@
     SUBDIR += mdh
     SUBDIR += mencal
     SUBDIR += menumaker
-    SUBDIR += mirall
     SUBDIR += moregroupware
     SUBDIR += mozo
     SUBDIR += mrundlg
-    SUBDIR += msynctool
     SUBDIR += multisync
     SUBDIR += multisync-backup
     SUBDIR += multisync-syncml
@@ -173,6 +171,7 @@
     SUBDIR += orage
     SUBDIR += osmo
     SUBDIR += osynctool
+    SUBDIR += owncloudclient
     SUBDIR += p5-Data-ICal
     SUBDIR += p5-Goo
     SUBDIR += p5-ZConf-BGSet
@@ -197,11 +196,13 @@
     SUBDIR += plasma-applet-teacooker
     SUBDIR += plasma-applet-yawp
     SUBDIR += plopfolio
-    SUBDIR += preferencepanes
     SUBDIR += preferences
+    SUBDIR += py-khal
+    SUBDIR += py-pycarddav
     SUBDIR += py-pystash
     SUBDIR += py-send2trash
     SUBDIR += py-spice-gtk
+    SUBDIR += py-vdirsyncer
     SUBDIR += py-vobject
     SUBDIR += pybookreader
     SUBDIR += pypanel
@@ -217,6 +218,7 @@
     SUBDIR += rubrica
     SUBDIR += rubygem-taskjuggler
     SUBDIR += semantik
+    SUBDIR += shutter
     SUBDIR += silence
     SUBDIR += simpleagenda
     SUBDIR += simplegroupware

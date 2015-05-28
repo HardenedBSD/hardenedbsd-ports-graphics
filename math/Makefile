@@ -30,6 +30,7 @@
     SUBDIR += R-cran-inline
     SUBDIR += R-cran-labeling
     SUBDIR += R-cran-memisc
+    SUBDIR += R-cran-minqa
     SUBDIR += R-cran-mvtnorm
     SUBDIR += R-cran-nnls
     SUBDIR += R-cran-outliers
@@ -88,11 +89,14 @@
     SUBDIR += cln
     SUBDIR += cloog
     SUBDIR += clp
+    SUBDIR += cminpack
+    SUBDIR += cmlib
     SUBDIR += coinmp
     SUBDIR += concorde
     SUBDIR += convertall
     SUBDIR += coq
     SUBDIR += crlibm
+    SUBDIR += cryptominisat
     SUBDIR += cvc3
     SUBDIR += dcdflib
     SUBDIR += diehard
@@ -184,7 +188,6 @@
     SUBDIR += hs-vector-space
     SUBDIR += igraph
     SUBDIR += ipopt
-    SUBDIR += isabelle
     SUBDIR += ised
     SUBDIR += jacal
     SUBDIR += jags
@@ -424,6 +427,7 @@
     SUBDIR += p5-Math-Geometry-Planar
     SUBDIR += p5-Math-Geometry-Planar-GPC
     SUBDIR += p5-Math-Geometry-Planar-GPC-Polygon
+    SUBDIR += p5-Math-Geometry-Planar-GPC-PolygonXS
     SUBDIR += p5-Math-Geometry-Planar-Offset
     SUBDIR += p5-Math-Geometry-Voronoi
     SUBDIR += p5-Math-Gradient
@@ -523,8 +527,6 @@
     SUBDIR += pecl-trader
     SUBDIR += php5-bcmath
     SUBDIR += php5-gmp
-    SUBDIR += php53-bcmath
-    SUBDIR += php53-gmp
     SUBDIR += php55-bcmath
     SUBDIR += php55-gmp
     SUBDIR += php56-bcmath
@@ -548,6 +550,7 @@
     SUBDIR += py-basemap-data
     SUBDIR += py-bitvector
     SUBDIR += py-bottleneck
+    SUBDIR += py-cryptominisat
     SUBDIR += py-fastcluster
     SUBDIR += py-ffc
     SUBDIR += py-fiat
@@ -582,6 +585,7 @@
     SUBDIR += py-svgmath
     SUBDIR += py-symeig
     SUBDIR += py-sympy
+    SUBDIR += py-theano
     SUBDIR += py-ufl
     SUBDIR += py-viper
     SUBDIR += qalculate
@@ -604,6 +608,7 @@
     SUBDIR += rpy
     SUBDIR += rpy2
     SUBDIR += ruby-algebra
+    SUBDIR += rubygem-expression_parser
     SUBDIR += rubygem-fftw3
     SUBDIR += rubygem-narray
     SUBDIR += rubygem-narray_miss

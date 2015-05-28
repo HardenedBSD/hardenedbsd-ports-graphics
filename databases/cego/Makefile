@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	cego
-PORTVERSION=	2.20.21
+PORTVERSION=	2.23.2
 CATEGORIES=	databases
 MASTER_SITES=	http://www.lemke-it.com/
 
@@ -12,6 +12,7 @@ LICENSE=	GPLv3
 
 LIB_DEPENDS=	liblfcbase.so:${PORTSDIR}/devel/lfcbase \
 		liblfcxml.so:${PORTSDIR}/devel/lfcxml
+RUN_DEPENDS=	${LOCALBASE}/bin/sudo:${PORTSDIR}/security/sudo
 
 GNU_CONFIGURE=	yes
 CPPFLAGS+=	-I${LOCALBASE}/include
@@ -39,7 +40,7 @@ post-install:
 	${CP} ${WRKSRC}/samples/rc/cego ${STAGEDIR}${PREFIX}/etc/rc.d/
 
 post-stage:
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libcego.so.1.0.0
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libcgwrap.so.1.0.0
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libcego.so.2.0.0
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libcgwrap.so.2.0.0
 
 .include <bsd.port.mk>

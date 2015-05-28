@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	libtorrent-rasterbar
-PORTVERSION=	0.16.17
+PORTVERSION=	0.16.19
 PORTREVISION=	1
 CATEGORIES?=	net-p2p ipv6
 MASTER_SITES=	SF/${PORTNAME:S/-rasterbar//}/${PORTNAME:S/-rasterbar//}/

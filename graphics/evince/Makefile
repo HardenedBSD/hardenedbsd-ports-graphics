@@ -3,8 +3,7 @@
 #    $MCom: ports/trunk/graphics/evince/Makefile 20078 2014-11-13 09:06:29Z gusi $
 
 PORTNAME=	evince
-PORTVERSION=	3.14.1
-PORTREVISION=	2
+PORTVERSION=	3.14.2
 CATEGORIES=	graphics print gnome
 MASTER_SITES=	GNOME
 DIST_SUBDIR=	gnome3
@@ -53,10 +52,6 @@ DJVU_DESC=	DJVU support
 XPS_DESC=	XPS support
 
 .include <bsd.port.options.mk>
-
-.if ${OSVERSION} < 900000
-BROKEN=		Fails to build
-.endif
 
 .if ${PORT_OPTIONS:MDVI} || ${PORT_OPTIONS:MT1LIB}
 USE_TEX=	latex

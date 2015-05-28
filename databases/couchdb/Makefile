@@ -3,11 +3,10 @@
 
 PORTNAME=	couchdb
 PORTVERSION=	1.6.1
-PORTREVISION=	1
+PORTREVISION=	4
 PORTEPOCH=	2
 CATEGORIES=	databases
-MASTER_SITES=	${MASTER_SITE_APACHE}
-MASTER_SITE_SUBDIR=	couchdb/source/${PORTVERSION}
+MASTER_SITES=	APACHE/couchdb/source/${PORTVERSION}
 DISTNAME=	apache-couchdb-${PORTVERSION}
 
 MAINTAINER=	olgeni@FreeBSD.org
@@ -28,7 +27,8 @@ GROUPS=		couchdb
 USE_RC_SUBR=	couchdb
 SUB_FILES=	pkg-message
 PLIST_SUB=	VERSION=${PORTVERSION}
-USES=		gmake libtool
+USES=		cpe gmake libtool
+CPE_VENDOR=	apache
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
 CONFIGURE_ARGS=	--with-erlang=${LOCALBASE}/lib/erlang/usr/include \

@@ -6,7 +6,6 @@ PORTEPOCH=	1
 CATEGORIES=	www python
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 PKGNAMESUFFIX=	-devel
-DISTNAME=	Django-${SNAPSHOTDATE}
 DIST_SUBDIR=	python
 
 MAINTAINER=	lwhsu@FreeBSD.org
@@ -14,15 +13,13 @@ COMMENT=	High-level Python Web framework
 
 LICENSE=	BSD3CLAUSE
 
-SNAPSHOTDATE=	20150124
+SNAPSHOTDATE=	20150326
 
 USES=		cpe gettext python
 USE_GITHUB=	yes
 USE_PYTHON=	autoplist distutils
 
-GH_ACCOUNT=	${PORTNAME}
-GH_TAGNAME=	f8e4e4a
-GH_COMMIT=	${GH_TAGNAME}
+GH_TAGNAME=	3e64f3d
 
 CONFLICTS=	py2[0-9]-django-[0-9]*
 CPE_VENDOR=	djangoproject
@@ -35,8 +32,7 @@ OPTIONS_GROUP=	DATABASE
 OPTIONS_GROUP_DATABASE=	PGSQL MYSQL SQLITE
 HTMLDOCS_DESC=	Install HTML documentation (requires Sphinx)
 
-PLIST_FILES=	man/man1/django-admin.1.gz \
-		man/man1/gather_profile_stats.1.gz
+PLIST_FILES=	man/man1/django-admin.1.gz
 
 PGSQL_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}psycopg2>0:${PORTSDIR}/databases/py-psycopg2
 MYSQL_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}MySQLdb>=1.2.2:${PORTSDIR}/databases/py-MySQLdb

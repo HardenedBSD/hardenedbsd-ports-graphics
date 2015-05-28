@@ -3,9 +3,9 @@
 
 PORTNAME=	slack
 PORTVERSION=	0.15.2
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	sysutils
-MASTER_SITES=	${MASTER_SITE_GOOGLE_CODE} \
+MASTER_SITES=	GOOGLE_CODE \
 		http://www.sundell.net/~alan/projects/slack/
 
 MAINTAINER=	satwell@disjoint.net

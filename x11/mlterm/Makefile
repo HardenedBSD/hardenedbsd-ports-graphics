@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	mlterm
-PORTVERSION=	3.4.2
-PORTREVISION=	1
+PORTVERSION=	3.4.5
 CATEGORIES=	x11
 MASTER_SITES=	SF/${PORTNAME}/01release/${PORTNAME}-${PORTVERSION}
 
@@ -18,7 +17,7 @@ USE_PERL5=	build
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--with-gui=x11 --with-imagelib=gdk-pixbuf2 --enable-utmp \
 		--enable-optimize-redrawing \
-		--disable-iiimf
+		--disable-iiimf --with-gtk=2.0
 EXTERNAL_TOOLS=	mlclient,mlconfig,mlterm-menu,mlcc,w3mmlconfig,mlimgloader
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib -lintl

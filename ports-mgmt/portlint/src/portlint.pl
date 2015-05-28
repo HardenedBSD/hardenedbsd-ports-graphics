@@ -15,7 +15,7 @@
 # was removed.
 #
 # $FreeBSD$
-# $MCom: portlint/portlint.pl,v 1.350 2015/02/04 17:07:25 jclarke Exp $
+# $MCom: portlint/portlint.pl,v 1.361 2015/05/17 21:39:49 jclarke Exp $
 #
 
 use strict;
@@ -50,7 +50,7 @@ $portdir = '.';
 # version variables
 my $major = 2;
 my $minor = 16;
-my $micro = 2;
+my $micro = 4;
 
 # default setting - for FreeBSD
 my $portsdir = '/usr/ports';
@@ -212,6 +212,12 @@ while (<IN>) {
 }
 
 close(IN);
+
+open(MK, 'Makefile') || die "Makefile: $!";
+my @muses = grep($_ = /^USES[?+]?=\s*(.*)/ && $1, <MK>);
+foreach my $muse (@muses) {
+	$makevar{USES} .= " " . $muse;
+}
 
 #
 # check for files.
@@ -923,6 +929,13 @@ sub checkpatch {
 	$whole = '';
 	while (<IN>) {
 		$whole .= $_;
+		if (/^--- /) {
+			if ($_ !~ /UTC\s*$/) {
+				&perror("WARN", $file, -1, "patch was not generated using ".
+					"``make makepatch''.  It is recommended to use ".
+					"``make makepatch'' to ensure proper patch format.");
+			}
+		}
 	}
 
 	if ($committer && $whole =~ /\wjavavm\w/) {
@@ -1265,6 +1278,16 @@ sub checkmakefile {
 		&perror("WARN", $file, $lineno, "do not use muted INSTALL_foo ".
 			"commands (i.e., those that start with '\@').  These should be ".
 			"printed.");
+	}
+
+	#
+	# checking for use of ${ENV}
+	#
+	print "OK: checking for use of \${ENV} instead of \${SETENV}.\n" if ($verbose);
+	if ($whole =~ /\$\{ENV}/m) {
+		my $lineno = &linenumber($`);
+		&perror("WARN", $file, $lineno, "most uses of \${ENV} should really ".
+			"be \${SETENV} to avoid strange behaviors in sh(1).");
 	}
 
 	#
@@ -1689,10 +1712,12 @@ sub checkmakefile {
 	}
 	if ($sharedocused && $whole !~ /defined\s*\(?NOPORTDOCS\)?/
 		&& $whole !~ /def\s*\(?NOPORTDOCS\)?/) {
-		if ($docsused == 0
+		if ($docsused == 1
 			&& $whole !~ m#(\$[\{\(]PREFIX[\}\)]|$localbase)/share/doc/#) {
-			&perror("WARN", $file, -1, "use \".if \${PORT_OPTIONS:MDOCS}\" to wrap ".
-				"installation of files into $localbase/share/doc.");
+			&perror("WARN", $file, -1, "you should only use \".if \${PORT_OPTIONS:MDOCS}\" to wrap ".
+				"installation of files into $localbase/share/doc if the".
+				" collection of files is large and it takes considerable time".
+				" to copy.");
 		}
 	} else {
 		$docsused++;
@@ -1985,7 +2010,7 @@ xargs xmkmf
 	if ($j =~ m'\${STAGEDIR}\${SITE_ARCH}') {
 		my $lineno = &linenumber($`);
 		&perror("WARN", $file, $lineno, "\${STAGEDIR}\${SITE_ARCH} should be ".
-			"replaced by \${STAGEDIR}\${PREFIX}/\${SITE_BASE_REL}.");
+			"replaced by \${STAGEDIR}\${PREFIX}/\${SITE_ARCH_REL}.");
 	}
 
 	#
@@ -2665,9 +2690,10 @@ DIST_SUBDIR EXTRACT_ONLY
 	}
 
 	push(@varnames, qw(
-PORTNAME PORTVERSION PORTREVISION PORTEPOCH CATEGORIES MASTER_SITES
-PKGNAMEPREFIX PKGNAMESUFFIX DISTNAME EXTRACT_SUFX
-DISTFILES EXTRACT_ONLY
+PORTNAME PORTVERSION DISTVERSIONPREFIX DISTVERSION DISTVERSIONSUFFIX
+PORTREVISION PORTEPOCH CATEGORIES MASTER_SITES MASTER_SITE_SUBDIR
+PROJECTHOST PKGNAMEPREFIX PKGNAMESUFFIX DISTNAME EXTRACT_SUFX DISTFILES
+DIST_SUBDIR EXTRACT_ONLY
 	));
 
 	#
@@ -3248,7 +3274,7 @@ work		\${WRKDIR} instead
 EOF
 		foreach my $i (keys %cmdnames) {
 			# use (?![\w-]) instead of \b to exclude pkg-*
-			if ($s =~ /^[^#]*(\.\/|\$[\{\(]\.CURDIR[\}\)]\/|[ \t])(\b$i)(?![\w-])/
+			if ($file =~ /^[^#]*(\.\/|\$[\{\(]\.CURDIR[\}\)]\/|[ \t])(\b$i)(?![\w-])/
 			    && $s !~ /^COMMENT(.)?=[^\n]+$i/m
 				&& $s !~ /^IGNORE(.)?=[^\n]+$i/m
 				&& $s !~ /^BROKEN(.)?=[^\n]+$i/m
@@ -3278,6 +3304,9 @@ sub get_makevar {
 	chomp $result;
 
 	$result =~ s/\n\n/\n\0\n/g;
+	if (${^CHILD_ERROR_NATIVE} != 0) {
+        die "\nFATAL ERROR: make(1) died with status ${^CHILD_ERROR_NATIVE} and returned '$result'";
+	}
 
 	return $result;
 }
@@ -3290,6 +3319,9 @@ sub get_makevar_raw {
 	chomp $result;
 
 	$result =~ s/\n\n/\n\0\n/g;
+	if (${^CHILD_ERROR_NATIVE} != 0) {
+        die "\nFATAL ERROR: make(1) died with status ${^CHILD_ERROR_NATIVE} and returned '$result'";
+	}
 
 	return $result;
 }

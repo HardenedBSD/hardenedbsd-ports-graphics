@@ -2,9 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	snort
-PORTVERSION=	2.9.7.0
+PORTVERSION=	2.9.7.3
 CATEGORIES=	security
 MASTER_SITES=	SF/snort/snort \
+		https://snort.org/downloads/snort/ \
 		http://mirrors.rit.edu/zi/
 
 PATCH_DIST_STRIP=	-p1
@@ -71,7 +72,7 @@ APPID_CONFIGURE_ENV+=	luajit_CFLAGS="-I${LOCALBASE}/include/luajit-2.0" \
 USE_RC_SUBR=	snort
 SUB_FILES=	pkg-message
 
-USES=		pathfix libtool
+USES=		cpe pathfix libtool
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
 MAKE_JOBS_UNSAFE=	yes
@@ -107,8 +108,8 @@ CONFIGURE_ARGS+=--enable-reload \
 		--with-dnet-libraries=${LIBNET_LIBDIR}
 
 post-patch:
-	@${FIND} ${WRKSRC} \( -name 'Makefile.in' -o -name snort.conf \) -print0 | \
-		${XARGS} -0 ${REINPLACE_CMD} -e 's|lib/snort_|lib/snort/|g'
+#@${FIND} ${WRKSRC} \( -name 'Makefile.in' -o -name snort.conf \) -print0 | \
+#${XARGS} -0 ${REINPLACE_CMD} -e 's|lib/snort_|lib/snort/|g'
 
 	@${REINPLACE_CMD} "s,/etc/snort.conf,${ETCDIR}/snort.conf," \
 		${WRKSRC}/src/snort.c ${WRKSRC}/snort.8

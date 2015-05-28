@@ -2,10 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	alsa-lib
-PORTVERSION=	1.0.28
+PORTVERSION=	1.0.29
 CATEGORIES=	audio
 MASTER_SITES=	ALSA/lib \
-		GENTOO/distfiles
+		GENTOO
 
 MAINTAINER=	jbeich@FreeBSD.org
 COMMENT=	ALSA compatibility library

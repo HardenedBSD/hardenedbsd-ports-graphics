@@ -3,11 +3,11 @@
 
 PORTNAME=	autotrace
 PORTVERSION=	0.31.1
-PORTREVISION=	28
+PORTREVISION=	29
 CATEGORIES=	graphics
 MASTER_SITES=	SF/${PORTNAME}/AutoTrace/${PORTVERSION}
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	portmaster@BSDforge.com
 COMMENT=	Convert bitmap to vector graphics
 
 LICENSE=	GPLv2 LGPL21
@@ -15,7 +15,8 @@ LICENSE_COMB=	multi
 
 LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png
 
-USES=		pathfix pkgconfig libtool
+USES=		cpe pathfix pkgconfig libtool
+CPE_VENDOR=	autotrace_project
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
 CPPFLAGS+=	$$(libpng-config --I_opts)
@@ -44,4 +45,6 @@ post-patch:
 		s|$$PSTOEDIT_CONFIG $$pstoedit_args|pkg-config pstoedit| ; \
 		/^PSTOEDIT_CONFIG=/s|=.*$$|=pkg-config|' ${WRKSRC}/configure
 
+post-install:
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libautotrace.so
 .include <bsd.port.mk>

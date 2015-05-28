@@ -1,10 +1,9 @@
---- qtox.pro
+--- qtox.pro.orig	2015-04-27 03:03:27 UTC
 +++ qtox.pro
-@@ -223,3 +223,15 @@
-     src/misc/serialize.cpp \
-     src/widget/form/settings/advancedform.cpp \
-     src/audio.cpp
-+
+@@ -433,6 +433,18 @@ SOURCES += \
+     src/profilelocker.cpp \
+     src/avatarbroadcaster.cpp
+ 
 +unix {
 +    target.path  = $$PREFIX/bin
 +
@@ -16,3 +15,7 @@
 +
 +    INSTALLS = target desktop icon
 +}
++
+ HEADERS += \
+     src/audio.h \
+     src/core/core.h \

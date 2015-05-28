@@ -49,6 +49,7 @@
     SUBDIR += devmon
     SUBDIR += devmon-templates
     SUBDIR += dhcdrop
+    SUBDIR += dhcp_probe
     SUBDIR += disco
     SUBDIR += docsis
     SUBDIR += driftnet
@@ -64,8 +65,6 @@
     SUBDIR += flowviewer
     SUBDIR += fprobe
     SUBDIR += glpi-plugins-fusioninventory-server
-    SUBDIR += glpi-plugins-tracker-agent
-    SUBDIR += glpi-plugins-tracker-server
     SUBDIR += grepcidr
     SUBDIR += grepip
     SUBDIR += gsnmp
@@ -172,6 +171,8 @@
     SUBDIR += nrpe-ssl
     SUBDIR += nsca
     SUBDIR += nsca-client
+    SUBDIR += nsca-ng
+    SUBDIR += nsca-ng-client
     SUBDIR += nsca27
     SUBDIR += nsca27-client
     SUBDIR += nstreams
@@ -245,7 +246,6 @@
     SUBDIR += percona-monitoring-plugins
     SUBDIR += pftabled
     SUBDIR += php5-snmp
-    SUBDIR += php53-snmp
     SUBDIR += php55-snmp
     SUBDIR += php56-snmp
     SUBDIR += phpip
@@ -271,6 +271,7 @@
     SUBDIR += rate
     SUBDIR += rcpd
     SUBDIR += remarp
+    SUBDIR += riemann
     SUBDIR += rotorouter
     SUBDIR += routers2
     SUBDIR += routers2-extensions

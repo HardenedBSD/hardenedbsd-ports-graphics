@@ -2,17 +2,19 @@
 # $FreeBSD$
 
 PORTNAME=		krb5
-PORTVERSION=		1.11.5
-PORTREVISION=		6
+PORTVERSION=		1.11.6
+PORTREVISION=		1
 CATEGORIES=		security
 MASTER_SITES=		http://web.mit.edu/kerberos/dist/krb5/${PORTVERSION:C/^[0-9]*\.[0-9]*/&X/:C/X\.[0-9]*$//:C/X//}/
 PKGNAMESUFFIX=		-111
 DISTNAME=		krb5-${PORTVERSION}-signed
 EXTRACT_SUFX=		.tar
 
+DEPRECATED=		EOLed by MIT in December 2014.
+EXPIRATION_DATE=	2015-08-31
+
 PATCH_SITES=		http://web.mit.edu/kerberos/advisories/
 PATCH_DIST_STRIP=	-p2
-PATCHFILES=		2015-001-patch-r111.txt
 
 MAINTAINER=		cy@FreeBSD.org
 COMMENT=		Authentication system developed at MIT, successor to Kerberos IV
@@ -25,14 +27,19 @@ CONFLICTS=		heimdal-[0-9]* srp-[0-9]* krb5-[0-9]* krb5-maint-112-*
 
 LATEST_LINK=		${PORTNAME}-111
 KERBEROSV_URL=		http://web.mit.edu/kerberos/
-USES=			gettext gmake perl5
+USES=			cpe gettext gmake perl5
 USE_PERL5=		build
 USE_LDCONFIG=		yes
 USE_CSTD=		gnu99
 GNU_CONFIGURE=		yes
-CONFIGURE_ARGS?=	--without-system-verto --disable-rpath
+CONFIGURE_ARGS?=	--without-system-verto --disable-rpath \
+			--localstatedir="${PREFIX}/var"
 CONFIGURE_ENV=		NSTALL="${INSTALL}" INSTALL_LIB="${INSTALL_LIB}" YACC="${YACC}"
 MAKE_ARGS=		INSTALL="${INSTALL}" INSTALL_LIB="${INSTALL_LIB}"
+
+CPE_VENDOR=		mit
+CPE_VERSION=		5-${PORTVERSION}
+CPE_PRODUCT=		kerberos
 
 OPTIONS_DEFINE=		KRB5_PDF KRB5_HTML DNS_FOR_REALM LDAP
 OPTIONS_DEFAULT=	KRB5_PDF KRB5_HTML

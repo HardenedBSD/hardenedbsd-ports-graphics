@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	toxic
-PORTVERSION=	0.5.2.150204
+PORTVERSION=	0.6.0.150519
 CATEGORIES=	net-im
 
 MAINTAINER=	thierry@FreeBSD.org
@@ -17,9 +17,8 @@ LIB_DEPENDS=	libvpx.so:${PORTSDIR}/multimedia/libvpx		\
 RUN_DEPENDS=	${LOCALBASE}/lib/libtoxcore.a:${PORTSDIR}/net-im/tox
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	tox
-GH_TAGNAME=	${GH_COMMIT}
-GH_COMMIT=	d714cda
+GH_ACCOUNT=	Tox
+GH_TAGNAME=	231078b
 
 OPTIONS_DEFINE=	X11
 OPTIONS_DEFAULT=X11
@@ -28,9 +27,6 @@ X11_USE=	XORG=x11
 X11_MAKE_ARGS_OFF=	DISABLE_X11=1 DISABLE_DESKTOP_NOTIFY=1
 X11_LIB_DEPENDS=libnotify.so:${PORTSDIR}/devel/libnotify
 
-WRKSRC=		${WRKDIR}/Tox-${PORTNAME}-${GH_COMMIT}
-BUILD_WRKSRC=	${WRKSRC}/build
-INSTALL_WRKSRC=	${BUILD_WRKSRC}
 MAKE_ENV=	USER_CFLAGS="${CFLAGS}" USER_LDFLAGS="${LDFLAGS}"
 SUB_FILES=	pkg-message
 
@@ -44,7 +40,7 @@ LDFLAGS+=	-B${LOCALBASE}/bin
 .endif
 
 pre-configure:
-	${REINPLACE_CMD} -e 's|PREFIX =|PREFIX?=|;s|$$(shell git rev-list HEAD.*$$|${GH_COMMIT}|'	\
+	${REINPLACE_CMD} -e 's|PREFIX =|PREFIX?=|;s|$$(shell git rev-list HEAD.*$$|${GH_TAGNAME}|'	\
 		${WRKSRC}/cfg/global_vars.mk
 
 post-install:

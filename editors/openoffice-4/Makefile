@@ -3,7 +3,7 @@
 
 PORTNAME=	apache-openoffice
 PORTVERSION=	${AOOVERSION}
-PORTREVISION=	6
+PORTREVISION=	9
 CATEGORIES=	editors java
 MASTER_SITES=	APACHE/openoffice/${PORTVERSION}/source \
 		http://tools.openoffice.org/unowinreg_prebuild/680/:unoreg \
@@ -26,6 +26,8 @@ LICENSE=	APACHE20
 
 BUILD_DEPENDS=								\
 		p5-Archive-Zip>=0:${PORTSDIR}/archivers/p5-Archive-Zip	\
+		p5-libwww>=0:${PORTSDIR}/www/p5-libwww			\
+		p5-XML-Parser>=0:${PORTSDIR}/textproc/p5-XML-Parser	\
 		${LOCALBASE}/bin/unzip:${PORTSDIR}/archivers/unzip	\
 		zip:${PORTSDIR}/archivers/zip				\
 		ant:${PORTSDIR}/devel/apache-ant			\
@@ -64,11 +66,13 @@ RUN_DEPENDS=								\
 		${LOCALBASE}/share/icons/hicolor/index.theme:${PORTSDIR}/misc/hicolor-icon-theme \
 		${JAVALIBDIR}/commons-httpclient.jar:${PORTSDIR}/java/jakarta-commons-httpclient \
 		${JAVALIBDIR}/bsh.jar:${PORTSDIR}/lang/bsh \
-		${LOCALBASE}/lib/X11/fonts/ChromeOS/Arimo-Bold.ttf:${PORTSDIR}/x11-fonts/croscorefonts-fonts-ttf
+		${LOCALBASE}/share/fonts/ChromeOS/Arimo-Bold.ttf:${PORTSDIR}/x11-fonts/croscorefonts-fonts-ttf
 
 AOOVERSION1=	4
 AOOVERSION2=	1
 AOOVERSION3=	1
+# From solenv/inc/minor.mk SOURCEREVISION LAST_MINOR BUILD
+AOOTAG=		AOO411m6\(Build:9775\)
 SVNREVISION=	1617669
 EXTSRC=		ApacheOpenOffice.ext_sources.${AOOVERSION1}.x.x.20140918.tar.gz
 
@@ -78,6 +82,7 @@ AOOSUFFIX=	${PORTVERSION}
 OOOSRC=		apache-openoffice-${AOOVERSION}-r${SVNREVISION}-src${EXTRACT_SUFX}
 
 OOODIR=			openoffice${AOOVERSION1}
+AOOUDIR=		.openoffice.org\/${AOOVERSION1}
 INSTALLATION_BASEDIR?=	openoffice-${AOOSUFFIX}
 EXECBASE?=		openoffice-${AOOSUFFIX}
 DIST_SUBDIR=		openoffice
@@ -86,38 +91,60 @@ NO_LATEST_LINK=	yes
 
 ONLY_FOR_ARCHS=	i386 amd64
 
+USE_GL=		gl glu
 USE_GNOME=	gtk20 libxslt libidl glib20
+USE_JAVA=	yes
+JAVA_BUILD=	jdk
+JAVA_VENDOR=	openjdk
+JAVA_VERSION=	1.6+
+USE_PERL5=	build
 USE_XORG=	x11 ice xaw xau xext xrender xrandr \
 		xi xt xcursor xdamage xcomposite xfixes
-USE_GL=		gl glu
-USE_GSTREAMER=	yes
-USE_GCC=	yes
-USES+=		bison desktop-file-utils gmake perl5 pkgconfig python tar:bzip2
-USE_PERL5=	build
+USES=		autoreconf:autoconf bison compiler cpe desktop-file-utils \
+		gmake perl5 pkgconfig python tar:bzip2
 WITHOUT_CPU_CFLAGS=	true
 MAKE_JOBS_SAFE=	yes
+CPE_PRODUCT=	${PORTNAME:S|apache-||}
+CPE_VENDOR=	apache
 
-OPTIONS_DEFINE=	GCONF GNOMEVFS CCACHE
-OPTIONS_DEFAULT=GCONF GNOMEVFS
-GNOMEVFS_DESC=	Enable GNOME Virtual File System
-CCACHE_DESC=	Mimimize compile time of C/C++ programs
+OPTIONS_DEFINE=		CUPS GNOME GNOMEVFS MMEDIA CCACHE
+OPTIONS_DEFAULT=	CUPS GNOME GNOMEVFS MMEDIA
+GNOME_DESC=		GConf + screensaver presentation control via DBUS
+GNOMEVFS_DESC=		GNOME Virtual File System
+MMEDIA_DESC=		Multimedia backend for impress
+CCACHE_DESC=		Mimimize compile time of C/C++ programs
 
-GCONF_USE=	GNOME=gconf2
-GCONF_CONFIGURE_OFF=--disable-gconf
+CUPS_CONFIGURE_ENABLE=		cups
+CUPS_LIB_DEPENDS=		libcups.so:${PORTSDIR}/print/cups-client
 
-GNOMEVFS_USE=	GNOME=gnomevfs2
-GNOMEVFS_CONFIGURE_OFF=--disable-gnome-vfs
+GNOME_CONFIGURE_ENABLE=		dbus gconf lockdown
+GNOME_LIB_DEPENDS=		libdbus-glib-1.so:${PORTSDIR}/devel/dbus-glib
+GNOME_USE=			GNOME=gconf2
 
-.include <bsd.port.options.mk>
+GNOMEVFS_CONFIGURE_ENABLE=	gnome-vfs
+GNOMEVFS_CONFIGURE_OFF=		--enable-gio
+GNOMEVFS_CONFIGURE_ON=		--disable-gio
+GNOMEVFS_USE=			GNOME=gnomevfs2
+
+MMEDIA_CONFIGURE_ENABLE=	gstreamer
+MMEDIA_USE=			GSTREAMER=yes
 
 .include <bsd.port.pre.mk>
 
 .include <${FILESDIR}/Makefile.localized>
 
-USE_JAVA=	yes
-JAVA_BUILD=	jdk
-JAVA_VENDOR=	openjdk
-JAVA_VERSION=	1.6+
+.if ${COMPILER_TYPE} == clang
+. if ${COMPILER_VERSION} < 35 && ${ARCH} == amd64
+BUILD_DEPENDS+=		clang35:${PORTSDIR}/lang/clang35
+CPP=			clang-cpp35
+CC=			clang35
+CXX=			clang++35
+. endif
+CPPFLAGS+=		-I${LOCALBASE}/include
+.else
+USE_GCC=		yes
+SUBST=			"s/-fexceptions/& -fno-enforce-eh-specs/;s/-DHAVE_STL_INCLUDE_PATH//"
+.endif
 
 .if ${ARCH} == amd64
 FREEBSD_ENV_SET=	FreeBSDAMDEnv.Set.sh
@@ -144,20 +171,15 @@ OOOCXX=		${CCACHE_PREFIX} ${CXX}
 OOOCC=		${CC}
 OOOCXX=		${CXX}
 .endif
+
 CONFIGURE_ENV+=	CC="${OOOCC}" CXX="${OOOCXX}"		\
 		PATH=${WRKSRC}/solenv/bin:$$PATH
 
-USE_AUTOTOOLS=	autoconf
 GNU_CONFIGURE=	yes
 WRKSUBDIR=	${WRKDIR}/aoo-${AOOVERSION}
 WRKSRC?=	${WRKSUBDIR}/main
-BASH?=		${PREFIX}/bin/bash
 SUB_FILES=	pkg-message
-SUB_LIST=	EXECBASE=${EXECBASE} OOOTAG=${OOOTAG} OOODIR=${OOODIR}
-
-.if defined(DISABLE_MAKE_JOBS)
-MAKE_JOBS_NUMBER=	4
-.endif
+SUB_LIST=	EXECBASE=${EXECBASE} AOOTAG=${AOOTAG} AOOUDIR=${AOOUDIR}
 
 CONFIGURE_ARGS+=							\
 			--with-system-apache-commons=yes		\
@@ -174,26 +196,30 @@ CONFIGURE_ARGS+=							\
 			--with-system-coinmp				\
 			--with-system-curl				\
 			--enable-crashdump				\
-			--enable-dbus					\
+			--with-system-dicts				\
 			--with-epm=${LOCALBASE}/bin/epm			\
 			--with-system-expat				\
 			--disable-fetch-external			\
 			--without-fonts					\
 			--with-gnu-patch=${LOCALBASE}/bin/gpatch	\
 			--with-gperf=${LOCALBASE}/bin/gperf		\
-			--enable-gstreamer				\
+			--enable-gtk					\
 			--with-system-hunspell				\
+			--with-external-dict-dir=${LOCALBASE}/share/hunspell \
 			--with-system-hyphen				\
+			--with-external-hyph-dir=${LOCALBASE}/share/hyphen \
 			--with-system-jpeg				\
 			--with-junit=${LOCALBASE}/share/java/classes/junit.jar \
 			--with-system-libtextcat			\
+			--disable-kde					\
+			--disable-kde4					\
 			--with-system-libxml				\
 			--with-system-libxslt				\
-			--enable-lockdown				\
 			--with-system-lucene				\
 			--with-lucene-core-jar=${JAVALIBDIR}/lucene-core-3.6.2.jar \
 			--with-lucene-analyzers-jar=${JAVALIBDIR}/lucene-analyzers-3.6.2.jar \
 			--with-system-mythes				\
+			--with-external-thes-dir=${LOCALBASE}/share/mythes \
 			--with-system-nss				\
 			--enable-opengl					\
 			--with-system-openssl				\
@@ -209,8 +235,6 @@ CONFIGURE_ARGS+=							\
 			--enable-verbose				\
 			--with-system-vigra				\
 			--enable-wiki-publisher				\
-			--x-includes={LOCALBASE}/include		\
-			--x-libraries=${LOCALBASE}lib			\
 			--with-system-zlib
 # system-graphite causes breakage when compiled with clang and linked
 # with libc++ because aoo is compiled with gcc and linked with libstdc++.
@@ -250,16 +274,17 @@ post-extract:
 
 post-patch:
 .if defined (USE_GCC)
-	${REINPLACE_CMD} -e "s+%%RPATH%%+-Wl,-rpath=${_GCC_RUNTIME}+" ${WRKSRC}/solenv/inc/unxfbsd.mk
-	${REINPLACE_CMD} -e "s+%%RPATH%%+-Wl,-rpath=${_GCC_RUNTIME}+" ${WRKSRC}/solenv/gbuild/platform/freebsd.mk
+	${REINPLACE_CMD} -e ${SUBST} ${WRKSRC}/solenv/gbuild/platform/freebsd.mk
+	${REINPLACE_CMD} -e ${SUBST} ${WRKSRC}/solenv/inc/unxfbsd.mk
+.endif
+.if ${ARCH} == i386
 	# g++49 -Os sometimes leaves inline class methods undefined
-	if [ ${CXX} = g++49 ]; then \
+	# autodoc core dumps when built with with -Os clang 3.6 on i386
+	if [ ${CXX} = g++49 -o \
+	     ${COMPILER_TYPE} = clang -a ${COMPILER_VERSION} = 36 ]; then \
 		${REINPLACE_CMD} -e "s/ := -Os/ := -O0/" ${WRKSRC}/solenv/gbuild/platform/freebsd.mk; \
 		${REINPLACE_CMD} -e "s/=-Os /=-O0 /" ${WRKSRC}/solenv/inc/unxfbsdi.mk; \
 	fi
-.else
-	${REINPLACE_CMD} -e "s+%%RPATH%%++" ${WRKSRC}/solenv/inc/unxfbsd.mk
-	${REINPLACE_CMD} -e "s+%%RPATH%%++" ${WRKSRC}/solenv/gbuild/platform/freebsd.mk
 .endif
 
 pre-configure:
@@ -270,7 +295,42 @@ do-build:
 	cd ${WRKSUBDIR} ; ${PRINTF} "main=active\n" >> source_config
 	cd ${WRKSUBDIR} ; ${PRINTF} "extras=active\n" >> source_config
 	cd ${WRKSRC} ; ./bootstrap
-	cd ${WRKSRC} ; ${SETENV} "LANG=C" "LC_ALL=C" ${BASH} -c "source ${FREEBSD_ENV_SET} ; cd instsetoo_native/util  ; build.pl --all -P${MAKE_JOBS_NUMBER} -- -P${MAKE_JOBS_NUMBER}"
+	#
+	# numproc controls the number of parallel makes.
+	#
+	# dmproc is passed to dmake and controls parallelization at that
+	# level.
+	#
+	# dmproc > numproc seems to give shorter build times than
+	# numproc > dmproc.
+	#
+	# Select values for numproc and dmproc such that:
+	#  * numproc*dmproc >= MAKE_JOBS_NUMBER
+	#  * minimize numproc*dmproc-MAKE_JOBS_NUMBER
+	#  * dmproc >= numproc
+	#  * dmproc <= 2*numproc if MAKE_JOBS_NUMBER <= 3
+	#
+	cd ${WRKSRC} ; . ${FREEBSD_ENV_SET} ; cd instsetoo_native/util ;  \
+	 export LANG=C LC_ALL=C FBSD_LDFLAGS="${LDFLAGS}" ;		  \
+	 if [ ${MAKE_JOBS_NUMBER} -le 3 ] ; then			  \
+	  numproc=1 ; dmproc=${MAKE_JOBS_NUMBER} ;			  \
+	 else								  \
+	  a=1 ;								  \
+	  while [ $$(( 2 * $${a} * $${a} )) -lt ${MAKE_JOBS_NUMBER} ]; do \
+	   a=$$(( $${a} + 1 )) ;					  \
+	  done ;							  \
+	  b=$$(( $${a} + 1 )) ;						  \
+	  ad=$$(( ( ${MAKE_JOBS_NUMBER} + $${a} - 1 ) / $${a} )) ;	  \
+	  ap=$$(( $${a} * $${ad} )) ;					  \
+	  bd=$$(( ( ${MAKE_JOBS_NUMBER} + $${b} - 1 ) / $${b} )) ;	  \
+	  bp=$$(( $${b} * $${bd} )) ;					  \
+	  if [ $${ap} -le $${bp} ]; then				  \
+	   numproc=$${a} ; dmproc=$${ad} ;				  \
+	  else								  \
+	   numproc=$${b} ; dmproc=$${bd} ;				  \
+	  fi ;								  \
+	 fi ;								  \
+	 build.pl --all -P$${numproc} -- -P$${dmproc}
 
 do-install:
 	cd ${WRKSRC}/instsetoo_native/unxfbsd?.pro/Apache_OpenOffice/archive/install/${LOCALIZED_LANG}/ ; ${LS} *.tar.?z > ${WRKDIR}/INSTALLFILES
@@ -283,7 +343,7 @@ do-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/${INSTALLATION_BASEDIR}
 	cd ${WRKDIR}/tmp/*/ ; ${TAR} cf - -C . . | ${TAR} xf - -C ${STAGEDIR}${PREFIX}/${INSTALLATION_BASEDIR}
 	${REINPLACE_CMD} -e 's/^UserInstallation.*$$/USERINSTALLATION/' ${STAGEDIR}${PREFIX}/${INSTALLATION_BASEDIR}/${OOODIR}/program/bootstraprc
-	${REINPLACE_CMD} -e 's/USERINSTALLATION/UserInstallation=$$SYSUSERCONFIG\/\.openoffice\.org-devel\/${AOOVERSION1}/' ${STAGEDIR}${PREFIX}/${INSTALLATION_BASEDIR}/${OOODIR}/program/bootstraprc
+	${REINPLACE_CMD} -e 's/USERINSTALLATION/UserInstallation=$$SYSUSERCONFIG\/${AOOUDIR}/' ${STAGEDIR}${PREFIX}/${INSTALLATION_BASEDIR}/${OOODIR}/program/bootstraprc
 	${MKDIR} ${STAGEDIR}${PREFIX}/${INSTALLATION_BASEDIR}/extensions/
 	cd ${WRKSRC}/solver/${AOOXXX}/unxfbsd?.pro/bin/ ; ${INSTALL_DATA} ${OOOEXTENSIONS} ${STAGEDIR}${PREFIX}/${INSTALLATION_BASEDIR}/extensions/
 	${FIND} ${STAGEDIR}${PREFIX}/${INSTALLATION_BASEDIR}/${OOODIR}/program -type f \( -name '*.so*' -or -name '*.bin' \) -print0 | ${XARGS} -0 -n1 ${STRIP_CMD}

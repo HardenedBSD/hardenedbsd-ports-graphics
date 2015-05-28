@@ -4,14 +4,15 @@
 PORTNAME=	mysql-connector-c
 PORTVERSION=	6.1.5
 CATEGORIES=	databases
-MASTER_SITES=	${MASTER_SITE_MYSQL}
-MASTER_SITE_SUBDIR=	Connector-C
+MASTER_SITES=	MYSQL/Connector-C
 DISTNAME=	${PORTNAME}-${PORTVERSION}-src
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	MySQL database connector for C
 
 LICENSE=	GPLv2
+
+BROKEN=		Fails to configure
 
 USE_MYSQL=	51+
 USE_OPENSSL=	yes

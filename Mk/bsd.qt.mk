@@ -27,7 +27,7 @@ Qt_Pre_Include=	bsd.qt.mk
 # Qt versions currently supported by the framework.
 _QT_SUPPORTED?=	4 5
 QT4_VERSION?=	4.8.6
-QT5_VERSION?=	5.3.2
+QT5_VERSION?=	5.4.1
 
 QT_PREFIX?=		${LOCALBASE}
 
@@ -146,6 +146,9 @@ CONFIGURE_ARGS+=-nomake examples -nomake tests \
 				-qmldir ${PREFIX}/${QT_QMLDIR_REL} \
 				-examplesdir ${PREFIX}/${QT_EXAMPLEDIR_REL} \
 				-testsdir ${PREFIX}/${QT_TESTDIR_REL}
+.  if ${ARCH} == i386 && empty(MACHINE_CPU:Msse2)
+CONFIGURE_ARGS+=-no-sse2
+.  endif
 . endif
 
 . if defined(WANT_QT_DEBUG) || defined(WITH_DEBUG)
@@ -285,7 +288,7 @@ PLIST_SUB+=		QT_${dir}DIR="${QT_${dir}DIR_REL}"
 Qt_Post_Include=	bsd.qt.mk
 
 _USE_QT_ALL=	assistant clucene dbus declarative designer gui help \
-				imageformats linguist multimedia network opengl pixeltool \
+				imageformats linguist linguisttools multimedia network opengl pixeltool \
 				qdbusviewer qmake script scripttools sql sql-ibase sql-mysql \
 				sql-odbc sql-pgsql sql-sqlite2 sql-sqlite3 svg testlib webkit \
 				xml xmlpatterns
@@ -296,8 +299,8 @@ _USE_QT4_ONLY=	accessible assistant-adp assistantclient codecs-cn codecs-jp \
 				phonon-gst porting qdoc3 qmlviewer qt3support qtconfig \
 				qtestlib qvfb rcc uic uic3 xmlpatterns-tool
 
-_USE_QT5_ONLY=	buildtools concurrent core graphicaleffects linguisttools \
-				paths printsupport qdbus qdoc qev qml quick \
+_USE_QT5_ONLY=	buildtools concurrent core graphicaleffects \
+				paths phonon4 printsupport qdbus qdoc qev qml quick \
 				quickcontrols serialport uitools widgets x11extras
 
 accessible_PORT=	accessibility/${_QT_RELNAME}-accessible
@@ -402,7 +405,7 @@ network_PATH=		${QT_LIBDIR}/libQt${_QT_LIBVER}Network.so
 opengl_PORT=		graphics/${_QT_RELNAME}-opengl
 opengl_PATH=		${QT_LIBDIR}/libQt${_QT_LIBVER}OpenGL.so
 
-paths_PORT=		sysutils/qt5-qtpaths
+paths_PORT=		sysutils/${_QT_RELNAME}-qtpaths
 paths_PATH=		${QT_BINDIR}/qtpaths
 
 pixeltool_PORT=		graphics/${_QT_RELNAME}-pixeltool
@@ -410,6 +413,9 @@ pixeltool_PATH=		${QT_BINDIR}/pixeltool
 
 phonon_PORT=		multimedia/phonon
 phonon_PATH=		${QT_LIBDIR}/libphonon.so
+
+phonon4_PORT=		multimedia/${_QT_RELNAME}-phonon4
+phonon4_PATH=		${QT_LIBDIR}/libphonon4${_QT_RELNAME}.so
 
 phonon-gst_PORT=	multimedia/phonon-gstreamer
 phonon-gst_PATH=	${QT_PLUGINDIR}/phonon_backend/libphonon_gstreamer.so

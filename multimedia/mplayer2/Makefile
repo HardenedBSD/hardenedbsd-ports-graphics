@@ -6,7 +6,7 @@ PORTREVISION=	11
 CATEGORIES=	multimedia audio
 MASTER_SITES=	LOCAL/gblach/
 
-MAINTAINER=	gblach@FreeBSD.org
+MAINTAINER=	cpm@fbsd.es
 COMMENT=	Advanced general-purpose video player
 
 LICENSE=	GPLv2
@@ -19,11 +19,9 @@ BUILD_DEPENDS=	ffmpeg:${PORTSDIR}/multimedia/ffmpeg \
 		rst2man:${PORTSDIR}/textproc/py-docutils
 RUN_DEPENDS=	ffmpeg:${PORTSDIR}/multimedia/ffmpeg
 
-USES=		gmake iconv ncurses pkgconfig tar:xz
+USES=		cpe gmake iconv ncurses pkgconfig tar:xz
 HAS_CONFIGURE=	yes
-CONFIGURE_ENV=	PTHREAD_CFLAGS="${PTHREAD_CFLAGS}" \
-		PTHREAD_LIBS="${PTHREAD_LIBS}" \
-		TMPDIR="${WRKSRC}"
+CONFIGURE_ENV=	TMPDIR="${WRKSRC}"
 CONFIGURE_ARGS=	--cc=${CC} \
 		--extra-cflags='-I${LOCALBASE}/include/portaudio2' \
 		--extra-libs='-lavresample' \
@@ -75,10 +73,6 @@ CONFLICTS=	mplayer-1.*
 
 .if ${ARCH} == "sparc64"
 BROKEN=		Does not compile on sparc64
-.endif
-
-.if ${OSVERSION} < 803000
-CONFIGURE_ARGS+=	--disable-ssse3
 .endif
 
 WITH_CDROM_DEVICE?=	/dev/cd0

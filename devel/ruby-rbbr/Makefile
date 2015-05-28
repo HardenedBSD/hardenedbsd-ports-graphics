@@ -7,7 +7,6 @@ PORTREVISION=	11
 CATEGORIES=	devel ruby
 MASTER_SITES=	SF/ruby-gnome2/${PORTNAME}/${PORTNAME}-${PORTVERSION}
 PKGNAMEPREFIX=	${RUBY_PKGNAMEPREFIX}
-DISTNAME=	${PORTNAME}-${PORTVERSION:S/r/rev/}
 DIST_SUBDIR=	ruby
 
 MAINTAINER=	ruby@FreeBSD.org
@@ -36,4 +35,10 @@ post-install:
 	@${INSTALL_DATA} ${WRKSRC}/${f} ${STAGEDIR}${RUBY_MODDOCDIR}/ja/
 .endfor
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${RUBY_VER} >= 2.2
+BROKEN=		Does not build
+.endif
+
+.include <bsd.port.post.mk>

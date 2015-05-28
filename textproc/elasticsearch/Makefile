@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	elasticsearch
-PORTVERSION=	1.4.2
+PORTVERSION=	1.5.2
+PORTREVISION=	1
 CATEGORIES=	textproc java devel
 MASTER_SITES=	http://download.elasticsearch.org/${PORTNAME}/${PORTNAME}/ \
 		http://mirrors.rit.edu/zi/
@@ -14,6 +15,7 @@ LICENSE=	APACHE20
 
 RUN_DEPENDS=	java-sigar>=0:${PORTSDIR}/java/sigar
 
+USES=		cpe
 USE_JAVA=	yes
 NO_BUILD=	yes
 JAVA_VERSION=	1.7+
@@ -24,13 +26,14 @@ OPTIONS_DEFINE=	DOCS
 
 .include <bsd.port.options.mk>
 
-LUCENEVER=	4.10.2
+LUCENEVER=	4.10.4
 CONFIG_FILES=	elasticsearch.yml logging.yml
 JARS=		elasticsearch-${PORTVERSION}.jar \
 		asm-4.1.jar \
 		asm-commons-4.1.jar \
+		apache-log4j-extras-1.2.17.jar \
 		antlr-runtime-3.5.jar \
-		groovy-all-2.3.2.jar \
+		groovy-all-2.4.0.jar \
 		jna-4.1.0.jar \
 		jts-1.13.jar \
 		log4j-1.2.17.jar \
@@ -67,14 +70,8 @@ ELASTIC_LOGDIR=	/var/log/elasticsearch
 PLATFORM_VER=	1
 .  elif ${OSVERSION} >= 900000
 PLATFORM_VER=	9
-.  elif ${OSVERSION} >= 800000
-PLATFORM_VER=	8
-.  elif ${OSVERSION} >= 700000
-PLATFORM_VER=	7
-.  elif ${OSVERSION} >= 600000
-PLATFORM_VER=	6
 .  else
-BROKEN=		Unsupported FreeBSD version
+PLATFORM_VER=	8
 .  endif
 .else
 BROKEN=		${OPSYS} platform is not supported
@@ -109,6 +106,7 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/lib/${f} ${STAGEDIR}${PREFIX}/lib/elasticsearch/
 .endfor
 
+	${MKDIR} ${STAGEDIR}${PREFIX}/lib/elasticsearch/plugins
 	${MKDIR} ${STAGEDIR}${PREFIX}/lib/elasticsearch/sigar
 #	${INSTALL_DATA} ${WRKSRC}/lib/sigar/sigar-1.6.4.jar ${STAGEDIR}${PREFIX}/lib/elasticsearch/sigar/
 	cd ${STAGEDIR}${PREFIX}/lib/elasticsearch/sigar && ${LN} -s ${JAVAJARDIR}/sigar.jar

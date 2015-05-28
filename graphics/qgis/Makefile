@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	qgis
-PORTVERSION=	2.6.1
-PORTREVISION=	2
+PORTVERSION=	2.8.2
 CATEGORIES=	graphics geography
 
 MAINTAINER=	rhurlin@gwdg.de
@@ -22,22 +21,20 @@ LIB_DEPENDS=	libexecinfo.so:${PORTSDIR}/devel/libexecinfo \
 		libspatialindex.so:${PORTSDIR}/devel/spatialindex \
 		libspatialite.so:${PORTSDIR}/databases/spatialite
 
-WRKSRC=	${WRKDIR}/${PORTNAME}-QGIS-${GH_COMMIT}
+USE_GITHUB=	yes
+GH_PROJECT=	${PORTNAME:tu}
+GH_TAGNAME=	1b929ef
 
-USE_GITHUB=
-GH_ACCOUNT=	qgis
-GH_COMMIT=	e2a51df
-GH_TAGNAME=	${GH_COMMIT}
-
-USES=		bison cmake fortran gmake python
+USES=		cpe bison cmake fortran gmake python
 USE_SQLITE=	yes
 USE_QT4=	gui svg xml network sql designer testlib linguist_build \
 		qmake_build moc_build rcc_build uic_build
 
 USE_LDCONFIG=	yes
 
-OPTIONS_DEFINE=		GRASS POSTGIS PYTHON MAPSERVER
+OPTIONS_DEFINE=		GRASS POSTGIS PYTHON SERVER
 OPTIONS_DEFAULT=	POSTGIS PYTHON
+SERVER_DESC=	Enable QGIS server
 
 .if !defined(MAINTAINER_MODE)
 CMAKE_ARGS+=	-Wno-dev
@@ -79,13 +76,13 @@ CMAKE_ARGS+=	-DWITH_POSTGRESQL:BOOL=FALSE
 PLIST_SUB+=	PGSQL="@comment "
 .endif
 
-.if ${PORT_OPTIONS:MMAPSERVER}
-CMAKE_ARGS+=	-DWITH_MAPSERVER:BOOL=TRUE
-PLIST_SUB+=	QGIS_MAPSERVER=""
+.if ${PORT_OPTIONS:MSERVER}
+CMAKE_ARGS+=	-DWITH_SERVER:BOOL=TRUE
+PLIST_SUB+=	QGIS_SERVER=""
 LIB_DEPENDS+=	libfcgi.so:${PORTSDIR}/www/fcgi
 .else
-CMAKE_ARGS+=	-DWITH_MAPSERVER:BOOL=FALSE
-PLIST_SUB+=	QGIS_MAPSERVER="@comment "
+CMAKE_ARGS+=	-DWITH_SERVER:BOOL=FALSE
+PLIST_SUB+=	QGIS_SERVER="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MPYTHON}

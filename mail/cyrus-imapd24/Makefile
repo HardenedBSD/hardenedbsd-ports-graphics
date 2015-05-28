@@ -23,7 +23,7 @@ PERLMAN=	${SITE_PERL_REL:S/site_perl\///}
 
 USE_RC_SUBR=	imapd
 
-USES=		perl5
+USES=		cpe perl5
 USE_OPENSSL=	yes
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--sysconfdir=${PREFIX}/etc \
@@ -38,6 +38,9 @@ CONFIGURE_ARGS=	--sysconfdir=${PREFIX}/etc \
 CPPFLAGS+=	-I${LOCALBASE}/include
 LIBS+=		-L${LOCALBASE}/lib
 MAKE_JOBS_UNSAFE=	yes
+
+CPE_VENDOR=	cmu
+CPE_PRODUCT=	cyrus_imap_server
 
 OPTIONS_DEFINE=		AUTOCREATE AUTOSIEVE BDB DRAC IDLED LDAP \
 			MURDER MYSQL NETSCAPEHACK NNTP PGSQL \
@@ -59,8 +62,8 @@ LDAP_USE=		OPENLDAP=yes
 LDAP_CONFIGURE_ON=	--with-ldap=${LOCALBASE}
 MURDER_DESC=		Enable IMAP Murder support
 MURDER_CONFIGURE_ENABLE=murder
-MURDER_CFLAGS=		${PTHREAD_CFLAGS}
-MURDER_MAKE_ENV=	PTHREAD_LIBS=${PTHREAD_LIBS}
+MURDER_CFLAGS=
+MURDER_MAKE_ENV=	PTHREAD_LIBS="-lpthread"
 MYSQL_USE=		MYSQL=yes
 MYSQL_CONFIGURE_ON=	--with-mysql=yes \
 			--with-mysql-libdir=${LOCALBASE}/lib/mysql \
@@ -79,6 +82,25 @@ SNMP_CONFIGURE_OFF=	--with-snmp=no
 SQLITE_USE=		SQLITE=yes
 SQLITE_CONFIGURE_ON=	--with-sqlite=${LOCALBASE}
 
+OPTIONS_RADIO=			GSSAPI
+OPTIONS_RADIO_GSSAPI=		GSSAPI_HEIMDAL GSSAPI_MIT
+.if exists(/usr/lib/libkrb5.a)
+OPTIONS_RADIO_GSSAPI+=		GSSAPI_BASE
+OPTIONS_DEFAULT+=		GSSAPI_BASE
+.endif
+GSSAPI_BASE_DESC=		Use Heimdal in base
+GSSAPI_BASE_USES=		gssapi
+GSSAPI_BASE_CONFIGURE_ON=	--enable-gssapi="${GSSAPIBASEDIR}" \
+				--with-gss_impl=heimdal
+GSSAPI_HEIMDAL_DESC=		Use Heimdal from ports
+GSSAPI_HEIMDAL_USES=		gssapi:heimdal,flags
+GSSAPI_HEIMDAL_CONFIGURE_ON=	--enable-gssapi="${GSSAPIBASEDIR}" \
+				--with-gss_impl=heimdal
+GSSAPI_MIT_DESC=		Use MIT Kerberos V5
+GSSAPI_MIT_USES=		gssapi:mit
+GSSAPI_MIT_CONFIGURE_ON=	--enable-gssapi="${GSSAPIBASEDIR}" \
+				--with-gss_impl=mit
+
 .include <bsd.port.pre.mk>
 
 # Autocreate Inbox and Autosieve patches from UoA
@@ -87,8 +109,7 @@ SQLITE_CONFIGURE_ON=	--with-sqlite=${LOCALBASE}
 
 .if ${PORT_OPTIONS:MAUTOCREATE} || ${PORT_OPTIONS:MAUTOSIEVE}
 PATCH_DIST_STRIP=	-p1
-PATCH_SITES+=		${MASTER_SITE_LOCAL}
-PATCH_SITE_SUBDIR=	mm
+PATCH_SITES+=		LOCAL/mm
 .endif
 
 .if ${PORT_OPTIONS:MAUTOCREATE}
@@ -109,24 +130,19 @@ BDB_LIB_NAME=	no
 .endif
 
 .if ${PORT_OPTIONS:MDRAC}
-.if ${OSVERSION} >= 800037
 EXTRA_PATCHES+=	${FILESDIR}/extra-patch-cmulocal::sasl2.m4
-.endif
 USE_AUTOTOOLS=	autoconf autoheader
+.endif
+
+.if !${PORT_OPTIONS:MGSSAPI_BASE} && !${PORT_OPTIONS:MGSSAPI_HEIMDAL} && \
+    !${PORT_OPTIONS:MGSSAPI_MIT}
+CONFIGURE_ARGS+=--disable-gssapi
 .endif
 
 .if ${OSVERSION} >= 900022
 PLIST_SUB+=	MANCONF=""
 .else
 PLIST_SUB+=	MANCONF="@comment "
-.endif
-
-.if !exists(/usr/lib/libkrb5.a)
-CONFIGURE_ARGS+=--disable-gssapi
-.endif
-
-.if ${OSVERSION} >= 800037
-EXTRA_PATCHES+=	${FILESDIR}/extra-patch-configure
 .endif
 
 CYRUS_USER?=	cyrus
@@ -183,8 +199,6 @@ post-patch:
 	@${REINPLACE_CMD} -e "s|/etc/|${PREFIX}/etc/|g" \
 			  -e "s|/usr/sieve|/var/imap/sieve|g" \
 		${WRKSRC}/tools/masssievec
-	@${REINPLACE_CMD} -e "s|-lpthread|\$$(PTHREAD_LIBS)|g" \
-		${WRKSRC}/imap/Makefile.in
 	@${SED} -e "s|%%PREFIX%%|${PREFIX}|g;" \
 		${FILESDIR}/cyrus-imapd-man.conf \
 		> ${WRKDIR}/cyrus-imapd-man.conf
@@ -201,9 +215,6 @@ post-install:
 	@${GZIP_CMD} ${STAGEDIR}${PREFIX}/cyrus/man/man8/${f}
 	@${ECHO_CMD} cyrus/man/man8/${f}.gz >>${TMPPLIST}
 .endfor
-	@${ECHO_CMD} "@dirrm cyrus/man/man8" >>${TMPPLIST}
-	@${ECHO_CMD} "@dirrm cyrus/man" >>${TMPPLIST}
-	@${ECHO_CMD} "@dirrm cyrus" >>${TMPPLIST}
 .if ${PORT_OPTIONS:MDOCS}
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}/man
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}/text
@@ -228,9 +239,6 @@ post-install:
 		${STAGEDIR}${DOCSDIR}/text
 	@${ECHO_CMD} share/doc/${PORTNAME}/text/${f} >>${TMPPLIST}
 .endfor
-	@${ECHO_CMD} "@dirrm share/doc/${PORTNAME}/text" >>${TMPPLIST}
-	@${ECHO_CMD} "@dirrm share/doc/${PORTNAME}/man" >>${TMPPLIST}
-	@${ECHO_CMD} "@dirrm share/doc/${PORTNAME}" >>${TMPPLIST}
 .endif
 	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
 	@${INSTALL_DATA} ${FILESDIR}/imapd.conf \
@@ -240,8 +248,6 @@ post-install:
 		${STAGEDIR}${EXAMPLESDIR}
 	@${ECHO_CMD} ${EXAMPLESDIR:S,^${PREFIX}/,,}/${f} >>${TMPPLIST}
 .endfor
-	@${ECHO_CMD} @dirrm ${EXAMPLESDIR:S,^${PREFIX}/,,} \
-		>>${TMPPLIST}
 	@${INSTALL_SCRIPT} ${WRKSRC}/tools/mkimap \
 		${STAGEDIR}${PREFIX}/cyrus/bin/mkimap
 	@${INSTALL_SCRIPT} ${WRKSRC}/tools/masssievec \

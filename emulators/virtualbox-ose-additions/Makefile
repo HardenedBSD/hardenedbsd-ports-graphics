@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	virtualbox-ose
-DISTVERSION=	4.3.22
+DISTVERSION=	4.3.28
 CATEGORIES=	emulators
 MASTER_SITES=	http://download.virtualbox.org/virtualbox/${DISTVERSION}/ \
 		http://tmp.chruetertee.ch/ \
@@ -113,6 +113,14 @@ EXTRA_PATCHES+=	${PATCHDIR}/extrapatch-src-VBox-Additions-x11-VBoxClient-Makefil
 .endif
 .endif
 
+.if ${OSVERSION} < 1001514
+EXTRA_PATCHES+=	${PATCHDIR}/extrapatch-src-VBox-Additions-x11-vboxvideo-Makefile.kmk.dri
+.else
+EXTRA_PATCHES+=	${PATCHDIR}/extrapatch-src-VBox-Additions-freebsd-drm-Makefile
+EXTRA_PATCHES+=	${PATCHDIR}/extrapatch-src-VBox-Additions-freebsd-drm-Makefile.kmk
+EXTRA_PATCHES+=	${PATCHDIR}/extrapatch-src-VBox-Additions-x11-vboxvideo-Makefile.kmk.dri2
+.endif
+
 SUB_LIST+=	KMODDIR=${KMODDIR}
 
 pre-everything::
@@ -126,6 +134,7 @@ pre-everything::
 
 post-patch:
 	@${ECHO} 'VBOX_ONLY_ADDITIONS = 1' > ${WRKSRC}/LocalConfig.kmk
+	@${ECHO} 'VBOX_WITH_DRAG_AND_DROP = ${VBOX_WITH_X11}' >> ${WRKSRC}/LocalConfig.kmk
 	@${ECHO} 'VBOX_WITH_X11_ADDITIONS = ${VBOX_WITH_X11}' >> ${WRKSRC}/LocalConfig.kmk
 .if ${COMPILER_TYPE} == clang
 	@${REINPLACE_CMD} -e 's| -finline-limit=8000||' \

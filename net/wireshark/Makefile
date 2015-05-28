@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME?=	wireshark
-PORTVERSION=	1.12.3
+PORTVERSION=	1.12.5
 CATEGORIES=	net ipv6
 MASTER_SITES=	http://www.wireshark.org/download/src/ \
 		http://ftp.uni-kl.de/pub/wireshark/src/ \
@@ -22,7 +22,7 @@ LICENSE=	GPLv2
 DATADIR_NAME=	wireshark
 
 USE_PERL5=	build
-USES=		alias gettext gmake iconv libtool perl5 pkgconfig \
+USES=		alias cpe gettext gmake iconv libtool perl5 pkgconfig \
 		python:build tar:bzip2
 WANT_GNOME=	yes
 USE_OPENSSL=	yes
@@ -122,6 +122,7 @@ CONFIGURE_ARGS+=	--with-pcre=no
 .if ${PORT_OPTIONS:MLUA} && !defined(LITE)
 USES+=		lua:51
 CONFIGURE_ARGS+=--with-lua=${PREFIX}
+CFLAGS+=	-I${LUA_INCDIR}
 CPPFLAGS+=	-I${LUA_INCDIR}
 PLIST_SUB+=	LUA=""
 .else
@@ -180,6 +181,10 @@ CONFIGURE_ARGS+=--with-libgcrypt-prefix=${LOCALBASE}
 
 .if ! ${PORT_OPTIONS:MGSSAPI}
 CONFIGURE_ARGS+=--with-krb5=no
+.else
+KRB5_CONFIG?=	${LOCALBASE}/bin/krb5-config
+CONFIGURE_ENV+=	KRB5_CONFIG=${KRB5_CONFIG}
+LIB_DEPENDS+=	libkrb5.so:${PORTSDIR}/security/krb5
 .endif
 
 PKG_MESSAGE=	${FILESDIR}/pkg-message

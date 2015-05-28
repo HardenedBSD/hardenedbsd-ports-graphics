@@ -26,7 +26,8 @@ GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--with-html-dir=${DOCSDIR} \
 		--disable-directfb \
 		--enable-tee
-USES+=		libtool pathfix pkgconfig
+USES+=		cpe libtool pathfix pkgconfig
+CPE_VENDOR=	cairographics
 USE_XORG=	pixman
 USE_GNOME=	referencehack
 USE_LDCONFIG=	yes
@@ -65,7 +66,7 @@ post-patch:
 		-e '/LIBS/s/-lrt//'  -e '/LIBS/s|-ldld||' \
 		-e '/LIBS/s|-ldl||' \
 		${WRKSRC}/configure
-	@${REINPLACE_CMD} -e 's|-lcairo|-lcairo ${PTHREAD_LIBS}|' \
+	@${REINPLACE_CMD} -e 's|-lcairo|-lcairo -lpthread|' \
 		${WRKSRC}/src/*.pc.in
 	@${REINPLACE_CMD} -e '/@CAIRO_HAS_PNG_FUNCTIONS_TRUE@.*=/d' \
 		${WRKSRC}/Makefile.in
