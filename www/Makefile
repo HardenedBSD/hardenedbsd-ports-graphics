@@ -404,6 +404,7 @@
     SUBDIR += mediawiki119
     SUBDIR += mediawiki123
     SUBDIR += mediawiki124
+    SUBDIR += mediawiki125
     SUBDIR += mergelog
     SUBDIR += mgstat
     SUBDIR += mhonarc
@@ -1784,6 +1785,7 @@
     SUBDIR += rubygem-actionpack4
     SUBDIR += rubygem-activeresource
     SUBDIR += rubygem-activeresource4
+    SUBDIR += rubygem-acts_as_taggable
     SUBDIR += rubygem-acts-as-taggable-on
     SUBDIR += rubygem-acts-as-taggable-on3
     SUBDIR += rubygem-addressable
@@ -1866,7 +1868,7 @@
     SUBDIR += rubygem-kaminari
     SUBDIR += rubygem-kaminari-rails4
     SUBDIR += rubygem-kensa
-    SUBDIR += rubygem-layout-yullio
+    SUBDIR += rubygem-layout_yullio_generator
     SUBDIR += rubygem-less
     SUBDIR += rubygem-lighthouse-api
     SUBDIR += rubygem-maruku
@@ -1939,7 +1941,6 @@
     SUBDIR += rubygem-sinatra-contrib
     SUBDIR += rubygem-sinatra-r18n
     SUBDIR += rubygem-sinatra-respond_to
-    SUBDIR += rubygem-taggable
     SUBDIR += rubygem-thin
     SUBDIR += rubygem-tinyatom
     SUBDIR += rubygem-tinymce-rails
