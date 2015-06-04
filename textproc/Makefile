@@ -145,6 +145,7 @@
     SUBDIR += elasticsearch-plugin-head
     SUBDIR += elasticsearch-plugin-hq
     SUBDIR += elasticsearch-plugin-marvel
+    SUBDIR += elasticsearch-plugin-sql
     SUBDIR += elasticsearch-river-rabbitmq
     SUBDIR += emacs-wiki
     SUBDIR += en-aspell
@@ -217,7 +218,6 @@
     SUBDIR += gv-aspell
     SUBDIR += heirloom-doctools
     SUBDIR += hevea
-    SUBDIR += hgrep
     SUBDIR += hhm
     SUBDIR += hi-aspell
     SUBDIR += highlight
@@ -1325,6 +1325,8 @@
     SUBDIR += rubygem-colorator
     SUBDIR += rubygem-colored
     SUBDIR += rubygem-compass
+    SUBDIR += rubygem-compass-core
+    SUBDIR += rubygem-compass-import-once
     SUBDIR += rubygem-compass-rails
     SUBDIR += rubygem-creole
     SUBDIR += rubygem-css_parser

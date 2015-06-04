@@ -175,9 +175,16 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 # BROKEN		- Port is believed to be broken.  Package builds can
 # 				  still be attempted using TRYBROKEN to test this
 #				  assumption.
-# BROKEN_${ARCH}  Port is believed to be broken on ${ARCH}. Package builds
-#				  can still be attempted using TRYBROKEN to test this
-#				  assumption.
+# BROKEN_${ARCH} - Port is believed to be broken on ${ARCH}. Package builds
+#				  can still be attempted using TRYBROKEN to
+#				  test this assumption.
+# BROKEN_${OPSYS} - Port is believed to be broken on ${OPSYS}. Package builds
+#				  can still be attempted using TRYBROKEN to
+#				  test this assumption.
+# BROKEN_${OPSYS}_${OSREL:R} -  Port is believed to be broken on a single
+#				  release of ${OPSYS}, e.g BROKEN_FreeBSD_8
+#				  would affect all point releases of FreeBSD 8
+#				  unless TRYBROKEN is also set.
 # DEPRECATED	- Port is deprecated to install. Advisory only.
 # EXPIRATION_DATE
 #				- If DEPRECATED is set, determines a date when
@@ -1316,7 +1323,7 @@ _SUF2=	,${PORTEPOCH}
 PKGVERSION=	${PORTVERSION:C/[-_,]/./g}${_SUF1}${_SUF2}
 PKGNAME=	${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}-${PKGVERSION}
 DISTVERSIONFULL=	${DISTVERSIONPREFIX}${DISTVERSION:C/:(.)/\1/g}${DISTVERSIONSUFFIX}
-.if defined(USE_GITHUB) && empty(MASTER_SITES:MGHC) && empty(DISTNAME)
+.if defined(USE_GITHUB) && empty(MASTER_SITES:MGHC) && empty(DISTNAME) && empty(USE_GITHUB:Mnodefault)
 _GITHUB_MUST_SET_DISTNAME=		yes
 .else
 DISTNAME?=	${PORTNAME}-${DISTVERSIONFULL}
@@ -2819,6 +2826,14 @@ IGNORE=		is marked as broken: ${BROKEN}
 .elif defined(BROKEN_${ARCH})
 .if !defined(TRYBROKEN)
 IGNORE=		is marked as broken on ${ARCH}: ${BROKEN_${ARCH}}
+.endif
+.elif defined(BROKEN_${OPSYS}_${OSREL:R})
+.if !defined(TRYBROKEN)
+IGNORE=		is marked as broken on ${OPSYS} ${OSREL}: ${BROKEN_${OPSYS}_${OSREL:R}}
+.endif
+.elif defined(BROKEN_${OPSYS})
+.if !defined(TRYBROKEN)
+IGNORE=		is marked as broken on ${OPSYS}: ${BROKEN_${OPSYS}}
 .endif
 .elif defined(FORBIDDEN)
 IGNORE=		is forbidden: ${FORBIDDEN}

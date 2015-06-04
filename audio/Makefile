@@ -51,6 +51,7 @@
     SUBDIR += baudline
     SUBDIR += bcg729
     SUBDIR += beast
+    SUBDIR += beep
     SUBDIR += beets
     SUBDIR += blop
     SUBDIR += boodler
@@ -592,7 +593,6 @@
     SUBDIR += pms
     SUBDIR += pocketsphinx
     SUBDIR += portaudio
-    SUBDIR += portaudio2
     SUBDIR += praat
     SUBDIR += puddletag
     SUBDIR += pulseaudio
