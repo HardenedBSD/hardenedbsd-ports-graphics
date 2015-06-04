@@ -31,4 +31,3 @@ post-install:
 		${MAKE_CMD} install-pkgconfigDATA install-glHEADERS
 
 .include <bsd.port.mk>
-
