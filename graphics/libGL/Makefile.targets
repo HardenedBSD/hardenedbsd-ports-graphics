@@ -18,7 +18,7 @@ pre-build: mesa-pre-build
 #custom targets so we can build parts of Mesa
 mesa-pre-build:
 # do propper gmake target.
-	@cd ${WRKSRC}/src/mesa/drivers/dri/common/xmlpool && ${MAKE_CMD}
+	@cd ${WRKSRC}/src/mesa/drivers/dri/common/ && ${MAKE_CMD}
 	@cd ${WRKSRC}/src/loader && ${MAKE_CMD}
 # libloader.la
 
