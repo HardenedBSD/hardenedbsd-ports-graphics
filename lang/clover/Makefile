@@ -24,9 +24,8 @@ ONLY_FOR_ARCHS=	i386 amd64
 #MESA_BUILD_WRKSRC=	src/util src/glsl src/mesa src/gallium
 MESA_INSTALL_WRKSRC=	src/gallium/targets/opencl src/gallium/targets/pipe-loader
 
-# Clover (OpenCL).
 .if ${OPSYS} == FreeBSD && ${OSVERSION} < 1000000
-IGNORE=		Clover only supported on FreeBSD 10.1 and newer
+IGNORE=		Clover is only supported on FreeBSD 10.1 and newer
 .endif
 
 .include "${.CURDIR}/../../graphics/libGL/Makefile.targets"
