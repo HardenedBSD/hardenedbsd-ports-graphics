@@ -267,7 +267,6 @@ etc/perl5_version
 %%PRIV_LIB%%/Locale/Codes/API.pod
 %%PRIV_LIB%%/Locale/Codes/Changes.pod
 %%PRIV_LIB%%/Locale/Codes/Constants.pm
-%%PRIV_LIB%%/Locale/Codes/Constants.pod
 %%PRIV_LIB%%/Locale/Codes/Country.pm
 %%PRIV_LIB%%/Locale/Codes/Country.pod
 %%PRIV_LIB%%/Locale/Codes/Country_Codes.pm
@@ -612,7 +611,7 @@ etc/perl5_version
 %%PRIV_LIB%%/autodie.pm
 %%PRIV_LIB%%/autodie/Scope/Guard.pm
 %%PRIV_LIB%%/autodie/Scope/GuardStack.pm
-%%PRIV_LIB%%/autodie/ScopeUtil.pm
+%%PRIV_LIB%%/autodie/Util.pm
 %%PRIV_LIB%%/autodie/exception.pm
 %%PRIV_LIB%%/autodie/exception/system.pm
 %%PRIV_LIB%%/autodie/hints.pm
@@ -1127,12 +1126,10 @@ etc/perl5_version
 %%MAN3%%/Locale::Codes.3.gz
 %%MAN3%%/Locale::Codes::API.3.gz
 %%MAN3%%/Locale::Codes::Changes.3.gz
-%%MAN3%%/Locale::Codes::Constants.3.gz
 %%MAN3%%/Locale::Codes::Country.3.gz
 %%MAN3%%/Locale::Codes::Currency.3.gz
 %%MAN3%%/Locale::Codes::LangExt.3.gz
 %%MAN3%%/Locale::Codes::LangFam.3.gz
-%%MAN3%%/Locale::Codes::LangFam_Retired.3.gz
 %%MAN3%%/Locale::Codes::LangVar.3.gz
 %%MAN3%%/Locale::Codes::Language.3.gz
 %%MAN3%%/Locale::Codes::Script.3.gz
@@ -1369,7 +1366,7 @@ etc/perl5_version
 %%MAN3%%/autodie.3.gz
 %%MAN3%%/autodie::Scope::Guard.3.gz
 %%MAN3%%/autodie::Scope::GuardStack.3.gz
-%%MAN3%%/autodie::ScopeUtil.3.gz
+%%MAN3%%/autodie::Util.3.gz
 %%MAN3%%/autodie::exception.3.gz
 %%MAN3%%/autodie::exception::system.3.gz
 %%MAN3%%/autodie::hints.3.gz

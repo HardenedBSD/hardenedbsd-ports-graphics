@@ -462,7 +462,6 @@
     SUBDIR += openldap24-sasl-client
     SUBDIR += openldap24-server
     SUBDIR += openmpi
-    SUBDIR += openmpi-devel
     SUBDIR += openmq
     SUBDIR += openmq-client
     SUBDIR += openntpd
@@ -1100,6 +1099,7 @@
     SUBDIR += rubygem-right_gogrid
     SUBDIR += rubygem-right_http_connection
     SUBDIR += rubygem-right_slicehost
+    SUBDIR += rubygem-rsync
     SUBDIR += rubygem-ruby-growl
     SUBDIR += rubygem-ruby-openid
     SUBDIR += rubygem-ruby-yadis
@@ -1125,6 +1125,7 @@
     SUBDIR += samba36
     SUBDIR += samba4
     SUBDIR += samba41
+    SUBDIR += samba42
     SUBDIR += samplicator
     SUBDIR += sbd
     SUBDIR += scamper
@@ -1140,11 +1141,9 @@
     SUBDIR += sendsms
     SUBDIR += sendsnpp
     SUBDIR += serveez
-    SUBDIR += service-discovery-applet
     SUBDIR += serviio
     SUBDIR += sflowtool
     SUBDIR += shadowsocks-libev
-    SUBDIR += shaperprobe
     SUBDIR += shelldap
     SUBDIR += shmux
     SUBDIR += sie-nmsg

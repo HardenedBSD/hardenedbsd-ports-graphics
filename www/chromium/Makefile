@@ -2,10 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	chromium
-PORTVERSION=	43.0.2357.81
+PORTVERSION=	43.0.2357.125
 CATEGORIES=	www
 MASTER_SITES=	http://commondatastorage.googleapis.com/chromium-browser-official/
-DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
+DISTFILES=	${DISTNAME}${EXTRACT_SUFX} # default, but needed to get distinfo correct if TEST is on
 
 MAINTAINER=	chromium@FreeBSD.org
 COMMENT=	Google web browser based on WebKit
@@ -128,7 +128,7 @@ GYP_DEFINES+=	google_api_key=AIzaSyBsp9n41JLW8jCokwn7vhoaMejDFRd1mp8 \
 SUB_FILES=	chromium-browser.desktop chrome
 SUB_LIST+=	COMMENT="${COMMENT}"
 
-OPTIONS_DEFINE=	CODECS GCONF PULSEAUDIO KERBEROS DEBUG #TEST
+OPTIONS_DEFINE=	CODECS GCONF PULSEAUDIO TEST KERBEROS DEBUG
 CODECS_DESC=	Compile and enable patented codecs like H.264
 
 OPTIONS_DEFAULT=	CODECS GCONF KERBEROS
@@ -181,7 +181,6 @@ ALL_TARGET+=	${TEST_TARGETS}
 
 DEBUG_MAKE_ENV=	V=1
 .if ${PORT_OPTIONS:MDEBUG}
-BROKEN=		Produces empty binary
 BUILDTYPE=	Debug
 .else
 BUILDTYPE=	Release
