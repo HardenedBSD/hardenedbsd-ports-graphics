@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME?=	xorg-server
-PORTVERSION=	1.17.1
+PORTVERSION=	1.17.2
 PORTREVISION?=	0
 PORTEPOCH?=	1
 CATEGORIES=	x11-servers
@@ -45,12 +45,12 @@ USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
 		videoproto compositeproto trapproto presentproto recordproto \
 		xineramaproto xinerama evieproto xfont fontenc xkbui pixman \
 		pciaccess xshmfence
-
+# --enable-glamor # needs gbm and epoxy and probably libEGL with drm backend.
 USE_OPENSSL=	yes
 CONFIGURE_ARGS?=--disable-dmx --disable-xvfb --disable-xnest \
 		--without-xmlto --disable-docs --disable-devel-docs \
 		--localstatedir=/var --without-dtrace --disable-xephyr \
-		--enable-record=yes --disable-dri3
+		--enable-record=yes --disable-dri3 --disable-xwayland
 INSTALL_TARGET=	install-strip
 
 .if ${SLAVE_PORT} == "no"
