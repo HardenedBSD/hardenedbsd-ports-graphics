@@ -175,9 +175,16 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 # BROKEN		- Port is believed to be broken.  Package builds can
 # 				  still be attempted using TRYBROKEN to test this
 #				  assumption.
-# BROKEN_${ARCH}  Port is believed to be broken on ${ARCH}. Package builds
-#				  can still be attempted using TRYBROKEN to test this
-#				  assumption.
+# BROKEN_${ARCH} - Port is believed to be broken on ${ARCH}. Package builds
+#				  can still be attempted using TRYBROKEN to
+#				  test this assumption.
+# BROKEN_${OPSYS} - Port is believed to be broken on ${OPSYS}. Package builds
+#				  can still be attempted using TRYBROKEN to
+#				  test this assumption.
+# BROKEN_${OPSYS}_${OSREL:R} -  Port is believed to be broken on a single
+#				  release of ${OPSYS}, e.g BROKEN_FreeBSD_8
+#				  would affect all point releases of FreeBSD 8
+#				  unless TRYBROKEN is also set.
 # DEPRECATED	- Port is deprecated to install. Advisory only.
 # EXPIRATION_DATE
 #				- If DEPRECATED is set, determines a date when
@@ -687,6 +694,9 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				- Create a package for a port and _all_ of its dependencies.
 # describe		- Try to generate a one-line description for each port for
 #				  use in INDEX files and the like.
+# check-plist		- Checks for files missing from the plist, and files in the plist
+#				  that are not installed by the port.
+# check-sanity		- Perform some basic checks of the port layout.
 # checkpatch	- Do a "patch -C" instead of a "patch".  Note that it may
 #				  give incorrect results if multiple patches deal with
 #				  the same file.
@@ -1316,7 +1326,7 @@ _SUF2=	,${PORTEPOCH}
 PKGVERSION=	${PORTVERSION:C/[-_,]/./g}${_SUF1}${_SUF2}
 PKGNAME=	${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}-${PKGVERSION}
 DISTVERSIONFULL=	${DISTVERSIONPREFIX}${DISTVERSION:C/:(.)/\1/g}${DISTVERSIONSUFFIX}
-.if defined(USE_GITHUB) && empty(MASTER_SITES:MGHC) && empty(DISTNAME)
+.if defined(USE_GITHUB) && empty(MASTER_SITES:MGHC) && empty(DISTNAME) && empty(USE_GITHUB:Mnodefault)
 _GITHUB_MUST_SET_DISTNAME=		yes
 .else
 DISTNAME?=	${PORTNAME}-${DISTVERSIONFULL}
@@ -2820,6 +2830,14 @@ IGNORE=		is marked as broken: ${BROKEN}
 .if !defined(TRYBROKEN)
 IGNORE=		is marked as broken on ${ARCH}: ${BROKEN_${ARCH}}
 .endif
+.elif defined(BROKEN_${OPSYS}_${OSREL:R})
+.if !defined(TRYBROKEN)
+IGNORE=		is marked as broken on ${OPSYS} ${OSREL}: ${BROKEN_${OPSYS}_${OSREL:R}}
+.endif
+.elif defined(BROKEN_${OPSYS})
+.if !defined(TRYBROKEN)
+IGNORE=		is marked as broken on ${OPSYS}: ${BROKEN_${OPSYS}}
+.endif
 .elif defined(FORBIDDEN)
 IGNORE=		is forbidden: ${FORBIDDEN}
 .endif
@@ -3277,6 +3295,7 @@ do-patch:
 		*.Z|*.gz) ${GZCAT} $$i ;; \
 		*.bz2) ${BZCAT} $$i ;; \
 		*.xz) ${XZCAT} $$i ;; \
+		*.zip) ${UNZIP_NATIVE_CMD} -p $$i ;; \
 		*) ${CAT} $$i ;; \
 		esac | ${PATCH} ${PATCH_DIST_ARGS} `patch_dist_strip $$i` ; \
 	done )
@@ -3293,6 +3312,7 @@ do-patch:
 		*.Z|*.gz) ${GZCAT} $$patch_file ;; \
 		*.bz2) ${BZCAT} $$patch_file ;; \
 		*.xz) ${XZCAT} $$patch_file ;; \
+		*.zip) ${UNZIP_NATIVE_CMD} -p $$patch_file ;; \
 		*) ${CAT} $$patch_file ;; \
 		esac | ${PATCH} ${PATCH_ARGS} $$patch_strip ; \
 	done
@@ -3906,12 +3926,6 @@ deinstall-all:
 
 .if !target(do-clean)
 do-clean:
-.if defined(NEED_ROOT) && ${UID} != 0 && !defined(INSTALL_AS_USER) && exists(${STAGE_COOKIE})
-	@${ECHO_MSG} "===>  Switching to root credentials for '${.TARGET}' target"
-	@cd ${.CURDIR} && \
-		${SU_CMD} "${MAKE} ${.TARGET}"
-	@${ECHO_MSG} "===>  Returning to user credentials"
-.else
 	@if [ -d ${WRKDIR} ]; then \
 		if [ -w ${WRKDIR} ]; then \
 			${RM} -rf ${WRKDIR}; \
@@ -3919,7 +3933,6 @@ do-clean:
 			${ECHO_MSG} "===>   ${WRKDIR} not writable, skipping"; \
 		fi; \
 	fi
-.endif
 .endif
 
 .if !target(clean)
@@ -5521,7 +5534,7 @@ config-conditional:
 MULTI_EOL=	: you have to choose at least one of them
 SINGLE_EOL=	: you have to select exactly one of them
 RADIO_EOL=	: you can only select none or one of them
-showconfig:
+showconfig: check-config
 .if !empty(COMPLETE_OPTIONS_LIST)
 	@${ECHO_MSG} "===> The following configuration options are available for ${PKGNAME}":
 .for opt in ${ALL_OPTIONS}
@@ -5908,19 +5921,6 @@ _STAGE_DEP=		build
 _STAGE_SEQ=		stage-message stage-dir run-depends lib-depends apply-slist pre-install generate-plist \
 				pre-su-install
 # ${POST_PLIST} must be after anything that modifies TMPPLIST
-.if defined(NEED_ROOT)
-_STAGE_SUSEQ=	create-users-groups do-install \
-				kmod-post-install fix-perl-things \
-				webplugin-post-install post-install post-install-script \
-				move-uniquefiles patch-lafiles post-stage compress-man \
-				install-rc-script install-ldconfig-file install-license \
-				install-desktop-entries add-plist-info add-plist-docs \
-				add-plist-examples add-plist-data add-plist-post \
-				move-uniquefiles-plist ${POST_PLIST}
-.if defined(DEVELOPER)
-_STAGE_SUSEQ+=	stage-qa
-.endif
-.else
 _STAGE_SEQ+=	create-users-groups do-install \
 				kmod-post-install fix-perl-things \
 				webplugin-post-install post-install post-install-script \
@@ -5931,7 +5931,6 @@ _STAGE_SEQ+=	create-users-groups do-install \
 				move-uniquefiles-plist ${POST_PLIST}
 .if defined(DEVELOPER)
 _STAGE_SEQ+=	stage-qa
-.endif
 .endif
 _INSTALL_DEP=	stage
 _INSTALL_SEQ=	install-message run-depends lib-depends check-already-installed

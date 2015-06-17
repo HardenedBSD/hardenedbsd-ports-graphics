@@ -96,7 +96,7 @@ USES+=			tar:xz
 # devel/qt*/distinfo for every port.
 QT_DIST=		base declarative doc graphicaleffects imageformats \
 				multimedia quick1 quickcontrols script serialport svg tools \
-				translations webkit webkit-examples x11extras xmlpatterns
+				translations webchannel webkit webkit-examples websockets x11extras xmlpatterns
 .  endif
 
 .  if ${QT_DIST} == "base" && ${PORTNAME} != "qmake"
@@ -301,7 +301,8 @@ _USE_QT4_ONLY=	accessible assistant-adp assistantclient codecs-cn codecs-jp \
 
 _USE_QT5_ONLY=	buildtools concurrent core graphicaleffects \
 				paths phonon4 printsupport qdbus qdoc qev qml quick \
-				quickcontrols serialport uitools widgets x11extras
+				quickcontrols serialport uitools webchannel websockets \
+				widgets x11extras
 
 accessible_PORT=	accessibility/${_QT_RELNAME}-accessible
 accessible_PATH=	${QT_PLUGINDIR}/accessible/libqtaccessiblewidgets.so
@@ -514,6 +515,12 @@ uic3_PATH=			${QT_BINDIR}/uic3
 
 uitools_PORT=		devel/${_QT_RELNAME}-uitools
 uitools_PATH=		${QT_LIBDIR}/libQt${_QT_LIBVER}UiTools.a
+
+webchannel_PORT=	www/${_QT_RELNAME}-webchannel
+webchannel_PATH=	${QT_LIBDIR}/libQt${_QT_LIBVER}WebChannel.so
+
+websockets_PORT=	www/${_QT_RELNAME}-websockets
+websockets_PATH=	${QT_LIBDIR}/libQt${_QT_LIBVER}WebSockets.so
 
 webkit_PORT=		www/webkit-${_QT_RELNAME}
 webkit_PATH=		${QT_LIBDIR}/libQt${_QT_LIBVER}WebKit.so

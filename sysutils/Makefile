@@ -51,6 +51,7 @@
     SUBDIR += autopsy
     SUBDIR += avfs
     SUBDIR += azure-agent
+    SUBDIR += b2sum
     SUBDIR += b43-fwcutter
     SUBDIR += backupchecker
     SUBDIR += backuppc
@@ -652,6 +653,7 @@
     SUBDIR += p5-ZConf-Cron
     SUBDIR += p5-arclog
     SUBDIR += p5-reslog
+    SUBDIR += packer
     SUBDIR += pacman
     SUBDIR += paicc
     SUBDIR += pam_mount
@@ -713,6 +715,7 @@
     SUBDIR += polkit-gnome
     SUBDIR += polkit-kde
     SUBDIR += polkit-qt
+    SUBDIR += polkit-qt5
     SUBDIR += powerman
     SUBDIR += pp
     SUBDIR += pprotectd
@@ -737,6 +740,7 @@
     SUBDIR += py-XenAPI
     SUBDIR += py-analyzemft
     SUBDIR += py-bcfg2
+    SUBDIR += py-croniter
     SUBDIR += py-danzfs
     SUBDIR += py-drmaa
     SUBDIR += py-execnet
@@ -812,7 +816,10 @@
     SUBDIR += ruby-quota
     SUBDIR += rubygem-SyslogLogger
     SUBDIR += rubygem-backup
+    SUBDIR += rubygem-bosh-gen
+    SUBDIR += rubygem-bosh_cli
     SUBDIR += rubygem-bundler
+    SUBDIR += rubygem-bundler17
     SUBDIR += rubygem-bundler_ext
     SUBDIR += rubygem-capistrano
     SUBDIR += rubygem-capistrano-ext
@@ -847,8 +854,11 @@
     SUBDIR += rubygem-murder
     SUBDIR += rubygem-ohai
     SUBDIR += rubygem-parallel
+    SUBDIR += rubygem-puppet_forge
+    SUBDIR += rubygem-r10k
     SUBDIR += rubygem-rubyipmi
     SUBDIR += rubygem-shellany
+    SUBDIR += rubygem-smart_proxy_chef
     SUBDIR += rubygem-smart_proxy_salt
     SUBDIR += rubygem-sys-admin
     SUBDIR += rubygem-sys-cpu
@@ -955,6 +965,7 @@
     SUBDIR += tdir
     SUBDIR += tenshi
     SUBDIR += tentakel
+    SUBDIR += terraform
     SUBDIR += testdisk
     SUBDIR += thefish
     SUBDIR += timelimit

@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	rack-oauth2
-PORTVERSION=	1.1.1
+PORTVERSION=	1.2.0
 CATEGORIES=	security rubygems
 MASTER_SITES=	RG
 
@@ -15,8 +15,9 @@ RUN_DEPENDS=	rubygem-activesupport>=2.3:${PORTSDIR}/devel/rubygem-activesupport 
 		rubygem-attr_required>=0.0.5:${PORTSDIR}/devel/rubygem-attr_required \
 		rubygem-httpclient>=2.4:${PORTSDIR}/www/rubygem-httpclient \
 		rubygem-multi_json>=1.3.6:${PORTSDIR}/devel/rubygem-multi_json \
-		rubygem-rack>=1.1:${PORTSDIR}/www/rubygem-rack
+		rubygem-rack16>=1.1:${PORTSDIR}/www/rubygem-rack16
 
+NO_ARCH=	yes
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes
 RUBYGEM_AUTOPLIST=	yes

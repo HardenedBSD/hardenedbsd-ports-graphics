@@ -1,9 +1,9 @@
 # $FreeBSD$
 
 PORTNAME=	ppsspp
-PORTVERSION=	1.0.1
 DISTVERSIONPREFIX=	v
-PORTREVISION=	2
+DISTVERSION?=	1.0.1
+PORTREVISION?=	3
 CATEGORIES=	emulators
 
 PATCH_SITES=	https://projects.archlinux.org/svntogit/community.git/plain/trunk/
@@ -20,7 +20,9 @@ RUN_DEPENDS=	xdg-open:${PORTSDIR}/devel/xdg-utils
 USE_GITHUB=	yes
 GH_ACCOUNT=	hrydgard:DEFAULT,lang,native Kingcom:ext_armips
 GH_PROJECT=	${PORTNAME}-lang:lang native:native armips:ext_armips
-GH_TAGNAME=	52c757e:lang 52ce9c1:native a0b878f:ext_armips
+GH_TAGNAME?=	52c757e:lang 52ce9c1:native a0b878f:ext_armips
+
+CONFLICTS_INSTALL?=	${PORTNAME}-devel-[0-9]*
 
 USES=		compiler:c++11-lib pkgconfig
 USE_GL=		glu
@@ -81,7 +83,7 @@ do-install:
 .endif
 	${INSTALL_DATA} ${WRKSRC}/debian/${PORTNAME}.desktop \
 		${STAGEDIR}${DESKTOPDIR}
-	${INSTALL_DATA} ${WRKSRC}/debian/${PORTNAME}.1 \
+	${INSTALL_MAN} ${WRKSRC}/debian/${PORTNAME}.1 \
 		${STAGEDIR}${MAN1PREFIX}/man/man1
 	(cd ${WRKSRC}/assets/unix-icons && ${COPYTREE_SHARE} \
 		"hicolor" ${STAGEDIR}${PREFIX}/share/icons)

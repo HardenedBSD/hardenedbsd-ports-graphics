@@ -145,6 +145,7 @@
     SUBDIR += elasticsearch-plugin-head
     SUBDIR += elasticsearch-plugin-hq
     SUBDIR += elasticsearch-plugin-marvel
+    SUBDIR += elasticsearch-plugin-sql
     SUBDIR += elasticsearch-river-rabbitmq
     SUBDIR += emacs-wiki
     SUBDIR += en-aspell
@@ -217,7 +218,6 @@
     SUBDIR += gv-aspell
     SUBDIR += heirloom-doctools
     SUBDIR += hevea
-    SUBDIR += hgrep
     SUBDIR += hhm
     SUBDIR += hi-aspell
     SUBDIR += highlight
@@ -1325,6 +1325,8 @@
     SUBDIR += rubygem-colorator
     SUBDIR += rubygem-colored
     SUBDIR += rubygem-compass
+    SUBDIR += rubygem-compass-core
+    SUBDIR += rubygem-compass-import-once
     SUBDIR += rubygem-compass-rails
     SUBDIR += rubygem-creole
     SUBDIR += rubygem-css_parser
@@ -1378,6 +1380,8 @@
     SUBDIR += rubygem-org-ruby
     SUBDIR += rubygem-parslet
     SUBDIR += rubygem-phone
+    SUBDIR += rubygem-rails-dom-testing
+    SUBDIR += rubygem-rails-html-sanitizer
     SUBDIR += rubygem-rak
     SUBDIR += rubygem-rchardet
     SUBDIR += rubygem-rdiscount
@@ -1396,6 +1400,7 @@
     SUBDIR += rubygem-sass
     SUBDIR += rubygem-sass-rails
     SUBDIR += rubygem-sass-rails4
+    SUBDIR += rubygem-sass-rails5
     SUBDIR += rubygem-sass32
     SUBDIR += rubygem-sax-machine
     SUBDIR += rubygem-simplecov-html
@@ -1469,9 +1474,9 @@
     SUBDIR += source-highlight
     SUBDIR += sowing
     SUBDIR += spellutils
-    SUBDIR += spiff
     SUBDIR += sphinxsearch
     SUBDIR += sphinxsearch-devel
+    SUBDIR += spiff
     SUBDIR += sq-hunspell
     SUBDIR += sr-aspell
     SUBDIR += sr-hunspell

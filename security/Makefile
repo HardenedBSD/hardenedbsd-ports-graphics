@@ -383,6 +383,7 @@
     SUBDIR += openscep
     SUBDIR += openssh-askpass
     SUBDIR += openssh-portable
+    SUBDIR += openssh-portable-devel
     SUBDIR += openssl
     SUBDIR += openssl_tpm_engine
     SUBDIR += openvas-client
@@ -794,6 +795,7 @@
     SUBDIR += py-flask-httpauth
     SUBDIR += py-gnupg
     SUBDIR += py-gnutls
+    SUBDIR += py-gpsoauth
     SUBDIR += py-htpasswd
     SUBDIR += py-itsdangerous
     SUBDIR += py-kerberos
@@ -1060,8 +1062,8 @@
     SUBDIR += webshag
     SUBDIR += whatweb
     SUBDIR += wipe
-    SUBDIR += wpa_supplicant
     SUBDIR += wolfssl
+    SUBDIR += wpa_supplicant
     SUBDIR += xca
     SUBDIR += xinetd
     SUBDIR += xml-security

@@ -113,7 +113,6 @@
     SUBDIR += demoroniser
     SUBDIR += dfileserver
     SUBDIR += dhttpd
-    SUBDIR += diamanda
     SUBDIR += dillo2
     SUBDIR += dojo
     SUBDIR += dojo-shrinksafe
@@ -348,6 +347,7 @@
     SUBDIR += jtoolkit
     SUBDIR += junkbuster
     SUBDIR += kannel
+    SUBDIR += kannel-sqlbox
     SUBDIR += kcgi
     SUBDIR += kdewebdev4
     SUBDIR += kpartsplugin
@@ -543,8 +543,8 @@
     SUBDIR += nginx-devel
     SUBDIR += nibbleblog
     SUBDIR += node
-    SUBDIR += node010
     SUBDIR += node-devel
+    SUBDIR += node010
     SUBDIR += nostromo
     SUBDIR += npapi-vlc
     SUBDIR += npapi-xine
@@ -1482,6 +1482,8 @@
     SUBDIR += py-cherrypy
     SUBDIR += py-cherrypy-old
     SUBDIR += py-clientform
+    SUBDIR += py-collective.easytemplate
+    SUBDIR += py-collective.templateengines
     SUBDIR += py-cssmin
     SUBDIR += py-cssselect
     SUBDIR += py-cssutils
@@ -1536,6 +1538,7 @@
     SUBDIR += py-django-tastypie
     SUBDIR += py-django-threaded-multihost
     SUBDIR += py-django-tinymce
+    SUBDIR += py-django-voting
     SUBDIR += py-django14
     SUBDIR += py-django16
     SUBDIR += py-django17
@@ -1671,6 +1674,7 @@
     SUBDIR += py-postmarkup
     SUBDIR += py-praw
     SUBDIR += py-prewikka
+    SUBDIR += py-puppetboard
     SUBDIR += py-py-restclient
     SUBDIR += py-pyjwt
     SUBDIR += py-pylons
@@ -1735,8 +1739,8 @@
     SUBDIR += py-webware-component
     SUBDIR += py-werkzeug
     SUBDIR += py-wikitools
-    SUBDIR += py-wsaccel
     SUBDIR += py-ws4py
+    SUBDIR += py-wsaccel
     SUBDIR += py-wsgiauth
     SUBDIR += py-wsgidav
     SUBDIR += py-zope.app.wsgi
@@ -1748,6 +1752,8 @@
     SUBDIR += pyweblib
     SUBDIR += qdecoder
     SUBDIR += qooxdoo
+    SUBDIR += qt5-webchannel
+    SUBDIR += qt5-websockets
     SUBDIR += quickie
     SUBDIR += qupzilla-qt4
     SUBDIR += qupzilla-qt5
@@ -1785,9 +1791,9 @@
     SUBDIR += rubygem-actionpack4
     SUBDIR += rubygem-activeresource
     SUBDIR += rubygem-activeresource4
-    SUBDIR += rubygem-acts_as_taggable
     SUBDIR += rubygem-acts-as-taggable-on
     SUBDIR += rubygem-acts-as-taggable-on3
+    SUBDIR += rubygem-acts_as_taggable
     SUBDIR += rubygem-addressable
     SUBDIR += rubygem-akami
     SUBDIR += rubygem-amazon-ecs
@@ -1798,6 +1804,7 @@
     SUBDIR += rubygem-bootstrap-sass
     SUBDIR += rubygem-browser
     SUBDIR += rubygem-cal-heatmap-rails
+    SUBDIR += rubygem-cal-heatmap-rails-rails4
     SUBDIR += rubygem-carrierwave
     SUBDIR += rubygem-cgi_multipart_eof_fix
     SUBDIR += rubygem-chosen-rails
@@ -1907,6 +1914,7 @@
     SUBDIR += rubygem-rack-ssl
     SUBDIR += rubygem-rack-test
     SUBDIR += rubygem-rack15
+    SUBDIR += rubygem-rack16
     SUBDIR += rubygem-rails
     SUBDIR += rubygem-rails4
     SUBDIR += rubygem-rails_autolink
@@ -1920,6 +1928,7 @@
     SUBDIR += rubygem-redis-rails
     SUBDIR += rubygem-redmine_acts_as_taggable_on
     SUBDIR += rubygem-responders
+    SUBDIR += rubygem-responders-rails3
     SUBDIR += rubygem-rest-client
     SUBDIR += rubygem-rfacebook
     SUBDIR += rubygem-rfeedfinder
@@ -2152,9 +2161,9 @@
     SUBDIR += uzbl
     SUBDIR += validator
     SUBDIR += varnish
-    SUBDIR += varnish4
     SUBDIR += varnish-libvmod-header
     SUBDIR += varnish-nagios
+    SUBDIR += varnish4
     SUBDIR += vdr-plugin-live
     SUBDIR += vdradmin-am
     SUBDIR += vee

@@ -57,6 +57,1028 @@ Notes:
 
 -->
 <vuxml xmlns="http://www.vuxml.org/apps/vuxml-1">
+  <vuln vid="25e0593d-13c0-11e5-9afb-3c970e169bc2">
+    <topic>tomcat -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>tomcat6</name>
+	<range><lt>6.0.44</lt></range>
+      </package>
+      <package>
+	<name>tomcat7</name>
+	<range><lt>7.0.55</lt></range>
+      </package>
+      <package>
+	<name>tomcat8</name>
+	<range><lt>8.0.9</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Apache Software Foundation reports:</p>
+	<blockquote cite="https://tomcat.apache.org/security-6.html#Fixed_in_Apache_Tomcat_6.0.44">
+	  <p>Low: Denial of Service CVE-2014-0230</p>
+	  <p>When a response for a request with a request body is
+	    returned to the user agent before the request body is
+	    fully read, by default Tomcat swallows the remaining
+	    request body so that the next request on the connection
+	    may be processed. There was no limit to the size of
+	    request body that Tomcat would swallow. This permitted
+	    a limited Denial of Service as Tomcat would never close
+	    the connection and a processing thread would remain
+	    allocated to the connection.</p>
+	  <p>Moderate: Security Manager bypass CVE-2014-7810</p>
+	  <p>Malicious web applications could use expression
+	    language to bypass the protections of a Security
+	    Manager as expressions were evaluated within a
+	    privileged code section.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2014-0230</cvename>
+      <cvename>CVE-2014-7810</cvename>
+      <url>https://tomcat.apache.org/security-6.html#Fixed_in_Apache_Tomcat_6.0.44</url>
+    </references>
+    <dates>
+      <discovery>2015-05-12</discovery>
+      <entry>2015-06-16</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="c470db07-1098-11e5-b6a8-002590263bf5">
+    <topic>security/ossec-hids-* -- root escalation via syscheck feature</topic>
+    <affects>
+      <package>
+	<name>ossec-hids-server</name>
+	<name>ossec-hids-client</name>
+	<name>ossec-hids-local</name>
+	<range><ge>2.7</ge><lt>2.8.2</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>OSSEC reports:</p>
+	<blockquote cite="http://www.ossec.net/?p=1198">
+	  <p>The CVE-2015-3222 vulnerability, which allows for root escalation
+	    via sys check has been fixed in OSSEC 2.8.2.  This issue does not
+	    affect agents.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-3222</cvename>
+      <freebsdpr>ports/200801</freebsdpr>
+      <url>http://www.ossec.net/?p=1198</url>
+      <url>https://github.com/ossec/ossec-hids/releases/tag/2.8.2</url>
+    </references>
+    <dates>
+      <discovery>2015-06-11</discovery>
+      <entry>2015-06-12</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="8305e215-1080-11e5-8ba2-000c2980a9f3">
+    <topic>openssl -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>openssl</name>
+	<range><lt>1.0.2_2</lt></range>
+      </package>
+      <package>
+	<name>mingw32-openssl</name>
+	<range><ge>1.0.1</ge><lt>1.0.2b</lt></range>
+      </package>
+      <package>
+	<name>linux-c6-openssl</name>
+	<range><lt>1.0.2b</lt></range>
+      </package>
+      <package>
+	<name>libressl</name>
+	<range><lt>2.1.7</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The OpenSSL team reports:</p>
+	<blockquote cite="https://www.openssl.org/news/secadv_20150611.txt">
+	  <ul>
+	    <li>Missing DHE man-in-the-middle protection (Logjam)
+	      (CVE-2015-4000)</li>
+	    <li>Malformed ECParameters causes infinite loop (CVE-2015-1788)</li>
+	    <li>Exploitable out-of-bounds read in X509_cmp_time
+	      (CVE-2015-1789)</li>
+	    <li>iPKCS7 crash with missing EnvelopedContent (CVE-2015-1790)</li>
+	    <li>CMS verify infinite loop with unknown hash function
+	      (CVE-2015-1792)</li>
+	    <li>Race condition handling NewSessionTicket (CVE-2015-1791)</li>
+	    <li>Invalid free in DTLS (CVE-2014-8176)</li>
+	  </ul>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2014-8176</cvename>
+      <cvename>CVE-2015-1788</cvename>
+      <cvename>CVE-2015-1789</cvename>
+      <cvename>CVE-2015-1790</cvename>
+      <cvename>CVE-2015-1791</cvename>
+      <cvename>CVE-2015-1792</cvename>
+      <url>https://www.openssl.org/news/secadv_20150611.txt</url>
+    </references>
+    <dates>
+      <discovery>2015-06-11</discovery>
+      <entry>2015-06-11</entry>
+      <modified>2015-06-11</modified>
+    </dates>
+  </vuln>
+
+  <vuln vid="1e63db88-1050-11e5-a4df-c485083ca99c">
+    <topic>Adobe Flash Player -- critical vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>linux-c6-flashplugin11</name>
+	<range><lt>11.2r202.466</lt></range>
+      </package>
+      <package>
+	<name>linux-f10-flashplugin11</name>
+	<range><lt>11.2r202.466</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Adobe reports:</p>
+	<blockquote cite="https://helpx.adobe.com/security/products/flash-player/apsb15-11.html">
+	  <p>
+	    Adobe has released security updates for Adobe Flash Player for
+	    Windows, Macintosh and Linux.  These updates address vulnerabilities
+	    that could potentially allow an attacker to take control of the
+	    affected system.
+	  </p>
+	  <p>
+	    These updates resolve a vulnerability (CVE-2015-3096) that could be
+	    exploited to bypass the fix for CVE-2014-5333.
+	  </p>
+	  <p>
+	    These updates improve memory address randomization of the Flash heap
+	    for the Window 7 64-bit platform (CVE-2015-3097).
+	  </p>
+	  <p>
+	    These updates resolve vulnerabilities that could be exploited to
+	    bypass the same-origin-policy and lead to information disclosure
+	    (CVE-2015-3098, CVE-2015-3099, CVE-2015-3102).
+	  </p>
+	  <p>
+	    These updates resolve a stack overflow vulnerability that could lead
+	    to code execution (CVE-2015-3100).
+	  </p>
+	  <p>
+	    These updates resolve a permission issue in the Flash broker for
+	    Internet Explorer that could be exploited to perform privilege
+	    escalation from low to medium integrity level (CVE-2015-3101).
+	  </p>
+	  <p>
+	    These updates resolve an integer overflow vulnerability that could
+	    lead to code execution (CVE-2015-3104).
+	  </p>
+	  <p>
+	    These updates resolve a memory corruption vulnerability that could
+	    lead to code execution (CVE-2015-3105).
+	  </p>
+	  <p>
+	    These updates resolve use-after-free vulnerabilities that could lead
+	    to code execution (CVE-2015-3103, CVE-2015-3106, CVE-2015-3107).
+	  </p>
+	  <p>
+	    These updates resolve a memory leak vulnerability that could be used
+	    to bypass ASLR (CVE-2015-3108).
+	  </p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://helpx.adobe.com/security/products/flash-player/apsb15-11.html</url>
+      <cvename>CVE-2015-3096</cvename>
+      <cvename>CVE-2015-3097</cvename>
+      <cvename>CVE-2015-3098</cvename>
+      <cvename>CVE-2015-3099</cvename>
+      <cvename>CVE-2015-3100</cvename>
+      <cvename>CVE-2015-3101</cvename>
+      <cvename>CVE-2015-3102</cvename>
+      <cvename>CVE-2015-3103</cvename>
+      <cvename>CVE-2015-3104</cvename>
+      <cvename>CVE-2015-3105</cvename>
+      <cvename>CVE-2015-3106</cvename>
+      <cvename>CVE-2015-3107</cvename>
+      <cvename>CVE-2015-3108</cvename>
+    </references>
+    <dates>
+      <discovery>2015-06-09</discovery>
+      <entry>2015-06-11</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="10a6d0aa-0b1c-11e5-bb90-002590263bf5">
+    <topic>libzmq4 -- V3 protocol handler vulnerable to downgrade attacks</topic>
+    <affects>
+      <package>
+	<name>libzmq4</name>
+	<range><ge>4.0.0</ge><lt>4.0.6</lt></range>
+	<range><ge>4.1.0</ge><lt>4.1.1</lt></range>
+      </package>
+    </affects>
+    <description>
+       <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Pieter Hintjens reports:</p>
+	<blockquote cite="https://github.com/zeromq/libzmq/issues/1273">
+	  <p>It is easy to bypass the security mechanism in 4.1.0 and 4.0.5 by
+	    sending a ZMTP v2 or earlier header. The library accepts such
+	    connections without applying its security mechanism.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2014-9721</cvename>
+      <url>https://github.com/zeromq/libzmq/issues/1273</url>
+      <mlist>http://www.openwall.com/lists/oss-security/2015/05/07/8</mlist>
+      <freebsdpr>200502</freebsdpr>
+    </references>
+    <dates>
+      <discovery>2014-12-04</discovery>
+      <entry>2015-06-10</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="8fbd4187-0f18-11e5-b6a8-002590263bf5">
+    <topic>pgbouncer -- remote denial of service</topic>
+    <affects>
+      <package>
+	<name>pgbouncer</name>
+	<range><lt>1.5.5</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>PgBouncer reports:</p>
+	<blockquote cite="https://pgbouncer.github.io/2015/04/pgbouncer-1-5-5/">
+	  <p>Fix remote crash - invalid packet order causes lookup of NULL pointer. Not
+	    exploitable, just DoS.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-4054</cvename>
+      <url>https://pgbouncer.github.io/2015/04/pgbouncer-1-5-5/</url>
+      <mlist>http://www.openwall.com/lists/oss-security/2015/05/21/2</mlist>
+      <freebsdpr>200507</freebsdpr>
+    </references>
+    <dates>
+      <discovery>2015-04-08</discovery>
+      <entry>2015-06-10</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="a40ec970-0efa-11e5-90e4-d050996490d0">
+    <topic>cups -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>cups-base</name>
+	<range><lt>2.0.3</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>CUPS development team reports:</p>
+	<blockquote cite="https://cups.org/blog.php?L1082">
+	  <p>The new release addresses two security vulnerabilities,
+	    add localizations for German and Russian, and includes
+	    several general bug fixes. Changes include:</p>
+	  <p>Security: Fixed CERT VU #810572/CVE-2015-1158/CVE-2015-1159
+	    exploiting the dynamic linker (STR #4609)</p>
+	  <p>Security: The scheduler could hang with malformed
+	    gzip data (STR #4602)</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-1158</cvename>
+      <cvename>CVE-2015-1159</cvename>
+      <url>https://cups.org/blog.php?L1082</url>
+      <url>https://www.kb.cert.org/vuls/id/810572</url>
+    </references>
+    <dates>
+      <discovery>2015-06-09</discovery>
+      <entry>2015-06-09</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="55363e65-0e71-11e5-8027-00167671dd1d">
+    <topic>strongswan -- Denial-of-service and potential remote code execution vulnerability</topic>
+    <affects>
+      <package>
+	<name>strongswan</name>
+	<range><ge>5.2.2</ge><lt>5.3.1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>trongSwan Project reports</p>
+	<blockquote cite="https://www.strongswan.org/blog/2015/06/01/strongswan-vulnerability-(cve-2015-3991).html">
+	  <p>A denial-of-service and potential remote code execution vulnerability
+	    triggered by crafted IKE messages was discovered in strongSwan. Versions
+	    5.2.2 and 5.3.0 are affected.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-3991</cvename>
+      <url>https://www.strongswan.org/blog/2015/06/01/strongswan-vulnerability-(cve-2015-3991).html</url>
+    </references>
+    <dates>
+      <discovery>2015-05-15</discovery>
+      <entry>2015-06-09</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="10d14955-0e45-11e5-b6a8-002590263bf5">
+    <topic>strongswan -- Information Leak Vulnerability</topic>
+    <affects>
+      <package>
+	<name>strongswan</name>
+	<range><ge>4.3.0</ge><lt>5.3.2</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>strongSwan Project reports:</p>
+	<blockquote cite="http://www.strongswan.org/blog/2015/06/08/strongswan-5.3.2-released.html">
+	  <p>An information leak vulnerability was fixed that, in certain IKEv2
+	    setups, allowed rogue servers with a valid certificate accepted by
+	    the client to trick it into disclosing user credentials (even plain
+	    passwords if the client accepts EAP-GTC). This was caused because
+	    constraints against the server's authentication were enforced too
+	    late. All versions since 4.3.0 are affected.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-4171</cvename>
+      <url>http://www.strongswan.org/blog/2015/06/08/strongswan-5.3.2-released.html</url>
+    </references>
+    <dates>
+      <discovery>2015-06-08</discovery>
+      <entry>2015-06-09</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="838fa84a-0e25-11e5-90e4-d050996490d0">
+    <topic>redis -- EVAL Lua Sandbox Escape</topic>
+    <affects>
+      <package>
+	<name>redis</name>
+	<name>redis-devel</name>
+	<range><ge>2.6.0</ge><lt>2.8.21</lt></range>
+	<range><ge>3.0</ge><lt>3.0.2</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Ben Murphy reports:</p>
+	<blockquote cite="http://benmmurphy.github.io/blog/2015/06/04/redis-eval-lua-sandbox-escape/">
+	  <p>It is possible to break out of the Lua sandbox in
+	    Redis and execute arbitrary code.</p>
+	  <p>This shouldn’t pose a threat to users under the
+	    trusted Redis security model where only trusted
+	    users can connect to the database. However, in real
+	    deployments there could be databases that can be
+	    accessed by untrusted users. The main deployments
+	    that are vulnerable are developers machines, places
+	    where redis servers can be reached via SSRF attacks
+	    and cloud hosting.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-4335</cvename>
+      <url>http://benmmurphy.github.io/blog/2015/06/04/redis-eval-lua-sandbox-escape/</url>
+    </references>
+    <dates>
+      <discovery>2015-06-04</discovery>
+      <entry>2015-06-08</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="bd1ab7a5-0e01-11e5-9976-a0f3c100ae18">
+    <topic>tidy -- heap-buffer-overflow</topic>
+    <affects>
+      <package>
+	<name>tidy4</name>
+	<range><le>20000804_3</le></range>
+      </package>
+      <package>
+	<name>tidy-devel</name>
+	<range><le>090315.c_2</le></range>
+      </package>
+      <package>
+	<name>tidy-lib</name>
+	<range><le>090315.c_2</le></range>
+      </package>
+      <package>
+	<name>tidy-html5</name>
+	<range><lt>4.9.31</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Geoff McLane reports:</p>
+	<blockquote cite="http://seclists.org/oss-sec/2015/q2/633">
+	  <p>tidy is affected by a write out of bounds when processing malformed html files.</p>
+	  <p>This issue could be abused on server side applications that use php-tidy extension with user input.</p>
+	  <p>The issue was confirmed, analysed and fixed by the tidy5 maintainer.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://github.com/htacg/tidy-html5/issues/217</url>
+      <url>http://seclists.org/oss-sec/2015/q2/633</url>
+    </references>
+    <dates>
+      <discovery>2015-06-03</discovery>
+      <entry>2015-06-08</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="e69af246-0ae2-11e5-90e4-d050996490d0">
+    <topic>pcre -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>pcre</name>
+	<range><lt>8.37_1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Venustech ADLAB reports:</p>
+	<blockquote cite="https://bugs.exim.org/show_bug.cgi?id=1636">
+	  <p>PCRE library is prone to a vulnerability which leads
+	    to Heap Overflow. During the compilation of a malformed
+	    regular expression, more data is written on the malloced
+	    block than the expected size output by compile_regex.</p>
+	</blockquote>
+	<blockquote cite="https://bugs.exim.org/show_bug.cgi?id=1638">
+	  <p>PCRE library is prone to a vulnerability which leads to
+	    Stack Overflow. Without enough bound checking inside
+	    match(), the stack memory could be overflowed via a
+	    crafted regular expression.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-3210</cvename>
+      <cvename>CVE-2015-3217</cvename>
+      <url>https://bugs.exim.org/show_bug.cgi?id=1636</url>
+      <url>https://bugs.exim.org/show_bug.cgi?id=1638</url>
+    </references>
+    <dates>
+      <discovery>2015-05-29</discovery>
+      <entry>2015-06-04</entry>
+      <modified>2015-06-07</modified>
+    </dates>
+  </vuln>
+
+  <vuln vid="bbc0db92-084c-11e5-bb90-002590263bf5">
+    <topic>hostapd and wpa_supplicant -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>hostapd</name>
+	<range><lt>2.4_1</lt></range>
+      </package>
+      <package>
+	<name>wpa_supplicant</name>
+	<range><lt>2.4_3</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Jouni Malinen reports:</p>
+	<blockquote cite="http://w1.fi/security/2015-2/wps-upnp-http-chunked-transfer-encoding.txt">
+	  <p>WPS UPnP vulnerability with HTTP chunked transfer encoding. (2015-2
+	    - CVE-2015-4141)</p>
+	</blockquote>
+	<blockquote cite="http://w1.fi/security/2015-3/integer-underflow-in-ap-mode-wmm-action-frame.txt">
+	  <p>Integer underflow in AP mode WMM Action frame processing. (2015-3 -
+	    CVE-2015-4142)</p>
+	</blockquote>
+	<blockquote cite="http://w1.fi/security/2015-4/eap-pwd-missing-payload-length-validation.txt">
+	  <p>EAP-pwd missing payload length validation. (2015-4 - CVE-2015-4143,
+	    CVE-2015-4144, CVE-2015-4145, CVE-2015-4146)</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://w1.fi/security/2015-2/wps-upnp-http-chunked-transfer-encoding.txt</url>
+      <url>http://w1.fi/security/2015-3/integer-underflow-in-ap-mode-wmm-action-frame.txt</url>
+      <url>http://w1.fi/security/2015-4/eap-pwd-missing-payload-length-validation.txt</url>
+      <cvename>CVE-2015-4141</cvename>
+      <cvename>CVE-2015-4142</cvename>
+      <cvename>CVE-2015-4143</cvename>
+      <cvename>CVE-2015-4144</cvename>
+      <cvename>CVE-2015-4145</cvename>
+      <cvename>CVE-2015-4146</cvename>
+      <mlist>http://openwall.com/lists/oss-security/2015/05/31/6</mlist>
+    </references>
+    <dates>
+      <discovery>2015-05-04</discovery>
+      <entry>2015-06-01</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="65b14d39-d01f-419c-b0b8-5df60b929973">
+    <topic>ffmpeg -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>ffmpeg</name>
+	<name>ffmpeg0</name>
+	<range><lt>0.7.17,1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>NVD and Vigilance report:</p>
+	<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-5150">
+	  <p>Use-after-free vulnerability in Google Chrome before
+	    24.0.1312.52 allows remote attackers to cause a denial of
+	    service or possibly have unspecified other impact via vectors
+	    involving seek operations on video data.</p>
+	</blockquote>
+	<blockquote cite="http://vigilance.fr/vulnerability/Libav-integer-overflow-of-av-lzo1x-decode-14944">
+	  <p> An attacker can generate an integer overflow in the
+	    av_lzo1x_decode() function of Libav, in order to trigger a
+	    denial of service, and possibly to execute code.</p>
+	</blockquote>
+	<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-8541">
+	  <p>libavcodec/mjpegdec.c in FFmpeg before 2.4.2 considers only
+	    dimension differences, and not bits-per-pixel differences, when
+	    determining whether an image size has changed, which allows
+	    remote attackers to cause a denial of service (out-of-bounds
+	    access) or possibly have unspecified other impact via crafted
+	    MJPEG data.</p>
+	</blockquote>
+	<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-8542">
+	  <p>libavcodec/utils.c in FFmpeg before 2.4.2 omits a certain
+	    codec ID during enforcement of alignment, which allows remote
+	    attackers to cause a denial of service (out-of-bounds access) or
+	    possibly have unspecified other impact via crafted JV data.</p>
+	</blockquote>
+	<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-8543">
+	  <p>libavcodec/mmvideo.c in FFmpeg before 2.4.2 does not consider
+	    all lines of HHV Intra blocks during validation of image height,
+	    which allows remote attackers to cause a denial of service
+	    (out-of-bounds access) or possibly have unspecified other impact
+	    via crafted MM video data.</p>
+	</blockquote>
+	<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-8545">
+	  <p>libavcodec/pngdec.c in FFmpeg before 2.4.2 accepts the
+	    monochrome-black format without verifying that the
+	    bits-per-pixel value is 1, which allows remote attackers to
+	    cause a denial of service (out-of-bounds access) or possibly
+	    have unspecified other impact via crafted PNG data.</p>
+	</blockquote>
+	<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-8547">
+	  <p>libavcodec/gifdec.c in FFmpeg before 2.4.2 does not properly
+	    compute image heights, which allows remote attackers to cause a
+	    denial of service (out-of-bounds access) or possibly have
+	    unspecified other impact via crafted GIF data.</p>
+	</blockquote>
+	<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-8548">
+	  <p>Off-by-one error in libavcodec/smc.c in FFmpeg before 2.4.2
+	    allows remote attackers to cause a denial of service
+	    (out-of-bounds access) or possibly have unspecified other impact
+	    via crafted Quicktime Graphics (aka SMC) video data.</p>
+	</blockquote>
+	<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-9316">
+	  <p>The mjpeg_decode_app function in libavcodec/mjpegdec.c in
+	    FFMpeg before 2.1.6, 2.2.x through 2.3.x, and 2.4.x before 2.4.4
+	    allows remote attackers to cause a denial of service
+	    (out-of-bounds heap access) and possibly have other unspecified
+	    impact via vectors related to LJIF tags in an MJPEG file.</p>
+	</blockquote>
+	<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-9317">
+	  <p>The decode_ihdr_chunk function in libavcodec/pngdec.c in
+	    FFMpeg before 2.1.6, 2.2.x through 2.3.x, and 2.4.x before 2.4.4
+	    allows remote attackers to cause a denial of service
+	    (out-of-bounds heap access) and possibly have other unspecified
+	    impact via an IDAT before an IHDR in a PNG file.</p>
+	</blockquote>
+	<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-9603">
+	  <p>The vmd_decode function in libavcodec/vmdvideo.c in FFmpeg
+	    before 2.5.2 does not validate the relationship between a
+	    certain length value and the frame width, which allows remote
+	    attackers to cause a denial of service (out-of-bounds array
+	    access) or possibly have unspecified other impact via crafted
+	    Sierra VMD video data.</p>
+	</blockquote>
+	<blockquote cite="http://vigilance.fr/vulnerability/FFmpeg-unreachable-memory-reading-via-mjpegdec-c-16213">
+	  <p>An attacker can force a read at an invalid address in
+	    mjpegdec.c of FFmpeg, in order to trigger a denial of
+	    service.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2012-5150</cvename>
+      <cvename>CVE-2014-4609</cvename>
+      <cvename>CVE-2014-8541</cvename>
+      <cvename>CVE-2014-8542</cvename>
+      <cvename>CVE-2014-8543</cvename>
+      <cvename>CVE-2014-8545</cvename>
+      <cvename>CVE-2014-8547</cvename>
+      <cvename>CVE-2014-8548</cvename>
+      <cvename>CVE-2014-9316</cvename>
+      <cvename>CVE-2014-9317</cvename>
+      <cvename>CVE-2014-9603</cvename>
+      <cvename>CVE-2015-1872</cvename>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=c3ece52decafc4923aebe7fd74b274e9ebb1962e</url>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=1b291e0466308b341bc2e8c2a49d44862400f014</url>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=b5e661bcd2bb4fe771cb2c1e21215c68e6a17665</url>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=cd3c4d8c55222337b0b59af4ea1fecfb46606e5e</url>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=73962e677d871fa0dde5385ee04ea07c048d8864</url>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=7a5590ef4282e19d48d70cba0bc4628c13ec6fd8</url>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=ef32bc8dde52439afd13988f56012a9f4dd55a83</url>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=5b2097626d0e4ccb432d7d8ab040aa8dbde9eb3a</url>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=30e8a375901f8802853fd6d478b77a127d208bd6</url>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=cb1db92cca98f963e91f421ee0c84f8866325a73</url>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=fac6f744d8170585f05e098ce9c9f27eeffa818e</url>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=75b0cfcf105c8720a47a2ee80a70ba16799d71b7</url>
+      <url>https://ffmpeg.org/security.html</url>
+    </references>
+    <dates>
+      <discovery>2015-03-12</discovery>
+      <entry>2015-06-02</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="022255be-0895-11e5-a242-5404a68ad561">
+    <topic>avidemux26 -- multiple vulnerabilities in bundled FFmpeg</topic>
+    <affects>
+      <package>
+	<name>avidemux2</name>
+	<range><lt>2.6.8</lt></range>
+      </package>
+      <package>
+	<name>avidemux26</name>
+	<range><lt>2.6.8</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The Mageia project reports:</p>
+	<blockquote cite="http://advisories.mageia.org/MGASA-2015-0233.html">
+	  <p>Avidemux is built with a bundled set of FFmpeg libraries.
+	    The bundled FFmpeg version has been updated from 1.2.10
+	    to 1.2.12 to fix these security issues and other bugs
+	    fixed upstream in FFmpeg.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2014-9316</cvename>
+      <cvename>CVE-2014-9317</cvename>
+      <cvename>CVE-2014-9603</cvename>
+      <cvename>CVE-2014-9604</cvename>
+      <cvename>CVE-2015-1872</cvename>
+      <cvename>CVE-2015-3417</cvename>
+      <freebsdpr>200507</freebsdpr>
+      <url>http://advisories.mageia.org/MGASA-2015-0233.html</url>
+    </references>
+    <dates>
+      <discovery>2015-05-18</discovery>
+      <entry>2015-06-01</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="ffe2d86c-07d9-11e5-9a28-001e67150279">
+    <topic>rest-client -- plaintext password disclosure</topic>
+    <affects>
+      <package>
+	<name>rubygem-rest-client</name>
+	<range><lt>1.6.7_1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The open sourced vulnerability database reports:</p>
+	<blockquote cite="http://osvdb.org/show/osvdb/117461">
+	  <p>REST Client for Ruby contains a flaw that is due to the application
+	    logging password information in plaintext. This may allow a local
+	    attacker to gain access to password information.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-3448</cvename>
+      <freebsdpr>200504</freebsdpr>
+      <url>https://github.com/rest-client/rest-client/issues/349</url>
+      <url>http://osvdb.org/show/osvdb/117461</url>
+    </references>
+    <dates>
+      <discovery>2015-01-12</discovery>
+      <entry>2015-05-31</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="83a7a720-07d8-11e5-9a28-001e67150279">
+    <topic>rest-client -- session fixation vulnerability</topic>
+    <affects>
+      <package>
+	<name>rubygem-rest-client</name>
+	<range><lt>1.6.7_1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Andy Brody reports:</p>
+	<blockquote cite="https://github.com/rest-client/rest-client/issues/369">
+	  <p>When Ruby rest-client processes an HTTP redirection response,
+	    it blindly passes along the values from any Set-Cookie headers to the
+	    redirection target, regardless of domain, path, or expiration.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-1820</cvename>
+      <freebsdpr>200504</freebsdpr>
+      <url>https://github.com/rest-client/rest-client/issues/369</url>
+    </references>
+    <dates>
+      <discovery>2015-03-24</discovery>
+      <entry>2015-05-31</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="cfb12f02-06e1-11e5-8fda-002590263bf5">
+    <topic>cabextract -- directory traversal with UTF-8 symbols in filenames</topic>
+    <affects>
+      <package>
+	<name>cabextract</name>
+	<range><lt>1.6</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Cabextract ChangeLog reports:</p>
+	<blockquote cite="http://www.cabextract.org.uk/#changes">
+	  <p>It was possible for cabinet files to extract to absolute file
+	    locations, and it was possible on Cygwin to get around cabextract's
+	    absolute and relative path protections by using backslashes.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.cabextract.org.uk/#changes</url>
+      <mlist>http://www.openwall.com/lists/oss-security/2015/02/18/3</mlist>
+      <cvename>CVE-2015-2060</cvename>
+    </references>
+    <dates>
+      <discovery>2015-02-18</discovery>
+      <entry>2015-05-31</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="cc7548ef-06e1-11e5-8fda-002590263bf5">
+    <topic>libmspack -- frame_end overflow which could cause infinite loop</topic>
+    <affects>
+      <package>
+	<name>libmspack</name>
+	<range><lt>0.5</lt></range>
+      </package>
+      <package>
+	<name>cabextract</name>
+	<range><lt>1.5</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>There is a denial of service vulnerability in libmspack.  The
+	  libmspack code is built into cabextract, so it is also
+	  vulnerable.</p>
+	<p>MITRE reports:</p>
+	<blockquote cite="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9556">
+	  <p>Integer overflow in the qtmd_decompress function in libmspack 0.4
+	    allows remote attackers to cause a denial of service (hang) via a
+	    crafted CAB file, which triggers an infinite loop.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2014-9556</cvename>
+      <url>https://bugs.debian.org/773041</url>
+      <mlist>http://www.openwall.com/lists/oss-security/2015/01/07/2</mlist>
+    </references>
+    <dates>
+      <discovery>2014-12-11</discovery>
+      <entry>2015-05-31</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="48504af7-07ad-11e5-879c-00e0814cab4e">
+    <topic>django -- Fixed session flushing in the cached_db backend</topic>
+    <affects>
+      <package>
+	<name>py27-django</name>
+	<range><ge>1.8</ge><lt>1.8.2</lt></range>
+      </package>
+      <package>
+	<name>py32-django</name>
+	<range><ge>1.8</ge><lt>1.8.2</lt></range>
+      </package>
+      <package>
+	<name>py33-django</name>
+	<range><ge>1.8</ge><lt>1.8.2</lt></range>
+      </package>
+      <package>
+	<name>py34-django</name>
+	<range><ge>1.8</ge><lt>1.8.2</lt></range>
+      </package>
+      <package>
+	<name>py27-django-devel</name>
+	<range><lt>20150531,1</lt></range>
+      </package>
+      <package>
+	<name>py32-django-devel</name>
+	<range><lt>20150531,1</lt></range>
+      </package>
+      <package>
+	<name>py33-django-devel</name>
+	<range><lt>20150531,1</lt></range>
+      </package>
+      <package>
+	<name>py34-django-devel</name>
+	<range><lt>20150531,1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The Django project reports:</p>
+	<blockquote cite="https://www.djangoproject.com/weblog/2015/may/20/security-release/">
+	  <p>A change to session.flush() in the cached_db session backend in
+	    Django 1.8 mistakenly sets the session key to an empty string
+	    rather than None. An empty string is treated as a valid session key
+	    and the session cookie is set accordingly. Any users with an empty
+	    string in their session cookie will use the same session store.
+	    session.flush() is called by django.contrib.auth.logout() and, more
+	    seriously, by django.contrib.auth.login() when a user switches accounts.
+	    If a user is logged in and logs in again to a different account
+	    (without logging out) the session is flushed to avoid reuse.
+	    After the session is flushed (and its session key becomes '') the
+	    account details are set on the session and the session is saved.
+	    Any users with an empty string in their session cookie will now be
+	    logged into that account.</p>
+	  <p>Thanks to Sam Cooke for reporting the issue.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://www.djangoproject.com/weblog/2015/may/20/security-release/</url>
+      <cvename>CVE-2015-3982</cvename>
+    </references>
+    <dates>
+      <discovery>2015-05-20</discovery>
+      <entry>2015-05-31</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="9471ec47-05a2-11e5-8fda-002590263bf5">
+    <topic>proxychains-ng -- current path as the first directory for the library search path</topic>
+    <affects>
+      <package>
+	<name>proxychains-ng</name>
+	<range><lt>4.9</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Mamoru TASAKA reports:</p>
+	<blockquote cite="http://seclists.org/oss-sec/2015/q2/430">
+	  <p>proxychains4 sets LD_PRELOAD to dlopen libproxychains4.so
+	    and execvp() the arbitrary command user has specified.
+	    proxychains4 sets the current directory as the first path
+	    to search libproxychains4.so</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <mlist>http://openwall.com/lists/oss-security/2015/05/12/6</mlist>
+      <mlist>http://seclists.org/oss-sec/2015/q2/430</mlist>
+      <cvename>CVE-2015-3887</cvename>
+    </references>
+    <dates>
+      <discovery>2015-05-11</discovery>
+      <entry>2015-05-29</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="a13500d0-0570-11e5-aab1-d050996490d0">
+    <topic>wireshark -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>wireshark</name>
+	<name>wireshark-lite</name>
+	<name>tshark</name>
+	<name>tshark-lite</name>
+	<range><lt>1.12.5</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Wireshark development team reports:</p>
+	<blockquote cite="https://www.wireshark.org/docs/relnotes/wireshark-1.12.5.html">
+	  <p>The following vulnerabilities have been fixed.</p>
+	  <ul>
+	    <li><p>wnpa-sec-2015-12</p>
+	      <p>The LBMR dissector could go into an infinite loop.
+		(Bug 11036) CVE-2015-3808, CVE-2015-3809</p></li>
+	    <li><p>wnpa-sec-2015-13</p>
+	      <p>The WebSocket dissector could recurse excessively.
+		(Bug 10989) CVE-2015-3810</p></li>
+	    <li><p>wnpa-sec-2015-14</p>
+	      <p>The WCP dissector could crash while decompressing data.
+		(Bug 10978) CVE-2015-3811</p></li>
+	    <li><p>wnpa-sec-2015-15</p>
+	      <p>The X11 dissector could leak memory. (Bug 11088)
+		CVE-2015-3812</p></li>
+	    <li><p>wnpa-sec-2015-16</p>
+	      <p>The packet reassembly code could leak memory.
+		(Bug 11129) CVE-2015-3813</p></li>
+	    <li><p>wnpa-sec-2015-17</p>
+	      <p>The IEEE 802.11 dissector could go into an infinite loop.
+		(Bug 11110) CVE-2015-3814</p></li>
+	    <li><p>wnpa-sec-2015-18</p>
+	      <p>The Android Logcat file parser could crash. Discovered by
+		Hanno Böck. (Bug 11188) CVE-2015-3815</p></li>
+	  </ul>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-3808</cvename>
+      <cvename>CVE-2015-3809</cvename>
+      <cvename>CVE-2015-3810</cvename>
+      <cvename>CVE-2015-3811</cvename>
+      <cvename>CVE-2015-3812</cvename>
+      <cvename>CVE-2015-3813</cvename>
+      <cvename>CVE-2015-3814</cvename>
+      <cvename>CVE-2015-3815</cvename>
+      <url>https://www.wireshark.org/docs/relnotes/wireshark-1.12.5.html</url>
+      <url>https://www.wireshark.org/security/wnpa-sec-2015-12.html</url>
+      <url>https://www.wireshark.org/security/wnpa-sec-2015-13.html</url>
+      <url>https://www.wireshark.org/security/wnpa-sec-2015-14.html</url>
+      <url>https://www.wireshark.org/security/wnpa-sec-2015-15.html</url>
+      <url>https://www.wireshark.org/security/wnpa-sec-2015-16.html</url>
+      <url>https://www.wireshark.org/security/wnpa-sec-2015-17.html</url>
+      <url>https://www.wireshark.org/security/wnpa-sec-2015-18.html</url>
+    </references>
+    <dates>
+      <discovery>2015-05-12</discovery>
+      <entry>2015-05-28</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="406636fe-055d-11e5-aab1-d050996490d0">
+    <topic>krb5 -- requires_preauth bypass in PKINIT-enabled KDC</topic>
+    <affects>
+      <package>
+	<name>krb5</name>
+	<range><lt>1.13.2</lt></range>
+      </package>
+      <package>
+	<name>krb5-112</name>
+	<range><lt>1.12.3_2</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>MIT reports:</p>
+	<blockquote cite="http://krbdev.mit.edu/rt/Ticket/Display.html?id=8160">
+	  <p>In MIT krb5 1.12 and later, when the KDC is configured
+	    with PKINIT support, an unauthenticated remote attacker
+	    can bypass the requires_preauth flag on a client principal
+	    and obtain a ciphertext encrypted in the principal's
+	    long-term key.  This ciphertext could be used to conduct
+	    an off-line dictionary attack against the user's password.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-2694</cvename>
+      <url>http://krbdev.mit.edu/rt/Ticket/Display.html?id=8160</url>
+    </references>
+    <dates>
+      <discovery>2015-05-25</discovery>
+      <entry>2015-05-28</entry>
+    </dates>
+  </vuln>
+
   <vuln vid="27f742f6-03f4-11e5-aab1-d050996490d0">
     <topic>cURL -- sensitive HTTP server headers also sent to proxies</topic>
     <affects>
@@ -353,18 +1375,6 @@ Notes:
 	<name>pcre</name>
 	<range><lt>8.37</lt></range>
       </package>
-      <package>
-	<name>php5</name>
-	<range><lt>5.4.41</lt></range>
-      </package>
-      <package>
-	<name>php55</name>
-	<range><lt>5.5.25</lt></range>
-      </package>
-      <package>
-	<name>php56</name>
-	<range><lt>5.6.9</lt></range>
-      </package>
     </affects>
     <description>
       <body xmlns="http://www.w3.org/1999/xhtml">
@@ -396,6 +1406,7 @@ Notes:
     <dates>
       <discovery>2015-04-28</discovery>
       <entry>2015-05-22</entry>
+      <modified>2015-06-07</modified>
     </dates>
   </vuln>
 
@@ -840,8 +1851,24 @@ Notes:
   </vuln>
 
   <vuln vid="57325ecf-facc-11e4-968f-b888e347c638">
-    <topic>ufraw -- integer overflow condition</topic>
+    <topic>dcraw, kodi, libraw, rawstudio, and ufraw -- integer overflow condition</topic>
     <affects>
+      <package>
+	<name>dcraw</name>
+	<range><ge>7.00</ge><lt>9.26</lt></range>
+      </package>
+      <package>
+	<name>kodi</name>
+	<range><lt>14.2_1</lt></range>
+      </package>
+      <package>
+	<name>libraw</name>
+	<range><lt>0.16.1</lt></range>
+      </package>
+      <package>
+	<name>rawstudio</name>
+	<range><lt>2.0_11</lt></range>
+      </package>
       <package>
 	<name>ufraw</name>
 	<range><lt>0.21</lt></range>
@@ -863,12 +1890,15 @@ Notes:
       </body>
     </description>
     <references>
+      <cvename>CVE-2015-3885</cvename>
       <url>http://www.ocert.org/advisories/ocert-2015-006.html</url>
-      <url>http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3885</url>
+      <url>https://github.com/rawstudio/rawstudio/commit/983bda1f0fa5fa86884381208274198a620f006e</url>
+      <url>https://github.com/LibRaw/LibRaw/commit/4606c28f494a750892c5c1ac7903e62dd1c6fdb5</url>
     </references>
     <dates>
       <discovery>2015-04-24</discovery>
       <entry>2015-05-15</entry>
+      <modified>2015-06-06</modified>
     </dates>
   </vuln>
 

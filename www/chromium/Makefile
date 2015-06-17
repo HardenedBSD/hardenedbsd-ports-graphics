@@ -2,10 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	chromium
-PORTVERSION=	43.0.2357.65
+PORTVERSION=	43.0.2357.125
 CATEGORIES=	www
 MASTER_SITES=	http://commondatastorage.googleapis.com/chromium-browser-official/
-DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
+DISTFILES=	${DISTNAME}${EXTRACT_SUFX} # default, but needed to get distinfo correct if TEST is on
 
 MAINTAINER=	chromium@FreeBSD.org
 COMMENT=	Google web browser based on WebKit
@@ -181,7 +181,6 @@ ALL_TARGET+=	${TEST_TARGETS}
 
 DEBUG_MAKE_ENV=	V=1
 .if ${PORT_OPTIONS:MDEBUG}
-BROKEN=		Produces empty binary
 BUILDTYPE=	Debug
 .else
 BUILDTYPE=	Release
