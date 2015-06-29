@@ -7,6 +7,7 @@
     SUBDIR += abcl
     SUBDIR += adacontrol
     SUBDIR += afnix
+    SUBDIR += alchemist.el
     SUBDIR += algol68g
     SUBDIR += alisp
     SUBDIR += angelscript
@@ -42,6 +43,7 @@
     SUBDIR += clinfo
     SUBDIR += clojure
     SUBDIR += clojure-mode.el
+    SUBDIR += cloudabi-clang
     SUBDIR += clover
     SUBDIR += cmucl
     SUBDIR += cmucl-extra
@@ -57,6 +59,7 @@
     SUBDIR += ecl
     SUBDIR += elan
     SUBDIR += elixir
+    SUBDIR += elixir-mode.el
     SUBDIR += elk
     SUBDIR += emacs-lisp-intro
     SUBDIR += erlang
@@ -64,6 +67,7 @@
     SUBDIR += erlang-runtime15
     SUBDIR += erlang-runtime16
     SUBDIR += erlang-runtime17
+    SUBDIR += erlang-runtime18
     SUBDIR += erlang-wx
     SUBDIR += execline
     SUBDIR += expect
@@ -303,6 +307,7 @@
     SUBDIR += smalltalk
     SUBDIR += smlnj
     SUBDIR += snobol4
+    SUBDIR += spark
     SUBDIR += spidermonkey17
     SUBDIR += spidermonkey170
     SUBDIR += spidermonkey185
