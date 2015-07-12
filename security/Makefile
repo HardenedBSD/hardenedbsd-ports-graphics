@@ -56,6 +56,7 @@
     SUBDIR += chaosreader
     SUBDIR += checkpassword
     SUBDIR += checkpassword-pam
+    SUBDIR += chkrootkit
     SUBDIR += chntpw
     SUBDIR += chroot_safe
     SUBDIR += chrootuid
@@ -828,6 +829,7 @@
     SUBDIR += py-pylibacl
     SUBDIR += py-pyme
     SUBDIR += py-pyptlib
+    SUBDIR += py-pyscard
     SUBDIR += py-pysha3
     SUBDIR += py-python-registry
     SUBDIR += py-rekall
@@ -909,7 +911,6 @@
     SUBDIR += rubygem-ezcrypto
     SUBDIR += rubygem-gpgr
     SUBDIR += rubygem-gssapi
-    SUBDIR += rubygem-hmac
     SUBDIR += rubygem-jugyo-twitter_oauth
     SUBDIR += rubygem-metasploit-concern
     SUBDIR += rubygem-metasploit-credential

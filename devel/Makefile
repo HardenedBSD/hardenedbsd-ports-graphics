@@ -159,6 +159,7 @@
     SUBDIR += bsdowl
     SUBDIR += bufferpool
     SUBDIR += bugzilla44
+    SUBDIR += bugzilla50
     SUBDIR += build
     SUBDIR += buildbot
     SUBDIR += buildbot-slave
@@ -409,6 +410,22 @@
     SUBDIR += elfrc
     SUBDIR += elfsh
     SUBDIR += elftoaout
+    SUBDIR += elixir-bson
+    SUBDIR += elixir-calendar
+    SUBDIR += elixir-conform
+    SUBDIR += elixir-csv
+    SUBDIR += elixir-decimal
+    SUBDIR += elixir-dialyze
+    SUBDIR += elixir-exactor
+    SUBDIR += elixir-exjsx
+    SUBDIR += elixir-exrm
+    SUBDIR += elixir-lager_logger
+    SUBDIR += elixir-msgpax
+    SUBDIR += elixir-plug
+    SUBDIR += elixir-poison
+    SUBDIR += elixir-timex
+    SUBDIR += elixir-timex-interval
+    SUBDIR += elixir-tzdata
     SUBDIR += embb
     SUBDIR += epl.el
     SUBDIR += epm
@@ -418,9 +435,10 @@
     SUBDIR += eris
     SUBDIR += erlang-bbmustache
     SUBDIR += erlang-bear
+    SUBDIR += erlang-clique
     SUBDIR += erlang-common_lib
-    SUBDIR += erlang-cowlib
     SUBDIR += erlang-cuttlefish
+    SUBDIR += erlang-erlware_commons
     SUBDIR += erlang-esdl
     SUBDIR += erlang-exmpp
     SUBDIR += erlang-folsom
@@ -429,16 +447,21 @@
     SUBDIR += erlang-getopt
     SUBDIR += erlang-goldrush
     SUBDIR += erlang-gproc
-    SUBDIR += erlang-ibrowse
+    SUBDIR += erlang-jobs
+    SUBDIR += erlang-jsx
     SUBDIR += erlang-lager
     SUBDIR += erlang-lager_syslog
     SUBDIR += erlang-meck
     SUBDIR += erlang-msgpack
     SUBDIR += erlang-neotoma
     SUBDIR += erlang-oserl
+    SUBDIR += erlang-parse_trans
     SUBDIR += erlang-poolboy
     SUBDIR += erlang-protobuffs
+    SUBDIR += erlang-providers
+    SUBDIR += erlang-rebar3_hex
     SUBDIR += erlang-recon
+    SUBDIR += erlang-ssl_verify_hostname
     SUBDIR += erlang-syslog
     SUBDIR += etcd
     SUBDIR += etcdctl
@@ -1026,6 +1049,7 @@
     SUBDIR += libbobcat
     SUBDIR += libbonobo
     SUBDIR += libbonobo-reference
+    SUBDIR += libbson
     SUBDIR += libburn
     SUBDIR += libc++
     SUBDIR += libccid
@@ -1230,6 +1254,7 @@
     SUBDIR += libtap
     SUBDIR += libtar
     SUBDIR += libtecla
+    SUBDIR += libtermkey
     SUBDIR += libthai
     SUBDIR += libtifiles2
     SUBDIR += libtool
@@ -1577,6 +1602,7 @@
     SUBDIR += p5-AppConfig
     SUBDIR += p5-AppConfig-Std
     SUBDIR += p5-Array-Group
+    SUBDIR += p5-Array-Heap
     SUBDIR += p5-Array-Iterator
     SUBDIR += p5-Array-Unique
     SUBDIR += p5-Array-Window
@@ -1862,6 +1888,7 @@
     SUBDIR += p5-Data-Miscellany
     SUBDIR += p5-Data-Model
     SUBDIR += p5-Data-Munge
+    SUBDIR += p5-Data-Object
     SUBDIR += p5-Data-ObjectDriver
     SUBDIR += p5-Data-OptList
     SUBDIR += p5-Data-Page-NoTotalEntries
@@ -2266,6 +2293,7 @@
     SUBDIR += p5-Hash-MultiKey
     SUBDIR += p5-Hash-MultiValue
     SUBDIR += p5-Hash-NoRef
+    SUBDIR += p5-Hash-Slice
     SUBDIR += p5-Hash-Union
     SUBDIR += p5-Hash-Util-FieldHash-Compat
     SUBDIR += p5-Hash-WithDefaults
@@ -3854,6 +3882,7 @@
     SUBDIR += py-distorm
     SUBDIR += py-distutils-extra
     SUBDIR += py-django-tastypie-mongoengine
+    SUBDIR += py-django16-tastypie-mongoengine
     SUBDIR += py-docopt
     SUBDIR += py-dogpile.cache
     SUBDIR += py-dogpile.core
@@ -4066,12 +4095,14 @@
     SUBDIR += py-pyshapelib
     SUBDIR += py-pytemplate
     SUBDIR += py-pytest
+    SUBDIR += py-pytest-cache
     SUBDIR += py-pytest-capturelog
     SUBDIR += py-pytest-runner
     SUBDIR += py-pytest-timeout
     SUBDIR += py-pytest-xdist
     SUBDIR += py-python-bugzilla
     SUBDIR += py-python-jenkins
+    SUBDIR += py-python-pcre
     SUBDIR += py-python-statsd
     SUBDIR += py-python2-pythondialog
     SUBDIR += py-pythonbrew
@@ -4121,6 +4152,7 @@
     SUBDIR += py-sanetime
     SUBDIR += py-scripttest
     SUBDIR += py-sdl2
+    SUBDIR += py-semantic_version
     SUBDIR += py-serpent
     SUBDIR += py-setproctitle
     SUBDIR += py-setuptools
@@ -4503,7 +4535,12 @@
     SUBDIR += rubygem-cairo-gobject
     SUBDIR += rubygem-capybara
     SUBDIR += rubygem-celluloid
+    SUBDIR += rubygem-celluloid-essentials
+    SUBDIR += rubygem-celluloid-extras
+    SUBDIR += rubygem-celluloid-fsm
     SUBDIR += rubygem-celluloid-io
+    SUBDIR += rubygem-celluloid-pool
+    SUBDIR += rubygem-celluloid-supervision
     SUBDIR += rubygem-cf-uaa-lib
     SUBDIR += rubygem-childprocess
     SUBDIR += rubygem-chronic
@@ -4545,7 +4582,9 @@
     SUBDIR += rubygem-deprecated2
     SUBDIR += rubygem-descendants_tracker
     SUBDIR += rubygem-devise
+    SUBDIR += rubygem-devise-rails4
     SUBDIR += rubygem-devise-async
+    SUBDIR += rubygem-devise-async-rails4
     SUBDIR += rubygem-directory_watcher
     SUBDIR += rubygem-ditz
     SUBDIR += rubygem-docile
@@ -4599,6 +4638,7 @@
     SUBDIR += rubygem-gibbler
     SUBDIR += rubygem-gio2
     SUBDIR += rubygem-git
+    SUBDIR += rubygem-git-version-bump
     SUBDIR += rubygem-github_api
     SUBDIR += rubygem-gitlab-pygments.rb
     SUBDIR += rubygem-gitlab_git
@@ -4646,6 +4686,7 @@
     SUBDIR += rubygem-librarianp
     SUBDIR += rubygem-libyajl2
     SUBDIR += rubygem-listen
+    SUBDIR += rubygem-listen2
     SUBDIR += rubygem-little-plugger
     SUBDIR += rubygem-locale
     SUBDIR += rubygem-lockfile
@@ -4656,7 +4697,6 @@
     SUBDIR += rubygem-lumberjack
     SUBDIR += rubygem-main
     SUBDIR += rubygem-map
-    SUBDIR += rubygem-mash
     SUBDIR += rubygem-memoizable
     SUBDIR += rubygem-memoize
     SUBDIR += rubygem-mercenary
@@ -4751,6 +4791,7 @@
     SUBDIR += rubygem-rspec
     SUBDIR += rubygem-rspec-core
     SUBDIR += rubygem-rspec-expectations
+    SUBDIR += rubygem-rspec-logsplit
     SUBDIR += rubygem-rspec-mocks
     SUBDIR += rubygem-rspec-support
     SUBDIR += rubygem-rubigen
@@ -4838,6 +4879,7 @@
     SUBDIR += rubygem-travis
     SUBDIR += rubygem-treetop
     SUBDIR += rubygem-trollop
+    SUBDIR += rubygem-trollop1
     SUBDIR += rubygem-turn
     SUBDIR += rubygem-typed-array
     SUBDIR += rubygem-tzinfo
@@ -5059,7 +5101,6 @@
     SUBDIR += xparam
     SUBDIR += xsd
     SUBDIR += xtl
-    SUBDIR += xtla
     SUBDIR += xwpe
     SUBDIR += xxgdb
     SUBDIR += xxl

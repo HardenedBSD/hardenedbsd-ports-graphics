@@ -12,13 +12,13 @@
     SUBDIR += fbsdmon
     SUBDIR += genpatch
     SUBDIR += genplist
-    SUBDIR += gnome-packagekit
     SUBDIR += hs-porte
     SUBDIR += jailaudit
     SUBDIR += kpackagekit
     SUBDIR += lsknobs
     SUBDIR += managepkg
     SUBDIR += mkreadmes
+    SUBDIR += octopkg
     SUBDIR += p5-FreeBSD-Portindex
     SUBDIR += p5-FreeBSD-Ports
     SUBDIR += p5-FreeBSD-Ports-INDEXhash

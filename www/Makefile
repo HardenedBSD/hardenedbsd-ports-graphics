@@ -161,12 +161,23 @@
     SUBDIR += elgg
     SUBDIR += elinks
     SUBDIR += eliom
+    SUBDIR += elixir-httpoison
+    SUBDIR += elixir-httpotion
+    SUBDIR += elixir-joken
+    SUBDIR += elixir-maru
+    SUBDIR += elixir-phoenix
+    SUBDIR += elixir-phoenix_ecto
+    SUBDIR += elixir-phoenix_html
+    SUBDIR += elixir-webassembly
     SUBDIR += emacs-w3m
     SUBDIR += encode-explorer
     SUBDIR += entrans
     SUBDIR += ephemera
     SUBDIR += epiphany
     SUBDIR += erlang-cowboy
+    SUBDIR += erlang-cowlib
+    SUBDIR += erlang-hackney
+    SUBDIR += erlang-ibrowse
     SUBDIR += erlang-mochiweb
     SUBDIR += erlang-mochiweb-basho
     SUBDIR += erlang-webmachine
@@ -511,7 +522,7 @@
     SUBDIR += mod_vhs
     SUBDIR += mod_webkit
     SUBDIR += mod_whatkilledus
-    SUBDIR += mod_wsgi3
+    SUBDIR += mod_wsgi4
     SUBDIR += mod_xml2enc
     SUBDIR += mod_xmlns
     SUBDIR += mod_xsendfile
@@ -1537,6 +1548,7 @@
     SUBDIR += py-django-tagging
     SUBDIR += py-django-taggit
     SUBDIR += py-django-tastypie
+    SUBDIR += py-django16-tastypie
     SUBDIR += py-django-threaded-multihost
     SUBDIR += py-django-tinymce
     SUBDIR += py-django-voting
@@ -1739,6 +1751,7 @@
     SUBDIR += py-webware
     SUBDIR += py-webware-component
     SUBDIR += py-werkzeug
+    SUBDIR += py-wikipedia
     SUBDIR += py-wikitools
     SUBDIR += py-ws4py
     SUBDIR += py-wsaccel
@@ -1783,7 +1796,6 @@
     SUBDIR += rsstool
     SUBDIR += rt40
     SUBDIR += rt42
-    SUBDIR += ruby-amazon
     SUBDIR += ruby-aws
     SUBDIR += ruby-google
     SUBDIR += ruby-wgettsv

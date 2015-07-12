@@ -4927,7 +4927,6 @@ www/py-Products.kupu||2013-09-23|This port is not required since Plone 4.3
 www/py-plone.app.kss||2013-09-23|This port is not required since Plone 4.3
 devel/py-archetypes.kss||2013-09-23|This port is not required since Plone 4.3
 devel/py-kss-core||2013-09-23|This port is not required since Plone 4.3
-cad/tkgate||2013-09-24|Removed
 x11/libXtrans||2013-09-26|Has expired: Project is obsoleted, use x11/xtrans instead
 sysutils/libpcbsd||2013-09-26|Obsolete: Use sysutils/pcbsd-utils-qt4 instead
 sysutils/pbreg||2013-09-26|Obsolete: Use sysutils/pcbsd-utils instead
@@ -6303,7 +6302,6 @@ misc/c-hey||2014-07-24|Has expired: Fails to build with new utmpx
 misc/wminfo||2014-07-24|Has expired: Fails to build with new utmpx
 net/sendfile||2014-07-24|Has expired: Fails to build with new utmpx
 net-im/centericq||2014-07-24|Has expired: Fails to build with new utmpx
-security/chkrootkit||2014-07-24|Has expired: Fails to build with new utmpx
 security/openfwtk||2014-07-24|Has expired: Fails to build with new utmpx
 security/pam_alreadyloggedin||2014-07-24|Has expired: Fails to build with new utmpx
 security/srp||2014-07-24|Has expired: Fails to build with new utmpx
@@ -6826,7 +6824,6 @@ print/scribus-devel||2014-09-01|Not staged
 russian/libcyrillic||2014-09-01|Not staged
 russian/prawda||2014-09-01|Not staged
 russian/pscyr||2014-09-01|Not staged
-russian/rux||2014-09-01|Not staged
 russian/tac+ia||2014-09-01|Not staged
 science/2dhf||2014-09-01|Not staged
 science/abinit||2014-09-01|Not staged
@@ -7666,3 +7663,24 @@ textproc/exmpp|devel/erlang-exmpp|2015-06-27|Moved to devel category, with erlan
 databases/eredis|databases/erlang-eredis|2015-06-27|Renamed with erlang- prefix
 databases/epgsql|databases/erlang-epgsql|2015-06-27|Renamed with erlang- prefix
 www/varnish|www/varnish4|2015-06-28|Has expired: EOL was reached in April 2015, use www/varnish4
+audio/padevchooser||2015-06-29|Has expired: Broken for more than 6 months
+devel/xtla||2015-06-29|Has expired: Broken for more than 6 months
+mail/mail-notification||2015-06-29|Has expired: Broken for more than 6 months
+ports-mgmt/gnome-packagekit||2015-06-29|Has expired: Broken for more than 6 months
+sysutils/py-salt-api||2015-06-29|Has expired: Broken for more than 6 months
+devel/rubygem-mash|devel/rubgem-hashie|2015-06-30|Has expired: Deprecated by upstream. Use devel/rubygem-hashie instead
+net/rubygem-bunny060|net/rubygem-bunny|2015-06-30|Has expired: Use net/rubygem-bunny instead
+security/rubygem-hmac|security/rubygem-ruby-hmac|2015-06-30|Has expired: Duplicate of security/rubygem-ruby-hmac
+www/ruby-amazon|www/ruby-aws|2015-06-30|Has expired: Rendered obsolete by upstream since Amazon shut down access to AWS API v3 (2008-03-31). Use www/ruby-aws instead
+net/ntp-rc||2015-06-30|Has gone GA
+net/ptpd2-devel|net/ptpd2|2015-07-02|Development version no longer necessary
+devel/erlang-cowlib|www/erlang-cowlib|2015-07-03|Move to www where it belongs
+net/py-google||2015-07-03|Google no longer supports the SOAP API for search
+devel/erlang-ibrowse|www/erlang-ibrowse|2015-07-05|Move to www where it belongs
+multimedia/ffmpeg23|multimedia/ffmpeg|2015-07-05|Obsolete since recent upstream upgrade of main ffmpeg port. Use multimedia/ffmpeg instead.
+multimedia/ffmpeg26|multimedia/ffmpeg|2015-07-05|Obsolete since recent upstream upgrade of main ffmpeg port. Use multimedia/ffmpeg instead.
+x11/docker|x11/docker-tray|2015-07-06|Renamed
+sysutils/docker|sysutils/docker-freebsd|2015-07-07|Renamed
+graphics/fli2gif||2015-07-07|Has expired: No public distfiles
+net-im/tkabbur||2015-07-07|Has expired: Upstream development ceased since 2008
+www/mod_wsgi3|www/mod_wsgi4|2015-07-12|Renamed to reflect new version

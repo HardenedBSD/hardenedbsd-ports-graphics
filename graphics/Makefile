@@ -168,7 +168,6 @@
     SUBDIR += figurine
     SUBDIR += flam3
     SUBDIR += flasm
-    SUBDIR += fli2gif
     SUBDIR += flphoto
     SUBDIR += fly
     SUBDIR += fortytwo
@@ -359,6 +358,7 @@
     SUBDIR += import-pictures
     SUBDIR += impressive
     SUBDIR += inkscape
+    SUBDIR += intel-backlight
     SUBDIR += intergif
     SUBDIR += inventor
     SUBDIR += ipe
@@ -803,6 +803,7 @@
     SUBDIR += pstoedit
     SUBDIR += pstoepsi
     SUBDIR += pure-gl
+    SUBDIR += py-pyganim
     SUBDIR += py-PyX
     SUBDIR += py-PyX12
     SUBDIR += py-aafigure

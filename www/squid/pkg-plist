@@ -482,6 +482,7 @@
 %%ETCDIR%%/errors/es-pr
 %%ETCDIR%%/errors/es-py
 %%ETCDIR%%/errors/es-sv
+%%ETCDIR%%/errors/es-us
 %%ETCDIR%%/errors/es-uy
 %%ETCDIR%%/errors/es-ve
 %%ETCDIR%%/errors/es/ERR_ACCESS_DENIED
@@ -2175,6 +2176,7 @@ sbin/purge
 sbin/squid
 sbin/squidclient
 @dir(squid,squid,750) /var/log/squid
+@dir(squid,squid,750) /var/run/squid
 @dir(squid,squid,750) /var/squid
 @dir(squid,squid,750) /var/squid/cache
 @dir(squid,squid,750) /var/squid/logs

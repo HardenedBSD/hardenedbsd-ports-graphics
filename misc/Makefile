@@ -9,6 +9,7 @@
     SUBDIR += amanda-perl-wrapper
     SUBDIR += amanda-server
     SUBDIR += amfm
+    SUBDIR += ansiweather
     SUBDIR += apparix
     SUBDIR += artikulate
     SUBDIR += asbutton
@@ -73,6 +74,7 @@
     SUBDIR += dvorakng
     SUBDIR += e2fsprogs-libblkid
     SUBDIR += e2fsprogs-libuuid
+    SUBDIR += elixir-uuid
     SUBDIR += elscreen
     SUBDIR += esniper
     SUBDIR += estic
