@@ -186,7 +186,6 @@
     SUBDIR += ocaml
     SUBDIR += ocaml-autoconf
     SUBDIR += ocaml-nox11
-    SUBDIR += ocl-icd
     SUBDIR += ofc
     SUBDIR += ohugs
     SUBDIR += onyx

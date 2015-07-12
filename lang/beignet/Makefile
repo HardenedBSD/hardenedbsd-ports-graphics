@@ -12,7 +12,7 @@ COMMENT=	OpenCL library for Intel GPUs
 
 BUILD_DEPENDS=	clang${LLVMVER}:${PORTSDIR}/lang/clang${LLVMVER} \
 		opencl>=0:${PORTSDIR}/devel/opencl
-LIB_DEPENDS=	libOpenCL.so:${PORTSDIR}/lang/ocl-icd \
+LIB_DEPENDS=	libOpenCL.so:${PORTSDIR}/devel/ocl-icd \
 		libdrm.so:${PORTSDIR}/graphics/libdrm
 RUN_DEPENDS=	opencl>=0:${PORTSDIR}/devel/opencl
 

@@ -9,7 +9,7 @@ COMMENT=	Mesa "Clover" OpenCL library
 
 BUILD_DEPENDS=	opencl>=0:${PORTSDIR}/devel/opencl
 LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm \
-		libOpenCL.so:${PORTSDIR}/lang/ocl-icd \
+		libOpenCL.so:${PORTSDIR}/devel/ocl-icd \
 		libexpat.so:${PORTSDIR}/textproc/expat2
 RUN_DEPENDS=	opencl>=0:${PORTSDIR}/devel/opencl
 
