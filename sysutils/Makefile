@@ -13,6 +13,7 @@
     SUBDIR += abgx360
     SUBDIR += abgx360gui
     SUBDIR += accountsservice
+    SUBDIR += acerhdf-kmod
     SUBDIR += acpi_call
     SUBDIR += acpica-tools
     SUBDIR += acts
@@ -134,6 +135,7 @@
     SUBDIR += clone
     SUBDIR += clonehdd
     SUBDIR += cloop-utils
+    SUBDIR += cloudabi-utils
     SUBDIR += clsync
     SUBDIR += cmdwatch
     SUBDIR += cmockery2
@@ -403,6 +405,7 @@
     SUBDIR += installwatch
     SUBDIR += intel-pcm
     SUBDIR += iocage
+    SUBDIR += iocage-devel
     SUBDIR += iogen
     SUBDIR += iograph
     SUBDIR += ioping
@@ -804,6 +807,7 @@
     SUBDIR += rename
     SUBDIR += renameutils
     SUBDIR += reoback
+    SUBDIR += reptyr
     SUBDIR += respond
     SUBDIR += retail
     SUBDIR += rfstool

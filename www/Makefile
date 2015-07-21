@@ -161,6 +161,7 @@
     SUBDIR += elgg
     SUBDIR += elinks
     SUBDIR += eliom
+    SUBDIR += elixir-html_entities
     SUBDIR += elixir-httpoison
     SUBDIR += elixir-httpotion
     SUBDIR += elixir-joken
@@ -360,6 +361,7 @@
     SUBDIR += jspwiki
     SUBDIR += jtoolkit
     SUBDIR += junkbuster
+    SUBDIR += kanboard
     SUBDIR += kannel
     SUBDIR += kannel-sqlbox
     SUBDIR += kcgi

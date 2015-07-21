@@ -57,9 +57,11 @@ include/atril/1.5.0/libview/ev-view.h
 lib/atril/3/backends/libpdfdocument.so
 lib/atril/3/backends/libpsdocument.so
 lib/atril/3/backends/libtiffdocument.so
+%%XPS%%lib/atril/3/backends/libxpsdocument.so
 lib/atril/3/backends/pdfdocument.atril-backend
 lib/atril/3/backends/psdocument.atril-backend
 lib/atril/3/backends/tiffdocument.atril-backend
+%%XPS%%lib/atril/3/backends/xpsdocument.atril-backend
 %%CAJA%%lib/caja/extensions-2.0/libatril-properties-page.so
 lib/libatrildocument.so
 lib/libatrildocument.so.3

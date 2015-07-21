@@ -416,13 +416,20 @@
     SUBDIR += elixir-csv
     SUBDIR += elixir-decimal
     SUBDIR += elixir-dialyze
+    SUBDIR += elixir-estree
     SUBDIR += elixir-exactor
     SUBDIR += elixir-exjsx
+    SUBDIR += elixir-exprotobuf
     SUBDIR += elixir-exrm
+    SUBDIR += elixir-hex
+    SUBDIR += elixir-inflex
     SUBDIR += elixir-lager_logger
     SUBDIR += elixir-msgpax
     SUBDIR += elixir-plug
     SUBDIR += elixir-poison
+    SUBDIR += elixir-quantum
+    SUBDIR += elixir-red_black_tree
+    SUBDIR += elixir-sorted_set
     SUBDIR += elixir-timex
     SUBDIR += elixir-timex-interval
     SUBDIR += elixir-tzdata
@@ -446,6 +453,7 @@
     SUBDIR += erlang-gen_smtp
     SUBDIR += erlang-getopt
     SUBDIR += erlang-goldrush
+    SUBDIR += erlang-gpb
     SUBDIR += erlang-gproc
     SUBDIR += erlang-jobs
     SUBDIR += erlang-jsx
@@ -461,6 +469,7 @@
     SUBDIR += erlang-providers
     SUBDIR += erlang-rebar3_hex
     SUBDIR += erlang-recon
+    SUBDIR += erlang-sbroker
     SUBDIR += erlang-ssl_verify_hostname
     SUBDIR += erlang-syslog
     SUBDIR += etcd
@@ -2490,6 +2499,7 @@
     SUBDIR += p5-Metabase-Fact
     SUBDIR += p5-Method-Alias
     SUBDIR += p5-Method-Signatures-Simple
+    SUBDIR += p5-Minilla
     SUBDIR += p5-Minion
     SUBDIR += p5-Mixin-Linewise
     SUBDIR += p5-Mknod
@@ -3162,7 +3172,6 @@
     SUBDIR += p5-Test-TCP
     SUBDIR += p5-Test-TableDriven
     SUBDIR += p5-Test-Taint
-    SUBDIR += p5-Test-TempDir
     SUBDIR += p5-Test-TempDir-Tiny
     SUBDIR += p5-Test-Tester
     SUBDIR += p5-Test-Time
@@ -3191,6 +3200,7 @@
     SUBDIR += p5-Test-use-ok
     SUBDIR += p5-Test-utf8
     SUBDIR += p5-Text-Levenshtein
+    SUBDIR += p5-Text-Levenshtein-Damerau
     SUBDIR += p5-Text-LevenshteinXS
     SUBDIR += p5-Text-Outdent
     SUBDIR += p5-Text-vFile-asData
@@ -3609,6 +3619,7 @@
     SUBDIR += pecl-swoole
     SUBDIR += pecl-sync
     SUBDIR += pecl-test_helpers
+    SUBDIR += pecl-trace
     SUBDIR += pecl-uopz
     SUBDIR += pecl-uploadprogress
     SUBDIR += pecl-uri_template
@@ -4017,6 +4028,7 @@
     SUBDIR += py-more-itertools
     SUBDIR += py-mox
     SUBDIR += py-msgpack
+    SUBDIR += py-multipledispatch
     SUBDIR += py-mwlib
     SUBDIR += py-mwlib.ext
     SUBDIR += py-mwlib.rl
@@ -4049,6 +4061,7 @@
     SUBDIR += py-pbr
     SUBDIR += py-pefile
     SUBDIR += py-period
+    SUBDIR += py-pex
     SUBDIR += py-phabricator
     SUBDIR += py-phpserialize
     SUBDIR += py-pika
@@ -4529,7 +4542,6 @@
     SUBDIR += rubygem-buftok
     SUBDIR += rubygem-bugspots
     SUBDIR += rubygem-builder
-    SUBDIR += rubygem-builder31
     SUBDIR += rubygem-builder32
     SUBDIR += rubygem-byebug
     SUBDIR += rubygem-caesars
@@ -4583,9 +4595,9 @@
     SUBDIR += rubygem-deprecated2
     SUBDIR += rubygem-descendants_tracker
     SUBDIR += rubygem-devise
-    SUBDIR += rubygem-devise-rails4
     SUBDIR += rubygem-devise-async
     SUBDIR += rubygem-devise-async-rails4
+    SUBDIR += rubygem-devise-rails4
     SUBDIR += rubygem-directory_watcher
     SUBDIR += rubygem-ditz
     SUBDIR += rubygem-docile
@@ -4872,7 +4884,6 @@
     SUBDIR += rubygem-tilt
     SUBDIR += rubygem-tilt1
     SUBDIR += rubygem-timers
-    SUBDIR += rubygem-timers1
     SUBDIR += rubygem-tins
     SUBDIR += rubygem-tins0
     SUBDIR += rubygem-toml
@@ -5026,6 +5037,8 @@
     SUBDIR += tesla
     SUBDIR += tevent
     SUBDIR += tex-kpathsea
+    SUBDIR += tex-libtexlua
+    SUBDIR += tex-libtexluajit
     SUBDIR += tex-web2c
     SUBDIR += thrift
     SUBDIR += thrift-c_glib

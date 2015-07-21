@@ -595,6 +595,7 @@
     SUBDIR += pocketsphinx
     SUBDIR += portaudio
     SUBDIR += praat
+    SUBDIR += pragha
     SUBDIR += puddletag
     SUBDIR += pulseaudio
     SUBDIR += pure-audio
@@ -660,7 +661,6 @@
     SUBDIR += rubygem-ruby-mp3info
     SUBDIR += rubygem-ruby-ogginfo
     SUBDIR += rubygem-ruby-shout
-    SUBDIR += rubyripper
     SUBDIR += s3mod
     SUBDIR += sbagen
     SUBDIR += schism

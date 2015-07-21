@@ -111,6 +111,7 @@
     SUBDIR += duo
     SUBDIR += easy-rsa
     SUBDIR += easypg
+    SUBDIR += elixir-comeonin
     SUBDIR += engine_pkcs11
     SUBDIR += expiretable
     SUBDIR += f-prot
@@ -334,6 +335,7 @@
     SUBDIR += masscan
     SUBDIR += massh
     SUBDIR += matrixssl
+    SUBDIR += mbedtls
     SUBDIR += mcrypt
     SUBDIR += md4coll
     SUBDIR += md5coll
@@ -397,6 +399,7 @@
     SUBDIR += openvpn-auth-ldap
     SUBDIR += openvpn-auth-radius
     SUBDIR += openvpn-devel
+    SUBDIR += openvpn-polarssl
     SUBDIR += ophcrack
     SUBDIR += orthrus
     SUBDIR += osiris
@@ -740,6 +743,7 @@
     SUBDIR += pidgin-otr
     SUBDIR += pinentry
     SUBDIR += pinentry-curses
+    SUBDIR += pinentry-gnome3
     SUBDIR += pinentry-gtk2
     SUBDIR += pinentry-qt4
     SUBDIR += pinentry-tty
@@ -918,12 +922,10 @@
     SUBDIR += rubygem-metasploit-payloads
     SUBDIR += rubygem-metasploit_data_models
     SUBDIR += rubygem-net-scp
-    SUBDIR += rubygem-net-scp11
     SUBDIR += rubygem-net-sftp
     SUBDIR += rubygem-net-ssh
     SUBDIR += rubygem-net-ssh-gateway
     SUBDIR += rubygem-net-ssh-multi
-    SUBDIR += rubygem-net-ssh27
     SUBDIR += rubygem-nmap-parser
     SUBDIR += rubygem-omniauth
     SUBDIR += rubygem-omniauth-bitbucket
@@ -991,7 +993,6 @@
     SUBDIR += srm
     SUBDIR += ssdeep
     SUBDIR += ssh-copy-id
-    SUBDIR += ssh-gui
     SUBDIR += ssh-multiadd
     SUBDIR += ssh_askpass_gtk2
     SUBDIR += sshblock
@@ -1026,6 +1027,7 @@
     SUBDIR += swatch
     SUBDIR += switzerland
     SUBDIR += symbion-sslproxy
+    SUBDIR += tclgpg
     SUBDIR += tclsasl
     SUBDIR += tcpcrypt
     SUBDIR += tinc

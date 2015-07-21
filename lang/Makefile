@@ -284,6 +284,7 @@
     SUBDIR += ruby22
     SUBDIR += runawk
     SUBDIR += rust
+    SUBDIR += rust-nightly
     SUBDIR += s9fes
     SUBDIR += sagittarius-scheme
     SUBDIR += sather-specification
