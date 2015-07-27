@@ -3,7 +3,7 @@
 
 PORTNAME=	ocl-icd
 PORTVERSION=	2.2.3
-CATEGORIES=	lang devel
+CATEGORIES=	devel
 MASTER_SITES=	https://forge.imag.fr/frs/download.php/598/
 
 MAINTAINER=	ohartman@zedat.fu-berlin.de

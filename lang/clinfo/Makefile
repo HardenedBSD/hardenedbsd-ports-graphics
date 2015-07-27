@@ -10,7 +10,7 @@ COMMENT=	OpenCL info program like glxinfo is for libGL
 
 # we need OpenCL header, it doesn't care either clover or beignet is fine.
 BUILD_DEPENDS=	${LOCALBASE}/include/CL/opencl.h:${PORTSDIR}/lang/beignet
-LIB_DEPENDS=	libOpenCL.so:${PORTSDIR}/lang/ocl-icd
+LIB_DEPENDS=	libOpenCL.so:${PORTSDIR}/devel/ocl-icd
 
 DATESTAMP=	20150127
 
