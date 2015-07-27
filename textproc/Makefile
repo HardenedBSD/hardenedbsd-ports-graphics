@@ -279,6 +279,7 @@
     SUBDIR += htdig
     SUBDIR += html
     SUBDIR += html-pretty
+    SUBDIR += html-xml-utils
     SUBDIR += html2fo
     SUBDIR += html2tex
     SUBDIR += html2text
@@ -758,6 +759,7 @@
     SUBDIR += p5-String-Tokenizer
     SUBDIR += p5-String-Truncate
     SUBDIR += p5-String-Urandom
+    SUBDIR += p5-String-Util
     SUBDIR += p5-Syntax-Highlight-Engine-Kate
     SUBDIR += p5-Syntax-Highlight-Perl-Improved
     SUBDIR += p5-TOML
@@ -1174,7 +1176,6 @@
     SUBDIR += py-Tempita
     SUBDIR += py-acora
     SUBDIR += py-alabaster
-    SUBDIR += py-asciinema
     SUBDIR += py-asv
     SUBDIR += py-bugzillatools
     SUBDIR += py-chardet

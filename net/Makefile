@@ -115,6 +115,7 @@
     SUBDIR += e169-stats
     SUBDIR += easysoap
     SUBDIR += echoping
+    SUBDIR += elixir-kafka_ex
     SUBDIR += elixir-oauth2
     SUBDIR += empty
     SUBDIR += enet
@@ -331,6 +332,7 @@
     SUBDIR += libproxy-perl
     SUBDIR += libproxy-python
     SUBDIR += libproxy-webkit
+    SUBDIR += librdkafka
     SUBDIR += librouteros
     SUBDIR += librsync
     SUBDIR += librsync1
@@ -539,6 +541,8 @@
     SUBDIR += p5-Net-Amazon-MechanicalTurk
     SUBDIR += p5-Net-Amazon-S3
     SUBDIR += p5-Net-Amazon-Signature
+    SUBDIR += p5-Net-Amazon-Signature-V3
+    SUBDIR += p5-Net-Amazon-Signature-V4
     SUBDIR += p5-Net-Amazon-Thumbnail
     SUBDIR += p5-Net-Analysis
     SUBDIR += p5-Net-Appliance-Phrasebook
