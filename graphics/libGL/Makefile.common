@@ -24,20 +24,17 @@ MESASUBVERSION=
 
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
 
-USES+=		tar:xz compiler:c++11-lib
-
 DISTFILES=	mesa-${MESADISTVERSION}${EXTRACT_SUFX}
 
 MAINTAINER=	x11@FreeBSD.org
 
 BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend
-
 LIB_DEPENDS+=	libdevq.so:${PORTSDIR}/devel/libdevq
 
-USES+=		gettext-tools gmake libtool pathfix pkgconfig shebangfix
+USES+=		compiler:c++11-lib gettext-tools gmake libtool \
+		pathfix pkgconfig shebangfix tar:xz
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
-
 CPPFLAGS+=	-isystem${LOCALBASE}/include
 LDFLAGS+=	-Wl,-Y${LOCALBASE}/lib
 
@@ -59,7 +56,6 @@ python_CMD=	${LOCALBASE}/bin/python2
 SHEBANG_FILES=	src/gallium/*/*/*.py src/gallium/tools/trace/*.py \
 		src/gallium/drivers/svga/svgadump/svga_dump.py \
 		src/glsl/tests/compare_ir src/mapi/glapi/gen/*.py
-
 SHEBANG_FILES+=	src/mapi/mapi_abi.py
 
 MASTERDIR=		${.CURDIR}/../../graphics/libGL
