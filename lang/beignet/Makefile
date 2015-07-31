@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	beignet
-PORTVERSION=	1.0.3
+PORTVERSION=	1.1.0
 CATEGORIES=	lang
 MASTER_SITES=	https://01.org/sites/default/files/
 DISTVERSIONSUFFIX=	-source
