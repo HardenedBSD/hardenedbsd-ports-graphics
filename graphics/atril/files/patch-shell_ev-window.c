@@ -1,50 +1,39 @@
---- shell/ev-window.c.orig	2015-01-30 14:16:41 UTC
-+++ shell/ev-window.c
-@@ -422,12 +422,12 @@ ev_window_setup_action_sensitivity (EvWi
- 	if (has_document && !ev_print_operation_exists_for_document(document))
- 		ok_to_print = FALSE;
+--- shell/ev-window.c.orig	2015-07-10 12:46:39.000000000 +0200
++++ shell/ev-window.c	2015-07-29 15:31:25.000000000 +0200
+@@ -41,8 +41,10 @@
+ #include <gio/gio.h>
+ #include <gtk/gtk.h>
  
--	if (has_document &&
-+	if (has_document && ev_window->priv->lockdown_settings &&
- 	    g_settings_get_boolean (ev_window->priv->lockdown_settings, MATE_LOCKDOWN_SAVE)) {
- 		ok_to_copy = FALSE;
- 	}
++#ifdef WITH_MATEDESKTOP
+ #include <libmate-desktop/mate-aboutdialog.h>
+ #include <libmate-desktop/mate-gsettings.h>
++#endif
  
--	if (has_document &&
-+	if (has_document && ev_window->priv->lockdown_settings &&
- 	    g_settings_get_boolean (ev_window->priv->lockdown_settings, MATE_LOCKDOWN_PRINT)) {
- 		ok_to_print = FALSE;
- 	}
-@@ -1375,12 +1375,14 @@ ev_window_setup_document (EvWindow *ev_w
+ #include "egg-editable-toolbar.h"
+ #include "egg-toolbar-editor.h"
+@@ -1501,7 +1503,13 @@
  				  ev_window);
  	}
  
--	if (!ev_window->priv->lockdown_settings)
--		ev_window->priv->lockdown_settings = g_settings_new (MATE_LOCKDOWN_SCHEMA);
--	g_signal_connect (ev_window->priv->lockdown_settings,
--				 "changed",
--				 G_CALLBACK (lockdown_changed),
--				 ev_window);
-+	if (g_settings_schema_source_lookup(g_settings_schema_source_get_default(), MATE_LOCKDOWN_SCHEMA, FALSE) != NULL) {
-+		if (!ev_window->priv->lockdown_settings)
-+			ev_window->priv->lockdown_settings = g_settings_new (MATE_LOCKDOWN_SCHEMA);
-+		g_signal_connect (ev_window->priv->lockdown_settings,
-+							"changed",
-+							G_CALLBACK (lockdown_changed),
-+							ev_window);
-+	}
++#ifdef WITH_MATEDESKTOP
+ 	if (mate_gsettings_schema_exists (MATE_LOCKDOWN_SCHEMA)) {
++#else
++	GSettingsSchema *schema_mate_lockdown_schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default(), MATE_LOCKDOWN_SCHEMA, FALSE);
++	if (schema_mate_lockdown_schema != NULL) {
++		g_settings_schema_unref (schema_mate_lockdown_schema);
++#endif
+ 		if (!ev_window->priv->lockdown_settings)
+ 			ev_window->priv->lockdown_settings = g_settings_new (MATE_LOCKDOWN_SCHEMA);
+ 		g_signal_connect (ev_window->priv->lockdown_settings,
+@@ -5053,7 +5061,11 @@
  
- 	ev_window_setup_action_sensitivity (ev_window);
+ 	comments = build_comments_string (ev_window->priv->document);
  
-@@ -3330,6 +3332,11 @@ ev_window_print_range (EvWindow *ev_wind
- 
- 	ev_print_operation_set_embed_page_setup (op, !g_settings_get_boolean (ev_window->priv->lockdown_settings,
- 									     MATE_LOCKDOWN_PRINT_SETUP));
-+	if (ev_window->priv->lockdown_settings)
-+		ev_print_operation_set_embed_page_setup (op, !g_settings_get_boolean (ev_window->priv->lockdown_settings,
-+													MATE_LOCKDOWN_PRINT_SETUP));
-+	else
-+		ev_print_operation_set_embed_page_setup (op, TRUE);
- 
- 	g_object_unref (print_settings);
- 	g_object_unref (print_page_setup);
++#ifdef WITH_MATEDESKTOP
+ 	mate_show_about_dialog (
++#else
++	gtk_show_about_dialog (
++#endif
+ 		GTK_WINDOW (ev_window),
+ 		"name", _("Atril"),
+ 		"version", VERSION,

@@ -1081,6 +1081,7 @@
     SUBDIR += p5-Net-Akismet
     SUBDIR += p5-Net-Amazon-AWIS
     SUBDIR += p5-Net-Async-FastCGI
+    SUBDIR += p5-Net-Async-HTTP
     SUBDIR += p5-Net-FastCGI
     SUBDIR += p5-Net-FireEagle
     SUBDIR += p5-Net-Flickr-API
@@ -1551,12 +1552,12 @@
     SUBDIR += py-django-tagging
     SUBDIR += py-django-taggit
     SUBDIR += py-django-tastypie
-    SUBDIR += py-django16-tastypie
     SUBDIR += py-django-threaded-multihost
     SUBDIR += py-django-tinymce
     SUBDIR += py-django-voting
     SUBDIR += py-django14
     SUBDIR += py-django16
+    SUBDIR += py-django16-tastypie
     SUBDIR += py-django17
     SUBDIR += py-django_compressor
     SUBDIR += py-djangotoolbox
@@ -1585,6 +1586,7 @@
     SUBDIR += py-flup
     SUBDIR += py-formalchemy
     SUBDIR += py-formencode
+    SUBDIR += py-frappe-bench
     SUBDIR += py-frozen-flask
     SUBDIR += py-funkload
     SUBDIR += py-gandi.cli
@@ -2038,6 +2040,7 @@
     SUBDIR += swish++
     SUBDIR += swish-e
     SUBDIR += sws
+    SUBDIR += sxweb
     SUBDIR += syndigator
     SUBDIR += tclhttpd
     SUBDIR += tclwebtest
