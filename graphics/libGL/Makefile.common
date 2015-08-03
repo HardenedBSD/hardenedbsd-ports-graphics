@@ -67,7 +67,7 @@ INSTALL_TARGET=		install-strip
 
 COMPONENT=		${PORTNAME:tl:C/^lib//:C/mesa-//}
 
-MESA_LLVM_VER=35
+MESA_LLVM_VER=36
 
 # DRI3 needs PRIME support in the kernel to work
 CONFIGURE_ARGS+=	--disable-dri3
