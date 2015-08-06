@@ -36,7 +36,6 @@ MANPAGES_BUILD_DEPENDS=	xmlto:${PORTSDIR}/textproc/xmlto \
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|/etc/|${LOCALBASE}/etc/|g' \
-		${WRKSRC}/doc/libOpenCL.7.txt \
-		${WRKSRC}/ocl_icd_loader.c
+		${WRKSRC}/doc/libOpenCL.7.txt
 
 .include <bsd.port.mk>
