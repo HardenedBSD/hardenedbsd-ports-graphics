@@ -2,9 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	ocl-icd
-PORTVERSION=	2.2.3
+PORTVERSION=	2.2.7
 CATEGORIES=	devel
-MASTER_SITES=	https://forge.imag.fr/frs/download.php/598/
+MASTER_SITES=	https://forge.imag.fr/frs/download.php/667/
 
 MAINTAINER=	ohartman@zedat.fu-berlin.de
 COMMENT=	OpenCL Installable Client Driver
