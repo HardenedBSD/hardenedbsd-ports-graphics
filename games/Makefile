@@ -348,6 +348,7 @@
     SUBDIR += gnome-nibbles
     SUBDIR += gnome-robots
     SUBDIR += gnome-sudoku
+    SUBDIR += gnome-taquin
     SUBDIR += gnome-tetravex
     SUBDIR += gnomeattacks
     SUBDIR += gnomebreakout
@@ -406,6 +407,7 @@
     SUBDIR += hohlin
     SUBDIR += hoichess
     SUBDIR += holotz-castle
+    SUBDIR += hypatia_engine
     SUBDIR += iagno
     SUBDIR += icbm3d
     SUBDIR += icebreaker

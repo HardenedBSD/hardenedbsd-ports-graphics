@@ -64,7 +64,6 @@
     SUBDIR += apache-ant
     SUBDIR += api-sanity-autotest
     SUBDIR += apiextractor
-    SUBDIR += appdata-tools
     SUBDIR += appstream-glib
     SUBDIR += apr1
     SUBDIR += apr2
@@ -986,7 +985,6 @@
     SUBDIR += jam
     SUBDIR += jansson
     SUBDIR += java-findbugs
-    SUBDIR += java-util-concurrent
     SUBDIR += javolution
     SUBDIR += jclassinfo
     SUBDIR += jcmdline
@@ -1485,6 +1483,7 @@
     SUBDIR += ocaml-pcre
     SUBDIR += ocaml-pomap
     SUBDIR += ocaml-ppx-tools
+    SUBDIR += ocaml-re
     SUBDIR += ocaml-react
     SUBDIR += ocaml-res
     SUBDIR += ocaml-sdl
@@ -1492,6 +1491,7 @@
     SUBDIR += ocaml-sexplib
     SUBDIR += ocaml-typeconv
     SUBDIR += ocaml-ulex
+    SUBDIR += ocaml-uutf
     SUBDIR += ocaml-xstr
     SUBDIR += ocaml-xstrp4
     SUBDIR += ocfpcsc
@@ -4070,6 +4070,7 @@
     SUBDIR += py-period
     SUBDIR += py-pex
     SUBDIR += py-phabricator
+    SUBDIR += py-phonenumbers
     SUBDIR += py-phpserialize
     SUBDIR += py-pika
     SUBDIR += py-pip
@@ -4111,7 +4112,6 @@
     SUBDIR += py-pymarc
     SUBDIR += py-pympler
     SUBDIR += py-pymtbl
-    SUBDIR += py-pyparsing15
     SUBDIR += py-pyrfc3339
     SUBDIR += py-pyro
     SUBDIR += py-pyshapelib
@@ -4509,11 +4509,13 @@
     SUBDIR += rubygem-abstract
     SUBDIR += rubygem-actionpack-action_caching
     SUBDIR += rubygem-actionview
+    SUBDIR += rubygem-actionview41
     SUBDIR += rubygem-active_scaffold
     SUBDIR += rubygem-activejob
     SUBDIR += rubygem-activemessaging
     SUBDIR += rubygem-activesupport
     SUBDIR += rubygem-activesupport4
+    SUBDIR += rubygem-activesupport41
     SUBDIR += rubygem-algorithms
     SUBDIR += rubygem-allison
     SUBDIR += rubygem-analogger

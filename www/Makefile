@@ -1807,6 +1807,7 @@
     SUBDIR += rubygem-ace-rails-ap
     SUBDIR += rubygem-actionpack
     SUBDIR += rubygem-actionpack4
+    SUBDIR += rubygem-actionpack41
     SUBDIR += rubygem-activeresource
     SUBDIR += rubygem-activeresource4
     SUBDIR += rubygem-acts-as-taggable-on
@@ -1904,7 +1905,6 @@
     SUBDIR += rubygem-merb-haml
     SUBDIR += rubygem-merb-helpers
     SUBDIR += rubygem-merb-param-protection
-    SUBDIR += rubygem-modernizr
     SUBDIR += rubygem-mousetrap-rails
     SUBDIR += rubygem-multipart-post
     SUBDIR += rubygem-nanoc
@@ -1938,6 +1938,7 @@
     SUBDIR += rubygem-rails_autolink
     SUBDIR += rubygem-railties
     SUBDIR += rubygem-railties4
+    SUBDIR += rubygem-railties41
     SUBDIR += rubygem-raindrops
     SUBDIR += rubygem-ramaze
     SUBDIR += rubygem-raphael-rails
@@ -2130,7 +2131,6 @@
     SUBDIR += transmission-web
     SUBDIR += transproxy
     SUBDIR += trytond28_google_maps
-    SUBDIR += trytond_google_maps
     SUBDIR += tt-rss
     SUBDIR += ttf2eot
     SUBDIR += twig
