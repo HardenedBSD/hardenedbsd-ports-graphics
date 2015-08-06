@@ -3,12 +3,12 @@
 
 PORTNAME=	clinfo
 PORTVERSION=	0.0.0.${DATESTAMP}
-CATEGORIES=	lang
+CATEGORIES=	devel
 
 MAINTAINER=	kwm@FreeBSD.org
 COMMENT=	OpenCL info program like glxinfo is for libGL
 
-# we need OpenCL header, it doesn't care either clover or beignet is fine.
+# We need OpenCL header, we don't care if it is either Clover or Beignet.
 BUILD_DEPENDS=	${LOCALBASE}/include/CL/opencl.h:${PORTSDIR}/lang/beignet
 LIB_DEPENDS=	libOpenCL.so:${PORTSDIR}/devel/ocl-icd
 

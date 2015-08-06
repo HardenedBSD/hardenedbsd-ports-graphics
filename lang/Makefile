@@ -39,7 +39,6 @@
     SUBDIR += clang34
     SUBDIR += clang35
     SUBDIR += clang36
-    SUBDIR += clinfo
     SUBDIR += clojure
     SUBDIR += clojure-mode.el
     SUBDIR += cloudabi-clang
