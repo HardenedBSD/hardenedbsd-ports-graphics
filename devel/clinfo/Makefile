@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	clinfo
-PORTVERSION=	0.0.0.${DATESTAMP}
+PORTVERSION=	2.0.15.04.28
 CATEGORIES=	devel
 
 MAINTAINER=	kwm@FreeBSD.org
@@ -12,11 +12,9 @@ COMMENT=	OpenCL info program like glxinfo is for libGL
 BUILD_DEPENDS=	${LOCALBASE}/include/CL/opencl.h:${PORTSDIR}/lang/beignet
 LIB_DEPENDS=	libOpenCL.so:${PORTSDIR}/devel/ocl-icd
 
-DATESTAMP=	20150127
-
 USE_GITHUB=	yes
 GH_ACCOUNT=	Oblomov
-GH_TAGNAME=	0d36ed9
+GH_TAGNAME=	b953d226b7
 
 USES=		gmake
 NO_CONFIGURE=	yes
