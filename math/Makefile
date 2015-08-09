@@ -86,6 +86,7 @@
     SUBDIR += chryzodus
     SUBDIR += clarence
     SUBDIR += clasp
+    SUBDIR += clblas
     SUBDIR += clipper
     SUBDIR += cln
     SUBDIR += cloog

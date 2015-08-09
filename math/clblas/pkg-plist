@@ -1,0 +1,9 @@
+bin/clBLAS-tune
+include/clAmdBlas.h
+include/clAmdBlas.version.h
+include/clBLAS-complex.h
+include/clBLAS.h
+include/clBLAS.version.h
+lib/libclBLAS.so
+lib/libclBLAS.so.2
+lib/libclBLAS.so.2.6.0
