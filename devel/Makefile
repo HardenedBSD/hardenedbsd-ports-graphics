@@ -3701,6 +3701,7 @@
     SUBDIR += plan9port
     SUBDIR += pmccabe
     SUBDIR += pmd
+    SUBDIR += pocl
     SUBDIR += poco
     SUBDIR += poco-devel
     SUBDIR += poco-ssl
