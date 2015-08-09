@@ -4585,6 +4585,7 @@
     SUBDIR += rubygem-coercible
     SUBDIR += rubygem-coffee-rails
     SUBDIR += rubygem-coffee-rails4
+    SUBDIR += rubygem-coffee-rails41
     SUBDIR += rubygem-coffee-script
     SUBDIR += rubygem-coffee-script-source
     SUBDIR += rubygem-colorize
@@ -4702,6 +4703,7 @@
     SUBDIR += rubygem-iobuffer
     SUBDIR += rubygem-jammit
     SUBDIR += rubygem-jbuilder
+    SUBDIR += rubygem-jbuilder-rails41
     SUBDIR += rubygem-jekyll-coffeescript
     SUBDIR += rubygem-jeweler
     SUBDIR += rubygem-jmespath
@@ -4869,6 +4871,7 @@
     SUBDIR += rubygem-sprockets
     SUBDIR += rubygem-sprockets-helpers
     SUBDIR += rubygem-sprockets-rails
+    SUBDIR += rubygem-sprockets-rails-rails41
     SUBDIR += rubygem-sprockets-sass
     SUBDIR += rubygem-sprockets211
     SUBDIR += rubygem-sprockets22
