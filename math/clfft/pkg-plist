@@ -1,0 +1,10 @@
+include/clAmdFft.h
+include/clAmdFft.version.h
+include/clFFT.h
+include/clFFT.version.h
+lib/libStatTimer.so
+lib/libStatTimer.so.2
+lib/libStatTimer.so.2.6.1
+lib/libclFFT.so
+lib/libclFFT.so.2
+lib/libclFFT.so.2.6.1

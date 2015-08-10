@@ -86,10 +86,13 @@
     SUBDIR += chryzodus
     SUBDIR += clarence
     SUBDIR += clasp
+    SUBDIR += clblas
+    SUBDIR += clfft
     SUBDIR += clipper
     SUBDIR += cln
     SUBDIR += cloog
     SUBDIR += clp
+    SUBDIR += clrng
     SUBDIR += cminpack
     SUBDIR += cmlib
     SUBDIR += coinmp
