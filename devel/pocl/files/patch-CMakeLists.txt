@@ -1,0 +1,11 @@
+--- CMakeLists.txt.orig	2015-08-10 08:16:45.336744000 +0200
++++ CMakeLists.txt	2015-08-10 08:17:20.698553000 +0200
+@@ -80,7 +80,7 @@
+ set(POCL_INSTALL_CMAKE_CONFIG_DIR "${POCL_INSTALL_PRIVATE_LIBDIR}" CACHE PATH   "Installation directory for CMake files")
+ 
+ # TODO maybe use output of pkg-config --variable=pc_path pkg-config ?
+-set(POCL_INSTALL_PKGCONFIG_DIR "${POCL_INSTALL_PUBLIC_LIBDIR}/pkgconfig" CACHE PATH "Destination for pocl.pc")
++set(POCL_INSTALL_PKGCONFIG_DIR "${CMAKE_INSTALL_PREFIX}/libdata/pkgconfig" CACHE PATH "Destination for pocl.pc")
+ 
+ if(APPLE)
+   set(POCL_INSTALL_OPENCL_HEADER_DIR "${POCL_INSTALL_PUBLIC_HEADER_DIR}/OpenCL" CACHE PATH "POCL header dir for OpenCL headers")

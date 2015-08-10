@@ -7,13 +7,13 @@ lib/libpocl.so.1.4.0
 lib/libpoclu.so
 lib/libpoclu.so.1
 lib/libpoclu.so.1.4.0
-lib/pkgconfig/pocl.pc
 lib/pocl/libllvmopencl.so
 lib/pocl/libllvmopencl.so.5.0.0
+libdata/pkgconfig/pocl.pc
 %%DATADIR%%/include/_kernel.h
 %%DATADIR%%/include/_kernel_c.h
 %%DATADIR%%/include/pocl.h
 %%DATADIR%%/include/pocl_device.h
 %%DATADIR%%/include/pocl_features.h
 %%DATADIR%%/include/pocl_types.h
-%%DATADIR%%/kernel-x86_64-portbld-freebsd11.0.bc
+%%DATADIR%%/kernel-x86_64-portbld-%%OSARCH%%.bc
