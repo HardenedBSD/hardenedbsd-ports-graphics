@@ -12,7 +12,9 @@ COMMENT=	Software library containing FFT functions written in OpenCL
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-LIB_DEPENDS=	libOpenCL.so:${PORTSDIR}/devel/opencl
+BUILD_DEPENDS=	opencl>=0:${PORTSDIR}/devel/opencl
+LIB_DEPENDS=	libOpenCL.so:${PORTSDIR}/devel/ocl-icd
+RUN_DEPENDS=	opencl>=0:${PORTSDIR}/devel/opencl
 
 ONLY_FOR_ARCHS=	amd64
 
