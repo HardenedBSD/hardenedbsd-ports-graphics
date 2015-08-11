@@ -10,6 +10,7 @@
     SUBDIR += ORBit2-reference
     SUBDIR += R-cran-Defaults
     SUBDIR += R-cran-Hmisc
+    SUBDIR += R-cran-R6
     SUBDIR += R-cran-RUnit
     SUBDIR += R-cran-Rcpp
     SUBDIR += R-cran-bit
@@ -18,6 +19,7 @@
     SUBDIR += R-cran-caTools
     SUBDIR += R-cran-caret
     SUBDIR += R-cran-chron
+    SUBDIR += R-cran-doParallel
     SUBDIR += R-cran-evaluate
     SUBDIR += R-cran-foreach
     SUBDIR += R-cran-gbm
@@ -30,11 +32,14 @@
     SUBDIR += R-cran-magrittr
     SUBDIR += R-cran-memoise
     SUBDIR += R-cran-microbenchmark
+    SUBDIR += R-cran-pkgmaker
     SUBDIR += R-cran-plyr
     SUBDIR += R-cran-proto
     SUBDIR += R-cran-randomForest
+    SUBDIR += R-cran-registry
     SUBDIR += R-cran-reshape
     SUBDIR += R-cran-reshape2
+    SUBDIR += R-cran-rngtools
     SUBDIR += SpecTcl
     SUBDIR += aap
     SUBDIR += aarch64-binutils
@@ -1460,6 +1465,7 @@
     SUBDIR += noweb
     SUBDIR += npth
     SUBDIR += nspr
+    SUBDIR += nuitka
     SUBDIR += nxt-python
     SUBDIR += obby
     SUBDIR += obfuscatejs
@@ -4696,6 +4702,7 @@
     SUBDIR += rubygem-holidays
     SUBDIR += rubygem-i18n
     SUBDIR += rubygem-icalendar
+    SUBDIR += rubygem-ice_cube
     SUBDIR += rubygem-ice_nine
     SUBDIR += rubygem-igraph
     SUBDIR += rubygem-inflecto
@@ -4820,6 +4827,7 @@
     SUBDIR += rubygem-retryable
     SUBDIR += rubygem-rgl
     SUBDIR += rubygem-rodzilla
+    SUBDIR += rubygem-rotp
     SUBDIR += rubygem-rr
     SUBDIR += rubygem-rrd-ffi
     SUBDIR += rubygem-rscm
@@ -4861,6 +4869,7 @@
     SUBDIR += rubygem-shoulda-context
     SUBDIR += rubygem-shoulda-matchers
     SUBDIR += rubygem-sidekiq
+    SUBDIR += rubygem-sidetiq
     SUBDIR += rubygem-sigdump
     SUBDIR += rubygem-simple_form
     SUBDIR += rubygem-simplecov
@@ -4975,6 +4984,7 @@
     SUBDIR += silentbob
     SUBDIR += simgear
     SUBDIR += simian
+    SUBDIR += simple_components
     SUBDIR += simpletest
     SUBDIR += skalibs
     SUBDIR += slf4j
