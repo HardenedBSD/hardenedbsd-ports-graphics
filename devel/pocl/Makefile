@@ -14,19 +14,17 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	${LOCALBASE}/llvm36/bin/llvm-config:${PORTSDIR}/devel/llvm36
 LIB_DEPENDS=	libOpenCL.so:${PORTSDIR}/devel/opencl \
-		libhwloc.so:${PORTSDIR}/devel/hwloc
+		libhwloc.so:${PORTSDIR}/devel/hwloc \
+		libltdl.so${PORTSDIR}/devel/libltdl
 
 ONLY_FOR_ARCHS=	amd64
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	pocl
-GH_PROJECT=	pocl
-GH_TAGNAME=	${GH_COMMIT}
-GH_COMMIT=	ae18e7e
+GH_TAGNAME=	ae18e7e
 
 USE_LDCONFIG=	yes
 USE_GL=		gl glew
-USES=		cmake libtool:libltdl
+USES=		cmake
 
 CMAKE_ARGS+=	-DWITH_LLVM_CONFIG=${LOCALBASE}/llvm36/bin/llvm-config \
 		-DPOCL_INSTALL_ICD_VENDORDIR=${LOCALBASE}/etc/OpenCL/vendors \
