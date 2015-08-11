@@ -22,7 +22,7 @@ USES=		cmake gmake pkgconfig shebangfix
 USE_XORG=	sm ice x11 xext xfixes
 USE_GL=		gl
 SHEBANG_FILES=	src/git_sha1.sh backend/kernels/compile.sh
-LLVMVER=	35
+LLVMVER=	36
 
 CMAKE_ARGS+=	-DLLVM_CONFIG_EXECUTABLE=${LOCALBASE}/bin/llvm-config${LLVMVER}
 
