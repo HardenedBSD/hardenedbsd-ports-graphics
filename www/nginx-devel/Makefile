@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	nginx
-PORTVERSION=	1.9.3
+PORTVERSION=	1.9.4
 CATEGORIES=	www
 MASTER_SITES=	http://nginx.org/download/
 MASTER_SITES+=	LOCAL/osa
@@ -366,12 +366,12 @@ JAVA_VERSION=	1.8
 JAVA_VENDOR=	openjdk
 JAVA_BUILD=	yes
 JAVA_RUN=	yes
-NGINX_CLOJURE_VERSION=	0.4.0
+NGINX_CLOJURE_VERSION=	0.4.1
 GH_ACCOUNT+=	nginx-clojure:clojure
 GH_PROJECT+=	nginx-clojure:clojure
 GH_TAGNAME+=	v${NGINX_CLOJURE_VERSION}:clojure
+CONFIGURE_ENV+=	"JNI_INCS=-I${LOCALBASE}/openjdk8/include -I${LOCALBASE}/openjdk8/include/freebsd"
 CONFIGURE_ARGS+=--add-module=${WRKSRC_clojure}/src/c
-EXTRA_PATCHES+=	${PATCHDIR}/extra-patch-nginx-clojure-src-c-config
 .endif
 
 .if ${PORT_OPTIONS:MECHO}
@@ -835,7 +835,7 @@ NGINX_OPENSSL=	yes
 USE_HTTP_SSL=	yes
 CONFIGURE_ARGS+=--with-http_v2_module
 USE_OPENSSL_PORT=	yes
-NGINX_HTTPV2_VERSION=	1
+NGINX_HTTPV2_VERSION=	3
 PATCH_SITES+=	http://nginx.org/patches/http2/:httpv2
 PATCHFILES+=	patch.http2-v${NGINX_HTTPV2_VERSION}_${PORTVERSION}.txt:httpv2
 PATCH_DIST_STRIP=	-p1
@@ -965,7 +965,7 @@ post-patch:
 .endif
 .if ${PORT_OPTIONS:MCLOJURE}
 	@${REINPLACE_CMD} \
-		's!%%JAVA_HOME%%!${JAVA_HOME}!g' \
+		'45,47d' \
 		${WRKSRC_clojure}/src/c/config
 .endif
 .if ${PORT_OPTIONS:MDRIZZLE}
