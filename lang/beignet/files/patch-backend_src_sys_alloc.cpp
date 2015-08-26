@@ -1,6 +1,6 @@
---- backend/src/sys/alloc.cpp.orig	2014-11-13 02:11:32.000000000 +0100
-+++ backend/src/sys/alloc.cpp	2015-01-30 01:03:17.269890206 +0100
-@@ -69,7 +69,7 @@
+--- backend/src/sys/alloc.cpp.orig	2015-07-02 09:39:05.000000000 +0200
++++ backend/src/sys/alloc.cpp	2015-08-26 11:57:00.901815000 +0200
+@@ -69,7 +69,7 @@ namespace gbe
      /*! Total number of allocations done */
      volatile intptr_t allocNum;
      /*! Sorts the file name and function name strings */
@@ -9,7 +9,34 @@
      /*! Each element contains the actual string */
      std::vector<const char*> staticStringVector;
      std::map<uintptr_t, AllocData> allocMap;
-@@ -291,6 +291,29 @@
+@@ -140,16 +140,17 @@ namespace gbe
+   static bool isMutexInitializing = true;
+   static size_t memDebuggerCurrSize(0u);
+   static size_t memDebuggerMaxSize(0u);
++  __attribute__((destructor))
+   static void SizeMutexDeallocate(void) { if (sizeMutex) delete sizeMutex; }
+   static void SizeMutexAllocate(void) {
+     if (sizeMutex == NULL && isMutexInitializing == false) {
+       isMutexInitializing = true;
+       sizeMutex = new MutexSys;
+-      atexit(SizeMutexDeallocate);
+     }
+   }
+ 
+   /*! Stop the memory debugger */
++  __attribute__((destructor))
+   static void MemDebuggerEnd(void) {
+     MemDebugger *_debug = memDebugger;
+     memDebugger = NULL;
+@@ -172,7 +173,6 @@ namespace gbe
+   /*! Start the memory debugger */
+   static void MemDebuggerStart(void) {
+     if (memDebugger == NULL) {
+-      atexit(MemDebuggerEnd);
+       memDebugger = new MemDebugger;
+     }
+   }
+@@ -291,6 +291,29 @@ namespace gbe
    void alignedFree(void *ptr) { if (ptr) std::free(ptr); }
  } /* namespace gbe */
  
