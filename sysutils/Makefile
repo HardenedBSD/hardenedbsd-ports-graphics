@@ -952,6 +952,7 @@
     SUBDIR += ssync
     SUBDIR += stalepid
     SUBDIR += stmpclean
+    SUBDIR += storcli
     SUBDIR += stow
     SUBDIR += stowES
     SUBDIR += stress
@@ -1092,6 +1093,7 @@
     SUBDIR += wmfire
     SUBDIR += wmflame
     SUBDIR += wmmemfree
+    SUBDIR += wmmemload
     SUBDIR += wmtop
     SUBDIR += wmupmon
     SUBDIR += worldtools

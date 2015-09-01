@@ -294,6 +294,7 @@
     SUBDIR += cppi
     SUBDIR += cpptest
     SUBDIR += cppunit
+    SUBDIR += cppunit113
     SUBDIR += cproto
     SUBDIR += cpuflags
     SUBDIR += critcl
@@ -576,8 +577,10 @@
     SUBDIR += geany
     SUBDIR += geany-plugin-addons
     SUBDIR += geany-plugin-autoclose
+    SUBDIR += geany-plugin-automark
     SUBDIR += geany-plugin-codenav
     SUBDIR += geany-plugin-commander
+    SUBDIR += geany-plugin-ctags
     SUBDIR += geany-plugin-debugger
     SUBDIR += geany-plugin-defineformat
     SUBDIR += geany-plugin-devhelp
@@ -586,20 +589,23 @@
     SUBDIR += geany-plugin-geanypy
     SUBDIR += geany-plugin-gendoc
     SUBDIR += geany-plugin-geniuspaste
-    SUBDIR += geany-plugin-gproject
+    SUBDIR += geany-plugin-git-changebar
     SUBDIR += geany-plugin-insertnum
     SUBDIR += geany-plugin-latex
     SUBDIR += geany-plugin-lipsum
     SUBDIR += geany-plugin-lua
     SUBDIR += geany-plugin-macro
+    SUBDIR += geany-plugin-markdown
     SUBDIR += geany-plugin-miniscript
     SUBDIR += geany-plugin-multiterm
     SUBDIR += geany-plugin-numberedbookmarks
+    SUBDIR += geany-plugin-overview
     SUBDIR += geany-plugin-pairtaghighlighter
     SUBDIR += geany-plugin-pg
     SUBDIR += geany-plugin-pohelper
     SUBDIR += geany-plugin-pretty-printer
     SUBDIR += geany-plugin-prj
+    SUBDIR += geany-plugin-projectorganizer
     SUBDIR += geany-plugin-scope
     SUBDIR += geany-plugin-sendmail
     SUBDIR += geany-plugin-shiftcolumn
@@ -1393,6 +1399,7 @@
     SUBDIR += lua-lgi
     SUBDIR += lua-lpeg
     SUBDIR += lua-lpeg51
+    SUBDIR += lua-luarocks
     SUBDIR += lua-lunit
     SUBDIR += lua-posix
     SUBDIR += lua-pty
@@ -3434,6 +3441,7 @@
     SUBDIR += pccts
     SUBDIR += pcl
     SUBDIR += pcre
+    SUBDIR += pcre2
     SUBDIR += pcre++
     SUBDIR += pcsc-ada
     SUBDIR += pcsc-lite
@@ -5167,6 +5175,7 @@
     SUBDIR += winpdb
     SUBDIR += wizardkit
     SUBDIR += wxGlade
+    SUBDIR += wxformbuilder
     SUBDIR += xa65
     SUBDIR += xc3sprog
     SUBDIR += xdg-user-dirs
