@@ -8,8 +8,7 @@ CATEGORIES=	devel
 MAINTAINER=	kwm@FreeBSD.org
 COMMENT=	OpenCL info program like glxinfo is for libGL
 
-# We need OpenCL header, we don't care if it is either Clover or Beignet.
-BUILD_DEPENDS=	${LOCALBASE}/include/CL/opencl.h:${PORTSDIR}/lang/beignet
+BUILD_DEPENDS=	${LOCALBASE}/include/CL/opencl.h:${PORTSDIR}/devel/opencl
 LIB_DEPENDS=	libOpenCL.so:${PORTSDIR}/devel/ocl-icd
 
 USE_GITHUB=	yes
