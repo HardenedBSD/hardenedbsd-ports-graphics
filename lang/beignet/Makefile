@@ -32,8 +32,9 @@ ONLY_FOR_ARCHS_REASON= Beignet needs a graphics driver supported by the Intel KM
 BROKEN_FreeBSD_10=	Does not build. Help appreciated
 BROKEN_FreeBSD_9=	Beignet is only supported on FreeBSD 10.1 and newer
 
-OPTIONS_DEFINE=	TESTS
-TESTS_DESC=	Build and run the test suite
+# running tests from makefile doesn't work quite yet, so comment them out for now.
+#OPTIONS_DEFINE=	TESTS
+#TESTS_DESC=	Build and run the test suite
 
 .include <bsd.port.options.mk>
 
@@ -41,15 +42,14 @@ post-patch:
 	@${REINPLACE_CMD} -e 's|llvm-dis|llvm-dis${LLVMVER}|g; \
 		s|clang |clang${LLVMVER} |g' \
 		${WRKSRC}/backend/kernels/compile.sh
-
-post-patch-TESTS-off:
+#post-patch-TESTS-off:
 	@${REINPLACE_CMD} -e 's|ADD_SUBDIRECTORY(utests)||g' \
 		${WRKSRC}/CMakeLists.txt
 
 post-install:
 	@${RM} -rf ${STAGEDIR}${PREFIX}/include/CL
 
-post-install-TESTS-on:
-	@cd ${WRKSRC}/utests && sh ./setenv.sh && ./utest_run
+#post-install-TESTS-on:
+#	@cd ${WRKSRC}/utests && sh ./setenv.sh && ./utest_run
 
 .include <bsd.port.mk>
