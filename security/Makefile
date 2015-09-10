@@ -113,6 +113,7 @@
     SUBDIR += easypg
     SUBDIR += elixir-comeonin
     SUBDIR += engine_pkcs11
+    SUBDIR += erlang-p1tls
     SUBDIR += expiretable
     SUBDIR += f-prot
     SUBDIR += fakebo
@@ -159,6 +160,7 @@
     SUBDIR += go.crypto
     SUBDIR += goptlib
     SUBDIR += gorilla
+    SUBDIR += govpn
     SUBDIR += gpa
     SUBDIR += gpasman
     SUBDIR += gpass
