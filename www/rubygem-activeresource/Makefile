@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	activeresource
-PORTVERSION=	3.2.21
+PORTVERSION=	3.2.22
 CATEGORIES=	www rubygems
 MASTER_SITES=	RG
 
@@ -13,6 +13,8 @@ LICENSE=	MIT
 
 RUN_DEPENDS=	rubygem-activemodel>=${PORTVERSION}:${PORTSDIR}/databases/rubygem-activemodel \
 		rubygem-activesupport>=${PORTVERSION}:${PORTSDIR}/devel/rubygem-activesupport
+
+NO_ARCH=	yes
 
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes

@@ -1,7 +1,8 @@
 # $FreeBSD$
 
 PORTNAME=	phabricator
-PORTVERSION=	20150602
+PORTVERSION=	20150626
+PORTREVISION=	1
 CATEGORIES=	devel
 PKGNAMEPREFIX=	php5-
 
@@ -19,6 +20,11 @@ OPTIONS_DEFINE=	GD OPCACHE
 OPTIONS_DEFAULT=OPCACHE
 OPCACHE_DESC?=	Use OPcache/APCu (APC on PHP < 5.5) to improve performance
 
+USES=		shebangfix
+SHEBANG_FILES=	externals/httpful/build \
+		externals/restful/build-phar \
+		scripts/install/install_rhel-derivs.sh \
+		scripts/install/install_ubuntu.sh
 USE_PHP=	ctype curl fileinfo hash iconv filter mbstring mysql openssl \
 		pcntl posix
 
@@ -40,7 +46,7 @@ NO_BUILD=	yes
 USE_RC_SUBR=	phd
 SUB_FILES=	pkg-message
 GH_ACCOUNT=	phacility
-GH_TAGNAME=	55c73b2
+GH_TAGNAME=	cee1835
 
 PHP_DESTDIR=	lib/php/phabricator
 

@@ -20,8 +20,6 @@ LIB_DEPENDS=	libgnutls.so:${PORTSDIR}/security/gnutls \
 
 CONFLICTS=	LPRng-[0-9]*
 
-UNIQUENAME=	${PORTNAME}${PKGNAMESUFFIX}
-
 USES+=		cpe gmake iconv pkgconfig tar:bzip2
 CPE_VENDOR=	apple
 DESTDIRNAME=	DSTROOT
@@ -53,7 +51,6 @@ CUPSSYSGRP=	wheel
 GROUPS=	cups
 USERS=		cups
 
-# UNIQUENAME must be set before bsd.port.pre.mk so OPTIONSFILE can be included
 OPTIONS_SUB=		yes
 .if defined(CUPS_CLIENT)
 PORTREVISION=	2
@@ -96,11 +93,11 @@ PKGMESSAGE=	${NONEXISTENT}
 DESCR=		${MASTERDIR}/pkg-descr.client
 .elif defined(CUPS_IMAGE)
 LIB_DEPENDS+=	libcups.so:${PORTSDIR}/${PKGCATEGORY}/cups-client \
-		libjpeg.so:${PORTSDIR}/graphics/jpeg \
 		libpng.so:${PORTSDIR}/graphics/png \
 		libtiff.so:${PORTSDIR}/graphics/tiff
 # force build if old cups is installed.
 BUILD_DEPENDS+=	cups-client${PKGNAMESUFFIX2}>=${PORTVERSION}:${PORTSDIR}/${PKGCATEGORY}/cups-client
+USES+=		jpeg
 COMMENT2=	Library cupsimage
 INSTALL_WRKSRC=	${WRKSRC}/filter
 PLIST=		${MASTERDIR}/pkg-plist.image

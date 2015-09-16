@@ -2,8 +2,8 @@
 
 PORTNAME=	android-tools-fastboot
 DISTVERSIONPREFIX=	android-
-DISTVERSION=	5.1.1_r4
-PORTREVISION=	5
+DISTVERSION?=	5.1.1_r4
+PORTREVISION?=	5
 CATEGORIES=	devel
 MASTER_SITES=	https://anonscm.debian.org/cgit/android-tools/android-tools.git/plain/debian/:bashcomp,manpage
 DISTFILES=	bash_completion.d/fastboot?id=2b8cfec:bashcomp \
@@ -26,7 +26,9 @@ GH_ACCOUNT=	android jbeich:extras,libselinux
 GH_PROJECT=	platform_system_core platform_system_extras:extras \
 		platform_external_libselinux:libselinux
 
-USES=		uidfix
+CONFLICTS_INSTALL?=	${PORTNAME}-devel-*
+
+USES+=		uidfix
 BUILD_WRKSRC=	${WRKSRC}/fastboot
 INSTALL_WRKSRC=	${BUILD_WRKSRC}
 MAKEFILE=	${FILESDIR}/Makefile
@@ -44,11 +46,7 @@ SUB_FILES=	pkg-message
 OPTIONS_DEFINE=	BASH DOCS
 OPTIONS_SUB=	yes
 
-.include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MBASH}
-LICENSE+=	MIT # debian/copyright
-.endif
+BASH_VARS=	LICENSE+=MIT # debian/copyright
 
 post-extract:
 	@${CP} ${_DISTDIR}/${DISTFILES:M*\:manpage:C/:.*//} \

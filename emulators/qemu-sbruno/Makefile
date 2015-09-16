@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	qemu
-PORTVERSION=	2.3.50.g20150613
+PORTVERSION=	2.4.50.g20150814
 CATEGORIES=	emulators
 MASTER_SITES=	GH \
 		LOCAL/nox \
@@ -12,7 +12,7 @@ MASTER_SITES=	GH \
 PKGNAMESUFFIX?=	-sbruno
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
 		dtc-v1.4.0${EXTRACT_SUFX}:dtc
-DIST_SUBDIR=	qemu/${PORTVERSION}b
+DIST_SUBDIR=	qemu/${PORTVERSION}
 
 MAINTAINER=	nox@FreeBSD.org
 COMMENT?=	QEMU CPU Emulator - github bsd-user branch
@@ -20,7 +20,7 @@ COMMENT?=	QEMU CPU Emulator - github bsd-user branch
 USE_GITHUB=	yes
 GH_ACCOUNT=	seanbruno
 GH_PROJECT=	${PORTNAME}-bsd-user
-GH_TAGNAME=	d715b14
+GH_TAGNAME=	6764363
 HAS_CONFIGURE=	yes
 USES=		gmake pkgconfig bison perl5 python:2,build
 USE_PERL5=	build
@@ -60,7 +60,7 @@ SUB_LIST=	NAME=qemu_user_static
 .include <bsd.port.options.mk>
 
 CONFIGURE_ARGS+=	--localstatedir=/var
-CONFIGURE_ARGS+=	--extra-ldflags=-L${LOCALBASE}/lib
+CONFIGURE_ARGS+=	--extra-ldflags=-L\"${LOCALBASE}/lib\"
 CONFIGURE_ARGS+=	--disable-smartcard-nss --disable-libssh2
 PORTDOCS=	docs qemu-doc.html qemu-tech.html qmp-commands.txt
 
@@ -165,7 +165,7 @@ LIB_DEPENDS+=	libsasl2.so:${PORTSDIR}/security/cyrus-sasl2
 .if empty(PORT_OPTIONS:MJPEG)
 CONFIGURE_ARGS+=	--disable-vnc-jpeg
 .else
-LIB_DEPENDS+=	libjpeg.so:${PORTSDIR}/graphics/jpeg
+USES+=		jpeg
 .endif
 
 .if empty(PORT_OPTIONS:MPNG)
@@ -292,8 +292,6 @@ post-install:
 .endif
 	${INSTALL_SCRIPT} ${FILESDIR}/qemu-ifup.sample ${STAGEDIR}${PREFIX}/etc
 	${INSTALL_SCRIPT} ${FILESDIR}/qemu-ifdown.sample ${STAGEDIR}${PREFIX}/etc
-	@(cd ${STAGEDIR}${PREFIX}/etc/qemu && \
-		${MV} -i target-x86_64.conf target-x86_64.conf.sample)
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/qemu-*
 .endif
 

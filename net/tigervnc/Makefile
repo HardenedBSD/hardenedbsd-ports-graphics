@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	tigervnc
-PORTVERSION=	1.4.3
+PORTVERSION=	1.5.0
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net x11-servers
 
@@ -92,7 +92,7 @@ PLIST_SUB+=	VIEWER="@comment "
 .if ${PORT_OPTIONS:MHPJPG}
 LIB_DEPENDS+=	libturbojpeg.so:${PORTSDIR}/graphics/libjpeg-turbo
 .else
-LIB_DEPENDS+=	libjpeg.so:${PORTSDIR}/graphics/jpeg
+USES+=		jpeg
 .endif
 
 MAKE_ARGS+=	TIGERVNC_SRCDIR=${WRKSRC}

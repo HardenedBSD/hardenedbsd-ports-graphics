@@ -12,13 +12,11 @@ COMMENT=	Framework for scalable cross-language services development
 
 LICENSE=	APACHE20
 
-USE_AUTOTOOLS=	autoconf autoheader:env aclocal automake
-ACLOCAL_ARGS=	-I${WRKSRC}/aclocal
-AUTOMAKE_ARGS=	--foreign --add-missing --copy
+BROKEN_sparc64=	does not compile on ${ARCH}
 
-USES=			gmake libtool pkgconfig
-GNU_CONFIGURE=		yes
-USE_LDCONFIG=		yes
+USES=		autoreconf gmake libtool pkgconfig
+GNU_CONFIGURE=	yes
+USE_LDCONFIG=	yes
 MAKE_JOBS_UNSAFE=	yes
 
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
@@ -53,10 +51,6 @@ PLIST_FILES=	bin/thrift
 .include "bsd.thrift.mk"
 
 PLIST_SUB+=	PORTVERSION="${PORTVERSION}"
-
-.if ${ARCH} == "ia64" || ${ARCH} == "powerpc" || ${ARCH} == "sparc64"
-BROKEN=		Does not compile on ia64, powerpc, or sparc64
-.endif
 
 pre-configure:
 	@${REINPLACE_CMD} '/config.h/d' ${WRKSRC}/lib/cpp/Makefile.am

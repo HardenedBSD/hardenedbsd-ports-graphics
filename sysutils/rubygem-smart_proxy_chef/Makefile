@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	smart_proxy_chef
-PORTVERSION=	0.1.3
+PORTVERSION=	0.1.4
 CATEGORIES=	sysutils ruby
 MASTER_SITES=	RG
 
@@ -13,6 +13,8 @@ LICENSE=	GPLv3
 
 RUN_DEPENDS=	foreman-proxy>=1.8.0:${PORTSDIR}/net/foreman-proxy \
 		rubygem-chef-api>0:${PORTSDIR}/sysutils/rubygem-chef-api
+
+NO_ARCH=	yes
 
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes

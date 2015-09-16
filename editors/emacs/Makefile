@@ -4,6 +4,7 @@
 PORTNAME=	emacs
 PORTVERSION=	${EMACS_VER}
 PORTEPOCH=	3
+PORTREVISION=	1
 CATEGORIES=	editors ipv6
 MASTER_SITES=	GNU
 PKGNAMESUFFIX?= 24
@@ -127,7 +128,7 @@ MOTIF_CONFIGURE_ON+=	--with-x-toolkit=motif
 
 SCROLLBARS_CONFIGURE_WITH=	toolkit-scroll-bars
 
-JPEG_LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg
+JPEG_USES=		jpeg
 JPEG_CONFIGURE_WITH=	jpeg
 
 TIFF_LIB_DEPENDS=	libtiff.so:${PORTSDIR}/graphics/tiff

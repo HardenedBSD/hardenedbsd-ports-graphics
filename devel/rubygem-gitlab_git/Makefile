@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	gitlab_git
-PORTVERSION=	7.1.13
+PORTVERSION=	7.2.15
 CATEGORIES=	devel rubygems
 MASTER_SITES=	RG
 
@@ -15,6 +15,7 @@ RUN_DEPENDS=	rubygem-activesupport4>=4.0:${PORTSDIR}/devel/rubygem-activesupport
 		rubygem-gitlab-linguist>=3.0:${PORTSDIR}/textproc/rubygem-gitlab-linguist \
 		rubygem-rugged>=0.22.2:${PORTSDIR}/devel/rubygem-rugged
 
+NO_ARCH=	yes
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes
 RUBYGEM_AUTOPLIST=	yes

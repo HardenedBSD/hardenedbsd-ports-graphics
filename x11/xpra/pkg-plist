@@ -415,6 +415,9 @@ bin/xpra_launcher
 %%PYTHON_SITELIBDIR%%/xpra/scripts/__init__.py
 %%PYTHON_SITELIBDIR%%/xpra/scripts/__init__.pyc
 %%PYTHON_SITELIBDIR%%/xpra/scripts/__init__.pyo
+%%PYTHON_SITELIBDIR%%/xpra/scripts/bug_report.py
+%%PYTHON_SITELIBDIR%%/xpra/scripts/bug_report.pyc
+%%PYTHON_SITELIBDIR%%/xpra/scripts/bug_report.pyo
 %%PYTHON_SITELIBDIR%%/xpra/scripts/config.py
 %%PYTHON_SITELIBDIR%%/xpra/scripts/config.pyc
 %%PYTHON_SITELIBDIR%%/xpra/scripts/config.pyo
@@ -647,6 +650,7 @@ man/man1/xpra_launcher.1.gz
 share/appdata/xpra.appdata.xml
 share/applications/xpra.desktop
 share/applications/xpra_launcher.desktop
+share/mime/packages/application-x-xpraconfig.xml
 share/pixmaps/xpra.png
 %%DATADIR%%/COPYING
 %%DATADIR%%/README

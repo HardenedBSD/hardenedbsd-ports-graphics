@@ -44,8 +44,6 @@ STRIP=	#empty
 
 INFO=		CouchDB
 
-OPTIONS_DEFINE=	DOCS
-
 .include <bsd.port.options.mk>
 
 # This stanza could be removed around version 1.7
@@ -72,9 +70,9 @@ post-patch:
 		${WRKSRC}/configure
 	@${REINPLACE_CMD} 's|\(info_file_inst = CouchDB\)$$|\1.info|' \
 		${WRKSRC}/share/doc/build/Makefile.in
-.if !${PORT_OPTIONS:MDOCS}
+
+post-patch-DOCS-off:
 	@${REINPLACE_CMD} -e 's/install-data-am$$//' ${WRKSRC}/Makefile.in
-.endif
 
 post-configure:
 # Cater for parallel Spidermonkey v1.7 and v1.8.5 installs by ensuring that

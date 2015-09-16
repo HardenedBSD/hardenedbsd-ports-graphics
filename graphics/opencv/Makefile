@@ -3,7 +3,7 @@
 
 PORTNAME?=	opencv
 PORTVERSION=	2.4.9
-PORTREVISION?=	5
+PORTREVISION?=	7
 CATEGORIES=	graphics
 MASTER_SITES=	SF/${PORTNAME}library/${PORTNAME}-unix/${PORTVERSION}
 
@@ -16,7 +16,6 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 USES=		cmake pkgconfig zip
 USE_LDCONFIG=	yes
 WANT_GSTREAMER=	yes
-MAKE_JOBS_UNSAFE=	yes
 
 NOT_FOR_ARCHS=	sparc64
 NOT_FOR_ARCHS_REASON_sparc64=	does not compile on sparc64
@@ -76,7 +75,7 @@ CMAKE_ARGS+=	-DWITH_1394:BOOL=Off
 BUILD_DEPENDS+=	${LOCALBASE}/include/eigen3/Eigen/Eigen:${PORTSDIR}/math/eigen3
 CMAKE_ARGS+=	-DWITH_EIGEN:BOOL=On
 .else
-CMAKE_ARGS=	-DWITH_EIGEN:BOOL=Off
+CMAKE_ARGS+=	-DWITH_EIGEN:BOOL=Off
 .endif
 
 .if ${PORT_OPTIONS:MEXAMPLES}
@@ -119,7 +118,7 @@ CMAKE_ARGS+=	-DWITH_JASPER:BOOL=Off
 .endif
 
 .if ${PORT_OPTIONS:MJPEG}
-LIB_DEPENDS+=	libjpeg.so:${PORTSDIR}/graphics/jpeg
+USES+=		jpeg
 CMAKE_ARGS+=	-DWITH_JPEG:BOOL=On
 .else
 CMAKE_ARGS+=	-DWITH_JPEG:BOOL=Off
@@ -244,7 +243,7 @@ CMAKE_ARGS+=	-DBUILD_opencv_java:BOOL=On
 . for module in apps python stitching superres videostab
 CMAKE_ARGS+=	-DBUILD_opencv_${module}:BOOL=Off
 . endfor
-CMAKE_ENV+=	JAVA_HOME="${JAVA_HOME}"
+CONFIGURE_ENV+=	JAVA_HOME="${JAVA_HOME}"
 INSTALL_WRKSRC=	${WRKSRC}/modules/java
 .else
 LIB_DEPENDS+=	libopencv_core.so:${PORTSDIR}/graphics/opencv-core

@@ -3,7 +3,7 @@
 
 PORTNAME=	gmerlin
 PORTVERSION=	1.2.0
-PORTREVISION=	9
+PORTREVISION=	10
 CATEGORIES=	multimedia
 MASTER_SITES=	SF
 
@@ -32,6 +32,7 @@ INSTALL_ICONS=	yes
 
 CPPFLAGS+=	-I${LOCALBASE}/include
 LIBS+=		-L${LOCALBASE}/lib
+LDFLAGS+=	-Wl,--add-needed
 
 INFO=		gmerlin
 
@@ -47,11 +48,12 @@ CDDB_LIB_DEPENDS=	libcddb.so:${PORTSDIR}/audio/libcddb
 CDDB_CONFIGURE_OFF=	--disable-cddb
 CDIO_LIB_DEPENDS=	libcdio.so:${PORTSDIR}/sysutils/libcdio
 CDIO_CONFIGURE_OFF=	--disable-libcdio
+CDIO_BROKEN=		fails to build with new libcdio
 ESOUND_USE=		gnome=esound
 ESOUND_CONFIGURE_OFF=	--disable-esd
 JACK_LIB_DEPENDS=	libjack.so:${PORTSDIR}/audio/jack
 JACK_CONFIGURE_OFF=	--disable-jack
-JPEG_LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg
+JPEG_USES=		jpeg
 JPEG_CONFIGURE_OFF=	--disable-libjpeg
 LIBVISUAL_LIB_DEPENDS=	libvisual-0.4.so:${PORTSDIR}/graphics/libvisual04
 LIBVISUAL_CONFIGURE_OFF=--disable-libvisual
@@ -64,16 +66,6 @@ QUICKTIME_LIB_DEPENDS=	libquicktime.so:${PORTSDIR}/multimedia/libquicktime
 QUICKTIME_CONFIGURE_OFF=--disable-lqt
 TIFF_LIB_DEPENDS=	libtiff.so:${PORTSDIR}/graphics/tiff
 TIFF_CONFIGURE_OFF=	--disable-libtiff
-
-.include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MCDIO}
-BROKEN=	Fails to build with new libcdio
-.endif
-
-.if !(${OPSYS} == FreeBSD && ${OSVERSION} < 900033)
-LDFLAGS+=	-Wl,--add-needed
-.endif
 
 post-patch:
 	@${REINPLACE_CMD} -e \

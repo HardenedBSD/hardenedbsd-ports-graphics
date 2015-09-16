@@ -2,7 +2,7 @@
 
 PORTNAME=	kopete
 PORTVERSION=	${KDE4_VERSION}
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	net-im kde
 MASTER_SITES=	KDE/${KDE4_BRANCH}/${PORTVERSION}/src
 DIST_SUBDIR=	KDE/${PORTVERSION}
@@ -17,11 +17,10 @@ LIB_DEPENDS=	libidn.so:${PORTSDIR}/dns/libidn \
 		libkleo.so:${PORTSDIR}/deskutils/kdepim4 \
 		libmeanwhile.so:${PORTSDIR}/net-im/meanwhile \
 		libv4l2.so:${PORTSDIR}/multimedia/libv4l \
-		libjasper.so:${PORTSDIR}/graphics/jasper \
-		libjpeg.so:${PORTSDIR}/graphics/jpeg
+		libjasper.so:${PORTSDIR}/graphics/jasper
 BUILD_DEPENDS=	${LOCALBASE}/include/linux/videodev2.h:${PORTSDIR}/multimedia/v4l_compat
 
-USES=		cmake:outsource pkgconfig shebangfix tar:xz webplugin:native
+USES=		cmake:outsource jpeg pkgconfig shebangfix tar:xz webplugin:native
 USE_GNOME=	libxml2 libxslt
 USE_KDE4=	kdelibs kdeprefix pimlibs \
 		automoc4 qimageblitz
@@ -31,8 +30,9 @@ USE_SQLITE=	yes
 USE_XORG=	x11 xdamage xext xscrnsaver xtst
 USE_LDCONFIG=	yes
 
-SHEBANG_FILES=	${WRKSRC}/protocols/winpopup/winpopup-install \
-		${WRKSRC}/protocols/winpopup/winpopup-send
+SHEBANG_FILES=	protocols/winpopup/winpopup-install \
+		protocols/winpopup/winpopup-send \
+		kopete/kconf_update/*.pl
 
 WEBPLUGIN_NAME=	# empty
 WEBPLUGIN_FILES=	skypebuttons.so

@@ -115,9 +115,12 @@
     SUBDIR += e169-stats
     SUBDIR += easysoap
     SUBDIR += echoping
+    SUBDIR += elixir-kafka_ex
+    SUBDIR += elixir-oauth2
     SUBDIR += empty
     SUBDIR += enet
-    SUBDIR += erlang_xmlrpc
+    SUBDIR += erlang-ranch
+    SUBDIR += erlang-xmlrpc
     SUBDIR += etrace
     SUBDIR += exabgp
     SUBDIR += exaddos
@@ -158,6 +161,7 @@
     SUBDIR += gnu-radius
     SUBDIR += go-amqp
     SUBDIR += go-cs
+    SUBDIR += go-geoip
     SUBDIR += go.net
     SUBDIR += gofish
     SUBDIR += gogoc
@@ -201,6 +205,7 @@
     SUBDIR += howl
     SUBDIR += hping
     SUBDIR += hping-devel
+    SUBDIR += hs-aws
     SUBDIR += hs-connection
     SUBDIR += hs-gsasl
     SUBDIR += hs-hoauth2
@@ -211,6 +216,7 @@
     SUBDIR += hs-network-info
     SUBDIR += hs-network-multicast
     SUBDIR += hs-network-protocol-xmpp
+    SUBDIR += hs-network-uri
     SUBDIR += hs-pcap
     SUBDIR += hs-publicsuffixlist
     SUBDIR += hs-sendfile
@@ -267,6 +273,7 @@
     SUBDIR += kdenetwork4
     SUBDIR += kdenetwork4-filesharing
     SUBDIR += kdenetwork4-strigi-analyzers
+    SUBDIR += kea
     SUBDIR += kget
     SUBDIR += kio-upnp-ms
     SUBDIR += kippo
@@ -304,6 +311,7 @@
     SUBDIR += libilbc
     SUBDIR += libkfbapi
     SUBDIR += libkvkontakte
+    SUBDIR += libmaia
     SUBDIR += libmateweather
     SUBDIR += libmaxminddb
     SUBDIR += libmediawiki
@@ -329,6 +337,7 @@
     SUBDIR += libproxy-perl
     SUBDIR += libproxy-python
     SUBDIR += libproxy-webkit
+    SUBDIR += librdkafka
     SUBDIR += librouteros
     SUBDIR += librsync
     SUBDIR += librsync1
@@ -365,7 +374,6 @@
     SUBDIR += macchanger
     SUBDIR += mad_fcl
     SUBDIR += malo-firmware-kmod
-    SUBDIR += mcast-tools
     SUBDIR += mdns-repeater
     SUBDIR += mediastreamer
     SUBDIR += mediatomb
@@ -440,12 +448,12 @@
     SUBDIR += ntopng
     SUBDIR += ntp
     SUBDIR += ntp-devel
-    SUBDIR += ntp-rc
     SUBDIR += ntraceroute
     SUBDIR += nusoap
     SUBDIR += nxproxy
     SUBDIR += nyancat
     SUBDIR += nylon
+    SUBDIR += ocserv
     SUBDIR += ohphone
     SUBDIR += olsrd
     SUBDIR += omcmd
@@ -538,6 +546,8 @@
     SUBDIR += p5-Net-Amazon-MechanicalTurk
     SUBDIR += p5-Net-Amazon-S3
     SUBDIR += p5-Net-Amazon-Signature
+    SUBDIR += p5-Net-Amazon-Signature-V3
+    SUBDIR += p5-Net-Amazon-Signature-V4
     SUBDIR += p5-Net-Amazon-Thumbnail
     SUBDIR += p5-Net-Analysis
     SUBDIR += p5-Net-Appliance-Phrasebook
@@ -677,6 +687,7 @@
     SUBDIR += p5-Net-Subnet
     SUBDIR += p5-Net-Syslog
     SUBDIR += p5-Net-TCLink
+    SUBDIR += p5-Net-TacacsPlus
     SUBDIR += p5-Net-TcpDumpLog
     SUBDIR += p5-Net-Telnet
     SUBDIR += p5-Net-Telnet-Netscreen
@@ -868,6 +879,9 @@
     SUBDIR += php56-sockets
     SUBDIR += php56-xmlrpc
     SUBDIR += phpldapadmin
+    SUBDIR += pim6-tools
+    SUBDIR += pim6dd
+    SUBDIR += pim6sd
     SUBDIR += pimd
     SUBDIR += pimdd
     SUBDIR += pipsecd
@@ -889,7 +903,6 @@
     SUBDIR += proxychains-ng
     SUBDIR += prtunnel
     SUBDIR += ptpd2
-    SUBDIR += ptpd2-devel
     SUBDIR += ptunnel
     SUBDIR += pure-sockets
     SUBDIR += pvm
@@ -907,14 +920,14 @@
     SUBDIR += py-ec2-cli-tools
     SUBDIR += py-eventlet
     SUBDIR += py-gntp
-    SUBDIR += py-google
     SUBDIR += py-gspread
     SUBDIR += py-gspreadsheet
     SUBDIR += py-impacket
     SUBDIR += py-ipaddress
     SUBDIR += py-iplib
     SUBDIR += py-kombu
-    SUBDIR += py-ldap2
+    SUBDIR += py-ldap
+    SUBDIR += py-ldap3
     SUBDIR += py-ldaptor
     SUBDIR += py-libcloud
     SUBDIR += py-libdnet
@@ -925,12 +938,14 @@
     SUBDIR += py-msrplib
     SUBDIR += py-ndg_httpsclient
     SUBDIR += py-netaddr
+    SUBDIR += py-netif
     SUBDIR += py-netifaces
     SUBDIR += py-netlib
     SUBDIR += py-netstring
     SUBDIR += py-novaclient
     SUBDIR += py-oauth
     SUBDIR += py-oauth2
+    SUBDIR += py-paho-mqtt
     SUBDIR += py-pcap
     SUBDIR += py-pcapy
     SUBDIR += py-pcs
@@ -943,6 +958,7 @@
     SUBDIR += py-pysendfile
     SUBDIR += py-pysocks
     SUBDIR += py-pysphere
+    SUBDIR += py-python-bitcoinrpc
     SUBDIR += py-pyvmomi
     SUBDIR += py-pyzmq
     SUBDIR += py-qt4-network
@@ -953,10 +969,9 @@
     SUBDIR += py-smb
     SUBDIR += py-smbpasswd
     SUBDIR += py-soappy
-    SUBDIR += py-soappy-devel
-    SUBDIR += py-soapy
     SUBDIR += py-speedtest-cli
     SUBDIR += py-suds
+    SUBDIR += py-terminado
     SUBDIR += py-tofu
     SUBDIR += py-tweepy
     SUBDIR += py-twistedPair
@@ -967,7 +982,6 @@
     SUBDIR += py-urllib3
     SUBDIR += py-wolframalpha
     SUBDIR += py-xmlrpc
-    SUBDIR += py-xmlrpclib
     SUBDIR += py-zope.proxy
     SUBDIR += py-zsi
     SUBDIR += pygopherd
@@ -995,7 +1009,6 @@
     SUBDIR += radsecproxy
     SUBDIR += radvd
     SUBDIR += raggle
-    SUBDIR += ranch
     SUBDIR += rdapper
     SUBDIR += rdesktop
     SUBDIR += rdist6
@@ -1039,7 +1052,6 @@
     SUBDIR += rubygem-aws-s3
     SUBDIR += rubygem-aws-ses
     SUBDIR += rubygem-bunny
-    SUBDIR += rubygem-bunny060
     SUBDIR += rubygem-connection_pool
     SUBDIR += rubygem-dogapi
     SUBDIR += rubygem-domain_name
@@ -1051,6 +1063,8 @@
     SUBDIR += rubygem-epp-client-smallregistry
     SUBDIR += rubygem-fog-atmos
     SUBDIR += rubygem-fog-aws
+    SUBDIR += rubygem-fog-brightbox
+    SUBDIR += rubygem-fog-dynect
     SUBDIR += rubygem-fog-ecloud
     SUBDIR += rubygem-fog-google
     SUBDIR += rubygem-fog-local
@@ -1104,7 +1118,6 @@
     SUBDIR += rubygem-ruby-openid
     SUBDIR += rubygem-ruby-yadis
     SUBDIR += rubygem-rubyntlm
-    SUBDIR += rubygem-rubyntlm01
     SUBDIR += rubygem-rubytter
     SUBDIR += rubygem-rudy
     SUBDIR += rubygem-rye
@@ -1158,6 +1171,7 @@
     SUBDIR += slurm
     SUBDIR += smb4k-kde4
     SUBDIR += smbldap-tools
+    SUBDIR += smcroute
     SUBDIR += smm++
     SUBDIR += sniffit
     SUBDIR += sntop
@@ -1174,6 +1188,7 @@
     SUBDIR += spread4
     SUBDIR += sprinkle
     SUBDIR += sqtop
+    SUBDIR += srelay
     SUBDIR += ss5
     SUBDIR += ssldump
     SUBDIR += sslh

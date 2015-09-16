@@ -87,7 +87,7 @@ post-install:
 	@${MKDIR} ${STAGEDIR}/var/db/mysql
 
 .else
-USES+=		readline
+USES+=		libedit
 .endif
 
 post-patch:

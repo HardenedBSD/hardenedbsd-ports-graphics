@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	postfix
-DISTVERSION=	3.0-20150410
+DISTVERSION=	3.0-20150719
 PORTEPOCH=	4
 CATEGORIES=	mail ipv6
 MASTER_SITES=	ftp://ftp.porcupine.org/mirrors/postfix-release/ \
@@ -14,7 +14,7 @@ MASTER_SITES=	ftp://ftp.porcupine.org/mirrors/postfix-release/ \
 #MASTER_SITES:=	${MASTER_SITES:S|$|experimental/|}
 MASTER_SITES:=	${MASTER_SITES:S|$|official/|}
 PKGNAMESUFFIX=	-current
-DISTNAME=	${PORTNAME}-3.0.1
+DISTNAME=	${PORTNAME}-3.0.2
 DIST_SUBDIR=	${PORTNAME}
 
 MAINTAINER=	ohauer@FreeBSD.org
@@ -36,6 +36,7 @@ USES=		perl5 shebangfix cpe
 SHEBANG_LANG=	perl
 SHEBANG_FILES=	auxiliary/qshape/qshape.pl
 
+USE_RC_SUBR=	postfix
 USE_SUBMAKE=	yes
 USE_PERL5=	build
 SCRIPTS_ENV+=	POSTFIX_DEFAULT_MTA="${POSTFIX_DEFAULT_MTA}"
@@ -106,10 +107,8 @@ MAKEFILEFLAGS+=	pie=yes CC="${CC}" OPT="${CFLAGS}"
 PKGNAMESUFFIX=	-base
 PREFIX=		/usr
 ETCDIR=		/etc/postfix
-USE_RCORDER=	postfix
 PLIST_SUB+=	BMAN="share/"
 .else
-USE_RC_SUBR=	postfix
 PLIST_SUB+=	BMAN=""
 .endif
 

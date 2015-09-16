@@ -3,7 +3,7 @@
 
 PORTNAME=	polyorb
 PORTVERSION=	2.11.1
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	http://downloads.dragonlace.net/src/
 DISTNAME=	polyorb-gpl-${YEAR}-src
@@ -33,7 +33,6 @@ PORTDOCS=	html \
 SHEBANG_FILES=	compilers/idlac/*.py testsuite/*.py testsuite/tests/*.py
 
 python_OLD_CMD=	/usr/bin/env python
-python_CMD=	${PYTHON_CMD}
 
 CONFIGURE_ARGS=	--with-appli-perso="corba dsa moma" \
 		--with-proto-perso="giop soap srp" \

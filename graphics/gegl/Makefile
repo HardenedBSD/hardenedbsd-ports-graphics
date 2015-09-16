@@ -15,6 +15,9 @@ LICENSE_FILE=	${WRKSRC}/COPYING.LESSER
 
 LIB_DEPENDS=	libbabl-0.1.so:${PORTSDIR}/x11/babl
 
+# ignore new versions until we can replace this version with gegl 3.x
+PORTSCOUT=	ignore:1
+
 OPTIONS_DEFINE=	CAIRO ENSCRIPT EXIV2 FFMPEG PIXBUF GRAPHVIZ JASPER JPEG \
 		LUA OPENEXR OPENRAW SIMD PANGO PNG LIBRSVG2 SDL SPIRO V4L \
 		DOCS EXAMPLES
@@ -106,7 +109,7 @@ PLIST_SUB+=	JP2="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MJPEG}
-LIB_DEPENDS+=	libjpeg.so:${PORTSDIR}/graphics/jpeg
+USES+=		jpeg
 PLIST_SUB+=	JPEG=""
 .else
 CONFIGURE_ARGS+=--without-libjpeg

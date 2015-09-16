@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	memcached
-PORTVERSION=	1.4.22
+PORTVERSION=	1.4.24
+PORTREVISION=	1
 CATEGORIES=	databases
 MASTER_SITES=	http://www.memcached.org/files/ \
 		GOOGLE_CODE \
@@ -28,7 +29,8 @@ SASL_DESC=	Enable SASL Authentication
 USE_RC_SUBR=	memcached
 SUB_LIST+=	RC_SUBR_SUFFIX=${RC_SUBR_SUFFIX}
 
-USES=		cpe shebangfix
+USES=		cpe shebangfix autoreconf:build
+USE_AUTOTOOLS=	aclocal
 SHEBANG_FILES=	scripts/memcached-tool
 
 USE_CSTD=	c99
@@ -44,6 +46,8 @@ SASL_CONFIGURE_ENABLE=	sasl
 SASL_CFLAGS=		-I${LOCALBASE}/include
 SASL_CPPFLAGS+=		${CFLAGS}
 SASL_LDFLAGS=		-L${LOCALBASE}/lib
+
+MAKE_JOBS_UNSAFE=	yes
 
 .include <bsd.port.pre.mk>
 

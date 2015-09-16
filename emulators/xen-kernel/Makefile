@@ -3,7 +3,7 @@
 PORTNAME=	xen
 PKGNAMESUFFIX=	-kernel
 PORTVERSION=	4.5.0
-PORTREVISION=	3
+PORTREVISION=	5
 CATEGORIES=	emulators
 MASTER_SITES=	http://bits.xensource.com/oss-xen/release/${PORTVERSION}/
 
@@ -12,7 +12,7 @@ COMMENT=	Hypervisor using a microkernel design
 
 LICENSE=	GPLv2
 
-ONLY_FOR_ARCH=	amd64
+ONLY_FOR_ARCHS=	amd64
 
 USES=		cpe gmake python:build
 MAKE_ARGS=	HOSTCC="${CC}" CC="${CC}" PYTHON=${PYTHON_CMD} \
@@ -36,7 +36,8 @@ EXTRA_PATCHES=	${FILESDIR}/iommu_share_p2m_table.patch:-p2 \
 		${FILESDIR}/xsa127-4.x.patch:-p2 \
 		${FILESDIR}/xsa132.patch:-p2 \
 		${FILESDIR}/xsa134.patch:-p2 \
-		${FILESDIR}/xsa136.patch:-p2
+		${FILESDIR}/xsa136.patch:-p2 \
+		${FILESDIR}/0001-libelf-fix-elf_parse_bsdsyms-call.patch:-p2
 
 .include <bsd.port.options.mk>
 
