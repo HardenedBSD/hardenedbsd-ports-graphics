@@ -75,6 +75,7 @@ include/xorg/misyncfd.h
 include/xorg/misyncshm.h
 include/xorg/misyncstr.h
 include/xorg/mizerarc.h
+include/xorg/nonsdk_extinit.h
 include/xorg/opaque.h
 include/xorg/optionstr.h
 include/xorg/os.h
@@ -106,14 +107,11 @@ include/xorg/shadow.h
 include/xorg/shadowfb.h
 include/xorg/shmint.h
 include/xorg/site.h
-include/xorg/swaprep.h
-include/xorg/swapreq.h
 include/xorg/syncsdk.h
 include/xorg/validate.h
 include/xorg/vbe.h
 include/xorg/vbeModes.h
 include/xorg/vgaHW.h
-include/xorg/vidmodeproc.h
 include/xorg/wfbrename.h
 include/xorg/window.h
 include/xorg/windowstr.h
@@ -151,7 +149,6 @@ include/xorg/xf86str.h
 include/xorg/xf86xv.h
 include/xorg/xf86xvmc.h
 include/xorg/xf86xvpriv.h
-include/xorg/xfixes.h
 include/xorg/xisb.h
 include/xorg/xkbfile.h
 include/xorg/xkbrules.h
