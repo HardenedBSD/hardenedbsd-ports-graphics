@@ -1,5 +1,5 @@
---- src/radeon_kms.c.orig	2014-10-02 05:31:27.000000000 +0200
-+++ src/radeon_kms.c	2014-10-23 18:56:18.359108170 +0200
+--- src/radeon_kms.c.orig	2014-10-02 03:31:27 UTC
++++ src/radeon_kms.c
 @@ -30,6 +30,8 @@
  
  #include <errno.h>
@@ -9,7 +9,19 @@
  /* Driver data structures */
  #include "radeon.h"
  #include "radeon_reg.h"
-@@ -280,7 +282,7 @@
+@@ -269,7 +271,11 @@ redisplay_dirty(ScreenPtr screen, Pixmap
+ 
+ 	PixmapRegionInit(&pixregion, dirty->slave_dst);
+ 	DamageRegionAppend(&dirty->slave_dst->drawable, &pixregion);
++#ifdef HAS_DIRTYTRACKING_ROTATION
++	PixmapSyncDirtyHelper(dirty);
++#else
+ 	PixmapSyncDirtyHelper(dirty, &pixregion);
++#endif
+ 
+ 	radeon_cs_flush_indirect(pScrn);
+ 	DamageRegionProcessPending(&dirty->slave_dst->drawable);
+@@ -280,7 +286,7 @@ static void
  radeon_dirty_update(ScreenPtr screen)
  {
  	RegionPtr region;
@@ -18,7 +30,7 @@
  
  	if (xorg_list_is_empty(&screen->pixmap_dirty_list))
  		return;
-@@ -589,7 +591,7 @@
+@@ -589,7 +595,7 @@ static int radeon_get_drm_master_fd(Scrn
  #endif
      struct pci_device *dev = info->PciInfo;
      char *busid;
@@ -27,7 +39,7 @@
  
  #ifdef XF86_PDEV_SERVER_FD
      if (pRADEONEnt->platform_dev) {
-@@ -608,6 +610,15 @@
+@@ -608,6 +614,15 @@ static int radeon_get_drm_master_fd(Scrn
  		      dev->domain, dev->bus, dev->dev, dev->func);
  #endif
  
