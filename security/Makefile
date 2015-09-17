@@ -261,7 +261,6 @@
     SUBDIR += kpcli
     SUBDIR += kqoauth
     SUBDIR += krb5
-    SUBDIR += krb5-111
     SUBDIR += krb5-112
     SUBDIR += krb5-appl
     SUBDIR += kripp
@@ -275,8 +274,8 @@
     SUBDIR += libassuan
     SUBDIR += libbeid
     SUBDIR += libbf
-    SUBDIR += libcryptui
     SUBDIR += libbzrtp
+    SUBDIR += libcryptui
     SUBDIR += libecc
     SUBDIR += libfprint
     SUBDIR += libgcrypt
@@ -844,6 +843,8 @@
     SUBDIR += py-pysha3
     SUBDIR += py-python-registry
     SUBDIR += py-rekall
+    SUBDIR += py-rekall-core
+    SUBDIR += py-rekall_gui
     SUBDIR += py-requests-kerberos
     SUBDIR += py-rsa
     SUBDIR += py-service_identity
