@@ -62,6 +62,10 @@ PLIST_SUB+=	RADEON_DRIVERS="@comment "
 PLIST_SUB+=	AMDGPU_DRIVERS="@comment "
 .endif
 
+.if ${OSVERSION} < 1000000
+EXTRA_PATCHES=	${FILESDIR}/extra-xf86drmMode.c
+.endif
+
 pre-patch:
 	@${REINPLACE_CMD} 's|{libdir}/pkgconfig|{prefix}/libdata/pkgconfig|g; \
 			   s,i?86|x86_64),i?86|amd64|x86_64),g' \
