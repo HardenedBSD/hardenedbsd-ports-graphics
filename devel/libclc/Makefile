@@ -23,13 +23,7 @@ LLVMVER=	36
 
 ALL_TARGET=	
 
-.include <bsd.port.pre.mk>
-
-.if ${OSVERSION} < 900000
-IGNORE=	LLVM 3.5 is not available on 8.x
-.elif ${OSVERSION} < 1000000
-IGNORE=	Does not build, missing <system_error> header
-.endif
+BROKEN_FreeBSD_9=	missing <system_error> header
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|/usr/bin/python|${PYTHON_CMD}|g' \
@@ -42,4 +36,4 @@ do-configure:
 		--with-llvm-config=${LOCALBASE}/bin/llvm-config${LLVMVER} \
 		--pkgconfigdir=${PREFIX}/libdata/pkgconfig
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

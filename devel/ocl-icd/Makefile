@@ -19,7 +19,7 @@ USE_RUBY=	yes
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
 RUBY_NO_RUN_DEPENDS=yes
-USES=		gmake pathfix libtool
+USES=		gmake libtool pathfix
 INSTALL_TARGET=	install-strip
 
 CONFIGURE_ARGS+=--disable-official-khronos-headers
