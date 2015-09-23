@@ -252,6 +252,7 @@
     SUBDIR += cld2
     SUBDIR += clewn
     SUBDIR += clig
+    SUBDIR += clinfo
     SUBDIR += clisp-hyperspec
     SUBDIR += clojure-cider
     SUBDIR += cloudabi-binutils
@@ -1536,6 +1537,7 @@
     SUBDIR += ocaml-xstr
     SUBDIR += ocaml-xstrp4
     SUBDIR += ocfpcsc
+    SUBDIR += ocl-icd
     SUBDIR += ode
     SUBDIR += ois
     SUBDIR += okteta
@@ -3961,6 +3963,7 @@
     SUBDIR += py-eggtestinfo
     SUBDIR += py-enum34
     SUBDIR += py-epsilon
+    SUBDIR += py-evdev
     SUBDIR += py-event
     SUBDIR += py-experimental.cssselect
     SUBDIR += py-extras
