@@ -49,6 +49,7 @@ include/xorg/gc.h
 include/xorg/gcstruct.h
 include/xorg/geext.h
 include/xorg/geint.h
+include/xorg/glamor.h
 include/xorg/globals.h
 include/xorg/glx_extinit.h
 include/xorg/glyphstr.h
@@ -166,6 +167,7 @@ lib/xorg/modules/extensions/.xorg/libglx.so
 lib/xorg/modules/libexa.so
 lib/xorg/modules/libfb.so
 lib/xorg/modules/libfbdevhw.so
+lib/xorg/modules/libglamoregl.so
 lib/xorg/modules/libint10.so
 lib/xorg/modules/libshadow.so
 lib/xorg/modules/libshadowfb.so
