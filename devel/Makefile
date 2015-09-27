@@ -129,6 +129,7 @@
     SUBDIR += avro-c
     SUBDIR += avro-cpp
     SUBDIR += awscli
+    SUBDIR += b2
     SUBDIR += bam
     SUBDIR += bbfreeze
     SUBDIR += bbfreeze-loader
@@ -428,6 +429,7 @@
     SUBDIR += elixir-exjsx
     SUBDIR += elixir-exprotobuf
     SUBDIR += elixir-exrm
+    SUBDIR += elixir-gettext
     SUBDIR += elixir-hex
     SUBDIR += elixir-inflex
     SUBDIR += elixir-lager_logger
@@ -632,6 +634,7 @@
     SUBDIR += git
     SUBDIR += git-bzr-ng
     SUBDIR += git-codereview
+    SUBDIR += git-cola
     SUBDIR += git-extras
     SUBDIR += git-lite
     SUBDIR += git-merge-changelog
@@ -1253,6 +1256,7 @@
     SUBDIR += libphutil
     SUBDIR += libplist
     SUBDIR += libpo6
+    SUBDIR += libpololu-avr
     SUBDIR += libpru
     SUBDIR += libpthread-stubs
     SUBDIR += libqcow
@@ -2321,6 +2325,7 @@
     SUBDIR += p5-Getopt-GUI-Long
     SUBDIR += p5-Getopt-Long
     SUBDIR += p5-Getopt-Long-Descriptive
+    SUBDIR += p5-Getopt-Tabular
     SUBDIR += p5-Git-PurePerl
     SUBDIR += p5-Git-Repository
     SUBDIR += p5-Git-Repository-Plugin-Log
@@ -3327,6 +3332,7 @@
     SUBDIR += p5-Tree-Trie
     SUBDIR += p5-Type-Tie
     SUBDIR += p5-Type-Tiny
+    SUBDIR += p5-Type-Tiny-Signatures
     SUBDIR += p5-Type-Tiny-XS
     SUBDIR += p5-Types-Core
     SUBDIR += p5-Types-Path-Tiny
@@ -3443,8 +3449,8 @@
     SUBDIR += pccts
     SUBDIR += pcl
     SUBDIR += pcre
-    SUBDIR += pcre2
     SUBDIR += pcre++
+    SUBDIR += pcre2
     SUBDIR += pcsc-ada
     SUBDIR += pcsc-lite
     SUBDIR += pdcurses
@@ -4208,6 +4214,7 @@
     SUBDIR += py-raven
     SUBDIR += py-repl
     SUBDIR += py-repoze.lru
+    SUBDIR += py-repoze.sphinx.autointerface
     SUBDIR += py-repoze.tm2
     SUBDIR += py-repoze.what
     SUBDIR += py-repoze.what-pylons
@@ -4840,6 +4847,7 @@
     SUBDIR += rubygem-power_assert
     SUBDIR += rubygem-powerbar
     SUBDIR += rubygem-progressbar
+    SUBDIR += rubygem-protected_attributes
     SUBDIR += rubygem-prototype-rails
     SUBDIR += rubygem-pry
     SUBDIR += rubygem-pry-rails
@@ -5043,6 +5051,7 @@
     SUBDIR += smokeqt
     SUBDIR += smv
     SUBDIR += soapui
+    SUBDIR += sope
     SUBDIR += sourcenav
     SUBDIR += sparc64-binutils
     SUBDIR += sparc64-gcc

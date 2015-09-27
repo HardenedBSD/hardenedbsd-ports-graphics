@@ -418,6 +418,7 @@
     SUBDIR += ioping
     SUBDIR += ipa
     SUBDIR += ipad_charge
+    SUBDIR += ipfs-go
     SUBDIR += ipmitool
     SUBDIR += ipsc
     SUBDIR += isc-cron
@@ -626,6 +627,8 @@
     SUBDIR += p5-Iterator-File
     SUBDIR += p5-Lchown
     SUBDIR += p5-Linux-Cpuinfo
+    SUBDIR += p5-Log-Syslog-Constants
+    SUBDIR += p5-Log-Syslog-Fast
     SUBDIR += p5-MogileFS-Client
     SUBDIR += p5-MogileFS-Network
     SUBDIR += p5-MogileFS-Server
@@ -747,6 +750,7 @@
     SUBDIR += pstree
     SUBDIR += ptools
     SUBDIR += puppet37
+    SUBDIR += puppet4
     SUBDIR += puppet
     SUBDIR += puppet-lint
     SUBDIR += puppet-mode.el
@@ -757,6 +761,7 @@
     SUBDIR += py-XenAPI
     SUBDIR += py-analyzemft
     SUBDIR += py-bcfg2
+    SUBDIR += py-cdmi
     SUBDIR += py-croniter
     SUBDIR += py-crontab
     SUBDIR += py-danzfs
@@ -820,9 +825,11 @@
     SUBDIR += reoback
     SUBDIR += reptyr
     SUBDIR += respond
+    SUBDIR += restic
     SUBDIR += retail
     SUBDIR += rfstool
     SUBDIR += rhc
+    SUBDIR += riak-cs
     SUBDIR += rinse
     SUBDIR += rmonitor
     SUBDIR += roottail
@@ -952,6 +959,7 @@
     SUBDIR += ssid
     SUBDIR += ssync
     SUBDIR += stalepid
+    SUBDIR += stanchion
     SUBDIR += stmpclean
     SUBDIR += storcli
     SUBDIR += stow

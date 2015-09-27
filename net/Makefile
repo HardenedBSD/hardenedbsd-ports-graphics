@@ -188,6 +188,7 @@
     SUBDIR += gtknetcat
     SUBDIR += gupnp
     SUBDIR += gupnp-av
+    SUBDIR += gupnp-dlna
     SUBDIR += gupnp-igd
     SUBDIR += gupnp-ui
     SUBDIR += gutenfetch
@@ -248,6 +249,7 @@
     SUBDIR += ipsumdump
     SUBDIR += ipsvd
     SUBDIR += irrd
+    SUBDIR += isboot-kmod
     SUBDIR += isc-dhcp41-client
     SUBDIR += isc-dhcp41-relay
     SUBDIR += isc-dhcp41-server
@@ -354,8 +356,6 @@
     SUBDIR += libzmq3
     SUBDIR += libzmq4
     SUBDIR += liferea
-    SUBDIR += linc
-    SUBDIR += linc-reference
     SUBDIR += linknx
     SUBDIR += linphone
     SUBDIR += linux-c6-avahi-libs
