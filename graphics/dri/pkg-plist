@@ -24,7 +24,6 @@ include/GL/internal/dri_interface.h
 @comment include/GLES3/gl3platform.h
 @comment include/KHR/khrplatform.h
 @comment include/gbm.h
-lib/dri/gallium_drv_video.so
 %%I915_DRIVER%%lib/dri/i915_dri.so
 %%I965_DRIVER%%lib/dri/i965_dri.so
 lib/dri/kms_swrast_dri.so

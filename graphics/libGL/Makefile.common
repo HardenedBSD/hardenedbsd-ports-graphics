@@ -148,6 +148,9 @@ CONFIGURE_ARGS+=--disable-vdpau
 CONFIGURE_ARGS+=--enable-vdpau
 .endif
 
+# VAAPI support?
+CONFIGURE_ARGS+=--disable-va
+
 ALL_DRI_DRIVERS=I915 I965 R200 RADEON SWRAST
 
 .if ${ARCH} == amd64 || ${ARCH} == i386 || ${ARCH} == ia64
