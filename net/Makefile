@@ -477,6 +477,7 @@
     SUBDIR += openospfd
     SUBDIR += openpgm
     SUBDIR += openradius
+    SUBDIR += opensips
     SUBDIR += openslp
     SUBDIR += opentracker
     SUBDIR += openvswitch
@@ -756,6 +757,7 @@
     SUBDIR += p5-SOAP-Data-Builder
     SUBDIR += p5-SOAP-Lite
     SUBDIR += p5-SOAP-MySOAP
+    SUBDIR += p5-SOAP-XML-Client
     SUBDIR += p5-Samba-LDAP
     SUBDIR += p5-Server-Starter
     SUBDIR += p5-Socket
@@ -943,6 +945,7 @@
     SUBDIR += py-netlib
     SUBDIR += py-netstring
     SUBDIR += py-novaclient
+    SUBDIR += py-ntplib
     SUBDIR += py-oauth
     SUBDIR += py-oauth2
     SUBDIR += py-paho-mqtt
@@ -1044,7 +1047,6 @@
     SUBDIR += ruby-tcpsocketpipe
     SUBDIR += ruby-tserver
     SUBDIR += rubygem-amazon-ec2
-    SUBDIR += rubygem-amq-client
     SUBDIR += rubygem-amq-protocol
     SUBDIR += rubygem-amqp
     SUBDIR += rubygem-amqp-utils
@@ -1349,6 +1351,7 @@
     SUBDIR += zebra
     SUBDIR += zebra-server
     SUBDIR += zeroconf-ioslave
+    SUBDIR += zerotier
     SUBDIR += zillion
     SUBDIR += zsync
 

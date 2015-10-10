@@ -112,8 +112,11 @@
     SUBDIR += easy-rsa
     SUBDIR += easypg
     SUBDIR += elixir-comeonin
+    SUBDIR += elixir-jose
     SUBDIR += engine_pkcs11
+    SUBDIR += erlang-jose
     SUBDIR += erlang-p1tls
+    SUBDIR += esteidfirefoxplugin
     SUBDIR += expiretable
     SUBDIR += f-prot
     SUBDIR += fakebo
