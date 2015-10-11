@@ -2,12 +2,14 @@
 
 PORTNAME=	xf86-video-ati
 PORTVERSION=	6.14.6
-PORTREVISION=	5
+PORTREVISION=	6
 PKGNAMESUFFIX=	-ums
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org ati display driver
+
+PORTSCOUT=	ignore:1
 
 USE_GL=		gl
 XORG_CAT=	driver
