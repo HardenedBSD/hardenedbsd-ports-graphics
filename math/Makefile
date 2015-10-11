@@ -244,6 +244,7 @@
     SUBDIR += ltl
     SUBDIR += ltl2ba
     SUBDIR += lybniz
+    SUBDIR += math77
     SUBDIR += mathomatic
     SUBDIR += matio
     SUBDIR += matlab-installer
@@ -688,5 +689,6 @@
     SUBDIR += xppaut
     SUBDIR += xspread
     SUBDIR += yacas
+    SUBDIR += z3
 
 .include <bsd.port.subdir.mk>

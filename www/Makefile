@@ -347,7 +347,6 @@
     SUBDIR += imgsizer
     SUBDIR += impresscms
     SUBDIR += interchange
-    SUBDIR += iojs
     SUBDIR += itop
     SUBDIR += iwebcal
     SUBDIR += jawstats
@@ -562,11 +561,13 @@
     SUBDIR += node
     SUBDIR += node-devel
     SUBDIR += node010
+    SUBDIR += node012
     SUBDIR += nostromo
     SUBDIR += npapi-vlc
     SUBDIR += npapi-xine
     SUBDIR += npc
     SUBDIR += npm
+    SUBDIR += npm012
     SUBDIR += nspluginwrapper
     SUBDIR += ocaml-net
     SUBDIR += ocsigen
@@ -1135,6 +1136,7 @@
     SUBDIR += p5-Plack-Middleware-Debug
     SUBDIR += p5-Plack-Middleware-Deflater
     SUBDIR += p5-Plack-Middleware-Expires
+    SUBDIR += p5-Plack-Middleware-ExtDirect
     SUBDIR += p5-Plack-Middleware-File-Sass
     SUBDIR += p5-Plack-Middleware-FixMissingBodyInRedirect
     SUBDIR += p5-Plack-Middleware-ForceEnv
@@ -2030,6 +2032,7 @@
     SUBDIR += smarty3
     SUBDIR += smb_auth
     SUBDIR += snarf
+    SUBDIR += sogo
     SUBDIR += spawn-fcgi
     SUBDIR += spdylay
     SUBDIR += speedtest-mini
