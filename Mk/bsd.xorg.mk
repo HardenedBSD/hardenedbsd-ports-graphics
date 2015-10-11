@@ -101,7 +101,7 @@ CONFIGURE_ARGS+=	--with-xkb-path=${LOCALBASE}/share/X11/xkb \
 					--with-fontrootdir=${LOCALBASE}/share/fonts
 
 LIB_PC_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/dri.pc:${PORTSDIR}/graphics/dri
-USE_XORG+=	pciaccess xextproto videoproto fontsproto dri2proto fontutil:build presentproto
+USE_XORG+=	pciaccess xextproto videoproto fontsproto dri2proto fontutil:build
 . endif
 
 .endif
