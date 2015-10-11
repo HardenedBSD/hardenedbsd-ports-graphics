@@ -195,10 +195,6 @@ do-install:
 	${MKDIR} ${STAGEDIR}${VIDEODIR}
 	${INSTALL_DATA} ${VBOX_BIN}/vboxvideo_drv_$$(${XORG_DRV_ABI}).so \
 	    ${STAGEDIR}${VIDEODIR}/vboxvideo_drv.so
-
-	${MKDIR} ${STAGEDIR}${INPUTDIR}
-	${INSTALL_DATA} ${VBOX_BIN}/vboxmouse_drv_$$(${XORG_DRV_ABI}).so \
-	    ${STAGEDIR}${INPUTDIR}/vboxmouse_drv.so
 .endif
 
 .if ${PORT_OPTIONS:MOPENGL}
