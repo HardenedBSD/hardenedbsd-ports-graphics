@@ -81,11 +81,6 @@ CONFIGURE_ARGS+=	--enable-config-hal=no
 # We handle Xorg setuid in the plist. This allows to build xorg-server as a user.
 CONFIGURE_ARGS+=--disable-install-setuid
 
-.if ${ARCH} == armv6
-EXTRA_PATCHES+=	${FILESDIR}/extra-arm-patch-hw__xfree86__os-support__bsd__Makefile.in
-EXTRA_PATCHES+=	${FILESDIR}/extra-arm-patch-include__servermd.h
-.endif
-
 .if ${ARCH} == i386
 EXTRA_PATCHES+=	${FILESDIR}/extra-arch-i386
 .endif
