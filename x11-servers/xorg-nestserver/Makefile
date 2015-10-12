@@ -12,6 +12,8 @@ DIST_SUBDIR=	xorg/xserver
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Nesting X server from X.Org
 
+LIB_DEPENDS=	libxcb-keysyms.so:x11/xcb-util-keysyms
+
 USES=		tar:bzip2 pkgconfig
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS= --disable-dmx \
