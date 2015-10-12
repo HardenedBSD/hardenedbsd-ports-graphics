@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	xorg-nestserver
-PORTVERSION=	1.14.7
-PORTREVISION=	2
+PORTVERSION=	1.17.2
 PORTEPOCH=	1
 CATEGORIES=	x11-servers
 MASTER_SITES=	XORG/individual/xserver
@@ -31,7 +30,6 @@ CONFIGURE_ARGS= --disable-dmx \
 		--localstatedir=/var \
 		--without-dtrace \
 		--without-doxygen \
-		--disable-libpciaccess \
 		--disable-glx \
 		--disable-dri  \
 		--disable-config-hal \
@@ -48,7 +46,7 @@ USE_XORG=	x11 xf86driproto glproto randrproto renderproto fixesproto \
 		dri2proto resourceproto fontsproto xf86dgaproto videoproto \
 		compositeproto trapproto recordproto resourceproto \
 		xineramaproto xinerama evieproto xkbfile xfont fontenc xkbui \
-		xxf86misc xxf86vm xaw7 xmu xpm xext pixman xtrans
+		xxf86misc xxf86vm xaw7 xmu xpm xext pixman xtrans presentproto
 
 PLIST_FILES=	bin/Xnest \
 		man/man1/Xnest.1.gz
