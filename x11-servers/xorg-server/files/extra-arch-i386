@@ -1,10 +1,10 @@
 --- hw/xfree86/common/compiler.h.orig	2015-06-05 17:19:40.000000000 +0200
-+++ hw/xfree86/common/compiler.h	2015-10-12 15:20:47.703178000 +0200
++++ hw/xfree86/common/compiler.h	2015-10-12 15:41:30.817470000 +0200
 @@ -968,6 +968,59 @@ inl(unsigned PORT_SIZE port)
  #endif                          /* NDS32_MMIO_SWAP */
  
  #elif defined(__i386__) || defined(__ia64__)
-+#defined(__clang__)
++#if defined(__clang__)
 +
 +/*
 + * If gcc uses gas rather than the native assembler, the syntax of these
