@@ -10,6 +10,7 @@
 %%OPENGL%%lib/VBoxOGLpassthroughspu.so
 %%OPENGL%%lib/dri/vboxvideo_dri.so
 %%X11%%lib/xorg/modules/drivers/vboxvideo_drv.so
+%%X11%%lib/xorg/modules/input/vboxmouse_drv.so
 sbin/VBoxControl
 sbin/VBoxService
 %%X11%%share/autostart/vboxclient.desktop
