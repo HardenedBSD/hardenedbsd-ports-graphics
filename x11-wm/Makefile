@@ -16,7 +16,7 @@
     SUBDIR += blackbox
     SUBDIR += bspwm
     SUBDIR += ccsm
-    SUBDIR += clementine
+    SUBDIR += clementine-wm
     SUBDIR += compiz
     SUBDIR += compiz-fusion
     SUBDIR += compiz-plugins-extra
@@ -134,6 +134,7 @@
     SUBDIR += wmii
     SUBDIR += wmii-devel
     SUBDIR += wmname
+    SUBDIR += wmx
     SUBDIR += xcompmgr
     SUBDIR += xfce4
     SUBDIR += xfce4-desktop

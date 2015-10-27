@@ -2088,6 +2088,7 @@
     SUBDIR += tomcat6
     SUBDIR += tomcat7
     SUBDIR += tomcat8
+    SUBDIR += tomee
     SUBDIR += trac
     SUBDIR += trac-OhlohWidgetsMacro
     SUBDIR += trac-TracGoogleAnalytics
@@ -2148,7 +2149,6 @@
     SUBDIR += trytond28_google_maps
     SUBDIR += tt-rss
     SUBDIR += ttf2eot
-    SUBDIR += twig
     SUBDIR += twiki
     SUBDIR += twiki-BehaviourContrib
     SUBDIR += twiki-BlogAddOn

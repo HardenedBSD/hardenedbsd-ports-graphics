@@ -114,6 +114,7 @@
     SUBDIR += darktable
     SUBDIR += dataplot
     SUBDIR += dc20pack
+    SUBDIR += dcp2icc
     SUBDIR += dcraw
     SUBDIR += dcraw-m
     SUBDIR += deegree-csw
@@ -602,6 +603,7 @@
     SUBDIR += nip2
     SUBDIR += nomacs
     SUBDIR += npretty
+    SUBDIR += nurbs++
     SUBDIR += nvidia-texture-tools
     SUBDIR += ocaml-images
     SUBDIR += ocaml-lablgl
