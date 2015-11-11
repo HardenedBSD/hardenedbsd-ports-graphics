@@ -2,9 +2,10 @@
 
 PORTNAME=	xen
 PORTVERSION=	4.5.1
+PORTREVISION=	1
 CATEGORIES=	emulators
 
-MAINTAINER=	bapt@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Xen Hyvervisor meta port
 
 LICENSE=	GPLv2

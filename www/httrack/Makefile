@@ -24,7 +24,7 @@ GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
 USE_LDCONFIG=	${PREFIX}/lib/httrack
 USE_OPENSSL=	yes
-USES=		alias execinfo gmake iconv libtool shebangfix
+USES=		alias execinfo gmake iconv libtool localbase shebangfix
 
 PORTDATA=	*
 PORTDOCS=	*

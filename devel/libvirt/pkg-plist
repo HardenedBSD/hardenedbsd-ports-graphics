@@ -10,11 +10,10 @@ man/man8/libvirtd.8.gz
 man/man8/virtlockd.8.gz
 @sample %%ETCDIR%%/libvirt.conf.sample
 @sample %%ETCDIR%%/libvirtd.conf.sample
+@sample %%ETCDIR%%/virtlockd.conf.sample
+%%EXAMPLESDIR%%/networks/default.xml
 %%QEMU%%@sample %%ETCDIR%%/qemu.conf.sample
 %%XEN%%@sample %%ETCDIR%%/libxl.conf.sample
-%%ETCDIR%%/virtlockd.conf
-%%ETCDIR%%/qemu/networks/default.xml
-%%ETCDIR%%/qemu/networks/autostart/default.xml
 %%QEMU%%%%ETCDIR%%/qemu-lockd.conf
 %%XEN%%%%ETCDIR%%/libxl-lockd.conf
 etc/logrotate.d/libvirtd
@@ -162,6 +161,16 @@ share/augeas/lenses/tests/test_virtlockd.aug
 %%DOCSDIR%%%%PORTVERSION%%/html/migration-native.png
 %%DOCSDIR%%%%PORTVERSION%%/html/migration-tunnel.png
 %%DOCSDIR%%%%PORTVERSION%%/html/migration-unmanaged-direct.png
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2005.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2006.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2007.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2008.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2009.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2010.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2011.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2012.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2013.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2014.html
 %%DOCSDIR%%%%PORTVERSION%%/html/news.html
 %%DOCSDIR%%%%PORTVERSION%%/html/node.gif
 %%DOCSDIR%%%%PORTVERSION%%/html/pending.html
@@ -300,6 +309,7 @@ lib/libvirt/connection-driver/libvirt_driver_vbox.so
 %%XEN%%@dir /var/lib/libvirt/libxl
 %%XEN%%@dir /var/log/libvirt/libxl
 %%XEN%%@dir /var/run/libvirt/libxl
+@dir %%ETCDIR%%/qemu/networks/autostart
 @dir /var/cache/libvirt
 @dir /var/lib/libvirt/boot
 @dir /var/lib/libvirt/dnsmasq

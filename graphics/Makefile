@@ -39,6 +39,7 @@
     SUBDIR += aeskulap
     SUBDIR += agave
     SUBDIR += agg
+    SUBDIR += alembic
     SUBDIR += alpng
     SUBDIR += amide
     SUBDIR += ampasACES-container
@@ -77,7 +78,6 @@
     SUBDIR += cairo-reference
     SUBDIR += cairomm
     SUBDIR += cal3d
-    SUBDIR += cal3d-devel
     SUBDIR += camera
     SUBDIR += camerakit
     SUBDIR += cbrpager
@@ -133,6 +133,7 @@
     SUBDIR += digikam-kde4-l10n
     SUBDIR += ditaa
     SUBDIR += djview4
+    SUBDIR += djview4-qt4
     SUBDIR += djvulibre
     SUBDIR += dmtx-utils
     SUBDIR += dri
@@ -215,7 +216,6 @@
     SUBDIR += gcolor2
     SUBDIR += gd
     SUBDIR += gdal
-    SUBDIR += gdal-grass
     SUBDIR += gdchart
     SUBDIR += gdk-pixbuf
     SUBDIR += gdk-pixbuf2
@@ -773,7 +773,6 @@
     SUBDIR += php56-gd
     SUBDIR += phplot
     SUBDIR += picpuz
-    SUBDIR += picviz
     SUBDIR += piddle
     SUBDIR += pikopixel
     SUBDIR += pinpoint
