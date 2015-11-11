@@ -490,6 +490,7 @@
     SUBDIR += p5-Math-SymbolicX-Statistics-Distributions
     SUBDIR += p5-Math-TrulyRandom
     SUBDIR += p5-Math-Units
+    SUBDIR += p5-Math-Utils
     SUBDIR += p5-Math-Vec
     SUBDIR += p5-Math-VecStat
     SUBDIR += p5-Math-VectorReal
@@ -614,7 +615,6 @@
     SUBDIR += rapid
     SUBDIR += reduce
     SUBDIR += reed-solomon
-    SUBDIR += rkward-kde4
     SUBDIR += rngstreams
     SUBDIR += rocs
     SUBDIR += rpcalc

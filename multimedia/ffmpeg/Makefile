@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	ffmpeg
-PORTVERSION=	2.8
-PORTREVISION=	1
+PORTVERSION=	2.8.1
 PORTEPOCH=	1
 CATEGORIES=	multimedia audio ipv6 net
 MASTER_SITES=	http://ffmpeg.org/releases/
@@ -39,6 +38,7 @@ OPTIONS_GROUP=	LICENSE
 OPTIONS_GROUP_LICENSE=	GPL3 NONFREE
 
 OPTIONS_DEFINE_amd64=	MMX SSE
+OPTIONS_DEFINE_armv6=	VFP
 OPTIONS_DEFINE_i386=	MMX SSE
 OPTIONS_DEFAULT_amd64=	MMX SSE
 OPTIONS_DEFAULT_i386=	${MACHINE_CPU:tu:MMMX} ${MACHINE_CPU:tu:MSSE}
@@ -52,6 +52,7 @@ LIBV4L_DESC=	Video for Linux support
 LICENSE_DESC=	Licensing options
 NONFREE_DESC=	Allow use of nonfree code
 OPENH264_DESC=	H.264 video codec support via OpenH264
+VFP_DESC=	Enable Vector Floating Point instructions
 X11GRAB_DESC=	Enable x11 grabbing
 
 OPTIONS_SUB=	yes
@@ -232,6 +233,8 @@ VAAPI_CONFIGURE_ENABLE=	vaapi
 # vdpau
 VDPAU_BUILD_DEPENDS=	${LOCALBASE}/include/vdpau/vdpau.h:${PORTSDIR}/multimedia/libvdpau
 VDPAU_CONFIGURE_ENABLE=	vdpau
+
+VFP_CONFIGURE_ENABLE=	vfp
 
 # vo-aacenc
 VO_AACENC_LIB_DEPENDS=	libvo-aacenc.so:${PORTSDIR}/audio/vo-aacenc

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	GraphViz2
-PORTVERSION=	2.36
+PORTVERSION=	2.37
 CATEGORIES=	graphics perl5
 MASTER_SITES=	CPAN
 MASTER_SITE_SUBDIR=	CPAN:RSAVAGE
@@ -12,8 +12,9 @@ MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	Wrapper for AT&T Graphviz
 
 LICENSE=	ART20
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	${LOCALBASE}/bin/dot:${PORTSDIR}/graphics/graphviz \
+BUILD_DEPENDS=	dot:${PORTSDIR}/graphics/graphviz \
 		p5-Algorithm-Dependency>=1.110:${PORTSDIR}/devel/p5-Algorithm-Dependency \
 		p5-Capture-Tiny>=0.10:${PORTSDIR}/devel/p5-Capture-Tiny \
 		p5-Class-ISA>=0.36:${PORTSDIR}/devel/p5-Class-ISA \

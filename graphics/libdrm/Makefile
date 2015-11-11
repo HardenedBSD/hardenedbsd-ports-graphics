@@ -3,6 +3,7 @@
 
 PORTNAME=	libdrm
 PORTVERSION=	2.4.65
+PORTREVISION=	1
 PORTEPOCH=	1
 CATEGORIES=	graphics x11
 MASTER_SITES=	http://dri.freedesktop.org/libdrm/
@@ -51,19 +52,22 @@ CONFIGURE_ARGS+=--disable-vmwgfx
 .if ${ARCH} == amd64 || ${ARCH} == i386
 PLIST_SUB+=	INTEL_DRIVER=""
 PLIST_SUB+=	RADEON_DRIVERS=""
-PLIST_SUB+=	AMDGPU_DRIVERS=""
 .elif ${ARCH} == ia64 || ${ARCH} == powerpc || ${ARCH} == powerpc64
 PLIST_SUB+=	INTEL_DRIVER="@comment "
 PLIST_SUB+=	RADEON_DRIVERS=""
-PLIST_SUB+=	AMDGPU_DRIVERS="@comment "
 .else
 PLIST_SUB+=	INTEL_DRIVER="@comment "
 PLIST_SUB+=	RADEON_DRIVERS="@comment "
-PLIST_SUB+=	AMDGPU_DRIVERS="@comment "
 .endif
 
 .if ${OSVERSION} < 1000000
 EXTRA_PATCHES=	${FILESDIR}/extra-xf86drmMode.c
+.endif
+
+# This variable is not for users. So use a non-default name, intended for
+# people working on DRM kernel module development.
+.if !defined(LIBDRM_SKIP_RETURN_PATCH)
+EXTRA_PATCHES+=	${FILESDIR}/extra-xf86drm.c
 .endif
 
 pre-patch:
