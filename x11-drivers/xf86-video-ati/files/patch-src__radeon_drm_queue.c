@@ -1,5 +1,5 @@
---- src/radeon_drm_queue.c.orig	2015-11-18 23:38:53.546665000 +0100
-+++ src/radeon_drm_queue.c	2015-11-18 23:40:21.737330000 +0100
+--- src/radeon_drm_queue.c.orig	2015-11-18 23:00:19 UTC
++++ src/radeon_drm_queue.c
 @@ -59,7 +59,7 @@ radeon_drm_queue_handler(int fd, unsigne
  			 unsigned int usec, void *user_ptr)
  {
