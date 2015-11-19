@@ -1,13 +1,28 @@
---- src/intel_device.c.orig	2013-06-30 16:03:51.000000000 +0200
-+++ src/intel_device.c	2013-07-02 14:08:34.903060688 +0200
-@@ -94,8 +94,8 @@
- 			 pci->domain, pci->bus, pci->dev, pci->func);
+--- src/intel_device.c.orig	2014-11-18 22:50:39.000000000 +0100
++++ src/intel_device.c	2014-12-21 20:26:36.204491002 +0100
+@@ -323,6 +323,7 @@
+ 	 * and search for a matching entry in /dev.
+ 	 */
  
- 		ret = drmCheckModesettingSupported(id);
--		if (ret) {
++	/* XXX devq query here */
+ 	base = sprintf(path,
+ 		       "/sys/bus/pci/devices/%04x:%02x:%02x.%d/",
+ 		       pci->domain, pci->bus, pci->dev, pci->func);
+@@ -336,7 +337,7 @@
+ 
+ 		sprintf(path + base, "driver");
+ 		if (stat(path, &st)) {
 -			if (xf86LoadKernelModule("i915"))
-+		if (ret || 1) {
 +			if (xf86LoadKernelModule("i915kms"))
- 				ret = drmCheckModesettingSupported(id);
- 			if (ret)
  				return -1;
+ 			(void)xf86LoadKernelModule("fbcon");
+ 		}
+@@ -399,7 +400,7 @@
+ 
+ 	ret = drmCheckModesettingSupported(id);
+ 	if (ret) {
+-		if (xf86LoadKernelModule("i915"))
++		if (xf86LoadKernelModule("i915kms"))
+ 			ret = drmCheckModesettingSupported(id);
+ 		if (ret)
+ 			return -1;

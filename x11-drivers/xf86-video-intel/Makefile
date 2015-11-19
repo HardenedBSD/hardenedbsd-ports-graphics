@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-intel
-PORTVERSION=	2.21.15
-PORTREVISION=	9
+PORTVERSION=	2.99.917
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
@@ -23,14 +22,15 @@ USE_XORG=	glproto \
 		xf86driproto \
 		xineramaproto \
 		xrender \
+		presentproto \
 		xvmc
 
 USES+=		cpe
 CPE_VENDOR=	x
 
 CONFIGURE_ENV+=	xorg_cv_cc_flag__Wno_maybe_uninitialized=no
-CONFIGURE_ARGS+=	--enable-sna
-CONFIGURE_ARGS+=	--disable-glamor
+CONFIGURE_ARGS+=	--enable-sna \
+			--disable-dri3
 INSTALL_TARGET=	install-strip
 
 .include <bsd.port.options.mk>
