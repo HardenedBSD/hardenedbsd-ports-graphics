@@ -60,10 +60,6 @@ PLIST_SUB+=	INTEL_DRIVER="@comment "
 PLIST_SUB+=	RADEON_DRIVERS="@comment "
 .endif
 
-.if ${OSVERSION} < 1000000
-EXTRA_PATCHES=	${FILESDIR}/extra-xf86drmMode.c
-.endif
-
 # This variable is not for users. So use a non-default name, intended for
 # people working on DRM kernel module development.
 .if !defined(LIBDRM_SKIP_RETURN_PATCH)
