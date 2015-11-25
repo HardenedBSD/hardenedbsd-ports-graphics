@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	wayland
-PORTVERSION=	1.6.91
+PORTVERSION=	1.9.90
 CATEGORIES=	x11
 MASTER_SITES=	http://rainbow-runner.nl/freebsd/
 #http://wayland.freedesktop.org/releases/
