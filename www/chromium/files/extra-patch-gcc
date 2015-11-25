@@ -86,3 +86,74 @@
  #include <string>
  #include <vector>
  
+--- v8/src/compiler/graph-visualizer.cc.orig	2015-04-28 22:29:10.000000000 +0200
++++ v8/src/compiler/graph-visualizer.cc	2015-05-02 21:01:32.086593000 +0200
+@@ -5,6 +5,7 @@
+ #include "src/compiler/graph-visualizer.h"
+ 
+ #include <sstream>
++#include <cstdio>
+ #include <string>
+ 
+ #include "src/code-stubs.h"
+@@ -25,7 +26,7 @@
+ namespace compiler {
+ 
+ 
+-FILE* OpenVisualizerLogFile(CompilationInfo* info, const char* phase,
++std::FILE* OpenVisualizerLogFile(CompilationInfo* info, const char* phase,
+                             const char* suffix, const char* mode) {
+   EmbeddedVector<char, 256> filename;
+   SmartArrayPointer<char> function_name;
+--- third_party/ffmpeg/libavutil/autorename_libavutil_cpu.c.orig	2015-07-24 22:27:11.000000000 +0200
++++ third_party/ffmpeg/libavutil/autorename_libavutil_cpu.c	2015-07-26 17:38:40.937606000 +0200
+@@ -34,6 +34,7 @@
+ #include <windows.h>
+ #endif
+ #if HAVE_SYSCTL
++#define __BSD_VISIBLE 1
+ #if HAVE_SYS_PARAM_H
+ #include <sys/param.h>
+ #endif
+--- v8/src/compiler/graph-visualizer.h.orig	2015-07-24 22:28:03.000000000 +0200
++++ v8/src/compiler/graph-visualizer.h	2015-07-26 18:37:45.488253000 +0200
+@@ -5,7 +5,7 @@
+ #ifndef V8_COMPILER_GRAPH_VISUALIZER_H_
+ #define V8_COMPILER_GRAPH_VISUALIZER_H_
+ 
+-#include <stdio.h>
++#include <cstdio>
+ #include <iosfwd>
+ 
+ namespace v8 {
+@@ -21,7 +21,7 @@
+ class Schedule;
+ class SourcePositionTable;
+ 
+-FILE* OpenVisualizerLogFile(CompilationInfo* info, const char* phase,
++std::FILE* OpenVisualizerLogFile(CompilationInfo* info, const char* phase,
+                             const char* suffix, const char* mode);
+ 
+ struct AsDOT {
+--- v8/src/log-utils.h.orig	2015-10-13 21:04:45.000000000 +0200
++++ v8/src/log-utils.h	2015-10-17 10:17:35.535561000 +0200
+@@ -5,6 +5,9 @@
+ #ifndef V8_LOG_UTILS_H_
+ #define V8_LOG_UTILS_H_
+ 
++#include <cstdarg>
++#include <cstdio>
++
+ #include "src/allocation.h"
+ #include "src/base/platform/mutex.h"
+ #include "src/flags.h"
+--- third_party/webrtc/modules/remote_bitrate_estimator/overuse_detector.cc.orig	2015-10-22 21:00:59.000000000 +0200
++++ third_party/webrtc/modules/remote_bitrate_estimator/overuse_detector.cc	2015-11-01 11:32:36.293750000 +0100
+@@ -11,6 +11,7 @@
+ #include "webrtc/modules/remote_bitrate_estimator/overuse_detector.h"
+ 
+ #include <algorithm>
++#include <cstdio>
+ #include <sstream>
+ #include <math.h>
+ #include <stdlib.h>

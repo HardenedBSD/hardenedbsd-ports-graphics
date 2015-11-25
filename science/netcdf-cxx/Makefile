@@ -3,6 +3,7 @@
 
 PORTNAME=	netcdf-cxx
 PORTVERSION=	4.2.1
+DISTVERSIONPREFIX=	v
 PORTREVISION=	2
 CATEGORIES=	science
 
@@ -13,22 +14,17 @@ LIB_DEPENDS=	libnetcdf.so:${PORTSDIR}/science/netcdf
 
 CONFLICTS=	netcdf-3.* netcdf-4.[0-2].*
 
-CPPFLAGS+=	-I${LOCALBASE}/include -fPIC -DPIC
+CPPFLAGS+=	-fPIC -DPIC
 GNU_CONFIGURE=	yes
-LDFLAGS+=	-L${LOCALBASE}/lib
+TEST_TARGET=	check
 USE_LDCONFIG=	yes
-USES=		libtool pathfix
+USES=		libtool localbase pathfix
 
-USE_GITHUB=	yes
 GH_ACCOUNT=	Unidata
-GH_COMMIT=	b477274
 GH_PROJECT=	${PORTNAME}4
-GH_TAGNAME=	v${PORTVERSION}
+USE_GITHUB=	yes
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libnetcdf_c++4.so.1
-
-regression-test test: build
-	cd ${WRKSRC}/ && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} check
 
 .include <bsd.port.mk>

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	wmclock
-PORTVERSION=	1.0.15
+PORTVERSION=	1.0.16
 CATEGORIES=	x11-clocks windowmaker
 MASTER_SITES=	DEBIAN
 DISTNAME=	${PORTNAME}_${PORTVERSION}.orig
@@ -11,13 +11,13 @@ MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Dockable clock applet for Window Maker
 
 LICENSE=	GPLv2 # (or later)
+LICENSE_FILE=	${WRKSRC}/COPYING
 
-WRKSRC=		${WRKDIR}/dockapps
+WRKSRC=		${WRKDIR}/dockapps-daaf3aa
 
-USES=		pkgconfig
+USES=		autoreconf gmake pkgconfig
 USE_XORG=	xpm
-USE_AUTOTOOLS=	aclocal automake autoconf
-AUTOMAKE_ARGS=	--add-missing --copy
+GNU_CONFIGURE=	yes
 
 OPTIONS_SINGLE=		NLS
 OPTIONS_SINGLE_NLS=	LANG_BR LANG_CS LANG_DA LANG_DE LANG_ES \
@@ -47,9 +47,6 @@ LANG_SL_CONFIGURE_ON=	--with-lang=slovene
 LANG_SV_CONFIGURE_ON=	--with-lang=swedish
 LANG_US_CONFIGURE_ON=	--with-lang=english
 LANG_UK_CONFIGURE_ON=	--with-lang=ukrainian
-
-PORTDATA=	*
-PLIST_FILES=	bin/wmclock man/man1/wmclock.1.gz
 
 post-patch:
 	@${REINPLACE_CMD} -e \

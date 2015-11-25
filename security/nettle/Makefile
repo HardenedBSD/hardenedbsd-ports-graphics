@@ -4,10 +4,9 @@
 PORTNAME=	nettle
 PORTVERSION=	2.7.1
 CATEGORIES=	security
-MASTER_SITES=	${MASTER_SITE_GNU} \
+MASTER_SITES=	GNU \
 		http://www.lysator.liu.se/~nisse/archive/:liu \
 		ftp://ftp.lysator.liu.se/pub/security/lsh/:liu
-MASTER_SITE_SUBDIR=	${PORTNAME}/:DEFAULT
 
 MAINTAINER=	johans@FreeBSD.org
 COMMENT=	Low-level cryptographic library
@@ -40,15 +39,13 @@ OPTIONS_DEFINE=	DOCS EXAMPLES
 CONFIGURE_ENV+=	CCPIC=-fPIC
 .endif
 
-post-install:
-.if ${PORT_OPTIONS:MEXAMPLES}
+post-install-EXAMPLES-on:
 	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
 	cd ${WRKSRC}/examples && ${INSTALL_DATA} ${PORTEXAMPLES} \
 		${STAGEDIR}${EXAMPLESDIR}
-.endif
-.if ${PORT_OPTIONS:MDOCS}
+
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	cd ${WRKSRC} && ${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}
-.endif
 
 .include <bsd.port.post.mk>

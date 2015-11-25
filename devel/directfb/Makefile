@@ -13,8 +13,8 @@ COMMENT=	Graphic development lightweight API
 
 LICENSE=	LGPL21
 
-LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg \
-		libpng.so:${PORTSDIR}/graphics/png
+BROKEN=		Does not fetch
+LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png
 
 OPTIONS_DEFINE=	FREETYPE X11 SDL UNIQUE TEST DOCS
 UNIQUE_DESC=	Unique (WM Module)
@@ -25,7 +25,7 @@ OPTIONS_SUB=	yes
 CPPFLAGS+=	-I${LOCALBASE}/include
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
-USES=		gmake libtool ncurses pathfix perl5 pkgconfig
+USES=		cpe gmake jpeg libtool ncurses pathfix perl5 pkgconfig
 USE_LDCONFIG=	yes
 USE_PERL5=	build
 PORTDOCS=	*

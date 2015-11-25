@@ -2,17 +2,16 @@
 # $FreeBSD$
 
 PORTNAME=	jwm
-PORTVERSION=	2.2.2
-PORTREVISION=	2
+PORTVERSION=	2.3.2
 CATEGORIES=	x11-wm
-MASTER_SITES=	http://joewing.net/programs/jwm/releases/
+MASTER_SITES=	http://joewing.net/projects/jwm/releases/
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Joe's Window Manager
 
 LICENSE=	GPLv2
 
-USES=		pkgconfig tar:xz
+USES=		iconv pkgconfig tar:xz
 USE_XORG=	x11
 GNU_CONFIGURE=	yes
 
@@ -30,7 +29,7 @@ DEBUG_CONFIGURE_ENABLE=	debug
 FRIBIDI_DESC=		Unicode Bidirectional Algorithm support
 FRIBIDI_LIB_DEPENDS=	libfribidi.so:${PORTSDIR}/converters/fribidi
 FRIBIDI_CONFIGURE_ENABLE=fribidi
-JPEG_LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg
+JPEG_USES=		jpeg
 JPEG_CONFIGURE_ENABLE=	jpeg
 NLS_USES=		gettext
 NLS_CONFIGURE_ENABLE=	nls
@@ -43,29 +42,25 @@ XEXT_USE=		XORG=xext
 XEXT_CONFIGURE_ENABLE=	shape
 XFT_USE=		XORG=xft
 XFT_CONFIGURE_ENABLE=	xft
+XFT_IMPLIES=		XRENDER
 XINERAMA_USE=		XORG=xinerama
 XINERAMA_CONFIGURE_ENABLE=xinerama
+XINERAMA_IMPLIES=	XEXT
 XMU_DESC=		X11 Miscellaneous Utilities support
 XMU_USE=		XORG=xmu
 XMU_CONFIGURE_ENABLE=	xmu
+XMU_IMPLIES=		XEXT
 XPM_USE=		XORG=xpm
 XPM_CONFIGURE_ENABLE=	xpm
+XPM_IMPLIES=		XEXT
 XRENDER_DESC=		X11 Render Extension support
 XRENDER_USE=		XORG=xrender
 XRENDER_CONFIGURE_ENABLE=xrender
 
-.include <bsd.port.options.mk>
+.include <bsd.port.pre.mk>
 
-.if ${PORT_OPTIONS:MXFT} && empty(PORT_OPTIONS:MXRENDER)
-IGNORE=		the XFT support requires XRENDER
-.endif
-
-.if ${PORT_OPTIONS:MXMU} && empty(PORT_OPTIONS:MXEXT)
-IGNORE=		the XMU support requires XEXT
-.endif
-
-.if ${PORT_OPTIONS:MXPM} && empty(PORT_OPTIONS:MXEXT)
-IGNORE=		the XPM support requires XEXT
+.if !empty(ICONV_LIB)
+CONFIGURE_ARGS+=ac_cv_lib_iconv_iconv=yes
 .endif
 
 post-patch:
@@ -78,4 +73,4 @@ post-patch:
 		'/EXE/s|install|@INSTALL_PROGRAM@| ; \
 		 /strip/s|^|#|' ${WRKSRC}/src/Makefile.in
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

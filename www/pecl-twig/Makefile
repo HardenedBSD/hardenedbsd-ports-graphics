@@ -2,13 +2,13 @@
 # $FreeBSD$
 
 PORTNAME=	twig
-PORTVERSION=	1.15.1
+PORTVERSION=	1.23.1
 CATEGORIES=	www
 MASTER_SITES=	http://pear.twig-project.org/get/
 PKGNAMEPREFIX=	pecl-
 DISTNAME=	CTwig-${PORTVERSION}
 
-MAINTAINER=	joehorn@gmail.com
+MAINTAINER=	ports@toco-domains.de
 COMMENT=	Twig C extension to improve performance of the Twig template language
 
 LICENSE=	BSD3CLAUSE

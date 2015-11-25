@@ -2,10 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	jgoodies-common
-PORTVERSION=	1.2.1
+DISTVERSION=	1_2_1
 CATEGORIES=	devel java
 MASTER_SITES=	http://www.jgoodies.com/download/libraries/common/
-DISTNAME=	${PORTNAME}-${PORTVERSION:S|.|_|g}
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Abstract and helper classes used by all other JGoodies libs
@@ -14,6 +13,8 @@ LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 BUILD_DEPENDS=	${JAVALIBDIR}/junit.jar:${PORTSDIR}/java/junit
+
+BROKEN=		does not build: "Test com.jgoodies.common.base.ObjectsTest failed"
 
 USES=		dos2unix zip
 USE_JAVA=	yes
@@ -56,7 +57,7 @@ do-install:
 .if ${PORT_OPTIONS:MDOCS}
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	(cd ${WRKSRC} && ${INSTALL_DATA} README.html RELEASE-NOTES.txt \
-		${STAGEDIR}${DOCSDIR})	
+		${STAGEDIR}${DOCSDIR})
 	(cd ${WRKSRC} && ${COPYTREE_SHARE} docs ${STAGEDIR}${DOCSDIR})
 	(cd ${WRKSRC}/build/docs && ${COPYTREE_SHARE} api \
 		${STAGEDIR}${DOCSDIR}/docs)

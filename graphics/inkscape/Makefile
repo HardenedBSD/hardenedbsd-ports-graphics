@@ -3,6 +3,7 @@
 
 PORTNAME=	inkscape
 PORTVERSION=	0.91
+PORTREVISION=	4
 CATEGORIES=	graphics gnome
 MASTER_SITES=	https://inkscape.global.ssl.fastly.net/media/resources/file/ \
 		LOCAL/kwm
@@ -21,18 +22,17 @@ LIB_DEPENDS=	libpopt.so:${PORTSDIR}/devel/popt \
 #RUN_DEPENDS=	p5-XML-XQL>=0:${PORTSDIR}/textproc/p5-XML-XQL
 
 USE_GNOME=	gtkmm24 intlhack libxslt
-USES=		compiler:c++0x desktop-file-utils gettext gmake iconv \
-		libtool pathfix perl5 pkgconfig shebangfix tar:bzip2
+USES=		compiler:c++0x cpe desktop-file-utils gettext gmake iconv \
+		libtool pathfix perl5 pkgconfig python:run shebangfix tar:bzip2
 GNU_CONFIGURE=	yes
 INSTALLS_ICONS=	yes
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 CONFIGURE_ARGS=	--without-gnome-vfs
 
-python_OLD_CMD?=/usr/bin/env python
 python_CMD?=	${LOCALBASE}/bin/python2
 SHEBANG_FILES=	cxxtest/cxxtestgen.pl share/extensions/*.p[lm] \
-		share/extensions/*.py
+		share/extensions/*.py share/extensions/genpofiles.sh
 
 OPTIONS_DEFINE=	POPPLER OPENMP VISIO CDR DBUS WPG
 OPTIONS_DEFAULT=POPPLER VISIO CDR WPG
@@ -68,6 +68,18 @@ WPG_LIB_DEPENDS=	libwpg-0.2.so:${PORTSDIR}/graphics/libwpg
 
 .if ${CHOSEN_COMPILER_TYPE} == clang
 CPPFLAGS+=	-Wno-mismatched-tags -Wno-unknown-attributes
+.endif
+
+# Base clang 3.4.1 in FreeBSD 9.3 fails to compile this code on i386
+# but base clang 3.4.1 in FreeBSD 10.1 succeeds.  The difference *appears*
+# to be the patch applied in r271597 (head) / r271739 (stable/10).  The
+# latter happened shortly before 10.1 was branched.
+.if ${ARCH} == i386 && ${OPSYS} == FreeBSD && ${OSVERSION} < 1001000 && \
+    ( ${COMPILER_TYPE} == clang || ${ALT_COMPILER_TYPE} == clang )
+BUILD_DEPENDS+=	clang34:${PORTSDIR}/lang/clang34
+CPP=    ${LOCALBASE}/bin/clang-cpp34
+CC=     ${LOCALBASE}/bin/clang34
+CXX=    ${LOCALBASE}/bin/clang++34
 .endif
 
 post-patch:

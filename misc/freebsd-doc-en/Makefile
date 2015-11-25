@@ -2,8 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	freebsd-doc
-PORTVERSION=	46230
+PORTVERSION=	47441
 PORTEPOCH=	1
+PORTREVISION=	1
 CATEGORIES=	misc docs
 MASTER_SITES=	LOCAL/blackend
 PKGNAMEPREFIX?=	en-
@@ -11,7 +12,7 @@ PKGNAMEPREFIX?=	en-
 MAINTAINER=	doceng@FreeBSD.org
 COMMENT?=	Documentation from the FreeBSD Documentation Project
 
-BUILD_DEPENDS=	docproj>=2.0_1:${PORTSDIR}/textproc/docproj
+BUILD_DEPENDS=	docproj>=2.0_6:${PORTSDIR}/textproc/docproj
 
 USES=		uidfix
 WRKSRC=		${WRKDIR}/doc
@@ -25,6 +26,7 @@ MAKE_ARGS=	FORMATS="${DOCFORMAT}" \
 		DOCOWN=${SHAREOWN} \
 		DOCGRP=${SHAREGRP}
 MAKE_JOBS_UNSAFE=	yes
+NO_ARCH=	yes
 
 # To populate correctly the stage directory
 TMPDESTDIR=	${STAGEDIR}${DESTDIR}/${PREFIX}/${DOCBASE}
@@ -62,12 +64,13 @@ PLIST_FORMATS+=	${O:tl:S,_,-,}
 
 .if ${PORT_OPTIONS:MPDF} || ${PORT_OPTIONS:MPS}
 BUILD_DEPENDS+=	fop:${PORTSDIR}/textproc/fop \
-		${LOCALBASE}/lib/X11/fonts/GentiumPlus/GentiumPlus-R.ttf:${PORTSDIR}/x11-fonts/gentium-plus \
-		${LOCALBASE}/lib/X11/fonts/Droid/DroidSans.ttf:${PORTSDIR}/x11-fonts/droid-fonts-ttf \
-		${LOCALBASE}/lib/X11/fonts/Lohit/Lohit-Bengali.ttf:${PORTSDIR}/x11-fonts/lohit \
-		${LOCALBASE}/lib/X11/fonts/dejavu/DejaVuSansMono.ttf:${PORTSDIR}/x11-fonts/dejavu \
+		${LOCALBASE}/share/fonts/GentiumPlus/GentiumPlus-R.ttf:${PORTSDIR}/x11-fonts/gentium-plus \
+		${LOCALBASE}/share/fonts/Droid/DroidSans.ttf:${PORTSDIR}/x11-fonts/droid-fonts-ttf \
+		${LOCALBASE}/share/fonts/Lohit/Lohit-Bengali.ttf:${PORTSDIR}/x11-fonts/lohit \
+		${LOCALBASE}/share/fonts/dejavu/DejaVuSansMono.ttf:${PORTSDIR}/x11-fonts/dejavu \
 		${LOCALBASE}/share/fonts/TrueType/gkai00mp.ttf:${PORTSDIR}/chinese/arphicttf \
-		${LOCALBASE}/share/fonts/OTF/ipam.otf:${PORTSDIR}/japanese/font-ipa
+		${LOCALBASE}/share/fonts/OTF/ipam.otf:${PORTSDIR}/japanese/font-ipa \
+		${LOCALBASE}/share/fonts/nanum-ttf/NanumBarunGothic.ttf:${PORTSDIR}/korean/nanumfonts-ttf
 .endif
 
 # when html or html-split is defined as the format, add HTML_COMMON.
@@ -80,7 +83,11 @@ PLIST_FORMATS+=	html-common
 PLIST_FORMATS+=	extras common
 
 pre-build:
-	${CAT} ${PLIST_FORMATS:S,^,${.CURDIR}/pkg-plist.,} > ${PLIST}
+.for i in ${PLIST_FORMATS:S,^,${.CURDIR}/pkg-plist.,}
+	if ${TEST} -f ${i}; then \
+		${CAT} ${i} >> ${PLIST}; \
+	fi
+.endfor
 
 # For HTML files, images links are hardcoded during the build
 # with absolute pathnames.  Make these pathnames relative.

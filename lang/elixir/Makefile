@@ -2,11 +2,16 @@
 # $FreeBSD$
 
 PORTNAME=	elixir
-PORTVERSION=	1.0.2
+PORTVERSION=	1.1.1
+DISTVERSIONPREFIX=	v
 PORTREVISION=	1
 CATEGORIES=	lang
+MASTER_SITES+=	http://github.com/elixir-lang/elixir/releases/download/${DISTVERSIONPREFIX}${PORTVERSION}/:doc
+DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
+		Docs.zip:doc
+DIST_SUBDIR=	elixir
 
-MAINTAINER=	lwhsu@FreeBSD.org
+MAINTAINER=	olgeni@FreeBSD.org
 COMMENT=	Functional, meta-programming aware language built on top of Erlang VM
 
 LICENSE=	APACHE20
@@ -16,11 +21,35 @@ RUN_DEPENDS=	erlang>=17:${PORTSDIR}/lang/erlang
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	elixir-lang
-GH_TAGNAME=	v${PORTVERSION}
-GH_COMMIT=	34df817
 
-USES=	gmake
-
+USES=		gmake
+MAKE_ENV=	LANG=en_US.UTF-8
 ALL_TARGET=	#empty
+REINPLACE_ARGS=	-i ""
+NO_ARCH=	yes
+OPTIONS_SUB=	yes
+
+OPTIONS_DEFINE=	SRC DOCS
+OPTIONS_DEFAULT=SRC DOCS
+
+SRC_DESC=	Install source code
+
+.include <bsd.port.options.mk>
+
+post-patch:
+	@${REINPLACE_CMD} -e 's|share/man|man|' ${WRKSRC}/Makefile
+	@${RM} ${WRKSRC}/bin/*.orig
+
+post-install-DOCS-on:
+	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	cd ${WRKDIR}/doc/ && ${COPYTREE_SHARE} \* ${STAGEDIR}${DOCSDIR}
+
+post-install-SRC-on:
+	${MKDIR} ${STAGEDIR}${PREFIX}/lib/elixir/lib
+	cd ${WRKSRC}/lib/ && for lib in *; do \
+		${MKDIR} ${STAGEDIR}${PREFIX}/lib/elixir/lib/$${lib}/lib; \
+		cd ${WRKSRC}/lib/$${lib}/lib && \
+			${COPYTREE_SHARE} \* ${STAGEDIR}${PREFIX}/lib/elixir/lib/$${lib}/lib; \
+	done
 
 .include <bsd.port.mk>

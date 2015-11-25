@@ -2,11 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	wolfpack
-PORTVERSION=	4.3.32
+PORTVERSION=	4.3.33
 PORTREVISION=	1
 CATEGORIES=	games
-MASTER_SITES=	SF
-MASTER_SITE_SUBDIR=	empserver/${DISTNAME}
+MASTER_SITES=	SF/empserver/${DISTNAME}
 DISTNAME=	empire-${PORTVERSION}
 
 MAINTAINER=	johans@FreeBSD.org
@@ -17,8 +16,7 @@ USES=		gmake perl5
 USE_PERL5=	build
 GNU_CONFIGURE=	yes
 BINDIR=		${PREFIX}/lib/${PORTNAME}
-VARDIR=		${PREFIX}/var/${PORTNAME}
-CONFIGURE_ARGS+=	--bindir=${BINDIR} --sbindir=${BINDIR}
+CONFIGURE_ARGS=	--bindir=${BINDIR} --sbindir=${BINDIR}
 
 CONFLICTS_INSTALL=	empire-[0-9]*
 
@@ -42,7 +40,8 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/README ${STAGEDIR}${DATADIR}
 	${LN} -s ${BINDIR}/emp_server ${STAGEDIR}${PREFIX}/bin/emp_server
 	${LN} -s ${BINDIR}/empire ${STAGEDIR}${PREFIX}/bin/emp_client
+	${MKDIR} ${STAGEDIR}${ETCDIR}
 	${STAGEDIR}${PREFIX}/lib/wolfpack/pconfig > \
-		${STAGEDIR}${ETCDIR}/econfig.orig
+		${STAGEDIR}${ETCDIR}/econfig.sample
 
 .include <bsd.port.post.mk>

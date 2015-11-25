@@ -10,15 +10,16 @@ MASTER_SITES=	http://adgali.apiou.org/download/
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Open source game library useful for 2D game development
 
+BROKEN=		unfetchable
+
 LICENSE=	GPLv2 # or later
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg \
-		libpng.so:${PORTSDIR}/graphics/png \
+LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png \
 		libtiff.so:${PORTSDIR}/graphics/tiff \
 		libfreetype.so:${PORTSDIR}/print/freetype2
 
-USES=		execinfo gmake libtool tar:bzip2
+USES=		execinfo gmake jpeg libtool tar:bzip2
 USE_LDCONFIG=	yes
 USE_SDL=	sdl
 USE_XORG=	xpm

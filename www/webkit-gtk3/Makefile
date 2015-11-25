@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	webkit
-PORTVERSION=	2.4.8
-PORTREVISION=	1
+PORTVERSION=	2.4.9
 CATEGORIES=	www
 MASTER_SITES=	http://webkitgtk.org/releases/
 PKGNAMESUFFIX=	-gtk3
@@ -13,6 +12,7 @@ MAINTAINER=	gnome@FreeBSD.org
 COMMENT=	Opensource browser engine using the GTK+ 3 toolkit
 
 BUILD_DEPENDS=	gtkdoc-rebase:${PORTSDIR}/textproc/gtk-doc \
+		p5-Switch>0:${PORTSDIR}/lang/p5-Switch \
 		geoclue>=0:${PORTSDIR}/net/geoclue
 LIB_DEPENDS=	libenchant.so:${PORTSDIR}/textproc/enchant \
 		libsecret-1.so:${PORTSDIR}/security/libsecret \
@@ -21,7 +21,7 @@ LIB_DEPENDS=	libenchant.so:${PORTSDIR}/textproc/enchant \
 		libwebp.so:${PORTSDIR}/graphics/webp \
 		libcurl.so:${PORTSDIR}/ftp/curl \
 		libsoup-2.4.so:${PORTSDIR}/devel/libsoup
-RUN_DEPENDS=	geoclue>=0:${PORTSDIR}/net/geoclue 
+RUN_DEPENDS=	geoclue>=0:${PORTSDIR}/net/geoclue
 
 PORTSCOUT=	limit:1.4.*$$
 
@@ -80,18 +80,11 @@ DEBUG_CONFIGURE_OFF=	--disable-debug-symbols
 
 .include <bsd.port.options.mk>
 
-# Shutup warning spam
-CXXFLAGS+=	-Wno-c++11-extensions
-
 .if ${ARCH} == powerpc64
 CFLAGS+=	-mminimal-toc
 .endif
 
 .include <bsd.port.pre.mk>
-
-.if ${PERL_LEVEL} >= 501400
-BUILD_DEPENDS+=	p5-Switch>0:${PORTSDIR}/lang/p5-Switch
-.endif
 
 .if ${OSVERSION} < 1000033
 BUILD_DEPENDS+=	flex>=0:${PORTSDIR}/textproc/flex
@@ -104,6 +97,7 @@ CFLAGS+=	-march=i586
 .endif
 
 .if ${CHOSEN_COMPILER_TYPE} == clang
+CXXFLAGS+=	-Wno-c++11-extensions	# Shutup warning spam
 CXXFLAGS+=	-Qunused-arguments
 .endif
 

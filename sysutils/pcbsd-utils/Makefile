@@ -2,36 +2,32 @@
 # $FreeBSD$
 
 PORTNAME=	pcbsd-utils
-PORTVERSION=	1422974289
+PORTVERSION=	1440778617
 CATEGORIES=	sysutils
-MASTER_SITES=	http://www.pcbsd.org/~kris/software/ \
-		ftp://ftp.pcbsd.org/pub/software/
 
 MAINTAINER=	kmoore@FreeBSD.org
 COMMENT=	PC-BSD Command-Line Utilities
 
-LICENSE=	BSD
+LICENSE=	BSD3CLAUSE
 
 RUN_DEPENDS=	sipcalc:${PORTSDIR}/net-mgmt/sipcalc \
 		eject:${PORTSDIR}/sysutils/eject \
 		unzip:${PORTSDIR}/archivers/unzip
 
-WRKSRC=		${WRKDIR}/pcbsd-utils
-CONFLICTS?=	pbi-manager-[0-9]*
+WRKSRC_SUBDIR=	src-sh/pcbsd-utils
 USE_QT5=	core network buildtools qmake
 USES=		pkgconfig tar:xz
-NO_BUILD=	yes
+MAKE_ARGS=	PREFIX=${STAGEDIR}${PREFIX}
+
+USE_GITHUB=	yes
+GH_ACCOUNT=	pcbsd
+GH_PROJECT=	pcbsd
+GH_TAGNAME=	3c4d2b
 
 .include <bsd.port.pre.mk>
 
 .if ${OSVERSION} < 1000000
 IGNORE=		requires FreeBSD 10 or later
 .endif
-
-do-install:
-	cd ${WRKSRC} && make install PREFIX=${STAGEDIR}${PREFIX}
-
-post-install:
-	PKG_PREFIX=${STAGEDIR}${PREFIX} ${SH} ${PKGINSTALL} ${PKGNAME} POST-INSTALL
 
 .include <bsd.port.post.mk>

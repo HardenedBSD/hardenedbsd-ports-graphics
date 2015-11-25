@@ -11,14 +11,19 @@
     SUBDIR += IPA
     SUBDIR += ImageMagick
     SUBDIR += ImageMagick-nox11
+    SUBDIR += ImageMagick7
+    SUBDIR += ImageMagick7-nox11
     SUBDIR += O2-tools
     SUBDIR += OpenEXR
+    SUBDIR += R-cran-DiagrammeR
     SUBDIR += R-cran-GDD
     SUBDIR += R-cran-RColorBrewer
     SUBDIR += R-cran-colorspace
     SUBDIR += R-cran-diagram
     SUBDIR += R-cran-dichromat
+    SUBDIR += R-cran-dygraphs
     SUBDIR += R-cran-ggplot2
+    SUBDIR += R-cran-gridBase
     SUBDIR += R-cran-munsell
     SUBDIR += R-cran-pixmap
     SUBDIR += R-cran-png
@@ -34,6 +39,7 @@
     SUBDIR += aeskulap
     SUBDIR += agave
     SUBDIR += agg
+    SUBDIR += alembic
     SUBDIR += alpng
     SUBDIR += amide
     SUBDIR += ampasACES-container
@@ -42,11 +48,13 @@
     SUBDIR += aoi
     SUBDIR += apngasm
     SUBDIR += apngdis
+    SUBDIR += appleseed
     SUBDIR += apvlv
     SUBDIR += aqsis
     SUBDIR += argyllcms
     SUBDIR += asciio
     SUBDIR += atril
+    SUBDIR += atril-lite
     SUBDIR += autopano-sift-c
     SUBDIR += autoq3d
     SUBDIR += autotrace
@@ -70,7 +78,6 @@
     SUBDIR += cairo-reference
     SUBDIR += cairomm
     SUBDIR += cal3d
-    SUBDIR += cal3d-devel
     SUBDIR += camera
     SUBDIR += camerakit
     SUBDIR += cbrpager
@@ -95,6 +102,7 @@
     SUBDIR += commons-utilities
     SUBDIR += compupic
     SUBDIR += converseen
+    SUBDIR += copperspice
     SUBDIR += cosmoplayer
     SUBDIR += crw
     SUBDIR += cthumb
@@ -106,6 +114,7 @@
     SUBDIR += darktable
     SUBDIR += dataplot
     SUBDIR += dc20pack
+    SUBDIR += dcp2icc
     SUBDIR += dcraw
     SUBDIR += dcraw-m
     SUBDIR += deegree-csw
@@ -124,6 +133,7 @@
     SUBDIR += digikam-kde4-l10n
     SUBDIR += ditaa
     SUBDIR += djview4
+    SUBDIR += djview4-qt4
     SUBDIR += djvulibre
     SUBDIR += dmtx-utils
     SUBDIR += dri
@@ -133,6 +143,7 @@
     SUBDIR += easypaint
     SUBDIR += edje_viewer
     SUBDIR += electrix
+    SUBDIR += embree
     SUBDIR += enblend
     SUBDIR += entangle
     SUBDIR += eog
@@ -140,7 +151,6 @@
     SUBDIR += eom
     SUBDIR += eos-movrec
     SUBDIR += epdfview
-    SUBDIR += epeg
     SUBDIR += epix
     SUBDIR += eps2png
     SUBDIR += epstool
@@ -153,6 +163,7 @@
     SUBDIR += evas_generic_loaders-svg
     SUBDIR += evas_generic_loaders-xcf
     SUBDIR += evince
+    SUBDIR += evince-lite
     SUBDIR += evolvotron
     SUBDIR += exact-image
     SUBDIR += exif
@@ -167,7 +178,6 @@
     SUBDIR += figurine
     SUBDIR += flam3
     SUBDIR += flasm
-    SUBDIR += fli2gif
     SUBDIR += flphoto
     SUBDIR += fly
     SUBDIR += fortytwo
@@ -175,7 +185,6 @@
     SUBDIR += fotoxx
     SUBDIR += founts
     SUBDIR += fpc-cairo
-    SUBDIR += fpc-fpgtk
     SUBDIR += fpc-graph
     SUBDIR += fpc-hermes
     SUBDIR += fpc-imagemagick
@@ -207,13 +216,13 @@
     SUBDIR += gcolor2
     SUBDIR += gd
     SUBDIR += gdal
-    SUBDIR += gdal-grass
     SUBDIR += gdchart
     SUBDIR += gdk-pixbuf
     SUBDIR += gdk-pixbuf2
     SUBDIR += gdtclft
     SUBDIR += geeqie
     SUBDIR += gegl
+    SUBDIR += gegl3
     SUBDIR += generic_image_decoder
     SUBDIR += geoapi
     SUBDIR += geomorph
@@ -281,7 +290,6 @@
     SUBDIR += gpicview
     SUBDIR += gplot
     SUBDIR += gpsmanshp
-    SUBDIR += gqview
     SUBDIR += gracula
     SUBDIR += grads
     SUBDIR += grafx2
@@ -311,6 +319,7 @@
     SUBDIR += gstreamer1-plugins-opencv
     SUBDIR += gstreamer1-plugins-openjpeg
     SUBDIR += gstreamer1-plugins-png
+    SUBDIR += gstreamer1-plugins-rsvg
     SUBDIR += gstreamer1-plugins-webp
     SUBDIR += gstreamer1-plugins-zbar
     SUBDIR += gthumb
@@ -322,6 +331,7 @@
     SUBDIR += guilib
     SUBDIR += gwenview-kde4
     SUBDIR += gx
+    SUBDIR += hdr_tools
     SUBDIR += hobbes-icons-xpm
     SUBDIR += hppsmtools
     SUBDIR += hs-HGL
@@ -329,7 +339,6 @@
     SUBDIR += hs-cairo
     SUBDIR += hs-dia-base
     SUBDIR += hs-dia-functions
-    SUBDIR += hs-soegtk
     SUBDIR += hs-svgcairo
     SUBDIR += hsetroot
     SUBDIR += hugin
@@ -358,6 +367,7 @@
     SUBDIR += import-pictures
     SUBDIR += impressive
     SUBDIR += inkscape
+    SUBDIR += intel-backlight
     SUBDIR += intergif
     SUBDIR += inventor
     SUBDIR += ipe
@@ -444,7 +454,6 @@
     SUBDIR += ksaneplugin
     SUBDIR += ksnapshot
     SUBDIR += kudu
-    SUBDIR += kuickshow-kde4
     SUBDIR += l2p
     SUBDIR += laternamagica
     SUBDIR += lcdtest
@@ -468,6 +477,7 @@
     SUBDIR += libcaca
     SUBDIR += libcdr01
     SUBDIR += libchamplain
+    SUBDIR += libchamplain08
     SUBDIR += libdmtx
     SUBDIR += libdrm
     SUBDIR += libecwj2
@@ -509,6 +519,7 @@
     SUBDIR += libpano13
     SUBDIR += libpcd
     SUBDIR += libpgf
+    SUBDIR += libpotrace
     SUBDIR += libprojectm
     SUBDIR += libpuzzle
     SUBDIR += libqrencode
@@ -529,6 +540,7 @@
     SUBDIR += libwmf-nox11
     SUBDIR += libwpg
     SUBDIR += libwpg03
+    SUBDIR += lightzone
     SUBDIR += linplasma
     SUBDIR += linux-XnViewMP
     SUBDIR += linux-adobesvg
@@ -561,6 +573,7 @@
     SUBDIR += luminance
     SUBDIR += luminance-qt5
     SUBDIR += luxrender
+    SUBDIR += luxrender14
     SUBDIR += mahotas
     SUBDIR += maim
     SUBDIR += makehuman
@@ -576,6 +589,7 @@
     SUBDIR += mhgui
     SUBDIR += ming
     SUBDIR += mirage
+    SUBDIR += mitsuba
     SUBDIR += mmrecover
     SUBDIR += mozjpeg
     SUBDIR += mscgen
@@ -589,6 +603,7 @@
     SUBDIR += nip2
     SUBDIR += nomacs
     SUBDIR += npretty
+    SUBDIR += nurbs++
     SUBDIR += nvidia-texture-tools
     SUBDIR += ocaml-images
     SUBDIR += ocaml-lablgl
@@ -622,6 +637,7 @@
     SUBDIR += osgearth
     SUBDIR += oyranos
     SUBDIR += p5-Acme-Steganography-Image-Png
+    SUBDIR += p5-Barcode-ZBar
     SUBDIR += p5-CAD-Drawing
     SUBDIR += p5-CAD-Drawing-Template
     SUBDIR += p5-Cairo
@@ -714,6 +730,7 @@
     SUBDIR += p5-URI-GoogleChart
     SUBDIR += p5-VCG
     SUBDIR += p5-Visio
+    SUBDIR += p5-feedgnuplot
     SUBDIR += p5-ming
     SUBDIR += panoglview
     SUBDIR += panomatic
@@ -750,16 +767,14 @@
     SUBDIR += php5-ffmpeg
     SUBDIR += php5-gd
     SUBDIR += php5-swfed
-    SUBDIR += php53-exif
-    SUBDIR += php53-gd
     SUBDIR += php55-exif
     SUBDIR += php55-gd
     SUBDIR += php56-exif
     SUBDIR += php56-gd
     SUBDIR += phplot
     SUBDIR += picpuz
-    SUBDIR += picviz
     SUBDIR += piddle
+    SUBDIR += pikopixel
     SUBDIR += pinpoint
     SUBDIR += pinta
     SUBDIR += pixelize
@@ -820,6 +835,7 @@
     SUBDIR += py-gimp
     SUBDIR += py-glewpy
     SUBDIR += py-goocanvas
+    SUBDIR += py-gphoto2
     SUBDIR += py-graph
     SUBDIR += py-graph-core
     SUBDIR += py-graph-dot
@@ -833,16 +849,19 @@
     SUBDIR += py-opencv
     SUBDIR += py-openexr
     SUBDIR += py-opengl
+    SUBDIR += py-opengl-accelerate
     SUBDIR += py-openimageio
     SUBDIR += py-paint
     SUBDIR += py-pillow
     SUBDIR += py-pivy
+    SUBDIR += py-plotly
     SUBDIR += py-png
     SUBDIR += py-poppler
     SUBDIR += py-poppler-qt4
     SUBDIR += py-pycha
     SUBDIR += py-pydot
     SUBDIR += py-pygal
+    SUBDIR += py-pyganim
     SUBDIR += py-pyggel
     SUBDIR += py-pyglet
     SUBDIR += py-pygooglechart
@@ -854,6 +873,7 @@
     SUBDIR += py-sorl-thumbnail
     SUBDIR += py-soya3d
     SUBDIR += py-stltools
+    SUBDIR += py-toyplot
     SUBDIR += py-wand
     SUBDIR += py-webcolors
     SUBDIR += py3-cairo
@@ -877,6 +897,7 @@
     SUBDIR += qt5-opengl
     SUBDIR += qt5-pixeltool
     SUBDIR += qt5-svg
+    SUBDIR += qtawesome
     SUBDIR += qtgtl
     SUBDIR += quat
     SUBDIR += quat-gui
@@ -912,13 +933,14 @@
     SUBDIR += rubygem-flamegraph
     SUBDIR += rubygem-gd2
     SUBDIR += rubygem-gdk_pixbuf2
+    SUBDIR += rubygem-gemojione
     SUBDIR += rubygem-geokit
     SUBDIR += rubygem-gitlab_emoji
     SUBDIR += rubygem-goocanvas
-    SUBDIR += rubygem-graphviz
     SUBDIR += rubygem-gruff
     SUBDIR += rubygem-image_science
     SUBDIR += rubygem-imagesize
+    SUBDIR += rubygem-mini_magick
     SUBDIR += rubygem-objectdetect
     SUBDIR += rubygem-opengl
     SUBDIR += rubygem-pdfkit
@@ -926,6 +948,7 @@
     SUBDIR += rubygem-railroad
     SUBDIR += rubygem-rmagick
     SUBDIR += rubygem-rsvg2
+    SUBDIR += rubygem-ruby-graphviz
     SUBDIR += rubygem-scruffy
     SUBDIR += rubyphoto
     SUBDIR += s10sh
@@ -948,6 +971,7 @@
     SUBDIR += sdump
     SUBDIR += seam-carving-gui
     SUBDIR += seejpeg
+    SUBDIR += seexpr
     SUBDIR += seom
     SUBDIR += separate
     SUBDIR += seq2gif
@@ -961,9 +985,8 @@
     SUBDIR += simpleviewer
     SUBDIR += sk1libs
     SUBDIR += skanlite
-    SUBDIR += skencil
     SUBDIR += sketch
-    SUBDIR += sng
+    SUBDIR += smillaenlarger
     SUBDIR += springgraph
     SUBDIR += squish
     SUBDIR += sswf
@@ -1012,6 +1035,7 @@
     SUBDIR += volpack
     SUBDIR += vp
     SUBDIR += waffle
+    SUBDIR += waifu2x-converter-cpp
     SUBDIR += webp
     SUBDIR += whirlgif
     SUBDIR += white_dune
@@ -1039,6 +1063,7 @@
     SUBDIR += xournal
     SUBDIR += xpaint
     SUBDIR += xpdf
+    SUBDIR += xpeps
     SUBDIR += xpx
     SUBDIR += xsane
     SUBDIR += xsvg

@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	erlang
-PORTVERSION=	17.4.1
+PORTVERSION=	18.1.4
 CATEGORIES=	lang parallel
 MASTER_SITES=	http://www.erlang.org/download/:erlangorg		\
 		http://erlang.stacken.kth.se/download/:erlangorg	\
@@ -12,10 +12,15 @@ DISTFILES=	${DISTNAME}${EXTRACT_SUFX}:erlangorg
 DIST_SUBDIR=	erlang
 EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
 
-PATCH_SITES=	http://www.erlang.org/download
+PATCH_SITES=	http://olgeni.olgeni.com/~olgeni/distfiles/ \
+		LOCAL/olgeni
+PATCHFILES=	patch-otp-18.1.1 patch-otp-18.1.2 patch-otp-18.1.3 \
+		patch-otp-18.1.4
 
 MAINTAINER=	olgeni@FreeBSD.org
 COMMENT=	Erlang bindings for wxWindows
+
+RUN_DEPENDS=	${LOCALBASE}/bin/erl:${PORTSDIR}/lang/erlang
 
 WRKSRC=		${WRKDIR}/otp_src_${ERL_RELEASE}
 
@@ -26,14 +31,13 @@ MAKE_JOBS_UNSAFE=yes
 
 OPTIONS_DEFINE=	DOCS
 
-ERL_RELEASE=	17.4
+ERL_RELEASE=	18.1
 
 USES=		gmake
-USE_AUTOTOOLS=	autoconf:env
 GNU_CONFIGURE=	yes
 LDFLAGS+=	-L${LOCALBASE}/lib
 
-APP_VERSION=	1.3.2
+APP_VERSION=	1.5
 APP_DIR=	${PREFIX}/lib/erlang/lib/wx-${APP_VERSION}
 
 .include <bsd.port.options.mk>
@@ -46,7 +50,6 @@ CONFIGURE_ARGS+=--enable-threads --without-odbc --without-javac --with-wx-config
 
 USE_WX=		2.8+
 WX_COMPS=	wx contrib
-WX_UNICODE=	yes
 
 ERLANG_DOCS=	otp_doc_html_${ERL_RELEASE}.tar.gz
 

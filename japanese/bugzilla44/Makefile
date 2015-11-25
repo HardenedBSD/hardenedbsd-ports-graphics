@@ -1,11 +1,10 @@
 # $FreeBSD$
 
 PORTNAME=	bugzilla
-PORTVERSION=	4.4.6
+PORTVERSION=	4.4.9
 CATEGORIES=	japanese
 MASTER_SITES=	http://bug-ja.org/releases/4.4/ \
-		LOCAL
-MASTER_SITE_SUBDIR=	tota/bugzilla-ja
+		LOCAL/tota/bugzilla-ja
 DISTNAME=	Bugzilla-ja-${PORTVERSION}-template
 
 MAINTAINER=	bz-ports@FreeBSD.org
@@ -23,11 +22,11 @@ LANGDIR=	${WWWDIR}/template/ja
 
 do-install:
 	@-${MKDIR} ${STAGEDIR}${LANGDIR}/default
-	@cd ${WRKDIR}/default; ${COPYTREE_SHARE} . ${STAGEDIR}${LANGDIR}/default
+	(cd ${WRKSRC}/default && ${COPYTREE_SHARE} . ${STAGEDIR}${LANGDIR}/default)
 
 # Maintainer
 plist: patch
-	@( cd ${WRKDIR}/ && ${FIND} default -type f | ${AWK} '{print "%%WWWDIR%%/template/ja/"$$1}' | ${SORT} > ${PLIST}.new )
+	@( cd ${WRKSRC}/ && ${FIND} default -type f | ${AWK} '{print "%%WWWDIR%%/template/ja/"$$1}' | ${SORT} > ${PLIST}.new )
 	@if ${DIFF} -u ${PLIST} ${PLIST}.new ; then \
 		${ECHO_MSG} no pkg-plist changes; \
 		${RM} ${PLIST}.new ; \

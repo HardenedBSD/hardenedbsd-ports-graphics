@@ -3,6 +3,7 @@
 
 PORTNAME=	cmucl-extra
 PORTVERSION=	19c
+PORTREVISION=	1
 CATEGORIES=	lang lisp
 MASTER_SITES=	ftp://ftp.common-lisp.net/pub/project/cmucl/release/${PORTVERSION}/ \
 		http://www.pmsf.de/pub/cmucl/release/${PORTVERSION}/ \
@@ -22,6 +23,9 @@ NO_WRKSUBDIR=	yes
 NO_BUILD=	yes
 
 do-install:
-	(cd ${WRKDIR} && ${COPYTREE_SHARE} lib ${STAGEDIR}${PREFIX})
+	(cd ${WRKSRC} && ${COPYTREE_SHARE} lib ${STAGEDIR}${PREFIX})
+	${CHMOD} u+w ${STAGEDIR}${PREFIX}/lib/cmucl/lib/motifd
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/cmucl/lib/motifd
+	${CHMOD} u-w ${STAGEDIR}${PREFIX}/lib/cmucl/lib/motifd
 
 .include <bsd.port.mk>

@@ -21,8 +21,6 @@ USE_LDCONFIG=	yes
 USES=		cmake pkgconfig python:2,build shebangfix tar:xz
 
 SHEBANG_FILES=	gen-config.py libhpack/huffman-gen.py
-python_OLD_CMD=	${SETENV} python
-python_CMD=	${PYTHON_CMD}
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|STATIC|SHARED|' ${WRKSRC}/libchula/CMakeLists.txt ${WRKSRC}/libhpack/CMakeLists.txt

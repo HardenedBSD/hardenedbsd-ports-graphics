@@ -146,7 +146,6 @@ FALLBACK_ELF_MIB=	kern.fallback_elf_brand
 .endif
 
 .if (${ARCH} == "amd64")
-LATEST_LINK:=		${PKGBASE:C/linux/linux32/}
 ARCH=			i386
 .endif
 
@@ -204,8 +203,8 @@ do-install:
 #
 # Do install without using linux rpm system
 #
-	@cd ${WRKSRC} && ${FIND} * ! -path "stage*" -type d -exec ${MKDIR} "${STAGEDIR}${PREFIX}/{}" \;
-	@cd ${WRKSRC} && ${FIND} * ! -path "stage/*" ! -type d \
+	@cd ${WRKSRC} && ${FIND} * -type d -exec ${MKDIR} "${STAGEDIR}${PREFIX}/{}" \;
+	@cd ${WRKSRC} && ${FIND} * ! -type d \
 		| ${CPIO} -pm -R root:wheel ${STAGEDIR}${PREFIX}
 
 	@${LN} -sf /var/tmp ${STAGEDIR}${PREFIX}/usr/tmp

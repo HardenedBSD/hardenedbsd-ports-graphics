@@ -10,6 +10,10 @@ MASTER_SITES=	http://fb.roolz.org/gnusget/
 MAINTAINER=	ilya.otyutskiy@gmail.com
 COMMENT=	Shell-extension for wget which uses download- and history-file
 
+BROKEN=		No public distfiles
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
+
 RUN_DEPENDS=	wget:${PORTSDIR}/ftp/wget
 
 NO_BUILD=	yes

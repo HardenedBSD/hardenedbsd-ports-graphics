@@ -3,7 +3,7 @@
 
 PORTNAME=	milter-regex
 PORTVERSION=	2.0
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	mail
 MASTER_SITES=	http://www.benzedrine.cx/
 
@@ -33,13 +33,13 @@ post-patch:
 	    "s:/etc/milter-regex.conf:${PREFIX}/etc/milter-regex.conf:g; \
 	    s:/var/spool/milter-regex:${SPOOLDIR}:g; \
 	    s:mailstats 1:mailstats 8:;" ${WRKSRC}/milter-regex.8
-	${REINPLACE_CMD} -e "s:-lpthread:${PTHREAD_LIBS}:g; \
-	    s:-I/usr/src/gnu/usr.sbin/sendmail/include:${PTHREAD_CFLAGS}:g; \
+	${REINPLACE_CMD} -e "s:-I/usr/src/gnu/usr.sbin/sendmail/include::g; \
 	    s:-L/usr/local/lib:-L${LOCALBASE}/lib:g; \
 	    s/-Werror//g"  ${WRKSRC}/Makefile
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/milter-regex ${STAGEDIR}${PREFIX}/libexec/
 	${INSTALL_MAN} ${WRKSRC}/milter-regex.8 ${STAGEDIR}${PREFIX}/man/man8/
+	${MKDIR} ${STAGEDIR}${SPOOLDIR}
 
 .include <bsd.port.post.mk>

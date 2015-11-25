@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	stellarium
-PORTVERSION=	0.13.2
+PORTVERSION=	0.14.0
 CATEGORIES=	astro
 MASTER_SITES=	SF/${PORTNAME}/Stellarium-sources/${PORTVERSION}
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
@@ -15,10 +15,9 @@ LICENSE=	GPLv2
 
 CONFLICTS_INSTALL=	${PORTNAME}-qt4-0.12.*
 
-USES=		cmake gettext iconv
+USES=		cmake gettext
 USE_QT5=	qmake_build buildtools_build linguisttools_build \
 		core concurrent declarative
-INSTALLS_ICONS=	yes
 
 PORTDOCS=	AUTHORS ChangeLog README
 
@@ -55,6 +54,8 @@ CMAKE_ARGS+=	-DENABLE_SOUND:BOOL=OFF
 
 post-patch:
 	@${REINPLACE_CMD} -e 's, -Wno-unused-result,,' ${WRKSRC}/CMakeLists.txt
+	@${REINPLACE_CMD} -e 's,-Testscene,&_ground,' \
+		${WRKSRC}/scenery3d/Testscene/TX_Stellarium-Testscene_ground/CMakeLists.txt
 
 post-install:
 .if ${PORT_OPTIONS:MMORE_STARS}
@@ -68,7 +69,7 @@ post-install:
 			${STAGEDIR}${DATADIR}/textures/$$f` ; \
 		${TEST} $$new -gt $$existing || continue ; \
 		${ECHO_CMD} "-- Replacing texture: $$f\
-			(has larger file size: $$new vs. $$existing)" ; \
+			(has larger file size: $$new > $$existing)" ; \
 		${INSTALL_DATA} $$f ${STAGEDIR}${DATADIR}/textures ; \
 	done)
 .endif

@@ -23,7 +23,20 @@ FPC_DEFAULT?=		2.6.4
 GCC_DEFAULT?=		4.8
 LUA_DEFAULT?=		5.2
 MYSQL_DEFAULT?=		5.6
-PERL5_DEFAULT?=		5.18
+.if !exists(${LOCALBASE}/bin/perl) || (!defined(_PORTS_ENV_CHECK) && \
+    defined(PACKAGE_BUILDING))
+PERL5_DEFAULT?=		5.20
+.elif !defined(PERL5_DEFAULT)
+# There's no need to replace development versions, like "5.23" with "devel"
+# because 1) nobody is supposed to use it outside of poudriere, and 2) it must
+# be set manually in /etc/make.conf in the first place, and we're never getting
+# in here.
+.if !defined(_PERL5_FROM_BIN)
+_PERL5_FROM_BIN!=	perl -e 'printf "%vd\n", $$^V;'
+.endif
+_EXPORTED_VARS+=	_PERL5_FROM_BIN
+PERL5_DEFAULT:=		${_PERL5_FROM_BIN:R}
+.endif
 PGSQL_DEFAULT?=		9.3
 PHP_DEFAULT?=		5.6
 PYTHON_DEFAULT?=	2.7
@@ -32,6 +45,7 @@ PYTHON3_DEFAULT?=	3.4
 RUBY_DEFAULT?=		2.1
 TCLTK_DEFAULT?=		8.6
 FIREBIRD_DEFAULT?=	2.5
+GHOSTSCRIPT_DEFAULT?=	9
 
 # Version of lang/gcc.  Do not override!
 LANG_GCC_IS=		4.8

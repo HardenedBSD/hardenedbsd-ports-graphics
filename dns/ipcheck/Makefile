@@ -6,7 +6,6 @@ PORTVERSION=	0.240
 PORTEPOCH=	1
 CATEGORIES=	dns python
 MASTER_SITES=	http://ipcheck.sourceforge.net/releases/
-MASTER_SITE_SUBDIR=	lioux
 DISTNAME=	${PORTNAME}.${PORTVERSION:S/^0.//}
 EXTRACT_SUFX=
 EXTRACT_ONLY=
@@ -26,9 +25,9 @@ do-patch:
 	@${SED} \
 		-e "s!/usr/bin/python!${LOCALBASE}/bin/python!" \
 		-e "s!ppp0!tun0!" \
-		${DISTDIR}/${DISTNAME} > ${WRKDIR}/${DISTNAME}
+		${DISTDIR}/${DISTNAME} > ${WRKSRC}/${DISTNAME}
 do-install:
-	${INSTALL_SCRIPT} ${WRKDIR}/${DISTNAME} \
+	${INSTALL_SCRIPT} ${WRKSRC}/${DISTNAME} \
 		${STAGEDIR}${PREFIX}/bin/${PORTNAME}.py
 
 .include <bsd.port.mk>

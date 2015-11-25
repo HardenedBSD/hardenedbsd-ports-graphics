@@ -1,13 +1,11 @@
 # Created by: Vanilla I. Shu <vanilla@MinJe.com.TW>
 # $FreeBSD$
-#   $MCom: ports/x11-toolkits/gtk20/Makefile,v 1.237 2013/03/04 17:44:38 kwm Exp $
 
 PORTNAME=	gtk
-PORTVERSION=	2.24.25
+PORTVERSION=	2.24.28
 PORTREVISION?=	1
 CATEGORIES=	x11-toolkits
-MASTER_SITES=	GNOME
-MASTER_SITE_SUBDIR=	sources/gtk+/${PORTVERSION:C/^([0-9]+\.[0-9]+).*/\1/}
+MASTER_SITES=	GNOME/sources/gtk+/${PORTVERSION:C/^([0-9]+\.[0-9]+).*/\1/}
 PKGNAMESUFFIX=	2
 DISTNAME=	gtk+-${PORTVERSION}
 DIST_SUBDIR=	gnome2
@@ -49,36 +47,26 @@ CUPS_CONFIGURE_ON=	--enable-cups=auto
 CUPS_CONFIGURE_OFF=	--disable-cups
 DEBUG_CONFIGURE_ON=	--enable-debug=yes
 
-.include <bsd.port.options.mk>
-
-PLIST_SUB+=	LIBGAILVER=18.0.1 LIBGVER=0.2400.25
+PLIST_SUB+=	LIBGAILVER=18.0.1 LIBGVER=0.2400.28
 
 post-patch:
-	@${FIND} ${WRKSRC} -name Makefile.in | ${XARGS} ${GREP} -l lgmodule | \
-		${XARGS} ${REINPLACE_CMD} -e 's|-lgmodule|@GMODULE_LIBS@|g'
 	@${REINPLACE_CMD} -e 's|[{]libdir[}]/locale|{datadir}/locale|g' \
-		-e 's|-DGDK_PIXBUF_DISABLE_DEPRECATED||g' \
 		${WRKSRC}/configure
-	@${REINPLACE_CMD} -e 's|@LN_S@|${LN} -sf|' ${WRKSRC}/gtk/Makefile.in
 	@${REINPLACE_CMD} -e 's|file,cups|file,cups,lpr|' \
 		${WRKSRC}/gtk/Makefile.in
 
 pre-configure:
-.if !exists(${LOCALBASE}/libdata/pkgconfig/cairo-xlib.pc)
-	@${ECHO_CMD} "${PKGNAME}: Needs cairo with X11 support enabled."
-	@${FALSE}
-.endif
-
-pre-build:
-	@${RM} -rf ${WRKSRC}/docs/gtk.info*
+# .if !exists() evaluates too early before cairo has a chance to be installed
+	@if ! pkg-config --exists cairo-xlib; then \
+		${ECHO_MSG} "${PKGNAME}: Needs cairo with X11 support enabled."; \
+		${FALSE}; \
+	fi
 
 post-install:
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/gtk-2.0/modules
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/gtk-2.0/${GTK2_VERSION}/engines
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/gtk-2.0/${GTK2_VERSION}/loaders
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/gtk-2.0/${GTK2_VERSION}/modules
-	${INSTALL_MAN} ${WRKSRC}/docs/reference/gtk/gtk-query-immodules-2.0.1 \
-		${STAGEDIR}${PREFIX}/man/man1
 
 .include <bsd.port.mk>
 

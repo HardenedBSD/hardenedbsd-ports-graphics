@@ -30,12 +30,10 @@
     info
     ..
     lib
+        debug
+        ..
         X11
             app-defaults
-            ..
-            fonts
-                local
-                ..
             ..
         ..
     ..

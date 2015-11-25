@@ -3,7 +3,7 @@
 
 PORTNAME=	Image-Scale
 PORTVERSION=	0.08
-PORTREVISION=	5
+PORTREVISION=	6
 CATEGORIES=	graphics perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
@@ -13,14 +13,10 @@ COMMENT=	Perl module for fast, high-quality fixed-point image resizing
 
 LICENSE=	GPLv2
 
-BROKEN=		Uses undocumented giflib API
-
-LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg \
-		libpng.so:${PORTSDIR}/graphics/png \
-		libgif.so:${PORTSDIR}/graphics/giflib
+LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png
 TEST_DEPENDS=	p5-Test-NoWarnings>=0:${PORTSDIR}/devel/p5-Test-NoWarnings
 
-USES=		perl5
+USES=		jpeg perl5
 USE_PERL5=	configure
 
 .include <bsd.port.mk>

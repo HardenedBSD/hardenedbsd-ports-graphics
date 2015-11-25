@@ -2,35 +2,32 @@
 # $FreeBSD$
 
 PORTNAME=	mongo-c-driver
-PORTVERSION=	0.7.1
+PORTVERSION=	1.1.9
 CATEGORIES=	devel
-MASTER_SITES=	GH
-PKGNAMESUFFIX=	-devel
-DISTNAME=	${GH_ACCOUNT}-${GH_PROJECT}-${PORTVERSION}-0-g${GH_COMMIT}
 
 MAINTAINER=	waitman@waitman.net
 COMMENT=	C Driver for MongoDB
 
+LICENSE=	APACHE20
+
+BUILD_DEPENDS=	${LOCALBASE}/lib/libbson-1.0.so:${PORTSDIR}/devel/libbson
+LIB_DEPENDS+=	libsasl2.so:${PORTSDIR}/security/cyrus-sasl2
+
 USE_GITHUB=	yes
 GH_ACCOUNT=	mongodb
-GH_PROJECT=	mongo-c-driver
-GH_TAGNAME=	v0.7.1
-GH_COMMIT=	g98826a
 
-WRKSRC=		${WRKDIR}/mongodb-mongo-c-driver-17ff925
-USES=		gmake
-
+USES=		autoreconf gmake libtool pkgconfig
+GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
+LDFLAGS+=	-pthread
 
-PLIST_FILES=	include/mongo.h \
-		include/bson.h \
-		lib/libmongoc.a \
-		lib/libmongoc.so.0.7 \
-		lib/libmongoc.so.0.7.1 \
-		lib/libmongoc.so \
-		lib/libbson.a \
-		lib/libbson.so.0.7.1 \
-		lib/libbson.so.0.7 \
-		lib/libbson.so
+MAKE_ARGS=	pkgconfigdir="${PREFIX}/libdata/pkgconfig" V=1
+
+pre-configure:
+	cd ${WRKSRC} && ./autogen.sh
+
+post-stage:
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libmongoc-priv.so.0.0.0
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libmongoc-1.0.so.0.0.0
 
 .include <bsd.port.mk>

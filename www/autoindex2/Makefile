@@ -10,13 +10,15 @@ MASTER_SITES=	SF/${PORTNAME:tl}/${PORTNAME}%20PHP%20Script%202.x/${PORTNAME}%20P
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	PHP 5.x script that put a directory listing into a table
 
+DEPRECATED=	PHP 5.4 EOL reached
+EXPIRATION_DATE=	2016-01-15
+
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 
 USES=		dos2unix
 USE_PHP=	session
 DEFAULT_VERSIONS+=	php=5
 CONFLICTS=	AutoIndex-1*
-LATEST_LINK=	AutoIndex2
 NO_BUILD=	yes
 
 INSTALLDIR?=	${WWWDIR}

@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	orc
-PORTVERSION=	0.4.23
+PORTVERSION=	0.4.24
+PORTREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES= 	http://gstreamer.freedesktop.org/data/src/orc/
 
@@ -43,7 +44,7 @@ post-patch:
 	@${REINPLACE_CMD} \
 		-E -e '/LIBS/s/-lrt(\ )*//; /LIBRT/s/-lrt//' \
 		-e 's|pkgconfigdir=.*|pkgconfigdir=\"\\$$(prefix)/libdata/pkgconfig\"|g' \
-		${WRKSRC}/configure 
+		${WRKSRC}/configure
 
 post-install:
 .if ${PORT_OPTIONS:MEXAMPLES}

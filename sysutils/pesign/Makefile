@@ -16,10 +16,9 @@ LIB_DEPENDS=	libefivar.so:${PORTSDIR}/devel/efivar \
 		libpopt.so:${PORTSDIR}/devel/popt \
 		libuuid.so:${PORTSDIR}/misc/e2fsprogs-libuuid
 
-USE_GCC=	4.8+
+USE_GCC=	yes
 USE_GITHUB=	yes
 GH_ACCOUNT=	rhinstaller
-GH_COMMIT=	00288b4
 
 USES=		gmake pkgconfig
 USE_LDCONFIG=	yes

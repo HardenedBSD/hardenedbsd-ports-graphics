@@ -3,11 +3,11 @@
 
 PORTNAME=	emacs
 PORTVERSION=	${EMACS_VER}.${EMACS_REV}
+DISTVERSIONSUFFIX=	.${GIT_REV}
 PORTEPOCH=	2
 CATEGORIES=	editors ipv6
-MASTER_SITES=	http://distfiles.pirateparty.in/%SUBDIR%/ \
-		${MASTER_SITE_LOCAL}
-MASTER_SITE_SUBDIR=	ashish
+MASTER_SITES=	http://distfiles.pirateparty.in/ashish/ \
+		LOCAL/ashish
 PKGNAMESUFFIX=	-devel
 
 MAINTAINER=	ashish@FreeBSD.org
@@ -16,20 +16,25 @@ COMMENT=	GNU editing macros
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/COPYING
 
+BROKEN_FreeBSD_9=	does not build
+BROKEN_sparc64=	fails to compile at bootstrap phase
+
 CONFLICTS=	emacs-19.* emacs21-[0-9]* emacs22-[0-9]* emacs23-[0-9]* \
 		emacs24-[0-9]* xemacs-[0-9]* xemacs-devel-[0-9]* \
 		xemacs-mule-[0-9]* xemacs-devel-mule-[0-9]* \
 		emacs-nox11-[0-9]*
 
 EMACS_VER=	25.0.50
-EMACS_REV=	20150206.5c9ad35f
+EMACS_REV=	20150810
+GIT_REV=	a9bb9d8f
 GNU_CONFIGURE=	yes
-USES=		gmake makeinfo ncurses pkgconfig shebangfix tar:xz
+USES=		cpe gmake makeinfo ncurses pkgconfig shebangfix tar:xz
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 INFO_PATH=	${DATADIR_REL}/info
-WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 USE_AUTOTOOLS=	autoconf:env aclocal:env automake:env autoheader:env
+CPE_VENDOR=	gnu
+CPE_VERSION=	${EMACS_VER}
 
 SUB_FILES=	pkg-install
 SUB_LIST+=	ARCHLIBDIR=${PREFIX}/libexec/emacs/${EMACS_VER}/${CONFIGURE_TARGET}
@@ -53,7 +58,7 @@ INFO=		ada-mode auth autotype bovine calc ccmode cl dbus dired-x \
 		srecode todo-mode tramp url vhdl-mode vip viper widget wisent woman
 
 OPTIONS_DEFINE=	X11 ACL DBUS GCONF GIF JPEG M17N OTF PNG SOUND SOURCES SVG TIFF SCROLLBARS \
-		XFT XIM XML XPM MAGICK GNUTLS GSETTINGS LTO FILENOTIFY
+		XFT XIM XML XPM MAGICK GNUTLS GSETTINGS LTO FILENOTIFY LLDB CAIRO
 
 OPTIONS_SINGLE=	X11 SOUND
 
@@ -69,6 +74,7 @@ M17N_DESC=		M17N support for text-shaping
 OTF_DESC=		Opentype fonts suport
 FILENOTIFY_DESC=	File notification support
 LTO_DESC=		Enable link-time optimization (requires GCC 4.6+)
+LLDB_DESC=		Enable lldb support for GUD (from llvm.org)
 
 OPTIONS_SINGLE_X11=	GTK2 GTK3 XAW XAW3D MOTIF
 OPTIONS_SINGLE_SOUND=		ALSA OSS
@@ -77,6 +83,8 @@ OPTIONS_DEFAULT=ACL DBUS GCONF GIF GTK2 JPEG M17N OTF PNG SOUND SOURCES SVG TIFF
 		SCROLLBARS XFT XIM XML XPM MAGICK GNUTLS GSETTINGS FILENOTIFY OSS X11
 
 OPTIONS_SUB=		SOURCES
+
+LLDB_EXTRA_PATCHES=	${PATCHDIR}/extrapatch-lldb-gud.el
 
 SOUND_CONFIGURE_OFF=	--with-sound=no
 ALSA_CONFIGURE_ON=		--with-sound=alsa
@@ -118,7 +126,7 @@ SCROLLBARS_CONFIGURE_WITH=	toolkit-scroll-bars
 
 SYNC_INPUT_CONFIGURE_WITH=	sync-input
 
-JPEG_LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg
+JPEG_USES=		jpeg
 JPEG_CONFIGURE_WITH=	jpeg
 
 TIFF_LIB_DEPENDS=	libtiff.so:${PORTSDIR}/graphics/tiff
@@ -163,13 +171,19 @@ FILENOTIFY_CONFIGURE_ON=	--with-file-notification=gfile
 FILENOTIFY_CONFIGURE_OFF=	--without-file-notification
 FILENOTIFY_USE=			GNOME=glib20
 
+CAIRO_USE=			GNOME=cairo
+CAIRO_CONFIGURE_ON=		--with-cairo
+
 .include <bsd.port.options.mk>
 
 # clang is broken on i386 platform in -O2, due to use of alloca, and stack realignment
 # and %esi as frame pointer register
 # http://llvm.org/bugs/show_bug.cgi?id=18171
+# fixed in r263312 (11-CURRENT), and fixed in r263765 (10-STABLE)
 .if ${ARCH} == "i386"
+.if (${OSVERSION} < 1000706) || (${OSVERSION} >= 1100000 && ${OSVERSION} < 1100015)
 USE_GCC=			any
+.endif
 .endif
 
 DBUS_PTHREAD_LIBS=	${CC} -dumpspecs | ${GREP} -m 1 pthread: | ${SED} -e 's|^.*%{\!pg: %{pthread:||' -e 's|}.*$$||' || ${TRUE}
@@ -231,8 +245,8 @@ post-install:
 	@${RM} -rf ${STAGEDIR}/var/games/emacs
 .if ${PORT_OPTIONS:MSOURCES}
 	@${MKDIR} ${STAGEDIR}${DATADIR}/${EMACS_VER}/src
-	@${INSTALL_DATA} ${WRKSRC}/src/*.[ch] ${STAGEDIR}${DATADIR}/${EMACS_VER}/src
-	@${INSTALL_DATA} ${WRKSRC}/sources.el ${STAGEDIR}${DATADIR}/${EMACS_VER}/site-lisp/site-start.el
+	${INSTALL_DATA} ${WRKSRC}/src/*.[ch] ${STAGEDIR}${DATADIR}/${EMACS_VER}/src
+	${INSTALL_DATA} ${WRKSRC}/sources.el ${STAGEDIR}${DATADIR}/${EMACS_VER}/site-lisp/site-start.el
 .endif
 
 .if !defined(WITHOUT_X11)

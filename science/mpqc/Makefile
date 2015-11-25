@@ -3,7 +3,7 @@
 
 PORTNAME=	mpqc
 PORTVERSION=	2.3.1
-PORTREVISION=	25
+PORTREVISION=	27
 CATEGORIES=	science parallel
 MASTER_SITES=	SF
 
@@ -13,7 +13,8 @@ COMMENT=	Massively Parallel Quantum Computing library and program
 LIB_DEPENDS=	libint.so:${PORTSDIR}/science/libint
 
 GNU_CONFIGURE=	yes
-USES=		fortran gmake libtool perl5 tar:bzip2
+USES=		fortran gmake libtool perl5 shebangfix tar:bzip2
+SHEBANG_FILES=	src/bin/mpqc/ccarunproc src/bin/mpqc/mpqcrunproc
 USE_AUTOTOOLS=	autoconf
 USE_LDCONFIG=	yes
 
@@ -31,8 +32,7 @@ CONFIGURE_ARGS+=--with-cc=${CC} \
 		--with-sc-datadir=${PREFIX}/share/mpqc/${PORTVERSION}
 
 OPTIONS_DEFINE=		DOCS ATLAS ICC MPICH OPTIFLAGS
-OPTIONS_DEFAULT=	DOCS
-OPTIONS_SUB=		DOCS
+OPTIONS_SUB=		yes
 
 ICC_DESC=		Build with ICC compiler instead
 ATLAS_DESC=		Link with ATLAS instead of BLAS
@@ -47,10 +47,6 @@ DOCS_BUILD_DEPENDS=	doxygen:${PORTSDIR}/devel/doxygen \
 			${LOCALBASE}/bin/gsed:${PORTSDIR}/textproc/gsed
 DOCS_USES=		execinfo
 DOCS_USE=		TEX=latex:build
-
-.if defined(WITH_MPICH)
-OPTIONS_DEFAULT+=	MPICH
-.endif
 
 .include <bsd.port.options.mk>
 
@@ -75,7 +71,7 @@ CONFIGURE_ARGS+=--with-libs="-lsvml"
 
 .if ${PORT_OPTIONS:MMPICH}
 CONFIGURE_ARGS+=--enable-always-use-mpi
-CONFIGURE_ENV+=	PTHREAD_LIBS="${PTHREAD_LIBS}"
+CONFIGURE_ENV+=	PTHREAD_LIBS=-lpthread
 .endif
 
 .if ${PORT_OPTIONS:MOPTIFLAGS}
@@ -85,12 +81,11 @@ CXXFLAGS+=	-O2 -ffast-math
 
 do-build:
 	(cd ${WRKSRC} && ${MAKE_CMD})
-.if ${PORT_OPTIONS:MDOCS}
+
+do-build-DOCS-on:
 	(cd ${WRKSRC}/doc && ${MAKE_CMD})
-	${RM} ${WRKSRC}/doc/man/man1/_*mpqc_*.1
-	${RM} ${WRKSRC}/doc/man/man3/_*mpqc_*.3
-	${RM} ${WRKSRC}/doc/man/man3/sc_PsiCCSD_T.3*
-.endif
+	${RM} ${WRKSRC}/doc/man/man1/_*
+	${RM} ${WRKSRC}/doc/man/man3/_*
 
 do-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/mpqc/validate
@@ -100,7 +95,12 @@ do-install:
 		${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/share/mpqc/validate)
 	(cd ${STAGEDIR}${PREFIX}/bin && ${STRIP_CMD} scpr molrender mpqc scls)
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/*.so
-.if ${PORT_OPTIONS:MDOCS}
+	cd ${STAGEDIR}${PREFIX}; ${FIND} share/mpqc \
+	   \( -type f -or -type l \) | ${SORT} >> ${TMPPLIST}
+	cd ${STAGEDIR}${PREFIX}; ${FIND} share/mpqc -type d -empty | ${SORT} -r | \
+	   ${SED} -e 's/^/@dir /g' >> ${TMPPLIST}
+
+do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	(cd ${WRKSRC}/doc/man/man3 && \
 		${INSTALL_MAN} *3 ${STAGEDIR}${MANPREFIX}/man/man3)
@@ -112,11 +112,6 @@ do-install:
 	   \( -type f -or -type l \) | ${SORT} >> ${TMPPLIST}
 	cd ${STAGEDIR}${PREFIX}; ${FIND} share/doc/mpqc -type d -empty | \
 	   ${SORT} -r | ${SED} -e 's/^/@dir /g' >> ${TMPPLIST}
-.endif
-	cd ${STAGEDIR}${PREFIX}; ${FIND} share/mpqc \
-	   \( -type f -or -type l \) | ${SORT} >> ${TMPPLIST}
-	cd ${STAGEDIR}${PREFIX}; ${FIND} share/mpqc -type d -empty | ${SORT} -r | \
-	   ${SED} -e 's/^/@dir /g' >> ${TMPPLIST}
 
 validate:
 	(cd ${WRKSRC}/src/bin/mpqc/validate && \

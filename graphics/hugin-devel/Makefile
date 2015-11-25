@@ -3,7 +3,7 @@
 
 PORTNAME=	hugin
 PORTVERSION=	2013.0
-PORTREVISION=	10
+PORTREVISION=	11
 CATEGORIES=	graphics
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTNAME}-2013.0
 PKGNAMESUFFIX=	-devel
@@ -17,7 +17,6 @@ LIB_DEPENDS=	libIlmImf.so:${PORTSDIR}/graphics/OpenEXR \
 		libImath.so:${PORTSDIR}/graphics/ilmbase \
 		libboost_thread.so:${PORTSDIR}/devel/boost-libs \
 		libexiv2.so:${PORTSDIR}/graphics/exiv2 \
-		libjpeg.so:${PORTSDIR}/graphics/jpeg \
 		liblensfun.so:${PORTSDIR}/graphics/lensfun \
 		libpano13.so:${PORTSDIR}/graphics/libpano13 \
 		libpng.so:${PORTSDIR}/graphics/png \
@@ -39,7 +38,7 @@ OPTIONS_DEFAULT=	PANOMATIC AUTOPANOSIFTC
 PANOMATIC_DESC=		Install graphics/panomatic
 AUTOPANOSIFTC_DESC=	Install graphics/autopano-sift-c
 
-USES=		cmake gettext pkgconfig tar:bzip2
+USES=		cmake gettext jpeg pkgconfig tar:bzip2
 
 CMAKE_ARGS=	-DwxWidgets_CONFIG_EXECUTABLE=${WX_CONFIG}
 

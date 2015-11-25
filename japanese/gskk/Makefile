@@ -5,8 +5,7 @@ PORTNAME=	gskk
 PORTVERSION=	20041208
 CATEGORIES=	japanese
 MASTER_SITES=	http://www.ohnolab.org/~kimoto/
-DISTNAME=	${PORTNAME}-${PORTVERSION}.t
-EXTRACT_SUFX=	.gz
+EXTRACT_SUFX=	.t.gz
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	SKK's dictionary for Canna
@@ -39,7 +38,7 @@ INSTALL_DIC=	${INSTALL} ${COPY} -m 664
 OPTIONS_DEFINE=	DOCS
 
 do-build:
-	cd ${WRKDIR} && mkbindic ${PORTNAME}.t
+	cd ${WRKSRC} && mkbindic ${PORTNAME}.t
 
 do-install:
 	@${MKDIR} ${STAGEDIR}${DICDIR}

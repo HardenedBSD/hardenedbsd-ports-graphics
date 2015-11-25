@@ -2,11 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	xorg-vfbserver
-PORTVERSION=	1.14.7
+PORTVERSION=	1.17.2
 PORTEPOCH=	1
 CATEGORIES=	x11-servers
-MASTER_SITES=	XORG
-MASTER_SITE_SUBDIR=	individual/xserver
+MASTER_SITES=	XORG/individual/xserver
 DISTNAME=	xorg-server-${PORTVERSION}
 DIST_SUBDIR=	xorg/xserver
 
@@ -31,7 +30,6 @@ CONFIGURE_ARGS=	--disable-dmx \
 		--localstatedir=/var \
 		--without-dtrace \
 		--without-doxygen \
-		--disable-libpciaccess \
 		--disable-glx \
 		--disable-dri  \
 		--disable-config-hal \
@@ -39,7 +37,8 @@ CONFIGURE_ARGS=	--disable-dmx \
 		--disable-glx-tls \
 		--disable-vbe \
 		--disable-vgahw \
-		--enable-xvfb
+		--enable-xvfb \
+		--with-fontrootdir=${PREFIX}/share/fonts
 
 USE_XORG=	pixman x11 fixesproto damageproto xcmiscproto xtrans \
 		bigreqsproto randrproto renderproto xextproto inputproto \

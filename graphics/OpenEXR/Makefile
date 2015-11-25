@@ -3,7 +3,7 @@
 
 PORTNAME=	OpenEXR
 PORTVERSION=	2.2.0
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	graphics devel
 MASTER_SITES=	SAVANNAH/openexr/:dist \
 		LOCAL/mandree/:test
@@ -23,12 +23,13 @@ WRKSRC=		${WRKDIR}/${DISTNAME}
 
 USES=		compiler:features gmake libtool pathfix pkgconfig
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS+=--disable-ilmbasetest --enable-imfexamples
+CONFIGURE_ARGS=	--disable-ilmbasetest --enable-imfexamples
 USE_LDCONFIG=	yes
-CPPFLAGS+=	-I. -I../IlmImf
+TEST_TARGET=	check
 
+CPPFLAGS+=	-I. -I../IlmImf
 # must be linked with -l{thr|pthread} explicitly
-LDFLAGS+=	${PTHREAD_LIBS}
+LDFLAGS+=	-lpthread
 
 PORTDOCS=	*
 PORTEXAMPLES=	*
@@ -49,10 +50,7 @@ LARGE_STACK_CONFIGURE_ENABLE=	large-stack
 
 .include <bsd.port.pre.mk>
 
-# If default compiler is GCC, upgrade it because
-# g++ 4.2 is too old to auto-upgrade 0xffffffffffffffffl to
-# a long long integer constant - and has likely more issues.
-.if ${COMPILER_TYPE} == gcc
+.if ${ARCH} == powerpc
 USE_GCC=	yes
 .endif
 
@@ -82,17 +80,11 @@ pre-configure:
 		${ECHO_CMD} "*** same C++ std. library before trying to build OpenEXR.  Abort.   ***" ; \
 		exit 1; }
 
-.if ! ${PORT_OPTIONS:MEXAMPLES}
-EXTRA_PATCHES+=${FILESDIR}/extra-patch-IlmImfExamples__Makefile.in
-.endif
-
-regression-test regression test check:	build
-	@(cd ${WRKSRC}; ${SETENV} ${MAKE_ENV} ${MAKE} ${MAKE_FLAGS} ${MAKEFILE} ${MAKE_ARGS} ${_MAKE_JOBS} check)
-
 post-install:
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libIlmImf-${MAJORVER}.so.${VER}
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libIlmImfUtil-${MAJORVER}.so.${VER}
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libIlmImf-${MAJORVER}.so.${VER} \
+		${STAGEDIR}${PREFIX}/lib/libIlmImfUtil-${MAJORVER}.so.${VER}
 
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${DOC_FILES1:S|^|${DOCSRCDIR1}/|} ${STAGEDIR}${DOCSDIR}
 	@${MKDIR} ${STAGEDIR}${DOCSDIR2}

@@ -3,7 +3,7 @@
 
 PORTNAME=	hylafax
 PORTVERSION=	6.0.6
-PORTREVISION=	3
+PORTREVISION=	5
 CATEGORIES=	comms
 MASTER_SITES=	ftp://ftp.hylafax.org/source/
 
@@ -12,13 +12,11 @@ COMMENT=	Fax software
 
 BUILD_DEPENDS=	${LOCALBASE}/lib/afm/Courier:${PORTSDIR}/print/afm
 LIB_DEPENDS=	libtiff.so:${PORTSDIR}/graphics/tiff \
-		libjpeg.so:${PORTSDIR}/graphics/jpeg \
 		libjbig.so:${PORTSDIR}/graphics/jbigkit
 
 MAKE_JOBS_UNSAFE=	yes
-USE_GHOSTSCRIPT=yes
 HAS_CONFIGURE=	yes
-USES=		fakeroot
+USES=		fakeroot ghostscript jpeg
 
 CONFIGURE_ARGS=	--with-INSTALL="" \
 		--with-LIBTIFF="-L${LOCALBASE}/lib -ltiff -ljpeg" \
@@ -26,7 +24,8 @@ CONFIGURE_ARGS=	--with-INSTALL="" \
 		--with-TIFFINC="-I${LOCALBASE}/include" \
 		--with-GCOPTS=" " --with-GCXXOPTS=" " \
 		--with-REGEX=no --with-LIBREGEX='' --with-REGEXINC=-I/usr/include \
-		--with-DIR_HTML="${DOCSDIR}"
+		--with-DIR_HTML="${DOCSDIR}" \
+		--with-GETTY=SysV
 CFLAGS+=	-D_XOPEN_SOURCE -D_XOPEN_SOURCE_EXTENDED -Wall -L${LOCALBASE}/lib
 CONFIGURE_ENV=	ENVOPTS="${CFLAGS}"
 MAKE_ENV+=	ROOT=${STAGEDIR}
@@ -68,21 +67,17 @@ PLIST_SUB+=	HYLAFAX_SPOOL=${HYLAFAX_SPOOL}
 CONFIGURE_ARGS+=--nointeractive
 .endif
 
-.if ${OSVERSION} >= 900007
-CONFIGURE_ARGS+=	--with-GETTY=SysV
-.endif
-
 post-patch:
 	${REINPLACE_CMD} \
 		-e 's,/usr/local,${LOCALBASE},g' \
 		-e 's,-ljbig,-L${LOCALBASE}/lib &,' \
 		${WRKSRC}/configure
-	${REINPLACE_CMD} -e 's,-O hfaxd.conf,-O hfaxd.conf-dist,' \
+	${REINPLACE_CMD} -e 's,-O hfaxd.conf,-O hfaxd.conf.sample,' \
 		${WRKSRC}/hfaxd/Makefile.in
-	${REINPLACE_CMD} -e 's,hosts.hfaxd,hosts.hfaxd-dist,' \
+	${REINPLACE_CMD} -e 's,hosts.hfaxd,hosts.hfaxd.sample,' \
 		${WRKSRC}/etc/Makefile.in
-	${REINPLACE_CMD} -e 's,-O typerules,-O typerules-dist,' \
-		-e 's,-O pagesizes,-O pagesizes-dist -src pagesizes,' \
+	${REINPLACE_CMD} -e 's,-O typerules,-O typerules.sample,' \
+		-e 's,-O pagesizes,-O pagesizes.sample -src pagesizes,' \
 		${WRKSRC}/libhylafax/Makefile.in
 
 pre-install:

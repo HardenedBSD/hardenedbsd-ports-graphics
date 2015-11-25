@@ -24,8 +24,6 @@ WITH_ZLIB=	yes
 MAKEFILE=	makefile
 
 SHEBANG_FILES=	pack.py unpack.py
-python_OLD_CMD=	${SETENV} python
-python_CMD=	${PYTHON_CMD}
 
 INSTALLS_ICONS=	yes
 

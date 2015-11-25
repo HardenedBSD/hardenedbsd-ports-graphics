@@ -32,6 +32,7 @@ include/libical-glib/i-cal-timezonetype.h
 include/libical-glib/i-cal-trigger-type.h
 include/libical-glib/i-cal-unknowntokenhandling.h
 include/libical-glib/i-cal-value.h
+include/libical-glib/libical-glib-private.h
 include/libical-glib/libical-glib.h
 lib/girepository-1.0/ICalGLib-1.0.typelib
 lib/libical-glib-1.0.so

@@ -3,11 +3,9 @@
 
 PORTNAME=	qcad
 PORTVERSION=	3.7.5.0
-PORTREVISION=	3
+DISTVERSIONPREFIX=	v
+PORTREVISION=	4
 CATEGORIES=	cad
-MASTER_SITES=	http://github.com/${PORTNAME}/${PORTNAME}/archive/${DISTNAME}.tar.gz?dummy=/	\
-		https://github.com/${PORTNAME}/${PORTNAME}/archive/${DISTNAME}.tar.gz?dummy=/
-DISTNAME=	v${PORTVERSION}
 DIST_SUBDIR=	${PORTNAME}
 
 MAINTAINER=	mr@FreeBSD.org
@@ -18,10 +16,10 @@ LICENSE=	GPLv3
 BUILD_DEPENDS=	bash:${PORTSDIR}/shells/bash	\
 		${LOCALBASE}/lib/libopenNURBS.a:${PORTSDIR}/graphics/opennurbs
 
-WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 MAKE_JOBS_UNSAFE=yes
 
 USES=		execinfo gmake qmake
+USE_GITHUB=	yes
 USE_LDCONFIG=	yes
 USE_QT4=	qmake_build codecs-cn codecs-jp codecs-kr codecs-tw corelib \
 		designer gui help imageformats moc_build network opengl rcc_build script \
@@ -54,12 +52,12 @@ pre-configure:
 	${REINPLACE_CMD} -e "s|%%DATADIR%%|${DATADIR}|"	\
 		${WRKSRC}/src/core/RSettings.cpp
 
-# Temporary hack for Qt 4.8.6 support while upstream does not add proper
+# Temporary hack for Qt 4.8.7 support while upstream does not add proper
 # bindings.
 	(cd ${WRKSRC}/src/3rdparty/qt-labs-qtscriptgenerator-4.8.5 && \
-		${COPYTREE_SHARE} . ../qt-labs-qtscriptgenerator-4.8.6)
-	(cd ${WRKSRC}/src/3rdparty/qt-labs-qtscriptgenerator-4.8.6 && \
-		mv qt-labs-qtscriptgenerator-4.8.5.pro qt-labs-qtscriptgenerator-4.8.6.pro)
+		${COPYTREE_SHARE} . ../qt-labs-qtscriptgenerator-4.8.7)
+	(cd ${WRKSRC}/src/3rdparty/qt-labs-qtscriptgenerator-4.8.7 && \
+		mv qt-labs-qtscriptgenerator-4.8.5.pro qt-labs-qtscriptgenerator-4.8.7.pro)
 
 do-install:
 	${INSTALL_PROGRAM} ${RESDIR}/qcad-bin ${STAGEDIR}${PREFIX}/bin/
@@ -69,7 +67,7 @@ do-install:
 	${LN} -sf ${PREFIX}/lib/${lib}.0 ${STAGEDIR}${PREFIX}/lib/${lib}
 .endfor
 .for lib in ${STALIBS:C|^|lib|:C|$|.a|}
-	${INSTALL_LIB} ${RESDIR}/${lib} ${STAGEDIR}${PREFIX}/lib/
+	${INSTALL_DATA} ${RESDIR}/${lib} ${STAGEDIR}${PREFIX}/lib/
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
 .for dir in ${SHRDIR}

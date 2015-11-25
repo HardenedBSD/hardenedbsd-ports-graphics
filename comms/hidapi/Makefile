@@ -1,6 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	hidapi
+DISTVERSIONPREFIX=	${PORTNAME}-
 DISTVERSION=	0.8.0-rc1
 PORTREVISION=	3
 CATEGORIES=	comms
@@ -13,13 +14,17 @@ LICENSE_COMB=	dual
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	signal11
-GH_TAGNAME=	${PORTNAME}-${DISTVERSION}
-GH_COMMIT=	40cf516
 
-USES=		autoreconf iconv:wchar_t libtool
+USES=		autoreconf gettext-tools iconv:wchar_t libtool
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
 INSTALL_TARGET=	install-strip
 PORTDOCS=	*
+
+CPPFLAGS+=	-I${LOCALBASE}/include
+LIBS+=		-L${LOCALBASE}/lib
+
+pre-configure:
+	@${CP} ${LOCALBASE}/share/gettext/config.rpath ${WRKSRC}
 
 .include <bsd.port.mk>

@@ -9,6 +9,9 @@ DISTNAME=	ReviewBoard-${PORTVERSION}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Web-based code review tool
 
+DEPRECATED=	Django 1.4 extended support ended on 2015-10-01
+EXPIRATION_DATE=	2015-12-09
+
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/COPYING
 
@@ -37,7 +40,9 @@ BUILD_DEPENDS=	python:${PORTSDIR}/lang/python \
 		${PYTHON_PKGNAMEPREFIX}jsmin>0:${PORTSDIR}/devel/py-jsmin \
 		uglifyjs:${PORTSDIR}/www/uglifyjs
 
-USES=		python:2
+USES=		cpe python:2
+CPE_VENDOR=	reviewboard
+CPE_PRODUCT=	review_board
 USE_PYTHON=	distutils
 PYDISTUTILS_PKGNAME=	ReviewBoard
 # avoid leftover /root/.subversion

@@ -3,10 +3,9 @@
 
 PORTNAME=	ladder
 PORTVERSION=	1.0
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	games gnustep
-MASTER_SITES=	SAVANNAH/gap \
-		GNUSTEP_CH/gap
+MASTER_SITES=	SAVANNAH/gap
 PKGNAMEPREFIX=	gnustep-
 DISTNAME=	Ladder-${PORTVERSION}
 
@@ -18,12 +17,10 @@ LICENSE_FILE=	${WRKSRC}/COPYING.GPL
 
 RUN_DEPENDS=	gnugo:${PORTSDIR}/games/gnugo
 
-USE_GNUSTEP=	yes
-USE_GNUSTEP_BACK=	yes
-USE_GNUSTEP_BUILD=	yes
-USE_GNUSTEP_INSTALL=	yes
+USES=		gnustep
+USE_GNUSTEP=	back build
 
 post-install:
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/Local/Applications/Ladder.app/Ladder
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/System/Applications/Ladder.app/Ladder
 
 .include <bsd.port.mk>

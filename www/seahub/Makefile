@@ -2,9 +2,11 @@
 
 PORTNAME=	seahub
 PORTVERSION=	4.0.5
+PORTREVISION=	1
+DISTVERSIONPREFIX=	v
+DISTVERSIONSUFFIX=	-pro
 CATEGORIES=	www
-MASTER_SITES=	GH:seahub \
-		https://pypi.python.org/packages/source/p/pip/:pip \
+MASTER_SITES=	https://pypi.python.org/packages/source/p/pip/:pip \
 		https://pypi.python.org/packages/source/p/pbr/:pbr \
 		https://pypi.python.org/packages/source/l/lockfile/:lockfile \
 		https://pypi.python.org/packages/source/s/six/:six \
@@ -16,7 +18,7 @@ MASTER_SITES=	GH:seahub \
 		https://pypi.python.org/packages/source/P/Pillow/:Pillow \
 		https://pypi.python.org/packages/source/D/Django/:Django \
 		http://downloads.reviewboard.org/releases/Djblets/0.6/:Djblets
-DISTFILES=	${PORTNAME}-${PORTVERSION}.tar.gz:${PORTNAME} \
+DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
 		pip-1.5.6.tar.gz:pip \
 		pbr-0.10.0.tar.gz:pbr \
 		lockfile-0.10.2.tar.gz:lockfile \
@@ -31,7 +33,7 @@ DISTFILES=	${PORTNAME}-${PORTVERSION}.tar.gz:${PORTNAME} \
 		Djblets-0.6.14.tar.gz:Djblets
 DIST_SUBDIR=	${PORTNAME}
 
-MAINTAINER=	yan_jingfeng@yahoo.com
+MAINTAINER=	ultima1252@gmail.com
 COMMENT=	Web frontend for Seafile
 
 LICENSE=	APACHE20
@@ -42,8 +44,6 @@ RUN_DEPENDS=	${LOCALBASE}/www/haiwen/seafile-server/seafile/bin/seaf-server:${PO
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	haiwen
-GH_TAGNAME=	v${PORTVERSION}-pro
-GH_COMMIT=	921c6ce
 
 USES=		python:2 shebangfix
 SHEBANG_FILES=	*.sh *.template
@@ -77,6 +77,7 @@ SITEPACKAGEDIR=	${SEAHUBDIR}/thirdpart
 SEAFILE_USERNAME?=	www
 SEAFILE_GROUPNAME?=	${SEAFILE_USERNAME}
 
+USE_RC_SUBR=	${PORTNAME}
 PLIST_SUB=	SEAFILE_USERNAME=${SEAFILE_USERNAME} \
 		SEAFILE_GROUPNAME=${SEAFILE_GROUPNAME} \
 		SEAFILE_SERVER=${SEAFILE_SERVER} \

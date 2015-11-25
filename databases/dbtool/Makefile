@@ -2,62 +2,52 @@
 # $FreeBSD$
 
 PORTNAME=	dbtool
-PORTVERSION=	1.7
-PORTREVISION=	5
+PORTVERSION=	1.9.1
 CATEGORIES=	databases
 MASTER_SITES=	http://www.daemon.de/idisk/Apps/dbtool/
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Store and retrieve data in a key/value format in a hash database
 
+LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/COPYING
+
+BROKEN=		Does not fetch
 LIB_DEPENDS=	libpcre.so:${PORTSDIR}/devel/pcre
 
-OPTIONS_DEFINE=	BDB EXAMPLES
-
-EXAMPLES_RUN_DEPENDS=	bash:${PORTSDIR}/shells/bash
-
-LICENSE=	GPLv2
-
+USES=		gmake shebangfix
+SHEBANG_FILES=	samples/account-db/accdb
+bash_OLD_CMD=	/bin/sh
 GNU_CONFIGURE=	yes
-CPPFLAGS+=	${CXXFLAGS} -I${LOCALBASE}/include
-LIBS+=		-L${LOCALBASE}/lib
 
-USES=		gmake
-REINPLACE_ARGS=	-i ""
+CPPFLAGS+=	-I${LOCALBASE}/include
+LDFLAGS+=	-L${LOCALBASE}/lib
 
-SH2BASH=	samples/account-db/accdb
-UB2PFX=		samples/locate/locate samples/locate/updatedb
+PORTEXAMPLES=	*
+PLIST_FILES=	bin/dbtool man/man1/dbtool.1.gz
 
-.include <bsd.port.options.mk>
+OPTIONS_DEFINE=		EXAMPLES
+OPTIONS_SINGLE=		BACKEND
+OPTIONS_SINGLE_BACKEND=	BDB GDBM
+OPTIONS_DEFAULT=	GDBM
 
-.if ${PORT_OPTIONS:MBDB}
-USE_BDB=	48+
-CPPFLAGS+=	-I${BDB_INCLUDE_DIR}
-LIBS+=		-L${BDB_LIB_DIR} -l${BDB_LIB_NAME}
-CONFIGURE_ARGS+=	--with-berkeley
-.else
-LIB_DEPENDS+=	libgdbm.so:${PORTSDIR}/databases/gdbm
-CONFIGURE_ARGS+=	--without-berkeley
-.endif
+BACKEND_DESC=		Database backend
+BDB_USE=		bdb=yes
+BDB_CONFIGURE_ON=	--with-berkeley \
+			--with-bdb-include-dir=${BDB_INCLUDE_DIR} \
+			--with-bdb-lib-dir=${BDB_LIB_DIR}
+EXAMPLES_RUN_DEPENDS=	bash:${PORTSDIR}/shells/bash
+GDBM_LIB_DEPENDS=	libgdbm.so:${PORTSDIR}/databases/gdbm
+GDBM_CONFIGURE_ON=	--with-gdbm \
+			--with-gdbm-dir=${LOCALBASE}
 
 post-patch:
-	${REINPLACE_CMD} -e 's,==,=,g' ${WRKSRC}/configure
-.for file in dbtool.cc engine.cc engine.h
-	${REINPLACE_CMD} -e "s,stdin,input,g" ${WRKSRC}/${file}
-.endfor
-.if ${PORT_OPTIONS:MEXAMPLES}
-.for file in ${SH2BASH}
-	${REINPLACE_CMD} -e "s|/bin/sh|${LOCALBASE}/bin/bash|" ${WRKSRC}/${file}
-.endfor
-.for file in ${UB2PFX}
-	${REINPLACE_CMD} -e "s|%%PREFIX%%|${PREFIX}|" ${WRKSRC}/${file}
-	@${RM} ${WRKSRC}/${file}.orig
-	@${RM} ${WRKSRC}/${file}~
-.endfor
-.endif
+	@${REINPLACE_CMD} -e \
+		'/try_libs=/s|"-ldb_cxx.*"|"-ldb_cxx"| ; \
+		 /try_headers=/s|"db.*"|"db_cxx.h"|' ${WRKSRC}/configure
 
-post-install:
+post-install-EXAMPLES-on:
 	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
-	${CP} -Rp ${WRKSRC}/samples/* ${STAGEDIR}${EXAMPLESDIR}
+	cd ${WRKSRC}/samples && ${COPYTREE_SHARE} . ${STAGEDIR}${EXAMPLESDIR}
 
 .include <bsd.port.mk>

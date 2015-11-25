@@ -2,10 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	hgview
-PORTVERSION=	1.6.2
-PORTREVISION=	2
+PORTVERSION=	1.8.2
 CATEGORIES=	devel
-MASTER_SITES=	LOGILAB
+MASTER_SITES=	CHEESESHOP \
+		http://download.logilab.org/pub/${PORTNAME}/
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Fast Mercurial log navigator written in pyqt4
@@ -20,6 +20,7 @@ BUILD_DEPENDS=	hg:${PORTSDIR}/devel/mercurial \
 		xmlto:${PORTSDIR}/textproc/xmlto \
 		asciidoc:${PORTSDIR}/textproc/asciidoc
 
+NO_ARCH=	yes
 USE_PYTHON=	distutils
 USES=		gmake python
 PORTDOCS=	*

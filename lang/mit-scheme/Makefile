@@ -5,8 +5,7 @@ PORTNAME=	mit-scheme
 PORTVERSION=	9.2
 PORTREVISION=	1
 CATEGORIES=	lang scheme
-MASTER_SITES=	${MASTER_SITE_GNU}
-MASTER_SITE_SUBDIR=	mit-scheme/stable.pkg/${PORTVERSION}
+MASTER_SITES=	GNU/mit-scheme/stable.pkg/${PORTVERSION}
 DISTNAME=	${PORTNAME}-${PORTVERSION}-${MIT_SCHEME_ARCH}
 
 MAINTAINER=	olgeni@FreeBSD.org
@@ -24,10 +23,6 @@ MCRYPT_DESC=	mcrypt library support
 MHASH_DESC=	mhash library support
 
 .include <bsd.port.pre.mk>
-
-.if ${OSVERSION} < 900000 && ${ARCH} == "amd64"
-USE_GCC=	yes
-.endif
 
 # TODO implement db4 support
 CONFIGURE_ARGS+=--without-db-4

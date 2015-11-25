@@ -26,7 +26,7 @@ USE_LDCONFIG=	yes
 USE_OPENSSL=	yes
 
 LDFLAGS+=	-lboost_program_options -lboost_system
-MAKE_CMD=	${SCONS} -j${MAKE_JOBS_NUMBER} --config=force
+MAKE_ARGS+=	--config=force
 
 SHEBANG_FILES=	docs/sphinx-*
 
@@ -64,20 +64,16 @@ PICKLE_DESC=	Pickle support
 
 .include <bsd.port.pre.mk>
 
-.if ${OSVERSION} < 900506
-IGNORE=	need __WORDSIZE found in FreeBSD 9
-.endif
-
 .if ${PORT_OPTIONS:MBOOSTPOOL}
-MAKE_CMD+=	boost_pool=1
+MAKE_ARGS+=	boost_pool=1
 .endif
 
 .if ${PORT_OPTIONS:MBPOSTATIC}
-MAKE_CMD+=	bpostatic=${PREFIX}/lib/libboost_program_options.so
+MAKE_ARGS+=	bpostatic=${PREFIX}/lib/libboost_program_options.so
 .endif
 
 .if ${PORT_OPTIONS:MDEBUG}
-MAKE_CMD+=	debug=3
+MAKE_ARGS+=	debug=3
 .endif
 
 post-patch:

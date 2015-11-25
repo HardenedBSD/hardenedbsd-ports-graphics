@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	gqrx
-PORTVERSION=	2.3.1
+PORTVERSION=	2.3.2
+DISTVERSIONPREFIX=	v
 PORTEPOCH=	1
 CATEGORIES=	comms hamradio
 
@@ -24,8 +25,6 @@ LIB_DEPENDS=	libgnuradio-runtime.so:${PORTSDIR}/comms/gnuradio \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	csete
-GH_COMMIT=	4d90b84
-GH_TAGNAME=	v${PORTVERSION}
 
 USES=		pkgconfig qmake
 
@@ -44,4 +43,11 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/gqrx.desktop \
 		${STAGEDIR}${PREFIX}/share/applications
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+# Chase comms/gnuradio compiler choice
+.if ${OPSYS} == FreeBSD && ${OSVERSION} < 1000000
+USE_GCC=	yes
+.endif
+
+.include <bsd.port.post.mk>

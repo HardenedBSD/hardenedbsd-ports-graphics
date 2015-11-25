@@ -2,12 +2,12 @@
 # $FreeBSD$
 
 PORTNAME=	syslog-ng
-PORTVERSION=	3.6.2
-PORTREVISION=	3
+PORTVERSION=	3.6.4
 CATEGORIES=	sysutils
 DISTVERSION=	$(PORTVERSION:S/a/alpha/:S/b/beta/:S/r/rc/)
-DISTFILES=	syslog-ng_${DISTVERSION}.tar.gz
-MASTER_SITES=	http://www.balabit.com/downloads/files/syslog-ng/open-source-edition/${DISTVERSION}/source/
+DISTFILES=	syslog-ng-${DISTVERSION}.tar.gz
+MASTER_SITES=	https://github.com/balabit/${PORTNAME}/releases/download/${PORTNAME}-${DISTVERSION}/ \
+		http://www.balabit.com/downloads/files/syslog-ng/open-source-edition/${DISTVERSION}/source/ \
 
 MAINTAINER=	cy@FreeBSD.org
 COMMENT=	Powerful syslogd replacement
@@ -32,7 +32,7 @@ JSON_DESC=		Build with JSON-C support
 GEOIP_DESC=		Build with GeoIP support
 REDIS_DESC=		Build with Redis support
 
-USES=		gmake libtool pathfix pkgconfig
+USES=		alias gmake libtool pathfix pkgconfig
 USE_LDCONFIG=	yes
 USE_RC_SUBR=	syslog-ng
 GNU_CONFIGURE=	yes
@@ -41,8 +41,8 @@ SUB_FILES=	pkg-message
 INSTALL_TARGET=	install-strip
 
 CONFIGURE_ARGS=	--sysconfdir=${LOCALBASE}/etc --localstatedir=/var/db \
-		--enable-dynamic-linking \
-		--enable-debug \
+		--enable-dynamic-linking --disable-linux-caps \
+		--enable-debug --enable-manpages \
 		--datadir=${PREFIX}/share/syslog-ng/
 
 BROKEN_sparc64=	Does not compile on sparc64: gcc core dump
@@ -92,7 +92,7 @@ CONFIGURE_ARGS+=	--disable-geoip
 .endif
 
 .if ${PORT_OPTIONS:MREDIS}
-CONFIGURE_ARGS+=        --enable-redis
+CONFIGURE_ARGS+=        --enable-redis --with-libhiredis=${LOCALBASE}/lib
 LIB_DEPENDS+=           libhiredis.so:${PORTSDIR}/databases/hiredis
 PLIST_FILES+=           lib/syslog-ng/libredis.so
 .else
@@ -125,12 +125,6 @@ PLIST_FILES+= 		lib/syslog-ng/libjson-plugin.so
 CONFIGURE_ARGS+=        --disable-json
 .endif
 
-.include <bsd.port.pre.mk>
-
-.if ${OSVERSION} >= 900034
-CONFIGURE_ARGS+=        --disable-linux-caps
-.endif
-
 post-patch:
 	@${REINPLACE_CMD} -e 's:libnet-config:libnet11-config:g' \
 		${WRKSRC}/configure
@@ -154,4 +148,4 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/lib/ivykis/src/include/iv*.h \
 		${STAGEDIR}${PREFIX}/include/syslog-ng/
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

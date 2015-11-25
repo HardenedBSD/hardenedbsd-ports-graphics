@@ -2,10 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	squirrel-sql
-PORTVERSION=	3.5.3
+PORTVERSION=	3.7.0
 CATEGORIES=	databases java
 MASTER_SITES=	SF/${PORTNAME}/1-stable/${PORTVERSION}-plainzip
-DISTNAME=	squirrelsql-${PORTVERSION}-optional
+DISTNAME=	squirrelsql-${PORTVERSION:R}-optional
 
 MAINTAINER=	jonc@chen.org.nz
 COMMENT=	Universal SQL Client
@@ -16,11 +16,12 @@ NO_BUILD=	yes
 USES=		zip
 USE_JAVA=	yes
 JAVA_VERSION=	1.6+
+NO_ARCH=	yes
 WRKSRC=		${WRKDIR}/${DISTNAME}
 
 SUB_FILES=	squirrel-sql
 
-DATADIR=	${PREFIX}/share/java/${UNIQUENAME}
+DATADIR=	${PREFIX}/share/java/${PKGBASE}
 
 DESKTOP_ENTRIES="Squirrel-SQL Client" \
 		"${COMMENT}" \

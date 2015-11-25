@@ -14,17 +14,16 @@ COMMENT=	P2P VoIP software, development version
 
 CONFLICTS=	skype-[0-9]*
 
-OPTIONS_DEFINE=	VIDEO NVIDIA_GL
-VIDEO_DESC=	[broken] Video support
-NVIDIA_GL_DESC=	libGL provided by NVidia binary drivers
-
+OPTIONS_DEFINE=	NVIDIA_GL VIDEO
 OPTIONS_DEFAULT=	VIDEO
+VIDEO_DESC=	[broken] Video support
+
 
 CONFLICTS=	skype-1* skype-2.0* skype-2.1*
 
 NO_BUILD=	yes
 
-USES=		tar:bzip2
+USES=		cpe tar:bzip2
 USE_LINUX=	yes
 USE_LINUX_APPS+=alsalib alsa-plugins-oss expat fontconfig libasyncns \
 		libsigcpp20
@@ -47,7 +46,7 @@ USE_LINUX_APPS+=dri
 .endif
 
 .if ${PORT_OPTIONS:MVIDEO}
-RUN_DEPENDS+=	webcamd>0:${PORTSDIR}/multimedia/webcamd
+RUN_DEPENDS+=	webcamd:${PORTSDIR}/multimedia/webcamd
 USE_LINUX_APPS+=libv4l
 SUB_LIST+=	VIDEO="LD_PRELOAD=/usr/lib/libv4l/v4l2convert.so "
 .else

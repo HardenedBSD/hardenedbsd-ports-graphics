@@ -2,12 +2,12 @@
 # $FreeBSD$
 
 PORTNAME=	gh
-PORTVERSION=	0.13.2
+PORTVERSION=	0.14.0
 CATEGORIES=	devel rubygems
 MASTER_SITES=	RG
 
 MAINTAINER=	ruby@FreeBSD.org
-COMMENT=	Multi-layer client for the github api v3
+COMMENT=	Multi-layer client for the GitHub API v3
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
@@ -19,6 +19,7 @@ RUN_DEPENDS=	rubygem-addressable>=0:${PORTSDIR}/www/rubygem-addressable \
 		rubygem-net-http-persistent>=2.7:${PORTSDIR}/www/rubygem-net-http-persistent \
 		rubygem-net-http-pipeline>=0:${PORTSDIR}/www/rubygem-net-http-pipeline
 
+NO_ARCH=	yes
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes
 RUBYGEM_AUTOPLIST=	yes

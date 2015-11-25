@@ -2,7 +2,7 @@
 
 PORTNAME=	htmlcxx
 PORTVERSION=	0.85
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	www textproc
 MASTER_SITES=	SF
 
@@ -23,4 +23,13 @@ MAKE_JOBS_UNSAFE=yes
 
 MAKE_ARGS=	pkgconfigdir="${PREFIX}/libdata/pkgconfig"
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if !empty(ICONV_LIB)
+CONFIGURE_ARGS+=ac_cv_lib_iconv_iconv_open=yes
+.endif
+
+post-patch:
+	@${REINPLACE_CMD} 's/-liconv/${ICONV_LIB}/' ${WRKSRC}/configure
+
+.include <bsd.port.post.mk>

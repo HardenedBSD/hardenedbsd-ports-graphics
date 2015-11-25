@@ -6,7 +6,6 @@ PORTVERSION=	0.27.0.20140121
 PORTREVISION=	6
 CATEGORIES=	multimedia
 MASTER_SITES=	http://people.freebsd.org/~decke/distfiles/
-DISTNAME=	mythtv-${PORTVERSION}
 
 MAINTAINER=	decke@FreeBSD.org
 COMMENT=	MythTV is a homebrew PVR project
@@ -23,10 +22,9 @@ CONFLICTS=	mythtv-[0-9]*
 USE_GITHUB=	yes
 GH_ACCOUNT=	MythTV
 GH_PROJECT=	mythtv
-GH_TAGNAME=	${GH_COMMIT}
-GH_COMMIT=	5a5e1cd
+GH_TAGNAME=	5a5e1cd
 
-WRKSRC=		${WRKDIR}/${GH_ACCOUNT}-${GH_PROJECT}-${GH_COMMIT}/${GH_PROJECT}
+WRKSRC_SUBDIR=	${GH_PROJECT}
 
 ONLY_FOR_ARCHS=	i386 amd64
 NOPRECIOUSMAKEVARS=	# don't override $(ARCH) in ffmpeg makefiles
@@ -72,19 +70,7 @@ VDPAU_LIB_DEPENDS=	libvdpau.so:${PORTSDIR}/multimedia/libvdpau
 VDPAU_CONFIGURE_ENABLE=	vdpau
 
 OPENGL_CONFIGURE_ENABLE=	opengl-video
-
-.include <bsd.port.pre.mk>
-
-# for too old binutils in base
-.if ${OSVERSION} < 900033
-BUILD_DEPENDS+=	${LOCALBASE}/bin/as:${PORTSDIR}/devel/binutils
-CONFIGURE_ENV+=	COMPILER_PATH=${LOCALBASE}/bin
-MAKE_ENV+=	COMPILER_PATH=${LOCALBASE}/bin
-.endif
-
-.if ${PORT_OPTIONS:MOPENGL}
-USE_QT4+=	opengl
-.endif
+OPENGL_USE=	QT4=opengl
 
 post-patch:
 		@${REINPLACE_CMD} -e 's|/usr/local|${LOCALBASE}|g' \
@@ -96,4 +82,4 @@ post-patch:
 			${WRKSRC}/programs/scripts/database/mythconverg_restore.pl \
 			${WRKSRC}/programs/mythcommflag/mythcommflag-analyze
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

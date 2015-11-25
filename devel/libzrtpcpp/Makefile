@@ -3,10 +3,9 @@
 
 PORTNAME=	libzrtpcpp
 PORTVERSION=	2.3.4
-PORTREVISION=	6
+PORTREVISION=	7
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_GNU}
-MASTER_SITE_SUBDIR=ccrtp
+MASTER_SITES=	GNU/ccrtp
 
 MAINTAINER=	acm@FreeBSD.org
 COMMENT=	ZRTP extension for GNU ccRTP
@@ -14,7 +13,7 @@ COMMENT=	ZRTP extension for GNU ccRTP
 LIB_DEPENDS=	libccrtp.so:${PORTSDIR}/devel/ccrtp \
 		libgcrypt.so:${PORTSDIR}/security/libgcrypt
 
-USES=		cmake iconv gettext pkgconfig
+USES=		cmake pkgconfig
 USE_OPENSSL=	yes
 
 CMAKE_ARGS+=	-DBUILD_SHARED_LIBS:BOOL=ON

@@ -49,9 +49,10 @@
     SUBDIR += autozen
     SUBDIR += baresip
     SUBDIR += baudline
-    SUBDIR += beast
-    SUBDIR += beets
     SUBDIR += bcg729
+    SUBDIR += beast
+    SUBDIR += beep
+    SUBDIR += beets
     SUBDIR += blop
     SUBDIR += boodler
     SUBDIR += bristol
@@ -76,7 +77,6 @@
     SUBDIR += cmp3
     SUBDIR += cmt
     SUBDIR += cmus
-    SUBDIR += cmus-post.fm
     SUBDIR += cpige
     SUBDIR += cplay
     SUBDIR += cpp-xmms2
@@ -95,7 +95,9 @@
     SUBDIR += darkice
     SUBDIR += dcd
     SUBDIR += deadbeef
+    SUBDIR += deadbeef-jack-plugin
     SUBDIR += deadbeef-mpris-plugin
+    SUBDIR += deadbeef-mpris2-plugin
     SUBDIR += decibel-audio-player
     SUBDIR += deforaos-mixer
     SUBDIR += dekagen
@@ -148,10 +150,10 @@
     SUBDIR += festvox-rab16
     SUBDIR += festvox-rab8
     SUBDIR += festvox-russian
-    SUBDIR += filter_audio
     SUBDIR += firefly
     SUBDIR += flac
     SUBDIR += flac123
+    SUBDIR += flacon
     SUBDIR += flake
     SUBDIR += flite
     SUBDIR += fluidsynth
@@ -206,6 +208,7 @@
     SUBDIR += gnormalize
     SUBDIR += gnuitar
     SUBDIR += gnupod
+    SUBDIR += gnuspeechsa
     SUBDIR += gnustep-cdplayer
     SUBDIR += gogglesmm
     SUBDIR += goobox
@@ -214,6 +217,7 @@
     SUBDIR += gramofile
     SUBDIR += grip
     SUBDIR += gsm
+    SUBDIR += gsound
     SUBDIR += gspeakers
     SUBDIR += gstreamer-plugins-a52dec
     SUBDIR += gstreamer-plugins-amrnb
@@ -252,7 +256,9 @@
     SUBDIR += gstreamer1-plugins-a52dec
     SUBDIR += gstreamer1-plugins-amrnb
     SUBDIR += gstreamer1-plugins-amrwbdec
+    SUBDIR += gstreamer1-plugins-bs2b
     SUBDIR += gstreamer1-plugins-cdparanoia
+    SUBDIR += gstreamer1-plugins-chromaprint
     SUBDIR += gstreamer1-plugins-faac
     SUBDIR += gstreamer1-plugins-faad
     SUBDIR += gstreamer1-plugins-flac
@@ -263,6 +269,7 @@
     SUBDIR += gstreamer1-plugins-lame
     SUBDIR += gstreamer1-plugins-mad
     SUBDIR += gstreamer1-plugins-modplug
+    SUBDIR += gstreamer1-plugins-mpg123
     SUBDIR += gstreamer1-plugins-ogg
     SUBDIR += gstreamer1-plugins-opus
     SUBDIR += gstreamer1-plugins-pulse
@@ -355,6 +362,7 @@
     SUBDIR += libdssialsacompat
     SUBDIR += libebur128
     SUBDIR += libechonest
+    SUBDIR += libfilteraudio
     SUBDIR += libfishsound
     SUBDIR += libgig
     SUBDIR += libgme
@@ -367,6 +375,7 @@
     SUBDIR += liblo
     SUBDIR += liblscp
     SUBDIR += libmad
+    SUBDIR += libmatemixer
     SUBDIR += libmikmod
     SUBDIR += libmodplug
     SUBDIR += libmp3-archive-perl
@@ -431,6 +440,7 @@
     SUBDIR += linux-laudio
     SUBDIR += linux-mbrola
     SUBDIR += linux-neroaaccodec
+    SUBDIR += linux-skype_oss_wrapper
     SUBDIR += linuxsampler
     SUBDIR += listener
     SUBDIR += lmms
@@ -497,6 +507,7 @@
     SUBDIR += mpg321
     SUBDIR += mpiosh
     SUBDIR += mps
+    SUBDIR += msbcg729
     SUBDIR += msilbc
     SUBDIR += mumble
     SUBDIR += murmur
@@ -569,7 +580,6 @@
     SUBDIR += p5-tagged
     SUBDIR += p5-xmms2
     SUBDIR += pacpl
-    SUBDIR += padevchooser
     SUBDIR += paman
     SUBDIR += paprefs
     SUBDIR += patchage
@@ -590,8 +600,8 @@
     SUBDIR += pms
     SUBDIR += pocketsphinx
     SUBDIR += portaudio
-    SUBDIR += portaudio2
     SUBDIR += praat
+    SUBDIR += pragha
     SUBDIR += puddletag
     SUBDIR += pulseaudio
     SUBDIR += pure-audio
@@ -603,6 +613,7 @@
     SUBDIR += py-discogs-client
     SUBDIR += py-eyed3
     SUBDIR += py-fastaudio
+    SUBDIR += py-fmoo-audiotools
     SUBDIR += py-gmusicapi
     SUBDIR += py-id3
     SUBDIR += py-karaoke
@@ -631,7 +642,6 @@
     SUBDIR += qsynth
     SUBDIR += quimup
     SUBDIR += raop_play
-    SUBDIR += raproxy
     SUBDIR += raul
     SUBDIR += rawrec
     SUBDIR += re
@@ -657,8 +667,7 @@
     SUBDIR += rubygem-librmpd
     SUBDIR += rubygem-ruby-mp3info
     SUBDIR += rubygem-ruby-ogginfo
-    SUBDIR += rubygem-shout
-    SUBDIR += rubyripper
+    SUBDIR += rubygem-ruby-shout
     SUBDIR += s3mod
     SUBDIR += sbagen
     SUBDIR += schism
@@ -680,6 +689,7 @@
     SUBDIR += sidplayer
     SUBDIR += simplemod
     SUBDIR += siren
+    SUBDIR += skype-call-recorder
     SUBDIR += slv2
     SUBDIR += smasher
     SUBDIR += snack
@@ -792,6 +802,7 @@
     SUBDIR += xcdplayer
     SUBDIR += xfce4-mixer
     SUBDIR += xfce4-mpc-plugin
+    SUBDIR += xfce4-pulseaudio-plugin
     SUBDIR += xfmpc
     SUBDIR += xhippo
     SUBDIR += ximp3

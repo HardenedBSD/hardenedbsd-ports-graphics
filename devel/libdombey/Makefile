@@ -2,12 +2,15 @@
 # $FreeBSD$
 
 PORTNAME=	libdombey
-PORTVERSION=	4.1.2
+PORTVERSION=	5.22
 CATEGORIES=	devel
 MASTER_SITES=	http://www.mammothcheese.ca/
 
 MAINTAINER=	jimmy@mammothcheese.ca
 COMMENT=	SCGI application server in a library
+
+LICENSE=	BSD3CLAUSE
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
 USE_LDCONFIG=	yes
 

@@ -2,11 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	ahven
-PORTVERSION=	2.4
-PORTREVISION=	4
+PORTVERSION=	2.6
+PORTREVISION=	1
 CATEGORIES=	devel
-MASTER_SITES=	SF
-MASTER_SITE_SUBDIR=${PORTNAME}/${PORTNAME}/Ahven%20${PORTVERSION}
+MASTER_SITES=	http://www.ahven-framework.com/releases/
 
 MAINTAINER=	marino@FreeBSD.org
 COMMENT=	Ada unit test framework
@@ -15,31 +14,40 @@ LICENSE=	ISCL
 
 BUILD_DEPENDS=	adactl:${PORTSDIR}/lang/adacontrol
 
-USES=		ada
-ALL_TARGET=	build_all
-MAKE_ENV+=	OS_VERSION=unix
+USES=		ada gmake
+MAKE_ENV=	OS_VERSION=unix
 
-OPTIONS_DEFINE=	TRACE DOCS
-OPTIONS_DEFAULT=TRACE
-NO_OPTIONS_SORT=yes
+OPTIONS_DEFINE=		TRACE DOCS
+OPTIONS_DEFAULT=	TRACE
+NO_OPTIONS_SORT=	yes
+TRACE_DESC=		Build with GNAT-specific symbolic tracing functionality
 
-TRACE_DESC=	Build with GNAT-specific symbolic tracing functionality
+DOCS_USES=		python:build
+DOCS_BUILD_DEPENDS=	sphinx-build:${PORTSDIR}/textproc/py-sphinx \
+			${PYTHON_PKGNAMEPREFIX}sphinxcontrib-adadomain>0:${PORTSDIR}/textproc/py-sphinxcontrib-adadomain
+TRACE_EXTRA_PATCHES=	${FILESDIR}/extra-src_ahven-framework.adb
 
-.include <bsd.port.options.mk>
+do-build:
+	(cd ${WRKSRC} && ${MKDIR} lib objects)
+	(cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} gnatmake -Pgnat/ahven_lib)
 
-.if ${PORT_OPTIONS:MDOCS}
-USES+=		python:build
-BUILD_DEPENDS+=	sphinx-build:${PORTSDIR}/textproc/py-sphinx \
-		${PYTHON_PKGNAMEPREFIX}sphinxcontrib-adadomain>0:${PORTSDIR}/textproc/py-sphinxcontrib-adadomain
-ALL_TARGET+=	docs
-.endif
+do-build-DOCS-on:
+	(cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+		${MAKE_CMD} -C doc/manual/en html)
 
-.if ${PORT_OPTIONS:MTRACE}
-EXTRA_PATCHES=	${FILESDIR}/extra-src_ahven-framework.adb
-.endif
+do-install:
+	(cd ${STAGEDIR}${PREFIX} && ${MKDIR} lib/gnat lib/ahven include/ahven)
+	${INSTALL_DATA} ${WRKSRC}/src/*.ad[bs] \
+		${STAGEDIR}${PREFIX}/include/ahven
+	${INSTALL_DATA} ${WRKSRC}/lib/*.ali ${STAGEDIR}${PREFIX}/lib/ahven
+	${INSTALL_DATA} ${WRKSRC}/lib/libahven.a ${STAGEDIR}${PREFIX}/lib/ahven
+	${INSTALL_DATA} ${FILESDIR}/ahven.gpr ${STAGEDIR}${PREFIX}/lib/gnat
 
-post-install:
-	${RM} -rf ${STAGEDIR}${PREFIX}/share/doc/ahven/html/_sources
-	${RM} ${STAGEDIR}${PREFIX}/share/doc/ahven/html/.buildinfo
+do-install-DOCS-on:
+	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	(cd ${WRKSRC}/doc/manual/en/build && \
+		${COPYTREE_SHARE} html ${STAGEDIR}${DOCSDIR});
+	${RM} -r ${STAGEDIR}${DOCSDIR}/html/_sources
+	${RM} ${STAGEDIR}${DOCSDIR}/html/.buildinfo
 
 .include <bsd.port.mk>

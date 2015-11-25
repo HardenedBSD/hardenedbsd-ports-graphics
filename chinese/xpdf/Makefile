@@ -6,9 +6,8 @@ PORTVERSION=	3.03
 PORTEPOCH=	2
 CATEGORIES=	chinese graphics print
 MASTER_SITES=	ftp://ftp.foolabs.com/pub/xpdf/ \
-		${MASTER_SITE_TEX_CTAN} \
+		TEX_CTAN/support/xpdf \
 		http://dryice.name/computer/FreeBSD/distfiles/
-MASTER_SITE_SUBDIR=	support/xpdf
 PKGNAMESUFFIX=	-zhfont
 DISTFILES=	xpdf-chinese-simplified-2011-sep-02${EXTRACT_SUFX} \
 		xpdf-chinese-traditional-2011-sep-02${EXTRACT_SUFX}
@@ -24,6 +23,7 @@ RUN_DEPENDS=	xpdf:${PORTSDIR}/graphics/xpdf \
 		${FONTSDIR}/MSung-Light:${PORTSDIR}/chinese/font-std
 
 NO_BUILD=	yes
+NO_ARCH=	yes
 NO_WRKSUBDIR=	yes
 SUB_FILES=	dot.xpdfrc
 SUB_LIST=	ADOBECMAPDIR=${ADOBECMAPDIR} \
@@ -47,7 +47,7 @@ do-install:
 	cd ${WRKSRC}/xpdf-chinese-traditional && \
 	    ${INSTALL_DATA} ${TRAD_FILES} \
 		${STAGEDIR}${DATADIR}/chinese-traditional
-	${INSTALL_DATA} ${WRKSRC}/dot.xpdfrc \
+	${INSTALL_DATA} ${WRKDIR}/dot.xpdfrc \
 	    ${STAGEDIR}${DATADIR}/chinese-traditional
 	${MKDIR} ${STAGEDIR}${DATADIR}/chinese-traditional/CMap
 	cd ${STAGEDIR}${DATADIR}/chinese-traditional/CMap && \

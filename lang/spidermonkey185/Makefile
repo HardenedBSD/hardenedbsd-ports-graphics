@@ -5,12 +5,14 @@ PORTNAME=		spidermonkey185
 PORTVERSION=		1.8.5
 PORTREVISION=		2
 CATEGORIES=		lang
-MASTER_SITES=		${MASTER_SITE_MOZILLA}
-MASTER_SITE_SUBDIR=	js
+MASTER_SITES=		MOZILLA/js
 DISTNAME=		js185-1.0.0
 
 MAINTAINER=		koobs@FreeBSD.org
 COMMENT=		Standalone JavaScript (1.8.5) interpreter from Mozilla
+
+NOT_FOR_ARCHS=		powerpc powerpc64
+NOT_FOR_ARCHS_REASON=	PowerPC is not supported; use lang/spidermonkey170
 
 BUILD_DEPENDS=		zip:${PORTSDIR}/archivers/zip \
 			autoconf-2.13:${PORTSDIR}/devel/autoconf213
@@ -66,8 +68,8 @@ UTF8_CFLAGS=			-DJS_C_STRINGS_ARE_UTF8
 CONFIGURE_TARGET=	x86_64-portbld-freebsd${OSREL}
 .endif
 
-.if ${ARCH} == "sparc64" && ${OSVERSION} > 900000
-BROKEN=			Does not build on sparc64-9: fails to link
+.if ${ARCH} == "sparc64"
+BROKEN=			Does not build on sparc64: fails to link
 .endif
 
 .if ${ARCH} == "amd64"

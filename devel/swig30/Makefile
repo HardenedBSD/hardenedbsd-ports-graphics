@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	swig
-PORTVERSION=	3.0.5
+PORTVERSION=	3.0.7
 CATEGORIES=	devel
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTNAME}-${PORTVERSION}
 PKGNAMESUFFIX=	30
@@ -19,11 +19,11 @@ OPTIONS_DEFINE=	DOCS EXAMPLES
 ALL_TARGET=	# empty
 CFLAGS+=	-fPIC -DPIC
 CONFIGURE_ARGS=	--program-suffix=${PORTVERSION:R} \
-		--with-lua=${LUA_BINDIR}/lua \
+		--with-lua=${LOCALBASE}/bin/${LUA_CMD} \
 		--with-luaincl=${LUA_INCDIR} \
 		--with-lualib=${LUA_LIBDIR}
 GNU_CONFIGURE=	yes
-USE_AUTOTOOLS=	autoconf:env
+TEST_TARGET=	check
 USES=		gmake lua
 
 PLIST_SUB=	MAJOR_VER=${PORTVERSION:R}
@@ -50,8 +50,5 @@ post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/ccache-swig${PORTVERSION:R} ${STAGEDIR}${PREFIX}/bin/swig${PORTVERSION:R}
 	cd ${WRKSRC}/Doc/ && ${COPYTREE_SHARE} . ${STAGEDIR}${DOCSDIR}/${PORTVERSION}
 	cd ${WRKSRC}/Examples/ && ${COPYTREE_SHARE} . ${STAGEDIR}${EXAMPLESDIR}/${PORTVERSION}
-
-regression-test test: build
-	cd ${WRKSRC}/ && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} check
 
 .include <bsd.port.mk>

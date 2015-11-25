@@ -3,17 +3,22 @@
 
 PORTNAME=	dmd
 PKGNAMESUFFIX=	2
-PORTVERSION=	2.066.1
-PORTREVISION=	1
+PORTVERSION=	2.069.1
+PORTREVISION=	2
 CATEGORIES=	lang
 MASTER_SITES=	http://ftp.digitalmars.com/
 DISTNAME=	dmd.${PORTVERSION}
+DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
+		dmd.2.067.1${EXTRACT_SUFX}
+EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
 
 MAINTAINER=	cy@FreeBSD.org
 COMMENT=	D 2.0 compiler, not officially validated for FreeBSD
 
 USES=		gmake zip
 MAKEFILE=	posix.mak
+MAKE_ARGS=	AUTO_BOOTSTRAP=1
+MAKE_ENV+=	WRKDIR=${WRKDIR}
 EXAMPLESDIR=	${PREFIX}/share/examples/dmd2
 DOCSDIR=	${PREFIX}/share/doc/dmd2
 PORTDOCS=	*.txt html/
@@ -27,10 +32,6 @@ LICENSE_PERMS_DMD=	no-dist-mirror no-dist-sell no-pkg-mirror no-pkg-sell auto-ac
 OPTIONS_DEFINE=	DOCS
 
 .include <bsd.port.pre.mk>
-
-.if ${OSVERSION} < 800000
-BROKEN=		does not compile
-.endif
 
 NOT_FOR_ARCHS=		powerpc
 NOT_FOR_ARCHS_REASON=	not yet ported to this architecture
@@ -90,5 +91,10 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${WRKSRC}/*.txt ${STAGEDIR}${DOCSDIR}
 	cd ${WRKDIR}/dmd2 && ${COPYTREE_SHARE} html ${STAGEDIR}${DOCSDIR}
+
+.if !exists(${LOCALBASE}/bin/dmd)
+pre-configure:
+	${MAKE} -f Makefile.bootstrap BOOTDIR=${WRKDIR}
+.endif
 
 .include <bsd.port.post.mk>

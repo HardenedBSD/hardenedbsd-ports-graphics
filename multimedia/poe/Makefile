@@ -2,7 +2,7 @@
 
 PORTNAME=	poe
 PORTVERSION=	0.5.1
-PORTREVISION=	8
+PORTREVISION=	9
 CATEGORIES=	multimedia gnustep
 MASTER_SITES=	http://www.eskimo.com/~pburns/Poe/files/
 DISTNAME=	Poe-${PORTVERSION}
@@ -14,10 +14,8 @@ LICENSE=	GPLv2 # or later
 
 LIB_DEPENDS=	libvorbis.so:${PORTSDIR}/audio/libvorbis
 
-USE_GNUSTEP=	yes
-USE_GNUSTEP_BACK=	yes
-USE_GNUSTEP_BUILD=	yes
-USE_GNUSTEP_INSTALL=	yes
+USES=		gnustep
+USE_GNUSTEP=	back build
 
 PORTSCOUT=	skipv:0.5.2
 
@@ -26,6 +24,6 @@ post-patch:
 		${WRKSRC}/GNUmakefile
 
 post-install:
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/Local/Applications/Poe.app/Poe
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/System/Applications/Poe.app/Poe
 
 .include <bsd.port.mk>

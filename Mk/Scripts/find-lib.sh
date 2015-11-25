@@ -7,6 +7,13 @@ if [ -z "${LIB_DIRS}" -o -z "${LOCALBASE}" ]; then
 	exit 1
 fi
 
+if [ -f /usr/share/misc/magic.mime -o -f /usr/share/misc/magic.mime.mgc ]; then
+	echo "Either /usr/share/misc/magic.mime or /usr/share/misc/mime.magic.mgc exist and must be removed." >&2
+	echo "These are legacy files from an older release and may safely be deleted." >&2
+	echo "Please see UPDATING 20150213 for more details." >&2
+	exit 1
+fi
+
 if [ $# -ne 1 ]; then
 	echo "$0: no argument provided." >&2
 fi
@@ -14,48 +21,9 @@ fi
 lib=$1
 dirs="${LIB_DIRS} `cat ${LOCALBASE}/libdata/ldconfig/* 2>/dev/null || :`"
 
-resolv_symlink() {
-	local file tgt
-	file=${1}
-	if [ ! -L ${file} ] ; then
-		echo ${file}
-		return
-	fi
-
-	tgt=`readlink ${file}`
-	case $tgt in
-	/*)
-		echo $tgt
-		return
-		;;
-	esac
-
-	file=${file%/*}/${tgt}
-	absolute_path ${file}
-}
-
-absolute_path() {
-	local file myifs target
-	file=$1
-
-	myifs=${IFS}
-	IFS='/'
-	set -- ${file}
-	IFS=${myifs}
-	for el; do
-		case $el in
-		.) continue ;;
-		'') continue ;;
-		..) target=${target%/*} ;;
-		*) target="${target}/${el}" ;;
-		esac
-	done
-	echo ${target}
-}
-
 for libdir in ${dirs} ; do
 	test -f ${libdir}/${lib} || continue
-	libfile=`resolv_symlink ${libdir}/${lib}`
+	libfile=${libdir}/${lib}
 	[ `file -b -L --mime-type ${libfile}` = "application/x-sharedlib" ] || continue
 	echo $libfile
 	break

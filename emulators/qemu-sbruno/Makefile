@@ -2,10 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	qemu
-PORTVERSION=	2.2.50.g20150215
-PORTREVISION=	1
+PORTVERSION=	2.4.50.g20151011
 CATEGORIES=	emulators
-MASTER_SITES=	GH GHC \
+MASTER_SITES=	GH \
 		LOCAL/nox \
 		LOCAL/nox:dtc \
 		http://people.freebsd.org/~nox/tmp/distfiles/ \
@@ -21,8 +20,7 @@ COMMENT?=	QEMU CPU Emulator - github bsd-user branch
 USE_GITHUB=	yes
 GH_ACCOUNT=	seanbruno
 GH_PROJECT=	${PORTNAME}-bsd-user
-GH_COMMIT=	87de5f9
-GH_TAGNAME=	${GH_COMMIT}
+GH_TAGNAME=	182181a
 HAS_CONFIGURE=	yes
 USES=		gmake pkgconfig bison perl5 python:2,build
 USE_PERL5=	build
@@ -62,7 +60,7 @@ SUB_LIST=	NAME=qemu_user_static
 .include <bsd.port.options.mk>
 
 CONFIGURE_ARGS+=	--localstatedir=/var
-CONFIGURE_ARGS+=	--extra-ldflags=-L${LOCALBASE}/lib
+CONFIGURE_ARGS+=	--extra-ldflags=-L\"${LOCALBASE}/lib\"
 CONFIGURE_ARGS+=	--disable-smartcard-nss --disable-libssh2
 PORTDOCS=	docs qemu-doc.html qemu-tech.html qmp-commands.txt
 
@@ -134,7 +132,7 @@ CONFIGURE_ARGS+=	--prefix=${PREFIX} --cc=${CC} --enable-docs \
 	--smbd=${LOCALBASE}/sbin/smbd \
 	--enable-debug \
 	--enable-debug-info \
-	--extra-cflags=-I${WRKSRC}\ -I${LOCALBASE}/include\ -DPREFIX=\\\"${PREFIX}\\\"
+	--extra-cflags=-I${WRKSRC}\ -I${LOCALBASE}/include\ -DPREFIX=\\\"\"${PREFIX}\\\"\"
 
 .if empty(PORT_OPTIONS:MX11)
 CONFIGURE_ARGS+=	--disable-sdl
@@ -167,7 +165,7 @@ LIB_DEPENDS+=	libsasl2.so:${PORTSDIR}/security/cyrus-sasl2
 .if empty(PORT_OPTIONS:MJPEG)
 CONFIGURE_ARGS+=	--disable-vnc-jpeg
 .else
-LIB_DEPENDS+=	libjpeg.so:${PORTSDIR}/graphics/jpeg
+USES+=		jpeg
 .endif
 
 .if empty(PORT_OPTIONS:MPNG)
@@ -183,7 +181,7 @@ LIB_DEPENDS+=	libcurl.so:${PORTSDIR}/ftp/curl
 .endif
 
 .if empty(PORT_OPTIONS:MOPENGL)
-CONFIGURE_ARGS+=	--disable-glx
+CONFIGURE_ARGS+=	--disable-opengl
 .else
 USE_GL=		yes
 .endif
@@ -239,25 +237,14 @@ MAKE_ARGS+=	ARCH=ppc64
 CONFIGURE_ARGS+= --sparc_cpu=v9
 .endif
 
-.if ${OSVERSION} < 900033
-BUILD_DEPENDS+=	${LOCALBASE}/bin/as:${PORTSDIR}/devel/binutils
-CONFIGURE_ENV+=	LD=${LOCALBASE}/bin/ld
-CONFIGURE_ENV+=	COMPILER_PATH=${LOCALBASE}/bin
-MAKE_ENV+=	COMPILER_PATH=${LOCALBASE}/bin
-.endif
-
 CONFIGURE_ARGS+= --python=${PYTHON_CMD}
 
 # -lprocstat actually only _needs_ -lelf after r249666 or r250870 (MFC)
 # but it shouldn't matter much
 post-patch:
 	@${MV} ${WRKDIR}/dtc ${WRKSRC}
-.if ${OSVERSION} < 900000
-	@${REINPLACE_CMD} -e '/LIBS/s|-lprocstat||' ${WRKSRC}/configure
-.else
 	@${REINPLACE_CMD} -e '/LIBS/s|-lprocstat|-lprocstat -lelf|' \
 		${WRKSRC}/configure
-.endif
 	@${REINPLACE_CMD} -e '/libs_qga=/s|glib_libs|glib_libs -lintl|' ${WRKSRC}/configure
 #.if ${PORT_OPTIONS:MPCAP}
 #	@cd ${WRKSRC} && ${PATCH} --quiet < ${FILESDIR}/pcap-patch
@@ -280,14 +267,12 @@ post-patch:
 		-e "1s|^(#! )/usr/bin/perl|\1${PERL}|" \
 		${WRKSRC}/scripts/texi2pod.pl
 
-.if ${OSVERSION} >= 800091
 # XXX need to disable usb host code on head while it's not ported to the
 # new usb stack yet
 post-configure:
 	@${REINPLACE_CMD} -E \
 		-e "s|^(HOST_USB=)bsd|\1stub|" \
 		${WRKSRC}/config-host.mak
-.endif
 
 .if !target(post-install)
 post-install:
@@ -296,8 +281,6 @@ post-install:
 .endif
 	${INSTALL_SCRIPT} ${FILESDIR}/qemu-ifup.sample ${STAGEDIR}${PREFIX}/etc
 	${INSTALL_SCRIPT} ${FILESDIR}/qemu-ifdown.sample ${STAGEDIR}${PREFIX}/etc
-	@(cd ${STAGEDIR}${PREFIX}/etc/qemu && \
-		${MV} -i target-x86_64.conf target-x86_64.conf.sample)
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/qemu-*
 .endif
 

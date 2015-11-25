@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	gdal
-PORTVERSION=	1.11.2
+PORTVERSION=	2.0.1
 CATEGORIES=	graphics geography
 MASTER_SITES=	http://download.osgeo.org/gdal/${PORTVERSION}/ \
 		ftp://ftp.remotesensing.org/pub/gdal/${PORTVERSION}/ \
@@ -12,21 +12,22 @@ MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	Translator library for raster geospatial data formats
 
 LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE.TXT
 
 LIB_DEPENDS=	libgeotiff.so:${PORTSDIR}/graphics/libgeotiff \
 		libgif.so:${PORTSDIR}/graphics/giflib \
-		libjpeg.so:${PORTSDIR}/graphics/jpeg \
 		libjson-c.so:${PORTSDIR}/devel/json-c \
 		libpng.so:${PORTSDIR}/graphics/png \
 		libtiff.so:${PORTSDIR}/graphics/tiff
 
-OPTIONS_DEFINE=	ARMADILLO CFITSIO CURL ECW EXPAT FREEXL GEOS GTA HDF5 ICONV \
-		JASPER KML LIBXML2 MYSQL NETCDF ODBC OPENJPEG PCRE PGSQL PROJ \
-		SQLITE WEBP XERCES
+OPTIONS_DEFINE=	ARMADILLO CFITSIO CURL ECW EXPAT FREEXL GEOS GTA HDF5 JASPER \
+		KML LIBXML2 MYSQL NETCDF ODBC OPENJPEG PCRE PGSQL PROJ \
+		SPATIALITE SQLITE WEBP XERCES
 OPTIONS_DEFAULT=JASPER
 OPTIONS_RADIO=	PDF
 OPTIONS_RADIO_PDF=	PODOFO POPPLER
 PCRE_DESC=	Regular expression support for SQLite
+SPATIALITE_DESC=SpatiaLite support
 
 CFLAGS+=	-fPIC
 CONFIGURE_ARGS=	--datadir=${DATADIR} \
@@ -40,15 +41,17 @@ CONFIGURE_ARGS=	--datadir=${DATADIR} \
 		--with-libz=/usr \
 		--with-png=${LOCALBASE} \
 		--with-threads=yes \
-		--without-libtool
+		--without-libtool \
+		${ICONV_CONFIGURE_ARG}
+CPPFLAGS+=	-I${LOCALBASE}/include
 GNU_CONFIGURE=	yes
-LDFLAGS+=	-L${LOCALBASE} -pthread
+LDFLAGS+=	-L${ICONV_PREFIX}/lib ${ICONV_LIB}
 MAKE_JOBS_UNSAFE=	yes
 MAKEFILE=	GNUmakefile
 USE_LDCONFIG=	yes
-USES=		gmake tar:xz
+USES=		gmake iconv jpeg tar:xz
 
-PLIST_SUB=	PORTVERSION=${PORTVERSION}
+PLIST_SUB=	MAJOR_VER=${PORTVERSION:R:R} PORTVERSION=${PORTVERSION}
 PORTDATA=	*
 
 SLAVEDIRS=	graphics/p5-Geo-GDAL graphics/php-gdal graphics/py-gdal graphics/ruby-gdal
@@ -63,7 +66,7 @@ CURL_CONFIGURE_OFF=	--with-curl=no
 CURL_CONFIGURE_ON=	--with-curl=${LOCALBASE}/bin/curl-config
 CURL_LIB_DEPENDS=	libcurl.so:${PORTSDIR}/ftp/curl
 ECW_CONFIGURE_OFF=	--with-ecw=no
-ECW_CONFIGURE_ON=	--with-ecw=${LOCALBASE}
+ECW_CONFIGURE_ON=	--with-ecw=yes
 ECW_LIB_DEPENDS=	libNCSEcw.so:${PORTSDIR}/graphics/libecwj2
 EXPAT_CONFIGURE_OFF=	--with-expat=no
 EXPAT_CONFIGURE_ON=	--with-expat=${LOCALBASE}
@@ -80,10 +83,6 @@ GTA_LIB_DEPENDS=	libgta.so:${PORTSDIR}/devel/libgta
 HDF5_CONFIGURE_OFF=	--with-hdf5=no
 HDF5_CONFIGURE_ON=	--with-hdf5=${LOCALBASE}
 HDF5_LIB_DEPENDS=	libhdf5.so:${PORTSDIR}/science/hdf5
-ICONV_CONFIGURE_OFF=	--with-libiconv-prefix=no
-ICONV_CONFIGURE_ON=	${ICONV_CONFIGURE_ARG}
-ICONV_LDFLAGS=		-L${ICONV_PREFIX}/lib ${ICONV_LIB}
-ICONV_USES=		iconv
 JASPER_CONFIGURE_OFF=	--with-jasper=no
 JASPER_CONFIGURE_ON=	--with-jasper=${LOCALBASE}
 JASPER_LIB_DEPENDS=	libjasper.so:${PORTSDIR}/graphics/jasper
@@ -120,6 +119,9 @@ POPPLER_LIB_DEPENDS=	libpoppler.so:${PORTSDIR}/graphics/poppler
 PROJ_CONFIGURE_OFF=	--with-static-proj4=no
 PROJ_CONFIGURE_ON=	--with-static-proj4=${LOCALBASE}
 PROJ_LIB_DEPENDS=	libproj.so:${PORTSDIR}/graphics/proj
+SPATIALITE_CONFIGURE_OFF=	--with-spatialite=no
+SPATIALITE_CONFIGURE_ON=--with-spatialite=${LOCALBASE}
+SPATIALITE_LIB_DEPENDS=	libspatialite.so:${PORTSDIR}/databases/spatialite
 SQLITE_CONFIGURE_OFF=	--with-sqlite3=no
 SQLITE_CONFIGURE_ON=	--with-sqlite3=${LOCALBASE}
 SQLITE_USE=		SQLITE=yes
@@ -132,7 +134,6 @@ XERCES_LIB_DEPENDS=	libxerces-c.so:${PORTSDIR}/textproc/xerces-c3
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|$$(INST_LIB)/pkgconfig|${PREFIX}/libdata/pkgconfig|' ${WRKSRC}/GNUmakefile
-	@${REINPLACE_CMD} -e 's|-lpthread|-pthread|g' ${WRKSRC}/configure
 # Cleanup bundled libraries
 	@${RM} -fr ${WRKSRC}/frmts/gif/giflib/
 	@${RM} -fr ${WRKSRC}/frmts/gtiff/libgeotiff/
@@ -144,7 +145,7 @@ post-patch:
 	@${RM} -fr ${WRKSRC}/ogr/ogrsf_frmts/geojson/libjson/
 
 post-install:
-	${INSTALL_LIB} ${WRKSRC}/libgdal.a ${STAGEDIR}${PREFIX}/lib/
+	${INSTALL_DATA} ${WRKSRC}/libgdal.a ${STAGEDIR}${PREFIX}/lib/
 	${TOUCH} ${STAGEDIR}${PREFIX}/lib/gdalplugins/.keepme
 	${INSTALL_DATA} ${WRKSRC}/GDALmake.opt ${STAGEDIR}${DATADIR}/
 	-${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/* ${STAGEDIR}${PREFIX}/lib/libgdal.so.${PORTVERSION}

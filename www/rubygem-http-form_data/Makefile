@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	http-form_data
-PORTVERSION=	1.0.0
+PORTVERSION=	1.0.1
 CATEGORIES=	www rubygems
 MASTER_SITES=	RG
 
@@ -11,6 +11,7 @@ COMMENT=	Build form data request bodies
 
 LICENSE=	MIT
 
+NO_ARCH=	yes
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes
 RUBYGEM_AUTOPLIST=	yes

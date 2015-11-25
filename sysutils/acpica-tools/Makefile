@@ -1,11 +1,10 @@
 # $FreeBSD$
 
 PORTNAME=	acpica
-PORTVERSION=	20150204
+PORTVERSION=	20150930
 CATEGORIES=	sysutils devel
 MASTER_SITES=	https://acpica.org/sites/acpica/files/ \
-		LOCAL
-MASTER_SITE_SUBDIR=	jkim
+		LOCAL/jkim
 PKGNAMESUFFIX=	-tools
 DISTNAME=	${PORTNAME}-unix2-${PORTVERSION}
 
@@ -15,22 +14,29 @@ COMMENT=	Tools from the ACPI Component Architecture (ACPICA) project
 LICENSE=	BSD3CLAUSE GPLv2
 LICENSE_COMB=	dual
 
-BUILD_DEPENDS=	gm4:${PORTSDIR}/devel/m4
+USES=		gmake
 
-USES=		bison gmake
+BUILD_WRKSRC=	${WRKSRC}/generate/unix
 
 ACPICA_TOOLS=	acpibin acpidump acpiexec acpihelp acpinames acpisrc
 ACPICA_TOOLS+=	acpixtract iasl
 
 PLIST_FILES=	${ACPICA_TOOLS:S,^,bin/,}
-WRKSRC_SUBDIR=	generate/unix
 
 MAKE_ARGS=	HOST=_FreeBSD NOOPT=TRUE PROGS="${ACPICA_TOOLS}"
-MAKE_ARGS+=	CC="${CC}" LEX="${FLEX}" MACROPROC="${LOCALBASE}/bin/gm4"
-MAKE_ARGS+=	YACC="${LOCALBASE}/bin/bison"
+MAKE_ARGS+=	CC="${CC}" LEX="${FLEX}" YACC="${YACC}"
+
+.include <bsd.port.pre.mk>
+
+.if ${OSVERSION} < 1001506
+BUILD_DEPENDS+=	bison:${PORTSDIR}/devel/bison
+BUILD_DEPENDS+=	gm4:${PORTSDIR}/devel/m4
+MAKE_ARGS+=	MACROPROC="${LOCALBASE}/bin/gm4"
+YACC=		${LOCALBASE}/bin/bison
+.endif
 
 do-install:
-	@${INSTALL_PROGRAM} ${ACPICA_TOOLS:S,^,${WRKSRC}/bin/,} \
+	${INSTALL_PROGRAM} ${ACPICA_TOOLS:S,^,${BUILD_WRKSRC}/bin/,} \
 	    ${STAGEDIR}${PREFIX}/bin
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

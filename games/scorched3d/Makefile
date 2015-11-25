@@ -3,7 +3,7 @@
 
 PORTNAME=	scorched3d
 PORTVERSION=	0.${SCORCH_VERSION}${SCORCH_REVISION}
-PORTREVISION=	8
+PORTREVISION=	9
 CATEGORIES=	games
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/Version%20${SCORCH_VERSION}
 DISTNAME=	Scorched3D-${SCORCH_VERSION}-src
@@ -13,9 +13,7 @@ COMMENT=	3D version of the classic DOS game Scorched Earth
 
 LICENSE=	GPLv2
 
-LIB_DEPENDS=	libGLEW.so:${PORTSDIR}/graphics/glew \
-		libvorbis.so:${PORTSDIR}/audio/libvorbis \
-		libjpeg.so:${PORTSDIR}/graphics/jpeg \
+LIB_DEPENDS=	libvorbis.so:${PORTSDIR}/audio/libvorbis \
 		libpng.so:${PORTSDIR}/graphics/png \
 		libfftw3.so:${PORTSDIR}/math/fftw3 \
 		libfftw3f.so:${PORTSDIR}/math/fftw3-float \
@@ -25,15 +23,13 @@ OPTIONS_DEFINE=	MYSQL
 
 WRKSRC=		${WRKDIR}/scorched
 
-USE_GL=		glu
+USE_GL=		glew glu
 USE_SDL=	mixer net sdl
 USE_WX=		2.8
 WX_CONF_ARGS=	absolute
 WX_UNICODE=	yes
-USES=		dos2unix gmake iconv openal:al,alut perl5 pkgconfig
-USE_AUTOTOOLS=	aclocal automake autoconf
-ACLOCAL_ARGS=	-I ${LOCALBASE}/share/aclocal
-AUTOMAKE_ARGS=	--add-missing --copy --force --foreign
+USES=		autoreconf dos2unix gmake iconv jpeg openal:al,alut perl5 pkgconfig
+GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--datadir=${DATADIR}
 
 DOS2UNIX_FILES=	src/client/GLEXT/GLFont2dFreeType.h \

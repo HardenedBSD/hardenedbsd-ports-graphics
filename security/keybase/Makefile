@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	keybase
-PORTVERSION=	0.7.3
+PORTVERSION=	0.7.8
 CATEGORIES=	security
 MASTER_SITES=	https://dist.keybase.io/pkg/files/ \
 		LOCAL/sunpoet
@@ -10,15 +10,14 @@ MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	Keybase.io client
 
 LICENSE=	BSD3CLAUSE
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
-RUN_DEPENDS=	${LOCALBASE}/bin/gpg:${PORTSDIR}/security/gnupg \
-		${LOCALBASE}/bin/node:${PORTSDIR}/www/node
+RUN_DEPENDS=	gpg:${PORTSDIR}/security/gnupg \
+		node:${PORTSDIR}/www/node
 
 NO_ARCH=	yes
 NO_BUILD=	yes
 USES=		tar:tgz
-
-SUB_FILES=	pkg-message
 WRKSRC=		${WRKDIR}/package
 
 # Install it to a private place instead of polluting lib/node_modules

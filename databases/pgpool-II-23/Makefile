@@ -18,7 +18,7 @@ GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
 INSTALL_TARGET=	install-strip
 
-CONFLICTS=	pgpool-3.* pgpool-II-3.* pgpool-II-22-* pgpool-II-30-* 
+CONFLICTS=	pgpool-3.* pgpool-II-3.* pgpool-II-22-* pgpool-II-30-*
 USE_RC_SUBR=	pgpool
 
 PORTDOCS=	AUTHORS COPYING ChangeLog INSTALL NEWS README README.euc_jp
@@ -29,8 +29,6 @@ PORTDOCShtml+=	tutorial-en.html tutorial-ja.html
 OPTIONS_DEFINE=	DOCS
 
 post-patch:
-	@${REINPLACE_CMD} -e 's|echo aout|echo elf|g' \
-	${WRKSRC}/configure
 	@${REINPLACE_CMD} -e 's| pg_config| ${LOCALBASE}/bin/pg_config|g' \
 	${WRKSRC}/sql/pgpool-recovery/Makefile
 

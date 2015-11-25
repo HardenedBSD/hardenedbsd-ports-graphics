@@ -17,7 +17,8 @@ BUILD_DEPENDS=	p5-Net-Jabber>=0:${PORTSDIR}/net-im/p5-Net-Jabber \
 		p5-SOAP-Lite>=0.711:${PORTSDIR}/net/p5-SOAP-Lite
 RUN_DEPENDS:=	${BUILD_DEPENDS}
 
-USE_PERL5=	configure
+NO_ARCH=	yes
+USE_PERL5=	modbuild
 USES=		perl5
 
 .include <bsd.port.mk>

@@ -4,8 +4,7 @@
 PORTNAME=	commons-digester
 PORTVERSION=	2.1
 CATEGORIES=	textproc java devel
-MASTER_SITES=	${MASTER_SITE_APACHE_COMMONS_BINARIES}
-MASTER_SITE_SUBDIR=	${PORTNAME:S,commons-,,}
+MASTER_SITES=	APACHE_COMMONS_BINARIES
 PKGNAMEPREFIX=	jakarta-
 DISTNAME=	${PORTNAME}-${PORTVERSION}-bin
 
@@ -20,6 +19,7 @@ RUN_DEPENDS=	${JAR_DEPENDS}
 
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 NO_BUILD=	yes
+NO_ARCH=	yes
 USE_JAVA=	yes
 JAVA_VERSION=	1.6+
 
@@ -44,13 +44,13 @@ do-install:
 	@${ECHO_MSG} -n ">> Installing JAR as ${JAVAJARDIR}/${JARFILE}..."
 	${INSTALL_DATA} ${WRKSRC}/${PORTNAME}-${PORTVERSION}.jar ${STAGEDIR}${JAVAJARDIR}/${JARFILE}
 	@${ECHO_MSG} " [ DONE ]"
-.if ${PORT_OPTIONS:MDOCS}
+
+do-install-DOCS-on:
 	@${ECHO_MSG} -n ">> Installing documentation in ${DOCSDIR}..."
 	@cd ${WRKSRC}/apidocs \
 	  && ${FIND} . -type d -exec ${MKDIR} ${STAGEDIR}${DOCSDIR}/{} \; \
 	  && ${FIND} . -type f -exec ${INSTALL_DATA} {} ${STAGEDIR}${DOCSDIR}/{} \;
 	${INSTALL_DATA} ${OTHERDOCS:S,^,${WRKSRC}/,} ${STAGEDIR}${DOCSDIR}/
 	@${ECHO_MSG} " [ DONE ]"
-.endif
 
 .include <bsd.port.post.mk>

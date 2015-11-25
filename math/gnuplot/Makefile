@@ -2,14 +2,14 @@
 
 PORTNAME=	gnuplot
 PORTVERSION=	4.6.6
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	math graphics
 MASTER_SITES=	SF
 
 MAINTAINER=	glewis@FreeBSD.org
 COMMENT=	Command-line driven graphing utility
 
-USES=		iconv lua pkgconfig
+USES=		iconv lua pkgconfig readline
 USE_TEX=	kpathsea
 GNU_CONFIGURE=	yes
 LDFLAGS+=	-L${LOCALBASE}/lib ${ICONV_LIB}
@@ -67,7 +67,6 @@ X11_USE=	XORG=x11
 # Version 3.x of WX currently cause gnuplot to crash.
 # Do not update without this without testing.
 USE_WX=			2.8
-WX_UNICODE=		yes
 WX_CONF_ARGS=		absolute
 .else
 CONFIGURE_ARGS+=	--disable-wxwidgets

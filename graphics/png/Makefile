@@ -2,21 +2,22 @@
 # $FreeBSD$
 
 PORTNAME=	png
-PORTVERSION=	1.6.16
+PORTVERSION=	1.6.19
 CATEGORIES=	graphics
-MASTER_SITES=	SF/lib${PORTNAME}/lib${PORTNAME}16/${PORTVERSION}
+MASTER_SITES=	SF/lib${PORTNAME}/lib${PORTNAME}16/${PORTVERSION} \
+		ftp://ftp.simplesystems.org/pub/lib${PORTNAME}/${PORTNAME}/src/lib${PORTNAME}16/
 PATCH_SITES=	SF/apng/lib${PORTNAME}/lib${PORTNAME}16/
 DISTNAME=	lib${PORTNAME}-${PORTVERSION}
 
 MAINTAINER=	portmgr@FreeBSD.org
 COMMENT=	Library for manipulating PNG images
 
-USES=		cmake cpe tar:xz
+USES=		cpe libtool tar:xz
 CPE_PRODUCT=	libpng
 GNU_CONFIGURE=	yes
+CONFIGURE_ARGS=	--with-pkgconfigdir=${PREFIX}/libdata/pkgconfig
+INSTALL_TARGET=	install-strip
 USE_LDCONFIG=	yes
-
-CMAKE_ARGS+=	-DPNG_MAN_DIR:STRING=man
 
 OPTIONS_DEFINE=APNG PNGTEST
 OPTIONS_DEFAULT=APNG PNGTEST
@@ -28,11 +29,6 @@ PNGTEST_DESC=Enable Regression Test (recommended)
 .if ${PORT_OPTIONS:MAPNG} || make(makesum)
 PATCHFILES=	${DISTNAME}-apng.patch.gz
 .endif
-
-post-patch:
-	${REINPLACE_CMD} \
-		-e 's|LIBDIR}/pkgconfig|LIBDIR}data/pkgconfig|' \
-		${WRKSRC}/CMakeLists.txt
 
 .if ${PORT_OPTIONS:MPNGTEST}
 post-build:

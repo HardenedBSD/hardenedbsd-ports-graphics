@@ -9,8 +9,7 @@ PORTNAME=	gentoo-test
 PORTVERSION=	0.1
 PORTREVISION=	3
 CATEGORIES=	x11-themes gnome
-MASTER_SITES=	GNOME
-MASTER_SITE_SUBDIR=	teams/art.gnome.org/archive/themes/icon
+MASTER_SITES=	GNOME/teams/art.gnome.org/archive/themes/icon
 DISTNAME=	ICON-Gentoo-Test
 
 MAINTAINER=	ports@FreeBSD.org
@@ -19,7 +18,7 @@ COMMENT=	Gentoo-Test Icons for Gnome
 RESTRICTED=	${REASON}
 
 USES=	tar:bzip2
-WRKSRC=		"${WRKDIR}/Gentoo-test"
+NO_WRKSUBDIR=	yes
 
 .include "${.CURDIR}/../gnome-icons/bsd.gnome-icons.mk"
 .include <bsd.port.mk>

@@ -3,7 +3,7 @@
 
 PORTNAME=	checkmol
 PORTVERSION=	0.5
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	science
 MASTER_SITES=	http://merian.pch.univie.ac.at/pch/download/chemistry/checkmol/
 EXTRACT_SUFX=	.pas
@@ -17,7 +17,7 @@ NO_WRKSUBDIR=	yes
 
 EXTRACT_CMD=	${CP}
 EXTRACT_BEFORE_ARGS=	#
-EXTRACT_AFTER_ARGS=	${WRKDIR}
+EXTRACT_AFTER_ARGS=	${WRKSRC}
 
 USE_FPC=	yes
 

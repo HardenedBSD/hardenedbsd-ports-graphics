@@ -1,7 +1,5 @@
 bin/prewikka-httpd
-@unexec if cmp -s %D/etc/prewikka/prewikka.conf-dist %D/etc/prewikka/prewikka.conf; then rm -f %D/etc/prewikka/prewikka.conf; fi
-etc/prewikka/prewikka.conf-dist
-@exec if [ ! -f %D/etc/prewikka/prewikka.conf ] ; then cp -p %D/%F %B/prewikka.conf; fi
+@sample etc/prewikka/prewikka.conf-dist etc/prewikka/prewikka.conf
 %%PYTHON_SITELIBDIR%%/prewikka/Auth.py
 %%PYTHON_SITELIBDIR%%/prewikka/Auth.pyc
 %%PYTHON_SITELIBDIR%%/prewikka/Auth.pyo
@@ -236,21 +234,4 @@ etc/prewikka/prewikka.conf-dist
 %%DATADIR%%/htdocs/images/table_order_up.gif
 %%DATADIR%%/htdocs/js/functions.js
 %%DATADIR%%/htdocs/js/jquery.js
-@exec mkdir -p %%DATADIR%%/htdocs/generated_images
-@dirrm %%DATADIR%%/htdocs/js
-@dirrm %%DATADIR%%/htdocs/images
-@dirrm %%DATADIR%%/htdocs/generated_images
-@dirrm %%DATADIR%%/htdocs/css
-@dirrm %%DATADIR%%/htdocs
-@dirrm %%DATADIR%%/database
-@dirrm %%DATADIR%%/cgi-bin
-@dirrm %%DATADIR%%
-@dirrm %%PYTHON_SITELIBDIR%%/prewikka/views
-@dirrm %%PYTHON_SITELIBDIR%%/prewikka/templates
-@dirrm %%PYTHON_SITELIBDIR%%/prewikka/modules/auth/loginpassword
-@dirrm %%PYTHON_SITELIBDIR%%/prewikka/modules/auth/cgi
-@dirrm %%PYTHON_SITELIBDIR%%/prewikka/modules/auth/anonymous
-@dirrm %%PYTHON_SITELIBDIR%%/prewikka/modules/auth
-@dirrm %%PYTHON_SITELIBDIR%%/prewikka/modules
-@dirrm %%PYTHON_SITELIBDIR%%/prewikka
-@dirrm etc/prewikka
+@dir %%DATADIR%%/htdocs/generated_images

@@ -11,6 +11,10 @@ DISTNAME=	${PORTNAME}_linux
 MAINTAINER=	mzaki@m.u-tokyo.ac.jp
 COMMENT=	Graphical tool for editing Phrap assemblies
 
+BROKEN=		Unfetchable
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
+
 RUN_DEPENDS=	phred:${PORTSDIR}/biology/phred \
 		phrap:${PORTSDIR}/biology/phrap
 
@@ -76,7 +80,7 @@ NO_BUILD=	yes
 do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	${LN} -sf ../../bin ${STAGEDIR}${DATADIR}/bin
-	(cd ${WRKSRC}; ${ENV} CC=${CC} ./installConsed.perl consed_linux32bit ${STAGEDIR}${DATADIR})
+	(cd ${WRKSRC}; ${SETENV} CC=${CC} ./installConsed.perl consed_linux32bit ${STAGEDIR}${DATADIR})
 	${LN} -sf ../../../etc/PhredPar/phredpar.dat ${STAGEDIR}${DATADIR}/lib/phredpar.dat
 	cd ${STAGEDIR}${PREFIX} && ${ECHO_CMD} ${MYSHEBANG} | ${XARGS} ${SED} -i '' ${_SHEBANG_REINPLACE_ARGS}
 

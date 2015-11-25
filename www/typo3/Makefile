@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	typo3
-PORTVERSION=	7.1.0
+PORTVERSION=	7.5.0
 CATEGORIES=	www
 MASTER_SITES=	SF/${PORTNAME}/TYPO3%20Source%20and%20Dummy/TYPO3%20${PORTVERSION}
 
@@ -10,12 +10,15 @@ MAINTAINER=	freebsd-ports@charlieroot.de
 COMMENT=	Typo3 content management system
 
 LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
-PORTSCOUT=	limit:^7\.1\.
-
+USES=		cpe shebangfix
+SHEBANG_FILES=	typo3/sysext/core/Build/Scripts/xlfcheck.sh
 NO_BUILD=	yes
+NO_ARCH=	yes
 USE_PHP=	ctype fileinfo filter hash json mysqli openssl pcre session soap xml
 WANT_PHP_WEB=	yes
+WRKSRC=		${WRKDIR}/${TYPO3SRC}
 
 TYPO3WWW=	www
 TYPO3SRC=	${PORTNAME}_src-${PORTVERSION}
@@ -64,12 +67,14 @@ post-install:
 		${FIND} * \( -type f -or -type l \) -path "${TYPO3WWW}/${TYPO3DIR}/*" | \
 		${SORT} >> ${TMPPLIST}
 	@cd ${STAGEDIR}${PREFIX}; \
-		${FIND} * \( -type f -or -type l \) \( -path "${TYPO3WWW}/${TYPO3SRC}/*" -and \
-		-not -path "${TYPO3WWW}/${TYPO3SRC}/typo3/ext/*" \) | \
+		${FIND} * \( -type f -or -type l \) -path "${TYPO3WWW}/${TYPO3SRC}/*" | \
 		${SORT} >> ${TMPPLIST}
-	@cd ${STAGEDIR}${PREFIX}; \
-		${FIND} * \( -type f -or -type l \) -path "${TYPO3WWW}/${TYPO3SRC}/typo3/ext/*" | \
-		${SORT} | ${SED} -ne 's#^#@(${WWWOWN},${WWWGRP},) #p' >> ${TMPPLIST}
-	@${ECHO} "@dir(${WWWOWN},${WWWGRP},) ${TYPO3WWW}/${TYPO3SRC}/typo3/ext" >> ${TMPPLIST}
+#		${FIND} * \( -type f -or -type l \) \( -path "${TYPO3WWW}/${TYPO3SRC}/*" -and \
+#		-not -path "${TYPO3WWW}/${TYPO3SRC}/typo3/ext/*" \) | \
+#		${SORT} >> ${TMPPLIST}
+#	@cd ${STAGEDIR}${PREFIX}; \
+#		${FIND} * \( -type f -or -type l \) -path "${TYPO3WWW}/${TYPO3SRC}/typo3/ext/*" | \
+#		${SORT} | ${SED} -ne 's#^#@(${WWWOWN},${WWWGRP},) #p' >> ${TMPPLIST}
+#	@${ECHO} "@dir(${WWWOWN},${WWWGRP},) ${TYPO3WWW}/${TYPO3SRC}/typo3/ext" >> ${TMPPLIST}
 
 .include <bsd.port.mk>

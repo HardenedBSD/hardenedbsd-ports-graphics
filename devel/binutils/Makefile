@@ -2,11 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	binutils
-PORTVERSION=	2.25
+PORTVERSION=	2.25.1
 PORTREVISION?=	0
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_SOURCEWARE}
-MASTER_SITE_SUBDIR=	binutils/releases
+MASTER_SITES=	SOURCEWARE/binutils/releases
 
 MAINTAINER?=	bapt@FreeBSD.org
 COMMENT?=	GNU binary tools
@@ -55,12 +54,8 @@ NLS_CONFIGURE_ENABLE=	nls
 
 .include <bsd.port.pre.mk>
 
-.if ! defined(PKGNAMEPREFIX) && ${OSVERSION} < 900000
-EXTRA_PATCHES+=	${FILESDIR}/allow-missing-group-info
-.endif
-
 # Actual earliest version may differ slightly
-.if ${ARCH} != ia64 && ${ARCH} != mips && ${ARCH} != mips64 && ${OSVERSION} >= 900044 && !defined(PKGNAMEPREFIX) && (${COMPILER_TYPE} == clang && ${COMPILER_VERSION} >= 34 || ${COMPILER_TYPE} == gcc)
+.if ${ARCH} != ia64 && ${ARCH} != mips && ${ARCH} != mips64 && !defined(PKGNAMEPREFIX) && (${COMPILER_TYPE} == clang && ${COMPILER_VERSION} >= 34 || ${COMPILER_TYPE} == gcc)
 CONFIGURE_ARGS+=	--enable-gold --enable-plugins
 PLIST_SUB+=	GOLD=""
 .else
@@ -75,9 +70,7 @@ CONFIGURE_TARGET=	${ARCH}-portbld-freebsd${OSREL}
 
 post-install:
 .if !defined(PKGNAMEPREFIX)
-.if ${OSVERSION} >= 900044
 	${INSTALL_DATA} ${WRKSRC}/include/plugin-api.h ${STAGEDIR}${PREFIX}/include/
-.endif
 	@${FIND} -ds ${STAGEDIR}${PREFIX}/${CONFIGURE_TARGET} ! -type d | \
 		${SED} -e 's,^${STAGEDIR}${PREFIX}/,,' >> ${TMPPLIST}
 	${RM} ${STAGEDIR}${PREFIX}/include/ansidecl.h

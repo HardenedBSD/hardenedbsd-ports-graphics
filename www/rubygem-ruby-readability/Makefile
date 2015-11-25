@@ -9,12 +9,16 @@ MASTER_SITES=	RG
 MAINTAINER=	ruby@FreeBSD.org
 COMMENT=	Readability for Ruby
 
-RUN_DEPENDS=	rubygem-guess_html_encoding>=0.0.4:${PORTSDIR}/devel/rubygem-guess_html_encoding \
-		rubygem-nokogiri>=1.4.2:${PORTSDIR}/textproc/rubygem-nokogiri
+LICENSE=	APACHE20
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
+RUN_DEPENDS=	rubygem-guess_html_encoding>=0.0.4:${PORTSDIR}/devel/rubygem-guess_html_encoding \
+		rubygem-nokogiri>=1.6.0:${PORTSDIR}/textproc/rubygem-nokogiri
+
+NO_ARCH=	yes
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=yes
+RUBYGEM_AUTOPLIST=	yes
 
 PLIST_FILES=	bin/readability
 

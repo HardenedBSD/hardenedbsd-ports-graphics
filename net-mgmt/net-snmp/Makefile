@@ -3,7 +3,7 @@
 
 PORTNAME=	snmp
 PORTVERSION=	5.7.3
-PORTREVISION=	5
+PORTREVISION=	11
 CATEGORIES=	net-mgmt ipv6
 MASTER_SITES=	SF/net-${PORTNAME}/net-${PORTNAME}/${PORTVERSION}
 PKGNAMEPREFIX=	net-
@@ -37,7 +37,8 @@ GNU_CONFIGURE=	yes
 USE_RC_SUBR=	snmpd snmptrapd
 USE_OPENSSL=	yes
 USE_LDCONFIG=	yes
-USES=		perl5 libtool
+USES=		cpe libtool perl5
+CPE_VENDOR=	net-snmp
 USE_PERL5=	build run
 USE_CSTD=	c99
 
@@ -53,6 +54,10 @@ CONFIGURE_ARGS+=--enable-shared --enable-internal-md5 \
 		--with-gnu-ld --with-libwrap \
 		--with-ldflags="-lm -lkvm -ldevstat -L${PKG_PREFIX}/lib -L${LOCALBASE}/lib ${LCRYPTO}"
 SUB_FILES=	pkg-message
+
+.if !defined(WITHOUT_SSP)
+CONFIGURE_ARGS+=--with-libs="-lssp_nonshared"
+.endif
 
 .if defined(BATCH)
 CONFIGURE_ARGS+=--with-defaults
@@ -145,18 +150,14 @@ NET_SNMP_SYS_CONTACT?=	nobody@nowhere.invalid
 NET_SNMP_SYS_LOCATION?=	somewhere
 NET_SNMP_LOGFILE?=	/var/log/snmpd.log
 NET_SNMP_PERSISTENTDIR?=/var/net-snmp
-NET_SNMP_WITH_MIB_MODULE_LIST+=	host disman/event-mib mibII/mta_sendmail mibII/tcpTable ucd-snmp/diskio
+NET_SNMP_WITH_MIB_MODULE_LIST+=	host disman/event-mib mibII/mta_sendmail mibII/tcpTable ucd-snmp/diskio sctp-mib
 
-.if ${OSVERSION} >= 700028
-NET_SNMP_WITH_MIB_MODULE_LIST+=	sctp-mib
-.endif
-
-.if ${OSVERSION} >= 800000
-CONFIGURE_ARGS+=	--with-libs="-lssp_nonshared"
-.endif
-
-.if ${OSVERSION} >= 1000000
+.if ${OSVERSION} >= 1000000 && ${OSVERSION} < 1100062
 CFLAGS+=	-D_WANT_IFADDR
+.endif
+
+.if ${OSVERSION} >= 1100062
+CONFIGURE_ARGS+=	--with-out-mib-modules="mibII/ipv6"
 .endif
 
 .if ${PORT_OPTIONS:MMFD_REWRITES}
@@ -238,10 +239,8 @@ post-patch:
 .for filename in ${SCRIPT_FILES}
 	@${REINPLACE_CMD} -e 's|/usr/local|${PREFIX}|' ${WRKSRC}/local/${filename}
 .endfor
-.if ${OSVERSION} >= 900007
 	@${REINPLACE_CMD} -e 's!utmp_p->ut_name!utmp_p->ut_user!' \
 	    ${WRKSRC}/agent/mibgroup/host/hr_system.c
-.endif
 	@${REINPLACE_CMD} -E -e 's|return pci_lookup_name|disabled broken|g' \
 		${WRKSRC}/configure
 
@@ -274,13 +273,14 @@ post-build:
 	${REINPLACE_CMD} -e 's| perlinstall||' ${WRKSRC}/Makefile
 .endif
 
-post-install: strip-files install-config-files install-doc-files display-message
-	@${MKDIR} ${STAGEDIR}/var/agentx
+post-install: strip-files install-config-files install-doc-files
+	@${MKDIR} ${STAGEDIR}/var/agentx ${STAGEDIR}${PREFIX}/etc/newsyslog.conf.d
 	@(cd ${STAGEDIR}${PREFIX}/lib && ${LN} -sf libnetsnmp.so.${SHLIB_VERSION} libnetsnmp.so)
 	@(cd ${STAGEDIR}${PREFIX}/lib && ${LN} -sf libnetsnmpagent.so.${SHLIB_VERSION} libnetsnmpagent.so)
 	@(cd ${STAGEDIR}${PREFIX}/lib && ${LN} -sf libnetsnmphelpers.so.${SHLIB_VERSION} libnetsnmphelpers.so)
 	@(cd ${STAGEDIR}${PREFIX}/lib && ${LN} -sf libnetsnmpmibs.so.${SHLIB_VERSION} libnetsnmpmibs.so)
 	@(cd ${STAGEDIR}${PREFIX}/lib && ${LN} -sf libnetsnmptrapd.so.${SHLIB_VERSION} libnetsnmptrapd.so)
+	${INSTALL_DATA} ${FILESDIR}/net-snmp.conf ${STAGEDIR}${PREFIX}/etc/newsyslog.conf.d/
 
 strip-files:
 	(cd ${STAGEDIR}${PREFIX}/bin; ${STRIP_CMD} ${BIN_FILES})
@@ -297,10 +297,6 @@ install-doc-files:
 	${INSTALL_DATA} ${WRKSRC}/${filename} ${STAGEDIR}${DOCSDIR}
 . endfor
 .endif
-
-display-message:
-	${ECHO_MSG}
-	${CAT} ${PKGMESSAGE}
 
 # Maintainer's note:
 #   Don't forget to bump library version in these ports.

@@ -2,12 +2,11 @@
 # $FreeBSD$
 
 PORTNAME=	json-py
-PORTVERSION=	3.4
+DISTVERSION=	3_4
 PORTREVISION=	1
 CATEGORIES=	devel lang www python
-MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/3_4
+MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${DISTVERSION}
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
-DISTNAME=	${PORTNAME}-${PORTVERSION:S/./_/}
 
 MAINTAINER=	nivit@FreeBSD.org
 COMMENT=	Python implementation of a JSON (http//:json.org) reader/writer
@@ -20,7 +19,7 @@ USES=		python zip
 
 do-build:
 	# compile python files
-	cd ${WRKDIR}; \
+	cd ${WRKSRC}; \
 	FILES=$$(${FIND} . -name "*.py" ); \
 	for FILE in $${FILES}; do \
 	    ${ECHO} import `basename $${FILE} .py` | ${PYTHON_CMD}; \
@@ -28,7 +27,7 @@ do-build:
 
 do-install:
 	${MKDIR} ${STAGEDIR}${PYTHON_SITELIBDIR}
-	@cd ${WRKDIR}; \
+	@cd ${WRKSRC}; \
 	${FIND} . \( -name "*.py" -or -name "*.pyc" \) -exec ${INSTALL_SCRIPT} \{\} ${STAGEDIR}${PYTHON_SITELIBDIR} \;
 
 .include <bsd.port.mk>

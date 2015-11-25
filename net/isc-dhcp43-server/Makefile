@@ -2,17 +2,16 @@
 # $FreeBSD$
 
 PORTNAME=	dhcp
-DISTVERSION=	4.3.1
+DISTVERSION=	4.3.3
 PORTREVISION=	${DHCP_PORTREVISION}
 CATEGORIES=	net
-MASTER_SITES=	${MASTER_SITE_ISC}
-MASTER_SITE_SUBDIR=	${PORTNAME}/${DISTVERSION}
+MASTER_SITES=	ISC/${PORTNAME}/${DISTVERSION}
 PKGNAMEPREFIX=	isc-
 PKGNAMESUFFIX=	43-${SUBSYS}
 #DISTNAME=	${PORTNAME}-${DISTVERSION}-${PATCHLEVEL}
 
 MAINTAINER=	zi@FreeBSD.org
-COMMENT?=	The ISC Dynamic Host Configuration Protocol server
+COMMENT?=	ISC Dynamic Host Configuration Protocol server
 
 LICENSE=	ISCL
 
@@ -25,8 +24,6 @@ PORTREVISION_RELAY=	0
 
 SUBSYS?=	server
 #WRKSRC=		${WRKDIR}/${PORTNAME}-${DISTVERSION}-${PATCHLEVEL}
-
-UNIQUENAME=	${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}
 
 OPTIONS_DEFINE=	IPV6
 OPTIONS_DEFAULT=IPV6
@@ -49,8 +46,8 @@ DHCP_PORTREVISION=	${PORTREVISION_RELAY}
 .else
 CONFLICTS=	isc-dhcp3?-server-[0-9]* isc-dhcp4[12]-server-[0-9]*
 DHCP_PORTREVISION=	${PORTREVISION_SERVER}
-MAKE_JOBS_UNSAFE=	yes
 .endif
+MAKE_JOBS_UNSAFE=	yes
 
 .if ${SUBSYS} == server
 USERS=		dhcpd
@@ -97,12 +94,12 @@ SUB_LIST+=	PARANOIA="no"
 .endif
 
 .if ${PORT_OPTIONS:MLDAP}
-CONFIGURE_ARGS+=--with-ldap
+CONFIGURE_ARGS+=--with-ldap --with-ldapcrypto
 USE_OPENLDAP=	yes
 LDAP_SCRIPT=	${WRKSRC}/contrib/ldap/dhcpd-conf-to-ldap
 LDAP_SCHEMA=	${WRKSRC}/contrib/ldap/dhcp.schema
 LDAP_README=	${WRKSRC}/contrib/ldap/README.ldap
-CPPFLAGS+=	-I${LOCALBASE}/include
+CPPFLAGS+=	-I${LOCALBASE}/include -L${LOCALBASE}/lib
 LIBS+=		-L${LOCALBASE}/lib
 PORTDOCS+=	README.ldap
 PLIST_SUB+=	SCHEMA_DIR="${SCHEMA_DIR:S,^${PREFIX}/,,}" LDAP=""
@@ -145,14 +142,15 @@ do-install:
 	${SETENV} DESTDIR=${STAGEDIR} ${MAKE} -C ${WRKSRC}/${SUBSYS} install
 .if ${SUBSYS} == server
 	${SETENV} DESTDIR=${STAGEDIR} ${MAKE} -C ${WRKSRC}/dhcpctl install
-	${SETENV} DESTDIR=${STAGEDIR} ${MAKE} -C ${WRKSRC}/dst install
+#${SETENV} DESTDIR=${STAGEDIR} ${MAKE} -C ${WRKSRC}/dst install
 	${SETENV} DESTDIR=${STAGEDIR} ${MAKE} -C ${WRKSRC}/omapip install
 	${SETENV} DESTDIR=${STAGEDIR} ${MAKE} -C ${WRKSRC}/includes install
 	${SETENV} DESTDIR=${STAGEDIR} ${MAKE} -C ${WRKSRC}/common install
 	${INSTALL_DATA} ${WRKSRC}/dhcpctl/dhcpctl.h ${STAGEDIR}${PREFIX}/include
+	${MV} ${STAGEDIR}${PREFIX}/etc/dhcpd.conf.example ${STAGEDIR}${PREFIX}/etc/dhcpd.conf.sample
 .if ${PORT_OPTIONS:MIPV6}
 	${INSTALL_DATA} ${WRKSRC}/doc/examples/dhcpd-dhcpv6.conf \
-		${STAGEDIR}${PREFIX}/etc/dhcpd6.conf.example
+		${STAGEDIR}${PREFIX}/etc/dhcpd6.conf.sample
 .endif
 .if ${PORT_OPTIONS:MLDAP}
 	@${MKDIR} ${STAGEDIR}${SCHEMA_DIR}

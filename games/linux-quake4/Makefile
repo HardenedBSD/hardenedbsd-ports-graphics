@@ -6,8 +6,8 @@ PORTVERSION=	1.4.2
 PORTREVISION=	1
 PORTEPOCH=	1
 CATEGORIES=	games linux
-MASTER_SITES=	${MASTER_SITE_IDSOFTWARE:S|$|quake4/linux/|} \
-		${MASTER_SITE_GENTOO:S|$|distfiles/|}
+MASTER_SITES=	IDSOFTWARE/quake4/linux/ \
+		GENTOO
 PKGNAMEPREFIX=	linux-
 DISTNAME=	${PORTNAME}-${PKGNAMEPREFIX}${PORTVERSION}.x86
 EXTRACT_SUFX=	.run
@@ -40,9 +40,7 @@ PLIST_SUB+=	THREADS="@comment "
 .endif
 
 do-extract:
-	@${RM} -rf ${WRKDIR}
-	@${MKDIR} ${WRKDIR}
-	@cd ${WRKDIR} && ${TAIL} +376 ${_DISTDIR}/${DISTNAME}${EXTRACT_SUFX} | \
+	@cd ${WRKSRC} && ${TAIL} +376 ${_DISTDIR}/${DISTNAME}${EXTRACT_SUFX} | \
 		${TAR} zxf -
 
 do-build:
@@ -101,8 +99,5 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/README ${STAGEDIR}${DOCSDIR}/README && \
 	${INSTALL_DATA} ${WRKSRC}/pb/PBEULA.txt ${STAGEDIR}${DOCSDIR}/PBEULA
 .endif
-
-post-install:
-	@${CAT} ${PKGMESSAGE}
 
 .include <bsd.port.post.mk>

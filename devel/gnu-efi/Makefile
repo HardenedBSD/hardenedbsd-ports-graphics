@@ -4,8 +4,7 @@
 PORTNAME=	gnu-efi
 PORTVERSION=	3.0.1
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE}
-MASTER_SITE_SUBDIR=	gnu-efi
+MASTER_SITES=	SF/gnu-efi
 
 MAINTAINER=	trasz@FreeBSD.org
 COMMENT=	SDK for EFI applications
@@ -15,7 +14,7 @@ LICENSE=	GPLv2
 BUILD_DEPENDS+=	${LOCALBASE}/bin/ar:${PORTSDIR}/devel/binutils
 
 USES=		gmake tar:bz2
-USE_GCC=	4.8+
+USE_GCC=	yes
 MAKE_JOBS_UNSAFE=	yes
 CFLAGS+=	"-fPIC"
 CPPFLAGS+=	"-fPIC"

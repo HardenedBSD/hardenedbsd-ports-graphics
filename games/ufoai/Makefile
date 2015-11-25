@@ -13,7 +13,6 @@ MAINTAINER=	m.tsatsenko@gmail.com
 COMMENT=	Strategy game featuring tactical combat
 
 LIB_DEPENDS=	libvorbis.so:${PORTSDIR}/audio/libvorbis \
-		libjpeg.so:${PORTSDIR}/graphics/jpeg \
 		libpng.so:${PORTSDIR}/graphics/png \
 		libcurl.so:${PORTSDIR}/ftp/curl \
 		libtheora.so:${PORTSDIR}/multimedia/libtheora \
@@ -25,12 +24,12 @@ RUN_DEPENDS=	${LOCALBASE}/share/${PORTNAME}/base/default.cfg:${PORTSDIR}/games/u
 USE_GL=		yes
 USE_SDL=	sdl image mixer ttf
 USE_CXXSTD=	c++11
-USES=		compiler:c++11-lang execinfo gettext gmake openal:soft pkgconfig \
+USES=		compiler:c++11-lang execinfo gettext gmake jpeg openal:soft pkgconfig \
 		python:build tar:bzip2
 HAS_CONFIGURE=	yes
 CONFIGURE_ARGS+=	--enable-release --target-os=freebsd
-CPPFLAGS+=	-I${LOCALBASE}/include ${PTHREAD_CFLAGS}
-LDFLAGS+=	-L${LOCALBASE}/lib ${PTHREAD_LIBS} -lexecinfo
+CPPFLAGS+=	-I${LOCALBASE}/include
+LDFLAGS+=	-lpthread -L${LOCALBASE}/lib -lexecinfo
 CFLAGS+=	-I${LOCALBASE}/include
 
 DATADIR=	share/${PORTNAME}
@@ -83,10 +82,6 @@ FAVORITE_COMPILER=	gcc
 .endif
 
 .include <bsd.port.pre.mk>
-
-.if ${OSVERSION} < 900000
-BROKEN=	Fails to build on 8.x
-.endif
 
 post-extract:
 	@${MKDIR} ${WRKSRC}/base/maps ${WRKSRC}/base/models

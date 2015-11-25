@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	libXi
-PORTVERSION=	1.7.4
+PORTVERSION=	1.7.5
 PORTEPOCH=	1
 CATEGORIES=	x11
 
@@ -14,6 +14,9 @@ LICENSE=	MIT
 XORG_CAT=	lib
 USE_XORG=	xproto x11 xext xextproto xfixes inputproto:both
 INSTALL_TARGET=	install-strip
+USES+=	cpe
+CPE_PRODUCT=	libxi
+CPE_VENDOR=	x
 
 CONFIGURE_ARGS+=--disable-docs \
 		--disable-specs \

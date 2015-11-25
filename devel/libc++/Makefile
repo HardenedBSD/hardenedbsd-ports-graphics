@@ -8,8 +8,8 @@ CATEGORIES=	devel
 MASTER_SITES=	http://files.etoilebsd.net/libc++/ \
 		LOCAL/bapt
 
-MAINTAINER=	ports@FreeBSD.org
-COMMENT?=	Llvm's C++ standard library with c++11 support
+MAINTAINER=	dim@FreeBSD.org
+COMMENT?=	LLVM C++ standard library with c++11 support
 
 USES=		tar:xz
 
@@ -34,16 +34,6 @@ CXXRT_INCS=	${LOCALBASE}/include/cxxrt/
 CXXRT_LIB=	${LOCALBASE}/lib/libcxxrt.so
 .endif
 
-.if ${OPSYS} == FreeBSD && ${OSVERSION} < 900000
-LIB_DEPENDS+=	libmissing.so:${PORTSDIR}/math/libmissing \
-		libxlocale.so:${PORTSDIR}/devel/xlocale
-EXTRA_PATCHES=	${FILESDIR}/extra-libmissing
-CXXFLAGS+=	-I${LOCALBASE}/include -D__LONG_LONG_SUPPORTED
-LDFLAGS+=	-lmissing
-EXTRALIB=	${LOCALBASE}/lib/libmissing.so.2 ${LOCALBASE}/lib/libxlocale.so.0
-.endif
-
-
 CMAKE_ARGS=	-DLIBCXX_CXX_ABI=libcxxrt -DLIBCXX_LIBCXXRT_INCLUDE_PATHS=${CXXRT_INCS}
 
 .if !defined(SVN_REV)
@@ -56,6 +46,10 @@ SVN_REV!=       LC_ALL=C svn info http://llvm.org/svn/llvm-project/ | ${GREP} Re
 
 .if defined(BOOTSTRAP) || defined(SVN_FETCH)
 FETCH_DEPENDS+= svn:${PORTSDIR}/devel/subversion
+
+post-patch:
+	# remove .orig files because they can get installed in stagedir
+	@${FIND} ${WRKSRC} -name "*.orig" -type f -delete
 
 do-fetch:
 	${MKDIR} ${WRKDIR}

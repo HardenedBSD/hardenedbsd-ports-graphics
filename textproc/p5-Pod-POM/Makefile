@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	Pod-POM
-PORTVERSION=	0.29
-PORTREVISION=	1
+PORTVERSION=	2.01
 CATEGORIES=	textproc perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
@@ -14,9 +13,11 @@ COMMENT=	POD Object Model
 LICENSE=	ART10 GPLv1
 LICENSE_COMB=	dual
 
-BUILD_DEPENDS=	p5-File-Slurp>=0:${PORTSDIR}/devel/p5-File-Slurp
-RUN_DEPENDS:=	${BUILD_DEPENDS}
+TEST_DEPENDS=	p5-File-Slurper>=0.004:${PORTSDIR}/devel/p5-File-Slurper \
+		p5-Test-Differences>=0:${PORTSDIR}/devel/p5-Test-Differences \
+		p5-Text-Diff>=0:${PORTSDIR}/textproc/p5-Text-Diff
 
+NO_ARCH=	yes
 USES=		perl5
 USE_PERL5=	configure
 

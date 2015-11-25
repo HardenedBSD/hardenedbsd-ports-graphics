@@ -22,8 +22,7 @@ LIB_DEPENDS=	libImath.so:${PORTSDIR}/graphics/ilmbase \
 USE_GITHUB=	yes
 GH_ACCOUNT=	ampas
 GH_PROJECT=	CTL
-GH_TAGNAME=	${GH_COMMIT}
-GH_COMMIT=	57b48a2
+GH_TAGNAME=	57b48a2
 
 USES=		cmake pkgconfig
 USE_LDCONFIG=	yes
@@ -42,10 +41,6 @@ OPTIONS_DEFINE=	DOCS
 .include <bsd.port.options.mk>
 
 post-patch:
-	@${REINPLACE_CMD} -e 's|#include <alloca.h>||' \
-		${WRKSRC}/lib/dpx/dpx_util.cc ${WRKSRC}/lib/IlmCtl/CtlExc.cpp \
-		${WRKSRC}/lib/IlmCtl/CtlTypeStorage.cpp ${WRKSRC}/ctlrender/tiff_file.cc
-
 	@${REINPLACE_CMD} -e 's|lib/CMake|lib/cmake|' \
 		-e 's|add_subdirectory(doc)||' \
 		-e 's|lib/pkgconfig|libdata/pkgconfig|' \

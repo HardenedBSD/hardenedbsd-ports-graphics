@@ -3,6 +3,7 @@
 
 PORTNAME=	gauche
 PORTVERSION=	0.9.4
+PORTREVISION=	1
 CATEGORIES=	lang scheme
 MASTER_SITES=	SF/${PORTNAME}/Gauche
 DISTNAME=	Gauche-${PORTVERSION}
@@ -29,10 +30,6 @@ MAKE_ENV+=	LANG=C
 MAKE_ENV+=	CCACHE_CPP2=1
 
 INFO=		gauche-refe gauche-refj
-
-BROKEN_ia64=	Does not build with ${ARCH}
-BROKEN_powerpc=	Does not build with ${ARCH}
-BROKEN_sparc=	Does not build with ${ARCH}
 
 OPTIONS_DEFINE=		GDBM THREADS SLIB
 OPTIONS_RADIO=		MULTIBYTE
@@ -77,11 +74,15 @@ post-install:
 	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
 	@${TOUCH} ${STAGEDIR}${EXAMPLESDIR}/.keepme
 .for i in gauche-config gosh
+	@${CHMOD} u+w ${STAGEDIR}${PREFIX}/bin/${i}
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/${i}
+	@${CHMOD} u-w ${STAGEDIR}${PREFIX}/bin/${i}
 .endfor
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libgauche-0.9.so.[0-9].*
 .for i in gauche-config gosh *.so
+	@${CHMOD} u+w ${STAGEDIR}${PREFIX}/lib/gauche-0.9/${PORTVERSION}/${CONFIGURE_TARGET}/${i}
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/gauche-0.9/${PORTVERSION}/${CONFIGURE_TARGET}/${i}
+	@${CHMOD} u-w ${STAGEDIR}${PREFIX}/lib/gauche-0.9/${PORTVERSION}/${CONFIGURE_TARGET}/${i}
 .endfor
 
 regression-test: build

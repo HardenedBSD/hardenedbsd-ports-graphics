@@ -4,8 +4,7 @@
 PORTNAME=	ristretto
 PORTVERSION=	0.8.0
 CATEGORIES=	graphics xfce
-MASTER_SITES=	${MASTER_SITE_XFCE}
-MASTER_SITE_SUBDIR=	src/apps/${PORTNAME}/${PORTVERSION:R}
+MASTER_SITES=	XFCE/src/apps/${PORTNAME}/${PORTVERSION:R}
 DIST_SUBDIR=	xfce4
 
 MAINTAINER=	xfce@FreeBSD.org
@@ -17,7 +16,7 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 LIB_DEPENDS=	libexif.so:${PORTSDIR}/graphics/libexif \
 		libdbus-glib-1.so:${PORTSDIR}/devel/dbus-glib \
 
-USES=		pkgconfig gettext desktop-file-utils gmake xfce tar:bzip2 
+USES=		pkgconfig gettext desktop-file-utils gmake xfce tar:bzip2
 GNU_CONFIGURE=	yes
 USE_GNOME=	gtk20 glib20 intltool intlhack
 INSTALLS_ICONS=	yes

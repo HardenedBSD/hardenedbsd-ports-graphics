@@ -8,10 +8,10 @@ CATEGORIES=	graphics
 PKGNAMEPREFIX=	gimp-
 PKGNAMESUFFIX=	-plugin
 
-MAINTAINER=	lioux@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	GIMP plug-ins to both quickly and easily beautify photo
 
-LICENSE=	GPLv3
+LICENSE=	GPLv3 # or later
 
 BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/fontconfig.pc:${PORTSDIR}/x11-fonts/fontconfig \
 		${LOCALBASE}/libdata/pkgconfig/freetype2.pc:${PORTSDIR}/print/freetype2 \
@@ -22,8 +22,7 @@ RUN_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/fontconfig.pc:${PORTSDIR}/x11-fonts/
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	hejiann
-GH_TAGNAME=	${GH_COMMIT}
-GH_COMMIT=	e209c8d
+GH_TAGNAME=	e209c8d
 
 USES=		gettext gmake pkgconfig
 USE_GCC=	yes

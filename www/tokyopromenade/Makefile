@@ -3,12 +3,14 @@
 
 PORTNAME=	tokyopromenade
 PORTVERSION=	0.9.22
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	www
 MASTER_SITES=	http://fallabs.com/${PORTNAME}/
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Content management system
+
+BROKEN=		unfetchable
 
 BUILD_DEPENDS=	tokyocabinet>=1.4.31:${PORTSDIR}/databases/tokyocabinet \
 		fcgi-devkit>=0:${PORTSDIR}/www/fcgi
@@ -35,5 +37,10 @@ CFLAGS+=		-Wno-incompatible-pointer-types-discards-qualifiers
 
 post-patch:
 	${REINPLACE_CMD} -e "s/llua/llua-${LUA_VER}/g" ${WRKSRC}/configure
+
+post-install:
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/prommgr
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/libexec/promenade.cgi
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/libexec/promenade.fcgi
 
 .include <bsd.port.post.mk>

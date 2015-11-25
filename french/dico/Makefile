@@ -11,6 +11,10 @@ DISTNAME=	le_dico
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Interactive dictionary in french
 
+BROKEN=		No public distfiles
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
+
 BROKEN_WWW=	http://www.montefiore.ulg.ac.be/cgi-bin-ulg/DICO.html
 
 WRKSRC=		${WRKDIR}/${PORTNAME}

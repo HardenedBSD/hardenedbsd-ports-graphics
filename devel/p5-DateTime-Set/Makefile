@@ -2,17 +2,17 @@
 # $FreeBSD$
 
 PORTNAME=	DateTime-Set
-PORTVERSION=	0.34
-PORTREVISION=	1
+PORTVERSION=	0.36
+DISTVERSIONSUFFIX=	00
 CATEGORIES=	devel perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
-DISTNAME=	${PORTNAME}-${PORTVERSION}00
 
 MAINTAINER=	perl@FreeBSD.org
 COMMENT=	Datetime sets and set math
 
 LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	p5-DateTime>=0.12:${PORTSDIR}/devel/p5-DateTime \
 		p5-Set-Infinite>=0.59:${PORTSDIR}/devel/p5-Set-Infinite
@@ -20,18 +20,15 @@ RUN_DEPENDS:=	${BUILD_DEPENDS}
 
 OPTIONS_DEFINE=	DOCS
 
+NO_ARCH=	yes
 USES=		perl5
 USE_PERL5=	configure
 
 PORTDOCS=	Changes README TODO
 
-.include <bsd.port.options.mk>
-
-post-install:
-.if ${PORT_OPTIONS:MDOCS}
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	(cd ${WRKSRC} && ${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR})
 	@${ECHO_MSG} "===> Documentation installed in ${DOCSDIR}."
-.endif
 
 .include <bsd.port.mk>

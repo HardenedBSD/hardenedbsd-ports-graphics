@@ -3,16 +3,15 @@
 
 PORTNAME=	sqlite3
 PORTVERSION=	${PYTHON_PORTVERSION}
-PORTREVISION=	6
+PORTREVISION=	7
 CATEGORIES=	databases python
-MASTER_SITES=	PYTHON
-MASTER_SITE_SUBDIR=	ftp/python/${PORTVERSION}
+MASTER_SITES=	PYTHON/ftp/python/${PORTVERSION}
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 DISTNAME=	Python-${PORTVERSION}
 DIST_SUBDIR=	python
 
 MAINTAINER=	python@FreeBSD.org
-COMMENT=	Standard Python binding to the SQLite3 library
+COMMENT=	Standard Python binding to the SQLite3 library (Python ${PYTHON_VER}) 
 
 LICENSE=	PSFL
 LICENSE_FILE=	${WRKDIR}/Python-${PORTVERSION}/LICENSE
@@ -32,7 +31,7 @@ PYDISTUTILS_INSTALLARGS+=	--install-lib ${PYTHON_LIBDIR}/lib-dynload
 .include <bsd.port.pre.mk>
 
 post-extract:
-.if ${PYTHON_REL} < 300
+.if ${PYTHON_REL} < 3000
 	@${CP} ${FILESDIR}/setup.py ${WRKSRC}
 .else
 	@${CP} ${FILESDIR}/setup3.py ${WRKSRC}/setup.py

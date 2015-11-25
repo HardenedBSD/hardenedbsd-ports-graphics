@@ -1,6 +1,7 @@
 %%XPI_XPIDIR%%/bootstrap.js
 %%XPI_XPIDIR%%/chrome/content/errors.html
 %%XPI_XPIDIR%%/chrome/content/objtabs.css
+%%XPI_XPIDIR%%/chrome/content/subscribeLinkHandler.js
 %%XPI_XPIDIR%%/chrome/content/ui/composer.js
 %%XPI_XPIDIR%%/chrome/content/ui/composer.xul
 %%XPI_XPIDIR%%/chrome/content/ui/ext/common.js
@@ -27,7 +28,8 @@
 %%XPI_XPIDIR%%/chrome/content/ui/sidebar.js
 %%XPI_XPIDIR%%/chrome/content/ui/sidebar.xul
 %%XPI_XPIDIR%%/chrome/content/ui/sidebarDetached.xul
-%%XPI_XPIDIR%%/chrome/content/ui/skin/abp-icon-big.png
+%%XPI_XPIDIR%%/chrome/content/ui/skin/abb-logo.png
+%%XPI_XPIDIR%%/chrome/content/ui/skin/abp-128.png
 %%XPI_XPIDIR%%/chrome/content/ui/skin/ajax-loader.gif
 %%XPI_XPIDIR%%/chrome/content/ui/skin/background-main.png
 %%XPI_XPIDIR%%/chrome/content/ui/skin/background-share.png
@@ -494,7 +496,7 @@
 %%XPI_XPIDIR%%/chrome/skin/slow.png
 %%XPI_XPIDIR%%/chrome/skin/subscriptionSelection.css
 %%XPI_XPIDIR%%/chrome.manifest
-%%XPI_XPIDIR%%/defaults/prefs.js
+%%XPI_XPIDIR%%/defaults/prefs.json
 %%XPI_XPIDIR%%/icon.png
 %%XPI_XPIDIR%%/icon64.png
 %%XPI_XPIDIR%%/install.rdf

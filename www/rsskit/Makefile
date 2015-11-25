@@ -2,7 +2,7 @@
 
 PORTNAME=	rsskit
 PORTVERSION=	0.4
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	www gnustep
 MASTER_SITES=	SAVANNAH/gap
 DISTNAME=	RSSKit-${PORTVERSION}
@@ -13,13 +13,11 @@ COMMENT=	Etoile Project RSSKit framework
 LICENSE=	LGPL21
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-USE_GNUSTEP=	yes
-USE_GNUSTEP_BACK=	yes
-USE_GNUSTEP_BUILD=	yes
-USE_GNUSTEP_INSTALL=	yes
-USE_GNUSTEP_LDCONFIG=	${GNUSTEP_LOCAL_LIBRARIES}
+USES=		gnustep
+USE_GNUSTEP=	back build
+USE_LDCONFIG=	${GNUSTEP_LOCAL_LIBRARIES}
 
 post-install:
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/Local/Library/Frameworks/RSSKit.framework/Versions/0/libRSSKit.so
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/System/Library/Frameworks/RSSKit.framework/Versions/0/libRSSKit.so
 
 .include <bsd.port.mk>

@@ -2,10 +2,12 @@
 # $FreeBSD$
 
 PORTNAME=	zsh
-PORTVERSION=	5.0.7
-PORTREVISION=	2
+DISTVERSION=	5.1.1
 CATEGORIES=	shells
-MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTVERSION} \
+MASTER_SITES=	\
+		http://www.zsh.org/pub/:doc \
+		http://www.zsh.org/pub/ \
+		SF/${PORTNAME}/${PORTNAME}/${PORTVERSION} \
 		SF/${PORTNAME}/${PORTNAME}-doc/${PORTVERSION}:doc
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
 
@@ -21,11 +23,21 @@ MAKE_JOBS_UNSAFE=	yes
 
 ZSH_VER=	${PORTVERSION}
 
-USES=		iconv ncurses tar:bzip2
+USES=		iconv ncurses shebangfix tar:xz
+SHEBANG_FILES=	Functions/Calendar/calendar_add \
+		Functions/Misc/checkmail \
+		Functions/Misc/run-help \
+		Functions/Misc/sticky-note \
+		Functions/Misc/zcalc \
+		Functions/Misc/zed \
+		Functions/Misc/zkbd
+SHEBANG_LANG=	zsh
+zsh_OLD_CMD=	/bin/zsh
+zsh_CMD=	${PREFIX}/bin/zsh
 GNU_CONFIGURE=	yes
 
 CPPFLAGS+=	-I${LOCALBASE}/include -DBOOL_DEFINED
-LDFLAGS+=	-L${LOCALBASE}/lib
+LDFLAGS+=	-L${LOCALBASE}/lib -Wl,--as-needed
 CONFIGURE_ENV+=	zsh_cv_sys_path_dev_fd=no
 CONFIGURE_ARGS=	--with-term-lib="ncursesw ncurses" --with-tcsetpgrp \
 		--enable-function-subdirs --enable-multibyte \
@@ -65,7 +77,6 @@ STATIC_LDFLAGS=		-static
 STATIC_CONFIGURE_ON=	--disable-dynamic
 STATIC_CONFIGURE_OFF=	--enable-dynamic
 DEBUG_CONFIGURE_ENABLE=	zsh-debug
-DOCS_USES=		makeinfo
 
 .include <bsd.port.pre.mk>
 
@@ -73,11 +84,8 @@ DOCS_USES=		makeinfo
 CONFIGURE_ENV+=	ac_cv_lib_iconv_libiconv=no
 .endif
 
-.if ${PORT_OPTIONS:MDOCS}
-INFO=	zsh
-.endif
-
 post-patch:
+	@${REINPLACE_CMD} -i '' -e '1s|zsh|${zsh_CMD}|' ${WRKSRC}/Functions/Misc/run-help-ip
 	@${REINPLACE_CMD} -e '/LIBS/s/-lrt//' ${WRKSRC}/configure
 	@${SED} -i "" -e "s,link=dynamic,link=either," \
 		${WRKSRC}/Src/Modules/*.mdd
@@ -104,23 +112,9 @@ post-build:
 	${MV} ${WRKSRC}/Doc/zshall.1 ${WRKSRC}/Doc/zshall.1.source
 	cd ${WRKSRC} && ${SOELIM} -r ${WRKSRC}/Doc/zshall.1.source > \
 		${WRKSRC}/Doc/zshall.1
-.if ${PORT_OPTIONS:MDOCS}
-	@${MKDIR} ${STAGEDIR}${PREFIX}/info
-	makeinfo --no-split --output=${WRKSRC}/Doc/zsh.info \
-		${WRKSRC}/Doc/zsh.texi
-.endif
 
 post-install:
 	${LN} -f ${STAGEDIR}${PREFIX}/bin/zsh ${STAGEDIR}${PREFIX}/bin/rzsh
-.if ${PORT_OPTIONS:MEXAMPLES}
-	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
-	cd ${WRKSRC}/StartupFiles && ${INSTALL_DATA} ${PORTEXAMPLES} ${STAGEDIR}${EXAMPLESDIR}
-.endif
-.if ${PORT_OPTIONS:MDOCS}
-	@${MKDIR} ${STAGEDIR}${DOCSDIR}
-	cd ${WRKSRC} && ${INSTALL_DATA} ${DOCS} ${STAGEDIR}${DOCSDIR}
-	${INSTALL_DATA} ${WRKSRC}/Doc/zsh.info ${STAGEDIR}${PREFIX}/info/zsh.info
-.endif
 	${STAGEDIR}${PREFIX}/bin/zsh -fc ' \
 		setopt extendedglob nomark_dirs; \
 		cd ${STAGEDIR}/${DATADIR}/${ZSH_VER} ; \
@@ -128,6 +122,14 @@ post-install:
 			zcompile -U -M $$i.zwc $$i/*~*.zwc(^/) ; \
 			${CHMOD} 644 $$i.zwc ; \
 		done'
+
+post-install-EXAMPLES-on:
+	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
+	cd ${WRKSRC}/StartupFiles && ${INSTALL_DATA} ${PORTEXAMPLES} ${STAGEDIR}${EXAMPLESDIR}
+
+post-install-DOCS-on:
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
+	cd ${WRKSRC} && ${INSTALL_DATA} ${DOCS} ${STAGEDIR}${DOCSDIR}
 
 regression-test:
 	@cd ${WRKSRC}; ${SETENV} -i ${MAKE} check

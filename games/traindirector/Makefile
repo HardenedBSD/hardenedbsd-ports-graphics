@@ -2,7 +2,7 @@
 
 PORTNAME=	traindirector
 PORTVERSION=	3.6
-PORTREVISION=	6
+PORTREVISION=	7
 CATEGORIES=	games
 MASTER_SITES=	http://www.backerstreet.com/traindir/
 DISTNAME=	tdir36src
@@ -29,6 +29,6 @@ PLIST_FILES=	bin/traindir3
 MAKEFILE=	Makefile.fc9
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKDIR}/traindir3 ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/traindir3 ${STAGEDIR}${PREFIX}/bin
 
 .include <bsd.port.mk>

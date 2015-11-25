@@ -2,16 +2,16 @@
 
 PORTNAME=	sid-milter
 PORTVERSION=	1.0.0
+PORTREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	SF/${PORTNAME}/SenderID%20Milter/${PORTVERSION}
 
 MAINTAINER=	dinoex@FreeBSD.org
-COMMENT=	sid and spf milter for Sendmail
+COMMENT=	Milter module for sid and spf
 
 RESTRICTED=	May incorporate intellectual property, possible patent issues
 
 WCONF=		${WRKSRC}/devtools/Site
-MAN8=		sid-filter.8
 DOCSFILES=	FEATURES INSTALL KNOWNBUGS LICENSE README README-SenderID \
 		RELEASE_NOTES rfc4406.txt rfc4407.txt rfc4408.txt
 INSTALL_WRKSRC=	${WRKSRC}/sid-filter
@@ -32,6 +32,8 @@ OPTIONS_DEFINE=	LIBAR NH_MFROM DOCS
 LIBAR_DESC=	build and install libar
 NH_MFROM_DESC=	use NH_MFROM
 
+LIBAR_PLIST_FILES=	include/libar.h lib/libar.a man/man3/ar.3.gz
+
 .include <bsd.port.options.mk>
 
 .include "${PORTSDIR}/mail/sendmail/bsd.milter.mk"
@@ -40,40 +42,29 @@ NH_MFROM_DESC=	use NH_MFROM
 SITE+=		${FILESDIR}/site.config.m4.milter
 .endif
 
-.if ${PORT_OPTIONS:MLIBAR}
-MAN3=		ar.3
-PLIST_FILES+=	include/libar.h lib/libar.a man/man3/ar.3.gz
-.endif
-
 pre-configure:
-	${REINPLACE_CMD} -e 's|-pthread|${PTHREAD_LIBS}|' \
-		-e 's|-D_THREAD_SAFE|${PTHREAD_CFLAGS}|' \
-		-e "s|\`-O'|\`${CFLAGS}'|g" \
+	${REINPLACE_CMD} -e "s|\`-O'|\`${CFLAGS}'|g" \
 		-e 's|%%LOCALBASE%%|${LOCALBASE}|g' \
 		${WRKSRC}/devtools/OS/FreeBSD
 	${SED} -e "s|%%PREFIX%%|${PREFIX}|g" \
 		-e "s|%%LOCALBASE%%|${LOCALBASE}|g" \
 		${SITE} > ${WCONF}/site.config.m4
-.if ${PORT_OPTIONS:MNH_MFROM}
+
+pre-configure-NH_MFROM_on:
 	${ECHO_CMD} \
 		'APPENDDEF(`confENVDEF'\'', `-D_FFR_NH_MFROM'\'')' \
 		>> ${WCONF}/site.config.m4
-.endif
 
 post-install:
-.for i in ${MAN8}
-	${INSTALL_MAN} ${WRKSRC}/*/${i} ${STAGEDIR}${PREFIX}/man/man8/
-.endfor
-.if ${PORT_OPTIONS:MLIBAR}
-	${INSTALL_LIB} ${WRKSRC}/*/libar/libar.a ${STAGEDIR}${PREFIX}/lib/libar.a
+	${INSTALL_MAN} ${WRKSRC}/*/sid-filter.8 ${STAGEDIR}${PREFIX}/man/man8/
+
+post-install-LIBAR-on:
+	${INSTALL_DATA} ${WRKSRC}/*/libar/libar.a ${STAGEDIR}${PREFIX}/lib/libar.a
 	${INSTALL_DATA} ${WRKSRC}/libar/ar.h ${STAGEDIR}${PREFIX}/include/libar.h
-.for i in ${MAN3}
-	${INSTALL_MAN} ${WRKSRC}/*/${i} ${STAGEDIR}${PREFIX}/man/man3/
-.endfor
-.endif
-.if ${PORT_OPTIONS:MDOCS}
+	${INSTALL_MAN} ${WRKSRC}/*/ar.3 ${STAGEDIR}${PREFIX}/man/man3/
+
+post-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${DOCSFILES:S,^,${WRKSRC}/,} ${STAGEDIR}${DOCSDIR}/
-.endif
 
 .include <bsd.port.mk>

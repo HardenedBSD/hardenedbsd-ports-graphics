@@ -10,6 +10,10 @@ MASTER_SITES=	SF
 MAINTAINER=	mi@aldan.algebra.com
 COMMENT=	TCL extension to connect to Sybase servers
 
+BROKEN=		Unfetchable
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
+
 LIB_DEPENDS=	libsybdb.so:${PORTSDIR}/databases/freetds
 
 USES=		tcl uidfix

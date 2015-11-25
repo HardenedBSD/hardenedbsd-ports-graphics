@@ -1208,7 +1208,6 @@ share/appdata/emacs.appdata.xml
 %%DATADIR%%/%%EMACS_VER%%/lisp/gnus/gnus-cache.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/gnus/nntp.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/gnus/nnagent.elc
-%%DATADIR%%/%%EMACS_VER%%/lisp/gnus/rfc2104.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/gnus/gnus-demon.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/gnus/gnus-agent.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/gnus/mml-smime.elc
@@ -1353,7 +1352,6 @@ share/appdata/emacs.appdata.xml
 %%DATADIR%%/%%EMACS_VER%%/lisp/gnus/score-mode.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/gnus/smiley.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/gnus/gnus-msg.elc
-%%DATADIR%%/%%EMACS_VER%%/lisp/gnus/rfc2104.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/gnus/gnus-icalendar.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/gnus/rfc2045.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/gnus/gnus-salt.elc
@@ -2142,7 +2140,6 @@ share/appdata/emacs.appdata.xml
 %%DATADIR%%/%%EMACS_VER%%/lisp/shadowfile.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/ps-print.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/play/hanoi.el
-%%DATADIR%%/%%EMACS_VER%%/lisp/play/landmark.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/play/zone.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/play/pong.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/play/cookie1.elc
@@ -2171,7 +2168,6 @@ share/appdata/emacs.appdata.xml
 %%DATADIR%%/%%EMACS_VER%%/lisp/play/blackbox.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/play/dunnet.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/play/decipher.elc
-%%DATADIR%%/%%EMACS_VER%%/lisp/play/landmark.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/play/handwrite.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/play/zone.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/play/fortune.elc
@@ -2711,6 +2707,8 @@ share/appdata/emacs.appdata.xml
 %%DATADIR%%/%%EMACS_VER%%/lisp/progmodes/cc-defs.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/progmodes/etags.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/progmodes/ebnf-bnf.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/progmodes/project.el
+%%DATADIR%%/%%EMACS_VER%%/lisp/progmodes/project.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/find-cmd.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/dired.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/tar-mode.elc
@@ -2752,6 +2750,8 @@ share/appdata/emacs.appdata.xml
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/socks.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/ldap.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/shr.el
+%%DATADIR%%/%%EMACS_VER%%/lisp/net/rfc2104.el
+%%DATADIR%%/%%EMACS_VER%%/lisp/net/rfc2104.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/rcirc.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/newsticker.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/net-utils.el
@@ -2770,6 +2770,7 @@ share/appdata/emacs.appdata.xml
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/network-stream.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/mairix.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/sasl-cram.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/net/sasl-scram-rfc.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/rlogin.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/tramp-ftp.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/tramp-loaddefs.el
@@ -2831,6 +2832,7 @@ share/appdata/emacs.appdata.xml
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/goto-addr.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/telnet.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/sasl-cram.el
+%%DATADIR%%/%%EMACS_VER%%/lisp/net/sasl-scram-rfc.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/netrc.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/secrets.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/net/newst-treeview.el
@@ -3268,6 +3270,8 @@ share/appdata/emacs.appdata.xml
 %%DATADIR%%/%%EMACS_VER%%/lisp/obsolete/rcompile.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/obsolete/lmenu.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/obsolete/ws-mode.el
+%%DATADIR%%/%%EMACS_VER%%/lisp/obsolete/landmark.el
+%%DATADIR%%/%%EMACS_VER%%/lisp/obsolete/landmark.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/isearchb.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/edmacro.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/outline.el
@@ -3634,6 +3638,8 @@ share/appdata/emacs.appdata.xml
 %%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/cl-generic.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/cl-preloaded.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/cl-preloaded.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/cursor-sensor.el
+%%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/cursor-sensor.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/eieio-compat.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/eieio-compat.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/inline.el
@@ -3787,6 +3793,10 @@ share/appdata/emacs.appdata.xml
 %%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/advice.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/seq.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/seq.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/generator.el
+%%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/generator.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/map.el
+%%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/map.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/informat.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/wdired.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/imenu.el
@@ -3820,8 +3830,19 @@ share/appdata/emacs.appdata.xml
 %%DATADIR%%/%%EMACS_VER%%/lisp/epa-dired.elc
 %%DATADIR%%/%%EMACS_VER%%/lisp/autoinsert.el
 %%DATADIR%%/%%EMACS_VER%%/lisp/files.el
-%%DATADIR%%/%%EMACS_VER%%/lisp/let-alist.el
-%%DATADIR%%/%%EMACS_VER%%/lisp/let-alist.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/character-fold.el
+%%DATADIR%%/%%EMACS_VER%%/lisp/character-fold.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/let-alist.el
+%%DATADIR%%/%%EMACS_VER%%/lisp/emacs-lisp/let-alist.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/international/charscript.el
+%%DATADIR%%/%%EMACS_VER%%/lisp/international/charscript.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/international/cp51932.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/international/eucjp-ms.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/net/pinentry.el
+%%DATADIR%%/%%EMACS_VER%%/lisp/net/pinentry.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/obsolete/bruce.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/obsolete/keyswap.elc
+%%DATADIR%%/%%EMACS_VER%%/lisp/obsolete/patcomp.elc
 %%SOURCES%%%%DATADIR%%/%%EMACS_VER%%/site-lisp/site-start.el
 %%DATADIR%%/%%EMACS_VER%%/site-lisp/subdirs.el
 %%SOURCES%%%%DATADIR%%/%%EMACS_VER%%/src/macuvs.h
@@ -4013,6 +4034,7 @@ share/appdata/emacs.appdata.xml
 %%SOURCES%%%%DATADIR%%/%%EMACS_VER%%/src/msdos.c
 %%SOURCES%%%%DATADIR%%/%%EMACS_VER%%/src/keymap.h
 %%SOURCES%%%%DATADIR%%/%%EMACS_VER%%/src/category.h
+%%SOURCES%%%%DATADIR%%/%%EMACS_VER%%/src/ftcrfont.c
 %%DATADIR%%/site-lisp/subdirs.el
 share/icons/hicolor/128x128/apps/emacs.png
 share/icons/hicolor/16x16/apps/emacs.png

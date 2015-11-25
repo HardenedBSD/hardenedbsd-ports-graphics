@@ -23,6 +23,7 @@ RUN_DEPENDS=	buffer:${PORTSDIR}/misc/buffer \
 SUB_FILES=	pkg-message
 PKGMESSAGE=	${WRKDIR}/pkg-message
 
+USES=		alias
 WRKSRC=		${WRKDIR}/${PORTNAME}
 VAMPSRC=	vamps.c requant.c
 LXDVDRIPSRC=	cputest.c \
@@ -38,8 +39,8 @@ LXDVDRIPSRC=	cputest.c \
 		systools.c \
 		tcmemcpy.c \
 		vaporize.c
-CFLAGS+=	-I${LOCALBASE}/include ${PTHREAD_CFLAGS}
-LDFLAGS+=	-L${LOCALBASE}/lib ${PTHREAD_LIBS} -ldvdread -lm
+CFLAGS+=	-I${LOCALBASE}/include
+LDFLAGS+=	-L${LOCALBASE}/lib -lpthread -ldvdread -lm
 
 DOCS=	Changelog.de Changelog.en Changelog.fr \
 		README.de  README.en README.fr \

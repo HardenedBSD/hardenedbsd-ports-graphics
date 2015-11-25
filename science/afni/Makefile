@@ -29,8 +29,7 @@ LIB_DEPENDS=	libXm.so:${PORTSDIR}/x11-toolkits/open-motif \
 		libR.so:${PORTSDIR}/math/R \
 		libgsl.so:${PORTSDIR}/math/gsl \
 		libnetcdff.so:${PORTSDIR}/science/netcdf-fortran
-RUN_DEPENDS=	cjpeg:${PORTSDIR}/graphics/jpeg \
-		mpeg_encode:${PORTSDIR}/multimedia/mpeg_encode \
+RUN_DEPENDS=	mpeg_encode:${PORTSDIR}/multimedia/mpeg_encode \
 		whirlgif:${PORTSDIR}/graphics/whirlgif \
 		ppmtogif:${PORTSDIR}/graphics/netpbm \
 		endian:${PORTSDIR}/sysutils/endian \
@@ -40,15 +39,13 @@ CONFLICTS=	im-[0-9]* \
 		nifticlib-[0-9]* \
 		open-usp-tukubai-[0-9]*
 
-USES=		gettext iconv gmake motif perl5 shebangfix
+USES=		gettext gmake iconv jpeg:run motif perl5 shebangfix
 SHEBANG_FILES=	suma_change_spec 3dPAR2AFNI.pl
 
 # Some prereqs use gcc anyway
 USE_GCC=	yes
 
 OPTIONS_DEFINE=	DOCS
-
-.include <bsd.port.options.mk>
 
 BROKEN_sparc64=	Does not compile: "undefined reference to '_mcount'"
 
@@ -130,11 +127,12 @@ do-install:
 	${INSTALL_DATA} ${DISTDIR}/${DIST_SUBDIR}/TTatlas* ${STAGEDIR}${DATADIR}
 	${INSTALL_DATA} ${WRKDIR}/CA_EZ_v1.5-July3107/* ${STAGEDIR}${DATADIR}
 	${INSTALL_MAN} ${WRKDIR}/afni.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
-.if ${PORT_OPTIONS:MDOCS}
-	${MKDIR} ${STAGEDIR}${DOCSDIR} ${STAGEDIR}${PREFIX}/etc/mri
-	${INSTALL_DATA} ${PRESTAGE}/doc/* ${STAGEDIR}${DOCSDIR}
+	${MKDIR} ${STAGEDIR}${PREFIX}/etc/mri
 	${INSTALL_SCRIPT} ${WRKDIR}/afni.cshrc ${WRKDIR}/afni.profile \
 		${STAGEDIR}${PREFIX}/etc/mri
-.endif
+
+do-install-DOCS-on:
+	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	${INSTALL_DATA} ${PRESTAGE}/doc/* ${STAGEDIR}${DOCSDIR}
 
 .include <bsd.port.mk>

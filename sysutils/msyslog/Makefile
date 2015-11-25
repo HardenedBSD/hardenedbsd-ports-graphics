@@ -30,13 +30,7 @@ USE_RC_SUBR=	msyslogd
 SUB_FILES=	pkg-message
 USE_LDCONFIG=	yes
 
-PORTSCOUT=	skipv:1.09d
-
-.include <bsd.port.options.mk>
-
-.if ${OSVERSION} > 900006
-EXTRA_PATCHES=	${PATCHDIR}/utmpx-src-modules-om_classic.c
-.endif
+PORTSCOUT=	skipv:1.09a,1.09b,1.09c,1.09d
 
 post-patch:
 	@${FIND} ${WRKSRC}/src/modules -name "*.c" | \

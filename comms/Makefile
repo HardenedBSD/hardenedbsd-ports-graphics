@@ -33,6 +33,7 @@
     SUBDIR += dfu-programmer
     SUBDIR += dfu-util
     SUBDIR += dump1090
+    SUBDIR += dump1090_mr
     SUBDIR += ebook2cw
     SUBDIR += ebook2cwgui
     SUBDIR += echolinux
@@ -62,6 +63,7 @@
     SUBDIR += gsmlib
     SUBDIR += gstreamer1-plugins-spandsp
     SUBDIR += gtkmmorse
+    SUBDIR += hackrf
     SUBDIR += hamfax
     SUBDIR += hamlib
     SUBDIR += hcidump
@@ -77,6 +79,7 @@
     SUBDIR += kermit
     SUBDIR += klog
     SUBDIR += kremotecontrol
+    SUBDIR += kvasd
     SUBDIR += libconcord
     SUBDIR += libfec
     SUBDIR += libimobiledevice
@@ -99,6 +102,7 @@
     SUBDIR += nasawash
     SUBDIR += ncid
     SUBDIR += nec2c
+    SUBDIR += nmealib
     SUBDIR += nokryptia
     SUBDIR += o2sms
     SUBDIR += obexapp

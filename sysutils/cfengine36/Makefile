@@ -2,10 +2,11 @@
 # $FreeBSD$
 
 PORTNAME=	cfengine
-PORTVERSION=	3.6.4
-PORTEPOCH=	1
+PORTVERSION=	3.6.6
+PORTEPOCH=	2
 CATEGORIES=	sysutils
-MASTER_SITES=	https://s3.amazonaws.com/cfengine.package-repos/tarballs/
+MASTER_SITES=	https://cfengine-package-repos.s3.amazonaws.com/tarballs/
+DISTFILES=	${PORTNAME}-${PORTVERSION}-2.tar.gz
 
 MAINTAINER=	cy@FreeBSD.org
 #		gjb@FreeBSD.org is also committer for this port
@@ -17,7 +18,6 @@ CPE_VENDOR=	gnu
 
 .if !defined(MASTERDIR)
 PKGNAMESUFFIX=	36
-LATEST_LINK=	cfengine36
 .endif
 
 FETCH_BEFORE_ARGS=	-o ${DISTDIR}/${DISTFILES}
@@ -30,8 +30,8 @@ MAKE_JOBS_UNSAFE=	yes
 USE_LDCONFIG=	yes
 USE_OPENSSL=	yes
 GNU_CONFIGURE=	yes
-USES=		cpe gmake libtool
-USE_AUTOTOOLS=	autoconf:env automake:env libtoolize:env
+USES=		autoreconf cpe gmake libtool shebangfix
+SHEBANG_FILES=	examples/remake_outputs.pl
 CFLAGS+=	-Wno-return-type
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
@@ -63,8 +63,5 @@ MYSQL_LDFLAGS=		-L${LOCALBASE}/lib/mysql
 
 LIBVIRT_CONFIGURE_ON=	--with-libvirt=${LOCALBASE}
 LIBVIRT_LIB_DEPENDS+=		libvirt.so:${PORTSDIR}/devel/libvirt
-
-pre-configure:
-	@cd ${WRKSRC}; autoreconf -Wno-portability --force --install -I m4
 
 .include <bsd.port.mk>

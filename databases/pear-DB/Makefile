@@ -2,10 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	DB
-PORTVERSION=	1.7.14
+PORTVERSION=	1.8.2
 PORTEPOCH=	1
 CATEGORIES=	databases www pear
-DISTNAME=	${PORTNAME}-${PORTVERSION:S/.r/RC/}
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	PEAR Database Abstraction Layer

@@ -10,6 +10,10 @@ MASTER_SITES=	http://source.clutter-project.org/sources/${PORTNAME}/0.10/
 MAINTAINER=	gnome@FreeBSD.org
 COMMENT=	Clutter Box2D integration library
 
+BROKEN=		No public distfiles
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
+
 LIB_DEPENDS=	libclutter-glx-1.0.so:${PORTSDIR}/graphics/clutter
 
 USES=		gmake libtool:keepla pathfix pkgconfig

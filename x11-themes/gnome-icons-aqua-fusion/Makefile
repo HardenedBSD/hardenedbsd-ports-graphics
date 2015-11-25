@@ -9,8 +9,7 @@ PORTNAME=	aqua-fusion
 PORTVERSION=	20030216
 PORTREVISION=	3
 CATEGORIES=	x11-themes gnome
-MASTER_SITES=	GNOME
-MASTER_SITE_SUBDIR=	teams/art.gnome.org/archive/themes/icon
+MASTER_SITES=	GNOME/teams/art.gnome.org/archive/themes/icon
 DISTNAME=	ICON-AquaFusion
 
 MAINTAINER=	ports@FreeBSD.org
@@ -19,7 +18,7 @@ COMMENT=	AquaFusion Icons for Gnome
 RESTRICTED=	${REASON}
 
 USES=	tar:bzip2
-WRKSRC=		"${WRKDIR}/AquaFusion"
+NO_WRKSUBDIR=	yes
 
 .include "${.CURDIR}/../gnome-icons/bsd.gnome-icons.mk"
 .include <bsd.port.mk>

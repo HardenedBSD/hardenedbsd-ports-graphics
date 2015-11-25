@@ -14,6 +14,9 @@ LICENSE=	GPLv2
 
 EXTRACT_DEPENDS=7z:${PORTSDIR}/archivers/p7zip
 
+NOT_FOR_ARCHS=	arm sparc64
+NOT_FOR_ARCHS_REASON=	cannot detect endianness
+
 WRKSRC=		${WRKDIR}/${DISTNAME}/${PORTNAME}
 
 USES=		gmake
@@ -25,8 +28,8 @@ PLIST_FILES=	bin/${PORTNAME}
 PORTDOCS=	ChangeLog.txt README.txt
 
 post-patch:
-	@${REINPLACE_CMD} -e 's,CC = g++,CXX ?= g++, ; s,CFLAGS =,CXXFLAGS +=, ; \
-		s,-lpthread,${PTHREAD_LIBS}, ; s,CC,CXX, ; s,CFLAGS,CXXFLAGS,' \
+	@${REINPLACE_CMD} -e 's,CC = g++,CXX ?= g++, ; \
+		s,CFLAGS =,CXXFLAGS +=, ; s,CC,CXX, ; s,CFLAGS,CXXFLAGS,' \
 		${WRKSRC}/Makefile
 
 do-install:

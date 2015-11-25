@@ -5,8 +5,7 @@ PORTNAME=	foiltex
 PORTVERSION=	2.1.4b
 PORTREVISION=	5
 CATEGORIES=	textproc
-MASTER_SITES=	${MASTER_SITE_TEX_CTAN}
-MASTER_SITE_SUBDIR=	macros/latex/contrib/${PORTNAME}
+MASTER_SITES=	TEX_CTAN/macros/latex/contrib/${PORTNAME}
 DISTFILES=	foiltex.dtx foiltex.ins
 
 MAINTAINER=	ports@FreeBSD.org
@@ -30,12 +29,12 @@ PORTEXAMPLES=	sampfoil.tex
 PLIST_FILES=	${FOIL_FILES:S,^,${FOIL_DIR}/,}
 
 do-extract:
-	${MKDIR} ${WRKDIR}
-	${CP} ${DISTDIR}/foiltex.ins ${WRKDIR}/foiltex.ins
-	${CP} ${DISTDIR}/foiltex.dtx ${WRKDIR}/foiltex.dtx
+	${MKDIR} ${WRKSRC}
+	${CP} ${DISTDIR}/foiltex.ins ${WRKSRC}/foiltex.ins
+	${CP} ${DISTDIR}/foiltex.dtx ${WRKSRC}/foiltex.dtx
 
 do-build:
-	@cd ${WRKDIR} && ${LATEX_CMD} foiltex.ins && \
+	@cd ${WRKSRC} && ${LATEX_CMD} foiltex.ins && \
 		${LATEX_CMD} foiltex.dtx && \
 		${LATEX_CMD} foiltex.dtx && \
 		${LATEX_CMD} foiltex.dtx

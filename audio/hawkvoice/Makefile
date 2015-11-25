@@ -11,14 +11,16 @@ DISTNAME=	HawkVoiceDI091src
 MAINTAINER=	acm@FreeBSD.org
 COMMENT=	Portable sound and speech compression library
 
+BROKEN=		Unfetchable
 USES=		gmake dos2unix zip
 MAKEFILE=	makefile.linux
 USE_CSTD=	gnu89
 USE_LDCONFIG=	yes
 
-LDFLAGS+=	-L${LOCALBASE}/lib ${PTHREAD_LIBS}
+LDFLAGS+=	-lpthread -L${LOCALBASE}/lib
 CPPFLAGS+=	-I${LOCALBASE}/include
-MAKE_ARGS=	LIBDIR=${STAGEDIR}${PREFIX}/lib INCDIR=${STAGEDIR}${PREFIX}/include
+MAKE_ARGS=	LIBDIR=${STAGEDIR}${PREFIX}/lib \
+		INCDIR=${STAGEDIR}${PREFIX}/include
 
 WRKSRC=	${WRKDIR}/HawkVoiceDI/src
 

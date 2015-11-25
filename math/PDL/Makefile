@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	PDL
-PORTVERSION=	2.007
-PORTREVISION=	3
+PORTVERSION=	2.014
 CATEGORIES=	math perl5
 MASTER_SITES=	CPAN
 MASTER_SITE_SUBDIR=	CPAN:CHM
@@ -16,17 +15,22 @@ LICENSE_COMB=	dual
 
 BUILD_DEPENDS=	p5-Astro-FITS-Header>=0:${PORTSDIR}/astro/p5-Astro-FITS-Header \
 		p5-Convert-UU>=0:${PORTSDIR}/converters/p5-Convert-UU \
-		p5-File-Map>=0.47:${PORTSDIR}/devel/p5-File-Map \
-		p5-Inline>=0.43:${PORTSDIR}/devel/p5-Inline \
+		p5-File-Map>=0.57:${PORTSDIR}/devel/p5-File-Map \
+		p5-Inline>=0.68:${PORTSDIR}/devel/p5-Inline \
+		p5-Inline-C>=0.62:${PORTSDIR}/devel/p5-Inline-C \
 		p5-Module-Compile>=0.23:${PORTSDIR}/devel/p5-Module-Compile
 RUN_DEPENDS:=	${BUILD_DEPENDS}
+BUILD_DEPENDS+=	p5-Devel-CheckLib>=1.01:${PORTSDIR}/devel/p5-Devel-CheckLib
+TEST_DEPENDS=	p5-Test-Deep>=0:${PORTSDIR}/devel/p5-Test-Deep \
+		p5-Test-Exception>=0:${PORTSDIR}/devel/p5-Test-Exception \
+		p5-Test-Warn>=0:${PORTSDIR}/devel/p5-Test-Warn
 
-PORTSCOUT=	limit:^[0-9\.]*$$
+PORTSCOUT=	limit:^[0-9]\.[0-9][0-9]+[0-9\.]*$$
 
 USES=		gmake perl5
 USE_PERL5=	configure
 MAKE_ENV=	PERL5LIB=${WRKSRC}/blib/lib
-PLIST_FILES=	bin/pdl bin/pdldoc bin/perldl bin/pptemplate \
+PLIST_FILES=	bin/pdl bin/pdl2 bin/pdldoc bin/perldl bin/pptemplate \
 		${SITE_ARCH_REL}/Inline/Pdlpp.pm \
 		${SITE_ARCH_REL}/Inline/MakePdlppInstallable.pm
 MAKE_JOBS_UNSAFE=	yes
@@ -71,20 +75,22 @@ SINK_RUN_DEPENDS=	ppmtogif:${PORTSDIR}/graphics/netpbm \
 post-patch:
 	@${GREP} -lR '#!/.*bin/perl' ${WRKSRC}/ | ${XARGS} ${SED} -e 's|#!/.*bin/perl|#!${PERL}|' -i ''
 	@${GREP} -lR 'x86_64' ${WRKSRC}/ | ${XARGS} ${SED} -e 's|x86_64|amd64|g' -i ''
-	@${REINPLACE_CMD} -e "/POSIX_THREADS_LIBS/ s|undef|'${PTHREAD_LIBS}'|" \
+	@${REINPLACE_CMD} -e "/POSIX_THREADS_LIBS/ s|undef|'-lpthread'|" \
 		${WRKSRC}/perldl.conf
 
 # autogen plist
 post-install:
 	@(cd ${WRKSRC}; ${PERL} -Iblib/lib -Iblib/arch Doc/scantree.pl)
 	@(cd ${WRKSRC}/blib/man3 ; \
-	  ${FIND} *.3 | ${SED} "s,^,${MAN3PREFIX:S,^${PREFIX}/,,}/man/man3/,;s/3$$/3.gz/" \
+	  ${FIND} *.3 | ${SED} "s,^,${MAN3PREFIX}/man/man3/,;s/3$$/3.gz/" \
 		>> ${TMPPLIST} ; \
 	  cd ${WRKSRC}/blib/man1 ; \
-	  ${FIND} *.1 | ${SED} "s,^,man/man1/,;s/1$$/1.gz/" >> ${TMPPLIST})
+	  ${FIND} *.1 | ${SED} "s,^,${MAN1PREFIX}/man/man1/,;s/1$$/1.gz/" \
+		>> ${TMPPLIST})
 	@(${FIND} ${STAGEDIR}${PREFIX}/${SITE_ARCH_REL}/PDL* -type f | \
 		${SED} "s,^${STAGEDIR}${PREFIX}/,," >> ${TMPPLIST} ; \
-	  ${FIND} ${STAGEDIR}${PREFIX}/${SITE_ARCH_REL}/auto/PDL -type f | \
-		${SED} "s,^${STAGEDIR}${PREFIX}/,," >> ${TMPPLIST})
+	  ${FIND} ${STAGEDIR}${PREFIX}/${SITE_ARCH_REL}/auto/PDL -type f \
+		-name "[A-Z]*" | ${SED} "s,^${STAGEDIR}${PREFIX}/,," \
+		>> ${TMPPLIST})
 
 .include <bsd.port.mk>

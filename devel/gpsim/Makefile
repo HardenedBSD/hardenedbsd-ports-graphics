@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	gpsim
-PORTVERSION=	0.27.0
+PORTVERSION=	0.29.0
 CATEGORIES=	devel
 MASTER_SITES=	SF
 
@@ -16,7 +16,7 @@ BUILD_DEPENDS=	gpasm:${PORTSDIR}/devel/gputils
 LIB_DEPENDS=	libpopt.so:${PORTSDIR}/devel/popt
 RUN_DEPENDS=	gpasm:${PORTSDIR}/devel/gputils
 
-USES=		libtool pathfix pkgconfig
+USES=		gmake libtool pathfix pkgconfig readline
 USE_GNOME=	glib20
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
@@ -32,12 +32,7 @@ OPTIONS_SUB=		yes
 GTK2_LIB_DEPENDS=	libgtkextra-x11-2.0.so:${PORTSDIR}/x11-toolkits/gtkextra2
 GTK2_USE=		gnome=gtk20
 GTK2_CONFIGURE_ENABLE=	gui
-
-.include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MGTK2}
-DESKTOP_ENTRIES="GPSim" "" "" "gpsim" "Development;GTK;" ""
-.endif
+GTK2_DESKTOP_ENTRIES=	"GPSim" "" "" "gpsim" "Development;GTK;" ""
 
 post-patch:
 .for i in gpsim/Makefile.in modules/Makefile.in

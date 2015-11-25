@@ -1,9 +1,10 @@
 # $FreeBSD$
 
 PORTNAME=	clang
-DISTVERSION=	3.5.1
+DISTVERSION=	3.5.2
+PORTREVISION=	1
 CATEGORIES=	lang devel
-MASTER_SITES=   http://llvm.org/releases/3.5.1/
+MASTER_SITES=   http://llvm.org/releases/3.5.2/
 PKGNAMESUFFIX=	${LLVM_SUFFIX}
 DISTNAME=	${CLANG_NAME}
 DISTFILES=	${CLANG_SOURCE} \
@@ -35,7 +36,7 @@ PYTHONLIBDIR=	${LLVM_PREFIX}/lib/python
 
 GNU_CONFIGURE=	yes
 GNU_CONFIGURE_PREFIX=	${LLVM_PREFIX}
-USES=		compiler:c++11-lib gmake perl5 python:build tar:xz
+USES=		compiler:c++11-lib gmake libedit perl5 python:build tar:xz
 USE_LDCONFIG=	yes
 
 MAKE_ARGS=	CLANG_TBLGEN=${WRKSRC}/${RELTYPE}/bin/clang-tblgen \
@@ -122,11 +123,13 @@ pre-build:
 	${LN} -sf ${LLVM_PREFIX}/lib/${LIBNAME} ${WRKSRC}/${RELTYPE}/lib/
 	${LN} -sf ${LLVM_PREFIX}/lib/libLLVMTableGen.a ${WRKSRC}/${RELTYPE}/lib/
 	${LN} -sf ${LLVM_PREFIX}/lib/libLLVMSupport.a ${WRKSRC}/${RELTYPE}/lib/
-	cd ${WRKSRC}/utils/unittest && ${MAKE_CMD}
+	${SETENV} ${MAKE_ENV} ${MAKE_CMD} -C ${WRKSRC}/utils/unittest
 
 post-build:
-	@cd ${WRKSRC}/tools/clang/docs/tools && ${MAKE_CMD} man
-	@cd ${WRKSRC}/tools/clang/docs/tools && ${MAKE_CMD} html ps
+	${SETENV} ${MAKE_ENV} \
+		${MAKE_CMD} -C ${WRKSRC}/tools/clang/docs/tools man
+	${SETENV} ${MAKE_ENV} \
+		${MAKE_CMD} -C ${WRKSRC}/tools/clang/docs/tools html ps
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${LLVM_PREFIX}/lib/libclang.so

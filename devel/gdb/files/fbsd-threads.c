@@ -18,11 +18,6 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.  */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <err.h>
-
 #include <sys/param.h>
 #include <sys/sysctl.h>
 #include <sys/user.h>
@@ -151,7 +146,7 @@ static CORE_ADDR td_death_bp_addr;
 
 /* Prototypes for local functions.  */
 static void fbsd_find_lwp_name(long lwpid, struct private_thread_info *info);
-static void fbsd_thread_find_new_threads (struct target_ops *ops);
+static void fbsd_thread_update_thread_list (struct target_ops *ops);
 static int fbsd_thread_alive (struct target_ops *ops, ptid_t ptid);
 static void attach_thread (ptid_t ptid, const td_thrhandle_t *th_p,
                const td_thrinfo_t *ti_p, int verbose);
@@ -446,7 +441,9 @@ fbsd_thread_activate (void)
   fbsd_thread_active = 1;
   if (target_has_execution)
     enable_thread_event_reporting ();
-  fbsd_thread_find_new_threads (NULL);
+  else
+    init_thread_list ();
+  fbsd_thread_update_thread_list (NULL);
   get_current_thread ();
 }
 
@@ -678,7 +675,7 @@ attach_thread (ptid_t ptid, const td_thrhandle_t *th_p,
     memset(private, 0, sizeof(struct private_thread_info));
 
     tp = add_thread_with_info(ptid, private);
-    tp->private = private;
+    tp->priv = private;
     tp->private_dtor = free_private_thread_info;
   }
 
@@ -767,7 +764,10 @@ fbsd_thread_wait (struct target_ops *ops,
   td_thrinfo_t ti;
 
   ret = beneath->to_wait (beneath, ptid, ourstatus, options);
-  if (GET_PID(ret) >= 0 && ourstatus->kind == TARGET_WAITKIND_STOPPED)
+  if (GET_PID(ret) >= 0 &&
+    ( ourstatus->kind == TARGET_WAITKIND_STOPPED ||
+      ourstatus->kind == TARGET_WAITKIND_VFORKED ||
+      ourstatus->kind == TARGET_WAITKIND_FORKED ) )
     {
       lwp = get_current_lwp (GET_PID(ret));
       ret = thread_from_lwp (BUILD_LWP(lwp, GET_PID(ret)),
@@ -809,6 +809,7 @@ fbsd_thread_fetch_registers (struct target_ops *ops,
   prgregset_t gregset;
   prfpregset_t fpregset;
   td_thrhandle_t th;
+  td_thrinfo_t ti;
   td_err_e err;
 #ifdef PT_GETXMMREGS
   char xmmregs[512];
@@ -828,6 +829,25 @@ fbsd_thread_fetch_registers (struct target_ops *ops,
            pid_to_thread_id (inferior_ptid),
            GET_THREAD (inferior_ptid), thread_db_err_str (err));
 
+  err = td_thr_get_info_p (&th, &ti);
+  if (err != TD_OK)
+    error ("Cannot get thread info, Thread ID=%ld, %s",
+	   GET_THREAD (inferior_ptid), thread_db_err_str (err));
+
+  if (ti.ti_lid != 0)
+    {
+      struct target_ops *beneath = find_target_beneath (ops);
+      struct cleanup *old_chain;
+
+      old_chain = save_inferior_ptid ();
+
+      inferior_ptid = BUILD_LWP (ti.ti_lid, GET_PID (inferior_ptid));
+      beneath->to_fetch_registers (ops, regcache, regnum);
+
+      do_cleanups (old_chain);
+      return;
+    }
+  
   err = td_thr_getgregs_p (&th, gregset);
   if (err != TD_OK)
     error ("Cannot fetch general-purpose registers for thread %d: Thread ID=%ld, %s",
@@ -862,6 +882,7 @@ fbsd_thread_store_registers (struct target_ops *ops,
   prgregset_t gregset;
   prfpregset_t fpregset;
   td_thrhandle_t th;
+  td_thrinfo_t ti;
   td_err_e err;
 #ifdef PT_GETXMMREGS
   char xmmregs[512];
@@ -882,6 +903,25 @@ fbsd_thread_store_registers (struct target_ops *ops,
            GET_THREAD (inferior_ptid),
            thread_db_err_str (err));
 
+  err = td_thr_get_info_p (&th, &ti);
+  if (err != TD_OK)
+    error ("Cannot get thread info, Thread ID=%ld, %s",
+	   GET_THREAD (inferior_ptid), thread_db_err_str (err));
+
+  if (ti.ti_lid != 0)
+    {
+      struct target_ops *beneath = find_target_beneath (ops);
+      struct cleanup *old_chain;
+
+      old_chain = save_inferior_ptid ();
+
+      inferior_ptid = BUILD_LWP (ti.ti_lid, GET_PID (inferior_ptid));
+      beneath->to_store_registers (ops, regcache, regnum);
+
+      do_cleanups (old_chain);
+      return;
+    }
+  
   if (regnum != -1)
     {
       char old_value[MAX_REGISTER_SIZE];
@@ -1013,7 +1053,7 @@ fbsd_thread_alive (struct target_ops *ops, ptid_t ptid)
 }
 
 static int
-find_new_threads_callback (const td_thrhandle_t *th_p, void *data)
+update_thread_list_callback (const td_thrhandle_t *th_p, void *data)
 {
   td_thrinfo_t ti;
   td_err_e err;
@@ -1033,12 +1073,15 @@ find_new_threads_callback (const td_thrhandle_t *th_p, void *data)
 }
 
 static void
-fbsd_thread_find_new_threads (struct target_ops *ops)
+fbsd_thread_update_thread_list (struct target_ops *ops)
 {
   td_err_e err;
 
+  /* Delete dead threads.  */
+  prune_threads();
+
   /* Iterate over all user-space threads to discover new threads. */
-  err = td_ta_thr_iter_p (thread_agent, find_new_threads_callback, NULL,
+  err = td_ta_thr_iter_p (thread_agent, update_thread_list_callback, NULL,
           TD_THR_ANY_STATE, TD_THR_LOWEST_PRIORITY,
           TD_SIGNO_MASK, TD_THR_ANY_USER_FLAGS);
   if (err != TD_OK)
@@ -1048,6 +1091,7 @@ fbsd_thread_find_new_threads (struct target_ops *ops)
 static void
 fbsd_find_lwp_name(long lwpid, struct private_thread_info *info)
 {
+  struct cleanup *old_chain;
   int error, name[4];
   unsigned int i;
   struct kinfo_proc *kipp, *kip;
@@ -1055,27 +1099,31 @@ fbsd_find_lwp_name(long lwpid, struct private_thread_info *info)
   int pid = inferior_ptid.pid;
   size_t len = 0;
 
+  if (!target_has_execution)
+    return;
+
   name[0] = CTL_KERN;
   name[1] = KERN_PROC;
   name[2] = KERN_PROC_PID | KERN_PROC_INC_THREAD;
   name[3] = pid;
 
   error = sysctl(name, 4, NULL, &len, NULL, 0);
-  if (error < 0 && errno != ESRCH) {
-      warn("sysctl: kern.proc.pid: %d", pid);
-      return;
-  }
-  if (error < 0)
+  if (error < 0) {
+    if (errno != ESRCH)
+      warning (_("sysctl: kern.proc.pid: %d: %s"), pid,
+	       safe_strerror (errno));
     return;
+  }
 
-  kip = malloc(len);
+  kip = xmalloc(len);
   if (kip == NULL)
-    err(-1, "malloc");
+    return;
+  old_chain = make_cleanup(xfree, kip);
 
   if (sysctl(name, 4, kip, &len, NULL, 0) < 0) {
-      warn("sysctl: kern.proc.pid: %d", pid);
-      free(kip);
-      return;
+    warning (_("sysctl: kern.proc.pid: %d: %s"), pid, safe_strerror(errno));
+    do_cleanups(old_chain);
+    return;
   }
 
   for (i = 0; i < len / sizeof(*kipp); i++) {
@@ -1097,15 +1145,13 @@ fbsd_find_lwp_name(long lwpid, struct private_thread_info *info)
                 }
             }
 
-          len = strlen(kipp->ki_ocomm) + 1;
-          lwpstr = xmalloc(len);
-          strncpy(lwpstr, kipp->ki_ocomm, len);
+	  lwpstr = xstrdup(kipp->ki_ocomm);
           info->lwp_name = lwpstr;
           break;
         }
   }
 
-  free(kip);
+  do_cleanups(old_chain);
 }
 
 static char *
@@ -1136,9 +1182,9 @@ fbsd_thread_pid_to_str (struct target_ops *ops, ptid_t ptid)
       if (ti.ti_lid != 0)
         {
           // Need to find the name of this LWP, even though it shouldn't change
-          fbsd_find_lwp_name(ti.ti_lid, tinfo->private);
+          fbsd_find_lwp_name(ti.ti_lid, tinfo->priv);
 
-          if (tinfo->private->lwp_name == NULL)
+          if (tinfo->priv->lwp_name == NULL)
             {
               snprintf(buf, sizeof (buf), "Thread %llx (LWP %d)",
                   (unsigned long long)th.th_thread, ti.ti_lid);
@@ -1147,7 +1193,7 @@ fbsd_thread_pid_to_str (struct target_ops *ops, ptid_t ptid)
             {
               snprintf(buf, sizeof (buf), "Thread %llx (LWP %d %s)",
                   (unsigned long long)th.th_thread, ti.ti_lid,
-                  tinfo->private->lwp_name);
+                  tinfo->priv->lwp_name);
             }
         }
       else
@@ -1316,7 +1362,7 @@ init_fbsd_thread_ops (void)
   fbsd_thread_ops.to_store_registers = fbsd_thread_store_registers;
   fbsd_thread_ops.to_mourn_inferior = fbsd_thread_mourn_inferior;
   fbsd_thread_ops.to_thread_alive = fbsd_thread_alive;
-  fbsd_thread_ops.to_find_new_threads = fbsd_thread_find_new_threads;
+  fbsd_thread_ops.to_update_thread_list = fbsd_thread_update_thread_list;
   fbsd_thread_ops.to_pid_to_str = fbsd_thread_pid_to_str;
   fbsd_thread_ops.to_stratum = thread_stratum;
   fbsd_thread_ops.to_get_thread_local_address = fbsd_thread_get_local_address;

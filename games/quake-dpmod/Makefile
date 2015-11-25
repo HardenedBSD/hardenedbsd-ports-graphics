@@ -12,7 +12,7 @@ DISTNAME=	darkplacesmod${PORTVERSION}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Quake 1 modification (for DarkPlaces)
 
-RUN_DEPENDS=	${LOCALBASE}/share/darkplaces/dummy:${PORTSDIR}/games/darkplaces
+RUN_DEPENDS=	darkplaces>=0:${PORTSDIR}/games/darkplaces
 
 USES=		zip
 NO_BUILD=	yes
@@ -22,9 +22,9 @@ DATADIR=	${Q1DIR}/${PORTNAME}
 
 post-extract:
 # Remove CVS directories
-	@${FIND} ${WRKDIR} -type d -name CVS -print0 | ${XARGS} -0 ${RM} -rf
+	@${FIND} ${WRKSRC} -type d -name CVS -print0 | ${XARGS} -0 ${RM} -rf
 # Fix permissions
-	@${CHMOD} go-w ${WRKDIR}/dpmod/progs.dat
+	@${CHMOD} go-w ${WRKSRC}/dpmod/progs.dat
 
 do-install:
 	@${MKDIR} ${STAGEDIR}${DATADIR}

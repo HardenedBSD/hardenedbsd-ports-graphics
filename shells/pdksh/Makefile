@@ -21,7 +21,10 @@ LICENSE=	BSD3CLAUSE
 
 OPTIONS_DEFINE=	STATIC
 
+BROKEN_sparc64=	fails to compile ./siglist.in
+
 GNU_CONFIGURE=	yes
+CPP+=		-P
 
 STATIC_CONFIGURE_ENV+=	LDSTATIC=-static
 

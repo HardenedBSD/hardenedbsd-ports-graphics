@@ -13,26 +13,14 @@ DISTNAME=	py2${PORTNAME}-${PORTVERSION}
 MAINTAINER=	gnome@FreeBSD.org
 COMMENT=	Python 2 bindings for Cairo
 
-USES=		pkgconfig python:2 shebangfix tar:bzip2
+USES=		pkgconfig python:2 shebangfix tar:bzip2 waf
 USE_GNOME=	cairo
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 CONFIGURE_ENV=	PYTHON=${LOCALBASE}/bin/${PYTHON_CMD} \
 		PREFIX=${PREFIX}
 
-python_OLD_CMD?=	/usr/bin/env python
-python_CMD?=		${LOCALBASE}/bin/python2
-SHEBANG_FILES=		examples/*.py examples/*/*.py test/*.py
-
-do-configure:
-	@cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ${PYTHON_CMD} \
-		./waf configure
-
-do-build:
-	@cd ${WRKSRC} && ${PYTHON_CMD} ./waf
-
-do-install:
-	cd ${WRKSRC} && ${PYTHON_CMD} ./waf install --destdir=${STAGEDIR}
+SHEBANG_FILES=	examples/*.py examples/*/*.py test/*.py
 
 post-install:
 	@cd ${STAGEDIR}${PREFIX} && ${PYTHON_CMD} ${PYTHON_LIBDIR}/compileall.py \

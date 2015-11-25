@@ -2,9 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	gbsdconv
-PORTVERSION=	11.1
+PORTVERSION=	11.3
 CATEGORIES=	converters python
-DISTNAME=	${GH_ACCOUNT}-${GH_PROJECT}-${PORTVERSION}-0-g${GH_COMMIT}
 
 MAINTAINER=	buganini@gmail.com
 COMMENT=	GUI for bsdconv
@@ -16,7 +15,6 @@ RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}bsdconv>=8.0:${PORTSDIR}/converters/py-bsdco
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	buganini
-GH_COMMIT=	0a9ad34
 
 USES=		python
 USE_GNOME=	gtk30 introspection:run
@@ -28,5 +26,8 @@ PLIST_FILES=	bin/gbsdconv \
 		%%DATADIR%%/gbsdconv.png \
 		%%DATADIR%%/gbsdconv.xml \
 		%%DATADIR%%/gbsdconv2.png
+
+post-install:
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/gbsdconv_taglib.so
 
 .include <bsd.port.mk>

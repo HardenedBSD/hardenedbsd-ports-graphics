@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	libhtp
-PORTVERSION=	0.5.16
+PORTVERSION=	0.5.18
 CATEGORIES=	devel
 
 MAINTAINER=	koobs@FreeBSD.org
@@ -12,7 +12,6 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	OISF
-GH_COMMIT=	4cb1b99
 
 USES=		autoreconf iconv:translit libtool pathfix pkgconfig
 USE_LDCONFIG=	yes

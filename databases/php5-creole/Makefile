@@ -10,8 +10,11 @@ PKGNAMEPREFIX=	php5-
 MAINTAINER=	kuriyama@FreeBSD.org
 COMMENT=	Database abstraction layer for PHP5
 
+DEPRECATED=	PHP 5.4 EOL reached
+EXPIRATION_DATE=	2016-01-15
+
 USE_PHP=	yes
-DEFAULT_VERSIONS+=php=5
+PHP_DEFAULT=	5.4
 NO_BUILD=	yes
 
 do-install:

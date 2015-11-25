@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	texmaker
-PORTVERSION=	4.4.1
+PORTVERSION=	4.5
 PORTREVISION=	0
 PORTEPOCH=	3
 CATEGORIES=	editors
@@ -13,8 +13,7 @@ COMMENT=	LaTeX Development Environment
 
 LIB_DEPENDS=	libpoppler.so:${PORTSDIR}/graphics/poppler
 
-USES=		desktop-file-utils pkgconfig qmake tar:bzip2
-USE_GHOSTSCRIPT_RUN=	yes
+USES=		desktop-file-utils ghostscript:x11,run pkgconfig qmake tar:bzip2
 _USE_QT4=	gui network xml webkit \
 		moc_build rcc_build uic_build
 _USE_QT5=	concurrent network printsupport script webkit widgets \

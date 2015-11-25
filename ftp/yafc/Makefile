@@ -3,6 +3,7 @@
 
 PORTNAME=	yafc
 PORTVERSION=	1.2.5
+PORTREVISION=	1
 CATEGORIES=	ftp ipv6
 MASTER_SITES=	http://www.yafc-ftp.com/upload/
 
@@ -11,6 +12,7 @@ COMMENT=	Yet another ftp client. Similar to ftp(1)
 
 LICENSE=	GPLv2 # (or later)
 
+BROKEN=		Does not fetch
 OPTIONS_DEFINE=	BASH EXAMPLES NLS SSH READLINE
 OPTIONS_DEFAULT=BASH NLS SSH
 
@@ -26,8 +28,8 @@ LDFLAGS+=	-L${LOCALBASE}/lib
 
 PORTEXAMPLES=	inputrc yafcrc
 PLIST_FILES=	bin/yafc \
-		info/yafc.info \
 		man/man1/yafc.1.gz
+INFO=		yafc
 
 NLS_USES=		gettext
 NLS_USE=		GNOME=intltool

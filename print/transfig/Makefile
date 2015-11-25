@@ -14,16 +14,15 @@ COMMENT=	Tools to convert Xfig .fig files
 RUN_DEPENDS=	ppmtogif:${PORTSDIR}/graphics/netpbm
 LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png
 
-USES=		alias imake
+USES=		alias ghostscript:run imake
 CFLAGS+=	-Wno-return-type
-USE_GHOSTSCRIPT_RUN=	yes
 USE_XORG=	xpm
 
 MAKE_ARGS+=	INSTALLFLAGS="${COPY}" \
-		INSTPGMFLAGS="${STRIP} ${_BINOWNGRP} -m ${BINMODE}" \
-		INSTBINFLAGS="${_BINOWNGRP} -m ${BINMODE}" \
-		INSTDATFLAGS="${_SHROWNGRP} -m ${SHAREMODE}" \
-		INSTMANFLAGS="${_MANOWNGRP} -m ${MANMODE}"
+		INSTPGMFLAGS="${STRIP}" \
+		INSTBINFLAGS="-m ${BINMODE}" \
+		INSTDATFLAGS="-m ${SHAREMODE}" \
+		INSTMANFLAGS="-m ${MANMODE}"
 
 post-install:
 	for i in hr_HR hu_HU pl_PL ro_RO; do \

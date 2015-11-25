@@ -9,8 +9,12 @@ MASTER_SITES=	RG
 MAINTAINER=	swills@FreeBSD.org
 COMMENT=	Present the user with a simple question before a destructive action
 
-RUN_DEPENDS=	rubygem-highline>=1.4.0:${PORTSDIR}/devel/rubygem-highline
+LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
+RUN_DEPENDS=	rubygem-highline>=1.5.0:${PORTSDIR}/devel/rubygem-highline
+
+NO_ARCH=	yes
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes
 RUBYGEM_AUTOPLIST=	yes

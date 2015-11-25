@@ -2,21 +2,24 @@
 
 PORTNAME=	xpdf
 PORTVERSION=	3.04
-PORTREVISION=	2
+PORTREVISION=	7
 CATEGORIES=	graphics print
 MASTER_SITES=	http://mirrors.rit.edu/zi/ \
 		ftp://ftp.foolabs.com/pub/xpdf/ \
-		${MASTER_SITE_TEX_CTAN} \
+		TEX_CTAN/support/xpdf \
 		http://komquats.com/distfiles/
-MASTER_SITE_SUBDIR=	support/xpdf
 
 MAINTAINER=	cy@FreeBSD.org
 COMMENT=	Display PDF files and convert them to other formats
 
-LIB_DEPENDS=	libfreetype.so:${PORTSDIR}/print/freetype2
+LICENSE=	GPLv2
+
+LIB_DEPENDS=	libfreetype.so:${PORTSDIR}/print/freetype2 \
+		libpng.so:${PORTSDIR}/graphics/png
 
 GNU_CONFIGURE=	yes
-USES=		gmake
+USES=		gmake cpe
+CPE_VENDOR=	foolabs
 CFLAGS+=	-I${LOCALBASE}/include -O0
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
@@ -33,6 +36,8 @@ LIBPAPER_DESC=	Enable libpaper
 TYPE1_DESC=	Ghostscript type1 fonts
 OPTIONS_DEFAULT=	TYPE1 X11
 OPTIONS_SUB=		yes
+
+SUB_FILES=	xpdf-man.conf
 
 TYPE1_RUN_DEPENDS=	${LOCALBASE}/share/ghostscript/fonts/n021003l.pfb:${PORTSDIR}/print/gsfonts
 
@@ -58,5 +63,7 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/${file} ${STAGEDIR}${DOCSDIR}
 .endfor
 	${LN} -sf ${PREFIX}/libexec/xpdf/xpdf ${STAGEDIR}${PREFIX}/bin/xpdf
+	${INSTALL_DATA} ${WRKDIR}/xpdf-man.conf \
+		${STAGEDIR}${PREFIX}/etc/man.d/xpdf.conf
 
 .include <bsd.port.mk>

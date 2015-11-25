@@ -4,7 +4,6 @@ PORTNAME=	libilbc
 DISTVERSIONPREFIX=	v
 DISTVERSION=	2.0.2
 CATEGORIES=	net
-MASTER_SITES=	GHR
 
 MAINTAINER=	mva@FreeBSD.org
 COMMENT=	Internet Low Bit Rate codec (RFC3951)
@@ -12,11 +11,13 @@ COMMENT=	Internet Low Bit Rate codec (RFC3951)
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/COPYING
 
+NOT_FOR_ARCHS=	sparc64
+NOT_FOR_ARCHS_REASON=	not yet ported to this architecture
+
 CONFLICTS=	ilbc-r[0-9]*
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	TimothyGu
-WRKSRC=		${WRKDIR}/${GH_PROJECT}-${DISTVERSION}
 
 USES=		cmake
 USE_LDCONFIG=	yes

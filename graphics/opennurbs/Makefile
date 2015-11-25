@@ -2,11 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	opennurbs
-PORTVERSION=	20121024
+PORTVERSION=	20130711
 PORTREVISION=	3
 CATEGORIES=	graphics
-MASTER_SITES=	http://files.na.mcneel.com/opennurbs/5.0/2012-10-24/
-MASTER_SITE_SUBDIR=	${PORTNAME}_${PORTVERSION}
+MASTER_SITES=	http://files.na.mcneel.com/opennurbs/5.0/2013-07-11/
 DISTNAME=	${PORTNAME}_${PORTVERSION}
 
 MAINTAINER=	fernando.apesteguia@gmail.com
@@ -77,8 +76,5 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/*.h ${STAGEDIR}${PREFIX}/include/openNURBS/
 	${INSTALL_DATA} ${WRKSRC}/zlib/*.h \
 		${STAGEDIR}${PREFIX}/include/openNURBS/zlib
-.if ${OPSYS} == FreeBSD && ${OSVERSION} < 900000
-	${TOUCH} ${STAGEDIR}${PREFIX}/include/openNURBS/zlib/gzguts.h
-.endif
 
 .include <bsd.port.post.mk>

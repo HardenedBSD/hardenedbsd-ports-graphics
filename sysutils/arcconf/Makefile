@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	arcconf
-DISTVERSION=	v1_6_21062
+DISTVERSION=	v1_7_21229
 PORTEPOCH=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	http://download.adaptec.com/raid/storage_manager/
@@ -22,16 +22,12 @@ SUB_FILES+=	${PERIODICSCRIPT}
 RESTRICTED=	May not be redistributed in binary form
 NO_CDROM=	May not be redistributed in binary form
 
+DIST_OSVER=	9
+
 .include <bsd.port.pre.mk>
 
 .if ${OPSYS} != FreeBSD
 IGNORE=		installs incompatible binaries for FreeBSD
-.endif
-
-.if ${OSVERSION} >= 900000
-DIST_OSVER=	9
-.elif ${OSVERSION} >= 800000
-DIST_OSVER=	8
 .endif
 
 .if ${ARCH} == amd64

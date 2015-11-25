@@ -12,8 +12,8 @@ LIB_DEPENDS=	libetpan.so:${PORTSDIR}/mail/libetpan \
 RUN_DEPENDS=	mime-support>0:${PORTSDIR}/misc/mime-support
 
 USE_GNOME=	gtk20
-USES=		desktop-file-utils execinfo pathfix shebangfix
-SHEBANG_FILES=	tools/*.pl tools/tb2claws-mail
+USES=		cpe desktop-file-utils execinfo pathfix shebangfix
+SHEBANG_FILES=	tools/*.pl tools/*.py tools/tb2claws-mail
 INSTALLS_ICONS=	yes
 
 OPTIONS_DEFINE=	COMPFACE DEBUG DOCS ENCHANT IPV6 JPILOT LDAP \
@@ -79,6 +79,5 @@ post-install:
 		tbird2claws.py textviewer.pl textviewer.sh \
 		thunderbird-filters-convertor.pl uudec uuooffice vcard2xml.py \
 		${STAGEDIR}${DATADIR})
-	${INSTALL_DATA} ${WRKSRC}/claws-mail.desktop ${STAGEDIR}${DESKTOPDIR}
 
 .include <bsd.port.mk>

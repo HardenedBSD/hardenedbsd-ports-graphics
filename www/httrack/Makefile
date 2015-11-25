@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	httrack
-PORTVERSION=	3.48.20
+PORTVERSION=	3.48.21
 PORTREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://download.httrack.com/ \
@@ -20,31 +20,32 @@ OPTIONS_DEFINE=	DOCS ICONS
 OPTIONS_SUB=	yes
 
 CONFIGURE_ARGS=	--docdir=${DOCSDIR} --with-zlib=/usr
-CPPFLAGS+=	-I${LOCALBASE}/include
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
-LDFLAGS+=	-L${LOCALBASE}/lib
-USES=		alias execinfo gmake iconv libtool shebangfix
 USE_LDCONFIG=	${PREFIX}/lib/httrack
 USE_OPENSSL=	yes
+USES=		alias execinfo gmake iconv libtool localbase shebangfix
 
 PORTDATA=	*
 PORTDOCS=	*
 
 SHEBANG_FILES=	src/webhttrack
 
-.include <bsd.port.options.mk>
+ICONS_VARS=	INSTALLS_ICONS=yes
 
-.if ${PORT_OPTIONS:MICONS}
-INSTALLS_ICONS=	yes
+.include <bsd.port.pre.mk>
+
+.if empty(ICONV_LIB)
+CONFIGURE_ARGS+=ac_cv_lib_iconv_iconv=no
+.else
+CONFIGURE_ARGS+=ac_cv_lib_iconv_iconv=yes
 .endif
 
 post-patch:
-	@${REINPLACE_CMD} -e '/DEFAULT_CFLAGS=/ s|-O -g3 ||g' ${WRKSRC}/configure
 	@${REINPLACE_CMD} -e '/ install-data-hook/d' ${WRKSRC}/html/Makefile.in
 	@${REINPLACE_CMD} -e 's|/usr/share|${PREFIX}/share|' ${WRKSRC}/html/server/div/WebHTTrack*
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/html/httrack.css ${STAGEDIR}${DOCSDIR}/httrack.css
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

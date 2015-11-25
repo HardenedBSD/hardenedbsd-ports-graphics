@@ -3,15 +3,14 @@
 
 PORTNAME=	gdbm
 PORTVERSION=	${PYTHON_PORTVERSION}
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	databases python
-MASTER_SITES=	PYTHON
-MASTER_SITE_SUBDIR=	ftp/python/${PORTVERSION}
+MASTER_SITES=	PYTHON/ftp/python/${PORTVERSION}
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 DISTNAME=	Python-${PORTVERSION}
 
 MAINTAINER=	python@FreeBSD.org
-COMMENT=	Python bindings to the GNU dbm library
+COMMENT=	Python bindings to the GNU dbm library (Python ${PYTHON_VER})
 
 LICENSE=	PSFL
 
@@ -31,7 +30,7 @@ WRKSRC=		${WRKDIR}/Python-${PORTVERSION}/Modules
 .include <bsd.port.pre.mk>
 
 post-extract:
-.if ${PYTHON_REL} < 300
+.if ${PYTHON_REL} < 3000
 	@${CP} ${FILESDIR}/setup.py ${WRKSRC}
 .else
 	@${CP} ${FILESDIR}/setup3.py ${WRKSRC}/setup.py

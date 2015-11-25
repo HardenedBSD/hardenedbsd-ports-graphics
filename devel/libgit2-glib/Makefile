@@ -1,10 +1,8 @@
 # Created by: Gustau Perez <gustau.perez@gmail.com>
 # $FreeBSD$
-#   $MCom: ports/trunk/devel/libgit2-glib/Makefile 19962 2014-10-15 14:57:24Z gusi $
 
 PORTNAME=	libgit2-glib
-PORTVERSION=	0.0.24
-PORTREVISION=	1
+PORTVERSION=	0.23.4
 CATEGORIES=	devel gnome
 MASTER_SITES=	GNOME
 DIST_SUBDIR=	gnome3
@@ -19,7 +17,7 @@ BUILD_DEPENDS=	vapigen:${PORTSDIR}/lang/vala \
 		gtkdoc-check:${PORTSDIR}/textproc/gtk-doc
 LIB_DEPENDS=	libgit2.so:${PORTSDIR}/devel/libgit2
 
-USES=		gmake libtool pathfix pkgconfig tar:xz
+USES=		compiler:c11 gmake libtool pathfix pkgconfig tar:xz
 USE_GNOME=	glib20 gnomeprefix gtk30 intlhack introspection
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes

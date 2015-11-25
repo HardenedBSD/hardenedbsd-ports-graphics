@@ -3,7 +3,7 @@
 
 PORTNAME=	clanlib
 PORTVERSION=	2.2.12
-PORTREVISION=	6
+PORTREVISION=	7
 CATEGORIES=	devel
 MASTER_SITES=	http://www.clanlib.org/download/releases-2.0/
 DISTNAME=	ClanLib-${PORTVERSION}
@@ -14,14 +14,13 @@ COMMENT=	Cross-platform game SDK
 
 LICENSE=	ZLIB
 
-LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg \
-		libpng.so:${PORTSDIR}/graphics/png \
+LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png \
 		libmikmod.so:${PORTSDIR}/audio/libmikmod \
 		libvorbis.so:${PORTSDIR}/audio/libvorbis \
 		libfontconfig.so:${PORTSDIR}/x11-fonts/fontconfig \
 		libpcre.so:${PORTSDIR}/devel/pcre
 
-USES=		gmake libtool pathfix pkgconfig tar:tgz
+USES=		gmake jpeg libtool pathfix pkgconfig tar:tgz
 USE_XORG=	x11
 USE_LDCONFIG=	yes
 USE_GL=		yes

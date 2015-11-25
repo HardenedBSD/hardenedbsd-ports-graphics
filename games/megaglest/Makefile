@@ -3,7 +3,7 @@
 
 PORTNAME=	megaglest
 PORTVERSION=	3.9.0.4
-PORTREVISION=	5
+PORTREVISION=	8
 CATEGORIES=	games
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}_3.9.0/
 DISTNAME=	${PORTNAME}-source-${PORTVERSION}
@@ -12,7 +12,6 @@ MAINTAINER=	rnejdl@ringofsaturn.com
 COMMENT=	Open source 3D real-time strategy game
 
 LIB_DEPENDS=	libcurl.so:${PORTSDIR}/ftp/curl \
-		libjpeg.so:${PORTSDIR}/graphics/jpeg \
 		libpng.so:${PORTSDIR}/graphics/png \
 		libxerces-c.so:${PORTSDIR}/textproc/xerces-c3 \
 		libftgl.so:${PORTSDIR}/graphics/ftgl \
@@ -23,10 +22,12 @@ RUN_DEPENDS=	${DATADIR}/tutorials/2_basic_tutorial/2_basic_tutorial.xml:${PORTSD
 
 SUB_FILES=	pkg-message
 
-USES=		cmake compiler:c++11-lib display:build dos2unix lua openal:al,alut pkgconfig tar:xz
+USES=		cmake compiler:c++11-lib display:build dos2unix jpeg lua \
+		openal:al,alut pkgconfig tar:xz
 USE_GL=		glew gl glu
 USE_SDL=	yes
 USE_WX=		3.0
+USE_CXXSTD=	c++11
 WX_UNICODE=	yes
 
 CFLAGS+=	-I${LOCALBASE}/include
@@ -62,10 +63,4 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/source/glest_map_editor/megaglest_editor ${STAGEDIR}${PREFIX}/bin/megaglest_editor
 .endif
 
-.include <bsd.port.pre.mk>
-
-.if ${ARCH} == "ia64" || ${ARCH} == "powerpc" || ${ARCH} == "sparc64"
-BROKEN=		Does not compile on ia64, powerpc, or sparc64: unrecognized compiler flags
-.endif
-
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

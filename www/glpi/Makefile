@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	glpi
-PORTVERSION=	0.85.1
+PORTVERSION=	0.85.2
 PORTEPOCH=	1
 CATEGORIES=	www
 MASTER_SITES=	http://droidng.free.fr/freebsd/ \
@@ -13,6 +13,8 @@ COMMENT=	Free IT and asset management software
 
 LICENSE=	GPLv2
 
+USES=		cpe
+CPE_VENDOR=	glpi-project
 USE_PHP=	mysqli mbstring pcre session xml json ctype gd
 WANT_PHP_WEB=	yes
 

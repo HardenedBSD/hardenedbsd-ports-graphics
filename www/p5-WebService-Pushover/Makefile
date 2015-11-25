@@ -3,10 +3,10 @@
 
 PORTNAME=	WebService-Pushover
 PORTVERSION=	1.0.0
+DISTVERSIONPREFIX=	v
 CATEGORIES=	www perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
-DISTNAME=	${PORTNAME}-v${PORTVERSION}
 
 MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	Interface to Pushover API
@@ -29,6 +29,7 @@ TEST_DEPENDS=	p5-JSON>=0:${PORTSDIR}/converters/p5-JSON \
 		p5-Test-Deep>=0:${PORTSDIR}/devel/p5-Test-Deep \
 		p5-Test-Fake-HTTPD>=0:${PORTSDIR}/devel/p5-Test-Fake-HTTPD
 
+NO_ARCH=	yes
 USE_PERL5=	configure
 USES=		perl5
 

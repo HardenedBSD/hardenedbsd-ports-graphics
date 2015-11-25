@@ -13,12 +13,8 @@ COMMENT=	Shisen-sho puzzle game for GNUstep
 
 LICENSE=	GPLv2 # or later
 
-USE_GNUSTEP=	yes
-USE_GNUSTEP_BACK=	yes
-USE_GNUSTEP_BUILD=	yes
-USE_GNUSTEP_INSTALL=	yes
-
-MAKE_ENV+=	GNUSTEP_INSTALLATION_DOMAIN=SYSTEM
+USES=		gnustep
+USE_GNUSTEP=	back build
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/System/Applications/GShisen.app/GShisen

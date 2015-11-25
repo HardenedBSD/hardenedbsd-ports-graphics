@@ -4,8 +4,7 @@
 PORTNAME=	cweb
 PORTVERSION=	3.64a.a
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_TEX_CTAN}
-MASTER_SITE_SUBDIR=	web/c_cpp/cweb
+MASTER_SITES=	TEX_CTAN/web/c_cpp/cweb
 DISTNAME=	${PORTNAME}-${PORTVERSION:C/.([a-z])$/\1/}
 
 MAINTAINER=	gerald@FreeBSD.org
@@ -35,6 +34,6 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/cwebmac.tex \
 		${STAGEDIR}${PREFIX}/share/texmf/tex/generic/misc
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
-	${INSTALL_DATA} ${WRKDIR}/cwebman.tex ${STAGEDIR}${DOCSDIR}
+	${INSTALL_DATA} ${WRKSRC}/cwebman.tex ${STAGEDIR}${DOCSDIR}
 
 .include <bsd.port.mk>

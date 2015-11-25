@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	tvheadend
-PORTVERSION=	3.9.20140806
+PORTVERSION=	4.0.6
 CATEGORIES=	multimedia
 
 MAINTAINER=	decke@FreeBSD.org
@@ -18,9 +18,7 @@ LIB_DEPENDS=	libcurl.so:${PORTSDIR}/ftp/curl \
 RUN_DEPENDS=	dtv-scan-tables>=0:${PORTSDIR}/multimedia/dtv-scan-tables
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	${PORTNAME}
-GH_TAGNAME=	${GH_COMMIT}
-GH_COMMIT=	6d19440
+GH_TAGNAME=	d97d5f1
 
 USES=		execinfo gmake pkgconfig python shebangfix
 GNU_CONFIGURE=	yes
@@ -71,7 +69,7 @@ CFLAGS+=	-Wno-microsoft \
 .endif
 
 post-patch:
-	@${REINPLACE_CMD} 's|0.0.0~unknown|${PORTVERSION}-${GH_COMMIT}|' \
+	@${REINPLACE_CMD} 's|0.0.0~unknown|${PORTVERSION}-${GH_TAGNAME}|' \
 		${WRKSRC}/support/version
 	@${REINPLACE_CMD} 's|-g||' \
 		${WRKSRC}/Makefile
@@ -79,6 +77,9 @@ post-patch:
 		${WRKSRC}/Makefile
 	# ignore gcc warnings on FreeBSD 9.X, and clang warnings on FreeBSD 10+
 	@${REINPLACE_CMD} 's|-Werror||' \
+		${WRKSRC}/Makefile
+	# Remove -Wunused-result because gcc 4.2 on FreeBSD 9.x does not know it
+	@${REINPLACE_CMD} 's|-Wunused-result||' \
 		${WRKSRC}/Makefile
 .if ${OSVERSION} >= 1000000
 	# to suppress clang CC flags on FreeBSD 10+

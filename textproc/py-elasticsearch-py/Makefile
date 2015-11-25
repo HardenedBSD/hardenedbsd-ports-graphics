@@ -2,19 +2,19 @@
 # $FreeBSD$
 
 PORTNAME=	elasticsearch-py
-PORTVERSION=	1.3.0
+PORTVERSION=	1.8.0
 CATEGORIES=	textproc python
-MASTER_SITES=	#
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
 MAINTAINER=	zi@FreeBSD.org
 COMMENT=	Official Python low-level client for Elasticsearch
 
+LICENSE=	APACHE20
+
 RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}urllib3>=1.8.2:${PORTSDIR}/net/py-urllib3
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	elasticsearch
-GH_COMMIT=	e3bfeee
 USES=		python
 USE_PYTHON=	distutils autoplist
 

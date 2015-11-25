@@ -9,12 +9,20 @@ MASTER_SITES=	http://download.adiscon.com/loganalyzer/
 MAINTAINER=	cristianorolim@outlook.com
 COMMENT=	Web based Syslog browsing and analysis
 
-NO_BUILD=	YES
+LICENSE=	GPLv3 # or later
+LICENSE_FILE=	${WRKSRC}/COPYING
+
+DEPRECATED=	PHP 5.4 EOL reached
+EXPIRATION_DATE=	2016-01-15
+
+USES=		cpe
+CPE_VENDOR=	adiscon
+NO_BUILD=	yes
 ANALYZERDIR?=	www/loganalyzer
 PLIST_SUB+=	ANALYZERDIR=${ANALYZERDIR}
 
 OPTIONS_DEFINE=	PHP_MYSQL PDO_DBLIB PDO_FIREBIRD PDO_MYSQL PDO_ODBC PDO_PGSQL \
-	PDO_SQLITE DOCS
+		PDO_SQLITE DOCS
 PHP_MYSQL_DESC=		MySQL database support (PHP extension)
 PDO_DBLIB_DESC=		Microsoft SQL Server and Sybase PDO driver
 PDO_FIREBIRD_DESC=	Firebird/Interbase PDO driver
@@ -30,7 +38,7 @@ DEFAULT_PHP_VER=5
 PHP_MYSQL_USE=	php=mysql
 PDO_DBLIB_RUN_DEPENDS=	${PHPBASE}/lib/php/${PHP_EXT_DIR}/pdo_dblib.so:${PORTSDIR}/databases/php5-pdo_dblib
 PDO_FIREBIRD_RUN_DEPENDS=	${PHPBASE}/lib/php/${PHP_EXT_DIR}/pdo_firebird.so:${PORTSDIR}/databases/php5-pdo_firebird
-PDO_MYSQL_USE=	php=pgo_mysql
+PDO_MYSQL_USE=	php=pdo_mysql
 PDO_ODBC_RUN_DEPENDS=	${PHPBASE}/lib/php/${PHP_EXT_DIR}/pdo_odbc.so:${PORTSDIR}/databases/php5-pdo_odbc
 PDO_PGSQL_RUN_DEPENDS=	${PHPBASE}/lib/php/${PHP_EXT_DIR}/pdo_pgsql.so:${PORTSDIR}/databases/php5-pdo_pgsql
 PDO_SQLITE_USE=	php=pdo_sqlite

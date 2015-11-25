@@ -1,17 +1,14 @@
 # $FreeBSD$
 
 PORTNAME=	compat10x
-PORTVERSION=	10.0.1000510.201410
+PORTVERSION=	10.2.1002000.20151116
 CATEGORIES=	misc
-MASTER_SITES=	${MASTER_SITE_LOCAL}
-MASTER_SITE_SUBDIR=	garga/compat
+MASTER_SITES=	LOCAL/des
 PKGNAMESUFFIX=	-${ARCH}
 DISTNAME=	${PORTNAME}-${ARCH}-${PORTVERSION}
 
-MAINTAINER=	garga@FreeBSD.org
+MAINTAINER=	des@FreeBSD.org
 COMMENT=	Convenience package to install the compat10x libraries
-
-LICENSE=	BSD2CLAUSE
 
 USES=		tar:xz
 NO_BUILD=	yes
@@ -28,16 +25,15 @@ IGNORE=		is for FreeBSD 10.x and newer
 .endif
 
 .if ${ARCH} == amd64
-PLIST_SUB+=	LDCONFIG_LIB32="${LDCONFIG} -32"
 USE_LDCONFIG32=	${TARGET32_DIR}
 .endif
 
 do-install:
 	@${MKDIR} -m 0755 ${STAGEDIR}${TARGET_DIR}
-	(cd ${WRKSRC}/lib && ${INSTALL_DATA} *.so.* ${STAGEDIR}${TARGET_DIR})
+	(cd ${WRKSRC}/lib && ${INSTALL_LIB} *.so.* ${STAGEDIR}${TARGET_DIR})
 .if ${ARCH} == amd64
 	@${MKDIR} ${STAGEDIR}${TARGET32_DIR}
-	(cd ${WRKSRC}/lib32 && ${INSTALL_DATA} *.so.* ${STAGEDIR}${TARGET32_DIR})
+	(cd ${WRKSRC}/lib32 && ${INSTALL_LIB} *.so.* ${STAGEDIR}${TARGET32_DIR})
 .endif
 
 .include <bsd.port.post.mk>

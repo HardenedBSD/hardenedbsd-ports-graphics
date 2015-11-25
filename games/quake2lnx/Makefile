@@ -17,7 +17,6 @@ COMMENT=	Icculus.org version of the original Quake II
 LICENSE=	GPLv2
 
 USES=		gmake
-WANT_SDL=	yes
 ALL_TARGET=	build_release
 
 LIBDIR=		${PREFIX}/lib/${PORTNAME}
@@ -72,7 +71,7 @@ PLIST_SUB+=	GLX="@comment "
 
 .if ${PORT_OPTIONS:MEYECANDY}
 DISTFILES+=	maxpak.pak
-LIB_DEPENDS+=	libjpeg.so:${PORTSDIR}/graphics/jpeg
+USES+=		jpeg
 USE_GL=		glu
 MAKE_ARGS+=	BUILD_QMAX=YES
 PLIST_SUB+=	QMAX=""

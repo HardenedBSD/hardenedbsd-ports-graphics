@@ -2,9 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	texinfo
-PORTVERSION=	5.2.20150101
+PORTVERSION=	6.0.20151108
 CATEGORIES=	print
 MASTER_SITES=	ftp://ftp.stack.nl/pub/users/johans/texinfo/${PORTVERSION:E}/ \
+		http://ftp.stack.nl/pub/users/johans/texinfo/${PORTVERSION:E}/ \
 		GNU
 DISTNAME=	${PORTNAME}-${PORTVERSION:R}
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} htmlxref.cnf texinfo.tex texi2dvi
@@ -24,10 +25,12 @@ NLS_CONFIGURE_ENABLE=	nls
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install install-tex
 PKGDEINSTALL=	${PKGINSTALL}
-USES+=		charsetfix gmake:lite perl5 tar:xz
+USES+=		charsetfix cpe gmake:lite perl5 tar:xz
 
 MAKE_ARGS=	TEXMF=${LOCALBASE}/${TEXMF} PERL=${LOCALBASE}/bin/perl
 INFO=		texinfo info-stnd info
+CPE_VENDOR=	gnu
+CPE_VERSION=	${PORTVERSION:R}
 
 TEXMF=		share/texmf
 PLIST_SUB=	TEXMF=${TEXMF}

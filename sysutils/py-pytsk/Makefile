@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	pytsk
-PORTVERSION=	20150111
+PORTVERSION=	20150406
+PORTREVISION=	1
 CATEGORIES=	sysutils security devel python
 MASTER_SITES=	https://github.com/py4n6/pytsk/releases/download/${PORTVERSION}/ \
 		LOCAL/antoine
@@ -20,7 +21,6 @@ WRKSRC=		${WRKDIR}/${PORTNAME}
 USES=		python shebangfix tar:tgz
 SHEBANG_FILES=	samples/*.py
 python_OLD_CMD=	.*
-python_CMD=	${PYTHON_CMD}
 USE_PYTHON=	distutils autoplist
 
 PORTDOCS=	README

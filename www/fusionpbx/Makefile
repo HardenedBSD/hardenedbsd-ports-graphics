@@ -6,12 +6,15 @@ DISTVERSION=	3.3
 PORTREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://www.fusionpbx.com/downloads/ \
-		${MASTER_SITE_GOOGLE_CODE}
+		GOOGLE_CODE
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	PHP5 Graphical User Interface for FreeSwitch
 
 LICENSE=	MPL
+
+DEPRECATED=	PHP 5.4 EOL reached
+EXPIRATION_DATE=	2016-01-15
 
 LIB_DEPENDS=	libodbc.so:${PORTSDIR}/databases/unixODBC
 RUN_DEPENDS+=	${PHPBASE}/lib/php/${PHP_EXT_DIR}/pdo_odbc.so:${PORTSDIR}/databases/php${PHP_VER}-pdo_odbc

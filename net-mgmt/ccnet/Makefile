@@ -2,10 +2,12 @@
 
 PORTNAME=	ccnet
 PORTVERSION=	4.0.6
-PORTREVISION=	5
+DISTVERSIONPREFIX=	v
+DISTVERSIONSUFFIX=	-server
+PORTREVISION=	6
 CATEGORIES=	net-mgmt devel
 
-MAINTAINER=	yan_jingfeng@yahoo.com
+MAINTAINER=	ultima1252@gmail.com
 COMMENT=	Framework for writing networked applications
 
 LICENSE=	GPLv3
@@ -23,8 +25,6 @@ LIB_DEPENDS=	libsearpc.so:${PORTSDIR}/devel/libsearpc \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	haiwen
-GH_TAGNAME=	v${PORTVERSION}-server
-GH_COMMIT=	1e1aeae
 
 USES=		autoreconf libtool pkgconfig pathfix python:2
 PATHFIX_MAKEFILEIN=	Makefile.am
@@ -32,11 +32,11 @@ USE_LDCONFIG=	yes
 
 CPPFLAGS+=	-I${LOCALBASE}/include -I${LOCALBASE}/include/event2
 LDFLAGS+=	-L${LOCALBASE}/lib -L${LOCALBASE}/lib/event2
+CONFIGURE_ENV=	SSL_CFLAGS="${OPENSSLINC}" SSL_LIBS="-L${OPENSSLLIB} -lssl -lcrypto"
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+=--enable-server --enable-ldap
 INSTALL_TARGET=	install-strip
 
-WITH_OPENSSL_PORT=	yes
 USE_OPENSSL=	yes
 
 HAIWENDIR=	www/haiwen
@@ -51,6 +51,12 @@ PLIST_SUB=	SEAFILE_USERNAME=${SEAFILE_USERNAME} \
 		SEAFILE_GROUPNAME=${SEAFILE_GROUPNAME} \
 		SEAFILE_SERVER=${SEAFILE_SERVER} \
 		HAIWENDIR=${HAIWENDIR}
+
+.include <bsd.port.options.mk>
+
+.if ${OPSYS} == FreeBSD && ${OSVERSION} < 1000000
+WITH_OPENSSL_PORT=	yes
+.endif
 
 post-install:
 	@${MKDIR} ${STAGEDIR}${PREFIX}/${SEABIN} ${STAGEDIR}${PREFIX}/${SEALIB}

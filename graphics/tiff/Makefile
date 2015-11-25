@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	tiff
-PORTVERSION=	4.0.3
-PORTREVISION=	5
+PORTVERSION=	4.0.6
 CATEGORIES=	graphics
 MASTER_SITES=	ftp://ftp.remotesensing.org/pub/libtiff/ \
 		http://download.osgeo.org/libtiff/
@@ -14,16 +13,19 @@ COMMENT=	Tools and library routines for working with TIFF images
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/COPYRIGHT
 
-LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg \
-		libjbig.so:${PORTSDIR}/graphics/jbigkit
+LIB_DEPENDS=	libjbig.so:${PORTSDIR}/graphics/jbigkit
 
-USES=		libtool
+USES=		cpe jpeg libtool
+CPE_PRODUCT=	libtiff
+CPE_VERSION=	${DISTVERSION:C/[a-z]+//}
+CPE_UPDATE=	${DISTVERSION:C/[0-9.]+//}
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+=	--with-jpeg-include-dir=${LOCALBASE}/include \
 			--with-jpeg-lib-dir=${LOCALBASE}/lib \
 			--without-x
 INSTALL_TARGET=	install-strip
+TEST_TARGET=	check
 
 MLNKS=	TIFFError.3tiff          TIFFSetErrorHandler.3tiff \
 	TIFFFlush.3tiff          TIFFFlushData.3tiff \
@@ -88,11 +90,11 @@ OPTIONS_DEFINE=	DOCS
 .include <bsd.port.options.mk>
 
 .if !defined(BUILDING_INDEX)
-__pmlinks3!= ${ECHO_CMD} '${MLNKS:S/    / /}' | ${AWK} \
+__pmlinks3!=	${ECHO_CMD} '${MLNKS:S/    / /}' | ${AWK} \
 	'{ if (NF % 2 != 0) { print "broken"; exit; } \
 	for (i=1; i<=NF; i++) { \
 		if ( i % 2 == 0) { print " " $$i " ;"; } \
-		else { printf "${LN} -s " $$i " "; } \
+		else { print "${LN} -s " $$i " "; } \
 	} }'
 .endif
 
@@ -116,8 +118,5 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/html/images/*.gif ${STAGEDIR}${DOCSDIR}/images/
 	${INSTALL_DATA} ${WRKSRC}/html/man/*.html ${STAGEDIR}${DOCSDIR}/man/
 .endif
-
-regression-test: build
-	@(cd ${WRKSRC}; ${SETENV} ${MAKE_ENV} ${MAKE} ${MAKE_ARGS} check)
 
 .include <bsd.port.mk>

@@ -4,8 +4,8 @@
 PORTNAME=	quake3
 PORTVERSION=	1.32c
 CATEGORIES=	games linux
-MASTER_SITES=	${MASTER_SITE_IDSOFTWARE:S|$|quake3/linux/:data|} \
-		${MASTER_SITE_IDSOFTWARE:S|$|quake3/:patch|}
+MASTER_SITES=	IDSOFTWARE/quake3/linux/:data \
+		IDSOFTWARE/quake3/:patch
 PKGNAMEPREFIX=	linux-
 DISTFILES=	${Q3DATAFILE}:data \
 		${Q3PATCHFILE}:patch
@@ -35,17 +35,15 @@ PUNKBUSTER_DESC=	Install PunkBuster
 SMP_DESC=	Install SMP (threaded) client
 
 PLIST_SUB+=	LIBDIR="libexec/${PKGNAMEPREFIX}${PORTNAME}"
-LATEST_LINK=	${PKGNAMEPREFIX}${PORTNAME}
 
 LIBDIR=		${PREFIX}/libexec/${PKGNAMEPREFIX}${PORTNAME}
 Q3DATAFILE=	linuxq3apoint-1.32b-3.x86.run
 Q3PATCHFILE=	quake3-${PORTVERSION}.zip
 
 do-extract:
-	@${MKDIR} ${WRKDIR}
-	@cd ${WRKDIR} && ${TAIL} +356 ${_DISTDIR}/${Q3DATAFILE} | \
+	@cd ${WRKSRC} && ${TAIL} +356 ${_DISTDIR}/${Q3DATAFILE} | \
 		${TAR} zxf -
-	@${UNZIP_CMD} -qo ${_DISTDIR}/${Q3PATCHFILE} -d ${WRKDIR}
+	@${UNZIP_CMD} -qo ${_DISTDIR}/${Q3PATCHFILE} -d ${WRKSRC}
 
 post-extract:
 .for f in q3ded quake3.x86 quake3-smp.x86

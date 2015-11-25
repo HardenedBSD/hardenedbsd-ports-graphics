@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	libzen
-PORTVERSION=	0.7.72
+PORTVERSION=	0.7.79
 CATEGORIES=	multimedia
 MASTER_SITES=	http://mediaarea.net/download/binary/mediainfo/${PORTVERSION}/ \
 		LOCAL/sunpoet
@@ -12,6 +12,7 @@ MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	ZenLib used by MediaInfo and its library
 
 LICENSE=	ZLIB
+LICENSE_FILE=	${WRKSRC}/../../../License.txt
 
 CONFLICTS_INSTALL=	mediainfo-0.[0-6]* mediainfo-0.7.[0-5]*
 
@@ -25,7 +26,7 @@ WRKSRC=		${WRKDIR}/MediaInfo_CLI_GNU_FromSource/ZenLib/Project/GNU/Library
 
 post-patch:
 	@${REINPLACE_CMD} -e '/^ZenLib_LIBS/ s|$$(pwd)[^ ]*|${LOCALBASE}/lib|' ${WRKSRC}/configure
-	@${REINPLACE_CMD} -e 's|-lpthread -lstdc++|-pthread|g' ${WRKSRC}/configure ${WRKSRC}/libzen.pc.in
+	@${REINPLACE_CMD} -e 's| -lstdc++||g' ${WRKSRC}/configure ${WRKSRC}/libzen.pc.in
 	@${REINPLACE_CMD} -e '1 s|bin/bash|bin/sh|' ${WRKSRC}/libzen-config.in
 
 post-install:

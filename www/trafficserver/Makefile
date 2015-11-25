@@ -2,8 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	trafficserver
-PORTVERSION=	5.0.1
-PORTREVISION=	2
+PORTVERSION=	5.3.1
+PORTREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	APACHE/${PORTNAME}
 
@@ -14,14 +14,13 @@ LICENSE=	APACHE20
 
 LIB_DEPENDS=	libboost_system.so:${PORTSDIR}/devel/boost-libs \
 		libcurl.so:${PORTSDIR}/ftp/curl \
-		libexecinfo.so:${PORTSDIR}/devel/libexecinfo \
 		libhwloc.so:${PORTSDIR}/devel/hwloc \
 		libpcre.so:${PORTSDIR}/devel/pcre \
 		libxml2.so:${PORTSDIR}/textproc/libxml2
 
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
-USES=		cpe gmake libtool perl5 pkgconfig tar:bzip2 tcl
+USES=		cpe execinfo gmake libtool perl5 pkgconfig tar:bzip2 tcl
 CPE_VENDOR=	apache
 CPE_PRODUCT=	traffic_server
 USE_PERL5=	build run
@@ -32,8 +31,9 @@ USE_SQLITE=	yes
 
 ONLY_FOR_ARCHS=	i386 amd64
 
-USERS=		www
-GROUPS=		www
+USERS=		${WWWOWN}
+GROUPS=		${WWWGRP}
+PLIST_SUB=	WWWOWN="${WWWOWN}" WWWGRP="${WWWGRP}" PORTVERSION="${PORTVERSION}"
 
 LIBS+=		-L${LOCALBASE}/lib
 CONFIGURE_ARGS=	--with-libxml2=${LOCALBASE} \
@@ -48,40 +48,38 @@ CONFIGURE_ARGS=	--with-libxml2=${LOCALBASE} \
 		--with-user=${USERS} \
 		--with-group=${GROUPS}
 
-OPTIONS_DEFINE=	DOCS INTERIM WCCP
-OPTIONS_RADIO=	MEMMAN
-OPTIONS_RADIO_MEMMAN=	ALLOCATORS FREELISTS RECLAIM
+OPTIONS_DEFINE=	DOCS INTERIM WCCP SPDY CACHEURL
+OPTIONS_SINGLE=	MEMMAN
+OPTIONS_SINGLE_MEMMAN=	ALLOCATORS FREELISTS RECLAIM
 OPTIONS_DEFAULT=	FREELISTS
+OPTIONS_SUB=	yes
 
+CACHEURL_DESC=  Enable CacheURL Plugin
 WCCP_DESC=	Enable WCCPv2 protocol
 INTERIM_DESC=	Enable interim cache (SSD)
 ALLOCATORS_DESC=	Manage memory with allocators
 FREELISTS_DESC=	Manage memory with freelists
 RECLAIM_DESC=	Reclaim unused memory in freelists
+SPDY_DESC=	Enable SPDY
 
 WCCP_CONFIGURE_ENABLE=	wccp
 INTERIM_CONFIGURE_ENABLE=	interim-cache
+SPDY_CONFIGURE_ENABLE=	spdy
+SPDY_LIB_DEPENDS=	libspdylay.so:${PORTSDIR}/www/spdylay
+CACHEURL_CONFIGURE_ENABLE=        experimental-plugins
 
-.include <bsd.port.options.mk>
+RECLAIM_CONFIGURE_ON=	--enable-reclaimable-freelist --enable-freelist
+FREELISTS_CONFIGURE_ARGS=	--enable-freelist
+ALLOCATORS_CONFIGURE_ARGS=	--disable-freelist
 
-.if ${PORT_OPTIONS:MRECLAIM}
-CONFIGURE_ARGS+=	--enable-reclaimable-freelist --enable-freelist
-.elif ${PORT_OPTIONS:MFREELISTS}
-CONFIGURE_ARGS+=	--enable-freelist
-.elif ${PORT_OPTIONS:MALLOCATORS}
-CONFIGURE_ARGS+=	--disable-freelist
-.else
-IGNORE=	no allocation strategy selected
-.endif
-
-.if ${OSVERSION} >= 900033 && exists(/usr/bin/clang)
+.if exists(/usr/bin/clang)
 CC=		clang
 CXX=		clang++
 .endif
 
 .if ! exists(/var/cache)
 # FreeBSD 8.x
-PLIST_DIRSTRY+=	/var/cache
+PLIST_DIRS+=	/var/cache
 .endif
 
 post-patch:

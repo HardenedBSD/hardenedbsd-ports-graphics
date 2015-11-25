@@ -10,6 +10,8 @@ DISTNAME=	${PORTNAME}${PORTVERSION}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	XSL(T) stylesheet checker
 
+BROKEN=		unfetchable
+
 RUN_DEPENDS=	p5-XML-DOM>=0:${PORTSDIR}/textproc/p5-XML-DOM
 
 USES=		shebangfix perl5 zip
@@ -17,6 +19,7 @@ USE_PERL5=	run
 
 WRKSRC=		${WRKDIR}/${PORTNAME}-0.05
 NO_BUILD=	yes
+NO_ARCH=	yes
 
 SHEBANG_FILES=	xslint.pl
 
@@ -25,16 +28,14 @@ PORTDOCS=	README xslint.html xslint.xml
 
 OPTIONS_DEFINE=	DOCS
 
-.include <bsd.port.options.mk>
-
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/${PORTNAME}.pl \
 		${STAGEDIR}${PREFIX}/bin/${PORTNAME}
-.if ${PORT_OPTIONS:MDOCS}
+
+do-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 .for i in ${PORTDOCS}
 	${INSTALL_DATA} ${WRKSRC}/${i} ${STAGEDIR}${DOCSDIR}
 .endfor
-.endif
 
 .include <bsd.port.mk>

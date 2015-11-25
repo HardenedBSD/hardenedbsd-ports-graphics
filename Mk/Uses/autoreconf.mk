@@ -48,7 +48,7 @@
 # Usage:	USES=autoreconf or USES=autoreconf:args
 # Valid args:	build	Don't run autoreconf, only add build dependencies
 #
-# MAINTAINER:	autotools@FreeBSD.org
+# MAINTAINER:	portmgr@FreeBSD.org
 
 .if !defined(_INCLUDE_USES_AUTORECONF_MK)
 _INCLUDE_USES_AUTORECONF_MK=	yes
@@ -64,12 +64,15 @@ BUILD_DEPENDS+=	autoconf-2.69:${PORTSDIR}/devel/autoconf \
 BUILD_DEPENDS+=	libtoolize:${PORTSDIR}/devel/libtool
 .endif
 
+AUTORECONF?=	${LOCALBASE}/bin/autoreconf
+
 .endif
 
 .if defined(_POSTMKINCLUDED) && !defined(_INCLUDE_USES_AUTORECONF_POST_MK)
 _INCLUDE_USES_AUTORECONF_POST_MK=	yes
 
 .if ! ${autoreconf_ARGS:Mbuild}
+_USES_configure+=	470:do-autoreconf
 do-autoreconf:
 .for f in AUTHORS ChangeLog INSTALL NEWS README
 # Don't modify time stamps if the files already exist
@@ -82,7 +85,7 @@ do-autoreconf:
 		if ${EGREP} -q '^(AC|IT)_PROG_INTLTOOL' $${configure}; \
 		then ${LOCALBASE}/bin/intltoolize -f -c; fi)
 .endif
-	@(cd ${CONFIGURE_WRKSRC} && ${LOCALBASE}/bin/autoreconf -f -i)
+	@(cd ${CONFIGURE_WRKSRC} && ${AUTORECONF} -f -i)
 .endif
 
 .endif

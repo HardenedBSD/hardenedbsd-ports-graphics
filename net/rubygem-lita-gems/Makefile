@@ -9,11 +9,15 @@ MASTER_SITES=	RG
 MAINTAINER=	ruby@FreeBSD.org
 COMMENT=	Lita handler for rubygems.org querying
 
-RUN_DEPENDS=	rubygem-lita>=2.6:${PORTSDIR}/net-im/rubygem-lita \
-		rubygem-gems>=0.8.0:${PORTSDIR}/devel/rubygem-gems
+LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
+RUN_DEPENDS=	rubygem-gems>=0.8.0:${PORTSDIR}/devel/rubygem-gems \
+		rubygem-lita>=2.6:${PORTSDIR}/net-im/rubygem-lita
+
+NO_ARCH=	yes
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=yes
+RUBYGEM_AUTOPLIST=	yes
 
 .include <bsd.port.mk>

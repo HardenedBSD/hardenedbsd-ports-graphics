@@ -1,7 +1,7 @@
---- Makefile.orig	2014-06-25 12:23:05.000000000 +0200
-+++ Makefile	2014-06-28 20:36:14.000000000 +0200
+--- Makefile.orig	2015-10-25 12:46:54 UTC
++++ Makefile
 @@ -17,14 +17,14 @@ opt:
- 	for p in $(PARTS); do ( cd src/$$p; $(MAKE) opt ); done
+ 	for p in $(PARTS); do ( cd src/$$p; $(MAKE) opt ) || exit; done
  
  install:
 -	mkdir -p "$(prefix)$(OCAMLFIND_BIN)"

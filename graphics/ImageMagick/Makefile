@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	ImageMagick
-DISTVERSION=	6.9.0-4
+DISTVERSION=	6.9.2-6
 PORTEPOCH=	1
 CATEGORIES=	graphics perl5
 MASTER_SITES=	http://www.imagemagick.org/download/ \
@@ -39,15 +39,18 @@ LIB_DEPENDS=	libltdl.so:${PORTSDIR}/devel/libltdl
 CONFLICTS_INSTALL=	execline-[0-9]* # bin/import
 
 # This port uses .la files, keep libtool:keepla! (magick/module.c)
-USES=		gmake libtool:keepla pathfix perl5 pkgconfig shebangfix tar:xz
+USES=		cpe gmake libtool:keepla pathfix perl5 pkgconfig:both shebangfix tar:xz
+CPE_PRODUCT=	imagemagick
+CPE_VENDOR=	imagemagick
 SHEBANG_FILES=	www/source/examples.pl
 GNU_CONFIGURE=	yes
 CONFIGURE_ENV=	MAKE=${MAKE_CMD}
-CONFIGURE_ARGS=	--without-dps \
-		--without-lcms
+CONFIGURE_ARGS=	--without-dps
 USE_LDCONFIG=	yes
 USE_GNOME=	libxml2
 
+# make sure LOCALBASE is placed at the end of the compiler lookup so the configure
+# script can find openjpeg2 headers before the openjpeg15 headers
 CPPFLAGS+=	-isystem${LOCALBASE}/include
 LDFLAGS+=	-Wl,-Y${LOCALBASE}/lib
 
@@ -125,9 +128,8 @@ PLIST_SUB+=		WITH_PERL='@comment '
 
 .if ${_IMAGEMAGICK_THREADS} == "yes"
 CONFIGURE_ARGS+=	--with-threads
-CONFIGURE_ENV+=		PTHREAD_CFLAGS="${PTHREAD_CFLAGS}" \
-			PTHREAD_LIBS="${PTHREAD_LIBS}"
-LDFLAGS+=		${PTHREAD_LIBS}
+CONFIGURE_ENV+=		PTHREAD_LIBS="-lpthread"
+LDFLAGS+=		-lpthread
 .else
 CONFIGURE_ARGS+=	--without-threads
 _IMAGEMAGICK_THREADS=no
@@ -192,7 +194,7 @@ PLIST_SUB+=		DJVU="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MJPEG}
-LIB_DEPENDS+=		libjpeg.so:${PORTSDIR}/graphics/jpeg
+USES+=			jpeg
 PLIST_SUB+=		JPEG=""
 .else
 CONFIGURE_ARGS+=	--without-jpeg
@@ -217,7 +219,11 @@ PLIST_SUB+=		TIFF="@comment "
 
 .if ${PORT_OPTIONS:MGSLIB}
 CONFIGURE_ARGS+=	--with-gslib
-USE_GHOSTSCRIPT=	yes
+. if ${PORT_OPTIONS:MX11}
+USES+=		ghostscript:x11
+. else
+USES+=		ghostscript
+. endif
 .else
 CONFIGURE_ARGS+=	--without-gslib
 .endif
@@ -288,13 +294,12 @@ CONFIGURE_ARGS+=	--without-lzma
 .if ${PORT_OPTIONS:MLCMS2}
 LIB_DEPENDS+=		liblcms2.so:${PORTSDIR}/graphics/lcms2
 .else
-CONFIGURE_ARGS+=	--without-lcms2
+CONFIGURE_ARGS+=	--without-lcms
 .endif
 
 # Freetype (TrueType Font) support
 .if ${PORT_OPTIONS:MFREETYPE}
 LIB_DEPENDS+=		libfreetype.so:${PORTSDIR}/print/freetype2
-USE_GHOSTSCRIPT=	yes
 CONFIGURE_ARGS+=	--with-freetype
 .else
 CONFIGURE_ARGS+=	--without-freetype
@@ -314,9 +319,6 @@ PLIST_SUB+=		WEBP="@comment "
 .if ${PORT_OPTIONS:MFONTCONFIG}
 LIB_DEPENDS+=		libfontconfig.so:${PORTSDIR}/x11-fonts/fontconfig
 CONFIGURE_ARGS+=	--with-fontconfig
-CONFIGURE_ENV+=		FONTCONFIG_CFLAGS="-I${LOCALBASE}/include" \
-			FONTCONFIG_LIBS="-L${LOCALBASE}/lib"
-MAKE_ENV+=		FONTCONFIG_CFLAGS="-I${LOCALBASE}/include"
 .else
 CONFIGURE_ARGS+=	--without-fontconfig
 .endif
@@ -329,7 +331,6 @@ LIB_DEPENDS+=		libwmf.so:${PORTSDIR}/graphics/libwmf
 LIB_DEPENDS+=		libwmf.so:${PORTSDIR}/graphics/libwmf-nox11
 . endif
 CONFIGURE_ARGS+=	--with-wmf=yes
-CFLAGS+=		-I${LOCALBASE}/include/freetype2
 PLIST_SUB+=		WMF=""
 .else
 CONFIGURE_ARGS+=	--without-wmf
@@ -355,7 +356,11 @@ PLIST_SUB+=		PANGO="@comment "
 
 # PDF (Adobe Portable Document Format) support
 .if ${PORT_OPTIONS:MPDF}
-USE_GHOSTSCRIPT=	yes
+. if ${PORT_OPTIONS:MX11}
+USES+=			ghostscript:x11
+. else
+USES+=			ghostscript
+. endif
 .endif
 
 .if ! ${PORT_OPTIONS:MX11}
@@ -378,7 +383,11 @@ INSTALL_TARGET=	install-strip
 .endif
 
 .if ${PORT_OPTIONS:MTESTS}
-USE_GHOSTSCRIPT_BUILD=yes
+. if ${PORT_OPTIONS:MX11}
+USES+=		ghostscript:x11,build
+. else
+USES+=		ghostscript:build
+. endif
 .endif
 
 post-patch:
@@ -408,15 +417,15 @@ pre-configure:
 	@${ECHO_CMD} NOTICE: SVG format support disabled, requires X11
 .endif
 
-post-install: test
+post-install:
 .for i in ${SAMPLE_FILES}
 	@${MV} ${STAGEDIR}${PREFIX}/etc/ImageMagick-6/${i} \
 		${STAGEDIR}${PREFIX}/etc/ImageMagick-6/${i}.sample
 .endfor
 
-test check:
-.if ${PORT_OPTIONS:MTESTS}
-	-cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} limits -m 20m ${MAKE} check
-.endif
+post-install-TESTS-on: test
+
+do-test:
+	-cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} limits -m 20m ${MAKE} ${_MAKE_JOBS} check
 
 .include <bsd.port.mk>

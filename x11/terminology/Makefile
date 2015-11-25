@@ -2,11 +2,11 @@
 # $FreeBSD$
 
 PORTNAME=	terminology
-PORTVERSION=	0.8.0
+PORTVERSION=	0.9.1
 CATEGORIES=	x11 enlightenment
 MASTER_SITES=	http://download.enlightenment.org/rel/apps/${PORTNAME}/
 
-MAINTAINER=	gblach@FreeBSD.org
+MAINTAINER=	enlightenment@FreeBSD.org
 COMMENT=	EFL Terminal Emulator
 
 LICENSE=	BSD2CLAUSE
@@ -16,7 +16,7 @@ LIB_DEPENDS=	libefl.so:${PORTSDIR}/devel/efl \
 
 DIST_SUBDIR=	enlightenment
 GNU_CONFIGURE=	yes
-USES=		pkgconfig tar:xz
+USES=		compiler:c11 pkgconfig tar:xz
 
 OPTIONS_DEFINE=		NLS
 OPTIONS_SUB=		yes

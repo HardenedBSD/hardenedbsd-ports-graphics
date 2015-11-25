@@ -8,7 +8,7 @@ CATEGORIES=	sysutils
 MASTER_SITES=	http://www.secnetix.de/~olli/scripts/Generic-utilities/
 DISTFILES=	vils
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	amdmi3@FreeBSD.org
 COMMENT=	Use your favorite editor to rename files
 
 LICENSE=	BSD2CLAUSE
@@ -20,7 +20,7 @@ NO_WRKSUBDIR=	yes
 
 EXTRACT_CMD=	${CP}
 EXTRACT_BEFORE_ARGS=	-f
-EXTRACT_AFTER_ARGS=	${WRKDIR}
+EXTRACT_AFTER_ARGS=	${WRKSRC}
 
 USES=		shebangfix
 SHEBANG_FILES=	vils

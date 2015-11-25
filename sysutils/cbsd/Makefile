@@ -1,8 +1,8 @@
 # $FreeBSD$
 
 PORTNAME=	cbsd
-PORTVERSION=	10.1.4
-PORTREVISION=	1
+PORTVERSION=	10.2.0
+DISTVERSIONPREFIX=	v
 CATEGORIES=	sysutils
 
 MAINTAINER=	olevole@olevole.ru
@@ -18,9 +18,8 @@ LIB_DEPENDS=	libssh2.so:${PORTSDIR}/security/libssh2 \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	olevole
-GH_TAGNAME=	v${PORTVERSION}
-GH_COMMIT=	f68f99f
 
+USES=	libedit
 USE_RC_SUBR=	cbsdd cbsdrsyncd
 
 SUB_FILES=	pkg-message
@@ -35,6 +34,10 @@ GROUPS=	${PORTNAME}
 
 .if ${OPSYS} == FreeBSD && ${OSVERSION} < 1000000
 IGNORE=	does not support FreeBSD versions < 10.0
+.endif
+
+.if ${OPSYS} == FreeBSD && ${OSVERSION} < 1100000
+LIB_DEPENDS+=	libxo.so:${PORTSDIR}/devel/libxo
 .endif
 
 do-install:

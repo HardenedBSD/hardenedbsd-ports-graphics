@@ -3,6 +3,7 @@
 
 PORTNAME=	php-plurk-api
 PORTVERSION=	1.6.4
+PORTREVISION=	2
 CATEGORIES=	www
 MASTER_SITES=	GOOGLE_CODE
 
@@ -12,8 +13,11 @@ COMMENT=	Plurk API Implementation with PHP
 LICENSE=	BSD3CLAUSE
 
 NO_BUILD=	yes
+NO_ARCH=	yes
 USE_PHP=	json curl
-USES=		zip
+USES=		shebangfix zip
+php_OLD_CMD=	/usr/bin/php5
+SHEBANG_FILES=	example.php
 WRKSRC=		${WRKDIR}/${PORTVERSION}
 
 PLIST_SUB=	WWWOWN="${WWWOWN}" WWWGRP="${WWWGRP}"

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	Unix-Passwd-File
-PORTVERSION=	0.15
+PORTVERSION=	0.22
 CATEGORIES=	security perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
@@ -14,16 +14,17 @@ LICENSE=	ART10 GPLv1
 LICENSE_COMB=	dual
 
 BUILD_DEPENDS=	p5-Crypt-Password-Util>=0.06:${PORTSDIR}/security/p5-Crypt-Password-Util \
-		p5-File-Flock>=0:${PORTSDIR}/devel/p5-File-Flock \
+		p5-File-Flock-Retry>=0:${PORTSDIR}/devel/p5-File-Flock-Retry \
 		p5-List-MoreUtils>=0:${PORTSDIR}/lang/p5-List-MoreUtils \
-		p5-Log-Any-IfLOG>=0:${PORTSDIR}/devel/p5-Log-Any-IfLOG \
-		p5-Rinci>=0:${PORTSDIR}/devel/p5-Rinci
+		p5-Log-Any-IfLOG>=0:${PORTSDIR}/devel/p5-Log-Any-IfLOG
 RUN_DEPENDS:=	${BUILD_DEPENDS}
-BUILD_DEPENDS+=	p5-Perl-osnames>=0.09:${PORTSDIR}/devel/p5-Perl-osnames
-TEST_DEPENDS=	p5-File-Copy-Recursive>=0:${PORTSDIR}/devel/p5-File-Copy-Recursive \
-		p5-File-Slurp>=0:${PORTSDIR}/devel/p5-File-Slurp \
-		p5-File-chdir>=0:${PORTSDIR}/devel/p5-File-chdir
+TEST_DEPENDS=	p5-Class-Load>=0:${PORTSDIR}/devel/p5-Class-Load \
+		p5-File-Copy-Recursive>=0:${PORTSDIR}/devel/p5-File-Copy-Recursive \
+		p5-File-Slurp-Tiny>=0:${PORTSDIR}/devel/p5-File-Slurp-Tiny \
+		p5-File-chdir>=0:${PORTSDIR}/devel/p5-File-chdir \
+		p5-namespace-autoclean>=0:${PORTSDIR}/devel/p5-namespace-autoclean
 
+NO_ARCH=	yes
 USES=		perl5
 USE_PERL5=	configure
 

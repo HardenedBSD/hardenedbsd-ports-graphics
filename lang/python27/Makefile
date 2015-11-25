@@ -1,10 +1,10 @@
 # $FreeBSD$
 
 PORTNAME=	python27
-PORTVERSION=	2.7.9
+PORTVERSION=	2.7.10
+PORTREVISION=	1
 CATEGORIES=	lang python ipv6
-MASTER_SITES=	PYTHON
-MASTER_SITE_SUBDIR=	ftp/python/${PORTVERSION}
+MASTER_SITES=	PYTHON/ftp/python/${PORTVERSION}
 DISTNAME=	Python-${PORTVERSION}
 DIST_SUBDIR=	python
 
@@ -28,6 +28,7 @@ CONFIGURE_ENV+=		ac_cv_opt_olimit_ok=no OPT=""				# Null out OPT to respect user
 INSTALL_TARGET=		altinstall						# Don't want cloberring of unprefixed files
 MAKE_ARGS+=		INSTALL_SHARED="${INSTALL_LIB}"				# Strip shared library
 MAKE_ARGS+=		LIBPC="${PREFIX}/libdata/pkgconfig"			# Until pathfix gets support for files other than Makefile.in
+MAKE_JOBS_UNSAFE=	yes							# Parser/pgen build bug. See Issue: 200622, 201974
 
 PLIST_SUB=		ABI=${ABIFLAGS} \
 			PORTVERSION=${PORTVERSION} \
@@ -64,8 +65,7 @@ SEM_CONFIGURE_ENV=	ac_cv_posix_semaphores_enabled=yes
 SEM_CONFIGURE_ENV_OFF=	ac_cv_posix_semaphores_enabled=no
 
 THREADS_CONFIGURE_WITH=	threads
-THREADS_CFLAGS=		${PTHREAD_CFLAGS}
-THREADS_LDFLAGS=	${PTHREAD_LIBS}
+THREADS_LDFLAGS=	-lpthread
 
 UCS2_CONFIGURE_ON=	--enable-unicode=ucs2
 UCS4_CONFIGURE_ON=	--enable-unicode=ucs4
@@ -84,7 +84,7 @@ PLIST_SUB+=	X86_ONLY=""
 PLIST_SUB+=	X86_ONLY="@comment "
 .endif
 
-.if ${ARCH} == amd64 || ${ARCH} == ia64 || ${ARCH} == sparc64 || ${ARCH} == powerpc64 || ${ARCH} == mips64
+.if ${ARCH} == aarch64 || ${ARCH} == amd64 || ${ARCH} == ia64 || ${ARCH} == sparc64 || ${ARCH} == powerpc64 || ${ARCH} == mips64
 PLIST_SUB+=	32BIT_ONLY="@comment "
 .else
 PLIST_SUB+=	32BIT_ONLY=""

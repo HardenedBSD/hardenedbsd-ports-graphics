@@ -5,8 +5,7 @@ PORTNAME=	ppower4
 PORTVERSION=	0.9.4
 PORTREVISION=	7
 CATEGORIES=	textproc java
-MASTER_SITES=	${MASTER_SITE_TEX_CTAN}
-MASTER_SITE_SUBDIR=	support/${PORTNAME}
+MASTER_SITES=	TEX_CTAN/support/${PORTNAME}
 DISTFILES=	pp4sty.zip pp4p.jar manual.pdf leveldemo.zip
 DIST_SUBDIR=	${PORTNAME}
 EXTRACT_ONLY=	pp4sty.zip leveldemo.zip
@@ -23,11 +22,11 @@ NO_WRKSUBDIR=	yes
 
 JAR_DIR=	${JAVASHAREDIR}/${PORTNAME}
 STY_DIR=	${PREFIX}/share/texmf/tex/latex/${PORTNAME}
-STY_FILES=	${WRKDIR}/pause.sty ${WRKDIR}/background.sty \
-		${WRKDIR}/pp4link.sty ${WRKDIR}/mpmulti.sty
-EXAMPLE_FILES=	${WRKDIR}/leveldemo.tex
+STY_FILES=	${WRKSRC}/pause.sty ${WRKSRC}/background.sty \
+		${WRKSRC}/pp4link.sty ${WRKSRC}/mpmulti.sty
+EXAMPLE_FILES=	${WRKSRC}/leveldemo.tex
 .for i in 1 2 3 4 5 6 7
-EXAMPLE_FILES+=	${WRKDIR}/example.${i}
+EXAMPLE_FILES+=	${WRKSRC}/example.${i}
 .endfor
 PLIST_SUB=	STY_DIR="${STY_DIR:S,^${PREFIX}/,,}" \
 		JAR_DIR="${JAR_DIR:S,^${PREFIX}/,,}"

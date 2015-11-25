@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	tcllauncher
-PORTVERSION=	1.5
+PORTVERSION=	1.6
+DISTVERSIONPREFIX=	v
 CATEGORIES=	devel
 
 MAINTAINER=	tcltk@FreeBSD.org
@@ -14,11 +15,9 @@ LIB_DEPENDS=	libtclx8.4.so:${PORTSDIR}/lang/tclX
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	flightaware
-GH_TAGNAME=	v${PORTVERSION}
-GH_COMMIT=	36b1295
 
-USES+=		tcl
-USE_AUTOTOOLS=	autoconf
+USES+=		tcl autoreconf
+GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+=--with-tcl=${TCL_LIBDIR} \
 		--prefix=${PREFIX} \
 		--exec-prefix=${PREFIX}

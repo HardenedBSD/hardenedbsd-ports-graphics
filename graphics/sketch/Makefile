@@ -11,6 +11,10 @@ COMMENT=	3D Scene Description Translator
 
 LICENSE=	GPLv3
 
+BROKEN=		Checksum and size mismatch
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
+
 BUILD_DEPENDS=	bison:${PORTSDIR}/devel/bison
 
 MAKEFILE=	makefile

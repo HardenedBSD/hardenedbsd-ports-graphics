@@ -3,7 +3,7 @@
 
 PORTNAME=	p2c
 PORTVERSION=	1.21a
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	lang
 MASTER_SITES=	http://darkstar.ist.utl.pt/slackware/slackware_source/d/p2c/ \
 		http://www.slackware.at/data/slackware-10.0/source/d/p2c/
@@ -11,6 +11,8 @@ DISTFILES=	p2c-1.21alpha2.tar.gz
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Pascal to C translator
+
+BROKEN=		unfetchable
 
 LICENSE=	GPLv2
 
@@ -26,7 +28,7 @@ do-install:
 		${STAGEDIR}${PREFIX}/bin)
 	(cd ${WRKSRC} && ${INSTALL_SCRIPT} p2cc \
 		${STAGEDIR}${PREFIX}/bin)
-	(cd ${WRKSRC} && ${INSTALL_LIB} libp2c.a \
+	(cd ${WRKSRC} && ${INSTALL_DATA} libp2c.a \
 		${STAGEDIR}${PREFIX}/lib)
 	@${MKDIR} ${STAGEDIR}${PREFIX}/include/p2c
 	(cd ${WRKSRC} && ${INSTALL_DATA} p2c.h \

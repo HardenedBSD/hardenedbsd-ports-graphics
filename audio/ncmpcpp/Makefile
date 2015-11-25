@@ -1,22 +1,28 @@
 # $FreeBSD$
 
 PORTNAME=	ncmpcpp
-PORTVERSION=	0.6.2
+PORTVERSION=	0.7.0b1
 CATEGORIES=	audio
 MASTER_SITES=	http://ncmpcpp.rybczak.net/stable/
+DISTNAME=	ncmpcpp-0.7_beta1
 
-MAINTAINER=	dhn@FreeBSD.org
+MAINTAINER=	yamagi@yamagi.org
 COMMENT=	ncurses mpd client, clone of ncmpc with some new features
+
+LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/COPYING
 
 LIB_DEPENDS=	libmpdclient.so:${PORTSDIR}/audio/libmpdclient \
 		libfftw3.so:${PORTSDIR}/math/fftw3 \
 		libboost_filesystem.so:${PORTSDIR}/devel/boost-libs
 
-USES=		compiler:c++11-lib iconv libtool ncurses pkgconfig tar:bzip2
+WRKSRC=	${WRKDIR}/ncmpcpp-0.7_beta1
+
+USES=		compiler:c++11-lib iconv libtool ncurses:port pkgconfig tar:bzip2
 GNU_CONFIGURE=	yes
 USE_GNOME=	glib20
 CPPFLAGS+=	-I${LOCALBASE}/include
-LDFLAGS+=	-L${LOCALBASE}/lib ${PTHREAD_LIBS}
+LDFLAGS+=	-lpthread -L${LOCALBASE}/lib
 CONFIGURE_ENV=	BOOST_LIB_SUFFIX=""
 
 OPTIONS_DEFINE=	CURL CLOCK DOCS OUTPUTS TAGLIB UTF8 VISUALIZER
@@ -27,11 +33,9 @@ TAGLIB_DESC=	taglib support
 OUTPUTS_DESC=	Enable outputs screen
 VISUALIZER_DESC=	Enable music visualizer screen
 
-.include <bsd.port.options.mk>
-
 PLIST_FILES=	bin/ncmpcpp \
 		man/man1/ncmpcpp.1.gz
-PORTDOCS=	AUTHORS COPYING NEWS bindings config ncmpcpp-completion.bash
+PORTDOCS=	AUTHORS COPYING NEWS bindings config
 
 CURL_LIB_DEPENDS=	libcurl.so:${PORTSDIR}/ftp/curl
 CURL_CONFIGURE_WITH=	curl
@@ -50,17 +54,11 @@ VISUALIZER_CONFIGURE_ENABLE=	visualizer
 
 .include <bsd.port.pre.mk>
 
-.if ${NCURSESBASE} == /usr
-# no need to use ncurses-config if we use ncurses from the base system
-CONFIGURE_ARGS+=	NCURSES_CONFIG=/usr/bin/true
-.endif
-
 post-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/src/ncmpcpp ${STAGEDIR}${PREFIX}/bin/
-.if ${PORT_OPTIONS:MDOCS}
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${WRKSRC}/NEWS ${WRKSRC}/AUTHORS ${WRKSRC}/COPYING ${STAGEDIR}${DOCSDIR}
-	${INSTALL_DATA} ${WRKSRC}/doc/bindings ${WRKSRC}/doc/config ${WRKSRC}/doc/ncmpcpp-completion.bash ${STAGEDIR}${DOCSDIR}/
-.endif
+	${INSTALL_DATA} ${WRKSRC}/doc/bindings ${WRKSRC}/doc/config ${STAGEDIR}${DOCSDIR}/
 
 .include <bsd.port.post.mk>

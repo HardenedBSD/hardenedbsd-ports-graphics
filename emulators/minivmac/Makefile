@@ -5,18 +5,20 @@ PORTNAME=	minivmac
 PORTVERSION=	3.0.0
 CATEGORIES=	emulators
 MASTER_SITES=	SF
-DISTFILES=	${PORTNAME}-${PORTVERSION}.src.tgz \
-		${PORTNAME}-${PORTVERSION}.prj.tgz
+DISTFILES=	${DISTNAME}.src${EXTRACT_SUFX} \
+		${DISTNAME}.prj${EXTRACT_SUFX}
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Miniature Macintosh emulator
+
+BROKEN=		unfetchable
 
 LICENSE=	GPLv2
 
 WRKSRC=		${WRKDIR}/projects/bgclx86d
 
 USE_XORG=	x11 xext
-USES=		gmake
+USES=		gmake tar:tgz
 CFLAGS+=	-I${LOCALBASE}/include
 ALL_TARGET=	# nothing
 

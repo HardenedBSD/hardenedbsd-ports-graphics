@@ -2,18 +2,18 @@
 # $FreeBSD$
 
 PORTNAME=	Class-Std
-DISTVERSION=	0.011
-PORTREVISION=	1
+DISTVERSION=	0.013
 CATEGORIES=	devel perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
 
-MAINTAINER=	lippe@FreeBSD.org
+MAINTAINER=	culot@FreeBSD.org
 COMMENT=	Support for creating standard "inside-out" classes
 
-BUILD_DEPENDS=	p5-version>=0:${PORTSDIR}/devel/p5-version
-RUN_DEPENDS:=	${BUILD_DEPENDS}
+LICENSE=	ART10 GPLv1
+LICENSE_COMB=	dual
 
+NO_ARCH=	yes
 USES=		perl5
 USE_PERL5=	configure
 

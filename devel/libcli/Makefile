@@ -4,15 +4,17 @@ PORTNAME=	libcli
 PORTVERSION=	1.9.6
 PORTREVISION=	1
 CATEGORIES=	devel
-MASTER_SITES=	 http://cloud.github.com/downloads/dparrish/libcli/
+MASTER_SITES=	GHC
 
 MAINTAINER=	tj@FreeBSD.org
 COMMENT=	Emulates a Cisco style command-line interface
 
 LICENSE=	LGPL21
 
-USES=		gmake
+USES=		alias gmake
 USE_LDCONFIG=	yes
+USE_GITHUB=	yes
+GH_ACCOUNT=	dparrish
 
 PLIST_FILES=	lib/libcli.so \
 		lib/libcli.so.1.9.6 \

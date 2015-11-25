@@ -12,6 +12,9 @@ COMMENT=	Audioscrobbler client for MusicPD
 
 LICENSE=	GPLv2
 
+BROKEN=		Unfetchable
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
 LIB_DEPENDS=	libconfuse.so:${PORTSDIR}/devel/libconfuse \
 		libcurl.so:${PORTSDIR}/ftp/curl \
 		libmpdclient.so:${PORTSDIR}/audio/libmpdclient

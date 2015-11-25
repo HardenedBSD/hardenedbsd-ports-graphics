@@ -3,10 +3,9 @@
 
 PORTNAME=	sgmlformat
 PORTVERSION=	1.7
-PORTREVISION=	5
+PORTREVISION=	6
 CATEGORIES=	textproc print
-MASTER_SITES=	${MASTER_SITE_LOCAL}
-MASTER_SITE_SUBDIR=	kuriyama
+MASTER_SITES=	LOCAL/kuriyama
 
 MAINTAINER=	kuriyama@FreeBSD.org
 COMMENT=	Generates groff and HTML from linuxdoc and docbook SGML documents

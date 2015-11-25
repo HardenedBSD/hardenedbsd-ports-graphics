@@ -2,12 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	Carp
-PORTVERSION=	1.33.01
-PORTREVISION=	2
+PORTVERSION=	1.38
 CATEGORIES=	devel perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
-DISTNAME=	${PORTNAME}-${PORTVERSION:R}${PORTVERSION:E}
 
 MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	Alternative warn and die for modules
@@ -15,6 +13,7 @@ COMMENT=	Alternative warn and die for modules
 LICENSE=	ART10 GPLv1
 LICENSE_COMB=	dual
 
+NO_ARCH=	yes
 USE_PERL5=	configure
 USES=		perl5
 

@@ -3,8 +3,9 @@
 
 PORTNAME=	tumbler
 PORTVERSION=	0.1.31
+PORTREVISION=	1
 CATEGORIES=	deskutils xfce
-MASTER_SITES=	${MASTER_SITE_XFCE}
+MASTER_SITES=	XFCE
 PKGNAMEPREFIX=	xfce4-
 DIST_SUBDIR=	xfce4
 
@@ -19,7 +20,7 @@ LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png \
 
 USES=		pathfix pkgconfig gmake libtool gettext-tools xfce tar:bzip2
 GNU_CONFIGURE=	yes
-USE_GNOME=	glib20 intltool intlhack gdkpixbuf2
+USE_GNOME=	glib20 intltool intlhack gdkpixbuf2 librsvg2
 USE_LDCONFIG=	yes
 
 CONFIGURE_ARGS=	--enable-xdg-cache \
@@ -39,8 +40,8 @@ NLS_USES=	gettext-runtime
 NLS_CONFIGURE_ENABLE=	nls
 FONTS_LIB_DEPENDS=	libfreetype.so:${PORTSDIR}/print/freetype2
 FONTS_CONFIGURE_ENABLE=	font-thumbnailer
-JPEG_LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg \
-	libexif.so:${PORTSDIR}/graphics/libexif
+JPEG_LIB_DEPENDS=	libexif.so:${PORTSDIR}/graphics/libexif
+JPEG_USES=		jpeg
 JPEG_CONFIGURE_ENABLE=	jpeg-thumbnailer
 FFMPEG_LIB_DEPENDS=	libffmpegthumbnailer.so:${PORTSDIR}/multimedia/ffmpegthumbnailer
 FFMPEG_CONFIGURE_ENABLE=	ffmpeg-thumbnailer

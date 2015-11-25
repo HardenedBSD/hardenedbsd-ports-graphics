@@ -3,7 +3,7 @@
 
 PORTNAME=	j
 PORTVERSION=	504b
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	lang linux java
 MASTER_SITES=	http://www.jsoftware.com/download/
 PKGNAMEPREFIX=	linux-
@@ -31,8 +31,8 @@ SUB_FILES=	j-jconsole.sh jw.sh
 SUB_LIST=	PORTVERSION=${PORTVERSION:S/b//g}
 
 do-install:
-	${INSTALL_SCRIPT} ${WRKSRC}/j-jconsole.sh ${STAGEDIR}${PREFIX}/bin/j-jconsole
-	${INSTALL_SCRIPT} ${WRKSRC}/jw.sh ${STAGEDIR}${PREFIX}/bin/jw
+	${INSTALL_SCRIPT} ${WRKDIR}/j-jconsole.sh ${STAGEDIR}${PREFIX}/bin/j-jconsole
+	${INSTALL_SCRIPT} ${WRKDIR}/jw.sh ${STAGEDIR}${PREFIX}/bin/jw
 	${INSTALL_MAN} ${WRKSRC}/j${PORTVERSION:S/b//g}/system/extras/help/man/jconsole.1 ${STAGEDIR}${PREFIX}/man/man1/${MAN1}
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/j
 	cd ${WRKSRC}/j${PORTVERSION:S/b//g} && \
@@ -43,8 +43,5 @@ do-install:
 
 post-install:
 	${MV} ${STAGEDIR}${PREFIX}/man/man1/jconsole.1 ${STAGEDIR}${PREFIX}/man/man1/j-jconsole.1
-.if !defined(BATCH)
-	@${CAT} ${PKGMESSAGE}
-.endif
 
 .include <bsd.port.mk>

@@ -2,9 +2,11 @@
 # $FreeBSD$
 
 PORTNAME=	stunnel
-PORTVERSION=	5.10
+PORTVERSION=	5.26
+PORTEPOCH=	1
 CATEGORIES=	security
 MASTER_SITES=	https://www.stunnel.org/downloads/%SUBDIR%/ \
+		https://www.stunnel.org/downloads/beta/ \
 		http://mirrors.zerg.biz/stunnel/%SUBDIR%/ \
 		http://mirrors.go-part.com/stunnel/%SUBDIR%/ \
 		http://ftp.nluug.nl/pub/networking/stunnel/%SUBDIR%/ \
@@ -25,7 +27,8 @@ COMMENT=	SSL encryption wrapper for standard network daemons
 LICENSE=	GPLv2 GPLv3
 LICENSE_COMB=	dual
 
-USES=		shebangfix libtool
+USES=		cpe libtool perl5 shebangfix
+USE_PERL5=	build
 USE_LDCONFIG=	yes
 USE_OPENSSL=	yes
 USE_RC_SUBR=	stunnel
@@ -35,19 +38,19 @@ CONFIGURE_ARGS=	--localstatedir=/var/tmp --enable-static --disable-systemd \
 		--with-ssl="${OPENSSLBASE}"
 SHEBANG_FILES=	src/stunnel3.in
 
-OPTIONS_DEFINE=			IPV6 LIBWRAP FIPS DOCS EXAMPLES
+OPTIONS_DEFINE=			DOCS EXAMPLES FIPS IPV6 LIBWRAP
 OPTIONS_SINGLE=			THREAD
 OPTIONS_SINGLE_THREAD=		FORK PTHREAD UCONTEXT
 OPTIONS_DEFAULT=		PTHREAD
 
+FIPS_CONFIGURE_ENABLE=		fips
 IPV6_CONFIGURE_ENABLE=		ipv6
 LIBWRAP_CONFIGURE_ENABLE=	libwrap
-FIPS_CONFIGURE_ENABLE=		fips
 
+FIPS_DESC=			Enable OpenSSL FIPS mode
 FORK_DESC=			Use the fork(3) threading model
 PTHREAD_DESC=			Use the pthread(3) threading model
 UCONTEXT_DESC=			Use the ucontext(3) threading model
-FIPS_DESC=			Enable OpenSSL FIPS mode
 
 STUNNEL_USER?=	stunnel
 STUNNEL_GROUP?=	stunnel
@@ -63,14 +66,20 @@ LDFLAGS+=		-lwrap
 
 .if ${PORT_OPTIONS:MUCONTEXT}
 CONFIGURE_ARGS+=--with-threads=ucontext
-CPPFLAGS+=	${PTHREAD_CFLAGS}
-LDFLAGS+=	${PTHREAD_LIBS}
+LDFLAGS+=	-lpthread
 .elif ${PORT_OPTIONS:MFORK}
 CONFIGURE_ARGS+=--with-threads=fork
 .else
 CONFIGURE_ARGS+=--with-threads=pthread
-CPPFLAGS+=	${PTHREAD_CFLAGS}
-LDFLAGS+=	${PTHREAD_LIBS}
+LDFLAGS+=	-lpthread
+.endif
+
+.if ${PORT_OPTIONS:MFIPS} && defined(OPENSSL_PORT) && ${OPENSSL_PORT} == security/libressl
+IGNORE=		LibreSSL does not support FIPS standard
+.endif
+
+.if defined(OPENSSL_PORT) && ${OPENSSL_PORT} == security/libressl
+NO_PACKAGE=	The stunnel license restricts distribution when linked to non-OpenSSL non-base SSL-libraries
 .endif
 
 post-patch:

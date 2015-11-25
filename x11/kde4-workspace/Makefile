@@ -2,7 +2,7 @@
 
 PORTNAME=	kde-workspace
 PORTVERSION=	${KDE4_WORKSPACE_VERSION}
-PORTREVISION=	2
+PORTREVISION=	4
 CATEGORIES=	x11 kde
 MASTER_SITES=	KDE/${KDE4_BRANCH}/${KDE4_VERSION}/src
 DIST_SUBDIR=	KDE/${PORTVERSION}
@@ -21,7 +21,6 @@ LIB_DEPENDS=	libdbus-1.so:${PORTSDIR}/devel/dbus \
 		libfontconfig.so:${PORTSDIR}/x11-fonts/fontconfig \
 		libfreetype.so:${PORTSDIR}/print/freetype2 \
 		libpng.so:${PORTSDIR}/graphics/png \
-		libjpeg.so:${PORTSDIR}/graphics/jpeg \
 		libxcb-render-util.so:${PORTSDIR}/x11/xcb-util-renderutil \
 		libxcb-image.so:${PORTSDIR}/x11/xcb-util-image \
 		libxcb-keysyms.so:${PORTSDIR}/x11/xcb-util-keysyms
@@ -45,13 +44,14 @@ USE_GL=		glu
 USE_GNOME=	glib20
 USE_KDE4=	kactivities kdelibs kdeprefix nepomuk-core oxygen \
 		pimlibs akonadi automoc4 ontologies qimageblitz soprano strigi
-USES=		cmake:outsource compiler:c++11-lib gettext gmake iconv \
-		pkgconfig tar:xz
+USES=		cmake:outsource compiler:c++11-lib gettext gmake jpeg \
+		pkgconfig shebangfix tar:xz
 USE_QT4=	corelib dbus declarative designer_build gui network \
 		opengl phonon qtestlib script sql webkit xml \
 		moc_build qmake_build rcc_build uic_build
 USE_XORG=	kbproto x11 xau xcomposite xcursor xdamage xdmcp xfixes \
 		xft xi xinerama xkbfile xrandr xrender xres xscrnsaver xtst
+SHEBANG_FILES=	kwin/clients/oxygen/data/update_oxygen.pl
 USE_LDCONFIG=	yes
 
 CMAKE_ARGS=	-DCMAKE_REQUIRED_FLAGS:STRING="-L${LOCALBASE}/lib" \
@@ -70,7 +70,7 @@ OPTIONS_DEFINE=	GLES GPS KACTIVITY UPOWER WALLPAPERS
 OPTIONS_GROUP=	PHONON PLASMA
 OPTIONS_GROUP_PHONON=	GSTREAMER VLC
 OPTIONS_GROUP_PLASMA=	PYTHON RUBY
-OPTIONS_DEFAULT=	GLES GPS GSTREAMER KACTIVITY UPOWER WALLPAPERS
+OPTIONS_DEFAULT=	GLES GPS KACTIVITY UPOWER VLC WALLPAPERS
 OPTIONS_SUB=	yes # GPS GLES
 
 GLES_DESC=	OpenGL ES 2.0 support in kwin and kinfocenter
@@ -83,7 +83,6 @@ GPS_CMAKE_ON=	-DWITH_libgps:BOOL=ON
 GPS_CMAKE_OFF=	-DWITH_libgps:BOOL=OFF
 
 GSTREAMER_DESC=	Multimedia via Phonon-GStreamer
-GSTREAMER_USE=	GSTREAMER=core
 GSTREAMER_USE=	QT4=phonon-gst_run
 
 KACTIVITY_DESC=		Activity Manager daemon
@@ -104,8 +103,6 @@ VLC_RUN_DEPENDS=	${KDE4_PREFIX}/lib/kde4/plugins/phonon_backend/phonon_vlc.so:${
 WALLPAPERS_DESC=	Install official KDE wallpapers
 WALLPAPERS_RUN_DEPENDS=	${KDE4_PREFIX}/share/wallpapers/Horos/metadata.desktop:${PORTSDIR}/x11-themes/kde4-wallpapers \
 			${KDE4_PREFIX}/share/wallpapers/stripes-freebsd-blue/metadata.desktop:${PORTSDIR}/x11-themes/kde4-wallpapers-freebsd
-
-.include <bsd.port.options.mk>
 
 .if !exists(/usr/lib/libutempter.so)
 LIB_DEPENDS+=	libutempter.so:${PORTSDIR}/sysutils/libutempter
@@ -130,10 +127,12 @@ pre-configure:
 
 post-install:
 	${LN} -sf ${PREFIX}/bin/startkde ${STAGEDIR}${PREFIX}/bin/startkde4
-.if ! ${PORT_OPTIONS:MGSTREAMER}
-	@${CAT} ${FILESDIR}/pkg-message.gstreamer >> ${PKGMESSAGE}
-.endif
+
+post-install-GSTREAMER-on:
 	@${HEAD} -1 ${PKGMESSAGE} >> ${PKGMESSAGE}
-	@${CAT} ${PKGMESSAGE}
+
+post-install-GSTREAMER-off:
+	@${CAT} ${FILESDIR}/pkg-message.gstreamer >> ${PKGMESSAGE}
+	@${HEAD} -1 ${PKGMESSAGE} >> ${PKGMESSAGE}
 
 .include <bsd.port.mk>

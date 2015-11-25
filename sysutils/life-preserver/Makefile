@@ -2,32 +2,31 @@
 # $FreeBSD$
 
 PORTNAME=	life-preserver
-PORTVERSION=	1422974289
+PORTVERSION=	1441050470
 CATEGORIES=	sysutils
-MASTER_SITES=	http://www.pcbsd.org/~kris/software/ \
-		ftp://ftp.pcbsd.org/pub/software/
 
 MAINTAINER=	kmoore@FreeBSD.org
 COMMENT=	PC-BSD Life Preserver Utility
 
-LICENSE=	BSD
+LICENSE=	BSD3CLAUSE
 
-RUN_DEPENDS=	${LOCALBASE}/share/pcbsd/scripts/functions.sh:${PORTSDIR}/sysutils/pcbsd-libsh
+RUN_DEPENDS=	${LOCALBASE}/share/pcbsd/scripts/functions.sh:${PORTSDIR}/sysutils/pcbsd-libsh \
+		stunnel:${PORTSDIR}/security/stunnel
 
-WRKSRC=		${WRKDIR}/lpreserver
+WRKSRC_SUBDIR=	src-sh/lpreserver
 USES=		pkgconfig tar:xz
 NO_BUILD=	yes
+MAKE_ARGS=	PREFIX=${STAGEDIR}${PREFIX}
+
+USE_GITHUB=	yes
+GH_ACCOUNT=	pcbsd
+GH_PROJECT=	pcbsd
+GH_TAGNAME=	3c4d2b
 
 .include <bsd.port.pre.mk>
 
 .if ${OSVERSION} < 1000000
 IGNORE=		requires FreeBSD 10 or later
 .endif
-
-do-install:
-	cd ${WRKSRC} && make install PREFIX=${STAGEDIR}${PREFIX}
-
-post-install:
-	PKG_PREFIX=${STAGEDIR}${PREFIX} ${SH} ${PKGINSTALL} ${PKGNAME} POST-INSTALL
 
 .include <bsd.port.post.mk>

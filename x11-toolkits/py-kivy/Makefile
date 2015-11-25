@@ -3,7 +3,7 @@
 
 PORTNAME=	kivy
 PORTVERSION=	1.8.0
-PORTREVISION=	1
+PORTREVISION=	3
 CATEGORIES=	x11-toolkits python
 MASTER_SITES=	GH LOCAL/dbn/${PORTNAME}
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
@@ -12,21 +12,26 @@ MAINTAINER=	dbn@FreeBSD.org
 COMMENT=	Python NUI library for rapid application development
 
 LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	cython:${PORTSDIR}/lang/cython
 
 MAKE_ENV=	KIVY_NO_CONFIG=yes KIVY_NO_FILELOG=yes PYTHONPATH=${WRKSRC}
 MAKE_JOBS_UNSAFE=	yes  # does not (really) use make
+
 USE_GITHUB=	yes
-GH_ACCOUNT=	${PORTNAME}
-GH_COMMIT=	d602d4b
 USES=		python:2.7+ shebangfix
 USE_GL=		gl
 PYDISTUTILS_BUILD_TARGET=	build_ext
 PYDISTUTILS_BUILDARGS=	--inplace
 PYDISTUTILS_EGGINFO=	Kivy-${PORTVERSION}-py${PYTHON_VER}.egg-info
 USE_PYTHON=	autoplist distutils
-SHEBANG_FILES=	kivy/lib/osc/OSC.py
+SHEBANG_FILES=	kivy/lib/osc/OSC.py \
+		kivy/tools/packaging/osx/kivy.sh \
+		examples/demo/*/*.py
+SHEBANG_LANG=	kivy
+kivy_OLD_CMD=	/usr/bin/kivy
+kivy_CMD=	${LOCALBASE}/bin/kivy
 
 OPTIONS_DEFINE=	DOCS PDF TEST
 OPTIONS_SET=	ENCHANT OPENCV PYGAME
@@ -71,8 +76,6 @@ TEST_BUILD_DEPENDS=	nosetests:${PORTSDIR}/devel/py-nose
 TEST_USES=		display:build
 X11_MAKE_ENV=		USE_X11=1
 X11_USE=		XORG=x11
-
-BROKEN=		fails to build with cython-0.22
 
 .if !defined(ARCH)
 ARCH!=		uname -p

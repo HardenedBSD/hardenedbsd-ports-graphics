@@ -6,7 +6,6 @@ PORTVERSION=	1.2
 PORTREVISION=	14
 CATEGORIES=	graphics www
 MASTER_SITES=	http://namazu.org/~satoru/zphoto/
-MASTER_SITE_SUBDIR=	${PORTNAME}
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Zooming photo album generator
@@ -26,7 +25,7 @@ GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--disable-avifile
 CPPFLAGS+=	-I${LOCALBASE}/include
 LIBS+=		-L${LOCALBASE}/lib
-USES=		perl5 gmake
+USES=		alias gmake perl5
 USE_PERL5=	build
 
 post-patch:

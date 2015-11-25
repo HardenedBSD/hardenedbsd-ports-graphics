@@ -3,6 +3,7 @@
 
 PORTNAME=	tintin++
 PORTVERSION=	2.01.1
+PORTREVISION=	1
 CATEGORIES+=	net games
 MASTER_SITES=	SF/tintin/TinTin%2B%2B%20Source%20Code/${PORTVERSION}/
 DISTNAME=	tintin-${PORTVERSION}
@@ -11,6 +12,7 @@ MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	Client program to help playing MUDs
 
 LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/../COPYING
 
 LIB_DEPENDS=	libpcre.so:${PORTSDIR}/devel/pcre
 
@@ -21,10 +23,8 @@ CONFIGURE_ARGS=	--includedir=${LOCALBASE}/include \
 		--libdir=${LOCALBASE}/lib \
 		--prefix=${PREFIX}
 CONFIGURE_ENV=	ac_cv_file__dev_ptmx=no
-CPPFLAGS+=	-I${LOCALBASE}/include
 GNU_CONFIGURE=	yes
-LDFLAGS+=	-L${LOCALBASE}/lib -pthread
-USES=		gmake
+USES=		gmake localbase
 WRKSRC=		${WRKDIR}/tt/src
 
 DOCS=		CREDITS FAQ README SCRIPTS TODO \
@@ -34,13 +34,12 @@ PORTDOCS=	${DOCS:T}
 
 SLAVEDIRS=	chinese/tintin++
 
-BIG5_CONFIGURE_ON=	--enable-big5
-
-post-configure:
-	@${REINPLACE_CMD} -e 's|-lpthread|-pthread|' ${WRKSRC}/Makefile
+BIG5_CONFIGURE_ENABLE=	big5
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/tt++ ${STAGEDIR}${PREFIX}/bin/
+
+do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}/
 	cd ${WRKSRC}/../ && ${INSTALL_DATA} ${DOCS} ${STAGEDIR}${DOCSDIR}/
 

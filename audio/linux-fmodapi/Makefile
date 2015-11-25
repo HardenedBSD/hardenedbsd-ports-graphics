@@ -12,6 +12,9 @@ DISTNAME=	fmodapi42416linux
 MAINTAINER=	edwin@mavetju.org
 COMMENT=	Music & Sound effects system
 
+BROKEN=		Unfetchable
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
 ONLY_FOR_ARCHS=	i386 amd64
 INSTALL_SHLIB=	yes
 USE_LDCONFIG=	yes

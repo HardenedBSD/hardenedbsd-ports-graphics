@@ -2,11 +2,10 @@
 # $FreeBSD$
 
 PORTNAME?=	mysql
-PORTVERSION=	5.6.23
+PORTVERSION=	5.6.27
 PORTREVISION?=	0
 CATEGORIES=	databases ipv6
-MASTER_SITES=	${MASTER_SITE_MYSQL}
-MASTER_SITE_SUBDIR=	MySQL-5.6
+MASTER_SITES=	MYSQL/MySQL-5.6
 PKGNAMESUFFIX?=	56-server
 
 MAINTAINER=	ale@FreeBSD.org
@@ -65,7 +64,7 @@ MMAN1=		my_print_defaults.1 myisam_ftdump.1 myisamchk.1 myisamlog.1 myisampack.1
 
 CMAKE_ARGS+=	-DWITH_EMBEDDED_SERVER="ON"
 .else
-USES+=		readline
+USES+=		libedit
 .endif
 
 post-patch:
@@ -73,8 +72,8 @@ post-patch:
 
 .include <bsd.port.pre.mk>
 
-.if ${ARCH} == "armv6"	 
+.if ${ARCH} == "armv6"
 EXTRA_PATCHES+=		${FILESDIR}/extra-patch-config.h.cmake
 .endif
- 	 
+
 .include <bsd.port.post.mk>

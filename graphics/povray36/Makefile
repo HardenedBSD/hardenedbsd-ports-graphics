@@ -6,8 +6,7 @@ PORTVERSION=	3.6.1
 PORTREVISION=	13
 CATEGORIES=	graphics
 MASTER_SITES=	ftp://ftp.povray.org/pub/povray/%SUBDIR%/ \
-		ftp://ftp.mirrorservice.org/sites/ftp.povray.org/pub/povray/%SUBDIR%/ \
-		${MASTER_SITE_RINGSERVER:S,%SUBDIR%,graphics/povray/%SUBDIR%,}
+		ftp://ftp.mirrorservice.org/sites/ftp.povray.org/pub/povray/%SUBDIR%/
 MASTER_SITE_SUBDIR=	Official/Unix
 PKGNAMESUFFIX=	36
 DIST_SUBDIR=	povray36
@@ -16,11 +15,10 @@ MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Persistence of Vision Ray Tracer
 
 LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png \
-		libtiff.so:${PORTSDIR}/graphics/tiff \
-		libjpeg.so:${PORTSDIR}/graphics/jpeg
+		libtiff.so:${PORTSDIR}/graphics/tiff
 
 USE_XORG=	x11
-USES=		gmake tar:bzip2
+USES=		gmake jpeg tar:bzip2
 GNU_CONFIGURE=	yes
 
 OPTIONS_DEFINE=	OPTIMIZED_CFLAGS DOCS

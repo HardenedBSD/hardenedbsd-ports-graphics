@@ -5,14 +5,14 @@ PORTNAME=	amap
 PORTVERSION=	5.2
 PORTREVISION=	1
 CATEGORIES=	security
-MASTER_SITES=	${MASTER_SITE_PACKETSTORM}
-MASTER_SITE_SUBDIR=	groups/thc
+MASTER_SITES=	PACKETSTORM/groups/thc
 
 MAINTAINER=	onatan@gmail.com
 COMMENT=	Application mapper
 
 HAS_CONFIGURE=	yes
 CONFIGURE_ARGS=	--prefix=${PREFIX}
+MAKE_JOBS_UNSAFE=	yes
 
 USE_OPENSSL=	yes
 
@@ -45,6 +45,8 @@ do-install:
 		${INSTALL_DATA} ${WRKSRC}/${i} ${STAGEDIR}${ETCDIR}/${i}.sample
 .endfor
 	${INSTALL_MAN} ${WRKSRC}/amap.1 ${STAGEDIR}${MANPREFIX}/man/man1
+
+do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 .for i in ${PORTDOCS}
 		${INSTALL_DATA} ${WRKSRC}/$i ${STAGEDIR}${DOCSDIR}

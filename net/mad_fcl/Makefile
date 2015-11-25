@@ -11,12 +11,12 @@ DISTNAME=	${PORTNAME}_v${PORTVERSION}_src
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	FLUTE - File Delivery over Unidirectional Transport implementation
 
+BROKEN=		unfetchable
+
 LIB_DEPENDS=	libexpat.so:${PORTSDIR}/textproc/expat2
 
 USES=		gmake
 USE_OPENSSL=	yes
-
-CFLAGS+=	${PTHREAD_CFLAGS}
 
 DOC_FILES=	fdt-example.xml flute-sdp-example.sdp
 
@@ -34,8 +34,6 @@ pre-patch:
 			${CAT} $$f.noms > $$f && ${RM} $$f.noms; done
 
 post-patch:
-	@${REINPLACE_CMD} -e 's|-lpthread|${PTHREAD_LIBS}|g' \
-		${WRKSRC}/flute/Makefile
 	@${FIND} ${WRKSRC} -name Makefile | ${XARGS} \
 		${REINPLACE_CMD} -e 's|gcc|${CC}|'
 

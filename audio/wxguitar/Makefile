@@ -14,12 +14,10 @@ COMMENT=	Simple guitar tuning assistant
 RUN_DEPENDS=	wavplay:${PORTSDIR}/audio/wavplay
 
 USES=		compiler:c++11-lib
+USE_CXXSTD=	c++11
 GNU_CONFIGURE=	yes
 USE_WX=		3.0
-WX_UNICODE=	yes
 CONFIGURE_ARGS=	--with-wx-config=${WX_CONFIG}
-CPPFLAGS+=	-I${LOCALBASE}/include
-LDFLAGS+=	-L${LOCALBASE}/lib
 
 WRKSRC=		${WRKDIR}/wxGuitar
 

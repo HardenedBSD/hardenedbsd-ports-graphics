@@ -11,6 +11,8 @@ DISTNAME=	FFFF${PORTVERSION}-src
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Fast Mandelbrot fractal generator
 
+BROKEN=		fails to link
+
 USE_XORG=	x11 xmu xext
 USE_GL=		gl glut
 USES=		dos2unix zip
@@ -20,9 +22,9 @@ SOURCE=		FFFF3 FragmentProgram FragmentProgramARB10 GPUProgram \
 		PixelBuffer VertexProgram VertexProgramATI VertexProgramNV \
 		extensions vpext
 
-CXXFLAGS+=	-I${LOCALBASE}/include/GL -D__linux__  -msse -msse2 -m3dnow -I${LOCALBASE}/include/ \
-		${PTHREAD_CFLAGS} 
-LDFLAGS+=	-L${LOCALBASE}/lib ${PTHREAD_LIBS} -lglut -lGL -lXext -lX11 -lXmu \
+CXXFLAGS+=	-I${LOCALBASE}/include/GL -D__linux__  -msse -msse2 -m3dnow \
+		-I${LOCALBASE}/include/
+LDFLAGS+=	-L${LOCALBASE}/lib -lpthread -lglut -lGL -lXext -lX11 -lXmu \
 		 -lGLU -lm
 
 PLIST_FILES=	bin/ffff

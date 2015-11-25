@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	Jifty-DBI
-PORTVERSION=	0.77
-PORTREVISION=	1
+PORTVERSION=	0.78
 CATEGORIES=	databases perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
@@ -41,6 +40,7 @@ BUILD_DEPENDS=	p5-Cache-Memcached>=0:${PORTSDIR}/databases/p5-Cache-Memcached \
 RUN_DEPENDS:=	${BUILD_DEPENDS}
 TEST_DEPENDS=	p5-Test-Warn>=0.1:${PORTSDIR}/devel/p5-Test-Warn
 
+NO_ARCH=	yes
 USES=		perl5
 USE_PERL5=	configure
 

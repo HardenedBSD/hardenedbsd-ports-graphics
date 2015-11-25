@@ -2,10 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	gcc
-PORTVERSION=	4.8.4
+PORTVERSION=	4.8.5
+PORTREVISION=	2
 CATEGORIES=	lang java
-MASTER_SITES=	${MASTER_SITE_GCC}
-MASTER_SITE_SUBDIR=	releases/gcc-${DISTVERSION}
+MASTER_SITES=	GCC/releases/gcc-${DISTVERSION}
 
 MAINTAINER=	gerald@FreeBSD.org
 COMMENT=	GNU Compiler Collection 4.8
@@ -24,6 +24,7 @@ BUILD_DEPENDS+=	runtest:${PORTSDIR}/misc/dejagnu
 .endif
 
 CONFLICTS=	gcc48*
+CPE_VENDOR=	gnu
 
 # DISTVERSION relates to downloads, GCC_VERSION and SUFFIX to names
 # of executables and directories once installed.
@@ -31,7 +32,7 @@ DISTVERSION=	${PORTVERSION}
 GCC_VERSION=	${PORTVERSION:C/(.+)\.[0-9]{8}/\1/}
 SUFFIX=		${PORTVERSION:C/([0-9]+).([0-9]+).*/\1\2/}
 ONLY_FOR_ARCHS=	amd64 armv6 armv6hf i386 powerpc powerpc64 sparc64
-USES=		gmake iconv libtool makeinfo perl5 tar:bzip2
+USES=		compiler cpe gmake iconv libtool makeinfo perl5 tar:bzip2
 USE_BINUTILS=	yes
 USE_PERL5=	build
 SSP_UNSAFE=	yes
@@ -44,7 +45,17 @@ OPTIONS_DEFINE_i386=	JAVA
 OPTIONS_DEFINE_amd64=	JAVA
 OPTIONS_DEFAULT_i386=	JAVA
 OPTIONS_DEFAULT_amd64=	JAVA
+OPTIONS_EXCLUDE_DragonFly=	JAVA
 BOOTSTRAP_DESC=		Build using a full bootstrap
+
+.if exists(/usr/lib32/libc.so)
+OPTIONS_DEFINE_powerpc64=	MULTILIB
+OPTIONS_DEFAULT_powerpc64=	MULTILIB
+MULTILIB_DESC=		Build support for 32-bit and 64-bit target types
+MULTILIB_CONFIGURE_ENABLE=	multilib
+.else
+CONFIGURE_ARGS+=	--disable-multilib
+.endif
 
 .include <bsd.port.pre.mk>
 
@@ -157,5 +168,10 @@ post-stage:
 	fi
 .endfor
 	cd ${WRKDIR} ; ${SED} -i -e "/PLIST.lib/ r PLIST.lib" ${TMPPLIST}
+	# This is the canonical GCC port, so add key commands without
+	# version numbers as part of their names.
+	for c in gfortran g++ gcc; do \
+	    ${LN} -s ${PREFIX}/bin/"$$c"${SUFFIX} ${STAGEDIR}${PREFIX}/bin/$$c ; \
+	done
 
 .include <bsd.port.post.mk>

@@ -3,26 +3,25 @@
 
 PORTNAME=	profont
 PORTVERSION=	400
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	x11-fonts
-MASTER_SITES=	http://www.tobiasjung.net/dl/
+MASTER_SITES=	http://tobiasjung.name/downloadfile.php?file=profont-x11.zip?dummy/
 DISTNAME=	${PORTNAME}-x11
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Ultimate programming font
 
-BUILD_DEPENDS=	mkfontdir:${PORTSDIR}/x11-fonts/mkfontdir \
-		mkfontscale:${PORTSDIR}/x11-fonts/mkfontscale
+LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
-FONTDIR=	lib/X11/fonts/${PORTNAME}
-PLIST_SUB+=	FONTDIR=${FONTDIR}
+USES=		fonts zip
+NO_ARCH=	yes
 
 do-build:
 	${GZIP_CMD} ${WRKSRC}/*.pcf
 
 do-install:
-	@${MKDIR} ${STAGEDIR}${LOCALBASE}/${FONTDIR}
-	${INSTALL_DATA} ${WRKSRC}/*.pcf.gz ${STAGEDIR}${LOCALBASE}/${FONTDIR}
-	(cd ${STAGEDIR}${LOCALBASE}/${FONTDIR}; mkfontdir; mkfontscale)
+	@${MKDIR} ${STAGEDIR}${FONTSDIR}
+	${INSTALL_DATA} ${WRKSRC}/*.pcf.gz ${STAGEDIR}${FONTSDIR}
 
 .include <bsd.port.mk>

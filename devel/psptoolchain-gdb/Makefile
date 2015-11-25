@@ -5,8 +5,7 @@ PORTNAME=		gdb
 PORTVERSION=		7.3.1
 PORTREVISION=		1
 CATEGORIES=		devel
-MASTER_SITES=		${MASTER_SITE_GNU}
-MASTER_SITE_SUBDIR=	${PORTNAME}/
+MASTER_SITES=		GNU
 PKGNAMEPREFIX=		psptoolchain-
 
 MAINTAINER=		tphilipp@potion-studios.com
@@ -31,5 +30,8 @@ post-patch:
 	@${REINPLACE_CMD} -E 's/^(INFO_DEPS.*=)(.*)/\1#\2/' ${WRKSRC}/gdb/doc/Makefile.in
 	@${REINPLACE_CMD} -E 's/^(install.*:.*)install-info(.*)/\1\2/' ${WRKSRC}/etc/Makefile.in
 	@${REINPLACE_CMD} -E 's/^(install:)(.*)/\1#\2/' ${WRKSRC}/libiberty/Makefile.in
+
+post-install:
+	@${RMDIR} ${STAGEDIR}${PREFIX}/share/info
 
 .include <bsd.port.mk>

@@ -2,18 +2,20 @@
 # $FreeBSD$
 
 PORTNAME=	gambit-c
-DISTVERSION=	v4_7_3
+PORTVERSION=	4.8.1
+DISTVERSIONPREFIX=	v
 PORTEPOCH=	1
 CATEGORIES=	lang
-MASTER_SITES=	http://www.iro.umontreal.ca/~gambit/download/gambit/v4.7/source/
-DISTNAME=	gambc-${DISTVERSION}
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	olgeni@FreeBSD.org
 COMMENT=	Gambit programming system where the compiler generates portable C code
 
 LICENSE=	APACHE20 LGPL21
 LICENSE_COMB=	dual
 
+USE_GITHUB=	yes
+GH_ACCOUNT=	feeley
+GH_PROJECT=	gambit
 USES=		compiler gmake tar:tgz
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--enable-single-host \
@@ -26,11 +28,18 @@ CONFIGURE_ARGS=	--enable-single-host \
 MAKEFILE=	makefile
 USE_LDCONFIG=	${PREFIX}/lib/gambit-c
 
-INFO=		gambit-c
+INFO=		gambit
 
-OPTIONS_DEFINE=	DOCS
+OPTIONS_DEFINE=	GCC
+OPTIONS_DEFAULT=GCC
+
+GCC_DESC=	Build with GCC
 
 .include <bsd.port.pre.mk>
+
+.if ${PORT_OPTIONS:MGCC}
+USE_GCC=	any
+.endif
 
 .if ${COMPILER_TYPE} == gcc
 # This is needed because 4.2 < gcc -v < 4.4 has optimisations that make the

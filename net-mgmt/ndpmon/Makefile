@@ -3,7 +3,7 @@
 
 PORTNAME=	ndpmon
 PORTVERSION=	1.4.0
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	net-mgmt ipv6
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTNAME}-1.4/
 
@@ -14,7 +14,7 @@ LICENSE=	LGPL21
 LICENSE_FILE=	${WRKSRC}/COPYING
 
 OPTIONS_DEFINE=		PY4SUITE MACRESOLV
-OPTIONS_DEFAULT=	
+OPTIONS_DEFAULT=
 
 PY4SUITE_DESC=		Depend on py-4suite-xml (for generating HTML)
 MACRESOLV_DESC=		Enable MAC Manufacturer Resolution (use p5-libwww)
@@ -29,7 +29,8 @@ PLIST_SUB+=	PY=""
 PLIST_SUB+=	PY="@comment "
 .endif
 
-USES=		perl5 tar:tgz
+USES=		perl5 shebangfix tar:tgz
+SHEBANG_FILES=	demopipeprogram.pl.sample
 USE_PERL5=	run
 USE_GNOME=	libxml2
 USE_RC_SUBR=	ndpmonitor

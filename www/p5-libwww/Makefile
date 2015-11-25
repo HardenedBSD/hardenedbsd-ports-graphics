@@ -3,10 +3,10 @@
 
 PORTNAME=	libwww
 PORTVERSION=	6.13
+DISTVERSIONPREFIX=	perl-
 CATEGORIES=	www devel perl5
 MASTER_SITES=	CPAN/LWP
 PKGNAMEPREFIX=	p5-
-DISTNAME=	libwww-perl-${PORTVERSION}
 
 MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	Perl5 library for WWW access
@@ -35,9 +35,7 @@ CONFIGURE_ARGS=	--aliases
 USE_PERL5=	configure
 USES=		perl5
 
-HTTPS_BUILD_DEPENDS=	p5-Crypt-SSLeay>=0:${PORTSDIR}/security/p5-Crypt-SSLeay \
-			p5-LWP-Protocol-https>=0:${PORTSDIR}/www/p5-LWP-Protocol-https
-HTTPS_RUN_DEPENDS=	p5-Crypt-SSLeay>=0:${PORTSDIR}/security/p5-Crypt-SSLeay \
-			p5-LWP-Protocol-https>=0:${PORTSDIR}/www/p5-LWP-Protocol-https
+HTTPS_BUILD_DEPENDS=	p5-LWP-Protocol-https>=0:${PORTSDIR}/www/p5-LWP-Protocol-https
+HTTPS_RUN_DEPENDS=	p5-LWP-Protocol-https>=0:${PORTSDIR}/www/p5-LWP-Protocol-https
 
 .include <bsd.port.mk>

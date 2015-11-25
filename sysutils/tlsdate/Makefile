@@ -1,40 +1,28 @@
 # $FreeBSD$
 
 PORTNAME=	tlsdate
-PORTVERSION=	0.0.11
+PORTVERSION=	0.0.13
+DISTVERSIONPREFIX=	${PORTNAME}-
 CATEGORIES=	sysutils
-DISTNAME=	${GH_ACCOUNT}-${GH_PROJECT}-${PORTVERSION}-${GH_COMMIT}
 
-MAINTAINER=	fk@fabiankeil.de
+MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	Secure parasitic rdate replacement
 
 LICENSE=	BSD3CLAUSE
-LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USE_GITHUB=	yes
-GH_ACCOUNT=	ioerror
-GH_COMMIT=	5be06de
-GH_TAGNAME=	${GH_COMMIT}
-
-GNU_CONFIGURE=	yes
-USES=		autoreconf libtool pkgconfig
-USE_OPENSSL=	yes
-
-PLIST_SUB+=	PKGNAME=${PKGNAME}
+LIB_DEPENDS=	libevent.so:${PORTSDIR}/devel/libevent2
 
 OPTIONS_DEFINE=	DOCS
 
-LIB_DEPENDS+=	libevent.so:${PORTSDIR}/devel/libevent2
+GNU_CONFIGURE=	yes
+TEST_TARGET=	test
+USE_OPENSSL=	yes
+USES=		autoreconf libtool pkgconfig
 
-post-patch:
-	${REINPLACE_CMD} -e '/doc_DATA\+= LICENSE/d' ${WRKSRC}/Makefile.am
+PLIST_SUB=	PKGNAME=${PKGNAME}
+PORTDOCS=	*
 
-post-install:
-	@${CHMOD} o+rx ${STAGEDIR}/${PREFIX}/etc/tlsdate ${STAGEDIR}/${PREFIX}/etc/tlsdate/ca-roots
-	@${MKDIR} ${STAGEDIR}/${PREFIX}/share/licenses/${PKGNAME}
-	${INSTALL_DATA} ${WRKSRC}/LICENSE ${STAGEDIR}${PREFIX}/share/licenses/${PKGNAME}
-
-regression-test: build
-	@cd ${WRKSRC} && make test
+USE_GITHUB=	yes
+GH_ACCOUNT=	ioerror
 
 .include <bsd.port.mk>

@@ -3,6 +3,7 @@
 
 PORTNAME=	ledger
 PORTVERSION=	3.1
+DISTVERSIONPREFIX=	v
 CATEGORIES=	finance
 
 MAINTAINER=	woodycarey@hotmail.com
@@ -14,16 +15,12 @@ LICENSE_FILE=	${WRKSRC}/doc/LICENSE
 BUILD_DEPENDS=	${LOCALBASE}/include/utf8.h:${PORTSDIR}/devel/utf8cpp
 LIB_DEPENDS=	libgmp.so:${PORTSDIR}/math/gmp \
 		libmpfr.so:${PORTSDIR}/math/mpfr \
-		libedit.so.0:${PORTSDIR}/devel/libedit \
 		libboost_system.so:${PORTSDIR}/devel/boost-libs
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	ledger
-GH_TAGNAME=	v${PORTVERSION}
-GH_COMMIT=	9df7fd4
 
 USE_LDCONFIG=	yes
-USES=		cmake compiler:c++11-lib
+USES=		cmake compiler:c++11-lib libedit
 
 CMAKE_ARGS+=	-DCMAKE_INSTALL_MANDIR=${MANPREFIX}/man \
 		-DCMAKE_INCLUDE_PATH=${LOCALBASE}/include

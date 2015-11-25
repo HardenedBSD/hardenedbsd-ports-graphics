@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	libsbml
-PORTVERSION=	5.11.0
+PORTVERSION=	5.11.4
+PORTREVISION=	1
 CATEGORIES=	biology devel
 MASTER_SITES=	SF/sbml/${PORTNAME}/${PORTVERSION}/stable
 DISTNAME=	libSBML-${PORTVERSION}-core-src
@@ -11,10 +12,11 @@ MAINTAINER=	ports@FreeBSD.org
 COMMENT=	API Library for Working with SBML File
 
 LICENSE=	LGPL21
+LICENSE_FILE=	${WRKSRC}/COPYING.txt
 
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 
-USES=		cmake:outsource iconv
+USES=		cmake:outsource iconv:build
 USE_GNOME=	libxml2
 USE_LDCONFIG=	yes
 
@@ -39,9 +41,10 @@ post-patch:
 	@${REINPLACE_CMD} -e \
 		's|/usr/local/include|${LOCALBASE}/include| ; \
 		s|/usr/local/lib|${LOCALBASE}/lib| ; \
+		s|$${CMAKE_INSTALL_LIBDIR}/pkgconfig|libdata/pkgconfig| ; \
 		/$${DOCUMENTATION_FILES}/s|^|#|' ${WRKSRC}/CMakeLists.txt
 
-post-install:
+post-install-EXAMPLES-on:
 	${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
 	@${TAR} -C ${WRKSRC}/examples --exclude "*Makefile*" -cf - . | \
 		${TAR} -C ${STAGEDIR}${EXAMPLESDIR} --unlink -xf -

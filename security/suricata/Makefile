@@ -2,10 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	suricata
-PORTVERSION=	2.0.6
+PORTVERSION=	2.0.9
 CATEGORIES=	security
-MASTER_SITES=	http://www.openinfosecfoundation.org/download/ \
-		http://mirrors.rit.edu/zi/
+MASTER_SITES=	http://www.openinfosecfoundation.org/download/
 
 MAINTAINER=	koobs@FreeBSD.org
 COMMENT=	High Performance Network IDS, IPS and Security Monitoring engine
@@ -17,16 +16,18 @@ LIB_DEPENDS=	libpcre.so:${PORTSDIR}/devel/pcre \
 		libnet.so:${PORTSDIR}/net/libnet \
 		libyaml.so:${PORTSDIR}/textproc/libyaml
 
-USES=		autoreconf gmake libtool pathfix pkgconfig
+USES=		autoreconf cpe gmake libtool pathfix pkgconfig
 USE_LDCONFIG=	yes
 USE_RC_SUBR=	${PORTNAME}
 GNU_CONFIGURE=	yes
+
+CPE_VENDOR=	openinfosecfoundation
 
 INSTALL_TARGET=		install-strip
 PATHFIX_MAKEFILEIN=	Makefile.am
 
 OPTIONS_DEFINE=		GEOIP HTP_PORT IPFW JSON NSS PORTS_PCAP PRELUDE SC TESTS
-OPTIONS_DEFAULT=	HTP_PORT IPFW PRELUDE
+OPTIONS_DEFAULT=	HTP_PORT IPFW JSON PRELUDE
 OPTIONS_RADIO=		SCRIPTS
 OPTIONS_RADIO_SCRIPTS=	LUA LUAJIT
 OPTIONS_SUB=		yes
@@ -102,20 +103,17 @@ CONFIGURE_ARGS+=--enable-gccprotect \
 		--with-libnet-libraries=${LOCALBASE}/lib/libnet11 \
 		--with-libhtp-includes=${LOCALBASE}/include/ \
 		--with-libhtp-libraries=${LOCALBASE}/lib \
+	        --disable-gccmarch-native \
 		--localstatedir=/var/
 
 LIBNET_CONFIG?=	${LOCALBASE}/bin/libnet11-config
 CONFIG_DIR?=	${ETCDIR}
-CONFIG_FILES=	suricata.yaml classification.config reference.config
+CONFIG_FILES=	suricata.yaml classification.config reference.config threshold.config
 RULES_DIR=	${CONFIG_DIR}/rules
 RULES_FILES=	decoder-events.rules dns-events.rules files.rules http-events.rules smtp-events.rules stream-events.rules tls-events.rules
 LOGS_DIR?=	/var/log/${PORTNAME}
 
 .include <bsd.port.pre.mk>
-
-.if ${ARCH} == "ia64" || ${ARCH} == "powerpc" || ${ARCH} == "sparc64"
-BROKEN=		Does not compile on ia64, powerpc, or sparc64
-.endif
 
 pre-patch:
 	${CP} ${FILESDIR}/ax_check_compile_flag.m4 ${WRKSRC}/m4

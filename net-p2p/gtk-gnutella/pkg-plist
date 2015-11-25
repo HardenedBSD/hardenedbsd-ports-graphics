@@ -32,6 +32,8 @@ share/applications/gtk-gnutella.desktop
 %%DATADIR%%/pixmaps/firewall_udp.xpm
 %%DATADIR%%/pixmaps/firewall_udp_punchable.xpm
 %%DATADIR%%/pixmaps/freeze.xpm
+%%DATADIR%%/pixmaps/go_back.xpm
+%%DATADIR%%/pixmaps/hungup.xpm
 %%DATADIR%%/pixmaps/icon.16x16.xpm
 %%DATADIR%%/pixmaps/icon.48x48.xpm
 %%DATADIR%%/pixmaps/icon.xpm
@@ -42,6 +44,7 @@ share/applications/gtk-gnutella.desktop
 %%DATADIR%%/pixmaps/magnet.64x64.png
 %%DATADIR%%/pixmaps/natpmp.xpm
 %%DATADIR%%/pixmaps/no_firewall.xpm
+%%DATADIR%%/pixmaps/no_listening.xpm
 %%DATADIR%%/pixmaps/offline.xpm
 %%DATADIR%%/pixmaps/online.xpm
 %%DATADIR%%/pixmaps/pause.xpm

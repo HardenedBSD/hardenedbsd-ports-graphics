@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	mini_httpd
-PORTVERSION=	1.21
-PORTREVISION=	1
+PORTVERSION=	1.22
 CATEGORIES=	www ipv6
 MASTER_SITES=	http://www.acme.com/software/mini_httpd/
 
@@ -12,6 +11,8 @@ COMMENT=	Small HTTP server with support for GET, HEAD, POST, CGI, SSL, IPv6
 
 LICENSE=	BSD2CLAUSE
 
+USES=		cpe
+CPE_VENDOR=	acme
 MAKE_ARGS=	SSL_TREE="${OPENSSLBASE}"
 USE_OPENSSL=	yes
 

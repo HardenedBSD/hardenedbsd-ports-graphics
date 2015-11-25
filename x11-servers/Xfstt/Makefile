@@ -2,22 +2,25 @@
 # $FreeBSD$
 
 PORTNAME=	xfstt
-PORTVERSION=	1.9.1
+PORTVERSION=	1.9.2
 CATEGORIES=	x11-servers
-MASTER_SITES=	http://archive.hadrons.org/software/xfstt/
+MASTER_SITES=	http://archive.hadrons.org/software/xfstt/ \
+		http://www.skysmurf.nl/comp/FreeBSD/distfiles/
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	freebsd@skysmurf.nl
 COMMENT=	TrueType font server for X11
+
+LICENSE=	GPLv2
 
 OPTIONS_DEFINE=	DOCS
 
-USES=		tar:xz pkgconfig
+USES=		pkgconfig tar:xz
 USE_XORG=	fontsproto xproto
 USE_RC_SUBR=	xfstt
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--localstatedir=/var --disable-nls
 
-TTFONTDIR=	${PREFIX}/lib/X11/fonts/TrueType
+TTFONTDIR=	${PREFIX}/share/fonts/TrueType
 
 SUB_FILES=	pkg-message
 
@@ -30,7 +33,6 @@ post-install:
 	${SED} -e "s:%%PREFIX%%:${PREFIX}:g" ${FILESDIR}/xfstt.in \
 		> ${WRKSRC}/xfstt
 	${INSTALL_SCRIPT} ${WRKSRC}/xfstt ${STAGEDIR}${PREFIX}/etc/rc.d/
-	${MKDIR} ${STAGEDIR}${TTFONTDIR}
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 .for _file in INSTALL THANKS
 	${INSTALL_DATA} ${WRKSRC}/${_file} ${STAGEDIR}${DOCSDIR}

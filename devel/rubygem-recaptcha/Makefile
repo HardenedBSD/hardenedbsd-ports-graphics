@@ -2,20 +2,21 @@
 # $FreeBSD$
 
 PORTNAME=	recaptcha
-PORTVERSION=	0.3.6
+PORTVERSION=	0.6.0
 CATEGORIES=	devel rubygems
 MASTER_SITES=	RG
 
 MAINTAINER=	ruby@FreeBSD.org
 COMMENT=	Helpers for the reCAPTCHA API
 
-RUN_DEPENDS=	rubygem-mocha>=0:${PORTSDIR}/devel/rubygem-mocha \
-		rubygem-rake>=0:${PORTSDIR}/devel/rubygem-rake \
-		rubygem-activesupport>=0:${PORTSDIR}/devel/rubygem-activesupport \
-		rubygem-i18n>=0:${PORTSDIR}/devel/rubygem-i18n
+LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
+RUN_DEPENDS=	rubygem-json>=0:${PORTSDIR}/devel/rubygem-json
+
+NO_ARCH=	yes
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=yes
+RUBYGEM_AUTOPLIST=	yes
 
 .include <bsd.port.mk>

@@ -10,6 +10,10 @@ MASTER_SITES=	ftp://pbil.univ-lyon1.fr/pub/mol_phylogeny/njplot/archive/
 MAINTAINER=	mzaki@m.u-tokyo.ac.jp
 COMMENT=	Phylogenetic tree drawing program capable of interactive manipulation
 
+BROKEN=		Unfetchable
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
+
 OPTIONS_DEFINE=		DOCS X11
 OPTIONS_DEFAULT=	DOCS X11
 

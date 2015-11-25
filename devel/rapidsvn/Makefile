@@ -2,12 +2,14 @@
 
 PORTNAME=	rapidsvn
 PORTVERSION=	0.12.1
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	devel
 MASTER_SITES=	http://www.rapidsvn.org/download/release/${PORTVERSION}/
 
 MAINTAINER=	robert.ayrapetyan@gmail.com
 COMMENT=	Cross-platform GUI front-end for the Subversion revision system
+
+BROKEN=		fails to build
 
 BUILD_DEPENDS=	${LOCALBASE}/bin/svn:${PORTSDIR}/devel/subversion \
 		xsltproc:${PORTSDIR}/textproc/libxslt \

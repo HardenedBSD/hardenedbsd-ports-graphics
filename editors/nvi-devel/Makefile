@@ -5,8 +5,7 @@ PORTNAME=	nvi
 PORTVERSION=	1.81.6
 PORTREVISION=	9
 CATEGORIES=	editors
-MASTER_SITES=	http://garage.linux.student.kuleuven.be/~skimo/nvi/devel/ \
-		http://www.kotnet.org/~skimo/nvi/devel/
+MASTER_SITES=	ftp://ftp.stack.nl/pub/users/johans/nvi/
 
 MAINTAINER=	johans@FreeBSD.org
 COMMENT=	Development snapshot of the world-renown nvi editor
@@ -26,11 +25,7 @@ CONFIGURE_ARGS+=	--with-db-prefix=${LOCALBASE} \
 			--program-prefix=n
 CONFIGURE_SCRIPT=	../dist/configure
 
-.include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MWIDECHAR}
-CONFIGURE_ARGS+=	--enable-widechar
-.endif
+WIDECHAR_CONFIGURE_ON=	--enable-widechar
 
 CPPFLAGS+=		-I${BDB_INCLUDE_DIR} -I${LOCALBASE}/include
 LDFLAGS+=		-L${BDB_LIB_DIR} -L${LOCALBASE}/lib
@@ -42,5 +37,8 @@ post-patch:
 	@${REINPLACE_CMD} -e 's,-ldb,-l${BDB_LIB_NAME},g' \
 		${WRKSRC}/../dist/configure
 	@${CHMOD} 755 ${WRKSRC}/../dist/configure
+
+post-install:
+	@${RM} ${STAGEDIR}${PREFIX}/man/cat1/*.0
 
 .include <bsd.port.mk>

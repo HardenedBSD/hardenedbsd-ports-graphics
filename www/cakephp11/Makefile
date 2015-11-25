@@ -3,7 +3,7 @@
 
 PORTNAME=	cakephp
 PORTVERSION=	1.1.19.6305
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	www
 MASTER_SITES=	http://www.sourcehosting.net/freebsd/distfiles/ \
 		LOCAL/glarkin
@@ -13,11 +13,15 @@ DISTNAME=	cake_${PORTVERSION}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Framework for developing PHP web applications
 
+DEPRECATED=	PHP 5.4 EOL reached
+EXPIRATION_DATE=	2016-01-15
+
 USES=		tar:bzip2
 USE_APACHE_RUN=	22+
 
 CONFLICTS=	cakephp-1[23]-* cakephp-2?-.* cakephp-2.3.*
 NO_BUILD=	yes
+NO_ARCH=	yes
 
 USE_PHP=	pcre session
 WANT_PHP_WEB=	yes

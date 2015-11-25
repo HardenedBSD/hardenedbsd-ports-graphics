@@ -4,7 +4,8 @@
 PORTNAME=	scalpel
 PORTVERSION=	2.0
 CATEGORIES=	sysutils
-MASTER_SITES=	http://www.digitalforensicssolutions.com/Scalpel/
+MASTER_SITES=	http://www.digitalforensicssolutions.com/Scalpel/ \
+		https://fossies.org/linux/misc/
 
 MAINTAINER=	nukama+maintainer@gmail.com
 COMMENT=	Frugal, high performance file carver
@@ -13,6 +14,7 @@ LICENSE=	GPLv2
 
 LIB_DEPENDS=	libtre.so:${PORTSDIR}/textproc/libtre
 
+USES=		alias
 GNU_CONFIGURE=	yes
 SUB_FILES=	pkg-message
 

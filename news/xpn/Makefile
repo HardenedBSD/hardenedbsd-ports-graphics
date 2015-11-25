@@ -17,10 +17,6 @@ RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}gtk2>=2.24.0:${PORTSDIR}/x11-toolkits/py-gtk
 
 NO_BUILD=	yes
 
-python_OLD_CMD=	/usr/bin/env python
-# we want a versioned python command
-python_CMD=	${PYTHON_CMD}
-
 SHEBANG_FILES=	${XPN}
 SUB_FILES=	${PORTNAME}
 SUB_LIST=	PYTHON_CMD=${PYTHON_CMD} XPN=${XPN}

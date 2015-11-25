@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	hdf5
-PORTVERSION=	1.8.14
+PORTVERSION=	1.8.15
+DISTVERSIONSUFFIX=	-patch1
 PORTREVISION=	1
 CATEGORIES=	science archivers graphics
 MASTER_SITES=	http://www.hdfgroup.org/ftp/HDF5/current/src/ \
@@ -18,18 +19,20 @@ LICENSE=	BSD4CLAUSE
 
 CONFLICTS_INSTALL=	hdf-4.[0-9]* hdf5-1.6.[0-9]*
 
+PORTSCOUT=	skipv:1.8.15-patch1
+
 OPTIONS_DEFINE=	DEBUG EXAMPLES FORTRAN SZIP
+#OPTIONS_DEFAULT=SZIP
 OPTIONS_SUB=	yes
 
 CONFIGURE_ARGS=	--enable-cxx \
 		--enable-hl \
 		--enable-instrument \
-		--enable-strict-format-checks \
-		--with-pthread=/usr \
-		--with-zlib=/usr
+		--enable-strict-format-checks
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
 MAKE_JOBS_UNSAFE=	yes
+TEST_TARGET=	check
 USE_LDCONFIG=	yes
 USES=		libtool tar:bzip2
 
@@ -48,7 +51,6 @@ SZIP_CONFIGURE_ON=	--with-szlib=${LOCALBASE}
 SZIP_LIB_DEPENDS=	libsz.so:${PORTSDIR}/science/szip
 
 post-patch:
-	@${REINPLACE_CMD} -e 's|-lpthread|-pthread|g' ${WRKSRC}/configure
 	@${REINPLACE_CMD} -e 's|-O3||g' ${WRKSRC}/config/gnu-flags
 	@${REINPLACE_CMD} \
 		-e '/LD_LIBRARY_PATH/ s|^|#|' \
@@ -56,8 +58,5 @@ post-patch:
 		-e 's|(INSTALL)|(INSTALL_DATA)|' \
 			`${FIND} ${WRKSRC} -regex '.*/examples/Makefile.in'`
 	@${REINPLACE_CMD} -e 's|\[ -a|\[ -f|g' `${FIND} ${WRKSRC} -name \*.sh\*`
-
-regression-test test: build
-	cd ${WRKSRC}/ && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} check
 
 .include <bsd.port.mk>

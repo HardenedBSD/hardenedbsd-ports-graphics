@@ -4,8 +4,7 @@
 PORTNAME=	apr
 PORTVERSION=	${APR_VERSION}.${APU_VERSION}
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_APACHE}
-MASTER_SITE_SUBDIR=	apr
+MASTER_SITES=	APACHE/apr
 DISTFILES=	apr-${APR_VERSION}.tar.gz \
 		apr-util-${APU_VERSION}.tar.gz
 
@@ -20,7 +19,7 @@ USES=		iconv pathfix libtool cpe
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
 
-APR_VERSION=	1.5.1
+APR_VERSION=	1.5.2
 APU_VERSION=	1.5.4
 
 CPE_VENDOR=	apache
@@ -51,9 +50,11 @@ PGSQL_USES=		pgsql
 SQLITE_USE=		SQLITE=yes
 SSL_USE=		OPENSSL=yes
 
-NO_WRKSUBDIR=	yes
 APR_WRKDIR=	${WRKDIR}/apr-${APR_VERSION}
 APU_WRKDIR=	${WRKDIR}/apr-util-${APU_VERSION}
+WRKSRC=		${APR_WRKDIR}
+PATCH_WRKSRC=	${WRKDIR}
+PATHFIX_WRKSRC=	${WRKDIR}
 
 SHLIB_APR_MAJOR=${APR_VERSION:C/^1/0/}
 SHLIB_APU_MAJOR=${APU_VERSION:C/^1/0/}
@@ -188,9 +189,9 @@ do-configure:
 
 do-build:
 	@${ECHO_MSG} "# ===> ${.TARGET} apr-${APR_VERSION}"
-	(cd ${APR_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE} ${_MAKE_JOBS})
+	(cd ${APR_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${_MAKE_JOBS})
 	@${ECHO_MSG} "# ===> ${.TARGET} apr-util-${APU_VERSION}"
-	(cd ${APU_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE} ${_MAKE_JOBS})
+	(cd ${APU_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${_MAKE_JOBS})
 
 pre-install:
 # always create the modules directory
@@ -199,19 +200,24 @@ pre-install:
 
 do-install:
 	@${ECHO_MSG} "# ===> ${.TARGET} apr-${APR_VERSION}"
-	(cd ${APR_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE} ${INSTALL_TARGET} ${MAKE_ARGS})
+	(cd ${APR_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${INSTALL_TARGET} ${MAKE_ARGS})
 	@${ECHO_MSG} "# ===> ${.TARGET} apr-util-${APU_VERSION}"
-	(cd ${APU_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE} ${INSTALL_TARGET} ${MAKE_ARGS})
+	(cd ${APU_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${INSTALL_TARGET} ${MAKE_ARGS})
 
 post-install:
 	-${FIND} ${STAGEDIR}${PREFIX}/lib/ -name \*.so | ${XARGS} ${STRIP_CMD}
 
 test: build
 	@${ECHO_MSG} "# ===> ${.TARGET} apr-${APR_VERSION}"
-	-(cd ${APR_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE} test)
+	-(cd ${APR_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} test)
 	@${ECHO_MSG} "# ===> ${.TARGET} apr-util-${APU_VERSION}"
-	-(cd ${APU_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE} test)
+	-(cd ${APU_WRKDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} test)
 
 #regression-test: test
+
+rpfl: configure
+# maintainer only: strip PID from logs (better compair)
+	${SED} -i '' -E 's|^configure:[0-9]+:|configure:_pid_:|g' ${APR_WRKDIR}/config.log
+	${SED} -i '' -E 's|^configure:[0-9]+:|configure:_pid_:|g' ${APU_WRKDIR}/config.log
 
 .include <bsd.port.mk>

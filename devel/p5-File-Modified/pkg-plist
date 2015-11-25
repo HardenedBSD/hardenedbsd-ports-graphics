@@ -1,5 +1,2 @@
-%%PERL5_MAN3%%/File::Modified.3.gz
 %%SITE_PERL%%/File/Modified.pm
-%%PORTDOCS%%%%EXAMPLESDIR%%/1.pl
-%%PORTDOCS%%%%EXAMPLESDIR%%/Export.cfg
-%%PORTDOCS%%%%EXAMPLESDIR%%/Import.cfg
+%%PERL5_MAN3%%/File::Modified.3.gz

@@ -1,5 +1,5 @@
---- cpp.orig/test/Glacier2/staticFiltering/run.py	2013-10-04 17:48:14.000000000 +0200
-+++ cpp/test/Glacier2/staticFiltering/run.py	2014-08-27 10:17:57.233098328 +0200
+--- cpp/test/Glacier2/staticFiltering/run.py.orig	2015-06-23 17:30:20.000000000 +0200
++++ cpp/test/Glacier2/staticFiltering/run.py	2015-09-22 16:23:30.270288987 +0200
 @@ -8,7 +8,7 @@
  #
  # **********************************************************************
@@ -9,16 +9,30 @@
  
  path = [ ".", "..", "../..", "../../..", "../../../.." ]
  head = os.path.dirname(sys.argv[0])
-@@ -100,6 +100,12 @@
+@@ -99,12 +99,26 @@
+         hostname = "127.0.0.1"
+         fqdn = ""
+         domainname = ""
++
++    # Check if IP addresses are configured on a local interface
++    if TestUtil.isFreeBSD():
++        p = subprocess.Popen("ifconfig", shell=1, stdout=subprocess.PIPE)
++        r = p.communicate()[0]
++        if r.find("inet " + testaddr1) == -1 or r.find("inet " + testaddr2) == 1:
++            print("Warning: Not all host IP addresses are available")
++            limitedTests = True
++            hostname = "127.0.0.1"
++            fqdn = ""
++            domainname = ""
+ except:
+     limitedTests = True
+     hostname = "127.0.0.1"
      fqdn = ""
      domainname = ""
  
-+print "Network and process debug output:"
-+subprocess.call(["/sbin/ifconfig", "-a"])
-+subprocess.call(["/sbin/sysctl", "-a"])
-+subprocess.call(["/bin/ps", "-alxww"])
-+subprocess.call(["/usr/bin/sockstat"])
-+subprocess.call(["/usr/bin/netstat", "-an"])
++if limitedTests:
++    print("Running limited tests")
++
  testcases = [
          ('testing category filter',
                  ('', '', '', 'foo "a cat with spaces"', '', ''),

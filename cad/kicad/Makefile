@@ -15,12 +15,11 @@ COMMENT=	Schematic and PCB editing software
 LICENSE=	GPLv2
 
 LIB_DEPENDS=	libboost_thread.so:${PORTSDIR}/devel/boost-libs
-BUILD_DEPENDS=	doxygen:${PORTSDIR}/devel/doxygen
 RUN_DEPENDS=	xpdf:${PORTSDIR}/graphics/xpdf
 
 CONFLICTS=	kicad-devel*
 
-USES=		cmake dos2unix desktop-file-utils shared-mime-info tar:xz
+USES=		cmake desktop-file-utils dos2unix shared-mime-info tar:xz
 
 # Does not compile with Gcc48
 USE_GCC=	4.7
@@ -28,12 +27,12 @@ USE_GCC=	4.7
 LDFLAGS+=	-L${LOCALBASE}/lib/c++
 CXXFLAGS+=	-nostdinc++ -isystem ${LOCALBASE}/include/c++/v1
 BUILD_DEPENDS+=	${LOCALBASE}/lib/c++/libstdc++.so:${PORTSDIR}/devel/libc++
+DOCS_BUILD_DEPENDS=	doxygen:${PORTSDIR}/devel/doxygen
 
 DOS2UNIX_GLOB=	*.cmake sch_bus_entry.h sch_line.h sch_no_connect.h
-USE_XORG=	x11 ice xext
+USE_XORG=	ice x11 xext
 USE_GL=		yes
 USE_WX=		3.0
-WX_UNICODE=	yes
 USE_GNOME=	atk	# Required by libwx_gtk2_aui-2.8.so
 CXXFLAGS+=	-I${WRKSRC}/include -I${LOCALBASE}/include -DBOOST_HASH_NO_EXTENSIONS
 CMAKE_ARGS=	-DwxWidgets_CONFIG_EXECUTABLE=${WX_CONFIG}	\
@@ -54,12 +53,10 @@ BINS=		cvpcb eeschema gerbview kicad pcbnew
 EXTRAS2RM=	linux-non_unicode linux wings3d LINUX.README	\
 		contrib_makefiles.txt running_kicad_under_W98.txt
 
-.include <bsd.port.options.mk>
+# undefined reference to `std::chrono::_V2::steady_clock::now()@GLIBCXX_3.4.19'
+BROKEN_FreeBSD_9=	does not link
 
-.if {PORT_OPTIONS:MDOCS}
-LICENSE+=	GFDL
-LICENSE_COMB=	multi
-.endif
+DOCS_VARS=	LICENSE+=GFDL LICENSE_COMB=multi
 
 post-patch:
 	${MV} ${WRKSRC}/include/boost ${WRKSRC}/include/boost.orig
@@ -78,17 +75,17 @@ post-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	(cd ${WRKSRC}/library && ${COPYTREE_SHARE} library ${STAGEDIR}${DATADIR})
 	(cd ${WRKSRC}/library && ${COPYTREE_SHARE} modules ${STAGEDIR}${DATADIR})
-.if ${PORT_OPTIONS:MNLS}
+
+post-install-NLS-on:
 	${MKDIR} ${STAGEDIR}${DATADIR}/internat
 	(cd ${WRKSRC}/doc/internat &&	\
 		${COPYTREE_SHARE} . ${STAGEDIR}${DATADIR}/internat)
 	${RM} -f ${STAGEDIR}${DATADIR}/internat/CMakeLists.txt
 	${FIND} ${STAGEDIR}${DATADIR}/internat -name kicad.po -delete
-.endif
-.if ${PORT_OPTIONS:MDOCS}
+
+post-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	(cd ${WRKSRC}/doc/doc && ${COPYTREE_SHARE} . ${STAGEDIR}${DOCSDIR})
 	(cd ${WRKSRC}/Documentation && ${COPYTREE_SHARE} . ${STAGEDIR}${DOCSDIR})
-.endif
 
 .include <bsd.port.mk>

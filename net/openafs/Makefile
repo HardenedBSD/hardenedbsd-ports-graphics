@@ -21,15 +21,15 @@ LICENSE_NAME=	IBM Public License Version 1.0
 LICENSE_FILE=	${WRKSRC}/doc/LICENSE
 LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
-AFS_DISTVERSION=	1.6.10
-DBVERSION=	2013-01-28
+AFS_DISTVERSION=	1.6.15
+DBVERSION=	2015-07-13
 
-USES=		kmod tar:bzip2
+USES=		cpe kmod tar:bzip2
 USE_LDCONFIG=	yes
 HAS_CONFIGURE=	yes
 CONFIGURE_ENV=	_XCFLAGS="${CFLAGS} -fPIC" \
 		_PAM_CFLAGS="${CFLAGS} -fPIC" \
-		_MT_LIBS="${PTHREAD_LIBS}"
+		_MT_LIBS="-lpthread"
 CONFIGURE_ARGS=	--prefix=${PREFIX} \
 		--localstatedir=/var \
 		--mandir=${MANPREFIX}/man \
@@ -43,6 +43,8 @@ CONFIGURE_ARGS=	--prefix=${PREFIX} \
 WRKSRC=		${WRKDIR}/${PORTNAME}-${AFS_DISTVERSION}
 MAKE_ENV=	COMPILER_TYPE=${COMPILER_TYPE}
 USE_RC_SUBR=	afsd afsserver
+
+CPE_VERSION=	${AFS_DISTVERSION}
 
 CONFLICTS=	coda-server-6.[0-9]* heimdal-[0-9]*
 ONLY_FOR_ARCHS=	i386 amd64
@@ -92,6 +94,14 @@ post-extract:
 	${MKDIR} ${WRKDIR}/conf
 	cd ${KERNCONFDIR} && \
 	    /usr/sbin/config -d ${WRKDIR}/conf ${_KERNCONF} >/dev/null
+# Unbreak on FreeBSD 10.2 (until official support arrives)
+.for a in i386 amd64
+	@${SED} -e 's,101,102, ; /FBSD102_ENV/ { h; s/102/101/; G; }' \
+		${WRKSRC}/src/config/param.${a}_fbsd_101.h \
+		> ${WRKSRC}/src/config/param.${a}_fbsd_102.h
+.endfor
+	@${REINPLACE_CMD} -e '/fbsd_101/ { h; s/101/102/; s/31/32/; x; G; }' \
+		${WRKSRC}/src/config/afs_sysnames.h
 
 create-sample-files:
 	@${ECHO_CMD} openafs.org > ${WRKDIR}/ThisCell

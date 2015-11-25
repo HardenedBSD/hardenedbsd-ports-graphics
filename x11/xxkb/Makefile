@@ -2,10 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	xxkb
-PORTVERSION=	1.11
-PORTREVISION=	1
+PORTVERSION=	1.11.1
 CATEGORIES=	x11
 MASTER_SITES=	SF
+MASTER_SITES=	SF/${PORTNAME}/
 DISTNAME=	${PORTNAME}-${PORTVERSION}-src
 
 MAINTAINER=	alexander.pohoyda@gmx.net
@@ -13,20 +13,16 @@ COMMENT=	XKB keyboard layout indicator and switcher
 
 LICENSE=	ART10
 
-USES=		iconv imake
-USE_XORG=	xpm
-WRKSRC=		${WRKDIR}/${PORTNAME}
+USES=		iconv imake pkgconfig
+USE_XORG=	xext xpm xt
+WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 
 PORTDOCS=	README CHANGES.ru README.ru
 
 OPTIONS_DEFINE=	LIBRSVG2 DOCS
 
-.include <bsd.port.pre.mk>
-
-.if ${PORT_OPTIONS:MLIBRSVG2}
-LIB_DEPENDS+=	librsvg-2.so:${PORTSDIR}/graphics/librsvg2
-XMKMF_ARGS=	-DWITH_SVG_SUPPORT
-.endif
+LIBRSVG2_LIB_DEPENDS=	librsvg-2.so:${PORTSDIR}/graphics/librsvg2
+LIBRSVG2_VARS=		XMKMF_ARGS=-DWITH_SVG_SUPPORT
 
 post-build:
 # Convert Russian language docs from archaic KOI8-R to modern UTF-8
@@ -34,10 +30,8 @@ post-build:
 	iconv -f koi8-r -t utf-8 ${WRKSRC}/${f}.koi8 > ${WRKSRC}/${f}.ru
 .endfor
 
-post-install:
-.if ${PORT_OPTIONS:MDOCS}
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${PORTDOCS:S,^,${WRKSRC}/,} ${STAGEDIR}${DOCSDIR}
-.endif
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

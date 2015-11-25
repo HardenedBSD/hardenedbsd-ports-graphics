@@ -3,7 +3,7 @@
 
 PORTNAME=	gri
 PORTVERSION=	2.12.23
-PORTREVISION=	2
+PORTREVISION=	4
 CATEGORIES=	math
 MASTER_SITES=	SF
 
@@ -13,7 +13,7 @@ COMMENT=	Extensible plotting language for producing scientific graphs
 LIB_DEPENDS=	libnetcdf.so:${PORTSDIR}/science/netcdf
 
 USES=		gmake readline shebangfix makeinfo
-SHEBANG_FILES=	src/gri_merge src/gri_unpage
+SHEBANG_FILES=	doc/examples/FEM.pl src/gri_merge src/gri_unpage
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--enable-FreeBSD
 
@@ -62,7 +62,7 @@ post-install:
 		${MAKEFILE} ${MAKE_ARGS} ${INSTALL_TARGET})
 .else
 	${INSTALL_MAN} ${WRKSRC}/doc/gri-manpage.1 \
-		${STAGEDIR}${MANPREFIX}/man/man1/gri.1 
+		${STAGEDIR}${MANPREFIX}/man/man1/gri.1
 	${INSTALL_MAN} ${WRKSRC}/doc/gri_merge.1-skel \
 		${STAGEDIR}${MANPREFIX}/man/man1/gri_merge.1
 	${INSTALL_MAN} ${WRKSRC}/doc/gri_unpage.1-skel \

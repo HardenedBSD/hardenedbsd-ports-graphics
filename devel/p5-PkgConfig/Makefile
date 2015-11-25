@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	PkgConfig
-PORTVERSION=	0.08926
+PORTVERSION=	0.09026
+PORTREVISION=	2
 CATEGORIES=	devel perl5
 MASTER_SITES=	CPAN
 MASTER_SITE_SUBDIR=	CPAN:PLICEASE
@@ -13,9 +14,11 @@ COMMENT=	Pure-Perl Core-Only replacement for pkg-config
 
 LICENSE=	ART10 GPLv1
 LICENSE_COMB=	dual
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
 PORTSCOUT=	limit:^[0-9\.]*$$
 
+NO_ARCH=	yes
 USE_PERL5=	configure
 USES=		perl5 pkgconfig
 

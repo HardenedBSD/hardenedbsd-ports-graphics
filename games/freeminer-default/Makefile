@@ -5,7 +5,6 @@ PORTNAME=	default
 PORTVERSION=	0.4.10.4
 CATEGORIES=	games
 PKGNAMEPREFIX=	freeminer-
-DIST_SUBDIR=	freeminer
 
 MAINTAINER=	amdmi3@FreeBSD.org
 COMMENT=	The main game for the Freeminer game engine
@@ -16,10 +15,9 @@ RUN_DEPENDS=	freeminer:${PORTSDIR}/games/freeminer
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	freeminer
-GH_PROJECT=	${PORTNAME}
-GH_COMMIT=	39f6ac8
 
 NO_BUILD=	yes
+NO_ARCH=	yes
 DATADIR=	${PREFIX}/share/freeminer/games/${PORTNAME}
 PORTDATA=	*
 

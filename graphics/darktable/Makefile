@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	darktable
-PORTVERSION=	1.6.2
+PORTVERSION=	1.6.9
 CATEGORIES=	graphics
 MASTER_SITES=	https://github.com/darktable-org/${PORTNAME}/releases/download/release-${PORTVERSION}/
 
@@ -18,11 +18,11 @@ LIB_DEPENDS=	libexiv2.so:${PORTSDIR}/graphics/exiv2 \
 		libcurl.so:${PORTSDIR}/ftp/curl
 
 ONLY_FOR_ARCHS=	i386 amd64
-ONLY_FOR_ARCHS_REASON=	uses SSE extensions
+ONLY_FOR_ARCHS_REASON=	uses SSE instructions
 
 USES=		compiler:c++11-lib cmake:outsource desktop-file-utils	\
 		ninja pkgconfig tar:xz
-USE_GNOME=	librsvg2
+USE_GNOME=	gtk20 intltool librsvg2
 USE_SQLITE=	yes
 USE_LDCONFIG=	${PREFIX}/lib/${PORTNAME}
 INSTALLS_ICONS=	yes
@@ -73,7 +73,7 @@ GRAPHMAGICK_CMAKE_OFF=	-DUSE_GRAPHICSMAGICK:BOOL=OFF
 LIBSECRET_LIB_DEPENDS=	libsecret-1.so:${PORTSDIR}/security/libsecret
 LIBSECRET_CMAKE_OFF=	-DUSE_LIBSECRET:BOOL=OFF
 
-LUA_USES=		lua
+LUA_USES=		lua:5.2
 LUA_CMAKE_OFF=		-DUSE_LUA:BOOL=OFF
 
 NLS_USES=		gettext
@@ -96,21 +96,22 @@ SQUISH_CMAKE_OFF=	-DUSE_SQUISH:BOOL=OFF
 WEBP_LIB_DEPENDS=	libwebp.so:${PORTSDIR}/graphics/webp
 WEBP_CMAKE_OFF=		-DUSE_WEBP:BOOL=OFF
 
-.include <bsd.port.options.mk>
+.include <bsd.port.pre.mk>
+
+.if ${ARCH} == amd64 && ${COMPILER_TYPE} == clang
+# Enable OpenMP support with Clang 3.7.
+BUILD_DEPENDS+=	clang37:${PORTSDIR}/devel/llvm37
+RUN_DEPENDS+=	clang37:${PORTSDIR}/devel/llvm37
+
+CPP=		${LOCALBASE}/bin/clang-cpp37
+CC=		${LOCALBASE}/bin/clang37
+CXX=		${LOCALBASE}/bin/clang++37
+LDFLAGS+=	-L${LOCALBASE}/llvm37/lib -lomp
+.endif
 
 .if defined(WITH_DEBUG)
 CMAKE_BUILD_TYPE=	RelWithDebInfo
 STRIP=
 .endif
 
-.if ! ${PORT_OPTIONS:MDOCS}
-post-install:
-	${RM} ${STAGEDIR}${DOCSDIR}/AUTHORS
-	${RM} ${STAGEDIR}${DOCSDIR}/LICENSE
-	${RM} ${STAGEDIR}${DOCSDIR}/README
-	${RM} ${STAGEDIR}${DOCSDIR}/TRANSLATORS
-	${RM} ${STAGEDIR}${DOCSDIR}/darktablerc.html
-	${RMDIR} ${STAGEDIR}${DOCSDIR}
-.endif
-
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

@@ -11,6 +11,9 @@ include/pd/s_stuff.h
 lib/pd/bin/pd
 lib/pd/bin/pd-watchdog
 %%PORTDOCS%%lib/pd/doc
+lib/pd/extra/bob~/bob~-help.pd
+lib/pd/extra/bob~/bob~.pd_linux
+lib/pd/extra/bob~/output~.pd
 lib/pd/extra/bonk~/bonk~-help.pd
 lib/pd/extra/bonk~/bonk~.pd_linux
 lib/pd/extra/bonk~/templates.txt
@@ -372,7 +375,7 @@ man/man1/pdsend.1.gz
 %%PORTDOCS%%%%DOCSDIR%%/5.reference/delay-help.pd
 %%PORTDOCS%%%%DOCSDIR%%/5.reference/delread~-help.pd
 %%PORTDOCS%%%%DOCSDIR%%/5.reference/delwrite~-help.pd
-%%PORTDOCS%%%%DOCSDIR%%/5.reference/drawnumber-help.pd
+%%PORTDOCS%%%%DOCSDIR%%/5.reference/drawtext-help.pd
 %%PORTDOCS%%%%DOCSDIR%%/5.reference/drawpolygon-help.pd
 %%PORTDOCS%%%%DOCSDIR%%/5.reference/element-help.pd
 %%PORTDOCS%%%%DOCSDIR%%/5.reference/env~-help.pd

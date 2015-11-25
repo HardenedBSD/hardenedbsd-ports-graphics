@@ -3,6 +3,7 @@
 
 PORTNAME=	chef
 PORTVERSION=	11.14.6
+PORTREVISION=	2
 CATEGORIES=	sysutils
 MASTER_SITES=	RG
 
@@ -10,6 +11,7 @@ MAINTAINER=	renchap@cocoa-x.com
 COMMENT=	Systems integration framework. Client part
 
 LICENSE=	APACHE20
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	rubygem-chef-zero>=2.1.0:${PORTSDIR}/sysutils/rubygem-chef-zero \
 		rubygem-diff-lcs>=0.0.0:${PORTSDIR}/textproc/rubygem-diff-lcs \
@@ -29,9 +31,9 @@ RUN_DEPENDS=	rubygem-chef-zero>=2.1.0:${PORTSDIR}/sysutils/rubygem-chef-zero \
 		rubygem-pry>=0.9.0:${PORTSDIR}/devel/rubygem-pry \
 		rubygem-rest-client>=1.0.4:${PORTSDIR}/www/rubygem-rest-client
 
+NO_ARCH=		yes
 USE_RUBY=		yes
 USE_RUBYGEMS=		yes
-USE_RUBY_FEATURES=	iconv
 RUBYGEM_AUTOPLIST=	yes
 
 SUB_LIST=	RUBY=${RUBY}

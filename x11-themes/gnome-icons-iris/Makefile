@@ -9,8 +9,7 @@ PORTNAME=	iris
 PORTVERSION=	20050420
 PORTREVISION=	1
 CATEGORIES=	x11-themes gnome
-MASTER_SITES=	GNOME
-MASTER_SITE_SUBDIR=	teams/art.gnome.org/themes/icon
+MASTER_SITES=	GNOME/teams/art.gnome.org/themes/icon
 DISTNAME=	ICON-Iris
 
 MAINTAINER=	ports@FreeBSD.org
@@ -19,7 +18,7 @@ COMMENT=	Iris SVG Icons for Gnome
 RESTRICTED=	${REASON}
 
 USES=	tar:bzip2
-WRKSRC=		"${WRKDIR}/Iris"
+NO_WRKSUBDIR=	yes
 
 .include "${.CURDIR}/../gnome-icons/bsd.gnome-icons.mk"
 .include <bsd.port.mk>

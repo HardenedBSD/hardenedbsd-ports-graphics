@@ -2,10 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	sqlite3
-PORTVERSION=	3.8.8.2
+PORTVERSION=	3.9.2
 CATEGORIES=	databases
-MASTER_SITES=	http://www.sqlite.org/2015/ http://www2.sqlite.org/2015/ http://www3.sqlite.org/2015/
-DISTNAME=	sqlite-autoconf-${PORTVERSION:S|.|0|g}
+MASTER_SITES=	https://www.sqlite.org/2015/ http://www2.sqlite.org/2015/ http://www3.sqlite.org/2015/
+DISTNAME=	sqlite-autoconf-${PORTVERSION:C/\.([[:digit:]])[[:>:]]/0\1/g:S/.//g}00
 
 MAINTAINER=	pavelivolkov@gmail.com
 COMMENT=	SQL database engine in a C library
@@ -15,24 +15,24 @@ LICENSE_NAME=	Public Domain
 LICENSE_TEXT=	Description of the license can be obtained from the following URL: http://www.sqlite.org/copyright.html
 LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
-CONFLICTS=	sqlite34-[0-9]* sqlcipher-[0-9]*
+CONFLICTS=	sqlcipher-[0-9]*
 
-USES=		pathfix libtool ncurses
+USES=		libtool ncurses pathfix
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
+CFLAGS+=	-Os
 
 MAKE_JOBS_UNSAFE=	yes
 
 # Compilation Options For SQLite http://www.sqlite.org/compile.html
 OPTIONS_DEFINE=	FTS4 UPD_DEL_LIMIT URI URI_AUTHORITY SOUNDEX METADATA \
 		DIRECT_READ MEMMAN SECURE_DELETE UNLOCK_NOTIFY THREADS \
-		EXTENSION READLINE ARMOR STMT
+		EXTENSION READLINE ARMOR STMT DBSTAT FTS5 JSON1 RBU
 OPTIONS_SINGLE=	RAMT
 OPTIONS_RADIO=	STAT
 OPTIONS_GROUP=	UNICODE RTREEG
 
-FTS4_DESC=		Enable FTS3/4 (Full Text Search) module
 UPD_DEL_LIMIT_DESC=	ORDER BY and LIMIT on UPDATE and DELETE
 URI_DESC=		Enable use the URI filename
 URI_AUTHORITY_DESC=	Allow convert URL into a UNC
@@ -46,6 +46,18 @@ EXTENSION_DESC=		Allow loadable extensions
 
 # http://www.sqlite.org/compile.html#enable_api_armor
 ARMOR_DESC=		Detect misuse of the API
+
+# http://www.sqlite.org/fts3.html
+FTS4_DESC=		Enable FTS3/4 (Full Text Search) module
+
+# http://www.sqlite.org/fts5.html
+FTS5_DESC=		Enable version 5 full-text search engine
+
+# http://www.sqlite.org/json1.html
+JSON1_DESC=		Enable the JSON1 extension
+
+# http://www.sqlite.org/rbu.html
+RBU_DESC=		Enable the Resumable Bulk Update
 
 # http://www.sqlite.org/c3ref/stmt_scanstatus.html
 STMT_DESC=		Prepared Statement Scan Status
@@ -64,6 +76,9 @@ STAT_DESC=		Which query planner to use
 STAT3_DESC=		collect histogram data from leftmost column
 STAT4_DESC=		collect histogram data from all columns
 
+# http://www.sqlite.org/dbstat.html
+DBSTAT_DESC=		Enable DBSTAT Virtual Table
+
 # http://www.sqlite.org/fts3.html#tokenizer
 OPTIONS_GROUP_UNICODE=	ICU UNICODE61
 UNICODE_DESC=		Unicode support
@@ -76,8 +91,8 @@ RTREE_DESC=		Enable R*Tree module
 RTREE_INT_DESC=		Store 32-bit sig int (no float) coordinates
 
 OPTIONS_DEFAULT=	FTS4 URI METADATA SECURE_DELETE UNLOCK_NOTIFY THREADS \
-			EXTENSION TS1 UNICODE61 RTREE READLINE
-# SECURE_DELETE, UNLOCK_NOTIFY used by www/firefox, www/libxul
+			EXTENSION TS1 UNICODE61 RTREE READLINE DBSTAT
+# SECURE_DELETE, UNLOCK_NOTIFY, DBSTAT (since 41.0) used by www/firefox et al.
 # RTREE used by graphics/mapnik, databases/spatialite
 
 PLIST_FILES=	bin/sqlite3 include/sqlite3.h include/sqlite3ext.h \
@@ -116,6 +131,7 @@ UNLOCK_NOTIFY_CPPFLAGS=	-DSQLITE_ENABLE_UNLOCK_NOTIFY=1
 METADATA_CPPFLAGS=	-DSQLITE_ENABLE_COLUMN_METADATA=1
 STAT3_CPPFLAGS=	-DSQLITE_ENABLE_STAT3=1
 STAT4_CPPFLAGS=	-DSQLITE_ENABLE_STAT4=1
+DBSTAT_CPPFLAGS=	-DSQLITE_ENABLE_DBSTAT_VTAB=1
 URI_CPPFLAGS=	-DSQLITE_USE_URI=1
 URI_AUTHORITY_CPPFLAGS=	-DSQLITE_ALLOW_URI_AUTHORITY=1
 DIRECT_READ_CPPFLAGS=	-DSQLITE_DIRECT_OVERFLOW_READ=1
@@ -125,7 +141,7 @@ STMT_CPPFLAGS=	-DSQLITE_ENABLE_STMT_SCANSTATUS=1
 EXTENSION_CONFIGURE_ENABLE=	dynamic-extensions
 
 THREADS_CONFIGURE_ENABLE=	threadsafe
-THREADS_LDFLAGS=	${PTHREAD_LIBS}
+THREADS_LDFLAGS=		-lpthread
 
 ICU_BUILD_DEPENDS=	${LOCALBASE}/bin/icu-config:${PORTSDIR}/devel/icu
 ICU_LIB_DEPENDS=	libicudata.so:${PORTSDIR}/devel/icu
@@ -137,11 +153,18 @@ UNICODE61_CPPFLAGS_OFF=	-DSQLITE_DISABLE_FTS3_UNICODE=1
 READLINE_CONFIGURE_ENABLE=	readline
 READLINE_USES=	readline
 
+FTS5_CONFIGURE_ENABLE=	fts5
+
+JSON1_CONFIGURE_ENABLE=	json1
+
+RBU_CPPFLAGS=	-DSQLITE_ENABLE_RBU=1
+
 .include <bsd.port.options.mk>
 
 post-configure:
 	@${ECHO_MSG} "===> CONFIGURE_ARGS=${CONFIGURE_ARGS}"
 	@${ECHO_MSG} "===> CPPFLAGS=${CPPFLAGS}"
+	@${ECHO_MSG} "===> CFLAGS=${CFLAGS}"
 	@${ECHO_MSG} "===> LDFLAGS=${LDFLAGS}"
 
 post-build:

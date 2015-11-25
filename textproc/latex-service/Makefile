@@ -2,7 +2,7 @@
 
 PORTNAME=	latex
 PORTVERSION=	0.1
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	textproc gnustep
 MASTER_SITES=	http://www.roard.com/latexservice/download/
 PKGNAMESUFFIX=	-service${PKGNAMESUFFIX2}
@@ -13,13 +13,10 @@ COMMENT=	LaTeX service for GNUstep
 
 LICENSE=	GPLv2
 
-USES=		tar:tgz
-USE_GNUSTEP=	yes
-USE_GNUSTEP_BACK=	yes
-USE_GNUSTEP_BUILD=	yes
-USE_GNUSTEP_INSTALL=	yes
+USES=		tar:tgz gnustep
+USE_GNUSTEP=	back build
 
 post-install:
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/Local/Library/Services/LaTeX.service/LaTeX
+	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/System/Library/Services/LaTeX.service/LaTeX
 
 .include <bsd.port.mk>

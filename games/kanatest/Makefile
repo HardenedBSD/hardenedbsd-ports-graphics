@@ -10,7 +10,9 @@ MASTER_SITES=	http://clayo.org/kanatest/
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Japanese kana (Hiragana and Katakana) simple flashcard tool
 
-USES=		gettext gmake pkgconfig
+BROKEN=		runtime segfault (PR 196452)
+
+USES=		gettext gmake pkgconfig desktop-file-utils
 USE_GNOME=	gtk20 libxml2
 GNU_CONFIGURE=	yes
 INSTALLS_ICONS=	yes

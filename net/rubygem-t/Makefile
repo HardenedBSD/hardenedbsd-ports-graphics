@@ -10,6 +10,7 @@ MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	Command-line power tool for Twitter
 
 LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 RUN_DEPENDS=	rubygem-geokit>=1.8.3:${PORTSDIR}/graphics/rubygem-geokit \
 		rubygem-htmlentities>=4.3:${PORTSDIR}/textproc/rubygem-htmlentities \
@@ -19,6 +20,7 @@ RUN_DEPENDS=	rubygem-geokit>=1.8.3:${PORTSDIR}/graphics/rubygem-geokit \
 		rubygem-thor>=0.19.1:${PORTSDIR}/devel/rubygem-thor \
 		rubygem-twitter>=5.13:${PORTSDIR}/net/rubygem-twitter
 
+NO_ARCH=	yes
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes
 RUBYGEM_AUTOPLIST=	yes

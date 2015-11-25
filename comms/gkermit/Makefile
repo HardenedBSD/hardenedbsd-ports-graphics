@@ -4,7 +4,7 @@
 PORTNAME=	gkermit
 PORTVERSION=	1.0
 CATEGORIES=	comms
-MASTER_SITES=	ftp://kermit.columbia.edu/kermit/archives/
+MASTER_SITES=	ftp://ftp.kermitproject.org/kermit/archives/
 DISTNAME=	gku100
 
 MAINTAINER=	ports@FreeBSD.org

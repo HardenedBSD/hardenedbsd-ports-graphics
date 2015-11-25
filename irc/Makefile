@@ -110,6 +110,7 @@
     SUBDIR += ruby-rica
     SUBDIR += ruby-rice
     SUBDIR += rubygem-cinch
+    SUBDIR += rubygem-cogbot
     SUBDIR += rubygem-lita-irc
     SUBDIR += rubygem-net-irc
     SUBDIR += scrollz
@@ -125,7 +126,6 @@
     SUBDIR += undernet-ircu
     SUBDIR += unreal
     SUBDIR += weechat
-    SUBDIR += weechat-devel
     SUBDIR += xaric
     SUBDIR += xchat
     SUBDIR += xchat-fish

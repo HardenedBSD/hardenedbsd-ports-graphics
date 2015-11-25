@@ -3,7 +3,7 @@
 
 PORTNAME=	ircd-ratbox
 PORTVERSION=	3.0.8
-PORTREVISION=	3
+PORTREVISION=	6
 CATEGORIES=	irc ipv6
 MASTER_SITES=	http://www.ratbox.org/download/				\
 		http://www.ratbox.org/download/old/
@@ -15,8 +15,8 @@ LICENSE=	GPLv2
 
 CONFLICTS=	ircd-ratbox-devel-[0-9]* charybdis-[0-9]*
 
-USES=		libtool tar:bzip2
-#MAN8=		ircd.8
+USES=		cpe libtool tar:bzip2
+CPE_VENDOR=	ratbox
 USE_RC_SUBR=	ircd-ratbox
 USE_SQLITE=	3
 USE_LDCONFIG=	${PREFIX}/lib/ircd-ratbox
@@ -29,7 +29,7 @@ GROUPS=		${USERS}
 LOGDIR?=	/var/log/${PORTNAME}
 RUNDIR?=	/var/run/${PORTNAME}
 DBDIR?=		/var/db/${PORTNAME}
-SUB_FILES=	pkg-message pkg-install
+SUB_FILES=	pkg-message
 PLIST_SUB=	LOGDIR=${LOGDIR} RUNDIR=${RUNDIR} DBDIR=${DBDIR}
 SUB_LIST=	LOGDIR=${LOGDIR} RUNDIR=${RUNDIR} DBDIR=${DBDIR}
 
@@ -123,6 +123,11 @@ CONFIGURE_ARGS+=	--with-nicklen=${NICKLEN}
 .endif
 
 #-----------------------------------------------------------------------
+
+post-patch:
+.if !defined(WITH_DEBUG)
+	${REINPLACE_CMD} 's|@INSTALL@|@INSTALL@ -s|' ${WRKSRC}/install-mod.sh.in
+.endif
 
 pre-configure:
 	@${ECHO_MSG} ""
@@ -219,10 +224,11 @@ pre-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/lib/${PORTNAME}/modules
 
 post-install:
-	${MKDIR} ${STAGEDIR}${DBDIR}
-	${MKDIR} ${STAGEDIR}${RUNDIR}
-	${MKDIR} ${STAGEDIR}${LOGDIR}
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	${MKDIR} ${STAGEDIR}${RUNDIR}
+	${MKDIR} ${STAGEDIR}${DBDIR}
+	${MKDIR} ${STAGEDIR}${LOGDIR}
+
 	cd ${WRKSRC}/doc && ${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}
 	cd ${INSTALL_WRKSRC}/contrib && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} \
 		${MAKE_FLAGS} ${MAKEFILE} ${MAKE_ARGS} ${INSTALL_TARGET}
@@ -230,6 +236,10 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/example.conf ${STAGEDIR}${PREFIX}/etc/${PORTNAME}/ircd.conf.sample
 	${INSTALL_DATA} ${WRKSRC}/doc/example.efnet.conf ${STAGEDIR}${PREFIX}/etc/${PORTNAME}/ircd-efnet.conf.sample
 	${INSTALL_DATA} ${WRKSRC}/doc/genssl.sh ${STAGEDIR}${PREFIX}/etc/${PORTNAME}/genssl.sh
+.if !defined(WITH_DEBUG)
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/ircd-ratbox/libcore.so
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/ircd-ratbox/libratbox.so
+.endif
 
 # ----- We need to install the shortcut.pl module ----
 .if ${PORT_OPTIONS:MSHORTCUTS}

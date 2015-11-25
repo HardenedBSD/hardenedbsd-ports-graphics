@@ -12,6 +12,16 @@ LICENSE_FILE=	${PANDORA_LICENSE_FILE}
 
 RUN_DEPENDS=	${LOCALBASE}/bin/twopi:${PORTSDIR}/graphics/graphviz
 
+USES=		shebangfix
+SHEBANG_FILES=	include/languages/util-all \
+		include/languages/util-bzr-update \
+		include/languages/util-compile-mo \
+		include/languages/util-create-po \
+		include/languages/util-create-template \
+		include/languages/util-generate-tarball \
+		include/languages/util-update-po \
+		pandora_console_upgrade
+
 OPTIONS_DEFINE=	DOCS PGSQL
 DOCS_DESC=	Install AUTHORS and ChangeLog
 PGSQL_DESC=	Use PostgreSQL backend (experimental)
@@ -52,7 +62,7 @@ post-install:
 			include/languages/extract_newlines.sh.bak \
 			*.sql.bak COPYING ${PORTDOCS} DEBIAN/ \
 			attachment/collections/.empty attachment/downloads/.gitignore
-	@cd ${STAGEDIR}${WWWDIR} && ${MV} install.php install.done
+	@cd ${STAGEDIR}${WWWDIR} && ${MV} install.php install_old.php
 .if ${PORT_OPTIONS:MDOCS}
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 .for x in ${PORTDOCS}

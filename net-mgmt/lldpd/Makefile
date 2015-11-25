@@ -2,9 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	lldpd
-PORTVERSION=	0.7.13
+PORTVERSION=	0.7.19
 CATEGORIES=	net-mgmt
-MASTER_SITES=	http://media.luffy.cx/files/${PORTNAME}/
+MASTER_SITES=	http://media.luffy.cx/files/${PORTNAME}/ \
+		http://mirror.1labs.ch/${PORTNAME}/
 
 MAINTAINER=	freebsd@simweb.ch
 COMMENT=	LLDP (802.1ab)/CDP/EDP/SONMP/FDP daemon and SNMP subagent
@@ -17,7 +18,9 @@ USES=		libtool
 USE_LDCONFIG=	yes
 USE_RC_SUBR=	${PORTNAME}
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS=	--enable-privsep \
+CONFIGURE_ARGS=	--disable-doxygen-doc \
+		--enable-hardening \
+		--enable-privsep \
 		--with-privsep-chroot=/var/empty \
 		--with-lldpd-ctl-socket=/var/run/lldpd.socket \
 		--with-lldpd-pid-file=/var/run/lldpd.pid \

@@ -7,6 +7,7 @@ include/libgit2-glib-1.0/libgit2-glib/ggit-branch.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-checkout-options.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-cherry-pick-options.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-clone-options.h
+include/libgit2-glib-1.0/libgit2-glib/ggit-commit-parents.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-commit.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-config-entry.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-config.h
@@ -14,6 +15,8 @@ include/libgit2-glib-1.0/libgit2-glib/ggit-cred-plaintext.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-cred-ssh-interactive.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-cred-ssh-key-from-agent.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-cred.h
+include/libgit2-glib-1.0/libgit2-glib/ggit-diff-binary.h
+include/libgit2-glib-1.0/libgit2-glib/ggit-diff-binary-file.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-diff-delta.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-diff-file.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-diff-find-options.h
@@ -25,6 +28,7 @@ include/libgit2-glib-1.0/libgit2-glib/ggit-diff-similarity-metric.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-diff.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-enum-types.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-error.h
+include/libgit2-glib-1.0/libgit2-glib/ggit-fetch-options.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-index-entry-resolve-undo.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-index-entry.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-index.h
@@ -38,8 +42,7 @@ include/libgit2-glib-1.0/libgit2-glib/ggit-object-factory.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-object.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-oid.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-patch.h
-include/libgit2-glib-1.0/libgit2-glib/ggit-push-progress.h
-include/libgit2-glib-1.0/libgit2-glib/ggit-push.h
+include/libgit2-glib-1.0/libgit2-glib/ggit-push-options.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-ref-spec.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-ref.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-reflog-entry.h
@@ -51,6 +54,7 @@ include/libgit2-glib-1.0/libgit2-glib/ggit-revert-options.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-revision-walker.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-signature.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-status-options.h
+include/libgit2-glib-1.0/libgit2-glib/ggit-submodule-update-options.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-submodule.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-tag.h
 include/libgit2-glib-1.0/libgit2-glib/ggit-transfer-progress.h
@@ -88,7 +92,6 @@ libdata/pkgconfig/libgit2-glib-1.0.pc
 %%PORTDOCS%%%%DOCSDIR%%-1.0/GgitObjectFactory.html
 %%PORTDOCS%%%%DOCSDIR%%-1.0/GgitObjectFactoryBase.html
 %%PORTDOCS%%%%DOCSDIR%%-1.0/GgitPatch.html
-%%PORTDOCS%%%%DOCSDIR%%-1.0/GgitPush.html
 %%PORTDOCS%%%%DOCSDIR%%-1.0/GgitRef.html
 %%PORTDOCS%%%%DOCSDIR%%-1.0/GgitRefSpec.html
 %%PORTDOCS%%%%DOCSDIR%%-1.0/GgitReflog.html
@@ -108,13 +111,13 @@ libdata/pkgconfig/libgit2-glib-1.0.pc
 %%PORTDOCS%%%%DOCSDIR%%-1.0/api-index-full.html
 %%PORTDOCS%%%%DOCSDIR%%-1.0/home.png
 %%PORTDOCS%%%%DOCSDIR%%-1.0/index.html
-%%PORTDOCS%%%%DOCSDIR%%-1.0/index.sgml
 %%PORTDOCS%%%%DOCSDIR%%-1.0/left-insensitive.png
 %%PORTDOCS%%%%DOCSDIR%%-1.0/left.png
 %%PORTDOCS%%%%DOCSDIR%%-1.0/libgit2-glib-1.0-Ggit-Main.html
 %%PORTDOCS%%%%DOCSDIR%%-1.0/libgit2-glib-1.0-GgitError.html
 %%PORTDOCS%%%%DOCSDIR%%-1.0/libgit2-glib-1.0-GgitMergeTreeOptions.html
 %%PORTDOCS%%%%DOCSDIR%%-1.0/libgit2-glib-1.0-GgitMessage.html
+%%PORTDOCS%%%%DOCSDIR%%-1.0/libgit2-glib-1.0-GgitPush.html
 %%PORTDOCS%%%%DOCSDIR%%-1.0/libgit2-glib-1.0-GgitStatusOptions.html
 %%PORTDOCS%%%%DOCSDIR%%-1.0/libgit2-glib-1.0.devhelp2
 %%PORTDOCS%%%%DOCSDIR%%-1.0/right-insensitive.png

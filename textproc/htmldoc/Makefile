@@ -6,8 +6,7 @@ PORTVERSION=	1.8.28
 PORTREVISION=	2
 CATEGORIES=	textproc
 MASTER_SITES=	http://www.msweet.org/files/project1/ \
-		${MASTER_SITE_EASYSW}
-MASTER_SITE_SUBDIR=	${PORTNAME}/${PORTVERSION}
+		EASYSW/${PORTNAME}/${PORTVERSION}
 DISTNAME=	${PORTNAME}-${PORTVERSION}-source
 
 MAINTAINER=	jose@diasfernandes.pt
@@ -15,13 +14,12 @@ COMMENT=	Converts HTML to PDF and/or PostScript
 
 LICENSE=	GPLv2
 
-LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg	\
-		libpng.so:${PORTSDIR}/graphics/png
+LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png
 
 OPTIONS_DEFINE=	HTMLDOCGUI
 HTMLDOCGUI_DESC=	Build GUI front-end
 
-USES=		tar:bzip2
+USES=		jpeg tar:bzip2
 USE_OPENSSL=	yes
 
 GNU_CONFIGURE=	yes

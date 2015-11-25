@@ -10,11 +10,12 @@ MAINTAINER=	ruby@FreeBSD.org
 COMMENT=	Define default values for ActiveRecord models in a declarative manner
 
 LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE.TXT
 
 RUN_DEPENDS=	rubygem-activerecord4>=4.1.4:${PORTSDIR}/databases/rubygem-activerecord4
 
+NO_ARCH=	yes
 USE_RUBY=	yes
-USE_RAKE=	yes
 USE_RUBYGEMS=	yes
 RUBYGEM_AUTOPLIST=	yes
 

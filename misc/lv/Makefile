@@ -8,25 +8,20 @@ CATEGORIES=	misc
 MASTER_SITES=	http://www.ff.iij4u.or.jp/~nrt/freeware/
 DISTNAME=	lv451
 
-MAINTAINER=	sumikawa@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Powerful Multilingual File Viewer
 
-LICENSE=	GPLv2
+LICENSE=	GPLv2 # or later
 LICENSE_FILE=	${WRKSRC}/../GPL.txt
 
 WRKSRC=		${WRKDIR}/${DISTNAME}/src
 GNU_CONFIGURE=	yes
 
 OPTIONS_DEFINE=	DOCS
-OPTIONS_DEFAULT=	DOCS
 
-.include <bsd.port.options.mk>
-
-post-install:
-.if ${PORT_OPTIONS:MDOCS}
-	${MKDIR} ${STAGEDIR}${DOCSDIR}
+post-install-DOCS-on:
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	(cd ${WRKDIR}/${DISTNAME}; \
-	${INSTALL_DATA} *.html hello.sample* ${STAGEDIR}${DOCSDIR})
-.endif
+		${INSTALL_DATA} *.html hello.sample* ${STAGEDIR}${DOCSDIR})
 
 .include <bsd.port.mk>

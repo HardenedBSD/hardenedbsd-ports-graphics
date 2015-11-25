@@ -1,9 +1,9 @@
 # Created by: Joe Marcus Clarke <marcus@FreeBSD.org>
 # $FreeBSD$
-#   $MCom: ports/trunk/x11/gdm/Makefile 20031 2014-11-02 21:47:55Z kwm $
 
 PORTNAME=	gdm
-PORTVERSION=	3.14.1
+PORTVERSION=	3.16.2
+PORTREVISION=	1
 CATEGORIES=	x11 gnome
 MASTER_SITES=	GNOME
 DIST_SUBDIR=	gnome3
@@ -13,7 +13,7 @@ COMMENT=	GNOME 3 version of xdm display manager
 
 BUILD_DEPENDS=	zenity>=3.0.0:${PORTSDIR}/x11/zenity \
 		itstool:${PORTSDIR}/textproc/itstool \
-    		iso-codes>=0:${PORTSDIR}/misc/iso-codes
+		iso-codes>=0:${PORTSDIR}/misc/iso-codes
 LIB_DEPENDS=	libck-connector.so:${PORTSDIR}/sysutils/consolekit \
 		libdbus-glib-1.so:${PORTSDIR}/devel/dbus-glib \
 		libupower-glib.so:${PORTSDIR}/sysutils/upower \
@@ -22,6 +22,7 @@ LIB_DEPENDS=	libck-connector.so:${PORTSDIR}/sysutils/consolekit \
 		libaccountsservice.so:${PORTSDIR}/sysutils/accountsservice \
 		libcanberra-gtk3.so:${PORTSDIR}/audio/libcanberra-gtk3
 RUN_DEPENDS=	zenity>=3.0.0:${PORTSDIR}/x11/zenity \
+		gnome-shell>=3.15.92:${PORTSDIR}/x11/gnome-shell \
 		gnome-settings-daemon>=3.0.0:${PORTSDIR}/sysutils/gnome-settings-daemon \
 		gnome-keyring-3:${PORTSDIR}/security/gnome-keyring \
 		gnome-session>=3.0.0:${PORTSDIR}/x11/gnome-session \
@@ -38,8 +39,12 @@ RUN_DEPENDS+=	xrdb:${PORTSDIR}/x11/xrdb \
 USERS=		gdm
 GROUPS=		gdm
 
-USES=		execinfo gettext gmake libtool pathfix pkgconfig tar:xz
-USE_GNOME=	dconf gnomeprefix intlhack introspection librsvg2
+PORTSCOUT=	limitw:1,even
+
+USES=		cpe execinfo gettext gmake libtool pathfix pkgconfig tar:xz
+CPE_VENDOR=	gnome
+CPE_VENDOR=	gnome_display_manager
+USE_GNOME=	dconf intlhack introspection librsvg2
 USE_LDCONFIG=	yes
 USE_XORG=	dmx dmxproto
 INSTALLS_ICONS=	yes
@@ -54,15 +59,19 @@ CONFIGURE_ARGS=	--disable-static \
 		--with-custom-conf=${PREFIX}/etc/gdm/custom.conf \
 		--with-dbus-sys=${PREFIX}/etc/dbus-1/system.d \
 		--with-log-dir=/var/log/gdm \
+		--localstatedir=/var \
+		--with-console-kit \
 		--with-working-directory=${PREFIX}/etc/gdm/home \
 		--with-sysconfsubdir=gdm \
 		--with-pid-file=/var/run/gdm.pid \
 		--with-dmconfdir=${LOCALBASE}/share/xsessions \
 		--with-screenshot-dir=/var/run/gdm/greeter \
 		--enable-authentication-scheme=pam \
+		--without-plymouth \
 		--with-user=gdm \
 		--with-group=gdm \
- 		--with-initial-vt=09 \
+		--with-initial-vt=09 \
+		--disable-wayland-support \
 		--with-systemd=no
 
 # this is a hack until we can get our own pam dir and dir in order.
@@ -125,7 +134,13 @@ post-patch:
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/data/gdm.conf-custom \
-		${STAGEDIR}${PREFIX}/etc/gdm/custom.conf.default
+		${STAGEDIR}${PREFIX}/etc/gdm/custom.conf.sample
+	@${RM} ${STAGEDIR}${PREFIX}/etc/gdm/custom.conf
+	${MV} ${STAGEDIR}${PREFIX}/etc/gdm/PostSession/Default \
+		${STAGEDIR}${PREFIX}/etc/gdm/PostSession/Default.sample
+	${MV} ${STAGEDIR}${PREFIX}/etc/gdm/PreSession/Default \
+		${STAGEDIR}${PREFIX}/etc/gdm/PreSession/Default.sample
+
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/xsessions
 	${MKDIR} ${STAGEDIR}${PREFIX}/etc/gdm/Sessions
 	${MKDIR} ${STAGEDIR}${PREFIX}/etc/dm/Sessions
@@ -143,10 +158,5 @@ post-install:
 
 	@${SED} -e 's|%%PREFIX%%|${PREFIX}|g' < ${PKGDIR}/pkg-message \
 		| /usr/bin/fmt 75 79 > ${PKGMESSAGE}
-
-# logwtmp lives here.
-.if ${OSVERSION} < 900000
-CONFIGLIBS+=	-lutil
-.endif
 
 .include <bsd.port.mk>

@@ -4,8 +4,7 @@
 PORTNAME=	netpipes
 PORTVERSION=	4.2
 CATEGORIES=	net
-MASTER_SITES=	${MASTER_SITE_LOCAL}
-MASTER_SITE_SUBDIR=kris
+MASTER_SITES=	LOCAL/kris
 DISTNAME=	netpipes-4.2-export
 
 MAINTAINER=	doconnor@gsoft.com.au
@@ -16,6 +15,6 @@ CONFLICTS=	timelimit-[0-9]*
 NO_WRKSUBDIR=	yes
 
 do-install:
-	${SETENV} ${MAKE_ENV} ${MAKE_CMD} -C ${WRKDIR} STAGEDIR=${STAGEDIR} install
+	${SETENV} ${MAKE_ENV} ${MAKE_CMD} -C ${WRKSRC} STAGEDIR=${STAGEDIR} install
 
 .include <bsd.port.mk>

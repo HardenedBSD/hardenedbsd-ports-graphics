@@ -7,7 +7,7 @@ PORTREVISION=	1
 CATEGORIES=	vietnamese devel
 MASTER_SITES=	LOCAL/obrien
 
-MAINTAINER=	obrien@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	VIQR<->VISCII conversion and VISCII ctype-like routines
 
 USES=		tar:bzip2
@@ -18,6 +18,8 @@ OPTIONS_DEFINE=	DOCS
 
 MAKE_ARGS=	${MAKE_ENV:S/CFLAGS/FLAGS/}
 
+MAKE_JOBS_UNSAFE=	yes
+
 do-install:
 	${INSTALL_DATA} ${WRKSRC}/libvntype.a ${WRKSRC}/libviqr.a \
 		${STAGEDIR}${PREFIX}/lib
@@ -25,6 +27,8 @@ do-install:
 	(cd ${WRKSRC}/../include && ${INSTALL_DATA} charset.h charseta.h \
 		charsetv.h ctype.h portable.h vncompos.h vnkeys.h vntype.h \
 		${STAGEDIR}${PREFIX}/include/viet)
+
+do-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${WRKSRC}/../README.lib ${STAGEDIR}${DOCSDIR}
 

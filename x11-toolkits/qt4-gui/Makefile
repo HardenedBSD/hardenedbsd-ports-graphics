@@ -3,7 +3,6 @@
 
 PORTNAME=	gui
 DISTVERSION=	${QT4_VERSION}
-PORTREVISION=	4
 CATEGORIES=	x11-toolkits
 PKGNAMEPREFIX=	qt4-
 
@@ -46,8 +45,8 @@ INSTALL_WRKSRC=	${BUILD_WRKSRC}
 CONFIGURE_ARGS+=	-I../../include/QtCore -I../../include/QtGui \
 			-I../../include/Qt -I../../include
 
-FONTSCALE=	${LOCALBASE}/lib/X11/fonts/TTF/luximb.ttf
-FONTENCOD=	${LOCALBASE}/lib/X11/fonts/encodings/encodings.dir
+FONTSCALE=	${LOCALBASE}/share/fonts/TTF/luximb.ttf
+FONTENCOD=	${LOCALBASE}/share/fonts/encodings/encodings.dir
 
 .include "${.CURDIR}/../../devel/qt4/files/Makefile.options"
 

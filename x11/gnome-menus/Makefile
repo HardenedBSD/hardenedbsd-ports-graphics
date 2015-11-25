@@ -23,11 +23,9 @@ INSTALL_TARGET=	install-strip
 post-patch:
 	@${SED} -e 's|/usr/local|${LOCALBASE}|g' \
 		< ${FILESDIR}/KDE.directory > ${WRKSRC}/KDE.directory
-	@${REINPLACE_CMD} -e 's|%%PTHREAD_LIBS%%|${PTHREAD_LIBS}|' \
-	    	${WRKSRC}/util/Makefile.in
 
 post-install:
-	@${MKDIR} -p ${STAGEDIR}${PREFIX}/etc/xdg/menus/ 
+	@${MKDIR} -p ${STAGEDIR}${PREFIX}/etc/xdg/menus/
 	@${INSTALL_DATA} ${WRKSRC}/layout/gnome-applications.menu \
 		${STAGEDIR}${PREFIX}/etc/xdg/menus/gnome-applications.menu
 	@${INSTALL_DATA} ${WRKSRC}/KDE.directory \

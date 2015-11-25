@@ -11,6 +11,7 @@ MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Network monitoring tool with command line and web interfaces
 
 LICENSE=	GPLv3
+LICENSE_FILE=	${WRKSRC}/COPYING
 
 LIB_DEPENDS=	libgdbm.so:${PORTSDIR}/databases/gdbm \
 		libevent.so:${PORTSDIR}/devel/libevent2
@@ -22,7 +23,7 @@ RUN_DEPENDS:=	${BUILD_DEPENDS} \
 
 DBDIR?=		/var/db
 
-USES=		autoreconf:build gmake libtool python
+USES=		autoreconf:build cpe gmake libtool python
 USE_GNOME=	libxml2
 USE_OPENSSL=	yes
 GNU_CONFIGURE=	yes
@@ -49,44 +50,21 @@ XMLDUMP_DESC=		Enable XML Dump support
 JUMBO_FRAMES_DESC=	Jumbo Frames (experimental)
 MAKO_DESC=		Install py-mako for Host Map, Region View
 
-.include <bsd.port.options.mk>
+PCAP_PORT_LIB_DEPENDS=	libpcap.so.1:${PORTSDIR}/net/libpcap
+PCAP_PORT_CONFIGURE_ON=	--with-pcap-root=${LOCALBASE}
+PCAP_PORT_CONFIGURE_OFF=--with-pcap-root=/usr
 
-.if ${PORT_OPTIONS:MPCAP_PORT}
-LIB_DEPENDS+=		libpcap.so:${PORTSDIR}/net/libpcap
-CONFIGURE_ARGS+=	--with-pcap-root=${LOCALBASE}
-.else
-CONFIGURE_ARGS+=	--with-pcap-root=/usr
-.endif
-
-.if ${PORT_OPTIONS:MXMLDUMP}
-LIB_DEPENDS+=		libgdome.so:${PORTSDIR}/textproc/gdome2
-CPPFLAGS+=		-I${LOCALBASE}/include/libxml2 \
+XMLDUMP_LIB_DEPENDS=	libgdome.so:${PORTSDIR}/textproc/gdome2
+XMLDUMP_CPPFLAGS=	-I${LOCALBASE}/include/libxml2 \
 			-I${LOCALBASE}/include/libxml2/libxml \
 			-I${LOCALBASE}/include/libgdome \
 			-I${LOCALBASE}/include/glib-2.0
-.endif
 
-.if ${PORT_OPTIONS:MJUMBO_FRAMES}
-CONFIGURE_ARGS+=	--enable-jumbo-frames
 # should set your mtu to 9000
 # see http://www.cyberciti.biz/faq/freebsd-jumbo-frames-networking-configration/
-.endif
+JUMBO_FRAMES_CONFIGURE_ON=	--enable-jumbo-frames
 
-.if ${PORT_OPTIONS:MMAKO}
-RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}mako>0:${PORTSDIR}/textproc/py-mako
-.endif
-
-.include <bsd.port.pre.mk>
-
-# Quick and dirty hackaround - older binutils barf when asked to strip
-# an .a file, newer complain about missing sections and succeed.
-# The real fix would be for ntop to not try stripping .a files,
-# but upstream seems to have gone ahead with ntopng so this may not
-# ever be fixed.
-.if ${OSVERSION} < 900033
-USE_BINUTILS=	yes
-CONFIGURE_ARGS+=	STRIP=${LOCALBASE}/bin/strip
-.endif
+MAKO_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}mako>0:${PORTSDIR}/textproc/py-mako
 
 pre-configure:
 	@(cd ${WRKSRC} && ./autogen.sh --noconfig)
@@ -97,4 +75,4 @@ pre-install:
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/ntop/plugins/*.so
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

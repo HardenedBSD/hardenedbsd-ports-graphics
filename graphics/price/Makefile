@@ -3,7 +3,7 @@
 
 PORTNAME=	price
 PORTVERSION=	1.3.0
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	graphics gnustep
 MASTER_SITES=	SF/${PORTNAME}/${PORTVERSION}
 DISTNAME=	PRICE-${PORTVERSION}
@@ -14,21 +14,18 @@ COMMENT=	Image filtering and manipulation using GNUstep
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		desktop-file-utils
+USES=		gnustep
 
-USE_GNUSTEP=	yes
-USE_GNUSTEP_BACK=	yes
-USE_GNUSTEP_BUILD=	yes
-USE_GNUSTEP_INSTALL=	yes
+USE_GNUSTEP=	back build
 
-DATADIR=	${GNUSTEP_LOCAL_APPS}/PRICE.app
+DATADIR=	${GNUSTEP_SYSTEM_ROOT}/Applications/PRICE.app
 PORTDATA=	*
-PLIST_FILES=	${GNUSTEP_LOCAL_TOOLS}/PRICE \
+PLIST_FILES=	${GNUSTEP_SYSTEM_TOOLS}/PRICE \
 		share/applications/PRICE.desktop
 
 post-build:
 	${SED} -i '' -e '/^Categories/s/=/&Graphics;/' \
- 		${WRKSRC}/PRICE.app/Resources/PRICE.desktop
+		${WRKSRC}/PRICE.app/Resources/PRICE.desktop
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${DATADIR}/PRICE

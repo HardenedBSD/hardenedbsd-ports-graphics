@@ -24,7 +24,6 @@ BUILD_DEPENDS=	pkg-config:${PORTSDIR}/devel/pkgconf \
 USE_GITHUB=	yes
 GH_ACCOUNT=	sm0svx
 GH_PROJECT=	svxlink
-GH_COMMIT=	cf22c70
 
 USES=		cmake tcl
 CMAKE_SOURCE_PATH=	${WRKSRC}/src
@@ -56,8 +55,6 @@ DOCS_BUILD_DEPENDS=	doxygen:${PORTSDIR}/devel/doxygen \
 OPTIONS_SUB=	yes
 PORTDOCS=	*
 
-.include <bsd.port.options.mk>
-
 post-patch:
 	@${GREP} -lr /dev/ttyS0 ${WRKSRC} | ${GREP} -v .bak | ${GREP} -v .orig | ${XARGS} \
 		${REINPLACE_CMD} -e 's|/dev/ttyS0|/dev/ttyu0|'
@@ -71,12 +68,11 @@ post-patch:
 	@${REINPLACE_CMD} -e 's|/usr/lib|${PREFIX}/lib|' \
 		${WRKSRC}/src/doc/man/svxlink.conf.5 \
 		${WRKSRC}/src/svxlink/svxlink/svxlink.conf.in
-.if ${PORT_OPTIONS:MOSS}
+post-patch-OSS-on:
 	@${GREP} -lr alsa:default ${WRKSRC} | ${GREP} -v .bak | ${GREP} -v .orig | ${XARGS} \
 		${REINPLACE_CMD} -e 's|alsa:default|oss:/dev/dsp|'
 	@${GREP} -lr alsa:plughw:0 ${WRKSRC} | ${GREP} -v .bak | ${GREP} -v .orig | ${XARGS} \
 		${REINPLACE_CMD} -e 's|alsa:plughw:0|oss:/dev/dsp|'
-.endif
 
 .if ${PORTNAME}==svxlink
 post-stage:

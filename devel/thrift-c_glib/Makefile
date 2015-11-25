@@ -3,32 +3,30 @@
 
 PORTNAME=	thrift
 PORTVERSION=	${THRIFT_PORTVERSION} # to keep in sync with thrift
-PORTREVISION=	1
+PORTREVISION=	2
 PORTEPOCH=	1
 CATEGORIES=	devel
+MASTER_SITES=	APACHE/thrift/${PORTVERSION
+DISTNAME=	thrift-${PORTVERSION}
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	C glib interface to Thrift
 
-PKGNAMESUFFIX=	-c_glib
+BROKEN=		unfetchable
 
-MASTER_SITES=		APACHE
-MASTER_SITE_SUBDIR=	/thrift/${PORTVERSION
-DISTINFO_FILE=		${.CURDIR}/../thrift/distinfo
-DISTNAME=		thrift-${PORTVERSION}
+PKGNAMESUFFIX=	-c_glib
 
 BUILDIR=	${WRKDIR}/${DISTNAME}/lib/c_glib
 
 LIB_DEPENDS=	libglib-2.0.so:${PORTSDIR}/devel/glib20
 
-USE_AUTOTOOLS=	autoconf autoheader:env aclocal automake
-ACLOCAL_ARGS=	-I${WRKSRC}/aclocal
-AUTOMAKE_ARGS=	--foreign --add-missing --copy
+DISTINFO_FILE=	${.CURDIR}/../thrift/distinfo
 
-USES=		pkgconfig gmake libtool
-GNU_CONFIGURE=  yes
-USE_LDCONFIG=   yes
-MAKE_JOBS_UNSAFE= yes
+USES=		autoreconf pkgconfig gmake libtool
+GNU_CONFIGURE=	yes
+USE_LDCONFIG=	yes
+MAKE_JOBS_UNSAFE=	yes
+INSTALL_TARGET=	install-strip
 
 .include "../thrift/bsd.thrift.mk"
 
@@ -44,7 +42,8 @@ CONFIGURE_ARGS+=        \
 		--without-php \
 		--without-php_extension \
 		--without-python \
-		--without-ruby
+		--without-ruby \
+		--without-go
 
 post-patch:
 	@${REINPLACE_CMD} 's,^pkgconfigdir = .*,pkgconfigdir=$${prefix}/libdata/pkgconfig,' ${WRKSRC}/lib/c_glib/Makefile.am

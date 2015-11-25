@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	xmlstarlet
-PORTVERSION=	1.5.0
+PORTVERSION=	1.6.1
 CATEGORIES=	textproc
 MASTER_SITES=	SF/xmlstar/${PORTNAME}/${PORTVERSION}
 
@@ -27,12 +27,8 @@ PORTDOCS=	xmlstarlet.txt \
 		html.css
 OPTIONS_DEFINE=	DOCS
 
-.include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MDOCS}
-post-install:
+post-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	cd ${WRKSRC}/doc && ${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}
-.endif
 
 .include <bsd.port.mk>

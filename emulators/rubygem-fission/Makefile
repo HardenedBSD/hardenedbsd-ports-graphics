@@ -10,9 +10,11 @@ MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	Utility to manage VMware Fusion VMs from the command line
 
 LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	rubygem-CFPropertyList>=2.2:${PORTSDIR}/devel/rubygem-CFPropertyList
 
+NO_ARCH=	yes
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes
 RUBYGEM_AUTOPLIST=	yes

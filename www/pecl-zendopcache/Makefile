@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	zendopcache
-PORTVERSION=	7.0.4
+PORTVERSION=	7.0.5
 CATEGORIES=	www
 MASTER_SITES=	http://pecl.php.net/get/
 PKGNAMEPREFIX=	pecl-
@@ -12,6 +12,9 @@ MAINTAINER=	ale@FreeBSD.org
 COMMENT=	Opcode cacher and optimizer for PHP
 
 LICENSE=	PHP301
+
+DEPRECATED=	PHP 5.4 EOL reached
+EXPIRATION_DATE=	2016-01-15
 
 OPTIONS_DEFINE=	DOCS
 

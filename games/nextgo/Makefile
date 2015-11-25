@@ -2,7 +2,7 @@
 
 PORTNAME=	nextgo
 PORTVERSION=	3.0
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	games gnustep
 MASTER_SITES=	SAVANNAH/gap
 DISTNAME=	NeXTGo-${PORTVERSION}
@@ -13,10 +13,8 @@ COMMENT=	Classic Go game for OPENSTEP/GNUstep
 LICENSE=	GPLv1
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-USE_GNUSTEP=	yes
-USE_GNUSTEP_BACK=	yes
-USE_GNUSTEP_BUILD=	yes
-USE_GNUSTEP_INSTALL=	yes
+USES=		gnustep
+USE_GNUSTEP=	back build
 
 post-patch:
 	${REINPLACE_CMD} -e 's|^GNUSTEP_INSTALLATION_DIR|#GNUSTEP_INSTALLATION_DIR|' \
@@ -25,6 +23,6 @@ post-patch:
 		${WRKSRC}/Board.m
 
 post-install:
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/Local/Applications/NeXTGo.app/NeXTGo
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/System/Applications/NeXTGo.app/NeXTGo
 
 .include <bsd.port.mk>

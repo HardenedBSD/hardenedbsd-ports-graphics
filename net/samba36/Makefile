@@ -2,10 +2,9 @@
 
 PORTNAME=		${SAMBA_BASENAME}36
 PORTVERSION=		3.6.25
-PORTREVISION?=		0
+PORTREVISION?=		1
 CATEGORIES?=		net
-MASTER_SITES=		${MASTER_SITE_SAMBA}
-MASTER_SITE_SUBDIR=	samba samba/stable samba/pre
+MASTER_SITES=		SAMBA/samba SAMBA/samba/stable SAMBA/samba/pre
 DISTNAME=		${SAMBA_BASENAME}-${PORTVERSION:S|.p|pre|:S|.r|rc|:S|.t|tp|:S|.a|alpha|}
 
 MAINTAINER?=		timur@FreeBSD.org
@@ -23,7 +22,6 @@ SAMBA_BASENAME=		samba
 CPE_VENDOR=		samba
 CPE_PRODUCT=		samba
 
-LATEST_LINK=		${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}
 EXAMPLESDIR=		${PREFIX}/share/examples/${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}
 PATCH_WRKSRC=		${WRKDIR}/${DISTNAME}
 WRKSRC=			${WRKDIR}/${DISTNAME}/source3
@@ -32,7 +30,21 @@ AUTOHEADER_ARGS=	${IPATHS}
 AUTOCONF_ARGS=		${IPATHS}
 
 GNU_CONFIGURE=		yes
-USES=			cpe execinfo gmake iconv pkgconfig
+USES=			cpe execinfo gmake iconv pkgconfig shebangfix
+SHEBANG_FILES=		../examples/LDAP/convertSambaAccount \
+			../examples/LDAP/get_next_oid \
+			../examples/LDAP/ol-schema-migrate.pl \
+			../examples/ad-bench/ad-bench.sh \
+			../examples/misc/adssearch.pl \
+			../examples/misc/check_multiple_LDAP_entries.pl \
+			../examples/misc/cldap.pl \
+			../examples/printing/smbprint \
+			../examples/scripts/idmap/idmap_nis.sh \
+			../examples/scripts/printing/cups/smbaddprinter.pl \
+			../examples/scripts/printing/cups/smbdelprinter.pl \
+			../examples/scripts/shares/perl/modify_samba_config.pl \
+			../examples/scripts/users_and_groups/adduserstogroups.pl \
+			../examples/scripts/users_and_groups/createdomobj.pl
 USE_AUTOTOOLS=		autoconf autoheader
 USE_LDCONFIG=		${SAMBA_LIBDIR}
 # pkg-config is used to find talloc
@@ -75,8 +87,7 @@ CONFIGURE_ARGS+=	--exec-prefix="${PREFIX}" \
 CPPFLAGS+=		-I${LOCALBASE}/include
 LDFLAGS+=		-L${LOCALBASE}/lib
 
-CONFIGURE_ENV+=		PTHREAD_CFLAGS="${PTHREAD_CFLAGS}" \
-			PTHREAD_LDFLAGS="${PTHREAD_LIBS}"
+CONFIGURE_ENV+=		PTHREAD_LDFLAGS="-lpthread"
 # XXX: Temporary hack for RELENG6
 CONFIGURE_ENV+=		ac_cv_header_sys_mount_h=yes
 # XXX: readdir test fails on ZFS, bringing unusable replacement code
@@ -261,18 +272,13 @@ CONFIGURE_ARGS+=	--disable-fam
 
 .if ${PORT_OPTIONS:MACL_SUPPORT}
 CONFIGURE_ARGS+=	--with-acl-support
-.	if ${OSVERSION} > 800000
 WANT_EXP_MODULES+=	vfs_zfsacl
 LIB_DEPENDS+=		libsunacl.so:${PORTSDIR}/sysutils/libsunacl
-.	endif
 .else
 CONFIGURE_ARGS+=	--without-acl-support
 .endif
 
 .if ${PORT_OPTIONS:MAIO_SUPPORT}
-.if ${OSVERSION} < 700055
-IGNORE=			an AIO support requires 7.0-RELEASE or later. Disable AIO support
-.endif
 CONFIGURE_ARGS+=	--with-aio-support
 .else
 CONFIGURE_ARGS+=	--without-aio-support

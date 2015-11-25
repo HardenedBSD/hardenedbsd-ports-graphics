@@ -22,7 +22,6 @@
     SUBDIR += bsnmp-jails
     SUBDIR += bsnmp-regex
     SUBDIR += bsnmp-ucd
-    SUBDIR += bsnmptools
     SUBDIR += bwm-ng
     SUBDIR += cacti
     SUBDIR += cacti-spine
@@ -30,6 +29,7 @@
     SUBDIR += cdpd
     SUBDIR += cdpr
     SUBDIR += centreon-clib
+    SUBDIR += check_ipmi_sensor
     SUBDIR += check_logfiles
     SUBDIR += check_multi
     SUBDIR += check_mysql_health
@@ -39,7 +39,6 @@
     SUBDIR += ciscoconf
     SUBDIR += clog
     SUBDIR += cnagios
-    SUBDIR += collectd
     SUBDIR += collectd5
     SUBDIR += confregdecode
     SUBDIR += coovachilli
@@ -57,6 +56,7 @@
     SUBDIR += etherape
     SUBDIR += ettercap
     SUBDIR += ezradius
+    SUBDIR += fastnetmon
     SUBDIR += fetchconfig
     SUBDIR += flow-extract
     SUBDIR += flow-tools
@@ -65,8 +65,6 @@
     SUBDIR += flowviewer
     SUBDIR += fprobe
     SUBDIR += glpi-plugins-fusioninventory-server
-    SUBDIR += glpi-plugins-tracker-agent
-    SUBDIR += glpi-plugins-tracker-server
     SUBDIR += grepcidr
     SUBDIR += grepip
     SUBDIR += gsnmp
@@ -74,7 +72,10 @@
     SUBDIR += hastmon
     SUBDIR += hawk
     SUBDIR += icinga
+    SUBDIR += icinga-classicweb
+    SUBDIR += icinga-core
     SUBDIR += icinga2
+    SUBDIR += icingaweb2
     SUBDIR += icli
     SUBDIR += icmpmonitor
     SUBDIR += icmpquery
@@ -93,8 +94,10 @@
     SUBDIR += isic
     SUBDIR += jnettop
     SUBDIR += kismet
+    SUBDIR += klg
     SUBDIR += lanmap
     SUBDIR += lg
+    SUBDIR += librenms
     SUBDIR += libsmi
     SUBDIR += lldpd
     SUBDIR += mbrowse
@@ -173,6 +176,8 @@
     SUBDIR += nrpe-ssl
     SUBDIR += nsca
     SUBDIR += nsca-client
+    SUBDIR += nsca-ng
+    SUBDIR += nsca-ng-client
     SUBDIR += nsca27
     SUBDIR += nsca27-client
     SUBDIR += nstreams
@@ -216,6 +221,7 @@
     SUBDIR += p5-Net-IPv6Addr
     SUBDIR += p5-Net-NSCA-Client
     SUBDIR += p5-Net-Netmask
+    SUBDIR += p5-Net-OpenVPN-Manage
     SUBDIR += p5-Net-SNMP
     SUBDIR += p5-Net-SNMP-Util
     SUBDIR += p5-Net-SNMPTrapd
@@ -246,13 +252,13 @@
     SUBDIR += percona-monitoring-plugins
     SUBDIR += pftabled
     SUBDIR += php5-snmp
-    SUBDIR += php53-snmp
     SUBDIR += php55-snmp
     SUBDIR += php56-snmp
     SUBDIR += phpip
     SUBDIR += phpipam
     SUBDIR += phpweathermap
     SUBDIR += pixilate
+    SUBDIR += pktstat
     SUBDIR += pmacct
     SUBDIR += pnp
     SUBDIR += pnp-icinga
@@ -261,6 +267,7 @@
     SUBDIR += py-ipcalc
     SUBDIR += py-ipy
     SUBDIR += py-pyang
+    SUBDIR += py-pysmi
     SUBDIR += py-snmp4
     SUBDIR += py-snmp4-apps
     SUBDIR += py-snmp4-mibs

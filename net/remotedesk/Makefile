@@ -2,7 +2,7 @@
 
 PORTNAME=	remotedesk
 PORTVERSION=	0.1
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	net gnustep
 MASTER_SITES=	SAVANNAH/gap
 DISTNAME=	RemoteDesk-${PORTVERSION}
@@ -14,16 +14,14 @@ LICENSE=	GPLv2 # or later
 
 RUN_DEPENDS=	rdesktop:${PORTSDIR}/net/rdesktop
 
-USE_GNUSTEP=	yes
-USE_GNUSTEP_BACK=	yes
-USE_GNUSTEP_BUILD=	yes
-USE_GNUSTEP_INSTALL=	yes
+USES=		gnustep
+USE_GNUSTEP=	back build
 
 post-patch:
 	${REINPLACE_CMD} -e 's|^GNUSTEP_INSTALLATION_DIR|#GNUSTEP_INSTALLATION_DIR|' \
 		${WRKSRC}/GNUmakefile
 
 post-install:
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/Local/Applications/RemoteDesk.app/RemoteDesk
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/GNUstep/System/Applications/RemoteDesk.app/RemoteDesk
 
 .include <bsd.port.mk>

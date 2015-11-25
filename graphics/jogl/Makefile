@@ -3,9 +3,9 @@
 
 PORTNAME=	jogl
 PORTVERSION=	1.1.1
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	graphics devel java
-MASTER_SITES=http://download.java.net/media/jogl/builds/archive/jsr-231-1.1.1/
+MASTER_SITES=	http://download.java.net/media/jogl/builds/archive/jsr-231-1.1.1/
 EXTRACT_SUFX=	-src.zip
 
 MAINTAINER=	peterj@FreeBSD.org
@@ -52,10 +52,21 @@ ALL_TARGET+=	javadoc
 
 .include <bsd.port.pre.mk>
 
-.if ${JAVA_PORT_VERSION} == "1.6.0"
+.if ${JAVA_PORT_VERSION:M1.6.*}
 PLIST_SUB+=	JDK6=""
-.else
+PLIST_SUB+=	JDK7="@comment "
+.endif
+.if ${JAVA_PORT_VERSION:M1.7.*}
 PLIST_SUB+=	JDK6="@comment "
+PLIST_SUB+=	JDK7=""
+.endif
+.if ${JAVA_PORT_VERSION:M1.8.*}
+PLIST_SUB+=	JDK6="@comment "
+PLIST_SUB+=	JDK7="@comment "
+.endif
+
+.if ${JAVA_PORT_VERSION:M1.8.*}
+EXTRA_PATCHES=	${PATCHDIR}/extra-patch-build.xml
 .endif
 
 post-patch:

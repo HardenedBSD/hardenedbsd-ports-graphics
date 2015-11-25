@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	Data-Printer
-PORTVERSION=	0.35
-PORTREVISION=	1
+PORTVERSION=	0.36
 CATEGORIES=	devel perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
@@ -24,6 +23,7 @@ TEST_DEPENDS=	p5-Capture-Tiny>=0:${PORTSDIR}/devel/p5-Capture-Tiny \
 		p5-IO-Pty-Easy>=0:${PORTSDIR}/devel/p5-IO-Pty-Easy \
 		p5-Test-Pod>=1.41:${PORTSDIR}/devel/p5-Test-Pod
 
+NO_ARCH=	yes
 USE_PERL5=	configure
 USES=		perl5
 

@@ -4,16 +4,14 @@ PORTNAME=	gsimplecal
 PORTVERSION=	2.1
 CATEGORIES=	deskutils
 
-MAINTAINER=	lme@FfreeBSD.org
+MAINTAINER=	lme@FreeBSD.org
 COMMENT=	Lightweight calendar applet written in C++ using GTK
 
 LICENSE=	GPLv3
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	dmedvinsky
-GH_COMMIT=	c544ee9
-GH_PROJECT=	${PORTNAME}
-GH_TAGNAME=	${GH_COMMIT}
+GH_TAGNAME=	c544ee9
 
 GNU_CONFIGURE=	yes
 

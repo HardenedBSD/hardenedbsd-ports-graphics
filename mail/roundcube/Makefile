@@ -1,7 +1,8 @@
 # $FreeBSD$
 
 PORTNAME=	roundcube
-DISTVERSION=	1.1.0
+DISTVERSION=	1.1.3
+PORTREVISION=	1
 PORTEPOCH=	1
 CATEGORIES?=	mail www
 MASTER_SITES=	SF/${PORTNAME}mail/${PORTNAME}mail/${DISTVERSION:tu}
@@ -17,6 +18,10 @@ WRKSRC=		${WRKDIR}/${PORTNAME}mail-${DISTVERSION}
 
 RCUBECOMP=	SQL config index.php installer logs plugins program robots.txt skins temp vendor
 PORTDOCS=	CHANGELOG INSTALL README.md UPGRADING
+
+USES=		cpe
+CPE_PRODUCT=	webmail
+CPE_VENDOR=	roundcube
 
 WANT_PHP_WEB=	yes
 USE_PHP=	pcre mbstring session iconv dom xml json intl zip filter

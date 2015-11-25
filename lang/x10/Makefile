@@ -8,7 +8,7 @@ CATEGORIES=	lang devel java
 MASTER_SITES=	http://dist.codehaus.org/x10/dependencies/ \
 		SF
 DISTNAME=	${PORTNAME}-${PORTVERSION}-src
-DISTFILES=	${PORTNAME}-${PORTVERSION}-src${EXTRACT_SUFX} \
+DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
 		lpg.runtime.java_2.0.22.jar \
 		ecj-3.5.1.jar \
 		com.ibm.wala.cast.java_1.0.0.201101071300.jar \
@@ -18,7 +18,7 @@ DISTFILES=	${PORTNAME}-${PORTVERSION}-src${EXTRACT_SUFX} \
 		org.eclipse.equinox.common_3.6.0.v20100503.jar \
 		commons-math-2.2.jar \
 		bdwgc-7.1.tar.gz
-EXTRACT_ONLY=	${PORTNAME}-${PORTVERSION}-src${EXTRACT_SUFX}
+EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
 
 MAINTAINER=	jwbacon@tds.net
 COMMENT=	Object-oriented parallel programming language
@@ -27,7 +27,7 @@ LICENSE=	EPL
 
 USES=	tar:bzip2
 USE_JAVA=	yes
-JAVA_VERSION=	1.6+
+JAVA_VERSION=	1.6 1.7
 USE_ANT=	yes
 USE_GCC=	yes
 
@@ -41,7 +41,7 @@ WRKSRC=		${WRKDIR}/x10.dist
 
 OPTIONS_DEFINE=	EXAMPLES
 
-.include <bsd.port.options.mk>
+.include <bsd.port.pre.mk>
 
 post-patch:
 	${REINPLACE_CMD} -e 's/value="make"/value="gmake"/g' \
@@ -72,4 +72,4 @@ do-install:
 	${CP} -R ${WRKSRC}/samples/* ${STAGEDIR}${EXAMPLESDIR}
 .endif
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

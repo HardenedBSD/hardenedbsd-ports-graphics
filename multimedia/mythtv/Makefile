@@ -3,7 +3,7 @@
 
 PORTNAME=	mythtv
 PORTVERSION=	0.27.0.20140121
-PORTREVISION=	6
+PORTREVISION=	7
 CATEGORIES=	multimedia
 MASTER_SITES=	http://people.freebsd.org/~decke/distfiles/
 
@@ -23,15 +23,16 @@ CONFLICTS=	mythtv-frontend-[0-9]*
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	MythTV
-GH_TAGNAME=	${GH_COMMIT}
-GH_COMMIT=	5a5e1cd
+GH_TAGNAME=	5a5e1cd
 
-WRKSRC=		${WRKDIR}/${GH_ACCOUNT}-${GH_PROJECT}-${GH_COMMIT}/${GH_PROJECT}
+WRKSRC_SUBDIR=	${PORTNAME}
 
 ONLY_FOR_ARCHS=	i386 amd64
 USE_PERL5=	run build
 NOPRECIOUSMAKEVARS=	# don't override $(ARCH) in ffmpeg makefiles
-USES=		gmake libtool perl5 pkgconfig pathfix
+USES=		gmake libtool perl5 pkgconfig pathfix shebangfix
+SHEBANG_FILES=	programs/scripts/database/mythconverg_backup.pl \
+		programs/scripts/database/mythconverg_restore.pl
 USE_QT4=	gui sql network script linguist_build l10n sql-mysql_run \
 		moc_build qmake_build rcc_build uic_build imageformats
 QT_NONSTANDARD=	yes
@@ -75,13 +76,6 @@ OPENGL_CONFIGURE_ENABLE=	opengl-video
 .include <bsd.port.options.mk>
 
 SUB_FILES=	pkg-message
-
-# for too old binutils in base
-.if ${OSVERSION} < 900033
-BUILD_DEPENDS+=	${LOCALBASE}/bin/as:${PORTSDIR}/devel/binutils
-CONFIGURE_ENV+=	COMPILER_PATH=${LOCALBASE}/bin
-MAKE_ENV+=	COMPILER_PATH=${LOCALBASE}/bin
-.endif
 
 .if ${PORT_OPTIONS:MBINDINGS}
 CONFIGURE_ARGS+=	--python=${PYTHON_CMD}

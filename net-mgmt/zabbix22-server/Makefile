@@ -1,14 +1,14 @@
-# Created by: Pakhom Golynga <pakhom706@gmail.com>
+# Created by: Pakhom Golynga <pakhom@pakhom.spb.ru>
 # $FreeBSD$
 
 PORTNAME=	zabbix22
-PORTVERSION=	2.2.8
+PORTVERSION=	2.2.10
 CATEGORIES=	net-mgmt
 MASTER_SITES=	SF/zabbix/ZABBIX%20Latest%20Stable/${PORTVERSION}
 PKGNAMESUFFIX?=	-server
 DISTNAME=	zabbix-${PORTVERSION}
 
-MAINTAINER=	pakhom706@gmail.com
+MAINTAINER=	pakhom@pakhom.spb.ru
 COMMENT=	Enterprise-class open source distributed monitoring (${PKGNAMESUFFIX:S/^-//})
 
 LICENSE=	GPLv2
@@ -66,8 +66,6 @@ SUB_FILES=	pkg-message
 
 CONFIGURE_ARGS+=	--with-net-snmp
 
-OPTIONSFILE=	${PORT_DBDIR}/${PORTNAME}${PKGNAMESUFFIX}/options
-
 OPTIONS_DEFINE=	IPV6 FPING JABBER CURL LDAP IPMI SSH NMAP JAVAGW LIBXML2
 OPTIONS_DEFAULT=	MYSQL IPV6 FPING JABBER CURL UNIXODBC
 OPTIONS_SUB=	yes
@@ -77,7 +75,7 @@ FPING_DESC=	Build/install fping for ping checks
 IPMI_DESC=	Support for IPMI checks
 JABBER_DESC=	Support for Jabber media type
 LDAP_DESC=	Support for LDAP server checks
-NMAP_DESC=	Build/install nmap for o/s detection
+NMAP_DESC=	Build/install Nmap for OS detection
 SSH_DESC=	Support for SSH-based checks
 ODBC_DESC=	Support for database checks via ODBC
 JAVAGW_DESC=	Support for Java gateway

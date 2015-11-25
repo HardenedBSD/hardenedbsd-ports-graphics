@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	sox
-PORTVERSION=	14.4.1
-PORTREVISION=	7
+PORTVERSION=	14.4.2
 CATEGORIES=	audio
 MASTER_SITES=	SF
 
@@ -21,9 +20,9 @@ GNU_CONFIGURE=	yes
 USES=		autoreconf pkgconfig libtool
 USE_LDCONFIG=	yes
 
-OPTIONS_DEFINE=	ALSA AO AMRNB AMRWB FFMPEG FLAC GSM ID3TAG LADSPA LAME \
-		MAD PNG PULSEAUDIO SNDFILE VORBIS WAVPACK
-OPTIONS_DEFAULT=	AO FFMPEG FLAC GSM ID3TAG MAD PNG SNDFILE VORBIS
+OPTIONS_DEFINE=	ALSA AO AMRNB AMRWB FLAC GSM ID3TAG LADSPA LAME \
+		MAD OPUS PNG PULSEAUDIO SNDFILE TWOLAME VORBIS WAVPACK
+OPTIONS_DEFAULT=	AO FLAC GSM ID3TAG MAD OPUS PNG SNDFILE VORBIS
 # Default LAME to off for packages so we don't end up RESTRICTED
 .if !defined(PACKAGE_BUILDING)
 OPTIONS_DEFAULT+=	LAME
@@ -35,10 +34,11 @@ GSM_DESC=	Use libgsm from ports (else use bundled lib)
 PNG_DESC=	PNG spectrogram creation
 
 CPPFLAGS+=	-I${LOCALBASE}/include
-LDFLAGS+=	-L${LOCALBASE}/lib ${PTHREAD_LIBS}
+LDFLAGS+=	-lpthread -L${LOCALBASE}/lib
 CONFIGURE_ARGS+=	--with-pkgconfigdir="${PREFIX}/libdata/pkgconfig"
-CONFIGURE_ARGS+=	--with-distro="${CONFIGURE_TARGET} ${PKGNAME}" \
-			--with-gsm
+CONFIGURE_ARGS+=	--with-distro="${CONFIGURE_TARGET} ${PKGNAME}"
+CONFIGURE_ARGS+=	--with-gsm
+CONFIGURE_ARGS+=	--disable-stack-protector
 
 ALSA_CONFIGURE_WITH=	alsa
 ALSA_LIB_DEPENDS=	libasound.so:${PORTSDIR}/audio/alsa-lib
@@ -52,9 +52,6 @@ AMRNB_LIB_DEPENDS=	libamrnb.so:${PORTSDIR}/audio/libamrnb
 
 AMRWB_CONFIGURE_WITH=	amrwb
 AMRWB_LIB_DEPENDS=	libamrwb.so:${PORTSDIR}/audio/libamrwb
-
-FFMPEG_CONFIGURE_WITH=	ffmpeg
-FFMPEG_LIB_DEPENDS=	libavcodec.so:${PORTSDIR}/multimedia/ffmpeg
 
 VORBIS_CONFIGURE_WITH=	oggvorbis
 VORBIS_LIB_DEPENDS=	libvorbis.so:${PORTSDIR}/audio/libvorbis
@@ -89,18 +86,17 @@ ID3TAG_LIB_DEPENDS=	libid3tag.so:${PORTSDIR}/audio/libid3tag
 WAVPACK_CONFIGURE_WITH=	wavpack
 WAVPACK_LIB_DEPENDS=	libwavpack.so:${PORTSDIR}/audio/wavpack
 
-.include <bsd.port.options.mk>
+TWOLAME_CONFIGURE_WITH=	twolame
+TWOLAME_LIB_DEPENDS=	libtwolame.so:${PORTSDIR}/audio/twolame
 
-.if ! ${PORT_OPTIONS:MGSM}
+OPUS_CONFIGURE_WITH=	opus
+OPUS_LIB_DEPENDS=	libopusfile.so:${PORTSDIR}/audio/opusfile
+
 # We cannot ask for gsm to be enabled without it trying to use external gsm,
 # so force the autoconf checks to fail
-CONFIGURE_ENV+=	ac_cv_header_gsm_h=no ac_cv_header_gsm_gsm_h=no \
+GSM_CONFIGURE_ENV_OFF=	ac_cv_header_gsm_h=no ac_cv_header_gsm_gsm_h=no \
 		ac_cv_lib_gsm_gsm_create=no
-.endif
 
-post-patch:
-	@${REINPLACE_CMD} -e 's/ CODEC_ID/ AV_CODEC_ID/g' \
-		-e 's/ CodecID/ AVCodecID/g' \
-		${WRKSRC}/src/ffmpeg.c
+INSTALL_TARGET=		install-strip
 
 .include <bsd.port.mk>

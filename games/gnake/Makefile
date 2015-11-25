@@ -4,12 +4,13 @@
 PORTNAME=	gnake
 PORTVERSION=	0.94b
 CATEGORIES=	games
-MASTER_SITES=	http://lightless.org/files/ \
-		LOCAL/jgh/games/${PORTNAME}/
+MASTER_SITES=	SF/fbsdports/gnake
 DISTNAME=	Gnake.${PORTVERSION}
 
-MAINTAINER=	chris@bsdjunk.com
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Nibbles clone for GNU/Linux and *BSD
+
+BROKEN=		unfetchable
 
 LICENSE=	GPLv2
 

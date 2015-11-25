@@ -22,8 +22,9 @@ RUN_DEPENDS=	${XMLCATMGR}:${PORTSDIR}/textproc/xmlcatmgr \
 
 USES=		python:run
 
-NO_MTREE=	YES
-NO_BUILD=	YES
+NO_MTREE=	yes
+NO_ARCH=	yes
+NO_BUILD=	yes
 WRKSRC=		${WRKDIR}
 PLIST_SUB=	XMLCAT_RM="${XMLCAT_RM}" XMLCAT_ADD="${XMLCAT_ADD}" \
 		SGMLCAT_RM="${SGMLCAT_RM}" SGMLCAT_ADD="${SGMLCAT_ADD}" \
@@ -83,7 +84,7 @@ validate: tidy
 		${ECHO_CMD} Consider using ${VUXML_FILE}.unexpanded for final commit; \
 		return 1; \
 	fi
-	${PYTHON_CMD} ${FILESDIR}/extra-validation.py
+	${PYTHON_CMD} ${FILESDIR}/extra-validation.py ${VUXML_FILE}
 
 tidy: vuln.xml
 	@if [ ! -e ${LOCALBASE}/share/xml/dtd/vuxml/catalog.xml ]; \
@@ -96,4 +97,16 @@ tidy: vuln.xml
 newentry:
 	@${SH} ${FILESDIR}/newentry.sh "${VUXML_FILE}"
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if defined(VID) && !empty(VID)
+html: work/${VID}.html
+work/${VID}.html: ${FILESDIR}/html.xsl ${FILESDIR}/common.css ${VUXML_FILE}
+	${MKDIR} work
+	xsltproc --stringparam vid "${VID}" \
+	    --output ${.TARGET} \
+	    ${FILESDIR}/html.xsl ${VUXML_FILE}
+	${INSTALL_DATA} ${FILESDIR}/common.css work
+.endif
+
+.include <bsd.port.post.mk>

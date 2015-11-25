@@ -6,8 +6,8 @@ PORTVERSION=	4.0.12
 PORTEPOCH=	2
 CATEGORIES=	print
 MASTER_SITES=	http://www.openprinting.org/download/foomatic/ \
-		${MASTER_SITE_GOOGLE_CODE} \
-		${MASTER_SITE_LOCAL:S,$,acm/foomatic/,}
+		GOOGLE_CODE \
+		LOCAL/acm/foomatic
 PKGNAMEPREFIX=	foomatic-db-
 DISTNAME=	${PKGNAMEPREFIX}${PORTNAME}-${PORTVERSION}
 DIST_SUBDIR=	foomatic
@@ -26,6 +26,8 @@ CONFIGURE_ENV=	PERL=${PERL} LIBDIR=${PREFIX}/share/foomatic/ \
 		LIB_CUPS=${LOCALBASE}/libexec/cups \
 		CUPS_FILTERS=${LOCALBASE}/libexec/cups/filters \
 		CUPS_BACKENDS=${LOCALBASE}/libexec/cups/backends
+
+MAKE_JOBS_UNSAFE=	yes
 
 post-patch:
 	@${REINPLACE_CMD} -e \

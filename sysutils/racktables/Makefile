@@ -3,6 +3,7 @@
 
 PORTNAME=	racktables
 DISTVERSION=	0.20.10
+PORTREVISION=	2
 CATEGORIES?=	sysutils www
 MASTER_SITES=	SF/${PORTNAME}/
 DISTNAME=	RackTables-${DISTVERSION}
@@ -16,6 +17,10 @@ NO_BUILD=	yes
 RACKHOME?=	www/racktables
 
 PORTEXAMPLES=	init-sample-racks.sql syncdomain.php
+
+USES=		shebangfix perl5 python:run
+USE_PERL5=	run
+SHEBANG_FILES=	gateways/*
 
 WANT_PHP_WEB=	yes
 USE_PHP=	bcmath gd json mbstring mysql pdo_mysql session

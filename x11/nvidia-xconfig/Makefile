@@ -2,17 +2,20 @@
 # $FreeBSD$
 
 PORTNAME=	nvidia-xconfig
-PORTVERSION=	310.14
+PORTVERSION=	355.11
 CATEGORIES=	x11
-MASTER_SITES=	ftp://download.nvidia.com/XFree86/nvidia-xconfig/ \
-		ftp://download1.nvidia.com/XFree86/nvidia-xconfig/
 
 MAINTAINER=	bland@FreeBSD.org
 COMMENT=	Tool to manipulate X configuration files for the NVidia driver
 
 LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/COPYING
 
-USES=		gmake tar:bzip2
+USE_GITHUB=	yes
+GH_ACCOUNT=	NVIDIA
+GH_TAGNAME=	${PORTVERSION}
+
+USES=		gmake
 
 MAKE_ENV=	NV_VERBOSE= \
 		STRIP_CMD=${TRUE} \
@@ -24,7 +27,7 @@ PLIST_FILES=	bin/nvidia-xconfig \
 		man/man1/nvidia-xconfig.1.gz
 
 post-patch:	.SILENT
-	${REINPLACE_CMD} -e '/^prefix/s/=/?&/' \
-		 -e '/^MANDIR/s|share/||' ${WRKSRC}/utils.mk
+	${REINPLACE_CMD} -e '/^MANDIR/s|share/||' \
+		${WRKSRC}/utils.mk
 
 .include <bsd.port.mk>

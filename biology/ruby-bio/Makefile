@@ -12,19 +12,23 @@ DIST_SUBDIR=	ruby
 MAINTAINER=	mauricio@arareko.net
 COMMENT=	Integrated environment for Bioinformatics written in Ruby
 
+LICENSE=	GPLv2 RUBY
+LICENSE_COMB=	dual
+
+BROKEN_RUBY22=	yes
+
 OPTIONS_DEFINE=	XMLPARSER BDB4 MYSQL PGSQL DOCS
 XMLPARSER_DESC=	xmlparser support for faster Blast processing
 BDB4_DESC=	bdb4 support for faster flat file indexing
 
-OPTIONSFILE=	${PORT_DBDIR}/ruby-${PORTNAME}/options
-
+NO_ARCH=	yes
 USES=	shebangfix
 USE_RUBY=	yes
 USE_RUBY_SETUP=	yes
 SHEBANG_FILES=	sample/biofetch.rb
 ruby_OLD_CMD=	/usr/proj/bioruby/bin/ruby
 
-XML_PARSER_RUN_DEPENDS=	${RUBY_SITEARCHLIBDIR}/xmlparser.so:${PORTSDIR}/textproc/ruby-xmlparser
+XMLPARSER_RUN_DEPENDS=	${RUBY_SITEARCHLIBDIR}/xmlparser.so:${PORTSDIR}/textproc/ruby-xmlparser
 BDB4_RUN_DEPENDS=	${RUBY_SITEARCHLIBDIR}/bdb.so:${PORTSDIR}/databases/ruby-bdb
 MYSQL_RUN_DEPENDS=	rubygem-dbd-mysql>=0:${PORTSDIR}/databases/rubygem-dbd-mysql
 PGSQL_RUN_DEPENDS=	rubygem-dbd-pg>=0:${PORTSDIR}/databases/rubygem-dbd-pg

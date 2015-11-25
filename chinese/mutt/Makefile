@@ -1,7 +1,7 @@
 # Created by: David O'Brien (obrien@NUXI.com)
 # $FreeBSD$
 
-PORTREVISION=	7
+#PORTREVISION=	0
 CATEGORIES=	chinese
 
 MASTERDIR=	${.CURDIR}/../../mail/mutt

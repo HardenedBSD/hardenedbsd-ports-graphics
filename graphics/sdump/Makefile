@@ -2,6 +2,7 @@
 
 PORTNAME=	sdump
 PORTVERSION=	2015.01.16
+PORTREVISION=	1
 CATEGORIES=	graphics
 
 MAINTAINER=	sue@iwmt.org
@@ -10,18 +11,16 @@ COMMENT=	Sixel image dumper
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg \
-		libpng.so:${PORTSDIR}/graphics/png \
+LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png \
 		libsixel.so:${PORTSDIR}/graphics/libsixel
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	uobikiemukot
-GH_PROJECT=	sdump
-GH_TAGNAME=	${GH_COMMIT}
-GH_COMMIT=	c5fb55b
+GH_TAGNAME=	c5fb55b
 
 PLIST_FILES=	bin/sdump libexec/w3m/yaimg-sixel
 
+USES=		jpeg
 MAKEFILE=	makefile
 
 #CFLAGS	+=	-I${LOCALBASE}/include -Wall -Wextra -std=c99 -pedantic -O3 -pipe -s

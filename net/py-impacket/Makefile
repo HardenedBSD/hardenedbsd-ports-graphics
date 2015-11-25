@@ -2,9 +2,11 @@
 # $FreeBSD$
 
 PORTNAME=	impacket
-PORTVERSION=	0.9.12
+PORTVERSION=	0.9.13
+PORTREVISION=	1
 CATEGORIES=	net python
-MASTER_SITES=	CHEESESHOP
+MASTER_SITES=	CHEESESHOP \
+		https://github.com/CoreSecurity/impacket/releases/download/impacket_${PORTVERSION:S,.,_,g}/
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
 MAINTAINER=	ports@FreeBSD.org
@@ -13,11 +15,12 @@ COMMENT=	Collection of Python classes providing access to network packets
 LICENSE=	APACHE11
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}pcapy>=0:${PORTSDIR}/net/py-pcapy \
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}pyasn1>=0:${PORTSDIR}/devel/py-pyasn1 \
+		${PYTHON_PKGNAMEPREFIX}pcapy>=0:${PORTSDIR}/net/py-pcapy \
 		${PYTHON_PKGNAMEPREFIX}pycrypto>=0:${PORTSDIR}/security/py-pycrypto
 
 USES=		dos2unix python
-USE_PYTHON=	distutils autoplist
+USE_PYTHON=	autoplist distutils
 
 PORTDOCS=	*
 

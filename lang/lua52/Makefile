@@ -2,19 +2,18 @@
 # $FreeBSD$
 
 PORTNAME=	lua
-PORTVERSION=	5.2.3
-PORTREVISION=	4
+PORTVERSION=	5.2.4
 CATEGORIES=	lang
 MASTER_SITES=	http://www.lua.org/ftp/
 PKGNAMESUFFIX=	52
 
-MAINTAINER=	lua@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Small, compilable scripting language providing easy access to C code
 
 LICENSE=	MIT
 
+USES=		libedit
 LUA_VER=	5.2
-LIB_DEPENDS=	libedit.so.0:${PORTSDIR}/devel/libedit
 USE_LDCONFIG=	yes
 
 # Overriding __MAKE_CONF makes sure that we don't re-parse
@@ -58,6 +57,7 @@ SUB_LIST=	version=${PORTVERSION} \
 		libdir=${LUA_LIBDIR} \
 		soname=lua-${LUA_VER}
 
+CFLAGS_aarch64=	-fPIC
 CFLAGS_amd64=	-fPIC
 CFLAGS_powerpc=	-fPIC
 

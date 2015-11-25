@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	coffee-script-source
-PORTVERSION=	1.8.0
+PORTVERSION=	1.10.0
 CATEGORIES=	devel rubygems
 MASTER_SITES=	RG
 
@@ -11,6 +11,7 @@ COMMENT=	CoffeeScript is a little language that compiles into JavaScript
 
 LICENSE=	MIT
 
+NO_ARCH=	yes
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes
 RUBYGEM_AUTOPLIST=	yes

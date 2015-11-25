@@ -17,11 +17,9 @@ SUB_FILES=	pkg-message
 
 PORTDOCS=	README
 PLIST_FILES=	bin/darkbot %%ETCDIR%%/logs/.pkgcreate man/man1/darkbot.1.gz
-PLIST_DIRSTRY=	%%ETCDIR%%/logs/ %%ETCDIR%%/dat/ %%ETCDIR%%
+NO_CDROM=	no commercial distribution
 
 OPTIONS_DEFINE=	DOCS
-
-.include <bsd.port.options.mk>
 
 pre-configure:
 	${CP} ${WRKSRC}/configure ${WRKSRC}/config
@@ -47,9 +45,9 @@ do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/$s ${STAGEDIR}${ETCDIR}
 	${ECHO_CMD} ${ETCDIR_REL}/$s >> ${TMPPLIST}
 .endfor
-.if ${PORT_OPTIONS:MDOCS}
+
+do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${WRKSRC}/docs/README ${STAGEDIR}${DOCSDIR}/
-.endif
 
 .include <bsd.port.mk>

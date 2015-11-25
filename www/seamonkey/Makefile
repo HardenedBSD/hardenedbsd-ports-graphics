@@ -2,45 +2,45 @@
 # $FreeBSD$
 
 PORTNAME=	seamonkey
-DISTVERSION=	2.32.1
-PORTREVISION=	1
+DISTVERSION=	2.39
+MOZILLA_VER=	42 # above + 3
 CATEGORIES?=	www mail news editors irc ipv6
 MASTER_SITES=	MOZILLA/${PORTNAME}/releases/${DISTVERSION}/source \
-		https://ftp.mozilla.org/pub/mozilla.org/${PORTNAME}/candidates/${DISTVERSION}-candidates/build1/source/
+		MOZILLA/${PORTNAME}/candidates/${DISTVERSION}-candidates/build1/source
 DISTFILES=	${PORTNAME}-${DISTVERSION}.source${EXTRACT_SUFX}
 EXTRACT_ONLY=	${PORTNAME}-${DISTVERSION}.source${EXTRACT_SUFX}
 
 MAINTAINER=	gecko@FreeBSD.org
 COMMENT=	The open source, standards compliant web browser
 
-BUILD_DEPENDS=	nspr>=4.10.6:${PORTSDIR}/devel/nspr \
-		nss>=3.17.2:${PORTSDIR}/security/nss \
+BUILD_DEPENDS=	nspr>=4.10.10:${PORTSDIR}/devel/nspr \
+		nss>=3.19.4:${PORTSDIR}/security/nss \
 		libevent2>=2.0.21_2:${PORTSDIR}/devel/libevent2 \
-		cairo>=1.12.16_1,2:${PORTSDIR}/graphics/cairo \
 		soundtouch>=1.8.0:${PORTSDIR}/audio/soundtouch \
 		harfbuzz>=0.9.34:${PORTSDIR}/print/harfbuzz \
 		graphite2>=1.2.4:${PORTSDIR}/graphics/graphite2 \
 		libvorbis>=1.3.5:${PORTSDIR}/audio/libvorbis \
-		opus>=1.1:${PORTSDIR}/audio/opus \
 		libvpx>=1.3.0:${PORTSDIR}/multimedia/libvpx \
-		sqlite3>=3.8.6:${PORTSDIR}/databases/sqlite3 \
+		sqlite3>=3.8.9:${PORTSDIR}/databases/sqlite3 \
 		${PYTHON_PKGNAMEPREFIX}sqlite3>0:${PORTSDIR}/databases/py-sqlite3 \
 		v4l_compat>0:${PORTSDIR}/multimedia/v4l_compat \
 		autoconf-2.13:${PORTSDIR}/devel/autoconf213 \
+		yasm:${PORTSDIR}/devel/yasm \
 		zip:${PORTSDIR}/archivers/zip \
 		unzip:${PORTSDIR}/archivers/unzip
+#		opus>=1.1:${PORTSDIR}/audio/opus \
 
 LIB_DEPENDS=	libv4l2.so:${PORTSDIR}/multimedia/libv4l
 
-EM_VERSION=	1.7.2
-L_VERSION=	3.7
+EM_VERSION=	1.8.2
+L_VERSION=	4.4
 
 SSP_UNSAFE=	yes
 USE_GECKO=	gecko
 USE_QT5=	# empty
 QT_NONSTANDARD=	yes
 USE_GL=		gl
-USES=		dos2unix tar:bzip2
+USES=		dos2unix tar:xz
 DOS2UNIX_FILES=	mozilla/media/webrtc/trunk/webrtc/system_wrappers/source/spreadsortlib/spreadsort.hpp
 MOZ_PIS_SCRIPTS=	moz_pis_S50cleanhome
 
@@ -48,11 +48,12 @@ MOZ_EXTENSIONS=	default
 MOZ_OPTIONS+=	--program-transform-name='s/seamonkey/${MOZILLA}/' \
 		--enable-application=suite
 
-USE_MOZILLA=	# empty
+USE_MOZILLA=	-opus
 MOZ_PKGCONFIG_FILES=
 
 NOT_FOR_ARCHS=	ia64
 
+OPTIONS_EXCLUDE=LOGGING
 OPTIONS_DEFINE=	CHATZILLA COMPOSER ENIGMAIL LDAP LIGHTNING MAILNEWS
 OPTIONS_DEFAULT=CANBERRA CHATZILLA COMPOSER ENIGMAIL LDAP LIGHTNING MAILNEWS
 
@@ -70,13 +71,17 @@ MOZ_EXTENSIONS:=	${MOZ_EXTENSIONS},irc
 
 .include <bsd.port.pre.mk>
 
-WRKSRC=		${WRKDIR}/comm-release
+WRKSRC:=	${WRKDIR}/${PORTNAME}-${DISTVERSION}
 MOZSRC:=	${WRKSRC}/mozilla
 
 XPI_LIBDIR=	${PREFIX}/lib/xpi
 
 .if ${PORT_OPTIONS:MALSA}
 RUN_DEPENDS+=	alsa-lib>=1.0.27.2_1:${PORTSDIR}/audio/alsa-lib
+.endif
+
+.if ! ${PORT_OPTIONS:MBUNDLED_CAIRO}
+BUILD_DEPENDS+=	cairo>=1.12.16_1,2:${PORTSDIR}/graphics/cairo
 .endif
 
 .if ${PORT_OPTIONS:MGSTREAMER}
@@ -98,7 +103,7 @@ DISTFILES+=	${EM_DISTFILE}:enigmail
 RUN_DEPENDS+=	gpg:${PORTSDIR}/security/gnupg
 EM_DISTNAME=	enigmail-${EM_VERSION}
 EM_DISTFILE=	${EM_DISTNAME}.tar.gz
-EM_XPI_FILE=	${WRKSRC}/mailnews/extensions/enigmail/build/${EM_DISTNAME}-${OPSYS:tl}-${ARCH:S/amd64/x86_64/:S/i386/x86/}-gcc3.xpi
+EM_XPI_FILE=	${WRKSRC}/mailnews/extensions/enigmail/build/${EM_DISTNAME}-${OPSYS:tl}-${ARCH:S/amd64/x86_64/:S/i386/x86/:S/powerpc/ppc/}-gcc3.xpi
 EM_ORIG_ID=	{847b3a00-7ab1-11d4-8f02-006008948af5}
 EM_ID=		${PORTNAME}@mozilla-enigmail.org
 EM_ID_RFILES=	${XPI_LIBDIR}/${EM_ID}/install.rdf \

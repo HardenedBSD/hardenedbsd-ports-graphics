@@ -2,16 +2,17 @@
 # $FreeBSD$
 
 PORTNAME=	camlp5
-PORTVERSION=	6.11
+PORTVERSION=	6.14
 CATEGORIES=	devel
-MASTER_SITES=	http://cristal.inria.fr/~ddr/camlp5/distrib/src/ \
+MASTER_SITES=	http://camlp5.gforge.inria.fr/distrib/src/ \
+		http://cristal.inria.fr/~ddr/camlp5/distrib/src/ \
 		http://pauillac.inria.fr/~ddr/camlp5/distrib/src/
 PKGNAMEPREFIX=	ocaml-
-DIST_SUBDIR=	${UNIQUENAME}
+DIST_SUBDIR=	${PKGBASE}
 
 PATCH_SITES=	${MASTER_SITES}
 
-MAINTAINER=	umq@ueo.co.jp
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Preprocessor-pretty-printer of OCaml
 
 LICENSE=	INRIA
@@ -19,6 +20,8 @@ LICENSE_NAME=	INRIA permissive license with copyright notice requirements
 LICENSE_FILE=	${WRKSRC}/LICENSE
 LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
+ALL_TARGET=	world.opt
+MAKE_JOBS_UNSAFE=	yes
 USES=			tar:tgz
 USE_OCAML=		yes
 HAS_CONFIGURE=		yes
@@ -35,25 +38,15 @@ OPTIONS_DEFINE=	DOCS
 DOCSDIR=	${OCAML_DOCSDIR}/${PORTNAME}
 PORTDOCS=	CHANGES DEVEL ICHANGES INSTALL MODE README UPGRADING
 
-MAKE_JOBS_UNSAFE= yes
-
-.include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MTRANSITIONAL}
-CONFIGURE_ARGS+=	--transitional
-.elif ${PORT_OPTIONS:MSTRICT}
-CONFIGURE_ARGS+=	--strict
-.endif
-ALL_TARGET=	world.opt
+STRICT_CONFIGURE_ON=	--strict
+TRANSITIONAL_CONFIGURE_ON=	--transitional
 
 post-install:
-.if ${PORT_OPTIONS:MDOCS}
+	${INSTALL_DATA} ${WRKSRC}/etc/META ${STAGEDIR}${PREFIX}/lib/ocaml/camlp5
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/camlp5*.opt ${STAGEDIR}${PREFIX}/${OCAML_LIBDIR}/camlp5/*.o
+
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
-.for f in ${PORTDOCS}
-	${INSTALL_DATA} ${WRKSRC}/${f} ${STAGEDIR}${DOCSDIR}
-.endfor
-.endif
-	${INSTALL_DATA} ${WRKSRC}/etc/META \
-		${STAGEDIR}${PREFIX}/lib/ocaml/camlp5
+	cd ${WRKSRC}/ && ${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}
 
 .include <bsd.port.mk>

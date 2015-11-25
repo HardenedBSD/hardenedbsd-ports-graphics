@@ -17,6 +17,7 @@ RUN_DEPENDS=	rubygem-fastimage>=1.6.3:${PORTSDIR}/graphics/rubygem-fastimage \
 		rubygem-multi_json>=1.10.1:${PORTSDIR}/devel/rubygem-multi_json \
 		rubygem-rack>=0:${PORTSDIR}/www/rubygem-rack
 
+NO_ARCH=	yes
 NO_BUILD=	yes
 USE_RUBY=	yes
 
@@ -48,10 +49,10 @@ SUB_FILES=	pkg-message tdiaryinst.rb
 SUB_LIST+=	TDIARY_LANG=${TDIARY_LANG} \
 		TDIARY_SCRIPT=${TDIARY_SCRIPT}
 WRKSRC=		${WRKDIR}/${PORTNAME}-v${PORTVERSION}.1
-DOCSDIR=	${PREFIX}/share/doc/${UNIQUENAME}
-WWWDIR=		${PREFIX}/www/${UNIQUENAME}
+DOCSDIR=	${PREFIX}/share/doc/${PKGBASE}
+WWWDIR=		${PREFIX}/www/${PKGBASE}
 
-TDIARY_SCRIPT=	${UNIQUENAME}-inst.rb
+TDIARY_SCRIPT=	${PKGBASE}-inst.rb
 
 #TDIARY_LANG	ja:Japanese en:English
 .if !defined(TDIARY_LANG) || ( defined(TDIARY_LANG) && ${TDIARY_LANG} != ja )

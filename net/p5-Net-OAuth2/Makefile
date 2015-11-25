@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	Net-OAuth2
-PORTVERSION=	0.61
-PORTREVISION=	1
+PORTVERSION=	0.62
 CATEGORIES=	net perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
@@ -24,6 +23,7 @@ TEST_DEPENDS=	p5-Test-Mock-LWP-Dispatch>=0:${PORTSDIR}/devel/p5-Test-Mock-LWP-Di
 		p5-Test-Pod>=1.22:${PORTSDIR}/devel/p5-Test-Pod \
 		p5-YAML>=0:${PORTSDIR}/textproc/p5-YAML
 
+NO_ARCH=	yes
 USE_PERL5=	configure
 USES=		perl5
 

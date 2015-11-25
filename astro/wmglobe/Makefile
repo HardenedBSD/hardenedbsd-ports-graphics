@@ -10,6 +10,10 @@ MASTER_SITES=	http://hamete.org/static/wmg/
 MAINTAINER=	will@FreeBSD.org
 COMMENT=	Neat xearth-like WindowMaker dockapp
 
+BROKEN=		No public distfiles
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
+
 LIB_DEPENDS=	libwraster.so:${PORTSDIR}/x11-wm/libwraster
 
 PLIST_FILES=	bin/wmglobe \

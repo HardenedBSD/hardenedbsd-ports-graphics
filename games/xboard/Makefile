@@ -56,7 +56,8 @@ GTK2_CONFIGURE_WITH=	gtk
 
 .include <bsd.port.options.mk>
 
-USES+=		desktop-file-utils makeinfo perl5 pkgconfig shared-mime-info
+USES+=		desktop-file-utils makeinfo perl5 pkgconfig shared-mime-info \
+		shebangfix
 USE_XORG+=	xt xpm
 USE_GNOME+=	librsvg2
 .if ${PORT_OPTIONS:MXAW}
@@ -65,6 +66,8 @@ USE_XORG+=	xaw
 .if ${PORT_OPTIONS:MGTK2}
 USE_GNOME+=	gtk20
 .endif
+SHEBANG_FILES=	texi2man
+
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+=MKDIR_P="${MKDIR}" PERLPATH=${PERL}
 CFLAGS+=	-I${LOCALBASE}/include
@@ -80,6 +83,8 @@ PORTDOCS=	AUTHORS COPYING COPYRIGHT ChangeLog DIFFSTAT FAQ.html NEWS README SHOR
 BROKEN_sparc64=	Does not install on sparc64
 
 .if ${PORT_OPTIONS:MZIPPY}
+USES+=		shebangfix
+SHEBANG_FILES+=	./texi2man
 PORTDOCS+=	zippy.README
 .endif
 

@@ -3,7 +3,7 @@
 
 PORTNAME=	HTTP-Server-Simple-Authen
 PORTVERSION=	0.04
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	www security perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
@@ -18,7 +18,10 @@ BUILD_DEPENDS=	p5-Authen-Simple>=0.4:${PORTSDIR}/security/p5-Authen-Simple \
 		p5-HTTP-Server-Simple>=0.16:${PORTSDIR}/www/p5-HTTP-Server-Simple
 RUN_DEPENDS:=	${BUILD_DEPENDS}
 
+NO_ARCH=	yes
 USE_PERL5=	configure
-USES=		perl5
+USES=		perl5 shebangfix
+
+SHEBANG_FILES=	server.pl
 
 .include <bsd.port.mk>

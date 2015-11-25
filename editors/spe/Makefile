@@ -5,13 +5,15 @@ PORTNAME=	SPE
 PORTVERSION=	0.8.4.h
 PORTREVISION=	8
 CATEGORIES=	editors devel python
-MASTER_SITES=	${MASTER_SITE_BERLIOS}
-MASTER_SITE_SUBDIR=	python
+MASTER_SITES=	SF/python
 DISTNAME=	${PORTNAME:tl}-${PORTVERSION}-wx2.6.1.0
 
 MAINTAINER=	nivit@FreeBSD.org
 COMMENT=	Stani's Python Editor
 
+BROKEN=		Unfetchable
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
 NO_BUILD=	yes
 
 USES=		python

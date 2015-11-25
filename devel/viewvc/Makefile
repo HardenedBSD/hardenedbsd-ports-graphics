@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	viewvc
-PORTVERSION=	1.1.23
+PORTVERSION=	1.1.24
 CATEGORIES=	devel python
 MASTER_SITES=	http://www.viewvc.org/ \
 		LOCAL/ohauer
@@ -18,12 +18,12 @@ OPTIONS_DEFAULT=	WEBSRV APACHE SVN
 
 OPTIONS_SINGLE=		WEBSRV APMOD
 OPTIONS_SINGLE_WEBSRV=	APACHE LIGHTTPD
-OPTIONS_SINGLE_APMOD=	MODPYTHON33 MODPYTHON35 MODWSGI3
+OPTIONS_SINGLE_APMOD=	MODPYTHON33 MODPYTHON35 MODWSGI
 
 WEBSRV_DESC=		Enable web server support
 APMOD_DESC=		depend on optional Apache module
 
-MODWSGI3_DESC=		Enable mod_wsgi3 support
+MODWSGI_DESC=		Enable mod_wsgi support
 MODPYTHON33_DESC=	Enable mod_python33 support
 MODPYTHON35_DESC=	Enable mod_python35 support
 MYSQL_DESC=		Bonsai-like repository query facilities
@@ -32,7 +32,7 @@ APACHE_USE=		APACHE_RUN=22+
 LIGHTTPD_RUN_DEPENDS=	lighttpd:${PORTSDIR}/www/lighttpd
 MODPYTHON33_RUN_DEPENDS=${APACHE_PKGNAMEPREFIX}mod_python33>=3.3:${PORTSDIR}/www/mod_python33
 MODPYTHON35_RUN_DEPENDS=${APACHE_PKGNAMEPREFIX}mod_python35>=3.5:${PORTSDIR}/www/mod_python35
-MODWSGI3_RUN_DEPENDS=	${APACHE_PKGNAMEPREFIX}mod_wsgi3>=3.3:${PORTSDIR}/www/mod_wsgi3
+MODWSGI_RUN_DEPENDS=	${APACHE_PKGNAMEPREFIX}mod_wsgi4>=4.4.13:${PORTSDIR}/www/mod_wsgi4
 SVN_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}subversion>=0:${PORTSDIR}/devel/py-subversion
 MYSQL_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}MySQLdb>=0:${PORTSDIR}/databases/py-MySQLdb
 
@@ -61,9 +61,9 @@ post-patch:
 	${REINPLACE_CMD} -e 's/conf.dist/conf.sample/g' \
 		${WRKSRC}/viewvc-install \
 		${WRKSRC}/bin/standalone.py
-# to much files, use own shebangfix	
+# to much files, use own shebangfix
 	${FIND} ${WRKSRC} -type f | ${GREP} -v -e 'png' -e 'images' \
-		| xargs ${REINPLACE_CMD} -i '' \
+		| ${XARGS} ${REINPLACE_CMD} -i '' \
 		-e '1s|^\#![[:space:]]*/usr/bin/env python|\#!${PYTHON_CMD}|' \
 		-e '1s|^\#![[:space:]]*/usr/bin/python|\#!${PYTHON_CMD}|'
 

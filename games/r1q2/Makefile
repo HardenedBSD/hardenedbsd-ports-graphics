@@ -24,7 +24,7 @@ BUILD_WRKSRC=	${WRKSRC}/binaries
 ALL_TARGET=	#
 
 LIBDIR=		${PREFIX}/lib/${PORTNAME}
-MAKE_ENV=	LIBDIR="${LIBDIR}" PTHREAD_LIBS="${PTHREAD_LIBS}"
+MAKE_ENV=	LIBDIR="${LIBDIR}"
 PLIST_SUB=	LIBDIR="${LIBDIR:S|${PREFIX}/||}"
 
 OPTIONS_DEFINE=	GAME REF_GL DOCS
@@ -62,10 +62,10 @@ PLIST_SUB+=	GAME="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MREF_GL}
+USES+=		jpeg
 USE_GL=		gl
 USE_SDL=	sdl
-LIB_DEPENDS+=	libjpeg.so:${PORTSDIR}/graphics/jpeg \
-		libpng.so:${PORTSDIR}/graphics/png
+LIB_DEPENDS+=	libpng.so:${PORTSDIR}/graphics/png
 ALL_TARGET+=	ref_gl
 PLIST_SUB+=	REF_GL=""
 .else

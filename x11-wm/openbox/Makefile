@@ -2,8 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	openbox
-PORTVERSION=	3.5.2
-PORTREVISION=	7
+PORTVERSION=	3.6
+PORTREVISION=	1
 CATEGORIES=	x11-wm
 MASTER_SITES=	http://openbox.org/dist/openbox/
 
@@ -15,13 +15,13 @@ LICENSE=	GPLv2
 GNU_CONFIGURE=	yes
 USES=		gmake libtool pathfix pkgconfig
 USE_GNOME=	glib20 libxml2
-USE_XORG=	xext xft
+USE_XORG=	xcursor xext xft xinerama xrandr xau
 USE_LDCONFIG=	yes
 
 CFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib -lXext
 
-PLIST_SUB=	VERSION=${PORTVERSION:C/.[0-9]+\$//}
+PLIST_SUB=	VERSION=${PORTVERSION}
 
 OPTIONS_DEFINE=	NLS IMLIB PANGO SVG NOTIFY
 OPTIONS_DEFAULT=	IMLIB PANGO NOTIFY SVG

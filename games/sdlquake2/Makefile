@@ -10,6 +10,8 @@ MASTER_SITES=	http://koti.mbnet.fi/~turol/sdlquake2/
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Combination of R1Q2 and R1GL with SDL code from Quake2Forge
 
+BROKEN=		unfetchable
+
 USES=		execinfo gmake tar:bzip2
 
 OPTIONS_DEFINE=	CLIENT DEDICATED GAME
@@ -26,8 +28,8 @@ PLIST_SUB=	LIBDIR=${LIBDIR:S/${PREFIX}\///}
 
 .include "${.CURDIR}/../quake2-data/Makefile.include"
 
-CLIENT_LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg \
-			libpng.so:${PORTSDIR}/graphics/png
+CLIENT_LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png
+CLIENT_USES=		jpeg
 CLIENT_USE=		GL=yes
 CLIENT_USE=		SDL=sdl
 CLIENT_MAKE_ENV=	BUILD_CLIENT=YES

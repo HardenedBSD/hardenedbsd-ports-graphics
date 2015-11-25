@@ -1,13 +1,13 @@
---- liquibase.orig	2013-02-11 22:36:23.000000000 +0800
-+++ liquibase	2013-02-11 22:38:03.000000000 +0800
-@@ -1,51 +1,14 @@
- #! /bin/sh
+--- liquibase.orig	2015-07-28 18:54:25 UTC
++++ liquibase
+@@ -1,54 +1,14 @@
+-#!/usr/bin/env bash
++#!/bin/sh
  
--if [ -n "${LIQUIBASE_HOME+x}" ]; then
--echo "Liquibase Home: $LIQUIBASE_HOME"
--else
--  echo "Liquibase Home is not set."
--
+-if [ ! -n "${LIQUIBASE_HOME+x}" ]; then
+-  # echo "LIQUIBASE_HOME is not set."
++LIQUIBASE_HOME=`dirname $0`/../share/liquibase
+ 
 -  ## resolve links - $0 may be a symlink
 -  PRG="$0"
 -  while [ -h "$PRG" ] ; do
@@ -25,7 +25,7 @@
 -
 -  # make it fully qualified
 -  LIQUIBASE_HOME=`cd "$LIQUIBASE_HOME" && pwd`
--  echo "Liquibase Home: $LIQUIBASE_HOME"
+-  # echo "Liquibase Home: $LIQUIBASE_HOME"
 -fi
 -
 - 
@@ -41,16 +41,19 @@
 -    CP="$CP;$i"
 -  done
 -else
+-  if [[ $(uname) = MINGW* ]]; then
+-    CP_SEPARATOR=";"
+-  else
+-    CP_SEPARATOR=":"
+-  fi
 -  CP=.
 -  for i in "$LIQUIBASE_HOME"/liquibase*.jar; do
--    CP="$CP":"$i"
+-    CP="$CP""$CP_SEPARATOR""$i"
 -  done
 -  for i in "$LIQUIBASE_HOME"/lib/*.jar; do
--    CP="$CP":"$i"
+-    CP="$CP""$CP_SEPARATOR""$i"
 -  done
 -fi
-+LIQUIBASE_HOME=`dirname $0`/../share/liquibase
-+
 +CP=.
 +for i in "$LIQUIBASE_HOME"/liquibase*.jar; do
 +  CP="$CP":"$i"
@@ -60,4 +63,4 @@
 +done
  
  # add any JVM options here
- JAVA_OPTS=
+ JAVA_OPTS="${JAVA_OPTS-}"

@@ -3,12 +3,15 @@
 
 PORTNAME=	smasher
 PORTVERSION=	1.1.7
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	audio
 MASTER_SITES=	SF
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Cross platform audio loop slicer
+
+LICENSE=	LGPL20
+LICENSE_FILE=	${WRKSRC}/COPYING.LIB
 
 LIB_DEPENDS=	libsndfile.so:${PORTSDIR}/audio/libsndfile \
 		libmad.so:${PORTSDIR}/audio/libmad \
@@ -18,7 +21,6 @@ GNU_CONFIGURE=	yes
 USES=		desktop-file-utils gmake pkgconfig
 USE_GCC=	yes
 USE_WX=		2.8
-WX_UNICODE=	yes
 WX_CONF_ARGS=	absolute
 
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}

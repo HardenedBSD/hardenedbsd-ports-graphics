@@ -2,9 +2,12 @@
 
 PORTNAME=	seafile
 PORTVERSION=	4.0.6
+PORTREVISION=	3
+DISTVERSIONPREFIX=	v
+DISTVERSIONSUFFIX=	-server
 CATEGORIES=	net-mgmt devel
 
-MAINTAINER=	yan_jingfeng@yahoo.com
+MAINTAINER=	ultima1252@gmail.com
 COMMENT=	Framework for writing networked applications
 
 LICENSE=	GPLv3
@@ -13,8 +16,6 @@ BUILD_DEPENDS=	valac:${PORTSDIR}/lang/vala
 LIB_DEPENDS=	libsearpc.so:${PORTSDIR}/devel/libsearpc \
 		libevhtp.so:${PORTSDIR}/www/libevhtp \
 		libzdb.so:${PORTSDIR}/databases/libzdb \
-		libcrypto.so:${PORTSDIR}/security/openssl \
-		libarchive.so.13:${PORTSDIR}/archivers/libarchive \
 		libcurl.so:${PORTSDIR}/ftp/curl \
 		libinotify.so:${PORTSDIR}/devel/libinotify \
 		libccnet.so:${PORTSDIR}/net-mgmt/ccnet
@@ -25,16 +26,15 @@ RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}eggtestinfo>0:${PORTSDIR}/devel/py-eggtestin
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	haiwen
-GH_TAGNAME=	v${PORTVERSION}-server
-GH_COMMIT=	adf9a87
 
-USES=		autoreconf iconv libtool pathfix pkgconfig python:2 shebangfix
+USES=		autoreconf iconv libarchive libtool pathfix pkgconfig python:2 \
+		shebangfix
 SHEBANG_FILES=	scripts/*.sh scripts/upgrade/*.sh
 GNU_CONFIGURE=	yes
 USE_OPENSSL=	yes
 USE_LDCONFIG=	yes
+CONFIGURE_ENV=	SSL_CFLAGS="${OPENSSLINC}" SSL_LIBS="-L${OPENSSLLIB} -lssl -lcrypto"
 
-WITH_OPENSSL_PORT=	yes
 PATHFIX_MAKEFILEIN=	Makefile.am
 
 CONFIGURE_ARGS=	--enable-server
@@ -50,6 +50,7 @@ SEALIB=		${SEAFILE_SERVER}/seafile/lib
 SEAFILE_USERNAME?=	www
 SEAFILE_GROUPNAME?=	${SEAFILE_USERNAME}
 
+USE_RC_SUBR=	${PORTNAME}
 PLIST_SUB=	SEAFILE_USERNAME=${SEAFILE_USERNAME} \
 		SEAFILE_GROUPNAME=${SEAFILE_GROUPNAME} \
 		SEAFILE_SERVER=${SEAFILE_SERVER} \

@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	yii
-PORTVERSION=	1.1.15
-DISTVERSIONSUFFIX=	.022a51
+PORTVERSION=	1.1.16
 CATEGORIES=	www
 
 MAINTAINER=	ports@FreeBSD.org
@@ -13,10 +12,6 @@ LICENSE=	BSD3CLAUSE
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	yiisoft
-GH_PROJECT=	${PORTNAME}
-GH_COMMIT=	022a51
-
-WRKSRC=		${WRKDIR}/${GH_ACCOUNT}-${PORTNAME}-65ddd44
 
 NO_BUILD=	yes
 USES=		cpe
@@ -39,7 +34,7 @@ PGSQL_RUN_DEPENDS=	${LOCALBASE}/lib/php/${PHP_EXT_DIR}/pdo_pgsql.so:${PORTSDIR}/
 .include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MREQPHP}
-USE_PHP+=	apc dom gd mcrypt memcache pdo soap
+USE_PHP+=	dom gd mcrypt memcache pdo soap
 .endif
 
 .if ${PORT_OPTIONS:MMYSQL}

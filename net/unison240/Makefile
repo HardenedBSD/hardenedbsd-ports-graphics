@@ -3,12 +3,13 @@
 
 PORTNAME=	unison
 PORTVERSION=	2.40.128
+PORTREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	http://www.cis.upenn.edu/~bcpierce/unison/download/releases/${DISTNAME}/
 PKGNAMESUFFIX=	240
 DISTFILES=	${EXTRACT_ONLY} ${EXTRA_DOCS}
-DIST_SUBDIR=	${PORTNAME}-${PORTVERSION}
-EXTRACT_ONLY=	${PORTNAME}-${PORTVERSION}.tar.gz
+DIST_SUBDIR=	${DISTNAME}
+EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
 
 MAINTAINER?=	madpilot@FreeBSD.org
 COMMENT?=	User-level file synchronization tool
@@ -17,6 +18,8 @@ LICENSE=	GPLv3
 
 PLIST_SUB=	PORTVERSION=${PORTVERSION}
 USES=		gmake
+USE_OCAML=	yes
+NO_OCAML_RUNDEPENDS=yes
 WANT_GNOME=	yes
 MAKE_ARGS=	CFLAGS=""
 
@@ -25,8 +28,8 @@ ALL_TARGET=	unison all
 
 DOCS=		BUGS.txt NEWS README
 DOCSDIR=	${PREFIX}/share/doc/${PORTNAME}${PKGNAMESUFFIX}
-EXTRA_DOCS=	unison-${PORTVERSION}-manual.html \
-		unison-${PORTVERSION}-manual.pdf unison-${PORTVERSION}-manual.ps
+EXTRA_DOCS=	${DISTNAME}-manual.html \
+		${DISTNAME}-manual.pdf ${DISTNAME}-manual.ps
 
 OPTIONS_DEFINE= DOCS X11
 OPTIONS_DEFAULT?=        DOCS X11
@@ -36,18 +39,13 @@ OPTIONS_DEFAULT?=        DOCS X11
 .if ${PORT_OPTIONS:MX11}
 MAKE_ARGS+=	UISTYLE=gtk2
 PLIST_SUB+=	TEXT=""
-BUILD_DEPENDS+=	ocamlc:${PORTSDIR}/lang/ocaml \
-		lablgtk2:${PORTSDIR}/x11-toolkits/ocaml-lablgtk2 \
+BUILD_DEPENDS+= lablgtk2:${PORTSDIR}/x11-toolkits/ocaml-lablgtk2 \
 		icotool:${PORTSDIR}/graphics/icoutils
 RUN_DEPENDS+=	lablgtk2:${PORTSDIR}/x11-toolkits/ocaml-lablgtk2
-PATCH_DEPENDS+=	${BUILD_DEPENDS}
-CONFLICTS+=	ocaml-nox11*
 SUB_FILES+=	${PORTNAME}.desktop
 .else
 MAKE_ARGS+=	UISTYLE=text
 PLIST_SUB+=	TEXT="@comment "
-BUILD_DEPENDS+=	ocamlc:${PORTSDIR}/lang/ocaml-nox11
-PATCH_DEPENDS+=	${BUILD_DEPENDS}
 PKGMESSAGE=	${PKGDIR}/pkg-message.nox11
 .endif
 

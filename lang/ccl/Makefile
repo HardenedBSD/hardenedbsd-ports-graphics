@@ -1,13 +1,15 @@
 # $FreeBSD$
 
 PORTNAME=	ccl
-PORTVERSION=	1.10
+PORTVERSION=	1.11
 CATEGORIES=	lang lisp
 MASTER_SITES=	ftp://ftp.clozure.com/pub/release/${PORTVERSION}/
 DISTNAME=	${PORTNAME}-${PORTVERSION}-freebsdx86
 
 MAINTAINER=	olgeni@FreeBSD.org
 COMMENT=	Clozure CL is a free Common Lisp implementation
+
+LICENSE=	LGPL21
 
 WRKSRC=		${WRKDIR}/ccl
 
@@ -23,10 +25,6 @@ USE_ASDF=	yes
 .include "${.CURDIR}/../../devel/cl-asdf/bsd.cl-asdf.mk"
 
 .include <bsd.port.pre.mk>
-
-.if ${ARCH} == "amd64" && ${OSVERSION} >= 700000 && ${OSVERSION} < 800000
-MANUAL_PACKAGE_BUILD=yes
-.endif
 
 .if ${ARCH} == "i386"
 LISP_ARCH=	x8632
@@ -55,11 +53,11 @@ do-build:
 
 do-install:
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/ccl
-	@${CP} -r ${WRKSRC}/* ${STAGEDIR}${CCL_DIRECTORY}
+	${CP} -r ${WRKSRC}/* ${STAGEDIR}${CCL_DIRECTORY}
 	@for i in ${EXCLUDE}; do \
 		${RM} -r -f ${STAGEDIR}${CCL_DIRECTORY}/$${i}; \
 	done
-	@${INSTALL_SCRIPT} ${WRKDIR}/ccl.sh ${STAGEDIR}${PREFIX}/bin/ccl
+	${INSTALL_SCRIPT} ${WRKDIR}/ccl.sh ${STAGEDIR}${PREFIX}/bin/ccl
 
 post-install:
 	@cd ${STAGEDIR}${PREFIX}; ${FIND} lib/ccl/* -type d -empty \

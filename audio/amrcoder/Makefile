@@ -10,6 +10,10 @@ MASTER_SITES=	http://ftp.us.sinuspl.net/pub/src/ \
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	AMR encoder/decoder for Mbuni MMS Gateway (www.mbuni.org)
 
+BROKEN=		No public distfiles
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
+
 USES=		uidfix tar:tgz
 
 post-extract:

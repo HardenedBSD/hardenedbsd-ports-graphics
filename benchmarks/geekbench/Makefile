@@ -11,6 +11,9 @@ DIST_SUBDIR=	${PORTNAME}-${PORTVERSION}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Cross-platform benchmark suite
 
+BROKEN=		Unfetchable
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
 NO_BUILD=	yes
 ONLY_FOR_ARCHS=	i386 amd64
 USE_LINUX=	yes

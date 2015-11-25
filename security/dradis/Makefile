@@ -2,14 +2,16 @@
 # $FreeBSD$
 
 PORTNAME=	dradis
+DISTVERSIONPREFIX=	v
 DISTVERSION=	2.6.1
 CATEGORIES=	security
-MASTER_SITES=	SF
-MASTER_SITE_SUBDIR=${PORTNAME:tl}/${PORTNAME:tl}/v${PORTVERSION}
-DISTNAME=	${PORTNAME}-v${PORTVERSION}
+MASTER_SITES=	SF/${PORTNAME:tl}/${PORTNAME:tl}/v${PORTVERSION}
 
 MAINTAINER=	semprix@gmx.com
 COMMENT=	Opensource framework to enable effective information gathering
+
+LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	${LOCALBASE}/bin/gem:${PORTSDIR}/devel/ruby-gems \
 		${RUBY_SITELIBDIR}/wirble.rb:${PORTSDIR}/devel/ruby-wirble \
@@ -20,8 +22,6 @@ RUN_DEPENDS=	${LOCALBASE}/bin/gem:${PORTSDIR}/devel/ruby-gems \
 		rubygem-redcloth>=4.2.7:${PORTSDIR}/www/rubygem-redcloth \
 		rubygem-sqlite3>=1.3.2:${PORTSDIR}/databases/rubygem-sqlite3
 
-LICENSE=	GPLv2
-
 USE_RC_SUBR=	dradis
 SUB_FILES=	pkg-message
 SUB_LIST=	INSTDIR="${PREFIX}/${INSTDIR}" \
@@ -30,6 +30,7 @@ SUB_LIST=	INSTDIR="${PREFIX}/${INSTDIR}" \
 INSTDIR?=	${PORTNAME}
 WRKSRC=		${WRKDIR}/${PORTNAME}-${DISTVERSION:R}
 
+NO_ARCH=	yes
 NO_BUILD=	yes
 USE_RUBY=	yes
 USE_RUBY_FEATURES=	iconv

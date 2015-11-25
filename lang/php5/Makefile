@@ -2,11 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	php5
-PORTVERSION=	5.4.38
+PORTVERSION=	5.4.45
 PORTREVISION?=	0
 CATEGORIES?=	lang devel www
-MASTER_SITES=	${MASTER_SITE_PHP}
-MASTER_SITE_SUBDIR=	distributions
+MASTER_SITES=	PHP/distributions
 DISTNAME=	php-${PORTVERSION}
 
 MAINTAINER=	ale@FreeBSD.org
@@ -14,11 +13,13 @@ COMMENT=	PHP Scripting Language
 
 LICENSE=	PHP301
 
-LATEST_LINK=	${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}
-
 USES=		tar:bzip2 cpe
 CPE_PRODUCT=	php
 NO_OPTIONS_SORT=yes
+
+DEPRECATED=	PHP 5.4 is End of Life http://php.net/supported-versions.php
+EXPIRATION_DATE=2016-01-15
+
 .if !defined(PKGNAMESUFFIX)
 USE_AUTOTOOLS=	autoconf
 
@@ -39,6 +40,9 @@ USE_GNOME=	libxml2
 
 OPTIONS_DEFINE+=CLI CGI FPM EMBED DEBUG DTRACE IPV6 MAILHEAD LINKTHR ZTS
 OPTIONS_DEFAULT=CLI CGI FPM IPV6 LINKTHR
+# Bug 197128:  No ASM code for MIPS/MIPS64, disable FPM
+OPTIONS_EXCLUDE_mips=FPM
+OPTIONS_EXCLUDE_mips64=FPM
 OPTIONS_SUB=	yes
 
 CLI_DESC=	Build CLI version
@@ -60,8 +64,7 @@ DESTDIRNAME=	INSTALL_ROOT
 
 PATCH_DIST_STRIP=	-p1
 
-PATCH_SITES+=	${MASTER_SITE_LOCAL}
-PATCH_SITE_SUBDIR=	ale
+PATCH_SITES+=	LOCAL/ale
 
 .if ${PORT_OPTIONS:MMAILHEAD}
 PATCHFILES+=	php-5.4.x-mail-header.patch:mail
@@ -143,7 +146,7 @@ CONFIGURE_ENV+=	ac_cv_pthreads_lib="" \
 		lt_cv_path_SED="sed"
 
 .if ${PORT_OPTIONS:MLINKTHR}
-LIBS+=		${PTHREAD_LIBS}
+LIBS+=		-lpthread
 .endif
 
 .if ${PORT_OPTIONS:MZTS}
@@ -155,9 +158,6 @@ CONFIGURE_ARGS+=--enable-debug
 .endif
 
 .if ${PORT_OPTIONS:MDTRACE}
-.if ${OSVERSION} < 900000
-IGNORE=		cannot be built with DTrace support on FreeBSD < 9.x
-.endif
 CONFIGURE_ARGS+=--enable-dtrace
 PLIST_SUB+=	DTRACE=""
 .else

@@ -5,8 +5,7 @@ PORTNAME=	bsmtrace
 PORTVERSION=	1.4
 PORTREVISION=	0
 CATEGORIES=	security
-MASTER_SITES=	${MASTER_SITE_LOCAL}
-MASTER_SITE_SUBDIR=	csjp
+MASTER_SITES=	LOCAL/csjp
 
 MAINTAINER=	alm@FreeBSD.org
 COMMENT=	BSM based intrusion detection system
@@ -21,7 +20,7 @@ OPTIONS_DEFINE=	PCRE EXAMPLES
 
 .if ${PORT_OPTIONS:MPCRE}
 LIB_DEPENDS=	libpcre.so:${PORTSDIR}/devel/pcre
-MAKE_ENV+=	PCRE=1 
+MAKE_ENV+=	PCRE=1
 CFLAGS+=	-I${LOCALBASE}/include
 LIBS+=		-L${LOCALBASE}/lib -lpcre
 .endif

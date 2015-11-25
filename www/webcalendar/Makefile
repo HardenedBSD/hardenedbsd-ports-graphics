@@ -10,11 +10,17 @@ COMMENT=	Web-based calendar application
 
 LICENSE=	GPLv2
 
+DEPRECATED=	PHP 5.4 EOL reached
+EXPIRATION_DATE=	2016-01-15
+
 PORTSCOUT=	limit:^1\.2\. skipb:1
 USE_PHP=	pcre session
 WANT_PHP_WEB=	yes
 NO_BUILD=	yes
+NO_ARCH=	yes
 
+USES=		cpe
+CPE_VENDOR=	craig_knudsen
 WWWDIR=		${PREFIX}/www/${PORTNAME:tl}
 DOCSDIR=	${PREFIX}/share/doc/${PORTNAME:tl}
 DEFAULT_VERSIONS+=	php=5

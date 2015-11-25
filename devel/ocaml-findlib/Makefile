@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	findlib
-PORTVERSION=	1.5.5
+PORTVERSION=	1.5.6
 CATEGORIES=	devel
 MASTER_SITES=	http://download.camlcity.org/download/
 PKGNAMEPREFIX=	ocaml-
@@ -18,6 +18,7 @@ ALL_TARGET=	all opt
 CONFIGURE_ARGS=	-bindir "${PREFIX}/bin" -mandir "${PREFIX}/man" \
 		-sitelib "${PREFIX}/${OCAML_SITELIBDIR}" \
 		-config "${PREFIX}/etc/findlib.conf"
+USE_OCAML_CAMLP4=yes
 USE_OCAML_FINDLIB=yes
 OCAMLFIND_DEPEND=	# Avoid dependency loop
 
@@ -26,6 +27,8 @@ OPTIONS_DEFAULT=TOOLBOX
 OPTIONS_SUB=	yes
 TOOLBOX_DESC=	Include toolbox interface (requires OCaml with TK)
 TOOLBOX_CONFIGURE_ON=	-with-toolbox
+TOOLBOX_RUN_DEPENDS=	labltk:${PORTSDIR}/x11-toolkits/ocaml-labltk
+TOOLBOX_BUILD_DEPENDS=	${TOOLBOX_RUN_DEPENDS}
 
 MAKE_JOBS_UNSAFE=	yes
 

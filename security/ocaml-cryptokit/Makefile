@@ -7,11 +7,12 @@ CATEGORIES=	security
 MASTER_SITES=	http://forge.ocamlcore.org/frs/download.php/891/
 PKGNAMEPREFIX=	ocaml-
 
-MAINTAINER=	jaapb@kerguelen.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Variety of cryptographic primitives for Objective Caml
 
 DESTDIRNAME=	destdir
 HAS_CONFIGURE=	yes
+CONFIGURE_ARGS=	--docdir ${OCAML_DOCSDIR}
 
 USE_OCAML=	yes
 USE_OCAML_LDCONFIG=	yes
@@ -27,7 +28,6 @@ OPTIONS_DEFINE=	DOCS
 
 .if ${PORT_OPTIONS:MDOCS}
 ALL_TARGET+=	doc
-CONFIGURE_ARGS+=	--docdir ${OCAML_DOCSDIR}
 .endif
 
 post-patch:

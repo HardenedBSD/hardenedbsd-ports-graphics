@@ -3,7 +3,7 @@
 
 PORTNAME=	wxdfast
 PORTVERSION=	0.6.0
-PORTREVISION=	7
+PORTREVISION=	9
 CATEGORIES=	ftp www
 MASTER_SITES=	SF/dfast/wxDownload%20Fast/${PORTVERSION}
 DISTNAME=	${PORTNAME}_${PORTVERSION}
@@ -12,17 +12,16 @@ MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Multithread and multi-platform download manager
 
 LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/COPYING
 
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 
 USE_WX=		2.8+
 WX_CONF_ARGS=	relative
-WX_UNICODE=	yes
-USES=		gettext
-USE_AUTOTOOLS=	aclocal automake autoconf libtoolize
-ACLOCAL_ARGS=	-I ${LOCALBASE}/share/locale
-AUTOMAKE_ARGS=	--add-missing --copy --force-missing --foreign
+USES=		autoreconf gettext libtool
+GNU_CONFIGURE=	yes
 CONFIGURE_ENV=	WXRC="${WXRC_CMD}"
+INSTALL_TARGET=	install-strip
 
 post-patch:
 	@${REINPLACE_CMD} -e \

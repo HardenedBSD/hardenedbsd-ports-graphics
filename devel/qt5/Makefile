@@ -2,11 +2,8 @@
 
 PORTNAME=	qt5
 DISTVERSION=	${QT5_VERSION}
-PORTREVISION=	2
+PORTREVISION=	1
 CATEGORIES=	devel
-MASTER_SITES=	# empty
-DISTFILES=	# empty
-EXTRACT_ONLY=	# empty
 
 MAINTAINER=	kde@FreeBSD.org
 COMMENT=	Cross-platform application and UI framework (metaport)
@@ -14,13 +11,10 @@ COMMENT=	Cross-platform application and UI framework (metaport)
 USE_QT5=	clucene concurrent core dbus declarative designer \
 		graphicaleffects gui help imageformats multimedia \
 		network opengl paths printsupport qml quick quickcontrols \
-		script scripttools serialport sql svg testlib webkit widgets \
-		x11extras xml xmlpatterns
+		script scripttools serialport sql svg testlib webchannel \
+		webkit websockets widgets x11extras xml xmlpatterns
 USE_QT5:=	${USE_QT5:S/$/_run/}
-
-NO_BUILD=	yes
-NO_INSTALL=	yes
-NO_MTREE=	yes
+USES=		metaport
 
 OPTIONS_DEFINE=	SQL_PLUGINS TOOLS
 OPTIONS_DEFAULT=${OPTIONS_DEFINE}

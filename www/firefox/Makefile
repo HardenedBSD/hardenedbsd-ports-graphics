@@ -2,45 +2,45 @@
 # $FreeBSD$
 
 PORTNAME=	firefox
-DISTVERSION=	36.0.1
+DISTVERSION=	42.0
 DISTVERSIONSUFFIX=.source
 PORTEPOCH=	1
 CATEGORIES=	www ipv6
 MASTER_SITES=	MOZILLA/${PORTNAME}/releases/${DISTVERSION}/source \
-		https://ftp.mozilla.org/pub/mozilla.org/${PORTNAME}/candidates/${DISTVERSION}-candidates/build2/source/
+		MOZILLA/${PORTNAME}/candidates/${DISTVERSION}-candidates/build2/source
 
 MAINTAINER=	gecko@FreeBSD.org
 COMMENT=	Web browser based on the browser portion of Mozilla
 
-BUILD_DEPENDS=	nspr>=4.10.6:${PORTSDIR}/devel/nspr \
-		nss>=3.17.4:${PORTSDIR}/security/nss \
+BUILD_DEPENDS=	nspr>=4.10.10:${PORTSDIR}/devel/nspr \
+		nss>=3.19.4:${PORTSDIR}/security/nss \
 		libevent2>=2.0.21_2:${PORTSDIR}/devel/libevent2 \
-		cairo>=1.12.16_1,2:${PORTSDIR}/graphics/cairo \
 		soundtouch>=1.8.0:${PORTSDIR}/audio/soundtouch \
 		harfbuzz>=0.9.34:${PORTSDIR}/print/harfbuzz \
 		graphite2>=1.2.4:${PORTSDIR}/graphics/graphite2 \
 		libvorbis>=1.3.5:${PORTSDIR}/audio/libvorbis \
-		opus>=1.1:${PORTSDIR}/audio/opus \
 		libvpx>=1.3.0:${PORTSDIR}/multimedia/libvpx \
-		sqlite3>=3.8.7.4:${PORTSDIR}/databases/sqlite3 \
+		sqlite3>=3.8.9:${PORTSDIR}/databases/sqlite3 \
 		${PYTHON_PKGNAMEPREFIX}sqlite3>0:${PORTSDIR}/databases/py-sqlite3 \
 		v4l_compat>0:${PORTSDIR}/multimedia/v4l_compat \
 		autoconf-2.13:${PORTSDIR}/devel/autoconf213 \
+		yasm:${PORTSDIR}/devel/yasm \
 		zip:${PORTSDIR}/archivers/zip \
 		unzip:${PORTSDIR}/archivers/unzip
+#		opus>=1.1:${PORTSDIR}/audio/opus \
 
 LIB_DEPENDS=	libv4l2.so:${PORTSDIR}/multimedia/libv4l
 
 USE_GECKO=	gecko
-CONFLICTS=	firefox-esr-31.* firefox-esr-24.* firefox-esr-17.*
+CONFLICTS_INSTALL=	firefox-esr-45.* firefox-esr-3[18].* firefox-esr-24.*
 MOZ_PKGCONFIG_FILES=	# empty
-USE_MOZILLA=	# empty
+USE_MOZILLA=	-opus
 MOZILLA_NAME=	Firefox
 
 USE_QT5=	# empty
 QT_NONSTANDARD=	yes
 USE_GL=		gl
-USES=		dos2unix tar:bzip2
+USES=		dos2unix tar:xz
 DOS2UNIX_FILES=	media/webrtc/trunk/webrtc/system_wrappers/source/spreadsortlib/spreadsort.hpp
 
 FIREFOX_ICON=		${MOZILLA}.png
@@ -49,6 +49,7 @@ MOZ_OPTIONS=	--program-transform-name='s/firefox/${MOZILLA}/' \
 		--enable-application=browser \
 		--enable-official-branding
 
+OPTIONS_EXCLUDE=	LOGGING
 OPTIONS_DEFAULT=	GTK2
 
 OPTIONS_SINGLE+=	TOOLKIT
@@ -57,10 +58,14 @@ OPTIONS_SINGLE_TOOLKIT=	GTK2 GTK3
 .include "${.CURDIR}/../../www/firefox/Makefile.options"
 .include <bsd.port.pre.mk>
 
-WRKSRC:=	${WRKDIR}/mozilla-release
+WRKSRC:=	${WRKDIR}/${PORTNAME}-${DISTVERSION}
 
 .if ${PORT_OPTIONS:MALSA}
 RUN_DEPENDS+=	alsa-lib>=1.0.27.2_1:${PORTSDIR}/audio/alsa-lib
+.endif
+
+.if ! ${PORT_OPTIONS:MBUNDLED_CAIRO}
+BUILD_DEPENDS+=	cairo>=1.12.16_1,2:${PORTSDIR}/graphics/cairo
 .endif
 
 .if ${PORT_OPTIONS:MGSTREAMER}

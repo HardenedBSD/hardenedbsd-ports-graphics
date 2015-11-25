@@ -10,15 +10,17 @@ man/man8/libvirtd.8.gz
 man/man8/virtlockd.8.gz
 @sample %%ETCDIR%%/libvirt.conf.sample
 @sample %%ETCDIR%%/libvirtd.conf.sample
+@sample %%ETCDIR%%/virtlockd.conf.sample
+%%EXAMPLESDIR%%/networks/default.xml
 %%QEMU%%@sample %%ETCDIR%%/qemu.conf.sample
-%%ETCDIR%%/virtlockd.conf
-%%ETCDIR%%/qemu/networks/default.xml
-%%ETCDIR%%/qemu/networks/autostart/default.xml
+%%XEN%%@sample %%ETCDIR%%/libxl.conf.sample
 %%QEMU%%%%ETCDIR%%/qemu-lockd.conf
+%%XEN%%%%ETCDIR%%/libxl-lockd.conf
 etc/logrotate.d/libvirtd
 etc/logrotate.d/libvirtd.lxc
 etc/logrotate.d/libvirtd.qemu
 etc/logrotate.d/libvirtd.uml
+etc/logrotate.d/libvirtd.libxl
 include/libvirt/libvirt-lxc.h
 include/libvirt/libvirt-qemu.h
 include/libvirt/libvirt-host.h
@@ -35,6 +37,9 @@ include/libvirt/libvirt-storage.h
 include/libvirt/libvirt-stream.h
 include/libvirt/virterror.h
 lib/libvirt/lock-driver/lockd.so
+lib/libvirt-admin.so
+lib/libvirt-admin.so.0
+lib/libvirt-admin.so.%%SHLIB_VER%%
 lib/libvirt-lxc.so
 lib/libvirt-lxc.so.0
 lib/libvirt-lxc.so.%%SHLIB_VER%%
@@ -60,6 +65,8 @@ share/augeas/lenses/virtlockd.aug
 share/augeas/lenses/tests/test_libvirtd.aug
 share/augeas/lenses/tests/test_virtlockd.aug
 %%QEMU%%share/augeas/lenses/tests/test_libvirtd_qemu.aug
+%%XEN%%share/augeas/lenses/libvirtd_libxl.aug
+%%XEN%%share/augeas/lenses/tests/test_libvirtd_libxl.aug
 %%DOCSDIR%%%%PORTVERSION%%/html/32favicon.png
 %%DOCSDIR%%%%PORTVERSION%%/html/404.html
 %%DOCSDIR%%%%PORTVERSION%%/html/acl.html
@@ -90,7 +97,6 @@ share/augeas/lenses/tests/test_virtlockd.aug
 %%DOCSDIR%%%%PORTVERSION%%/html/drvhyperv.html
 %%DOCSDIR%%%%PORTVERSION%%/html/drvlxc.html
 %%DOCSDIR%%%%PORTVERSION%%/html/drvopenvz.html
-%%DOCSDIR%%%%PORTVERSION%%/html/drvparallels.html
 %%DOCSDIR%%%%PORTVERSION%%/html/drvphyp.html
 %%DOCSDIR%%%%PORTVERSION%%/html/drvqemu.html
 %%DOCSDIR%%%%PORTVERSION%%/html/drvremote.html
@@ -98,6 +104,7 @@ share/augeas/lenses/tests/test_virtlockd.aug
 %%DOCSDIR%%%%PORTVERSION%%/html/drvuml.html
 %%DOCSDIR%%%%PORTVERSION%%/html/drvvbox.html
 %%DOCSDIR%%%%PORTVERSION%%/html/drvvmware.html
+%%DOCSDIR%%%%PORTVERSION%%/html/drvvirtuozzo.html
 %%DOCSDIR%%%%PORTVERSION%%/html/drvxen.html
 %%DOCSDIR%%%%PORTVERSION%%/html/errors.html
 %%DOCSDIR%%%%PORTVERSION%%/html/et.png
@@ -154,6 +161,16 @@ share/augeas/lenses/tests/test_virtlockd.aug
 %%DOCSDIR%%%%PORTVERSION%%/html/migration-native.png
 %%DOCSDIR%%%%PORTVERSION%%/html/migration-tunnel.png
 %%DOCSDIR%%%%PORTVERSION%%/html/migration-unmanaged-direct.png
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2005.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2006.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2007.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2008.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2009.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2010.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2011.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2012.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2013.html
+%%DOCSDIR%%%%PORTVERSION%%/html/news-2014.html
 %%DOCSDIR%%%%PORTVERSION%%/html/news.html
 %%DOCSDIR%%%%PORTVERSION%%/html/node.gif
 %%DOCSDIR%%%%PORTVERSION%%/html/pending.html
@@ -215,15 +232,11 @@ share/gtk-doc/html/libvirt/up.png
 %%DATADIR%%/schemas/storagecommon.rng
 %%DATADIR%%/schemas/storagepool.rng
 %%DATADIR%%/schemas/storagevol.rng
-%%NLS%%share/locale/af/LC_MESSAGES/libvirt.mo
-%%NLS%%share/locale/am/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/ar/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/as/LC_MESSAGES/libvirt.mo
-%%NLS%%share/locale/be/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/bg/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/bn/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/bn_IN/LC_MESSAGES/libvirt.mo
-%%NLS%%share/locale/bo/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/bs/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/ca/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/cs/LC_MESSAGES/libvirt.mo
@@ -234,17 +247,13 @@ share/gtk-doc/html/libvirt/up.png
 %%NLS%%share/locale/en_GB/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/es/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/et/LC_MESSAGES/libvirt.mo
-%%NLS%%share/locale/eu_ES/LC_MESSAGES/libvirt.mo
-%%NLS%%share/locale/fa/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/fi/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/fr/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/gl/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/gu/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/he/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/hi/LC_MESSAGES/libvirt.mo
-%%NLS%%share/locale/hr/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/hu/LC_MESSAGES/libvirt.mo
-%%NLS%%share/locale/hy/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/id/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/is/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/it/LC_MESSAGES/libvirt.mo
@@ -252,15 +261,12 @@ share/gtk-doc/html/libvirt/up.png
 %%NLS%%share/locale/ka/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/kn/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/ko/LC_MESSAGES/libvirt.mo
-%%NLS%%share/locale/ku/LC_MESSAGES/libvirt.mo
-%%NLS%%share/locale/lo/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/lt/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/lv/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/mk/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/ml/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/mr/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/ms/LC_MESSAGES/libvirt.mo
-%%NLS%%share/locale/my/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/nb/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/nl/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/nn/LC_MESSAGES/libvirt.mo
@@ -286,22 +292,26 @@ share/gtk-doc/html/libvirt/up.png
 %%NLS%%share/locale/uk/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/ur/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/vi/LC_MESSAGES/libvirt.mo
-%%NLS%%share/locale/vi_VN/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/zh_CN/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/zh_TW/LC_MESSAGES/libvirt.mo
 %%NLS%%share/locale/zu/LC_MESSAGES/libvirt.mo
+%%BHYVE%%lib/libvirt/connection-driver/libvirt_driver_bhyve.so
 %%QEMU%%lib/libvirt/connection-driver/libvirt_driver_qemu.so
 lib/libvirt/connection-driver/libvirt_driver_network.so
 lib/libvirt/connection-driver/libvirt_driver_secret.so
 lib/libvirt/connection-driver/libvirt_driver_storage.so
 lib/libvirt/connection-driver/libvirt_driver_vbox.so
+%%XEN%%lib/libvirt/connection-driver/libvirt_driver_libxl.so
 %%QEMU%%@dir /var/run/libvirt/qemu
 %%QEMU%%@dir /var/lib/libvirt/qemu/channel/target
 %%QEMU%%@dir /var/lib/libvirt/qemu/channel
 %%QEMU%%@dir /var/lib/libvirt/qemu
 %%QEMU%%@dir /var/cache/libvirt/qemu
+%%XEN%%@dir /var/lib/libvirt/libxl
+%%XEN%%@dir /var/log/libvirt/libxl
+%%XEN%%@dir /var/run/libvirt/libxl
+@dir %%ETCDIR%%/qemu/networks/autostart
 @dir /var/cache/libvirt
-@dir /var/cache
 @dir /var/lib/libvirt/boot
 @dir /var/lib/libvirt/dnsmasq
 @dir /var/lib/libvirt/filesystems
@@ -315,8 +325,6 @@ lib/libvirt/connection-driver/libvirt_driver_vbox.so
 @dir /var/log/libvirt/qemu
 @dir /var/log/libvirt/uml
 @dir /var/log/libvirt
-@dir /var/log
 @dir /var/run/libvirt/lockd
 @dir /var/run/libvirt/network
 @dir /var/run/libvirt
-@dir /var/run

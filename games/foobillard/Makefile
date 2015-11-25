@@ -45,6 +45,7 @@ CONFIGURE_ARGS+=	--enable-glut
 
 .if ! ${PORT_OPTIONS:MNVIDIA_BUMPREF}
 CONFIGURE_ARGS+=	--disable-nvidia
+CFLAGS += -DGL_AMD_gpu_shader_int64=1 -DGLuint64EXT=uint64_t -DGLint64EXT=int64_t -UGL_VERTEX_PROGRAM_NV -DGL_NV_vertex_program=1
 .endif
 
 post-patch:

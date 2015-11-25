@@ -2,7 +2,7 @@
 
 PORTNAME=	oyranos
 PORTVERSION=	0.9.5
-PORTREVISION=	5
+PORTREVISION=	6
 CATEGORIES=	graphics
 MASTER_SITES=	SF/${PORTNAME}/Oyranos/Oyranos%20${PORTVERSION:C|(.*)\.[0-9]*$|\1|}
 
@@ -23,6 +23,8 @@ LIB_DEPENDS=	libraw.so:${PORTSDIR}/graphics/libraw \
 		liblcms.so:${PORTSDIR}/graphics/lcms \
 		liblcms2.so:${PORTSDIR}/graphics/lcms2 \
 		libXcm.so:${PORTSDIR}/x11/libXcm
+
+BROKEN_FreeBSD_9=	does not build
 
 USES=		cmake gettext iconv pkgconfig tar:bzip2
 USE_GL=		yes

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	x2goclient
-PORTVERSION=	4.0.3.2
+PORTVERSION=	4.0.5.0
 CATEGORIES=	net
 MASTER_SITES=	http://code.x2go.org/releases/source/x2goclient/
 
@@ -10,6 +10,7 @@ MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Qt client for the X2Go system
 
 LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/COPYING
 
 # Avoid clash with libssh from base
 BUILD_DEPENDS=	${LOCALBASE}/lib/libssh.so:${PORTSDIR}/security/libssh
@@ -34,15 +35,15 @@ LDAP_QMAKE_ON=		LIBS+="-lX11 -lXpm -lcups -lldap"
 LDAP_QMAKE_OFF=		LIBS+="-lX11 -lXpm -lcups"
 
 post-patch:
-	@${FIND} ${WRKSRC} -name "*.cpp" -or -name "*.h" | ${XARGS} \
+	@${FIND} ${WRKSRC}/src -name "*.cpp" -or -name "*.h" | ${XARGS} \
 		${REINPLACE_CMD} -e \
 		's|Q_OS_LINUX|Q_OS_UNIX| ; \
 		 /<linux\/fs.h>/s|^|//| ; \
-		 /#define USELDAP/s|^|//|'
+		 /#define USELDAP/s|^|//| ; \
+		 s|/usr/local/bin|${LOCALBASE}/bin|'
 
 pre-build:
-	@(cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${MAKE_FLAGS} \
-		${MAKEFILE} compiler_TSQM_make_all)
+	@(cd ${WRKSRC} && ${DO_MAKE_BUILD} compiler_TSQM_make_all)
 
 do-install:
 	(cd ${WRKSRC} && ${INSTALL_PROGRAM} x2goclient \
@@ -54,14 +55,14 @@ do-install:
 		${STAGEDIR}${DESKTOPDIR})
 .for i in 16x16 32x32 48x48 64x64 128x128
 	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${i}/apps
-	(cd ${WRKSRC}/icons/${i} && ${INSTALL_DATA} x2goclient.png \
+	(cd ${WRKSRC}/res/img/icons/${i} && ${INSTALL_DATA} x2goclient.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${i}/apps)
 .endfor
 	@${MKDIR} ${STAGEDIR}${DATADIR}/icons
-	(cd ${WRKSRC}/icons && ${INSTALL_DATA} x2goclient.xpm \
+	(cd ${WRKSRC}/res/img/icons && ${INSTALL_DATA} x2goclient.xpm \
 		${STAGEDIR}${DATADIR}/icons)
 .for i in x2goclient.png x2gosession.png
-	(cd ${WRKSRC}/icons/128x128 && ${INSTALL_DATA} ${i} \
+	(cd ${WRKSRC}/res/img/icons/128x128 && ${INSTALL_DATA} ${i} \
 		${STAGEDIR}${DATADIR}/icons)
 .endfor
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}

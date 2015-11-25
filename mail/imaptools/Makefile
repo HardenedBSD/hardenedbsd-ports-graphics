@@ -4,8 +4,7 @@
 PORTNAME=	imaptools
 PORTVERSION=	1.135
 CATEGORIES=	mail
-MASTER_SITES=	${MASTER_SITE_LOCAL}
-MASTER_SITE_SUBDIR=	bsam
+MASTER_SITES=	LOCAL/bsam
 DISTNAME=	imap_tools_V${PORTVERSION}
 
 MAINTAINER=	bsam@FreeBSD.org
@@ -22,6 +21,6 @@ SHEBANG_FILES=	*.pl
 USE_PERL5=	run
 
 do-install:
-	${INSTALL_SCRIPT} ${WRKDIR}/*.pl ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/*.pl ${STAGEDIR}${PREFIX}/bin
 
 .include <bsd.port.mk>

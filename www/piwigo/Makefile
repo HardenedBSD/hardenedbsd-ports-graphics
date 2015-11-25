@@ -18,7 +18,7 @@ USE_PHP=	calendar ctype dom exif filter gd gettext hash iconv json \
 		mbstring mcrypt mysql mysqli openssl pcre pdf pdo posix \
 		session simplexml sockets spl tokenizer xml xmlreader \
 		xmlwriter zlib
-USES=		zip
+USES=		cpe zip
 WANT_PHP_WEB=	yes
 WRKSRC=		${WRKDIR}/${PORTNAME}
 
@@ -39,6 +39,7 @@ PORTDOCS=	README_ca.txt README_en.txt README_fr.txt
 PLIST_SUB+=	WWWOWN="${WWWOWN}" \
 		WWWGRP="${WWWGRP}" \
 		CHOWN="${CHOWN}"
+
 .include <bsd.port.pre.mk>
 
 .if ${PORT_OPTIONS:MIMAGICK}
@@ -53,15 +54,15 @@ post-extract:
 	@${FIND} -d ${WRKSRC} -type d -exec ${CHMOD} 755 {} \;
 	@${FIND} -d ${WRKSRC} -type f -exec ${CHMOD} ${SHAREMODE} {} \;
 
-do-install:
-.if ${PORT_OPTIONS:MDOCS}
-	@${INSTALL} -d ${STAGEDIR}${DOCSDIR}/
+pre-install-DOCS-on:
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}/
 	@cd ${WRKSRC}/doc/ && ${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}/
-.endif
-.if ${PORT_OPTIONS:MEXAMPLES}
-	@${INSTALL} -d ${STAGEDIR}${EXAMPLESDIR}/
+
+pre-install-EXAMPLES-on:
+	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}/
 	@cd ${WRKSRC}/tools/ && ${COPYTREE_SHARE} . ${STAGEDIR}${EXAMPLESDIR}/
-.endif
+
+do-install:
 	@cd ${WRKSRC}/doc/ && ${RM} ${PORTDOCS}
 	@${RM} -fr ${WRKSRC}/tools ${WRKSRC}/_data/dummy.txt
 	@${INSTALL} -d ${STAGEDIR}${WWWDIR}

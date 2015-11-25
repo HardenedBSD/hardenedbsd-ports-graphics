@@ -3,7 +3,7 @@
 
 PORTNAME=	zynaddsubfx
 PORTVERSION=	2.4.3
-PORTREVISION=	6
+PORTREVISION=	7
 CATEGORIES=	audio
 MASTER_SITES=	SF
 DISTNAME=	ZynAddSubFX-${PORTVERSION}
@@ -15,10 +15,6 @@ LICENSE=	GPLv2
 
 LIB_DEPENDS=	libfftw3.so:${PORTSDIR}/math/fftw3 \
 		libmxml.so:${PORTSDIR}/textproc/mxml
-
-BROKEN_ia64=	invokes i386 asm
-BROKEN_powerpc=	invokes i386 asm
-BROKEN_sparc64=	invokes i386 asm
 
 USES=		tar:bzip2 cmake pkgconfig
 
@@ -54,10 +50,9 @@ LASH_CMAKE_OFF=			-DLashEnabe:BOOL=OFF
 JACK_LIB_DEPENDS=		libjack.so:${PORTSDIR}/audio/jack
 JACK_CMAKE_OFF=			-DJackEnable:BOOL=OFF
 
-PORTAUDIO_LIB_DEPENDS=		libportaudio.so.2:${PORTSDIR}/audio/portaudio2
-PORTAUDIO_CFLAGS=		-I${LOCALBASE}/include/portaudio2
+PORTAUDIO_LIB_DEPENDS=		libportaudio.so:${PORTSDIR}/audio/portaudio
 PORTAUDIO_CMAKE_OFF=		-DPaEnabe:BOOL=OFF
-PORTAUDIO_LDFLAGS=		${LOCALBASE}/lib/portaudio2/libportaudio.so
+PORTAUDIO_LDFLAGS=		-lportaudio
 
 PORTDOCS=	*
 

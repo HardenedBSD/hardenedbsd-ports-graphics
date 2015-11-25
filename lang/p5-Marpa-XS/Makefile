@@ -3,7 +3,7 @@
 
 PORTNAME=	Marpa-XS
 PORTVERSION=	1.008000
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	lang textproc perl5
 MASTER_SITES=	CPAN
 MASTER_SITE_SUBDIR=	CPAN:JKEGL
@@ -21,7 +21,10 @@ BUILD_DEPENDS=	p5-ExtUtils-PkgConfig>=0:${PORTSDIR}/devel/p5-ExtUtils-PkgConfig 
 RUN_DEPENDS:=	${BUILD_DEPENDS}
 TEST_DEPENDS=	p5-Test-Weaken>=3.004000:${PORTSDIR}/devel/p5-Test-Weaken
 
-USE_PERL5=	configure
+USE_PERL5=	modbuild
 USES=		perl5
+
+post-install:
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/${SITE_ARCH_REL}/auto/Marpa/XS/XS.so
 
 .include <bsd.port.mk>

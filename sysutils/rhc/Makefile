@@ -3,6 +3,7 @@
 
 PORTNAME=	rhc
 PORTVERSION=	1.32.2
+PORTREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	RG
 
@@ -10,6 +11,7 @@ MAINTAINER=	dereckson@gmail.com
 COMMENT=	Administration console client for RedHat OpenShift
 
 LICENSE=	APACHE20
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	${LOCALBASE}/bin/minitar:${PORTSDIR}/archivers/rubygem-archive-tar-minitar \
 		${LOCALBASE}/bin/commander:${PORTSDIR}/devel/rubygem-commander \

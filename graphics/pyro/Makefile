@@ -11,8 +11,11 @@ EXTRACT_SUFX=	.tgz
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Simple OpenGL-based firework simulator
 
-LIB_DEPENDS=	libjpeg.so:${PORTSDIR}/graphics/jpeg
+BROKEN=		No public distfiles
+DEPRECATED=	Broken for more than 6 months
+EXPIRATION_DATE=	2015-11-26
 
+USES=		jpeg
 USE_GL=		gl glut
 USE_XORG=	xi xmu xext
 

@@ -16,7 +16,7 @@ USE_LDCONFIG=	yes
 PKGMESSAGE=	${WRKDIR}/pkg-message
 USES=		gmake libtool shebangfix
 SHEBANG_FILES=	scripts/sphinx2-demo.in
-perl_OLD_CMD=	@PERL@ -w
+perl_OLD_CMD=	"@PERL@ -w"
 
 # contains i386 sound code
 ONLY_FOR_ARCHS=	i386
@@ -27,8 +27,6 @@ post-patch:
 		${WRKSRC}/src/libsphinx2/hash.c	\
 		${WRKSRC}/src/libsphinx2/list.c	\
 		${WRKSRC}/src/libsphinx2/salloc.c
-	@${REINPLACE_CMD} -e 's|echo aout|echo elf|g' \
-		${WRKSRC}/configure
 
 post-build:
 	${ECHO_CMD} "*** WARNING ***"				 > ${PKGMESSAGE}

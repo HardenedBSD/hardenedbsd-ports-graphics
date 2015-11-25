@@ -3,6 +3,7 @@
 
 PORTNAME=	gcalcli
 PORTVERSION=	3.2
+DISTVERSIONPREFIX=	v
 CATEGORIES=	deskutils
 
 MAINTAINER=	ports@thelanman.net
@@ -18,13 +19,11 @@ RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}dateutil>=0:${PORTSDIR}/devel/py-dateutil \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	insanum
-GH_PROJECT=	gcalcli
-GH_TAGNAME=	v${PORTVERSION}
-GH_COMMIT=	3964779
 
 USES=		python
 
 NO_BUILD=	yes
+NO_ARCH=	yes
 
 PORTDOCS=	README.md gcalcli_?.png
 
@@ -41,14 +40,12 @@ ICS_VCAL_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}vobject>=0.4.8:${PORTSDIR}/deskutil
 SIMPLEJSON_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}simplejson>=0:${PORTSDIR}/devel/py-simplejson
 FUZZYDATES_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}parsedatetime>=0:${PORTSDIR}/devel/py-parsedatetime
 
-.include <bsd.port.options.mk>
-
 do-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_SCRIPT} ${WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
-.if ${PORT_OPTIONS:MDOCS}
+
+do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}/${DOCSDIR}
 	(cd ${WRKSRC}/docs && ${COPYTREE_SHARE} . ${STAGEDIR}${DOCSDIR})
-.endif
 
 .include <bsd.port.mk>

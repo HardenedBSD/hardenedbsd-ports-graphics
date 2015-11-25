@@ -3,7 +3,7 @@
 
 PORTNAME=	x-face-e21
 PORTVERSION=	20070306
-PORTREVISION=	12
+PORTREVISION=	13
 CATEGORIES=	mail elisp
 MASTER_SITES=	http://www.jpl.org/elips/
 PKGNAMESUFFIX=	-${EMACS_PORT_NAME}
@@ -28,7 +28,7 @@ PLIST_FILES=	${EMACS_VERSION_SITE_LISPDIR}/${DISTNAME} \
 		${EMACS_VERSION_SITE_LISPDIR}/${DISTNAME}c
 
 do-build:
-	@cd ${WRKDIR} && ${EMACS_CMD} -batch -q -no-site-file -no-init-file \
+	@cd ${WRKSRC} && ${EMACS_CMD} -batch -q -no-site-file -no-init-file \
 		-f batch-byte-compile ${DISTNAME}
 
 do-install:

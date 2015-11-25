@@ -11,28 +11,30 @@ COMMENT=	Extensible network forensic analysis framework
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
-RUN_DEPENDS=	bash:${PORTSDIR}/shells/bash \
+BUILD_DEPENDS=	bash:${PORTSDIR}/shells/bash \
 		${PYTHON_PKGNAMEPREFIX}pygeoip>0:${PORTSDIR}/net/py-pygeoip \
 		${PYTHON_PKGNAMEPREFIX}pycrypto>0:${PORTSDIR}/security/py-pycrypto \
 		${PYTHON_PKGNAMEPREFIX}dpkt>0:${PORTSDIR}/net/py-dpkt \
 		${PYTHON_PKGNAMEPREFIX}ipy>0:${PORTSDIR}/net-mgmt/py-ipy \
 		${PYTHON_PKGNAMEPREFIX}pypcap>0:${PORTSDIR}/net/py-pypcap
+RUN_DEPENDS:=	${BUILD_DEPENDS}
 
 USE_GITHUB=	yes
 USES=		python
+NO_ARCH=	yes
 
 GH_ACCOUNT=	USArmyResearchLab
 GH_PROJECT=	Dshell
-GH_TAGNAME=	${GH_COMMIT}
-GH_COMMIT=	46e691c
+GH_TAGNAME=	46e691c
 
 OPTIONS_DEFINE=	DOCS
 
-.include <bsd.port.options.mk>
+MAKE_ENV+=	PYTHON_CMD=${PYTHON_CMD}
 
 post-patch:
 .for f in bin/generate-dshellrc.py doc/generate-doc.sh
 	${REINPLACE_CMD} -e 's|/bin/bash|${LOCALBASE}/bin/bash|' ${WRKSRC}/${f}
+	${REINPLACE_CMD} -e 's|pydoc|${LOCALBASE}/bin/pydoc${PYTHON_VER}|' ${WRKSRC}/${f}
 .endfor
 
 post-build:
@@ -60,11 +62,11 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/.dshellrc ${STAGEDIR}/${PREFIX}/etc/dshell
 	(cd ${WRKSRC}/lib; ${COPYTREE_SHARE} . ${STAGEDIR}/${PYTHON_SITELIBDIR}/dshell)
 	(cd ${WRKSRC}/decoders; ${COPYTREE_SHARE} . ${STAGEDIR}/${PYTHON_SITELIBDIR}/dshell/decoders)
-.if ${PORT_OPTIONS:MDOCS}
+	${MKDIR} ${STAGEDIR}/${DATADIR}/GeoIP
+
+do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}/${DOCSDIR}
 	${INSTALL_DATA} ${WRKSRC}/README.md ${STAGEDIR}/${DOCSDIR}
 	(cd ${WRKSRC}/doc; ${COPYTREE_SHARE} . ${STAGEDIR}/${DOCSDIR} "-name *\.html")
-.endif
-	${MKDIR} ${STAGEDIR}/${DATADIR}/GeoIP
 
 .include <bsd.port.mk>

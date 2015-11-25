@@ -2,36 +2,35 @@
 # $FreeBSD$
 
 PORTNAME=	freeipmi
-PORTVERSION=	1.4.8
+PORTVERSION=	1.4.11
 CATEGORIES=	sysutils
-MASTER_SITES=	GNU/${PORTNAME}/ \
+MASTER_SITES=	GNU/${PORTNAME} \
 		http://ftp.gluster.com/pub/${PORTNAME}/${PORTVERSION}/
 
 MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	Library and tools to support IPMI-capable hardware
 
 LICENSE=	GPLv3
+LICENSE_FILE=	${WRKSRC}/COPYING
 
 LIB_DEPENDS=	libargp.so:${PORTSDIR}/devel/argp-standalone \
 		libgcrypt.so:${PORTSDIR}/security/libgcrypt
+
+ONLY_FOR_ARCHS=	i386 amd64
+ONLY_FOR_ARCHS_REASON=	invokes i386 asm
 
 OPTIONS_DEFINE=	DEBUG DOCS IOPERM
 IOPERM_DESC=	Use i386_set_ioperm
 
 CONFIGURE_ARGS=	--disable-init-scripts \
-		--localstatedir=/var \
 		--sysconfdir=${ETCDIR} \
 		--with-ipmi-monitoring-sdr-cache-dir=${CACHE_DIR}/ipmimonitoringsdrcache \
 		--with-ipmiseld-cache-dir=${CACHE_DIR}/ipmiseld \
 		--with-pkgconfig-dir=${PREFIX}/libdata/pkgconfig
-CONFIGURE_ENV=	PTHREAD_LIBS=-pthread ac_cv_path_CPP=${CPP}
-CPPFLAGS+=	-I${LOCALBASE}/include
+CONFIGURE_ENV=	PTHREAD_LIBS=-lpthread ac_cv_path_CPP=${CPP}
 GNU_CONFIGURE=	yes
-LDFLAGS+=	-L${LOCALBASE}/lib
-ONLY_FOR_ARCHS=	i386 amd64
-ONLY_FOR_ARCHS_REASON=	invokes i386 asm
 USE_LDCONFIG=	yes
-USES=		gmake libtool shebangfix
+USES=		gmake libtool localbase shebangfix
 
 INFO=		freeipmi-faq
 PLIST_SUB=	CACHE_DIR=${CACHE_DIR}

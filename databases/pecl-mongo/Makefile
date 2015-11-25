@@ -2,16 +2,18 @@
 # $FreeBSD$
 
 PORTNAME=	mongo
-PORTVERSION=	1.6.4
+PORTVERSION=	1.6.11
 CATEGORIES=	databases pear
 MASTER_SITES=	http://pecl.php.net/get/
 PKGNAMEPREFIX=	pecl-
 DIST_SUBDIR=	PECL
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	bofh@FreeBSD.org
 COMMENT=	PECL classes for Mongo Database Driver
 
 LICENSE=	APACHE20
+
+BUILD_DEPENDS=	re2c>=0.13.4:${PORTSDIR}/devel/re2c
 
 USES=		tar:tgz
 USE_PHP=	spl

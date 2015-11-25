@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	scite
-PORTVERSION=	3.5.3
+PORTVERSION=	3.6.2
 CATEGORIES=	editors gnome
 MASTER_SITES=	SF/scintilla/SciTE/${PORTVERSION}
 DISTNAME=	${PORTNAME}${PORTVERSION:S/.//g}
@@ -18,25 +18,19 @@ LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 LIB_DEPENDS=	libscintilla.so:${PORTSDIR}/x11-toolkits/scintilla
 RUN_DEPENDS=	xdg-open:${PORTSDIR}/devel/xdg-utils
 
-OPTIONS_DEFINE=	DOCS FULL_BUFFER_MENU
-FULL_BUFFER_MENU_DESC=	Show all files in buffer menu
+OPTIONS_DEFINE=	DOCS
 
 WRKSRC=		${WRKDIR}/${PORTNAME}/gtk
 
-USES=		desktop-file-utils gmake pkgconfig tar:tgz
+USES=		compiler:c++11-lib desktop-file-utils gmake pkgconfig tar:tgz
 USE_GNOME=	gtk20
 MAKEFILE=	makefile
 
 PORTDATA=	*.properties
 PORTDOCS=	*.html *.jpg *.png
 
-.include <bsd.port.options.mk>
-
 post-patch:
 	@${REINPLACE_CMD} -e 's| -Os||g' ${WRKSRC}/makefile
-.if ${PORT_OPTIONS:MFULL_BUFFER_MENU}
-	@${REINPLACE_CMD} -e 's|30, "/Buffers|props.GetInt("buffers") > 30 ? props.GetInt("buffers") - 10 : 30, "/Buffers|g' ${WRKSRC}/SciTEGTK.cxx
-.endif
 	@${REINPLACE_CMD} -e 's|$$(SciteDefaultHome)|${DOCSDIR}|' \
 		${WRKSRC}/../src/SciTEGlobal.properties
 

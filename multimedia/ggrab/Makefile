@@ -11,16 +11,14 @@ EXTRACT_SUFX=	.tgz
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Records MPEG2 streams directly from your Dbox2 over Ethernet
 
+BROKEN=		unfetchable
+
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 
 PLIST_FILES=	bin/ggrab bin/sserver
 PORTDOCS=	README
 
 OPTIONS_DEFINE=	DOCS
-
-post-patch:
-	@${REINPLACE_CMD} -e 's/-lpthread/${PTHREAD_LIBS}/g' \
-		${WRKSRC}/Makefile
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/ggrab ${STAGEDIR}${PREFIX}/bin

@@ -2,23 +2,47 @@
 # $FreeBSD$
 
 PORTNAME=	utf8proc
-PORTVERSION=	1.1.6
-PORTREVISION=	1
+PORTVERSION=	1.3
+DISTVERSIONPREFIX=	v
 CATEGORIES=	textproc devel
-MASTER_SITES=	http://www.public-software-group.org/pub/projects/${PORTNAME}/v${PORTVERSION}/
-DISTNAME=	${PORTNAME}-v${PORTVERSION}
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	UTF-8 processing library
 
-ALL_TARGET=	c-library
+LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
+USE_GITHUB=	yes
+GH_ACCOUNT=	JuliaLang
+
+USES=		gmake
 USE_LDCONFIG=	yes
 
+PORTDOCS=	NEWS.md README.md
+PLIST_FILES=	include/utf8proc.h \
+		lib/libutf8proc.a \
+		lib/libutf8proc.so \
+		lib/libutf8proc.so.1 \
+		lib/libutf8proc.so.1.3 \
+		lib/libutf8proc.so.1.3.0
+
+OPTIONS_DEFINE=	DOCS
+
 do-install:
-		${INSTALL_LIB} ${WRKSRC}/libutf8proc.so ${STAGEDIR}${PREFIX}/lib/libutf8proc.so.1
-		${INSTALL_DATA} ${WRKSRC}/libutf8proc.a ${STAGEDIR}${PREFIX}/lib
-		${INSTALL_DATA} ${WRKSRC}/utf8proc.h ${STAGEDIR}${PREFIX}/include
-		${LN} -sf libutf8proc.so.1 ${STAGEDIR}${PREFIX}/lib/libutf8proc.so
+	(cd ${WRKSRC} && ${INSTALL_DATA} utf8proc.h \
+		${STAGEDIR}${PREFIX}/include)
+	(cd ${WRKSRC} && ${INSTALL_DATA} libutf8proc.a \
+		${STAGEDIR}${PREFIX}/lib)
+	(cd ${WRKSRC} && ${INSTALL_LIB} libutf8proc.so.1.3.0 \
+		${STAGEDIR}${PREFIX}/lib)
+	${LN} -sf libutf8proc.so.1.3.0 \
+		${STAGEDIR}${PREFIX}/lib/libutf8proc.so.1.3
+	${LN} -sf libutf8proc.so.1.3.0 \
+		${STAGEDIR}${PREFIX}/lib/libutf8proc.so.1
+	${LN} -sf libutf8proc.so.1.3.0 \
+		${STAGEDIR}${PREFIX}/lib/libutf8proc.so
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
+	(cd ${WRKSRC} && ${INSTALL_DATA} ${PORTDOCS} \
+		${STAGEDIR}${DOCSDIR})
 
 .include <bsd.port.mk>

@@ -6,8 +6,7 @@ PORTVERSION=	${SNAPSHOT}
 PORTREVISION=	${MAIN_PR}
 CATEGORIES=	lang
 MASTER_SITES=	http://downloads.dragonlace.net/src/:boot \
-		LOCAL/marino:boot ${MASTER_SITE_GCC}
-MASTER_SITE_SUBDIR=	${MS_SUBDIR}
+		LOCAL/marino:boot GCC/${MS_SUBDIR}
 DISTFILES=	${IDENTIFICATION}.tar.bz2
 
 MAINTAINER=	marino@FreeBSD.org
@@ -49,11 +48,7 @@ BOOTSTRAP_DESC=		Create bootstrap compiler (overrides other options)
 
 .if ${OPSYS} == FreeBSD
 MODERN_BINUTILS=	yes
-.  if ${OSVERSION} < 900000
-BOOTSTRAP_COMPILER=	ada-bootstrap.${GARCH}.freebsd.84.tar.bz2
-.  else
 BOOTSTRAP_COMPILER=	ada-bootstrap.${GARCH}.freebsd.100B.tar.bz2
-.  endif
 .endif
 .if ${OPSYS} == DragonFly
 BOOTSTRAP_COMPILER=	ada-bootstrap.${GARCH}.dragonfly.36A.tar.bz2
@@ -108,16 +103,14 @@ DISTFILES+=	${BOOTSTRAP_COMPILER}:boot
 DISTFILES=	\
    ${IDENTIFICATION}.tar.bz2 \
    ada-bootstrap.i386.dragonfly.36A.tar.bz2:boot \
-   ada-bootstrap.i386.freebsd.84.tar.bz2:boot \
    ada-bootstrap.i386.freebsd.100B.tar.bz2:boot \
    ada-bootstrap.x86_64.dragonfly.36A.tar.bz2:boot \
-   ada-bootstrap.x86_64.freebsd.84.tar.bz2:boot \
    ada-bootstrap.x86_64.freebsd.100B.tar.bz2:boot
 .endif
 
 .if ${PORT_OPTIONS:MFORT} && !${PORT_OPTIONS:MBOOTSTRAP}
 LANGS+=		fortran
-APPLY_DIFFS+=	fortran
+#APPLY_DIFFS+=	fortran
 EXTRA_CONFIG+=	--enable-libquadmath
 .else
 EXTRA_CONFIG+=	--disable-libquadmath

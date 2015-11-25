@@ -5,8 +5,7 @@ PORTNAME=	solitaire
 PORTVERSION=	19980817
 PORTREVISION=	1
 CATEGORIES=	math
-MASTER_SITES=	${MASTER_SITE_LOCAL}
-MASTER_SITE_SUBDIR=	dd
+MASTER_SITES=	LOCAL/dd
 DISTFILES=	sol.pl sol-test.txt
 
 MAINTAINER=	ports@FreeBSD.org
@@ -22,8 +21,7 @@ STRIP=
 OPTIONS_DEFINE=	DOCS
 
 do-extract:
-	@${MKDIR} ${WRKDIR}
-	@${CP} -r ${DISTDIR}/sol.pl ${DISTDIR}/sol-test.txt ${WRKDIR}
+	@${CP} ${DISTDIR}/sol.pl ${DISTDIR}/sol-test.txt ${WRKSRC}
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/sol.pl ${STAGEDIR}${PREFIX}/bin/solitaire

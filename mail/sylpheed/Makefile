@@ -2,8 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	sylpheed
-PORTVERSION=	3.4.2
-PORTREVISION=	2
+PORTVERSION=	3.4.3
+PORTREVISION=	1
 CATEGORIES=	mail ipv6
 MASTER_SITES=	http://sylpheed.sraoss.jp/sylpheed/v${PORTVERSION:C/\.[^\.]*$//}/  \
 		LOCAL/ehaupt
@@ -82,8 +82,7 @@ MAKEFILES=	Makefile.in ac/Makefile.in faq/Makefile.in faq/de/Makefile.in \
 		src/icons/Makefile.in
 
 post-patch:
-	@${REINPLACE_CMD} -e 's|-lpthread|${PTHREAD_LIBS:S/"//g}|g; \
-		s|-lresolv||g; s|-lpisock\"|${ICONV_LIB} &|g;' \
+	@${REINPLACE_CMD} -e 's|-lresolv||g; s|-lpisock\"|${ICONV_LIB} &|g;' \
 		${WRKSRC}/configure
 	@${REINPLACE_CMD} -e 's|/etc|${LOCALBASE}&|g' \
 		${WRKSRC}/libsylph/procmime.c

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	spatialite
-PORTVERSION=	4.2.0
+PORTVERSION=	4.3.0
 CATEGORIES=	databases geography
 MASTER_SITES=	http://www.gaia-gis.it/gaia-sins/
 DISTNAME=	lib${PORTNAME}-${PORTVERSION}
@@ -25,14 +25,17 @@ USE_GNOME=	libxml2
 
 CFLAGS+=	-I${WRKSRC}/src/headers -I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib ${ICONV_LIB}
-CONFIGURE_ARGS+=--enable-libxml2=yes CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}"
+CONFIGURE_ARGS+= --enable-gcp=yes --enable-libxml2=yes CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}"
 USE_LDCONFIG=	yes
+
+OPTIONS_DEFINE=LWGEOM
+LWGEOM_DESC=Enable lwgeom (PostGIS) functions
+LWGEOM_CONFIGURE_ENABLE=	lwgeom
+LWGEOM_LIB_DEPENDS=	liblwgeom.so:${PORTSDIR}/databases/postgis21
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|-ldl| |' ${WRKSRC}/src/Makefile.am
 	@${REINPLACE_CMD} -e 's|-ldl| |' ${WRKSRC}/src/Makefile.in
 	@${REINPLACE_CMD} -e 's|-ldl| |' ${WRKSRC}/configure
-
-BROKEN_powerpc=		Does not compile on powerpc: invokes i386 assembler
 
 .include <bsd.port.mk>

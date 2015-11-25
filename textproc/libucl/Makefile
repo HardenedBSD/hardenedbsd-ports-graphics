@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	libucl
-PORTVERSION=	0.7.2
+PORTVERSION=	0.7.3
+PORTREVISION=	1
 CATEGORIES=	textproc devel
 
 MAINTAINER=	koobs@FreeBSD.org
@@ -41,7 +42,6 @@ GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+=	--disable-silent-rules
 
 GH_ACCOUNT=	vstakhov
-GH_COMMIT=	518233b
 
 PATHFIX_MAKEFILEIN=	Makefile.am
 INSTALL_TARGET=		install-strip
@@ -49,5 +49,5 @@ CONFLICTS_INSTALL=	ucl
 
 regression-test: build
 	@cd ${WRKSRC} && ${MAKE} check
-	
+
 .include <bsd.port.mk>

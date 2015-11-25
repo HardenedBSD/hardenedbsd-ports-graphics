@@ -5,8 +5,7 @@ PORTNAME=	thunar-vfs
 PORTVERSION=	1.2.0
 PORTREVISION=	11
 CATEGORIES=	x11-fm xfce
-MASTER_SITES=	${MASTER_SITE_XFCE}
-MASTER_SITE_SUBDIR=	src/archive/${PORTNAME}/${PORTVERSION:R}
+MASTER_SITES=	XFCE/src/archive/${PORTNAME}/${PORTVERSION:R}
 DIST_SUBDIR=	xfce4
 
 MAINTAINER=	xfce@FreeBSD.org
@@ -16,7 +15,6 @@ LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/COPYING
 
 LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png \
-		libjpeg.so:${PORTSDIR}/graphics/jpeg \
 		libfreetype.so:${PORTSDIR}/print/freetype2 \
 		libgamin-1.so:${PORTSDIR}/devel/gamin
 
@@ -24,8 +22,8 @@ GNU_CONFIGURE=	yes
 USE_GNOME=	glib20 gtk20 gdkpixbuf2 intltool intlhack
 USE_XFCE=	libexo
 USE_XORG=	x11
-USES=		gmake pathfix perl5 pkgconfig libtool desktop-file-utils \
-		gettext-tools xfce tar:bzip2
+USES=		desktop-file-utils gettext-tools gmake jpeg libtool pathfix perl5 pkgconfig \
+		xfce tar:bzip2
 
 CONFIGURE_ARGS=	--disable-debug --without-html-dir
 
@@ -44,8 +42,5 @@ STARTUP_CONFIGURE_ENABLE=	startup-notification
 GCONF_USE=	gnome=gconf2
 GCONF_CONFIGURE_ENABLE=	gnome-thumbnailers
 OPTIONS_SUB=	yes
-
-post-patch:
-	@${REINPLACE_CMD} -e 's|echo aout|echo elf|g' ${WRKSRC}/configure
 
 .include <bsd.port.mk>

@@ -1,6 +1,6 @@
 # $FreeBSD$
 
-PANDORA_VERSION=	5.1SP1
+PANDORA_VERSION=	6.0
 PANDORA_LICENSE=	GPLv2
 PANDORA_LICENSE_FILE=	${WRKSRC}/COPYING
 
@@ -14,7 +14,7 @@ PANDORA_INSTALLER_ARGS=	--install
 
 PORTVERSION=	${PANDORA_VERSION:C/SP/./}
 
-MASTER_SITES?=	SF/pandora/Pandora%20FMS%20${PANDORA_VERSION:C/(SP[0-9]*)/\/\1/}Final/Tarball
+MASTER_SITES?=	SF/pandora/Pandora%20FMS%20${PANDORA_VERSION:C/((SP[0-9]*)*)$/\/\1/}Final/Tarball
 .if ${PORTNAME} == "pandora_agent"
 DISTNAME=	pandorafms_agent_unix-${PANDORA_VERSION}
 .else
@@ -23,6 +23,7 @@ DISTNAME=	${PORTNAME:S/pandora_/pandorafms_/}-${PANDORA_VERSION}
 DIST_SUBDIR=	pandora
 
 NO_BUILD=	yes
+NO_ARCH=	yes
 
 USERS=		pandora
 GROUPS=		pandora

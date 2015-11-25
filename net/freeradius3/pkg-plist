@@ -1,6 +1,7 @@
 @unexec different=0 ; for i in `find %D/%%EXAMPLESDIR%%/raddb/certs/ -type f -print | sed -e 's:^%D/%%EXAMPLESDIR%%/raddb/certs/::g'`; do if ! cmp -hsz %D/%%EXAMPLESDIR%%/raddb/certs/${i} %D/etc/raddb/certs/${i}; then different=1; break; fi; done; if [ ${different} -eq 0 ] && diff -rq --exclude=certs %D/%%EXAMPLESDIR%%/raddb %D/etc/raddb >/dev/null 2>&1; then rm -rf %D/etc/raddb; fi
 @unexec if [ -d %D/etc/raddb ]; then echo "You should remove %D/etc/raddb if you don't need it any more."; fi
 bin/dhcpclient
+bin/map_unit
 bin/rad_counter
 bin/radattr
 bin/radclient
@@ -44,6 +45,9 @@ include/freeradius/stats.h
 include/freeradius/sysutmp.h
 include/freeradius/token.h
 include/freeradius/udpfromto.h
+%%LIBDIR%%/libfreeradius-dhcp.a
+%%LIBDIR%%/libfreeradius-dhcp.la
+%%LIBDIR%%/libfreeradius-dhcp.so
 %%LIBDIR%%/libfreeradius-eap.a
 %%LIBDIR%%/libfreeradius-eap.la
 %%LIBDIR%%/libfreeradius-eap.so
@@ -415,6 +419,10 @@ sbin/radmin
 %%PORTDOCS%%%%DOCSDIR%%/rfc/rfc6911.txt
 %%PORTDOCS%%%%DOCSDIR%%/rfc/rfc6929.txt
 %%PORTDOCS%%%%DOCSDIR%%/rfc/rfc6930.txt
+%%PORTDOCS%%%%DOCSDIR%%/rfc/rfc7055.txt
+%%PORTDOCS%%%%DOCSDIR%%/rfc/rfc7268.txt
+%%PORTDOCS%%%%DOCSDIR%%/rfc/rfc7542.txt
+%%PORTDOCS%%%%DOCSDIR%%/rfc/rfc7599.txt
 %%PORTDOCS%%%%DOCSDIR%%/schemas/ldap/edir/freeradius-clients.ldif
 %%PORTDOCS%%%%DOCSDIR%%/schemas/ldap/iplanet/freeradius.ldif
 %%PORTDOCS%%%%DOCSDIR%%/schemas/ldap/iplanet/freeradius.schema
@@ -422,6 +430,9 @@ sbin/radmin
 %%PORTDOCS%%%%DOCSDIR%%/schemas/ldap/openldap/freeradius-clients.schema
 %%PORTDOCS%%%%DOCSDIR%%/schemas/ldap/openldap/freeradius.ldif
 %%PORTDOCS%%%%DOCSDIR%%/schemas/ldap/openldap/freeradius.schema
+%%PORTDOCS%%%%DOCSDIR%%/schemas/logstash/README
+%%PORTDOCS%%%%DOCSDIR%%/schemas/logstash/radius-mapping.sh
+%%PORTDOCS%%%%DOCSDIR%%/schemas/logstash/radius.conf
 %%PORTDOCS%%%%DOCSDIR%%/schemas/sql
 %%PORTDOCS%%%%DOCSDIR%%/vendor/ascend
 %%PORTDOCS%%%%DOCSDIR%%/vendor/bay
@@ -449,7 +460,6 @@ sbin/radmin
 %%EXAMPLESDIR%%/raddb/certs/index.txt.attr.old
 %%EXAMPLESDIR%%/raddb/certs/index.txt.old
 %%EXAMPLESDIR%%/raddb/certs/passwords.mk
-%%EXAMPLESDIR%%/raddb/certs/random
 %%EXAMPLESDIR%%/raddb/certs/serial
 %%EXAMPLESDIR%%/raddb/certs/serial.old
 %%EXAMPLESDIR%%/raddb/certs/server.cnf
@@ -458,7 +468,7 @@ sbin/radmin
 %%EXAMPLESDIR%%/raddb/certs/server.key
 %%EXAMPLESDIR%%/raddb/certs/server.p12
 %%EXAMPLESDIR%%/raddb/certs/server.pem
-%%EXAMPLESDIR%%/raddb/certs/user@example.com.pem
+%%EXAMPLESDIR%%/raddb/certs/user@example.org.pem
 %%EXAMPLESDIR%%/raddb/certs/xpextensions
 %%EXAMPLESDIR%%/raddb/clients.conf
 %%EXAMPLESDIR%%/raddb/dictionary
@@ -644,6 +654,7 @@ sbin/radmin
 %%EXAMPLESDIR%%/raddb/sites-available/abfab-tls
 %%EXAMPLESDIR%%/raddb/sites-available/abfab-tr-idp
 %%EXAMPLESDIR%%/raddb/sites-available/buffered-sql
+%%EXAMPLESDIR%%/raddb/sites-available/challenge
 %%EXAMPLESDIR%%/raddb/sites-available/channel_bindings
 %%EXAMPLESDIR%%/raddb/sites-available/check-eap-tls
 %%EXAMPLESDIR%%/raddb/sites-available/coa
@@ -687,8 +698,10 @@ sbin/radmin
 %%DATADIR%%/dictionary.alvarion
 %%DATADIR%%/dictionary.alvarion.wimax.v2_2
 %%DATADIR%%/dictionary.apc
+%%DATADIR%%/dictionary.aptilo
 %%DATADIR%%/dictionary.aptis
 %%DATADIR%%/dictionary.arbor
+%%DATADIR%%/dictionary.arista
 %%DATADIR%%/dictionary.aruba
 %%DATADIR%%/dictionary.ascend
 %%DATADIR%%/dictionary.ascend.illegal
@@ -699,6 +712,7 @@ sbin/radmin
 %%DATADIR%%/dictionary.bay
 %%DATADIR%%/dictionary.bintec
 %%DATADIR%%/dictionary.bluecoat
+%%DATADIR%%/dictionary.boingo
 %%DATADIR%%/dictionary.bristol
 %%DATADIR%%/dictionary.broadsoft
 %%DATADIR%%/dictionary.brocade
@@ -822,6 +836,7 @@ sbin/radmin
 %%DATADIR%%/dictionary.rfc7055
 %%DATADIR%%/dictionary.rfc7155
 %%DATADIR%%/dictionary.rfc7268
+%%DATADIR%%/dictionary.rfc7499
 %%DATADIR%%/dictionary.riverbed
 %%DATADIR%%/dictionary.riverstone
 %%DATADIR%%/dictionary.roaringpenguin
@@ -857,6 +872,7 @@ sbin/radmin
 %%DATADIR%%/dictionary.walabi
 %%DATADIR%%/dictionary.waverider
 %%DATADIR%%/dictionary.wichorus
+%%DATADIR%%/dictionary.wifialliance
 %%DATADIR%%/dictionary.wimax
 %%DATADIR%%/dictionary.wimax.alvarion
 %%DATADIR%%/dictionary.wimax.wichorus
@@ -867,65 +883,6 @@ sbin/radmin
 %%DATADIR%%/dictionary.zeus
 %%DATADIR%%/dictionary.zte
 %%DATADIR%%/dictionary.zyxel
-@dirrm include/freeradius
-@dirrm %%LIBDIR%%
-%%PORTDOCS%%@dirrm %%DOCSDIR%%/concepts
-%%PORTDOCS%%@dirrm %%DOCSDIR%%/configuration
-%%PORTDOCS%%@dirrm %%DOCSDIR%%/deployment
-%%PORTDOCS%%@dirrm %%DOCSDIR%%/developer
-%%PORTDOCS%%@dirrm %%DOCSDIR%%/modules
-%%PORTDOCS%%@dirrm %%DOCSDIR%%/rfc
-%%PORTDOCS%%@dirrm %%DOCSDIR%%/schemas/ldap/edir
-%%PORTDOCS%%@dirrm %%DOCSDIR%%/schemas/ldap/iplanet
-%%PORTDOCS%%@dirrm %%DOCSDIR%%/schemas/ldap/openldap
-%%PORTDOCS%%@dirrm %%DOCSDIR%%/schemas/ldap
-%%PORTDOCS%%@dirrm %%DOCSDIR%%/schemas
-%%PORTDOCS%%@dirrm %%DOCSDIR%%/vendor
-%%PORTDOCS%%@dirrm %%DOCSDIR%%
-@dirrm %%EXAMPLESDIR%%/raddb/certs
-@dirrm %%EXAMPLESDIR%%/raddb/mods-available
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/attr_filter
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/files
-%%RLMPERL%%@dirrm %%EXAMPLESDIR%%/raddb/mods-config/perl
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/preprocess
-%%RLMPYTHON%%@dirrm %%EXAMPLESDIR%%/raddb/mods-config/python
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/counter/mysql
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/counter/postgresql
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/counter/sqlite
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/counter
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/cui/mysql
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/cui/postgresql
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/cui/sqlite
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/cui
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/ippool/mysql
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/ippool/oracle
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/ippool/postgresql
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/ippool/sqlite
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/ippool
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/ippool-dhcp/mysql
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/ippool-dhcp/oracle
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/ippool-dhcp/sqlite
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/ippool-dhcp
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/main/mssql
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/main/mysql/extras/wimax
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/main/mysql/extras
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/main/mysql
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/main/ndb
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/main/oracle
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/main/postgresql/extras
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/main/postgresql
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/main/sqlite
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql/main
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/sql
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config/unbound
-@dirrm %%EXAMPLESDIR%%/raddb/mods-config
-@dirrm %%EXAMPLESDIR%%/raddb/mods-enabled
-@dirrm %%EXAMPLESDIR%%/raddb/policy.d
-@dirrm %%EXAMPLESDIR%%/raddb/sites-available
-@dirrm %%EXAMPLESDIR%%/raddb/sites-enabled
-@dirrm %%EXAMPLESDIR%%/raddb
-@dirrm %%EXAMPLESDIR%%
-@dirrm %%DATADIR%%
 @exec if ! [ -d %D/etc/raddb -o -L %D/etc/raddb ]; then cp -RP %D/%%EXAMPLESDIR%%/raddb %D/etc/raddb; echo '===> Bootstrapping default certificates, please wait...'; %D/etc/raddb/certs/bootstrap >/dev/null 2>&1; fi
 @exec chmod -R g-w,o-rwx %D/etc/raddb
 @exec if [ ! -d /var/log/radacct ]; then mkdir -p /var/log/radacct; chmod -R go= /var/log/radacct; fi

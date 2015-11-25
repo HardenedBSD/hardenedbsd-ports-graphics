@@ -8,12 +8,15 @@ bin/%%GNU_HOST%%-gcc-ranlib%%SUFFIX%%
 bin/%%GNU_HOST%%-gfortran%%SUFFIX%%
 bin/c++%%SUFFIX%%
 bin/cpp%%SUFFIX%%
+bin/g++
 bin/g++%%SUFFIX%%
+bin/gcc
 bin/gcc%%SUFFIX%%
 bin/gcc-ar%%SUFFIX%%
 bin/gcc-nm%%SUFFIX%%
 bin/gcc-ranlib%%SUFFIX%%
 bin/gcov%%SUFFIX%%
+bin/gfortran
 bin/gfortran%%SUFFIX%%
 @comment info/gcc%%SUFFIX%%/dir
 man/man1/cpp%%SUFFIX%%.1.gz
@@ -71,6 +74,6 @@ share/gcc-%%GCC_VERSION%%/python/libstdcxx/v6/printers.py
 %%JAVA%%man/man1/jv-convert%%SUFFIX%%.1.gz
 %%JAVA%%share/java/libgcj-%%GCC_VERSION%%.jar
 %%JAVA%%share/java/libgcj-tools-%%GCC_VERSION%%.jar
-@exec if type ccache-update-links >/dev/null 2>&1; then ccache-update-links -v; fi
-@unexec if type ccache-update-links >/dev/null 2>&1; then ccache-update-links -v; fi
+@postexec if type ccache-update-links >/dev/null 2>&1; then ccache-update-links -v; fi
+@postunexec if type ccache-update-links >/dev/null 2>&1; then ccache-update-links -v; fi
 @comment Insert PLIST.lib here

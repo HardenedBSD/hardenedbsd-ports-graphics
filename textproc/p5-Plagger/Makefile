@@ -9,7 +9,7 @@ MASTER_SITES=	CPAN
 MASTER_SITE_SUBDIR=	CPAN:MIYAGAWA
 PKGNAMEPREFIX=	p5-
 
-MAINTAINER=	sumikawa@FreeBSD.org
+MAINTAINER=	perl@FreeBSD.org
 COMMENT=	Pluggable RSS/Atom feed aggregator written in Perl
 
 LICENSE=	ART10 GPLv1
@@ -41,6 +41,7 @@ BUILD_DEPENDS=	p5-Class-Accessor>=0:${PORTSDIR}/devel/p5-Class-Accessor \
 		p5-URI-Fetch>=0:${PORTSDIR}/www/p5-URI-Fetch \
 		p5-YAML>=0:${PORTSDIR}/textproc/p5-YAML
 
+NO_ARCH=	yes
 USES=		perl5 shebangfix
 USE_PERL5=	configure
 

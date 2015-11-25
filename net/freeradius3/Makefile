@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	freeradius
-DISTVERSION=	3.0.7
+DISTVERSION=	3.0.10
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.freeradius.org/pub/freeradius/%SUBDIR%/ \
 		ftp://ftp.ntua.gr/pub/net/radius/freeradius/%SUBDIR%/ \
@@ -28,7 +28,7 @@ CONFLICTS_INSTALL=	gnu-radius-[0-9].* openradius-[0-9].* radiusd-cistron-[0-9].*
 
 USE_RC_SUBR=	radiusd
 
-USES=		gmake tar:bzip2 shebangfix
+USES=		gmake shebangfix tar:bzip2
 SHEBANG_FILES=	src/modules/rlm_counter/rad_counter scripts/sql/radsqlrelay
 GNU_CONFIGURE=	yes
 USE_OPENSSL=	yes
@@ -37,7 +37,6 @@ MAKE_ARGS+=	HOME=/dev/null
 CPPFLAGS+=	-I${LOCALBASE}/include
 CFLAGS+=	${CPPFLAGS}
 LDFLAGS+=	-L${LOCALBASE}/lib
-MAKE_JOBS_SAFE=	yes
 
 PLIST_SUB=	PORTVERSION=${DISTVERSION} LIBVER=0${PORTVERSION:C/\./0/g}
 
@@ -81,18 +80,14 @@ RADIUS_GROUP=	freeradius
 USERS=		${RADIUS_USER}
 GROUPS=		${RADIUS_GROUP}
 
-.if ${PORT_OPTIONS:MHEIMDAL} && empty(PORT_OPTIONS:MKERBEROS)
-${UNIQUENAME}_SET+=	KERBEROS
-.endif
-
-.if ${PORT_OPTIONS:MKERBEROS}
+.if ${PORT_OPTIONS:MKERBEROS} || ${PORT_OPTIONS:MHEIMDAL}
 .if ${PORT_OPTIONS:MHEIMDAL}
 .if ${PORT_OPTIONS:MHEIMDAL_PORT}
 LIB_DEPENDS+=	libkrb5.so:${PORTSDIR}/security/heimdal
 .endif
 CONFIGURE_ARGS+=--enable-heimdal-krb5 --enable-pthread-support
 .else
-LIB_DEPENDS+=	libkrb5.so:${PORTSDIR}/security/krb5
+LIB_DEPENDS+=	libkrb5support.so:${PORTSDIR}/security/krb5
 .endif
 CONFIGURE_ARGS+=--with-rlm_krb5
 .if ${PORT_OPTIONS:MHEIMDAL} && empty(PORT_OPTIONS:MHEIMDAL_PORT)
@@ -120,6 +115,7 @@ CONFIGURE_ARGS+=--without-edir
 
 .if ${PORT_OPTIONS:MLDAP}
 USE_OPENLDAP=	YES
+LIB_DEPENDS+=	libsasl2.so:${PORTSDIR}/security/cyrus-sasl2
 CONFIGURE_ARGS+=--with-rlm_ldap
 PLIST_SUB+=	LDAP=""
 _REQUIRE+=	slapd
@@ -221,7 +217,7 @@ EXPM=		yes
 .endif
 
 .if ${PORT_OPTIONS:MREST}
-LIB_DEPENDS+=	libjson.so:${PORTSDIR}/devel/json-c \
+LIB_DEPENDS+=	libjson-c.so:${PORTSDIR}/devel/json-c \
     		libcurl.so:${PORTSDIR}/ftp/curl
 CONFIGURE_ARGS+=--with-rlm_rest \
 		--with-libcurl=${LOCALBASE} \
@@ -295,10 +291,6 @@ WITH_OPENSSL_PORT=yes
 
 # if we're installing, place sample configs into ${EXAMPLESDIR}
 MAKE_ARGS+=	raddbdir="${EXAMPLESDIR}/raddb" R=${STAGEDIR}
-
-.if ${ARCH} == "sparc64" && ${OSVERSION} < 700000
-BROKEN=		Does not build on sparc64-6
-.endif
 
 FREERADIUS_LIBDIR=	lib/freeradius-${PORTVERSION}
 PLIST_SUB+=	LIBDIR="${FREERADIUS_LIBDIR}"

@@ -12,7 +12,7 @@ COMMENT=	Ada bindings for PLplot
 
 LICENSE=	LGPL3
 
-LIB_DEPENDS=	libplplotd.so:${PORTSDIR}/math/plplot
+LIB_DEPENDS=	libplplot.so:${PORTSDIR}/math/plplot
 
 USES=		ada
 

@@ -5,7 +5,7 @@ PORTVERSION=	0.5.0
 CATEGORIES=	audio
 MASTER_SITES=	http://softwarebakery.com/maato/files/volumeicon/
 
-MAINTAINER=	lme@FfreeBSD.org
+MAINTAINER=	lme@FreeBSD.org
 COMMENT=	Lightweight volume control for the systray
 
 LICENSE=	GPLv3
@@ -17,7 +17,7 @@ CPPFLAGS+=	-I${LOCALBASE}/include
 LIBS+=		-L${LOCALBASE}/lib
 
 USES=		gmake gettext pkgconfig
-USE_GNOME=	gtk30
+USE_GNOME=	gtk30 intltool
 
 OPTIONS_DEFINE=		NLS NOTIFY
 OPTIONS_DEFAULT=	NOTIFY

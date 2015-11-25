@@ -29,6 +29,7 @@
     SUBDIR += gale
     SUBDIR += gloox
     SUBDIR += hotot
+    SUBDIR += hs-haskell-xmpp
     SUBDIR += icb
     SUBDIR += icmpchat
     SUBDIR += icqlib
@@ -54,6 +55,8 @@
     SUBDIR += ktp-kded-integration-module
     SUBDIR += ktp-send-file
     SUBDIR += ktp-text-ui
+    SUBDIR += libaccounts-glib
+    SUBDIR += libaccounts-qt5
     SUBDIR += libjreen
     SUBDIR += libnice
     SUBDIR += libnice-gst010
@@ -112,6 +115,7 @@
     SUBDIR += pidgin-rhythmbox
     SUBDIR += pidgin-sipe
     SUBDIR += pidgin-skype
+    SUBDIR += pidgin-skypeweb
     SUBDIR += pidgin-twitter
     SUBDIR += plasma-applet-ktp
     SUBDIR += poezio
@@ -146,11 +150,13 @@
     SUBDIR += rubygem-lita
     SUBDIR += rubygem-termtter
     SUBDIR += rubygem-tinder
+    SUBDIR += sayaka
     SUBDIR += sendxmpp
     SUBDIR += sigram
     SUBDIR += skype
     SUBDIR += skype-devel
     SUBDIR += skype4
+    SUBDIR += teamwords
     SUBDIR += telegram
     SUBDIR += telegram-purple
     SUBDIR += telepathy-butterfly
@@ -170,7 +176,6 @@
     SUBDIR += telepathy-sofiasip
     SUBDIR += tkabber
     SUBDIR += tkabber-plugins
-    SUBDIR += tkabbur
     SUBDIR += tox
     SUBDIR += toxic
     SUBDIR += ttytter
@@ -180,6 +185,7 @@
     SUBDIR += uTox
     SUBDIR += vacuum-im
     SUBDIR += vqcc-gtk
+    SUBDIR += xmpp-client
     SUBDIR += yoono
     SUBDIR += zephyr
 

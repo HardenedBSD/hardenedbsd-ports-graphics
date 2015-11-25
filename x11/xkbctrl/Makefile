@@ -5,8 +5,7 @@ PORTNAME=	xkbctrl
 PORTVERSION=	1.0
 PORTREVISION=	2
 CATEGORIES=	x11
-MASTER_SITES=	${MASTER_SITE_XORG}
-MASTER_SITE_SUBDIR=	unsupported/test/Xkb/programs
+MASTER_SITES=	XORG/unsupported/test/Xkb/programs
 DISTFILES=	Imakefile xkbctrl.c
 
 MAINTAINER=	sanpei@FreeBSD.org
@@ -19,8 +18,8 @@ USE_XORG=	x11 xkbfile
 NO_WRKSUBDIR=	yes
 
 do-extract:
-		@${RM} -rf ${WRKDIR}
-		@${MKDIR} ${WRKDIR}
+		@${RM} -rf ${WRKSRC}
+		@${MKDIR} ${WRKSRC}
 		@for _file in ${DISTFILES}; do \
 			${CP} ${DISTDIR}/${DIST_SUBDIR}/$${_file} ${WRKSRC}; \
 		done

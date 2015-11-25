@@ -15,7 +15,6 @@ COMMENT=		Free C++ class library of Cryptographic Primitives
 OPTIONS_DEFINE=		DEBUG DOCS GCC STATIC THREADS
 OPTIONS_DEFAULT=	THREADS
 STATIC_DESC=		Build static version only (no shared libs)
-GCC_DESC=		Build with current GCC
 
 .include <bsd.port.options.mk>
 
@@ -46,8 +45,7 @@ USE_LDCONFIG=		yes
 .endif
 
 .if ${PORT_OPTIONS:MTHREADS}
-CXXFLAGS+=		${PTHREAD_CFLAGS}
-LDFLAGS+=		${PTHREAD_LIBS}
+LDFLAGS+=		-lpthread
 .endif
 
 do-install:

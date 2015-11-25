@@ -7,10 +7,14 @@ PORTREVISION=	2
 CATEGORIES=	audio
 MASTER_SITES=	GOOGLE_CODE
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	danfe@FreeBSD.org
 COMMENT=	MPRIS plugin for DeaDBeeF music player
 
 LICENSE=	GPLv3
+
+BROKEN=		does not work with recent versions of glib and/or DeaDBeeF
+DEPRECATED=	Abandonware; use `audio/deadbeef-mpris2-plugin' instead
+EXPIRATION_DATE=	2016-05-16
 
 BUILD_DEPENDS=	${LOCALBASE}/include/deadbeef/deadbeef.h:${PORTSDIR}/audio/deadbeef
 RUN_DEPENDS:=	${BUILD_DEPENDS}

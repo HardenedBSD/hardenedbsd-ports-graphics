@@ -9,6 +9,11 @@ MASTER_SITES=	RG
 MAINTAINER=	ruby@FreeBSD.org
 COMMENT=	Flexible logging library for use in Ruby programs
 
+LICENSE=	LGPL3
+
+PORTSCOUT=	skipv:1.1.11
+
+NO_ARCH=	yes
 USE_RUBY=	yes
 USE_RUBYGEMS=	yes
 RUBYGEM_AUTOPLIST=	yes

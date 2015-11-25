@@ -17,20 +17,12 @@ LICENSE_COMB=	multi
 USES=		fortran gmake
 
 OPTIONS_RADIO=	BLAS
-OPTIONS_RADIO_BLAS=	OPENBLAS REFERENCE ATLAS GOTO
+OPTIONS_RADIO_BLAS=	OPENBLAS NETLIB ATLAS
 OPTIONS_DEFAULT=	OPENBLAS
 
-OPENBLAS_DESC=	Openblas
-OPENBLAS_USES=	blaslapack
-
-REFERENCE_DESC=	Blas / Lapack
-REFERENCE_USES=	blaslapack:netlib
-
-ATLAS_DESC=	ATLAS
+OPENBLAS_USES=	blaslapack:openblas
+NETLIB_USES=	blaslapack:netlib
 ATLAS_USES=	blaslapack:atlas
-
-GOTO_DESC=	GOTO
-GOTO_USES=	blaslapack:gotoblas
 
 .if defined (WITH_METIS)
 LIB_DEPENDS=	libmetis.so:${PORTSDIR}/math/metis4
@@ -40,7 +32,6 @@ RESTRICTED=	GPL and METIS licenses are contradictory
 
 CONFLICTS=	umfpack-*
 
-CFLAGS+=	${PTHREAD_CFLAGS}
 LDFLAGS+=	-L${LOCALBASE}/lib
 
 .include <bsd.port.options.mk>

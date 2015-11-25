@@ -9,16 +9,14 @@ PORTNAME=	ximian-south
 PORTVERSION=	1.3.6
 PORTREVISION=	3
 CATEGORIES=	x11-themes gnome
-MASTER_SITES=	GNOME
-MASTER_SITE_SUBDIR=	teams/art.gnome.org/archive/themes/icon
+MASTER_SITES=	GNOME/teams/art.gnome.org/archive/themes/icon
 DISTNAME=	ICON-Ximian-South-${PORTVERSION}
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Ximian-South Icons for Gnome
 
 RESTRICTED=	${REASON}
-
-WRKSRC=		"${WRKDIR}/${PORTNAME}"
+NO_WRKSUBDIR=	yes
 
 .include "${.CURDIR}/../gnome-icons/bsd.gnome-icons.mk"
 .include <bsd.port.mk>

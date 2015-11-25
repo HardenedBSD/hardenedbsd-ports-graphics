@@ -1,5 +1,5 @@
---- src/spot/pskrep.cxx.orig	2014-07-04 15:11:14.000000000 -0700
-+++ src/spot/pskrep.cxx	2014-07-04 15:13:32.000000000 -0700
+--- src/spot/pskrep.cxx.orig	2015-09-15 14:09:37 UTC
++++ src/spot/pskrep.cxx
 @@ -50,7 +50,7 @@
  #include <algorithm>
  #include <fstream>

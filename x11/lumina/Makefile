@@ -2,12 +2,11 @@
 # $FreeBSD$
 
 PORTNAME=	lumina
-PORTVERSION=	0.8.2.${GITVERSION}
+PORTVERSION=	0.8.7
+DISTVERSIONPREFIX=	v
+DISTVERSIONSUFFIX=	-Release
 PORTEPOCH=	1
 CATEGORIES=	x11
-MASTER_SITES=	http://www.pcbsd.org/~kris/software/ \
-		ftp://ftp.pcbsd.org/pub/software/
-DISTNAME=	${PORTNAME}-${GITVERSION}
 
 MAINTAINER=	kmoore@FreeBSD.org
 COMMENT=	Lumina Desktop Environment
@@ -23,28 +22,35 @@ RUN_DEPENDS=	xorg>=0:${PORTSDIR}/x11/xorg \
 		xbrightness:${PORTSDIR}/x11/xbrightness \
 		numlockx:${PORTSDIR}/x11/numlockx
 
-OPTIONS_DEFINE=	MULTIMEDIA
+CONFLICTS=      lumina-devel-0*
+
+OPTIONS_DEFINE=	MULTIMEDIA PCBSD
 OPTIONS_DEFAULT=	MULTIMEDIA
 MULTIMEDIA_DESC=	Install multimedia support backend (gstreamer)
+PCBSD_DESC=	Use the PC-BSD system interface settings.
 
 .include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MMULTIMEDIA}
-RUN_DEPENDS+=	gstreamer-plugins>=0:${PORTSDIR}/multimedia/gstreamer-plugins
+RUN_DEPENDS+=	gstreamer-plugins-core>=0:${PORTSDIR}/multimedia/gstreamer-plugins-core
 .endif
 
 MAKE_JOBS_UNSAFE=yes
 
-GITVERSION=	1424293520
-USE_XORG=	x11 xcomposite xdamage xrender
+USE_XORG=	x11 xdamage
 USE_XCB=		x11extras wm
 USE_LDCONFIG=	yes
-USE_QT5=	core gui network svg linguist multimedia imageformats \
-		buildtools x11extras
-USES=		qmake tar:bzip2
+USE_QT5=	core gui network quick svg linguist multimedia imageformats \
+		buildtools x11extras concurrent
+USES=		desktop-file-utils qmake
+USE_GITHUB=	yes
+GH_ACCOUNT=	pcbsd
 
-WRKSRC=		${WRKDIR}/lumina
-
-QMAKE_ARGS=	CONFIG+="configure"
+#Setup the qmake configuration options
+.if {PORT_OPTIONS:MPCBSD}
+QMAKE_ARGS=	CONFIG+="configure NO_I18N PCBSD"
+.else
+QMAKE_ARGS=	CONFIG+="configure NO_I18N"
+.endif
 
 .include <bsd.port.mk>

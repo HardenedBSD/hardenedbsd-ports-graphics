@@ -7,8 +7,10 @@ MASTER_SITES=	http://cronolog.org/patches/
 PKGNAMESUFFIX=	-devel
 DISTNAME=	${PORTNAME}-${PORTVERSION}-beta
 
-MAINTAINER=	bdrewery@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Web log rotation utility that provides datestamp filenames
+
+BROKEN=		unfetchable
 
 PLIST_FILES=	sbin/cronolog \
 		sbin/cronosplit \

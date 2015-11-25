@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	cdo
-PORTVERSION=	1.2.3
+PORTVERSION=	1.2.6
 CATEGORIES=	science python
 MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
@@ -12,9 +12,10 @@ COMMENT=	Python binding to CDO (Climate Data Operators)
 
 LICENSE=	GPLv2
 
-RUN_DEPENDS=	${LOCALBASE}/bin/cdo:${PORTSDIR}/science/cdo
+RUN_DEPENDS=	cdo:${PORTSDIR}/science/cdo
 
-USE_PYTHON=	autoplist distutils
-USES=		python:2
+NO_ARCH=	yes
+USE_PYTHON=	autoplist concurrent distutils
+USES=		python
 
 .include <bsd.port.mk>

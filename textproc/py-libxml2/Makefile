@@ -1,6 +1,5 @@
 # Created by: Alexander Nedotsukov <bland@FreeBSD.org>
 # $FreeBSD$
-#   $MCom: ports/trunk/textproc/py-libxml2/Makefile 18999 2014-02-04 18:55:27Z kwm $
 
 PORTREVISION=	0
 CATEGORIES=	textproc gnome python
@@ -17,8 +16,7 @@ PLIST=		${.CURDIR}/pkg-plist
 
 USE_GNOME+=	libxml2
 USES+=		python:2
-USE_PYTHON=	distutils
-PYDISTUTILS_EGGINFO=	libxml2_python-${PORTVERSION}-py${PYTHON_VER}.egg-info
+USE_PYTHON=	autoplist distutils
 
 CPPFLAGS+=	`${PYTHON_VERSION}-config --cflags`
 LDFLAGS+=	-L${LOCALBASE}/lib `${PYTHON_VERSION}-config --libs`
