@@ -3,7 +3,7 @@
 
 PORTNAME=	wayland
 PORTVERSION=	1.9.90
-CATEGORIES=	x11
+CATEGORIES=	graphics
 MASTER_SITES=	http://rainbow-runner.nl/freebsd/
 #http://wayland.freedesktop.org/releases/
 
@@ -13,11 +13,13 @@ COMMENT=	Wayland composite "server"
 LIB_DEPENDS=	libexpat.so:${PORTSDIR}/textproc/expat2 \
 		libffi.so:${PORTSDIR}/devel/libffi
 
+WITH_DEBUG=	1
 USES=		gmake libtool pathfix pkgconfig tar:xz
 USE_GNOME=	libxslt:build
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--disable-documentation
+INSTALL_TARGET=	install-strip
 
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
