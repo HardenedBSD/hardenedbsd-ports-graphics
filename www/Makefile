@@ -5,7 +5,6 @@
 
     SUBDIR += MT
     SUBDIR += R-cran-RgoogleMaps
-    SUBDIR += R-cran-Rpad
     SUBDIR += R-cran-htmlwidgets
     SUBDIR += R-cran-httpuv
     SUBDIR += R-cran-httr
@@ -419,10 +418,10 @@
     SUBDIR += man2web
     SUBDIR += mathjax
     SUBDIR += mathopd
-    SUBDIR += mediawiki119
     SUBDIR += mediawiki123
     SUBDIR += mediawiki124
     SUBDIR += mediawiki125
+    SUBDIR += mediawiki126
     SUBDIR += mergelog
     SUBDIR += mgstat
     SUBDIR += mhonarc
@@ -1551,6 +1550,7 @@
     SUBDIR += py-django-picklefield
     SUBDIR += py-django-pipeline
     SUBDIR += py-django-pipeline12
+    SUBDIR += py-django-pipeline14
     SUBDIR += py-django-piston
     SUBDIR += py-django-profiles
     SUBDIR += py-django-redis
@@ -1934,6 +1934,7 @@
     SUBDIR += rubygem-net-http-pipeline
     SUBDIR += rubygem-nicovideo
     SUBDIR += rubygem-ntlm-http
+    SUBDIR += rubygem-octopress
     SUBDIR += rubygem-pagerduty
     SUBDIR += rubygem-passenger
     SUBDIR += rubygem-puma

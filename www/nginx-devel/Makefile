@@ -3,6 +3,7 @@
 
 PORTNAME=	nginx
 PORTVERSION=	1.9.7
+PORTREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://nginx.org/download/
 MASTER_SITES+=	LOCAL/osa
@@ -60,6 +61,7 @@ OPTIONS_DEFINE=	\
 	AJP \
 	CACHE_PURGE \
 	CLOJURE \
+	CT \
 	ECHO \
 	HEADERS_MORE \
 	HTTP_ACCEPT_LANGUAGE \
@@ -117,7 +119,7 @@ OPTIONS_DEFINE=	\
 
 OPTIONS_RADIO=		VIDEO
 OPTIONS_RADIO_VIDEO=	HTTP_MP4 HTTP_MP4_H264
-OPTIONS_DEFAULT=	IPV6 HTTP HTTP_CACHE HTTP_REWRITE HTTP_SSL HTTP_STATUS WWW
+OPTIONS_DEFAULT=	IPV6 HTTP HTTP_CACHE HTTP_REWRITE HTTP_SSL HTTP_STATUS HTTPV2 WWW
 
 DEBUGLOG_DESC=			Enable debug log (--with-debug)
 FILE_AIO_DESC=			Enable file aio
@@ -156,6 +158,7 @@ WWW_DESC=			Enable html sample files
 AJP_DESC=			3rd party ajp module
 CACHE_PURGE_DESC=		3rd party cache_purge module
 CLOJURE_DESC=			3rd party clojure module
+CT_DESC=			3rd party cert_transparency module (SSL req.)
 ECHO_DESC=			3rd party echo module
 HEADERS_MORE_DESC=		3rd party headers_more module
 HTTP_ACCEPT_LANGUAGE_DESC=	3rd party accept_language module
@@ -376,6 +379,17 @@ GH_PROJECT+=	nginx-clojure:clojure
 GH_TAGNAME+=	v${NGINX_CLOJURE_VERSION}:clojure
 CONFIGURE_ENV+=	"JNI_INCS=-I${LOCALBASE}/openjdk8/include -I${LOCALBASE}/openjdk8/include/freebsd"
 CONFIGURE_ARGS+=--add-module=${WRKSRC_clojure}/src/c
+.endif
+
+.if ${PORT_OPTIONS:MCT}
+GIT_CT_VERSION=	1790ac0
+GH_ACCOUNT+=	grahamedgecombe:ct
+GH_PROJECT+=	nginx-ct:ct
+GH_TAGNAME+=	${GIT_CT_VERSION}:ct
+CONFIGURE_ARGS+=--add-module=${WRKSRC_ct}
+NGINX_OPENSSL=	yes
+USE_HTTP_SSL=	yes
+USE_OPENSSL_PORT=	yes
 .endif
 
 .if ${PORT_OPTIONS:MECHO}
@@ -853,7 +867,7 @@ USE_OPENSSL_PORT=	yes
 .if ${PORT_OPTIONS:MNJS}
 GH_ACCOUNT+=	nginx:njs
 GH_PROJECT+=	njs:njs
-GH_TAGNAME+=	e7ea1a7:njs
+GH_TAGNAME+=	1d4fae9:njs
 CONFIGURE_ARGS+=--add-module=${WRKSRC_njs}/nginx
 .endif
 

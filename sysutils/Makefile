@@ -76,7 +76,6 @@
     SUBDIR += bareos-client-static
     SUBDIR += bareos-docs
     SUBDIR += bareos-server
-    SUBDIR += bashburn
     SUBDIR += batmon
     SUBDIR += battfink
     SUBDIR += battmond
@@ -818,6 +817,7 @@
     SUBDIR += racktables
     SUBDIR += radeontool
     SUBDIR += radmind
+    SUBDIR += rainbarf
     SUBDIR += raincoat
     SUBDIR += rcadm
     SUBDIR += rclean
@@ -830,6 +830,7 @@
     SUBDIR += recoverdm
     SUBDIR += reed
     SUBDIR += rej
+    SUBDIR += relaunchd
     SUBDIR += relaxconf
     SUBDIR += rename
     SUBDIR += renameutils
