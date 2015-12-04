@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	libclc
-DISTVERSION=	0.2.0.20150921
+DISTVERSION=	0.2.0.20151006
 CATEGORIES=	devel
 
 MAINTAINER=	kwm@FreeBSD.org
@@ -12,7 +12,7 @@ BUILD_DEPENDS=	clang${LLVMVER}:${PORTSDIR}/devel/llvm${LLVMVER}
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	llvm-mirror
-GH_TAGNAME=	4346c30
+GH_TAGNAME=	6d78407
 
 GNU_CONFIGURE=	yes
 USES=		gmake python:2,build ninja

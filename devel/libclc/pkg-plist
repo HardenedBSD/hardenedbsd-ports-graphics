@@ -74,6 +74,8 @@ include/clc/geometric/length.h
 include/clc/geometric/length.inc
 include/clc/geometric/normalize.h
 include/clc/geometric/normalize.inc
+include/clc/image/image.h
+include/clc/image/image_defines.h
 include/clc/integer/abs.h
 include/clc/integer/abs.inc
 include/clc/integer/abs_diff.h
@@ -193,6 +195,8 @@ include/clc/math/sqrt.h
 include/clc/math/sqrt.inc
 include/clc/math/tan.h
 include/clc/math/tan.inc
+include/clc/math/tanh.h
+include/clc/math/tanh.inc
 include/clc/math/ternary_intrin.inc
 include/clc/math/trunc.h
 include/clc/math/unary_decl.inc
