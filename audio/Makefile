@@ -24,9 +24,7 @@
     SUBDIR += amarok-kde4
     SUBDIR += amb-plugins
     SUBDIR += amp
-    SUBDIR += ampache
     SUBDIR += ample
-    SUBDIR += amrcoder
     SUBDIR += aqualung
     SUBDIR += ardour
     SUBDIR += ario
@@ -56,7 +54,6 @@
     SUBDIR += blop
     SUBDIR += boodler
     SUBDIR += bristol
-    SUBDIR += btc
     SUBDIR += calf
     SUBDIR += cam
     SUBDIR += cantata
@@ -82,7 +79,6 @@
     SUBDIR += cpp-xmms2
     SUBDIR += creox
     SUBDIR += crip
-    SUBDIR += cripple
     SUBDIR += csound
     SUBDIR += csound6
     SUBDIR += ctronome
@@ -90,12 +86,13 @@
     SUBDIR += cueplayer
     SUBDIR += cuetools
     SUBDIR += cutmp3
-    SUBDIR += cymbaline
     SUBDIR += dagrab
     SUBDIR += darkice
     SUBDIR += dcd
     SUBDIR += deadbeef
+    SUBDIR += deadbeef-jack-plugin
     SUBDIR += deadbeef-mpris-plugin
+    SUBDIR += deadbeef-mpris2-plugin
     SUBDIR += decibel-audio-player
     SUBDIR += deforaos-mixer
     SUBDIR += dekagen
@@ -107,7 +104,6 @@
     SUBDIR += dtmfdial
     SUBDIR += dumb
     SUBDIR += dumb-allegro
-    SUBDIR += dvda-author
     SUBDIR += easytag
     SUBDIR += eawpats
     SUBDIR += eawplus
@@ -138,6 +134,13 @@
     SUBDIR += festlex-oald
     SUBDIR += festlex-ogi
     SUBDIR += festlex-poslex
+    SUBDIR += festvox-cmu_us_awb_arctic
+    SUBDIR += festvox-cmu_us_bdl_arctic
+    SUBDIR += festvox-cmu_us_clb_arctic
+    SUBDIR += festvox-cmu_us_jmk_arctic
+    SUBDIR += festvox-cmu_us_ksp_arctic
+    SUBDIR += festvox-cmu_us_rms_arctic
+    SUBDIR += festvox-cmu_us_slt_arctic
     SUBDIR += festvox-czech
     SUBDIR += festvox-don
     SUBDIR += festvox-el11
@@ -162,7 +165,6 @@
     SUBDIR += fpc-modplug
     SUBDIR += fpc-oggvorbis
     SUBDIR += fpc-openal
-    SUBDIR += fpc-sndfile
     SUBDIR += fplib
     SUBDIR += freealut
     SUBDIR += freedesktop-sound-theme
@@ -433,7 +435,6 @@
     SUBDIR += linux-f10-openal-soft
     SUBDIR += linux-f10-pulseaudio-libs
     SUBDIR += linux-f10-sdl_mixer
-    SUBDIR += linux-fmodapi
     SUBDIR += linux-genpuid
     SUBDIR += linux-laudio
     SUBDIR += linux-mbrola
@@ -499,7 +500,6 @@
     SUBDIR += mpdas
     SUBDIR += mpdbrowser
     SUBDIR += mpdcon
-    SUBDIR += mpdscribble
     SUBDIR += mpg123
     SUBDIR += mpg123.el
     SUBDIR += mpg321
@@ -512,7 +512,6 @@
     SUBDIR += muse
     SUBDIR += musepack
     SUBDIR += musescore
-    SUBDIR += musica
     SUBDIR += musicbox-tag-editor
     SUBDIR += musiccontrol
     SUBDIR += musicpc
@@ -585,7 +584,6 @@
     SUBDIR += pavumeter
     SUBDIR += pd
     SUBDIR += pear-Text_Spell_Audio
-    SUBDIR += pecl-id3
     SUBDIR += penguinsap
     SUBDIR += pianobar
     SUBDIR += picard
@@ -602,7 +600,6 @@
     SUBDIR += pragha
     SUBDIR += puddletag
     SUBDIR += pulseaudio
-    SUBDIR += pure-audio
     SUBDIR += py-al
     SUBDIR += py-ao
     SUBDIR += py-apetag
@@ -669,7 +666,6 @@
     SUBDIR += s3mod
     SUBDIR += sbagen
     SUBDIR += schism
-    SUBDIR += scmpc
     SUBDIR += scrobbler
     SUBDIR += sdl2_mixer
     SUBDIR += sdl_mixer
@@ -694,7 +690,6 @@
     SUBDIR += snd
     SUBDIR += solfege
     SUBDIR += sonata
-    SUBDIR += sonice
     SUBDIR += sooperlooper
     SUBDIR += sound-juicer
     SUBDIR += soundconverter
@@ -739,7 +734,6 @@
     SUBDIR += tclmidi
     SUBDIR += teamspeak3-server
     SUBDIR += tempest_for_eliza
-    SUBDIR += tepsonic
     SUBDIR += terminatorx
     SUBDIR += thunar-media-tags-plugin
     SUBDIR += timemachine
@@ -790,7 +784,6 @@
     SUBDIR += wildmidi
     SUBDIR += wmalbum
     SUBDIR += wmix
-    SUBDIR += wmmp
     SUBDIR += wmrecord
     SUBDIR += wmsmixer
     SUBDIR += workman

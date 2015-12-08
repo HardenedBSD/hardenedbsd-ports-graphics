@@ -76,7 +76,6 @@
     SUBDIR += bareos-client-static
     SUBDIR += bareos-docs
     SUBDIR += bareos-server
-    SUBDIR += bashburn
     SUBDIR += batmon
     SUBDIR += battfink
     SUBDIR += battmond
@@ -124,6 +123,9 @@
     SUBDIR += cdrtools
     SUBDIR += cdrtools-devel
     SUBDIR += cfengine
+    SUBDIR += cfengine-masterfiles
+    SUBDIR += cfengine-masterfiles36
+    SUBDIR += cfengine-masterfiles37
     SUBDIR += cfengine22
     SUBDIR += cfengine32
     SUBDIR += cfengine33
@@ -310,6 +312,7 @@
     SUBDIR += fusefs-ifuse
     SUBDIR += fusefs-kmod
     SUBDIR += fusefs-libs
+    SUBDIR += fusefs-lkl
     SUBDIR += fusefs-mhddfs
     SUBDIR += fusefs-mp3fs
     SUBDIR += fusefs-ntfs
@@ -727,6 +730,7 @@
     SUBDIR += php55-posix
     SUBDIR += php56-fileinfo
     SUBDIR += php56-posix
+    SUBDIR += phybs
     SUBDIR += pick
     SUBDIR += pidof
     SUBDIR += pipemeter
@@ -771,10 +775,12 @@
     SUBDIR += py-croniter
     SUBDIR += py-crontab
     SUBDIR += py-danzfs
+    SUBDIR += py-dlipower
     SUBDIR += py-drmaa
     SUBDIR += py-execnet
     SUBDIR += py-ezjailremote
     SUBDIR += py-filelike
+    SUBDIR += py-freenas.cli
     SUBDIR += py-glances
     SUBDIR += py-halite
     SUBDIR += py-honcho
@@ -814,6 +820,7 @@
     SUBDIR += racktables
     SUBDIR += radeontool
     SUBDIR += radmind
+    SUBDIR += rainbarf
     SUBDIR += raincoat
     SUBDIR += rcadm
     SUBDIR += rclean
@@ -826,6 +833,7 @@
     SUBDIR += recoverdm
     SUBDIR += reed
     SUBDIR += rej
+    SUBDIR += relaunchd
     SUBDIR += relaxconf
     SUBDIR += rename
     SUBDIR += renameutils
@@ -879,6 +887,7 @@
     SUBDIR += rubygem-hammer_cli_foreman_salt
     SUBDIR += rubygem-hammer_cli_foreman_ssh
     SUBDIR += rubygem-hiera
+    SUBDIR += rubygem-hieracles
     SUBDIR += rubygem-hiera-file
     SUBDIR += rubygem-hiera1
     SUBDIR += rubygem-librarian-puppet
@@ -1060,6 +1069,7 @@
     SUBDIR += upsdaemon
     SUBDIR += uptimed
     SUBDIR += usb_modeswitch
+    SUBDIR += usbhid-dump
     SUBDIR += usbhotkey
     SUBDIR += usbutils
     SUBDIR += uschedule

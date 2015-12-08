@@ -158,6 +158,7 @@
     SUBDIR += elasticsearch-plugin-marvel
     SUBDIR += elasticsearch-plugin-sql
     SUBDIR += elasticsearch-river-rabbitmq
+    SUBDIR += elasticsearch2
     SUBDIR += elixir-earmark
     SUBDIR += elixir-ex_doc
     SUBDIR += elixir-funnel
@@ -355,7 +356,9 @@
     SUBDIR += kdiff3
     SUBDIR += kenlm
     SUBDIR += kibana3
-    SUBDIR += kibana4
+    SUBDIR += kibana41
+    SUBDIR += kibana42
+    SUBDIR += kibana43
     SUBDIR += kmfl-european-latin
     SUBDIR += kmfl-khmer
     SUBDIR += kmfl-sil-ezra
@@ -1214,6 +1217,7 @@
     SUBDIR += py-empy
     SUBDIR += py-enchant
     SUBDIR += py-errorhandler
+    SUBDIR += py-et_xmlfile
     SUBDIR += py-excelerator
     SUBDIR += py-feedparser
     SUBDIR += py-genshi
@@ -1244,6 +1248,7 @@
     SUBDIR += py-pyes
     SUBDIR += py-pygments
     SUBDIR += py-pygtail
+    SUBDIR += py-pyphen
     SUBDIR += py-pyscss
     SUBDIR += py-pysrt
     SUBDIR += py-pystache
@@ -1299,7 +1304,9 @@
     SUBDIR += py-zope.tal
     SUBDIR += py-zpt
     SUBDIR += py2html
+    SUBDIR += py3-chardet
     SUBDIR += py3-libxml2
+    SUBDIR += py3-MarkupSafe
     SUBDIR += pychm
     SUBDIR += qprint
     SUBDIR += qstardict
@@ -1400,6 +1407,7 @@
     SUBDIR += rubygem-ini
     SUBDIR += rubygem-itextomml
     SUBDIR += rubygem-jekyll-assets
+    SUBDIR += rubygem-jekyll-assets1
     SUBDIR += rubygem-jekyll-feed
     SUBDIR += rubygem-jekyll-gist
     SUBDIR += rubygem-jekyll-mentions
@@ -1424,6 +1432,7 @@
     SUBDIR += rubygem-nokogiri-diff
     SUBDIR += rubygem-nokogiri14
     SUBDIR += rubygem-nokogumbo
+    SUBDIR += rubygem-octopress-escape-code
     SUBDIR += rubygem-opml
     SUBDIR += rubygem-org-ruby
     SUBDIR += rubygem-parslet
@@ -1435,6 +1444,7 @@
     SUBDIR += rubygem-rdiscount
     SUBDIR += rubygem-rdtool
     SUBDIR += rubygem-redcarpet
+    SUBDIR += rubygem-reverse_markdown
     SUBDIR += rubygem-ri_cal
     SUBDIR += rubygem-rich
     SUBDIR += rubygem-rmmseg-cpp
@@ -1620,6 +1630,7 @@
     SUBDIR += words
     SUBDIR += wv
     SUBDIR += wv2
+    SUBDIR += xalan-c
     SUBDIR += xalan-j
     SUBDIR += xerces-c3
     SUBDIR += xerces-j

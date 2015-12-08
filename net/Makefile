@@ -95,6 +95,7 @@
     SUBDIR += dgd-lpmud
     SUBDIR += dhcp6
     SUBDIR += dhcpcd
+    SUBDIR += dhcpd
     SUBDIR += dhcpd-pools
     SUBDIR += dhcpdump
     SUBDIR += dhcperf
@@ -106,6 +107,7 @@
     SUBDIR += dimes
     SUBDIR += dosdetector
     SUBDIR += dpdk
+    SUBDIR += dpinger
     SUBDIR += drawterm
     SUBDIR += dropbox-api-command
     SUBDIR += dropbox-uploader
@@ -526,6 +528,7 @@
     SUBDIR += p5-IO-Socket-IP
     SUBDIR += p5-IO-Socket-Multicast
     SUBDIR += p5-IO-Socket-Multicast6
+    SUBDIR += p5-IO-Socket-Timeout
     SUBDIR += p5-IO-Socket-UNIX-Util
     SUBDIR += p5-IP-Anonymous
     SUBDIR += p5-IP-Country
@@ -962,19 +965,22 @@
     SUBDIR += py-pynsq
     SUBDIR += py-pypcap
     SUBDIR += py-pysendfile
+    SUBDIR += py-pysmb
     SUBDIR += py-pysocks
     SUBDIR += py-pysphere
+    SUBDIR += py-pystun
     SUBDIR += py-python-bitcoinrpc
     SUBDIR += py-pyvmomi
     SUBDIR += py-pyzmq
     SUBDIR += py-qt4-network
     SUBDIR += py-radix
     SUBDIR += py-raet
+    SUBDIR += py-ripe.atlas.cousteau
     SUBDIR += py-s3cmd
     SUBDIR += py-simplesoap
-    SUBDIR += py-smb
     SUBDIR += py-smbpasswd
     SUBDIR += py-soappy
+    SUBDIR += py-socketio-client
     SUBDIR += py-speedtest-cli
     SUBDIR += py-suds
     SUBDIR += py-terminado
@@ -990,6 +996,7 @@
     SUBDIR += py-xmlrpc
     SUBDIR += py-zope.proxy
     SUBDIR += py-zsi
+    SUBDIR += py3-netifaces
     SUBDIR += pygopherd
     SUBDIR += pynids
     SUBDIR += pyrad
@@ -1101,6 +1108,7 @@
     SUBDIR += rubygem-oauth
     SUBDIR += rubygem-oauth2
     SUBDIR += rubygem-octokit
+    SUBDIR += rubygem-octopress-deploy
     SUBDIR += rubygem-omniauth-facebook
     SUBDIR += rubygem-omniauth-github
     SUBDIR += rubygem-omniauth-github-discourse
@@ -1146,6 +1154,7 @@
     SUBDIR += samba4
     SUBDIR += samba41
     SUBDIR += samba42
+    SUBDIR += samba43
     SUBDIR += samplicator
     SUBDIR += sbd
     SUBDIR += scamper

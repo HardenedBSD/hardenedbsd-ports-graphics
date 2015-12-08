@@ -64,7 +64,6 @@
     SUBDIR += flvtool++
     SUBDIR += fpc-dts
     SUBDIR += fpc-libvlc
-    SUBDIR += fpc-matroska
     SUBDIR += freetuxtv
     SUBDIR += freevo
     SUBDIR += fxtv
@@ -268,12 +267,14 @@
     SUBDIR += oggvideotools
     SUBDIR += ogmrip
     SUBDIR += ogmtools
+    SUBDIR += omxplayer
     SUBDIR += opencinematools
     SUBDIR += openh264
     SUBDIR += openquicktime
     SUBDIR += openshot
     SUBDIR += oqtencoder
     SUBDIR += oqtplayer
+    SUBDIR += oscam
     SUBDIR += p5-Audio-M4P
     SUBDIR += p5-FFmpeg-Command
     SUBDIR += p5-FLV-Info
