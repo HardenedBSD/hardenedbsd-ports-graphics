@@ -133,7 +133,6 @@
     SUBDIR += firewalk
     SUBDIR += fl0p
     SUBDIR += flawfinder
-    SUBDIR += fpc-hash
     SUBDIR += fpc-openssl
     SUBDIR += fpm2
     SUBDIR += fprint_demo
@@ -848,6 +847,7 @@
     SUBDIR += py-pycrypto
     SUBDIR += py-pycryptopp
     SUBDIR += py-pydeep
+    SUBDIR += py-pyelliptic
     SUBDIR += py-pylibacl
     SUBDIR += py-pyme
     SUBDIR += py-pyptlib

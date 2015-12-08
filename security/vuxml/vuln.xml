@@ -58,6 +58,410 @@ Notes:
 
 -->
 <vuxml xmlns="http://www.vuxml.org/apps/vuxml-1">
+  <vuln vid="c8842a84-9ddd-11e5-8c2f-c485083ca99c">
+    <topic>flash -- multiple vulnabilities</topic>
+    <affects>
+      <package>
+	<name>linux-c6-flashplugin</name>
+	<name>linux-f10-flashplugin</name>
+	<name>linux-c6_64-flashplugin</name>
+	<range><lt>11.2r202.554</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Adobe reports:</p>
+	<blockquote cite="https://helpx.adobe.com/security/products/flash-player/apsb15-32.html">
+	  <p>
+	    These updates resolve heap buffer overflow vulnerabilities that
+	    could lead to code execution (CVE-2015-8438, CVE-2015-8446).</p>
+
+	  <p>
+	    These updates resolve memory corruption vulnerabilities that
+	    could lead to code execution (CVE-2015-8444, CVE-2015-8443,
+	    CVE-2015-8417, CVE-2015-8416, CVE-2015-8451, CVE-2015-8047,
+	    CVE-2015-8053, CVE-2015-8045, CVE-2015-8051, CVE-2015-8060,
+	    CVE-2015-8419, CVE-2015-8408).</p>
+
+	  <p>
+	    These updates resolve security bypass vulnerabilities
+	    (CVE-2015-8453, CVE-2015-8440, CVE-2015-8409).</p>
+
+	  <p>
+	    These updates resolve a stack overflow vulnerability that
+	    could lead to code execution (CVE-2015-8407).</p>
+
+	  <p>
+	    These updates resolve a type confusion vulnerability that
+	    could lead to code execution (CVE-2015-8439).</p>
+
+	  <p>
+	    These updates resolve an integer overflow vulnerability
+	    that could lead to code execution (CVE-2015-8445).</p>
+
+	  <p>
+	    These updates resolve a buffer overflow vulnerability that
+	    could lead to code execution (CVE-2015-8415).</p>
+
+	  <p>
+	    These updates resolve use-after-free vulnerabilities that
+	    could lead to code execution (CVE-2015-8050, CVE-2015-8049,
+	    CVE-2015-8437, CVE-2015-8450, CVE-2015-8449, CVE-2015-8448,
+	    CVE-2015-8436, CVE-2015-8452, CVE-2015-8048, CVE-2015-8413,
+	    CVE-2015-8412, CVE-2015-8410, CVE-2015-8411, CVE-2015-8424,
+	    CVE-2015-8422, CVE-2015-8420, CVE-2015-8421, CVE-2015-8423,
+	    CVE-2015-8425, CVE-2015-8433, CVE-2015-8432, CVE-2015-8431,
+	    CVE-2015-8426, CVE-2015-8430, CVE-2015-8427, CVE-2015-8428,
+	    CVE-2015-8429, CVE-2015-8434, CVE-2015-8435, CVE-2015-8414,
+	    CVE-2015-8052, CVE-2015-8059, CVE-2015-8058, CVE-2015-8055,
+	    CVE-2015-8057, CVE-2015-8056, CVE-2015-8061, CVE-2015-8067,
+	    CVE-2015-8066, CVE-2015-8062, CVE-2015-8068, CVE-2015-8064,
+	    CVE-2015-8065, CVE-2015-8063, CVE-2015-8405, CVE-2015-8404,
+	    CVE-2015-8402, CVE-2015-8403, CVE-2015-8071, CVE-2015-8401,
+	    CVE-2015-8406, CVE-2015-8069, CVE-2015-8070, CVE-2015-8441,
+	    CVE-2015-8442, CVE-2015-8447).</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://helpx.adobe.com/security/products/flash-player/apsb15-32.html</url>
+      <cvename>CVE-2015-8045</cvename>
+      <cvename>CVE-2015-8047</cvename>
+      <cvename>CVE-2015-8048</cvename>
+      <cvename>CVE-2015-8049</cvename>
+      <cvename>CVE-2015-8050</cvename>
+      <cvename>CVE-2015-8051</cvename>
+      <cvename>CVE-2015-8052</cvename>
+      <cvename>CVE-2015-8053</cvename>
+      <cvename>CVE-2015-8054</cvename>
+      <cvename>CVE-2015-8055</cvename>
+      <cvename>CVE-2015-8056</cvename>
+      <cvename>CVE-2015-8057</cvename>
+      <cvename>CVE-2015-8058</cvename>
+      <cvename>CVE-2015-8059</cvename>
+      <cvename>CVE-2015-8060</cvename>
+      <cvename>CVE-2015-8061</cvename>
+      <cvename>CVE-2015-8062</cvename>
+      <cvename>CVE-2015-8063</cvename>
+      <cvename>CVE-2015-8064</cvename>
+      <cvename>CVE-2015-8065</cvename>
+      <cvename>CVE-2015-8066</cvename>
+      <cvename>CVE-2015-8067</cvename>
+      <cvename>CVE-2015-8068</cvename>
+      <cvename>CVE-2015-8069</cvename>
+      <cvename>CVE-2015-8070</cvename>
+      <cvename>CVE-2015-8071</cvename>
+      <cvename>CVE-2015-8401</cvename>
+      <cvename>CVE-2015-8402</cvename>
+      <cvename>CVE-2015-8403</cvename>
+      <cvename>CVE-2015-8404</cvename>
+      <cvename>CVE-2015-8405</cvename>
+      <cvename>CVE-2015-8406</cvename>
+      <cvename>CVE-2015-8407</cvename>
+      <cvename>CVE-2015-8408</cvename>
+      <cvename>CVE-2015-8409</cvename>
+      <cvename>CVE-2015-8410</cvename>
+      <cvename>CVE-2015-8411</cvename>
+      <cvename>CVE-2015-8412</cvename>
+      <cvename>CVE-2015-8413</cvename>
+      <cvename>CVE-2015-8414</cvename>
+      <cvename>CVE-2015-8415</cvename>
+      <cvename>CVE-2015-8416</cvename>
+      <cvename>CVE-2015-8417</cvename>
+      <cvename>CVE-2015-8419</cvename>
+      <cvename>CVE-2015-8420</cvename>
+      <cvename>CVE-2015-8421</cvename>
+      <cvename>CVE-2015-8422</cvename>
+      <cvename>CVE-2015-8423</cvename>
+      <cvename>CVE-2015-8424</cvename>
+      <cvename>CVE-2015-8425</cvename>
+      <cvename>CVE-2015-8426</cvename>
+      <cvename>CVE-2015-8427</cvename>
+      <cvename>CVE-2015-8428</cvename>
+      <cvename>CVE-2015-8429</cvename>
+      <cvename>CVE-2015-8430</cvename>
+      <cvename>CVE-2015-8431</cvename>
+      <cvename>CVE-2015-8432</cvename>
+      <cvename>CVE-2015-8433</cvename>
+      <cvename>CVE-2015-8434</cvename>
+      <cvename>CVE-2015-8435</cvename>
+      <cvename>CVE-2015-8436</cvename>
+      <cvename>CVE-2015-8437</cvename>
+      <cvename>CVE-2015-8438</cvename>
+      <cvename>CVE-2015-8439</cvename>
+      <cvename>CVE-2015-8440</cvename>
+      <cvename>CVE-2015-8441</cvename>
+      <cvename>CVE-2015-8442</cvename>
+      <cvename>CVE-2015-8443</cvename>
+      <cvename>CVE-2015-8444</cvename>
+      <cvename>CVE-2015-8445</cvename>
+      <cvename>CVE-2015-8446</cvename>
+      <cvename>CVE-2015-8447</cvename>
+      <cvename>CVE-2015-8448</cvename>
+      <cvename>CVE-2015-8449</cvename>
+      <cvename>CVE-2015-8450</cvename>
+      <cvename>CVE-2015-8451</cvename>
+      <cvename>CVE-2015-8452</cvename>
+      <cvename>CVE-2015-8453</cvename>
+    </references>
+    <dates>
+      <discovery>2015-12-08</discovery>
+      <entry>2015-12-08</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="215e740e-9c56-11e5-90e7-b499baebfeaf">
+    <topic>libressl -- NULL pointer dereference</topic>
+    <affects>
+      <package>
+	<name>libressl</name>
+	<range><lt>2.2.5</lt></range>
+	<range><ge>2.3.0</ge><lt>2.3.1_1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The OpenBSD project reports:</p>
+	<blockquote cite="https://marc.info/?l=openbsd-announce&amp;t=144920914600002">
+	  <p>A NULL pointer deference could be triggered by a crafted
+	    certificate sent to services configured to verify client
+	    certificates on TLS/SSL connections.
+	  </p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://marc.info/?l=openbsd-announce&amp;t=144920914600002</url>
+      <cvename>CVE-2015-3194</cvename>
+    </references>
+    <dates>
+      <discovery>2015-12-03</discovery>
+      <entry>2015-12-08</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="918a5d1f-9d40-11e5-8f5c-002590263bf5">
+    <topic>KeePassX -- information disclosure</topic>
+    <affects>
+      <package>
+	<name>KeePassX</name>
+	<range><lt>0.4.4</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Yves-Alexis Perez reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/11/30/4">
+	  <p>Starting an export (using File / Export to / KeepassX XML file) and
+	    cancelling it leads to KeepassX saving a cleartext XML file in
+	    ~/.xml without any warning.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8378</cvename>
+      <freebsdpr>ports/205105</freebsdpr>
+      <url>http://www.openwall.com/lists/oss-security/2015/11/30/4</url>
+    </references>
+    <dates>
+      <discovery>2015-07-08</discovery>
+      <entry>2015-12-08</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="84fdd1bb-9d37-11e5-8f5c-002590263bf5">
+    <topic>passenger -- client controlled header overwriting</topic>
+    <affects>
+      <package>
+	<name>rubygem-passenger</name>
+	<range><ge>5.0.0</ge><lt>5.0.22</lt></range>
+	<range><lt>4.0.60</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Daniel Knoppel reports:</p>
+	<blockquote cite="https://blog.phusion.nl/2015/12/07/cve-2015-7519/">
+	  <p>It was discovered by the SUSE security team that it was possible,
+	    in some cases, for clients to overwrite headers set by the server,
+	    resulting in a medium level security issue. CVE-2015-7519 has been
+	    assigned to this issue.</p>
+	  <p>Affected use-cases:</p>
+	  <p>Header overwriting may occur if all of the following conditions are met:</p>
+	  <ul>
+	    <li>Apache integration mode, or standalone+builtin engine without
+	      a filtering proxy</li>
+	    <li>Ruby or Python applications only (Passenger 5); or any
+	      application (Passenger 4)</li>
+	    <li>The app depends on a request header containing a dash (-)</li>
+	    <li>The header is supposed to be trusted (set by the server)</li>
+	    <li>The client correctly guesses the header name</li>
+	  </ul>
+	  <p>This vulnerability has been fixed by filtering out client headers
+	    that do not consist of alphanumeric/dash characters (Nginx already
+	    did this, so Passenger+Nginx was not affected). If your application
+	    depends on headers that don't conform to this, you can add a
+	    workaround in Apache specifically for those to convert them to a
+	    dash-based format.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-7519</cvename>
+      <url>https://blog.phusion.nl/2015/12/07/cve-2015-7519/</url>
+    </references>
+    <dates>
+      <discovery>2015-12-07</discovery>
+      <entry>2015-12-07</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="e6b974ab-9d35-11e5-8f5c-002590263bf5">
+    <topic>Salt -- information disclosure</topic>
+    <affects>
+      <package>
+	<name>py27-salt</name>
+	<range><lt>2015.8.3</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Salt release notes report:</p>
+	<blockquote cite="https://docs.saltstack.com/en/latest/topics/releases/2015.8.3.html">
+	  <p>CVE-2015-8034: Saving state.sls cache data to disk with insecure
+	    permissions</p>
+	  <p>This affects users of the state.sls function. The state run cache
+	    on the minion was being created with incorrect permissions. This
+	    file could potentially contain sensitive data that was inserted via
+	    jinja into the state SLS files. The permissions for this file are
+	    now being set correctly. Thanks to @zmalone for bringing this issue
+	    to our attention.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8034</cvename>
+      <url>https://docs.saltstack.com/en/latest/topics/releases/2015.8.3.html</url>
+    </references>
+    <dates>
+      <discovery>2015-11-25</discovery>
+      <entry>2015-12-07</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="6bc6eed2-9cca-11e5-8c2b-c335fa8985d7">
+    <topic>libraw -- memory objects not properly initialized</topic>
+    <affects>
+      <package>
+	<name>libraw</name>
+	<range><lt>0.17.1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>ChenQin reports:</p>
+	<blockquote cite="http://seclists.org/fulldisclosure/2015/Nov/108">
+	  <p>The LibRaw raw image decoder has multiple vulnerabilities that can
+	    cause memory errors which may lead to code execution or other
+	    problems.</p>
+	  <p>In CVE-2015-8367, LibRaw's phase_one_correct function does not
+	    handle memory initialization correctly, which may cause other
+	    problems.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.libraw.org/news/libraw-0-17-1</url>
+      <url>https://github.com/LibRaw/LibRaw/commit/490ef94d1796f730180039e80997efe5c58db780</url>
+      <mlist>http://seclists.org/fulldisclosure/2015/Nov/108</mlist>
+      <cvename>CVE-2015-8367</cvename>
+    </references>
+    <dates>
+      <discovery>2015-11-30</discovery>
+      <entry>2015-12-07</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="db04bf07-9cc8-11e5-8c2b-c335fa8985d7">
+    <topic>libraw -- index overflow in smal_decode_segment</topic>
+    <affects>
+      <package>
+	<name>libraw</name>
+	<range><lt>0.17.1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>ChenQin reports:</p>
+	<blockquote cite="http://seclists.org/fulldisclosure/2015/Nov/108">
+	  <p>The LibRaw raw image decoder has multiple vulnerabilities that can
+	    cause memory errors which may lead to code execution or other
+	    problems.</p>
+	  <p>In CVE-2015-8366, LibRaw's smal_decode_segment function does not
+	    handle indexes carefully, which can cause an index overflow.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.libraw.org/news/libraw-0-17-1</url>
+      <url>https://github.com/LibRaw/LibRaw/commit/89d065424f09b788f443734d44857289489ca9e2</url>
+      <mlist>http://seclists.org/fulldisclosure/2015/Nov/108</mlist>
+      <cvename>CVE-2015-8366</cvename>
+    </references>
+    <dates>
+      <discovery>2015-11-30</discovery>
+      <entry>2015-12-07</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="4c8d1d72-9b38-11e5-aece-d050996490d0">
+    <topic>openssl -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>openssl</name>
+	<range><lt>1.0.2_5</lt></range>
+      </package>
+      <package>
+	<name>mingw32-openssl</name>
+	<range><ge>1.0.1</ge><lt>1.0.2e</lt></range>
+      </package>
+      <package>
+	<name>linux-c6-openssl</name>
+	<range><ge>0</ge></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>OpenSSL project reports:</p>
+	<blockquote cite="https://www.openssl.org/news/secadv/20151203.txt">
+	  <ol>
+	    <li>BN_mod_exp may produce incorrect results on x86_64
+	      (CVE-2015-3193)</li>
+	    <li>Certificate verify crash with missing PSS parameter
+	      (CVE-2015-3194)</li>
+	    <li>X509_ATTRIBUTE memory leak (CVE-2015-3195)</li>
+	    <li>Race condition handling PSK identify hint
+	      (CVE-2015-3196)</li>
+	    <li>Anon DH ServerKeyExchange with 0 p parameter
+	      (CVE-2015-1794)</li>
+	  </ol>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-1794</cvename>
+      <cvename>CVE-2015-3193</cvename>
+      <cvename>CVE-2015-3194</cvename>
+      <cvename>CVE-2015-3195</cvename>
+      <cvename>CVE-2015-3196</cvename>
+      <url>https://www.openssl.org/news/secadv/20151203.txt</url>
+    </references>
+    <dates>
+      <discovery>2015-12-03</discovery>
+      <entry>2015-12-05</entry>
+    </dates>
+  </vuln>
+
   <vuln vid="8a90dc87-89f9-11e5-a408-00248c0c745d">
     <topic>PHPmailer -- SMTP injection vulnerability</topic>
     <affects>
@@ -913,11 +1317,12 @@ Notes:
       <url>http://www.openwall.com/lists/oss-security/2015/11/12/2</url>
       <url>http://www.openwall.com/lists/oss-security/2015/12/03/6</url>
       <cvename>CVE-2015-8126</cvename>
+      <cvename>CVE-2015-8472</cvename>
     </references>
     <dates>
       <discovery>2015-11-15</discovery>
       <entry>2015-11-15</entry>
-      <modified>2015-12-03</modified>
+      <modified>2015-12-08</modified>
     </dates>
   </vuln>
 

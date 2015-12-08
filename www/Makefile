@@ -353,7 +353,8 @@
     SUBDIR += jdresolve
     SUBDIR += jericho-html
     SUBDIR += jesred
-    SUBDIR += jetty
+    SUBDIR += jetty8
+    SUBDIR += jetty9
     SUBDIR += jinzora
     SUBDIR += jmeter
     SUBDIR += joomla15
@@ -569,6 +570,7 @@
     SUBDIR += npm
     SUBDIR += npm012
     SUBDIR += nspluginwrapper
+    SUBDIR += obhttpd
     SUBDIR += ocaml-net
     SUBDIR += ocsigen
     SUBDIR += offline-npm
@@ -1550,12 +1552,14 @@
     SUBDIR += py-django-picklefield
     SUBDIR += py-django-pipeline
     SUBDIR += py-django-pipeline12
+    SUBDIR += py-django-pipeline13
     SUBDIR += py-django-pipeline14
     SUBDIR += py-django-piston
     SUBDIR += py-django-profiles
     SUBDIR += py-django-redis
     SUBDIR += py-django-registration
     SUBDIR += py-django-registration-defaults
+    SUBDIR += py-django-registration-redux
     SUBDIR += py-django-reversion
     SUBDIR += py-django-sekizai
     SUBDIR += py-django-signals-ahoy
@@ -1731,6 +1735,7 @@
     SUBDIR += py-requests-toolbelt
     SUBDIR += py-requests1
     SUBDIR += py-restclient
+    SUBDIR += py-rfc3986
     SUBDIR += py-rfc3987
     SUBDIR += py-rhodecode
     SUBDIR += py-routes

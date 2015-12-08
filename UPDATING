@@ -5,6 +5,40 @@ they are unavoidable.
 You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
+20151206:
+  AFFECTS: users of mail/postfixadmin
+  AUTHOR: riggs@FreeBSD.org
+
+  Caveat when updating to version 2.93: If you have an existing
+  configuration and are NOT using the recommended practice of putting your
+  settings changes in config.local.php:
+
+  Copy config.inc.php to config.local.php prior to upgrading, then revise
+  config.local.php for the current version afterward.
+
+  Postfixadmin will not function correctly unless correct and complete
+  data structures are placed in config.inc.php. Therefore the file must be
+  upgraded as part of the package and any changes to config.inc.php will
+  be overwritten.
+
+  Detailed information regarding this procedure is provided in step 3 of
+  the installation instructions in ${DATADIR}/INSTALL.TXT (by default
+  /usr/local/share/postfixadmin/INSTALL.TXT).
+
+20151205:
+  AFFECTS: users of devel/ncurses
+  AUTHOR: bapt@FreeBSD.org
+
+  ncurses has been updated to 6.0.
+  If you are using binary pkg, 'pkg upgrade' will do the right thing.
+  Users of portmaster/portupgrade must rebuild all ports which depend
+  on ncurses.
+
+  Portmaster users:
+      portmaster -w -r ncurses
+  Portupgrade users:
+      portupgrade -fr devel/ncurses
+
 20151203:
   AFFECTS: users of x11-toolkits/qt4-gui or x11-toolkits/qt5-gui
   AUTHOR: kde@FreeBSD.org
@@ -16,7 +50,7 @@ you update your ports collection, before attempting any port upgrades.
   qt4-gui's or qt5-gui's pkg-message, please considering removing them and
   using the default settings:
   * kern.ipc.shmall
-  * kern.ipc.shmni
+  * kern.ipc.shmmni
   * kern.ipc.shmseg
   See base r209037 and ports PR 202927 for more context.
 
