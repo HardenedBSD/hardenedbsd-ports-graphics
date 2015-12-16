@@ -269,6 +269,7 @@
     SUBDIR += krb5
     SUBDIR += krb5-112
     SUBDIR += krb5-113
+    SUBDIR += krb5-114
     SUBDIR += krb5-appl
     SUBDIR += kripp
     SUBDIR += kstart
@@ -525,6 +526,7 @@
     SUBDIR += p5-Crypt-Passwd-XS
     SUBDIR += p5-Crypt-PasswdMD5
     SUBDIR += p5-Crypt-Password-Util
+    SUBDIR += p5-Crypt-PKCS10
     SUBDIR += p5-Crypt-Primes
     SUBDIR += p5-Crypt-RC4
     SUBDIR += p5-Crypt-RC5
@@ -642,6 +644,7 @@
     SUBDIR += p5-OpenCA-PKCS7
     SUBDIR += p5-OpenCA-REQ
     SUBDIR += p5-OpenCA-X509
+    SUBDIR += p5-Parse-Snort
     SUBDIR += p5-PBKDF2-Tiny
     SUBDIR += p5-PGP
     SUBDIR += p5-PGP-Sign
