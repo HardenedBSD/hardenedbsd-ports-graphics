@@ -519,6 +519,7 @@
     SUBDIR += fib
     SUBDIR += firmware-utils
     SUBDIR += fistgen
+    SUBDIR += flatbuffers
     SUBDIR += flatzebra
     SUBDIR += flex-sdk
     SUBDIR += flex-sdk35
@@ -3977,6 +3978,7 @@
     SUBDIR += py-ctags
     SUBDIR += py-curtsies
     SUBDIR += py-cxx
+    SUBDIR += py-cycler
     SUBDIR += py-d2to1
     SUBDIR += py-daemon
     SUBDIR += py-daemons
@@ -4112,6 +4114,7 @@
     SUBDIR += py-kqueue
     SUBDIR += py-krosspython
     SUBDIR += py-lazy
+    SUBDIR += py-lazy-object-proxy
     SUBDIR += py-levenshtein
     SUBDIR += py-liblarch
     SUBDIR += py-libpeas
@@ -4150,6 +4153,7 @@
     SUBDIR += py-natural
     SUBDIR += py-ncurses
     SUBDIR += py-nose
+    SUBDIR += py-nose-cov
     SUBDIR += py-notifier
     SUBDIR += py-notify
     SUBDIR += py-ocempgui
@@ -4397,6 +4401,7 @@
     SUBDIR += py-wcwidth
     SUBDIR += py-weblib
     SUBDIR += py-wheel
+    SUBDIR += py-wrapt
     SUBDIR += py-wsgi_xmlrpc
     SUBDIR += py-wsgitools
     SUBDIR += py-wsgiutils
@@ -4537,8 +4542,8 @@
     SUBDIR += qross
     SUBDIR += qscintilla2
     SUBDIR += qscintilla2-designerplugin
-    SUBDIR += qscintilla2-qt5
     SUBDIR += qscintilla2-designerplugin-qt5
+    SUBDIR += qscintilla2-qt5
     SUBDIR += qt4
     SUBDIR += qt4-assistant
     SUBDIR += qt4-assistant-adp
@@ -5065,7 +5070,6 @@
     SUBDIR += rubygem-tilt1
     SUBDIR += rubygem-timers
     SUBDIR += rubygem-tins
-    SUBDIR += rubygem-tins0
     SUBDIR += rubygem-titlecase
     SUBDIR += rubygem-toml
     SUBDIR += rubygem-transaction-simple
