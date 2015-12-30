@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	puppet
-PORTVERSION=	4.3.0
+PORTVERSION=	4.3.1
 CATEGORIES=	sysutils
 MASTER_SITES=	http://downloads.puppetlabs.com/puppet/
 PKGNAMESUFFIX=	4
@@ -24,7 +24,6 @@ CONFLICTS_INSTALL=	puppet-* puppet37-*
 NO_ARCH=	yes
 NO_BUILD=	yes
 USE_RUBY=	yes
-USE_RUBY_FEATURES=	iconv
 USE_RC_SUBR=	puppet puppetmaster
 PORTDOCS=	LICENSE README.md
 PORTEXAMPLES=	*
