@@ -12,7 +12,7 @@ LIB_DEPENDS=	libevdev.so:${PORTSDIR}/devel/libevdev
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	kwm81
-GH_TAGNAME=	991817c
+GH_TAGNAME=	778d6f2
 
 USES=		autoreconf gmake libtool pathfix pkgconfig
 GNU_CONFIGURE=	yes
