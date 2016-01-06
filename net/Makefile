@@ -27,6 +27,7 @@
     SUBDIR += asio
     SUBDIR += aslookup
     SUBDIR += asterisk
+    SUBDIR += asterisk-chan_sccp
     SUBDIR += asterisk-g72x
     SUBDIR += asterisk11
     SUBDIR += asterisk13
@@ -439,6 +440,7 @@
     SUBDIR += nocatsplash
     SUBDIR += nos-ttb
     SUBDIR += nph
+    SUBDIR += ns3
     SUBDIR += nss-pam-ldapd
     SUBDIR += nss-pam-ldapd-sasl
     SUBDIR += nss_ldap
@@ -622,6 +624,7 @@
     SUBDIR += p5-Net-LDAP-AutoDNs
     SUBDIR += p5-Net-LDAP-AutoServer
     SUBDIR += p5-Net-LDAP-Express
+    SUBDIR += p5-Net-LDAP-FilterBuilder
     SUBDIR += p5-Net-LDAP-LDAPhash
     SUBDIR += p5-Net-LDAP-Makepath
     SUBDIR += p5-Net-LDAP-Server
@@ -773,8 +776,10 @@
     SUBDIR += p5-Sort-Key-IPv4
     SUBDIR += p5-Test-URI
     SUBDIR += p5-URI
+    SUBDIR += p5-URI-db
     SUBDIR += p5-URI-FromHash
     SUBDIR += p5-URI-Match
+    SUBDIR += p5-URI-Nested
     SUBDIR += p5-URI-OpenURL
     SUBDIR += p5-URI-Query
     SUBDIR += p5-URI-SmartURI
@@ -926,6 +931,7 @@
     SUBDIR += py-beanstalkc
     SUBDIR += py-cloudfiles
     SUBDIR += py-dpkt
+    SUBDIR += py-dugong
     SUBDIR += py-ec2-cli-tools
     SUBDIR += py-eventlet
     SUBDIR += py-gntp
@@ -967,15 +973,17 @@
     SUBDIR += py-pysendfile
     SUBDIR += py-pysmb
     SUBDIR += py-pysocks
-    SUBDIR += py-pysphere
     SUBDIR += py-pystun
     SUBDIR += py-python-bitcoinrpc
     SUBDIR += py-pyvmomi
     SUBDIR += py-pyzmq
     SUBDIR += py-qt4-network
+    SUBDIR += py-qt5-network
     SUBDIR += py-radix
     SUBDIR += py-raet
     SUBDIR += py-ripe.atlas.cousteau
+    SUBDIR += py-ripe.atlas.sagan
+    SUBDIR += py-ripe.atlas.tools
     SUBDIR += py-s3cmd
     SUBDIR += py-simplesoap
     SUBDIR += py-smbpasswd
@@ -990,6 +998,7 @@
     SUBDIR += py-twitter
     SUBDIR += py-twitter-tools
     SUBDIR += py-txamqp
+    SUBDIR += py-txrestapi
     SUBDIR += py-uritemplate
     SUBDIR += py-urllib3
     SUBDIR += py-wolframalpha
@@ -1032,7 +1041,6 @@
     SUBDIR += remmina-plugin-gnome
     SUBDIR += remmina-plugin-i18n
     SUBDIR += remmina-plugin-nx
-    SUBDIR += remmina-plugin-rdp
     SUBDIR += remmina-plugin-telepathy
     SUBDIR += remmina-plugin-vnc
     SUBDIR += remmina-plugin-xdmcp
@@ -1092,6 +1100,7 @@
     SUBDIR += rubygem-fog-terremark
     SUBDIR += rubygem-fog-vmfusion
     SUBDIR += rubygem-fog-voxel
+    SUBDIR += rubygem-fog-vsphere
     SUBDIR += rubygem-fog-xenserver
     SUBDIR += rubygem-geoip
     SUBDIR += rubygem-gitlab_omniauth-ldap

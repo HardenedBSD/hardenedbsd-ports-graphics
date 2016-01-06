@@ -7,8 +7,10 @@ PORTREVISION=	1
 CATEGORIES=	net-p2p
 MASTER_SITES=	GOOGLE_CODE
 
-MAINTAINER=	wenheping@gmail.com
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Free BitTorrent Implementation
+
+LICENSE=	MIT
 
 LIB_DEPENDS=	libevent.so:${PORTSDIR}/devel/libevent2
 
@@ -20,7 +22,7 @@ WRKSRC=		${WRKDIR}/${PORTNAME}
 PLIST_FILES=	bin/unworkable man/man1/unworkable.1.gz
 
 post-extract:
-	${REINPLACE_CMD} -e 's#/usr/local#${LOCALBASE}#g' \
+	@${REINPLACE_CMD} -e 's#/usr/local#${LOCALBASE}#g' \
 		${WRKSRC}/SConstruct
 
 do-install:

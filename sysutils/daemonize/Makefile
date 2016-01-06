@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	daemonize
-PORTVERSION=	1.7.6
+PORTVERSION=	1.7.7
 DISTVERSIONPREFIX=	release-
 CATEGORIES=	sysutils
 
@@ -10,6 +10,7 @@ COMMENT=	Tool to run a command as a daemon
 
 LICENSE=	BSD3CLAUSE
 
+USES=		gmake
 GNU_CONFIGURE=	yes
 
 USE_GITHUB=	yes
@@ -22,4 +23,3 @@ do-install:
 	${INSTALL_MAN} ${WRKSRC}/${PORTNAME}.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
 
 .include <bsd.port.mk>
-

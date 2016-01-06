@@ -213,6 +213,8 @@
     SUBDIR += mysql55-server
     SUBDIR += mysql56-client
     SUBDIR += mysql56-server
+    SUBDIR += mysql57-client
+    SUBDIR += mysql57-server
     SUBDIR += mysqlbackup
     SUBDIR += mysqlbigram
     SUBDIR += mysqldumper
@@ -698,7 +700,6 @@
     SUBDIR += puredb
     SUBDIR += pxlib
     SUBDIR += pxtools
-    SUBDIR += py-django-transaction-hooks
     SUBDIR += py-Elixir
     SUBDIR += py-MySQLdb
     SUBDIR += py-MySQLdb55
@@ -715,15 +716,12 @@
     SUBDIR += py-cql
     SUBDIR += py-dbf
     SUBDIR += py-dbutils
+    SUBDIR += py-django-transaction-hooks
     SUBDIR += py-fdb
     SUBDIR += py-firebirdsql
     SUBDIR += py-flask-sqlalchemy
     SUBDIR += py-forgetsql
     SUBDIR += py-gdbm
-    SUBDIR += py32-gdbm
-    SUBDIR += py33-gdbm
-    SUBDIR += py34-gdbm
-    SUBDIR += py35-gdbm
     SUBDIR += py-geoalchemy
     SUBDIR += py-geoalchemy2
     SUBDIR += py-hiredis
@@ -732,7 +730,6 @@
     SUBDIR += py-htsql-pgsql
     SUBDIR += py-kyotocabinet
     SUBDIR += py-leveldb
-    SUBDIR += py-memcached
     SUBDIR += py-mycli
     SUBDIR += py-mysql-connector-python
     SUBDIR += py-mysql-connector-python2
@@ -747,6 +744,7 @@
     SUBDIR += py-pgspecial
     SUBDIR += py-pgxnclient
     SUBDIR += py-pickledb
+    SUBDIR += py-pickleshare
     SUBDIR += py-postgresql
     SUBDIR += py-psycogreen
     SUBDIR += py-psycopg
@@ -758,9 +756,12 @@
     SUBDIR += py-pymysql
     SUBDIR += py-pypuppetdb
     SUBDIR += py-pytc
+    SUBDIR += py-python-memcached
     SUBDIR += py-python-rrdtool
     SUBDIR += py-python-sql
     SUBDIR += py-qt4-sql
+    SUBDIR += py-qt5-sql
+    SUBDIR += py-queries
     SUBDIR += py-redis
     SUBDIR += py-riak
     SUBDIR += py-rrdtool_lgpl
@@ -770,10 +771,6 @@
     SUBDIR += py-sqlalchemy-migrate
     SUBDIR += py-sqlalchemy06
     SUBDIR += py-sqlite3
-    SUBDIR += py32-sqlite3
-    SUBDIR += py33-sqlite3
-    SUBDIR += py34-sqlite3
-    SUBDIR += py35-sqlite3
     SUBDIR += py-sqlite3dbm
     SUBDIR += py-sqlobject
     SUBDIR += py-sqlparse
@@ -784,6 +781,14 @@
     SUBDIR += py-tarantool
     SUBDIR += py-umemcache
     SUBDIR += py-whisper
+    SUBDIR += py32-gdbm
+    SUBDIR += py32-sqlite3
+    SUBDIR += py33-gdbm
+    SUBDIR += py33-sqlite3
+    SUBDIR += py34-gdbm
+    SUBDIR += py34-sqlite3
+    SUBDIR += py35-gdbm
+    SUBDIR += py35-sqlite3
     SUBDIR += pydbx
     SUBDIR += pymongo
     SUBDIR += pypy-gdbm
@@ -837,6 +842,7 @@
     SUBDIR += rubygem-activerecord-jdbc-adapter
     SUBDIR += rubygem-activerecord-jdbcmysql-adapter
     SUBDIR += rubygem-activerecord-mysql-adapter
+    SUBDIR += rubygem-activerecord-session_store
     SUBDIR += rubygem-activerecord4
     SUBDIR += rubygem-activerecord41
     SUBDIR += rubygem-after_commit_queue
@@ -845,6 +851,7 @@
     SUBDIR += rubygem-arel
     SUBDIR += rubygem-arel-helpers
     SUBDIR += rubygem-arel3
+    SUBDIR += rubygem-arel5
     SUBDIR += rubygem-arel6
     SUBDIR += rubygem-awesome_nested_set
     SUBDIR += rubygem-bdb1
@@ -901,6 +908,8 @@
     SUBDIR += rubygem-seed-fu
     SUBDIR += rubygem-sqlite3
     SUBDIR += rubygem-sqlite3-ruby
+    SUBDIR += rubygem-state_machines-activemodel
+    SUBDIR += rubygem-state_machines-activerecord
     SUBDIR += rubygem-tarantool
     SUBDIR += sfcgal
     SUBDIR += sharedance

@@ -46,7 +46,6 @@
     SUBDIR += bsdsfv
     SUBDIR += bsmtrace
     SUBDIR += bugs
-    SUBDIR += burpsuite
     SUBDIR += ca_root_nss
     SUBDIR += calife
     SUBDIR += ccrypt
@@ -182,6 +181,7 @@
     SUBDIR += gwee
     SUBDIR += hackbot
     SUBDIR += hamachi
+    SUBDIR += hashcat
     SUBDIR += heimdal
     SUBDIR += hitch
     SUBDIR += hlfl
@@ -269,6 +269,7 @@
     SUBDIR += krb5
     SUBDIR += krb5-112
     SUBDIR += krb5-113
+    SUBDIR += krb5-114
     SUBDIR += krb5-appl
     SUBDIR += kripp
     SUBDIR += kstart
@@ -303,6 +304,7 @@
     SUBDIR += libpwquality
     SUBDIR += libpwstor
     SUBDIR += libressl
+    SUBDIR += libressl-devel
     SUBDIR += libscrypt
     SUBDIR += libsecret
     SUBDIR += libsectok
@@ -520,6 +522,7 @@
     SUBDIR += p5-Crypt-OpenSSL-X509
     SUBDIR += p5-Crypt-PBKDF2
     SUBDIR += p5-Crypt-PGPSimple
+    SUBDIR += p5-Crypt-PKCS10
     SUBDIR += p5-Crypt-PWSafe3
     SUBDIR += p5-Crypt-PassGen
     SUBDIR += p5-Crypt-Passwd-XS
@@ -647,6 +650,7 @@
     SUBDIR += p5-PGP-Sign
     SUBDIR += p5-POE-Component-SSLify
     SUBDIR += p5-POE-Filter-SSL
+    SUBDIR += p5-Parse-Snort
     SUBDIR += p5-PerlCryptLib
     SUBDIR += p5-SAVI-Perl
     SUBDIR += p5-SHA
@@ -850,6 +854,7 @@
     SUBDIR += py-pyelliptic
     SUBDIR += py-pylibacl
     SUBDIR += py-pyme
+    SUBDIR += py-pynacl
     SUBDIR += py-pyptlib
     SUBDIR += py-pyscard
     SUBDIR += py-pysha3
@@ -953,6 +958,7 @@
     SUBDIR += rubygem-nmap-parser
     SUBDIR += rubygem-omniauth
     SUBDIR += rubygem-omniauth-bitbucket
+    SUBDIR += rubygem-omniauth-cas3
     SUBDIR += rubygem-omniauth-gitlab
     SUBDIR += rubygem-omniauth-multipassword
     SUBDIR += rubygem-omniauth-saml

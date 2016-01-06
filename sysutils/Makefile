@@ -104,8 +104,8 @@
     SUBDIR += bsdstats
     SUBDIR += btsixad
     SUBDIR += bulk_extractor
+    SUBDIR += burp
     SUBDIR += busybox
-    SUBDIR += busybox-unstable
     SUBDIR += byobu
     SUBDIR += cbsd
     SUBDIR += ccd2iso
@@ -653,6 +653,7 @@
     SUBDIR += p5-Samba-SIDhelper
     SUBDIR += p5-Schedule-At
     SUBDIR += p5-Schedule-Cron
+    SUBDIR += p5-Schedule-Cron-Events
     SUBDIR += p5-Schedule-Load
     SUBDIR += p5-Schedule-Match
     SUBDIR += p5-Shell-Command
@@ -798,6 +799,7 @@
     SUBDIR += py-psutil121
     SUBDIR += py-ptyprocess
     SUBDIR += py-pytsk
+    SUBDIR += py-pywatchman
     SUBDIR += py-queuelib
     SUBDIR += py-ranger
     SUBDIR += py-salt
@@ -887,9 +889,9 @@
     SUBDIR += rubygem-hammer_cli_foreman_salt
     SUBDIR += rubygem-hammer_cli_foreman_ssh
     SUBDIR += rubygem-hiera
-    SUBDIR += rubygem-hieracles
     SUBDIR += rubygem-hiera-file
     SUBDIR += rubygem-hiera1
+    SUBDIR += rubygem-hieracles
     SUBDIR += rubygem-librarian-puppet
     SUBDIR += rubygem-log4r
     SUBDIR += rubygem-logify

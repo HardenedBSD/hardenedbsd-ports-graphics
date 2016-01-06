@@ -6,12 +6,14 @@
     SUBDIR += GiNaC
     SUBDIR += PDL
     SUBDIR += R
+    SUBDIR += R-cran-Amelia
     SUBDIR += R-cran-ChangeAnomalyDetection
     SUBDIR += R-cran-Formula
     SUBDIR += R-cran-KFAS
     SUBDIR += R-cran-LearnBayes
     SUBDIR += R-cran-MCMCpack
     SUBDIR += R-cran-MSwM
+    SUBDIR += R-cran-MatchIt
     SUBDIR += R-cran-MatrixModels
     SUBDIR += R-cran-NMF
     SUBDIR += R-cran-RHmm
@@ -22,13 +24,16 @@
     SUBDIR += R-cran-SuppDists
     SUBDIR += R-cran-VGAM
     SUBDIR += R-cran-Zelig
+    SUBDIR += R-cran-assertthat
     SUBDIR += R-cran-bdsmatrix
     SUBDIR += R-cran-car
     SUBDIR += R-cran-coda
     SUBDIR += R-cran-deldir
     SUBDIR += R-cran-dlmodeler
+    SUBDIR += R-cran-dplyr
     SUBDIR += R-cran-forecast
     SUBDIR += R-cran-fracdiff
+    SUBDIR += R-cran-geepack
     SUBDIR += R-cran-gpclib
     SUBDIR += R-cran-gss
     SUBDIR += R-cran-gtable
@@ -36,6 +41,7 @@
     SUBDIR += R-cran-inline
     SUBDIR += R-cran-irlba
     SUBDIR += R-cran-labeling
+    SUBDIR += R-cran-lazyeval
     SUBDIR += R-cran-lme4
     SUBDIR += R-cran-maxLik
     SUBDIR += R-cran-memisc
@@ -447,7 +453,6 @@
     SUBDIR += p5-Math-Geometry
     SUBDIR += p5-Math-Geometry-Planar
     SUBDIR += p5-Math-Geometry-Planar-GPC
-    SUBDIR += p5-Math-Geometry-Planar-GPC-Polygon
     SUBDIR += p5-Math-Geometry-Planar-GPC-PolygonXS
     SUBDIR += p5-Math-Geometry-Planar-Offset
     SUBDIR += p5-Math-Geometry-Voronoi
@@ -603,7 +608,9 @@
     SUBDIR += py-pybloom
     SUBDIR += py-pycosat
     SUBDIR += py-pyfst
+    SUBDIR += py-pyhull
     SUBDIR += py-pymc
+    SUBDIR += py-pyvtk
     SUBDIR += py-roman
     SUBDIR += py-scientific
     SUBDIR += py-statsmodels
@@ -688,7 +695,7 @@
     SUBDIR += wcalc
     SUBDIR += wfmath
     SUBDIR += why3
-    SUBDIR += why3-gpl
+    SUBDIR += why3-spark
     SUBDIR += wingz3
     SUBDIR += wxMaxima
     SUBDIR += x12arima

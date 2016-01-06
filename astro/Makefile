@@ -35,7 +35,6 @@
     SUBDIR += libkgeomap
     SUBDIR += libnova
     SUBDIR += libosmpbf
-    SUBDIR += libroadnav
     SUBDIR += luna
     SUBDIR += marble
     SUBDIR += match
@@ -82,8 +81,8 @@
     SUBDIR += py-RO
     SUBDIR += py-aipy
     SUBDIR += py-astLib
-    SUBDIR += py-metar
     SUBDIR += py-pyfits
+    SUBDIR += py-pymetar
     SUBDIR += pyephem
     SUBDIR += pyweather
     SUBDIR += qlandkartegt
@@ -91,7 +90,6 @@
     SUBDIR += readosm
     SUBDIR += rmap
     SUBDIR += roadmap
-    SUBDIR += roadnav
     SUBDIR += routino
     SUBDIR += saoimage
     SUBDIR += sextractor

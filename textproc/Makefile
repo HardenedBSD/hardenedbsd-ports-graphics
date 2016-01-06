@@ -621,6 +621,7 @@
     SUBDIR += p5-Lingua-EN-Words2Nums
     SUBDIR += p5-Lingua-Ident
     SUBDIR += p5-Lingua-Identify
+    SUBDIR += p5-Lingua-Identify-CLD
     SUBDIR += p5-Lingua-Ispell
     SUBDIR += p5-Lingua-PT-Stemmer
     SUBDIR += p5-Lingua-Preferred
@@ -655,6 +656,7 @@
     SUBDIR += p5-ODF-lpOD
     SUBDIR += p5-OpenOffice-OODoc
     SUBDIR += p5-PDF-API2
+    SUBDIR += p5-PDF-API2-Simple
     SUBDIR += p5-PDF-API3
     SUBDIR += p5-PDF-Create
     SUBDIR += p5-PDF-FromHTML
@@ -1208,6 +1210,7 @@
     SUBDIR += py-chardet
     SUBDIR += py-cloud_sptheme
     SUBDIR += py-creole
+    SUBDIR += py-curator
     SUBDIR += py-diff-match-patch
     SUBDIR += py-docutils
     SUBDIR += py-dsv
@@ -1260,6 +1263,8 @@
     SUBDIR += py-qrcode
     SUBDIR += py-qt4-xml
     SUBDIR += py-qt4-xmlpatterns
+    SUBDIR += py-qt5-xml
+    SUBDIR += py-qt5-xmlpatterns
     SUBDIR += py-rdflib
     SUBDIR += py-regex
     SUBDIR += py-reverend
@@ -1304,9 +1309,9 @@
     SUBDIR += py-zope.tal
     SUBDIR += py-zpt
     SUBDIR += py2html
+    SUBDIR += py3-MarkupSafe
     SUBDIR += py3-chardet
     SUBDIR += py3-libxml2
-    SUBDIR += py3-MarkupSafe
     SUBDIR += pychm
     SUBDIR += qprint
     SUBDIR += qstardict
@@ -1463,6 +1468,7 @@
     SUBDIR += rubygem-sass32
     SUBDIR += rubygem-sax-machine
     SUBDIR += rubygem-scss_lint
+    SUBDIR += rubygem-shell2html
     SUBDIR += rubygem-simplecov-html
     SUBDIR += rubygem-spreadsheet
     SUBDIR += rubygem-stamp

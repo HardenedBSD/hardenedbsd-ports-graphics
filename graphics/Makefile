@@ -627,6 +627,7 @@
     SUBDIR += opennurbs
     SUBDIR += openrm
     SUBDIR += openshadinglanguage
+    SUBDIR += opensubdiv
     SUBDIR += optar
     SUBDIR += optipng
     SUBDIR += osg
@@ -651,6 +652,8 @@
     SUBDIR += p5-Color-Rgb
     SUBDIR += p5-Color-Scheme
     SUBDIR += p5-Convert-Color
+    SUBDIR += p5-Data-Google-Visualization-DataSource
+    SUBDIR += p5-Data-Google-Visualization-DataTable
     SUBDIR += p5-GD
     SUBDIR += p5-GD-Arrow
     SUBDIR += p5-GD-Barcode
@@ -774,7 +777,6 @@
     SUBDIR += piddle
     SUBDIR += pikopixel
     SUBDIR += pinpoint
-    SUBDIR += pinta
     SUBDIR += pixelize
     SUBDIR += pixen
     SUBDIR += pixie
@@ -824,6 +826,7 @@
     SUBDIR += py-django-easy-thumbnails
     SUBDIR += py-editobj
     SUBDIR += py-exif
+    SUBDIR += py-exifread
     SUBDIR += py-exiv2
     SUBDIR += py-freeimagepy
     SUBDIR += py-gchartwrapper
@@ -864,6 +867,7 @@
     SUBDIR += py-pygooglechart
     SUBDIR += py-pyproj
     SUBDIR += py-qt4-svg
+    SUBDIR += py-qt5-svg
     SUBDIR += py-rabbyt
     SUBDIR += py-sane
     SUBDIR += py-seqdiag

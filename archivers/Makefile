@@ -163,6 +163,7 @@
     SUBDIR += ppunpack
     SUBDIR += pxz
     SUBDIR += py-attic
+    SUBDIR += py-bz2file
     SUBDIR += py-librtfcomp
     SUBDIR += py-lz4
     SUBDIR += py-lzma
@@ -170,6 +171,7 @@
     SUBDIR += py-python-snappy
     SUBDIR += qpress
     SUBDIR += quazip
+    SUBDIR += quazip-qt5
     SUBDIR += rar
     SUBDIR += rox-archive
     SUBDIR += rpm2cpio
@@ -189,6 +191,7 @@
     SUBDIR += sharutils
     SUBDIR += snappy
     SUBDIR += snappy-java
+    SUBDIR += snzip
     SUBDIR += squeeze
     SUBDIR += squsq
     SUBDIR += stuffit

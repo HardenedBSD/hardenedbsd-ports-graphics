@@ -6,7 +6,7 @@ CATEGORIES=	sysutils
 MASTER_SITES=	http://downloads.puppetlabs.com/puppet/
 PKGNAMESUFFIX=	4
 
-MAINTAINER=	mmoll@FreeBSD.org
+MAINTAINER=	ruby@FreeBSD.org
 COMMENT=	Configuration management framework written in Ruby
 
 LICENSE=	APACHE20
@@ -24,7 +24,6 @@ CONFLICTS_INSTALL=	puppet-* puppet37-*
 NO_ARCH=	yes
 NO_BUILD=	yes
 USE_RUBY=	yes
-USE_RUBY_FEATURES=	iconv
 USE_RC_SUBR=	puppet puppetmaster
 PORTDOCS=	LICENSE README.md
 PORTEXAMPLES=	*

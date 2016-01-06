@@ -126,6 +126,7 @@
     SUBDIR += kgamma
     SUBDIR += konsole
     SUBDIR += leechcraft
+    SUBDIR += lemonbar
     SUBDIR += libICE
     SUBDIR += libSM
     SUBDIR += libX11
@@ -232,6 +233,7 @@
     SUBDIR += printscreen
     SUBDIR += props
     SUBDIR += py-qt4-opengl
+    SUBDIR += py-qt5-opengl
     SUBDIR += qimageblitz
     SUBDIR += qt4-graphicssystems-opengl
     SUBDIR += qt4-inputmethods

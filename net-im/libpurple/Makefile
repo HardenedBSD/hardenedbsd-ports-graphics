@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME?=	libpurple
-PORTVERSION=	2.10.11
+PORTVERSION=	2.10.12
 PORTREVISION?=	0
 CATEGORIES?=	net-im
 MASTER_SITES=	SF/pidgin/Pidgin/${PORTVERSION}
@@ -77,6 +77,8 @@ PLIST_SUB+=	GTKUI="@comment not installed: "
 .endif
 
 .if defined(WITH_CONSOLEUI)
+OPTIONS_DEFINE+=NCURSES
+NCURSES_DESC=	Build with ncurses from ports
 PLIST_SUB+=	CONSOLEUI=""
 .else
 PLIST_SUB+=	CONSOLEUI="@comment not installed: "
@@ -95,6 +97,28 @@ PLIST_SUB+=		TCL:=""
 .else
 CONFIGURE_ARGS+=	--disable-tcl
 PLIST_SUB+=		TCL:="@comment not installed: "
+.endif
+
+.if ${PORT_OPTIONS:MNCURSES}
+USES+=		ncurses:port
+CONFIGURE_ARGS+=--with-ncurses-headers=${LOCALBASE}/include/ncurses/
+.else
+USES+=		ncurses
+.endif
+
+.if ${PORT_OPTIONS:MPERL}
+USES+=			perl5
+CONFIGURE_ARGS+=	--with-perl-lib=site
+PLIST_SUB+=		PERL:=""
+.if !defined(PIDGIN_SLAVE) || defined(WITH_GTKUI)
+PLIST_SUB+=		PERLMAN:=""
+.else
+PLIST_SUB+=		PERLMAN:="@comment not installed: "
+.endif
+.else
+CONFIGURE_ARGS+=	--disable-perl
+PLIST_SUB+=		PERL:="@comment not installed: " \
+			PERLMAN:="@comment not installed: "
 .endif
 
 .include <bsd.port.pre.mk>
@@ -197,21 +221,6 @@ PLIST_SUB+=		DBUS=""
 .else
 CONFIGURE_ARGS+=	--disable-dbus
 PLIST_SUB+=		DBUS="@comment not installed: "
-.endif
-
-.if ${PORT_OPTIONS:MPERL}
-USES+=			perl5
-CONFIGURE_ARGS+=	--with-perl-lib=site
-PLIST_SUB+=		PERL:=""
-.if !defined(PIDGIN_SLAVE)
-PLIST_SUB+=		PERLMAN:=""
-.else
-PLIST_SUB+=		PERLMAN:="@comment not installed: "
-.endif
-.else
-CONFIGURE_ARGS+=	--disable-perl
-PLIST_SUB+=		PERL:="@comment not installed: " \
-			PERLMAN:="@comment not installed: "
 .endif
 
 .if ${PORT_OPTIONS:MSAMETIME}

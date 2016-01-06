@@ -42,8 +42,8 @@ QUICK GUIDE TO ADDING A NEW ENTRY
 6. profit!
 
 Additional tests can be done this way:
- $ env PKG_DBDIR=/usr/ports/security/vuxml pkg audit py26-django-1.6
- $ env PKG_DBDIR=/usr/ports/security/vuxml pkg audit py27-django-1.6.1
+ $ pkg audit -f ./vuln.xml py26-django-1.6
+ $ pkg audit -f ./vuln.xml py27-django-1.6.1
 
 Extensive documentation of the format and help with writing and verifying
 a new entry is available in The Porter's Handbook at:
@@ -58,6 +58,2663 @@ Notes:
 
 -->
 <vuxml xmlns="http://www.vuxml.org/apps/vuxml-1">
+  <vuln vid="6aa2d135-b40e-11e5-9728-002590263bf5">
+    <topic>xen-kernel -- ioreq handling possibly susceptible to multiple read issue</topic>
+    <affects>
+      <package>
+	<name>xen-kernel</name>
+	<range><lt>4.5.2_1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The Xen Project reports:</p>
+	<blockquote cite="http://xenbits.xen.org/xsa/advisory-166.html">
+	  <p>Single memory accesses in source code can be translated to multiple
+	    ones in machine code by the compiler, requiring special caution when
+	    accessing shared memory.  Such precaution was missing from the
+	    hypervisor code inspecting the state of I/O requests sent to the
+	    device model for assistance.</p>
+	  <p>Due to the offending field being a bitfield, it is however believed
+	    that there is no issue in practice, since compilers, at least when
+	    optimizing (which is always the case for non-debug builds), should find
+	    it more expensive to extract the bit field value twice than to keep the
+	    calculated value in a register.</p>
+	  <p>This vulnerability is exposed to malicious device models.  In
+	    conventional Xen systems this means the qemu which service an HVM
+	    domain.  On such systems this vulnerability can only be exploited if
+	    the attacker has gained control of the device model qemu via another
+	    vulnerability.</p>
+	  <p>Privilege escalation, host crash (Denial of Service), and leaked
+	    information all cannot be excluded.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <freebsdpr>ports/205841</freebsdpr>
+      <url>http://xenbits.xen.org/xsa/advisory-166.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-17</discovery>
+      <entry>2016-01-06</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="e839ca04-b40d-11e5-9728-002590263bf5">
+    <topic>xen-kernel -- information leak in legacy x86 FPU/XMM initialization</topic>
+    <affects>
+      <package>
+	<name>xen-kernel</name>
+	<range><lt>4.5.2_1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The Xen Project reports:</p>
+	<blockquote cite="http://xenbits.xen.org/xsa/advisory-165.html">
+	  <p>When XSAVE/XRSTOR are not in use by Xen to manage guest extended
+	    register state, the initial values in the FPU stack and XMM
+	    registers seen by the guest upon first use are those left there by
+	    the previous user of those registers.</p>
+	  <p>A malicious domain may be able to leverage this to obtain sensitive
+	    information such as cryptographic keys from another domain.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8555</cvename>
+      <freebsdpr>ports/205841</freebsdpr>
+      <url>http://xenbits.xen.org/xsa/advisory-165.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-17</discovery>
+      <entry>2016-01-06</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="5d1d4473-b40d-11e5-9728-002590263bf5">
+    <topic>xen-tools -- libxl leak of pv kernel and initrd on error</topic>
+    <affects>
+      <package>
+	<name>xen-tools</name>
+	<range><ge>4.1</ge><lt>4.5.2_1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The Xen Project reports:</p>
+	<blockquote cite="http://xenbits.xen.org/xsa/advisory-160.html">
+	  <p>When constructing a guest which is configured to use a PV
+	    bootloader which runs as a userspace process in the toolstack domain
+	    (e.g. pygrub) libxl creates a mapping of the files to be used as
+	    kernel and initial ramdisk when building the guest domain.</p>
+	  <p>However if building the domain subsequently fails these mappings
+	    would not be released leading to a leak of virtual address space in
+	    the calling process, as well as preventing the recovery of the
+	    temporary disk files containing the kernel and initial ramdisk.</p>
+	  <p>For toolstacks which manage multiple domains within the same
+	    process, an attacker who is able to repeatedly start a suitable
+	    domain (or many such domains) can cause an out-of-memory condition in the
+	    toolstack process, leading to a denial of service.</p>
+	  <p>Under the same circumstances an attacker can also cause files to
+	    accumulate on the toolstack domain filesystem (usually under /var in
+	    dom0) used to temporarily store the kernel and initial ramdisk,
+	    perhaps leading to a denial of service against arbitrary other
+	    services using that filesystem.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8341</cvename>
+      <freebsdpr>ports/205841</freebsdpr>
+      <url>http://xenbits.xen.org/xsa/advisory-160.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-08</discovery>
+      <entry>2016-01-06</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="bcad3faa-b40c-11e5-9728-002590263bf5">
+    <topic>xen-kernel -- XENMEM_exchange error handling issues</topic>
+    <affects>
+      <package>
+	<name>xen-kernel</name>
+	<range><lt>4.5.2_1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The Xen Project reports:</p>
+	<blockquote cite="http://xenbits.xen.org/xsa/advisory-159.html">
+	  <p>Error handling in the operation may involve handing back pages to
+	    the domain. This operation may fail when in parallel the domain gets
+	    torn down. So far this failure unconditionally resulted in the host
+	    being brought down due to an internal error being assumed. This is
+	    CVE-2015-8339.</p>
+	  <p>Furthermore error handling so far wrongly included the release of a
+	    lock. That lock, however, was either not acquired or already released
+	    on all paths leading to the error handling sequence. This is
+	    CVE-2015-8340.</p>
+	  <p>A malicious guest administrator may be able to deny service by
+	    crashing the host or causing a deadlock.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8339</cvename>
+      <cvename>CVE-2015-8340</cvename>
+      <freebsdpr>ports/205841</freebsdpr>
+      <url>http://xenbits.xen.org/xsa/advisory-159.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-08</discovery>
+      <entry>2016-01-06</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="b65e4914-b3bc-11e5-8255-5453ed2e2b49">
+    <topic>tiff -- out-of-bounds read in CIE Lab image format</topic>
+    <affects>
+      <package>
+	<name>tiff</name>
+	<range><le>4.0.6</le></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>zzf of Alibaba discovered an out-of-bounds vulnerability in the code
+	  processing the LogLUV and CIE Lab image format files. An attacker
+	  could create a specially-crafted TIFF file that could cause libtiff
+	  to crash.</p>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8683</cvename>
+      <mlist>http://www.openwall.com/lists/oss-security/2015/12/25/2</mlist>
+    </references>
+    <dates>
+      <discovery>2015-12-25</discovery>
+      <entry>2016-01-05</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="bd349f7a-b3b9-11e5-8255-5453ed2e2b49">
+    <topic>tiff -- out-of-bounds read in tif_getimage.c</topic>
+    <affects>
+      <package>
+	<name>tiff</name>
+	<range><le>4.0.6</le></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>LMX of Qihoo 360 Codesafe Team discovered an out-of-bounds read in
+	  tif_getimage.c. An attacker could create a specially-crafted TIFF
+	  file that could cause libtiff to crash.</p>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8665</cvename>
+      <mlist>http://www.openwall.com/lists/oss-security/2015/12/24/2</mlist>
+    </references>
+    <dates>
+      <discovery>2015-12-24</discovery>
+      <entry>2016-01-05</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="86c3c66e-b2f5-11e5-863a-b499baebfeaf">
+    <topic>unzip -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>unzip</name>
+	<range><lt>6.0_7</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Gustavo Grieco reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/09/07/4">
+	 <p>Two issues were found in unzip 6.0:</p>
+	 <p> * A heap overflow triggered by unzipping a file with password
+	    (e.g unzip -p -P x sigsegv.zip).</p>
+	 <p> * A denegation of service with a file that never finishes unzipping
+	    (e.g. unzip sigxcpu.zip).</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.openwall.com/lists/oss-security/2015/09/07/4</url>
+      <freebsdpr>ports/204413</freebsdpr>
+      <cvename>CVE-2015-7696</cvename>
+      <cvename>CVE-2015-7697</cvename>
+    </references>
+    <dates>
+      <discovery>2015-09-26</discovery>
+      <entry>2016-01-04</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="bb961ff3-b3a4-11e5-8255-5453ed2e2b49">
+    <topic>cacti -- SQL injection vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>cacti</name>
+	<range><le>0.8.8f_1</le></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>NVD reports:</p>
+	<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-8369">
+	  <p>SQL injection vulnerability in include/top_graph_header.php in
+	    Cacti 0.8.8f and earlier allows remote attackers to execute arbitrary
+	    SQL commands via the rra_id parameter in a properties action to
+	    graph.php.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8369</cvename>
+      <url>http://bugs.cacti.net/view.php?id=2646</url>
+      <url>http://svn.cacti.net/viewvc?view=rev&amp;revision=7767</url>
+      <mlist>http://seclists.org/fulldisclosure/2015/Dec/8</mlist>
+    </references>
+    <dates>
+      <discovery>2015-12-05</discovery>
+      <entry>2016-01-05</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="59e7eb28-b309-11e5-af83-80ee73b5dcf5">
+    <topic>kea -- unexpected termination while handling a malformed packet</topic>
+    <affects>
+      <package>
+	<name>kea</name>
+	<range><ge>0.9.2</ge><lt>1.0.0</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>ISC Support reports:</p>
+	<blockquote cite="https://kb.isc.org/article/AA-01318/0/CVE-2015-8373-ISC-Kea%3A-unexpected-termination-while-handling-a-malformed-packet.html">
+	  <p>ISC Kea may terminate unexpectedly (crash) while handling
+	    a malformed client packet.  Related defects in the kea-dhcp4
+	    and kea-dhcp6 servers can cause the server to crash during
+	    option processing if a client sends a malformed packet.
+	    An attacker sending a crafted malformed packet can cause
+	    an ISC Kea server providing DHCP services to IPv4 or IPv6
+	    clients to exit unexpectedly.</p>
+	  <ul>
+	    <li><p>The kea-dhcp4 server is vulnerable only in versions
+		  0.9.2 and 1.0.0-beta, and furthermore only when logging
+		  at debug level 40 or higher.  Servers running kea-dhcp4
+		  versions 0.9.1 or lower, and servers which are not
+		  logging or are logging at debug level 39 or below are
+		  not vulnerable.</p></li>
+	    <li><p>The kea-dhcp6 server is vulnerable only in versions
+		  0.9.2 and 1.0.0-beta, and furthermore only when
+		  logging at debug level 45 or higher.  Servers running
+		  kea-dhcp6 versions 0.9.1 or lower, and servers
+		  which are not logging or are logging at debug level 44
+		  or below are not vulnerable.</p></li>
+	  </ul>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8373</cvename>
+      <url>https://kb.isc.org/article/AA-01318/0/CVE-2015-8373-ISC-Kea%3A-unexpected-termination-while-handling-a-malformed-packet.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-15</discovery>
+      <entry>2016-01-04</entry>
+      <modified>2016-01-05</modified>
+    </dates>
+  </vuln>
+
+  <vuln vid="84dc49b0-b267-11e5-8a5b-00262d5ed8ee">
+    <topic>mini_httpd -- buffer overflow via snprintf</topic>
+    <affects>
+      <package>
+	<name>mini_httpd</name>
+	<range><lt>1.23</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>ACME Updates reports:</p>
+	<blockquote cite="https://cxsecurity.com/acveshow/CVE-2015-1548">
+	  <p>mini_httpd 1.21 and earlier allows remote attackers to obtain
+	    sensitive information from process memory via an HTTP request with
+	    a long protocol string, which triggers an incorrect response size
+	    calculation and an out-of-bounds read.</p>
+	  <p>(rene) ACME, the author, claims that the vulnerability is fixed
+	    *after* version 1.22, released on 2015-12-28</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-1548</cvename>
+      <url>https://cxsecurity.com/cveshow/CVE-2015-1548</url>
+      <url>http://acme.com/updates/archive/192.html</url>
+    </references>
+    <dates>
+      <discovery>2015-02-10</discovery>
+      <entry>2016-01-03</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="1384f2fd-b1be-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerability in Rocker switch emulation</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><ge>0</ge></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><ge>0</ge></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/12/28/6">
+	  <p>Qemu emulator built with the Rocker switch emulation support is
+	    vulnerable to an off-by-one error. It happens while processing
+	    transmit(tx) descriptors in 'tx_consume' routine, if a descriptor
+	    was to have more than allowed (ROCKER_TX_FRAGS_MAX=16) fragments.
+	    </p>
+	  <p>A privileged user inside guest could use this flaw to cause memory
+	    leakage on the host or crash the Qemu process instance resulting in
+	    DoS issue.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8701</cvename>
+      <freebsdpr>ports/205813</freebsdpr>
+      <freebsdpr>ports/205814</freebsdpr>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/28/6</url>
+      <url>https://lists.gnu.org/archive/html/qemu-devel/2015-12/msg04629.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-28</discovery>
+      <entry>2016-01-03</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="152acff3-b1bd-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerability in Q35 chipset emulation</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><lt>2.5.0</lt></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.5.50.g20151224</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/12/24/1">
+	  <p>Qemu emulator built with the Q35 chipset based pc system emulator
+	    is vulnerable to a heap based buffer overflow. It occurs during VM
+	    guest migration, as more(16 bytes) data is moved into allocated
+	    (8 bytes) memory area.</p>
+	  <p>A privileged guest user could use this issue to corrupt the VM
+	    guest image, potentially leading to a DoS. This issue affects q35
+	    machine types.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8666</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/24/1</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=d9a3b33d2c9f996537b7f1d0246dee2d0120cefb</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/d9a3b33d2c9f996537b7f1d0246dee2d0120cefb</url>
+    </references>
+    <dates>
+      <discovery>2015-11-19</discovery>
+      <entry>2016-01-03</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="62ab8707-b1bc-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerability in Human Monitor Interface support</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><ge>0</ge></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><ge>0</ge></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/12/22/8">
+	  <p>Qemu emulator built with the Human Monitor Interface(HMP) support
+	    is vulnerable to an OOB write issue. It occurs while processing
+	    'sendkey' command in hmp_sendkey routine, if the command argument is
+	    longer than the 'keyname_buf' buffer size.</p>
+	  <p>A user/process could use this flaw to crash the Qemu process
+	    instance resulting in DoS.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8619</cvename>
+      <freebsdpr>ports/205813</freebsdpr>
+      <freebsdpr>ports/205814</freebsdpr>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/22/8</url>
+      <url>https://lists.gnu.org/archive/html/qemu-devel/2015-12/msg02930.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-23</discovery>
+      <entry>2016-01-03</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="b3f9f8ef-b1bb-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerability in MegaRAID SAS HBA emulation</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><ge>0</ge></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><ge>0</ge></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/12/21/7">
+	  <p>Qemu emulator built with the SCSI MegaRAID SAS HBA emulation
+	    support is vulnerable to a stack buffer overflow issue. It occurs
+	    while processing the SCSI controller's CTRL_GET_INFO command. A
+	    privileged guest user could use this flaw to crash the Qemu process
+	    instance resulting in DoS.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8613</cvename>
+      <freebsdpr>ports/205813</freebsdpr>
+      <freebsdpr>ports/205814</freebsdpr>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/21/7</url>
+      <url>https://lists.gnu.org/archive/html/qemu-devel/2015-12/msg03737.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-21</discovery>
+      <entry>2016-01-03</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="9ad8993e-b1ba-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerability in VMWARE VMXNET3 NIC support</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><ge>0</ge></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><ge>0</ge></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/12/15/4">
+	  <p>Qemu emulator built with a VMWARE VMXNET3 paravirtual NIC emulator
+	    support is vulnerable to a memory leakage flaw. It occurs when a
+	    guest repeatedly tries to activate the vmxnet3 device.</p>
+	  <p>A privileged guest user could use this flaw to leak host memory,
+	    resulting in DoS on the host.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8567</cvename>
+      <cvename>CVE-2015-8568</cvename>
+      <freebsdpr>ports/205813</freebsdpr>
+      <freebsdpr>ports/205814</freebsdpr>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/15/4</url>
+      <url>https://lists.gnu.org/archive/html/qemu-devel/2015-12/msg02299.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-15</discovery>
+      <entry>2016-01-03</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="60cb2055-b1b8-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerability in USB EHCI emulation support</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><ge>0</ge></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.5.50.g20151224</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/12/14/9">
+	  <p>Qemu emulator built with the USB EHCI emulation support is
+	    vulnerable to an infinite loop issue. It occurs during communication
+	    between host controller interface(EHCI) and a respective device
+	    driver. These two communicate via a isochronous transfer descriptor
+	    list(iTD) and an infinite loop unfolds if there is a closed loop in
+	    this list.</p>
+	  <p>A privileges user inside guest could use this flaw to consume
+	    excessive CPU cycles &amp; resources on the host.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8558</cvename>
+      <freebsdpr>ports/205814</freebsdpr>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/14/9</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=156a2e4dbffa85997636a7a39ef12da6f1b40254</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/156a2e4dbffa85997636a7a39ef12da6f1b40254</url>
+    </references>
+    <dates>
+      <discovery>2015-12-14</discovery>
+      <entry>2016-01-03</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="3fb06284-b1b7-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerability in MSI-X support</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><lt>2.5.0</lt></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.5.50.g20151224</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/12/14/2">
+	  <p>Qemu emulator built with the PCI MSI-X support is vulnerable to
+	    null pointer dereference issue. It occurs when the controller
+	    attempts to write to the pending bit array(PBA) memory region.
+	    Because the MSI-X MMIO support did not define the .write method.</p>
+	  <p>A privileges used inside guest could use this flaw to crash the
+	    Qemu process resulting in DoS issue.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-7549</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/14/2</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=43b11a91dd861a946b231b89b7542856ade23d1b</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/43b11a91dd861a946b231b89b7542856ade23d1b</url>
+    </references>
+    <dates>
+      <discovery>2015-06-26</discovery>
+      <entry>2016-01-03</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="67feba97-b1b5-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerability in VNC</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><lt>2.5.0</lt></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.5.50.g20151224</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/12/08/4">
+	  <p>Qemu emulator built with the VNC display driver support is
+	    vulnerable to an arithmetic exception flaw. It occurs on the VNC
+	    server side while processing the 'SetPixelFormat' messages from a
+	    client.</p>
+	  <p>A privileged remote client could use this flaw to crash the guest
+	    resulting in DoS.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8504</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/08/4</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commitdiff;h=4c65fed8bdf96780735dbdb92a8bd0d6b6526cc3</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/4c65fed8bdf96780735dbdb92a8bd0d6b6526cc3</url>
+    </references>
+    <dates>
+      <discovery>2015-12-08</discovery>
+      <entry>2016-01-03</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="405446f4-b1b3-11e5-9728-002590263bf5">
+    <topic>qemu and xen-tools -- denial of service vulnerabilities in AMD PC-Net II NIC support</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><lt>2.5.0</lt></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.5.50.g20151224</lt></range>
+      </package>
+      <package>
+	<name>xen-tools</name>
+	<range><lt>4.5.2_1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/11/30/2">
+	  <p>Qemu emulator built with the AMD PC-Net II Ethernet Controller
+	    support is vulnerable to a heap buffer overflow flaw. While
+	    receiving packets in the loopback mode, it appends CRC code to the
+	    receive buffer. If the data size given is same as the receive buffer
+	    size, the appended CRC code overwrites 4 bytes beyond this
+	    's-&gt;buffer' array.</p>
+	  <p>A privileged(CAP_SYS_RAWIO) user inside guest could use this flaw
+	    to crash the Qemu instance resulting in DoS or potentially execute
+	    arbitrary code with privileges of the Qemu process on the host.</p>
+	</blockquote>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/11/30/3">
+	  <p>The AMD PC-Net II emulator(hw/net/pcnet.c), while receiving packets
+	    from a remote host(non-loopback mode), fails to validate the
+	    received data size, thus resulting in a buffer overflow issue. It
+	    could potentially lead to arbitrary code execution on the host, with
+	    privileges of the Qemu process. It requires the guest NIC to have
+	    larger MTU limit.</p>
+	  <p>A remote user could use this flaw to crash the guest instance
+	    resulting in DoS or potentially execute arbitrary code on a remote
+	    host with privileges of the Qemu process.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-7504</cvename>
+      <cvename>CVE-2015-7512</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2015/11/30/2</url>
+      <url>http://www.openwall.com/lists/oss-security/2015/11/30/3</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=837f21aacf5a714c23ddaadbbc5212f9b661e3f7</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=8b98a2f07175d46c3f7217639bd5e03f2ec56343</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/837f21aacf5a714c23ddaadbbc5212f9b661e3f7</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/8b98a2f07175d46c3f7217639bd5e03f2ec56343</url>
+      <url>http://xenbits.xen.org/xsa/advisory-162.html</url>
+    </references>
+    <dates>
+      <discovery>2015-11-30</discovery>
+      <entry>2016-01-03</entry>
+      <modified>2016-01-06</modified>
+    </dates>
+  </vuln>
+
+  <vuln vid="b56fe6bb-b1b1-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerabilities in eepro100 NIC support</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><ge>0</ge></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><ge>0</ge></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/11/25/3">
+	  <p>Qemu emulator built with the i8255x (PRO100) emulation support is
+	    vulnerable to an infinite loop issue. It could occur while
+	    processing a chain of commands located in the Command Block List
+	    (CBL). Each Command Block(CB) points to the next command in the
+	    list. An infinite loop unfolds if the link to the next CB points
+	    to the same block or there is a closed loop in the chain.</p>
+	  <p>A privileged(CAP_SYS_RAWIO) user inside guest could use this flaw
+	    to crash the Qemu instance resulting in DoS.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8345</cvename>
+      <freebsdpr>ports/205813</freebsdpr>
+      <freebsdpr>ports/205814</freebsdpr>
+      <url>http://www.openwall.com/lists/oss-security/2015/11/25/3</url>
+      <url>https://lists.gnu.org/archive/html/qemu-devel/2015-10/msg03911.html</url>
+    </references>
+    <dates>
+      <discovery>2015-10-16</discovery>
+      <entry>2016-01-03</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="42cbd1e8-b152-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerability in virtio-net support</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><lt>2.4.1</lt></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.5.50.g20151224</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/09/18/5">
+	  <p>Qemu emulator built with the Virtual Network Device(virtio-net)
+	    support is vulnerable to a DoS issue. It could occur while receiving
+	    large packets over the tuntap/macvtap interfaces and when guest's
+	    virtio-net driver did not support big/mergeable receive buffers.</p>
+	  <p>An attacker on the local network could use this flaw to disable
+	    guest's networking by sending a large number of jumbo frames to the
+	    guest, exhausting all receive buffers and thus leading to a DoS
+	    situation.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-7295</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2015/09/18/5</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=696317f1895e836d53b670c7b77b7be93302ba08</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/0cf33fb6b49a19de32859e2cdc6021334f448fb3</url>
+    </references>
+    <dates>
+      <discovery>2015-09-18</discovery>
+      <entry>2016-01-02</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="6aa3322f-b150-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerabilities in NE2000 NIC support</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><lt>2.4.0.1</lt></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.5.50.g20151224</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/09/15/2">
+	  <p>Qemu emulator built with the NE2000 NIC emulation support is
+	    vulnerable to an infinite loop issue. It could occur when receiving
+	    packets over the network.</p>
+	  <p>A privileged user inside guest could use this flaw to crash the
+	    Qemu instance resulting in DoS.</p>
+	</blockquote>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/09/15/3">
+	  <p>Qemu emulator built with the NE2000 NIC emulation support is
+	    vulnerable to a heap buffer overflow issue. It could occur when
+	    receiving packets over the network.</p>
+	  <p>A privileged user inside guest could use this flaw to crash the
+	    Qemu instance or potentially execute arbitrary code on the host.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-5278</cvename>
+      <cvename>CVE-2015-5279</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2015/09/15/2</url>
+      <url>http://www.openwall.com/lists/oss-security/2015/09/15/3</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=5a1ccdfe44946e726b4c6fda8a4493b3931a68c1</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/737d2b3c41d59eb8f94ab7eb419b957938f24943</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=7aa2bcad0ca837dd6d4bf4fa38a80314b4a6b755</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/9bbdbc66e5765068dce76e9269dce4547afd8ad4</url>
+    </references>
+    <dates>
+      <discovery>2015-09-15</discovery>
+      <entry>2016-01-02</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="bbc97005-b14e-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerability in IDE disk/CD/DVD-ROM emulation</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><lt>2.4.1</lt></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.5.50.g20151224</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/09/10/1">
+	  <p>Qemu emulator built with the IDE disk and CD/DVD-ROM emulation
+	    support is vulnerable to a divide by zero issue. It could occur
+	    while executing an IDE command WIN_READ_NATIVE_MAX to determine
+	    the maximum size of a drive.</p>
+	  <p>A privileged user inside guest could use this flaw to crash the
+	    Qemu instance resulting in DoS.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-6855</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2015/09/10/1</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=63d761388d6fea994ca498c6e7a210851a99ad93</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/d9033e1d3aa666c5071580617a57bd853c5d794a</url>
+    </references>
+    <dates>
+      <discovery>2015-09-09</discovery>
+      <entry>2016-01-02</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="10bf8eed-b14d-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerability in e1000 NIC support</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><lt>2.4.0.1</lt></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.5.50.g20151224</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/09/04/4">
+	  <p>Qemu emulator built with the e1000 NIC emulation support is
+	    vulnerable to an infinite loop issue. It could occur while
+	    processing transmit descriptor data when sending a network packet.
+	    </p>
+	  <p>A privileged user inside guest could use this flaw to crash the
+	    Qemu instance resulting in DoS.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-6815</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2015/09/04/4</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=3a56af1fbc17ff453f6e90fb08ce0c0e6fd0b61b</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/b947ac2bf26479e710489739c465c8af336599e7</url>
+    </references>
+    <dates>
+      <discovery>2015-09-04</discovery>
+      <entry>2016-01-02</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="8a560bcf-b14b-11e5-9728-002590263bf5">
+    <topic>qemu -- denial of service vulnerability in VNC</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><lt>2.1.0</lt></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.2.50.g20141230</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/09/02/7">
+	  <p>Qemu emulator built with the VNC display driver is vulnerable to an
+	    infinite loop issue. It could occur while processing a
+	    CLIENT_CUT_TEXT message with specially crafted payload message.</p>
+	  <p>A privileged guest user could use this flaw to crash the Qemu
+	    process on the host, resulting in DoS.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-5239</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2015/09/02/7</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=f9a70e79391f6d7c2a912d785239ee8effc1922d</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/f9a70e79391f6d7c2a912d785239ee8effc1922d</url>
+    </references>
+    <dates>
+      <discovery>2014-06-30</discovery>
+      <entry>2016-01-02</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="2b3b4c27-b0c7-11e5-8d13-bc5ff45d0f28">
+    <topic>qemu -- buffer overflow vulnerability in VNC</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><lt>2.4.0.1</lt></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.4.50.g20151011</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/08/21/6">
+	  <p>Qemu emulator built with the VNC display driver support is
+	    vulnerable to a buffer overflow flaw leading to a heap memory
+	    corruption issue. It could occur while refreshing the server
+	    display surface via routine vnc_refresh_server_surface().</p>
+	  <p>A privileged guest user could use this flaw to corrupt the heap
+	    memory and crash the Qemu process instance OR potentially use it
+	    to execute arbitrary code on the host.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-5225</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2015/08/21/6</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=efec4dcd2552e85ed57f276b58f09fc385727450</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/eb8934b0418b3b1d125edddc4fc334a54334a49b</url>
+    </references>
+    <dates>
+      <discovery>2015-08-17</discovery>
+      <entry>2016-01-01</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="21e5abe3-b0c6-11e5-8d13-bc5ff45d0f28">
+    <topic>qemu -- buffer overflow vulnerability in virtio-serial message exchanges</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><lt>2.4.0</lt></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.4.50.g20150814</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/08/06/3">
+	  <p>Qemu emulator built with the virtio-serial vmchannel support is
+	    vulnerable to a buffer overflow issue. It could occur while
+	    exchanging virtio control messages between guest and the host.</p>
+	  <p>A malicious guest could use this flaw to corrupt few bytes of Qemu
+	    memory area, potentially crashing the Qemu process.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-5745</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2015/08/06/5</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=7882080388be5088e72c425b02223c02e6cb4295</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/7882080388be5088e72c425b02223c02e6cb4295</url>
+    </references>
+    <dates>
+      <discovery>2015-08-06</discovery>
+      <entry>2016-01-01</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="a267cd6c-b0c4-11e5-8d13-bc5ff45d0f28">
+    <topic>qemu -- stack buffer overflow while parsing SCSI commands</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><lt>2.4.0</lt></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.4.50.g20150814</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Prasad J Pandit, Red Hat Product Security Team, reports:</p>
+	<blockquote cite="http://openwall.com/lists/oss-security/2015/07/23/6">
+	  <p>Qemu emulator built with the SCSI device emulation support is
+	    vulnerable to a stack buffer overflow issue. It could occur while
+	    parsing SCSI command descriptor block with an invalid operation
+	    code.</p>
+	  <p>A privileged(CAP_SYS_RAWIO) user inside guest could use this flaw
+	    to crash the Qemu instance resulting in DoS.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-5158</cvename>
+      <url>http://openwall.com/lists/oss-security/2015/07/23/6</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=c170aad8b057223b1139d72e5ce7acceafab4fa9</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/c170aad8b057223b1139d72e5ce7acceafab4fa9</url>
+    </references>
+    <dates>
+      <discovery>2015-07-23</discovery>
+      <entry>2016-01-01</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="aea8d90e-b0c1-11e5-8d13-bc5ff45d0f28">
+    <topic>qemu -- code execution on host machine</topic>
+    <affects>
+      <package>
+	<name>qemu</name>
+	<name>qemu-devel</name>
+	<range><lt>2.4.0</lt></range>
+      </package>
+      <package>
+	<name>qemu-sbruno</name>
+	<name>qemu-user-static</name>
+	<range><lt>2.4.50.g20150814</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Petr Matousek of Red Hat Inc. reports:</p>
+	<blockquote cite="http://openwall.com/lists/oss-security/2015/06/17/5">
+	  <p>Due converting PIO to the new memory read/write api we no longer
+	    provide separate I/O region lenghts for read and write operations.
+	    As a result, reading from PIT Mode/Command register will end with
+	    accessing pit-&gt;channels with invalid index and potentially cause
+	    memory corruption and/or minor information leak.</p>
+	  <p>A privileged guest user in a guest with QEMU PIT emulation enabled
+	    could potentially (tough unlikely) use this flaw to execute
+	    arbitrary code on the host with the privileges of the hosting QEMU
+	    process.</p>
+	  <p>Please note that by default QEMU/KVM guests use in-kernel (KVM) PIT
+	    emulation and are thus not vulnerable to this issue.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-3214</cvename>
+      <url>http://openwall.com/lists/oss-security/2015/06/17/5</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=d4862a87e31a51de9eb260f25c9e99a75efe3235</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/d4862a87e31a51de9eb260f25c9e99a75efe3235</url>
+    </references>
+    <dates>
+      <discovery>2015-06-17</discovery>
+      <entry>2016-01-01</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="4b3a7e70-afce-11e5-b864-14dae9d210b8">
+    <topic>mono -- DoS and code execution</topic>
+    <affects>
+      <package>
+	<name>mono</name>
+	<range><lt>4.2</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>NCC Group reports:</p>
+	<blockquote cite="http://seclists.org/oss-sec/2015/q4/543">
+	  <p>An attacker who can cause a carefully-chosen string to be
+	    converted to a floating-point number can cause a crash and potentially
+	    induce arbitrary code execution.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://seclists.org/oss-sec/2015/q4/543</url>
+      <cvename>CVE-2009-0689</cvename>
+    </references>
+    <dates>
+      <discovery>2015-12-19</discovery>
+      <entry>2015-12-31</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="84c7ea88-bf04-4bdc-973b-36744bf540ab">
+    <topic>flash -- multiple vulnabilities</topic>
+    <affects>
+      <package>
+	<name>linux-c6-flashplugin</name>
+	<name>linux-f10-flashplugin</name>
+	<name>linux-c6_64-flashplugin</name>
+	<range><lt>11.2r202.559</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Adobe reports:</p>
+	<blockquote cite="https://helpx.adobe.com/security/products/flash-player/apsb16-01.html">
+	  <p>These updates resolve a type confusion vulnerability that
+	    could lead to code execution (CVE-2015-8644).</p>
+
+	  <p>These updates resolve an integer overflow vulnerability
+	    that could lead to code execution (CVE-2015-8651).</p>
+
+	  <p>These updates resolve use-after-free vulnerabilities that
+	    could lead to code execution (CVE-2015-8634, CVE-2015-8635,
+	    CVE-2015-8638, CVE-2015-8639, CVE-2015-8640, CVE-2015-8641,
+	    CVE-2015-8642, CVE-2015-8643, CVE-2015-8646, CVE-2015-8647,
+	    CVE-2015-8648, CVE-2015-8649, CVE-2015-8650).</p>
+
+	  <p>These updates resolve memory corruption vulnerabilities
+	    that could lead to code execution (CVE-2015-8459,
+	    CVE-2015-8460, CVE-2015-8636, CVE-2015-8645).</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8459</cvename>
+      <cvename>CVE-2015-8460</cvename>
+      <cvename>CVE-2015-8634</cvename>
+      <cvename>CVE-2015-8636</cvename>
+      <cvename>CVE-2015-8638</cvename>
+      <cvename>CVE-2015-8639</cvename>
+      <cvename>CVE-2015-8640</cvename>
+      <cvename>CVE-2015-8641</cvename>
+      <cvename>CVE-2015-8642</cvename>
+      <cvename>CVE-2015-8643</cvename>
+      <cvename>CVE-2015-8644</cvename>
+      <cvename>CVE-2015-8645</cvename>
+      <cvename>CVE-2015-8646</cvename>
+      <cvename>CVE-2015-8647</cvename>
+      <cvename>CVE-2015-8648</cvename>
+      <cvename>CVE-2015-8649</cvename>
+      <cvename>CVE-2015-8650</cvename>
+      <cvename>CVE-2015-8651</cvename>
+      <url>https://helpx.adobe.com/security/products/flash-player/apsb16-01.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-28</discovery>
+      <entry>2015-12-29</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="b808c3a8-ae30-11e5-b864-14dae9d210b8">
+    <topic>inspircd -- DoS</topic>
+    <affects>
+      <package>
+	<name>inspircd</name>
+	<range><lt>2.0.19</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Inspircd reports:</p>
+	<blockquote cite="http://www.inspircd.org/2015/04/16/v2019-released.html">
+	  <p>This release fixes the issues discovered since 2.0.18,
+	    containing multiple important stability and correctness related
+	    improvements, including a fix for a bug which allowed malformed DNS
+	    records to cause netsplits on a network.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.inspircd.org/2015/04/16/v2019-released.html</url>
+      <url>https://github.com/inspircd/inspircd/commit/6058483d9fbc1b904d5ae7cfea47bfcde5c5b559</url>
+      <url>http://comments.gmane.org/gmane.comp.security.oss.general/18464</url>
+      <cvename>CVE-2015-8702</cvename>
+    </references>
+    <dates>
+      <discovery>2015-04-16</discovery>
+      <entry>2015-12-29</entry>
+      <modified>2015-12-29</modified>
+    </dates>
+  </vuln>
+
+  <vuln vid="4bae544d-06a3-4352-938c-b3bcbca89298">
+    <topic>ffmpeg -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>libav</name>
+	<!-- no known fixed version -->
+	<range><ge>0</ge></range>
+      </package>
+      <package>
+	<name>gstreamer-ffmpeg</name>
+	<!-- gst-ffmpeg-0.10.13 has libav-0.7.2 (0.7.7 in freebsd port) -->
+	<!-- no known fixed version -->
+	<range><ge>0</ge></range>
+      </package>
+      <package>
+	<name>handbrake</name>
+	<!-- handbrake-0.10.2 has libav-10.1 -->
+	<!-- no known fixed version -->
+	<range><ge>0</ge></range>
+      </package>
+      <package>
+	<name>ffmpeg</name>
+	<range><ge>2.8,1</ge><lt>2.8.4,1</lt></range>
+	<range><lt>2.7.4,1</lt></range>
+      </package>
+      <package>
+	<name>ffmpeg26</name>
+	<range><lt>2.6.6</lt></range>
+      </package>
+      <package>
+	<name>ffmpeg25</name>
+	<range><lt>2.5.9</lt></range>
+      </package>
+      <package>
+	<name>ffmpeg24</name>
+	<range><lt>2.4.12</lt></range>
+      </package>
+      <package>
+	<name>ffmpeg-devel</name>
+	<name>ffmpeg23</name>
+	<name>ffmpeg2</name>
+	<name>ffmpeg1</name>
+	<name>ffmpeg-011</name>
+	<name>ffmpeg0</name>
+	<!-- no known fixed version -->
+	<range><ge>0</ge></range>
+      </package>
+      <package>
+	<name>avidemux</name>
+	<name>avidemux2</name>
+	<name>avidemux26</name>
+	<!-- avidemux-2.6.10 has ffmpeg-2.6.1 -->
+	<!-- no known fixed version -->
+	<range><ge>0</ge></range>
+      </package>
+      <package>
+	<name>kodi</name>
+	<!-- kodi-15.2 has ffmpeg-2.6.4 -->
+	<range><lt>16.0</lt></range>
+      </package>
+      <package>
+	<name>mplayer</name>
+	<name>mencoder</name>
+	<!-- mplayer-1.2.r20151219 has ffmpeg-2.8.3 -->
+	<range><lt>1.2.r20151219_1</lt></range>
+      </package>
+      <package>
+	<name>mythtv</name>
+	<name>mythtv-frontend</name>
+	<!-- mythtv-0.27.0.20140121 has ffmpeg-1.2.2+ (snapshot, f9c8726) -->
+	<!-- no known fixed version -->
+	<range><ge>0</ge></range>
+      </package>
+      <package>
+	<name>plexhometheater</name>
+	<!-- plexhometheater-1.4.1 has ffmpeg-0.10.2 fork -->
+	<!-- no known fixed version -->
+	<range><ge>0</ge></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>NVD reports:</p>
+	<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-8662">
+	  <p>The ff_dwt_decode function in libavcodec/jpeg2000dwt.c in
+	    FFmpeg before 2.8.4 does not validate the number of
+	    decomposition levels before proceeding with Discrete Wavelet
+	    Transform decoding, which allows remote attackers to cause a
+	    denial of service (out-of-bounds array access) or possibly
+	    have unspecified other impact via crafted JPEG 2000
+	    data.</p>
+	</blockquote>
+	<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-8663">
+	  <p>The ff_get_buffer function in libavcodec/utils.c in
+	    FFmpeg before 2.8.4 preserves width and height values after
+	    a failure, which allows remote attackers to cause a denial
+	    of service (out-of-bounds array access) or possibly have
+	    unspecified other impact via a crafted .mov file.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8662</cvename>
+      <cvename>CVE-2015-8663</cvename>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=75422280fbcdfbe9dc56bde5525b4d8b280f1bc5</url>
+      <url>https://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=abee0a1c60612e8638640a8a3738fffb65e16dbf</url>
+      <url>https://ffmpeg.org/security.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-20</discovery>
+      <entry>2015-12-28</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="10f7bc76-0335-4a88-b391-0b05b3a8ce1c">
+    <topic>NSS -- MD5 downgrade in TLS 1.2 signatures</topic>
+    <affects>
+      <package>
+	<name>nss</name>
+	<name>linux-c6-nss</name>
+	<range><ge>3.20</ge><lt>3.20.2</lt></range>
+	<range><lt>3.19.2.2</lt></range>
+      </package>
+      <package>
+	<name>linux-firefox</name>
+	<range><lt>43.0.2,1</lt></range>
+      </package>
+      <package>
+	<name>linux-thunderbird</name>
+	<range><lt>38.5.1</lt></range>
+      </package>
+      <package>
+	<name>linux-seamonkey</name>
+	<range><lt>2.40</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The Mozilla Project reports:</p>
+	<blockquote cite="https://www.mozilla.org/en-US/security/advisories/mfsa2015-150/">
+	  <p>Security researcher Karthikeyan Bhargavan reported an
+	    issue in Network Security Services (NSS) where MD5
+	    signatures in the server signature within the TLS 1.2
+	    ServerKeyExchange message are still accepted. This is an
+	    issue since NSS has officially disallowed the accepting MD5
+	    as a hash algorithm in signatures since 2011. This issues
+	    exposes NSS based clients such as Firefox to theoretical
+	    collision-based forgery attacks.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-7575</cvename>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-150/</url>
+      <url>https://hg.mozilla.org/projects/nss/rev/94e1157f3fbb</url>
+    </references>
+    <dates>
+      <discovery>2015-12-22</discovery>
+      <entry>2015-12-28</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="88f75070-abcf-11e5-83d3-6805ca0b3d42">
+    <topic>phpMyAdmin -- path disclosure vulnerability</topic>
+    <affects>
+      <package>
+	<name>phpMyAdmin</name>
+	<range><ge>4.5.0</ge><lt>4.5.3.1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The phpMyAdmin development team reports:</p>
+	<blockquote cite="https://www.phpmyadmin.net/security/PMASA-2015-6/">
+	  <p>By calling some scripts that are part of phpMyAdmin in an
+	    unexpected way, it is possible to trigger phpMyAdmin to
+	    display a PHP error message which contains the full path of
+	    the directory where phpMyAdmin is installed.</p>
+	  <p>We consider these vulnerabilities to be non-critical.</p>
+	  <p>This path disclosure is possible on servers where the
+	    recommended setting of the PHP configuration directive
+	    display_errors is set to on, which is against the
+	    recommendations given in the PHP manual for a production
+	    server.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://www.phpmyadmin.net/security/PMASA-2015-6/</url>
+      <cvename>CVE-2015-8669</cvename>
+    </references>
+    <dates>
+      <discovery>2015-12-25</discovery>
+      <entry>2015-12-26</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="876768aa-ab1e-11e5-8a30-5453ed2e2b49">
+    <topic>dpkg -- stack-based buffer overflow</topic>
+    <affects>
+      <package>
+	<name>dpkg</name>
+	<range><lt>1.16.17</lt></range>
+	<range><lt>1.17.26</lt></range>
+	<range><lt>1.18.4</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Salvatore Bonaccorso reports:</p>
+	<blockquote cite="https://lists.debian.org/debian-security-announce/2015/msg00312.html">
+	  <p>Hanno Boeck discovered a stack-based buffer overflow in the
+	    dpkg-deb component of dpkg, the Debian package management system.
+	    This flaw could potentially lead to arbitrary code execution if a
+	    user or an automated system were tricked into processing a specially
+	    crafted Debian binary package (.deb) in the old style Debian binary
+	    package format.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-0860</cvename>
+      <url>http://openwall.com/lists/oss-security/2015/11/26/3</url>
+      <url>https://anonscm.debian.org/cgit/dpkg/dpkg.git/commit/?id=f1aac7d933819569bf6f347c3c0d5a64a90bbce0</url>
+    </references>
+    <dates>
+      <discovery>2015-11-26</discovery>
+      <entry>2015-12-25</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="e1b5318c-aa4d-11e5-8f5c-002590263bf5">
+    <topic>mantis -- information disclosure vulnerability</topic>
+    <affects>
+      <package>
+	<name>mantis</name>
+	<range><lt>1.2.19_1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Mantis reports:</p>
+	<blockquote cite="https://mantisbt.org/bugs/view.php?id=19873">
+	  <p>CVE-2015-5059: documentation in private projects can be seen by
+	    every user</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-5059</cvename>
+      <freebsdpr>ports/201106</freebsdpr>
+      <url>https://mantisbt.org/bugs/view.php?id=19873</url>
+      <url>http://openwall.com/lists/oss-security/2015/06/25/3</url>
+    </references>
+    <dates>
+      <discovery>2015-06-23</discovery>
+      <entry>2015-12-24</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="f36bbd66-aa44-11e5-8f5c-002590263bf5">
+    <topic>mediawiki -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>mediawiki123</name>
+	<range><lt>1.23.12</lt></range>
+      </package>
+      <package>
+	<name>mediawiki124</name>
+	<range><lt>1.24.5</lt></range>
+      </package>
+      <package>
+	<name>mediawiki125</name>
+	<range><lt>1.25.4</lt></range>
+      </package>
+      <package>
+	<name>mediawiki126</name>
+	<range><lt>1.26.1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>MediaWiki reports:</p>
+	<blockquote cite="https://lists.wikimedia.org/pipermail/mediawiki-announce/2015-December/000186.html">
+	  <p>(T117899) SECURITY: $wgArticlePath can no longer be set to relative
+	    paths that do not begin with a slash. This enabled trivial XSS
+	    attacks. Configuration values such as "http://my.wiki.com/wiki/$1"
+	    are fine, as are "/wiki/$1". A value such as "$1" or "wiki/$1" is
+	    not and will now throw an error.</p>
+	  <p>(T119309) SECURITY: Use hash_compare() for edit token comparison.
+	    </p>
+	  <p>(T118032) SECURITY: Don't allow cURL to interpret POST parameters
+	    starting with '@' as file uploads.</p>
+	  <p>(T115522) SECURITY: Passwords generated by User::randomPassword()
+	    can no longer be shorter than $wgMinimalPasswordLength.</p>
+	  <p>(T97897) SECURITY: Improve IP parsing and trimming. Previous
+	    behavior could result in improper blocks being issued.</p>
+	  <p>(T109724) SECURITY: Special:MyPage, Special:MyTalk,
+	    Special:MyContributions and related pages no longer use HTTP
+	    redirects and are now redirected by MediaWiki.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8622</cvename>
+      <cvename>CVE-2015-8623</cvename>
+      <cvename>CVE-2015-8624</cvename>
+      <cvename>CVE-2015-8625</cvename>
+      <cvename>CVE-2015-8626</cvename>
+      <cvename>CVE-2015-8627</cvename>
+      <cvename>CVE-2015-8628</cvename>
+      <url>https://lists.wikimedia.org/pipermail/mediawiki-announce/2015-December/000186.html</url>
+      <url>https://phabricator.wikimedia.org/T117899</url>
+      <url>https://phabricator.wikimedia.org/T119309</url>
+      <url>https://phabricator.wikimedia.org/T118032</url>
+      <url>https://phabricator.wikimedia.org/T115522</url>
+      <url>https://phabricator.wikimedia.org/T97897</url>
+      <url>https://phabricator.wikimedia.org/T109724</url>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/23/7</url>
+    </references>
+    <dates>
+      <discovery>2015-12-18</discovery>
+      <entry>2015-12-24</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="3b50881d-1860-4721-aab1-503290e23f6c">
+    <topic>Ruby -- unsafe tainted string vulnerability</topic>
+    <affects>
+      <package>
+	<name>ruby</name>
+	<range><ge>2.0.0,1</ge><lt>2.0.0.648,1</lt></range>
+	<range><ge>2.1.0,1</ge><lt>2.1.8,1</lt></range>
+	<range><ge>2.2.0,1</ge><lt>2.2.4,1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Ruby developer reports:</p>
+	<blockquote cite="https://www.ruby-lang.org/en/news/2015/12/16/unsafe-tainted-string-usage-in-fiddle-and-dl-cve-2015-7551/">
+	  <p>There is an unsafe tainted string vulnerability in Fiddle and DL.
+	    This issue was originally reported and fixed with CVE-2009-5147 in
+		DL, but reappeared after DL was reimplemented using Fiddle and
+		libffi.</p>
+	  <p>And, about DL, CVE-2009-5147 was fixed at Ruby 1.9.1, but not
+	    fixed at other branches, then rubies which bundled DL except Ruby
+		1.9.1 are still vulnerable.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+	  <url>https://www.ruby-lang.org/en/news/2015/12/16/unsafe-tainted-string-usage-in-fiddle-and-dl-cve-2015-7551/</url>
+	  <cvename>CVE-2015-7551</cvename>
+    </references>
+    <dates>
+      <discovery>2015-12-16</discovery>
+      <entry>2015-12-23</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="54075861-a95a-11e5-8b40-20cf30e32f6d">
+    <topic>Bugzilla security issues</topic>
+    <affects>
+      <package>
+	<name>bugzilla44</name>
+	<range><lt>4.4.11</lt></range>
+      </package>
+      <package>
+	<name>bugzilla50</name>
+	<range><lt>5.0.2</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Bugzilla Security Advisory</p>
+	<blockquote cite="https://www.bugzilla.org/security/4.2.15/">
+	  <p>During the generation of a dependency graph, the code for
+	    the HTML image map is generated locally if a local dot
+	    installation is used. With escaped HTML characters in a bug
+	    summary, it is possible to inject unfiltered HTML code in
+	    the map file which the CreateImagemap function generates.
+	    This could be used for a cross-site scripting attack.</p>
+	  <p>If an external HTML page contains a &lt;script&gt; element with
+	    its src attribute pointing to a buglist in CSV format, some
+	    web browsers incorrectly try to parse the CSV file as valid
+	    JavaScript code. As the buglist is generated based on the
+	    privileges of the user logged into Bugzilla, the external
+	    page could collect confidential data contained in the CSV
+	    file.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8508</cvename>
+      <cvename>CVE-2015-8509</cvename>
+      <url>https://bugzilla.mozilla.org/show_bug.cgi?id=1221518</url>
+      <url>https://bugzilla.mozilla.org/show_bug.cgi?id=1232785</url>
+    </references>
+    <dates>
+      <discovery>2015-12-22</discovery>
+      <entry>2015-12-23</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="d6c51737-a84b-11e5-8f5c-002590263bf5">
+    <topic>librsvg2 -- denial of service vulnerability</topic>
+    <affects>
+      <package>
+	<name>librsvg2</name>
+	<range><lt>2.40.12</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Adam Maris, Red Hat Product Security, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/12/21/5">
+	  <p>CVE-2015-7558: Stack exhaustion due to cyclic dependency causing to
+	    crash an application was found in librsvg2 while parsing SVG file.
+	    It has been fixed in 2.40.12 by many commits that has rewritten the
+	    checks for cyclic references.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-7558</cvename>
+      <freebsdpr>ports/205502</freebsdpr>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/21/5</url>
+      <url>https://bugzilla.redhat.com/1268243</url>
+    </references>
+    <dates>
+      <discovery>2015-10-02</discovery>
+      <entry>2015-12-22</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="da634091-a84a-11e5-8f5c-002590263bf5">
+    <topic>librsvg2 -- denial of service vulnerability</topic>
+    <affects>
+      <package>
+	<name>librsvg2</name>
+	<range><lt>2.40.7</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Adam Maris, Red Hat Product Security, reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/12/21/5">
+	  <p>CVE-2015-7557: Out-of-bounds heap read in librsvg2 was found when
+	    parsing SVG file.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-7557</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/21/5</url>
+      <url>https://git.gnome.org/browse/librsvg/commit/rsvg-shapes.c?id=40af93e6eb1c94b90c3b9a0b87e0840e126bb8df</url>
+    </references>
+    <dates>
+      <discovery>2015-02-06</discovery>
+      <entry>2015-12-22</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="9e7306b9-a5c3-11e5-b864-14dae9d210b8">
+    <topic>quassel -- remote denial of service</topic>
+    <affects>
+      <package>
+       <name>quassel</name>
+       <range><lt>0.12.2_1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+       <p>Pierre Schweitzer reports:</p>
+       <blockquote cite="http://www.openwall.com/lists/oss-security/2015/12/12/1">
+	 <p>Any client sending the command "/op *" in a query will
+	   cause the Quassel core to crash.</p>
+       </blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/12/1</url>
+      <cvename>CVE-2015-8547</cvename>
+    </references>
+    <dates>
+      <discovery>2015-11-22</discovery>
+      <entry>2015-12-18</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="f714b4c9-a6c1-11e5-88d7-047d7b492d07">
+    <topic>libvirt -- ACL bypass using ../ to access beyond storage pool</topic>
+    <affects>
+      <package>
+	<name>libvirt</name>
+	<range><ge>1.1.0</ge><lt>1.2.19_2</lt></range>
+	<range><ge>1.2.20</ge><lt>1.3.0</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Libvit development team reports:</p>
+	<blockquote cite="http://security.libvirt.org/2015/0004.html">
+	  <p>Various virStorageVol* API operate on user-supplied volume names by
+	    concatenating the volume name to the pool location. Note that the
+	    virStoragePoolListVolumes API, when used on a storage pool backed by
+	    a directory in a file system, will only list volumes immediately in
+	    that directory (there is no traversal into subdirectories). However,
+	    other APIs such as virStorageVolCreateXML were not checking if a
+	    potential volume name represented one of the volumes that could be
+	    returned by virStoragePoolListVolumes; because they were not rejecting
+	    the use of '/' in a volume name.</p>
+	  <p>Because no checking was done on volume names, a user could supply
+	    a potential volume name of something like '../../../etc/passwd' to
+	    attempt to access a file not belonging to the storage pool. When
+	    fine-grained Access Control Lists (ACL) are in effect, a user with
+	    storage_vol:create ACL permission but lacking domain:write permssion
+	    could thus abuse virStorageVolCreateXML and similar APIs to gain
+	    access to files not normally permitted to that user. Fortunately, it
+	    appears that the only APIs that could leak information or corrupt
+	    files require read-write connection to libvirtd; and when ACLs are not
+	    in use (the default without any further configuration), a user with
+	    read-write access can already be considered to have full access to the
+	    machine, and without an escalation of privilege there is no security
+	    problem.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-5313</cvename>
+      <url>http://security.libvirt.org/2015/0004.html</url>
+    </references>
+    <dates>
+      <discovery>2015-10-30</discovery>
+      <entry>2015-12-20</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="ef434839-a6a4-11e5-8275-000c292e4fd8">
+    <topic>samba -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>samba36</name>
+	<range><ge>3.6.0</ge><le>3.6.25</le></range>
+      </package>
+      <package>
+	<name>samba4</name>
+	<range><ge>4.0.0</ge><le>4.0.26</le></range>
+      </package>
+      <package>
+	<name>samba41</name>
+	<range><ge>4.1.0</ge><lt>4.1.22</lt></range>
+      </package>
+      <package>
+	<name>samba42</name>
+	<range><ge>4.2.0</ge><lt>4.2.7</lt></range>
+      </package>
+      <package>
+	<name>samba43</name>
+	<range><ge>4.3.0</ge><lt>4.3.3</lt></range>
+      </package>
+      <package>
+	<name>ldb</name>
+	<range><ge>1.0.0</ge><lt>1.1.24</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Samba team reports:</p>
+	<blockquote cite="https://www.samba.org/samba/latest_news.html#4.3.3">
+	  <p>[CVE-2015-3223] Malicious request can cause Samba LDAP server to hang, spinning using CPU.</p>
+	  <p>[CVE-2015-5330] Malicious request can cause Samba LDAP server
+	     to return uninitialized memory that should not be part of the reply.</p>
+	  <p>[CVE-2015-5296] Requesting encryption should also request
+	     signing when setting up the connection to protect against man-in-the-middle attacks.</p>
+	  <p>[CVE-2015-5299] A missing access control check in the VFS
+	     shadow_copy2 module could allow unauthorized users to access snapshots.</p>
+	  <p>[CVE-2015-7540] Malicious request can cause Samba LDAP server to return crash.</p>
+	  <p>[CVE-2015-8467] Samba can expose Windows DCs to MS15-096
+	     Denial of service via the creation of multiple machine accounts(The Microsoft issue is CVE-2015-2535).</p>
+	  <p>[CVE-2015-5252] Insufficient symlink verification could allow data access outside share path.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-3223</cvename>
+      <url>https://www.samba.org/samba/security/CVE-2015-3223.html</url>
+      <cvename>CVE-2015-5252</cvename>
+      <url>https://www.samba.org/samba/security/CVE-2015-5252.html</url>
+      <cvename>CVE-2015-5296</cvename>
+      <url>https://www.samba.org/samba/security/CVE-2015-5296.html</url>
+      <cvename>CVE-2015-5299</cvename>
+      <url>https://www.samba.org/samba/security/CVE-2015-5299.html</url>
+      <cvename>CVE-2015-5330</cvename>
+      <url>https://www.samba.org/samba/security/CVE-2015-5330.html</url>
+      <cvename>CVE-2015-7540</cvename>
+      <url>https://www.samba.org/samba/security/CVE-2015-7540.html</url>
+      <cvename>CVE-2015-8467</cvename>
+      <url>https://www.samba.org/samba/security/CVE-2015-8467.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-16</discovery>
+      <entry>2015-12-19</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="bb7d4791-a5bf-11e5-a0e5-00262d5ed8ee">
+    <topic>chromium -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>chromium</name>
+	<name>chromium-npapi</name>
+	<name>chromium-pulse</name>
+	<range><lt>47.0.2526.106</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Google Chrome Releases reports:</p>
+	<blockquote cite="http://googlechromereleases.blogspot.nl/2015/12/stable-channel-update_15.html">
+	  <p>2 security fixes in this release, including:</p>
+	  <ul>
+	    <li>[569486] CVE-2015-6792: Fixes from internal audits and
+	      fuzzing.</li>
+	  </ul>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-6792</cvename>
+      <url>http://googlechromereleases.blogspot.nl/2015/12/stable-channel-update_15.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-16</discovery>
+      <entry>2015-12-18</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="7329938b-a4e6-11e5-b864-14dae9d210b8">
+    <topic>cups-filters -- code execution</topic>
+    <affects>
+      <package>
+	<name>cups-filters</name>
+	<range><lt>1.4.0</lt></range>
+      </package>
+      <package>
+	<name>foomatic-filters</name>
+	<range><lt>4.0.17_4</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Till Kamppeter reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/12/14/13">
+	  <p>Cups Filters/Foomatic Filters does not consider semicolon
+	    as an illegal escape character.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/14/13</url>
+      <cvename>CVE-2015-8560</cvename>
+    </references>
+    <dates>
+      <discovery>2015-12-12</discovery>
+      <entry>2015-12-17</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="6dbae1a8-a4e6-11e5-b864-14dae9d210b8">
+    <topic>cups-filters -- code execution</topic>
+    <affects>
+      <package>
+	<name>cups-filters</name>
+	<range><lt>1.2.0</lt></range>
+      </package>
+      <package>
+	<name>foomatic-filters</name>
+	<range><lt>4.0.17_4</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Salvatore Bonaccorso reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/12/13/2">
+	  <p>Cups Filters/Foomatic Filters does not consider backtick
+	    as an illegal escape character.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/13/2</url>
+      <cvename>CVE-2015-8327</cvename>
+    </references>
+    <dates>
+      <discovery>2015-10-30</discovery>
+      <entry>2015-12-17</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="1fbd6db1-a4e4-11e5-b864-14dae9d210b8">
+    <topic>py-amf -- input sanitization errors</topic>
+    <affects>
+      <package>
+	<name>py27-amf</name>
+	<name>py32-amf</name>
+	<name>py33-amf</name>
+	<name>py34-amf</name>
+	<range><lt>0.8.0</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>oCERT reports:</p>
+	<blockquote cite="http://www.ocert.org/advisories/ocert-2015-011.html">
+	  <p>A specially crafted AMF payload, containing malicious
+	    references to XML external entities, can be used to trigger Denial of
+	    Service (DoS) conditions or arbitrarily return the contents of files
+	    that are accessible with the running application privileges.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.ocert.org/advisories/ocert-2015-011.html</url>
+      <cvename>CVE-2015-8549</cvename>
+    </references>
+    <dates>
+     <discovery>2015-12-01</discovery>
+     <entry>2015-12-17</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="a9f60ce8-a4e0-11e5-b864-14dae9d210b8">
+    <topic>joomla -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>joomla3</name>
+	<range><lt>3.4.6</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Joomla! reports:</p>
+	<blockquote cite="https://www.joomla.org/announcements/release-news/5641-joomla-3-4-6-released.html">
+	  <p>Joomla! 3.4.6 is now available. This is a security release
+	    for the 3.x series of Joomla which addresses a critical security
+	    vulnerability and 4 low level security vulnerabilities. We strongly
+	    recommend that you update your sites immediately.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://www.joomla.org/announcements/release-news/5641-joomla-3-4-6-released.html</url>
+      <cvename>CVE-2015-8562</cvename>
+      <cvename>CVE-2015-8563</cvename>
+      <cvename>CVE-2015-8564</cvename>
+      <cvename>CVE-2015-8565</cvename>
+    </references>
+    <dates>
+      <discovery>2015-12-14</discovery>
+      <entry>2015-12-17</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="a8ec4db7-a398-11e5-85e9-14dae9d210b8">
+    <topic>bind -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>bind99</name>
+	<range><lt>9.9.8P2</lt></range>
+      </package>
+      <package>
+	<name>bind910</name>
+	<range><lt>9.10.3P2</lt></range>
+      </package>
+      <package>
+	<name>bind9-devel</name>
+	<range><lt>9.11.0.a20151215</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>ISC reports:</p>
+	<blockquote cite="https://kb.isc.org/article/AA-01328/0/BIND-9.10.3-P2-Release-Notes.html">
+	  <p>Named is potentially vulnerable to the OpenSSL vulnerabilty described in CVE-2015-3193.</p>
+	  <p>Incorrect reference counting could result in an INSIST
+	    failure if a socket error occurred while performing a lookup. This flaw
+	    is disclosed in CVE-2015-8461. [RT#40945]</p>
+	  <p>Insufficient testing when parsing a message allowed records
+	    with an incorrect class to be be accepted, triggering a REQUIRE failure
+	    when those records were subsequently cached. This flaw is disclosed in
+	    CVE-2015-8000. [RT #40987]</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://kb.isc.org/article/AA-01328/0/BIND-9.10.3-P2-Release-Notes.html</url>
+      <url>https://kb.isc.org/article/AA-01317/0/CVE-2015-8000%3A-Responses-with-a-malformed-class-attribute-can-trigger-an-assertion-failure-in-db.c.html</url>
+      <url>https://kb.isc.org/article/AA-01319/0/CVE-2015-8461%3A-A-race-condition-when-handling-socket-errors-can-lead-to-an-assertion-failure-in-resolver.c.html</url>
+      <cvename>CVE-2015-3193</cvename>
+      <cvename>CVE-2015-8000</cvename>
+      <cvename>CVE-2015-8461</cvename>
+    </references>
+    <dates>
+      <discovery>2015-11-24</discovery>
+      <entry>2015-12-16</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="2c2d1c39-1396-459a-91f5-ca03ee7c64c6">
+    <topic>mozilla -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>firefox</name>
+	<range><lt>43.0,1</lt></range>
+      </package>
+      <package>
+	<name>linux-firefox</name>
+	<range><lt>43.0,1</lt></range>
+      </package>
+      <package>
+	<name>seamonkey</name>
+	<range><lt>2.40</lt></range>
+      </package>
+      <package>
+	<name>linux-seamonkey</name>
+	<range><lt>2.40</lt></range>
+      </package>
+      <package>
+	<name>firefox-esr</name>
+	<range><lt>38.5.0,1</lt></range>
+      </package>
+      <package>
+	<name>libxul</name>
+	<range><lt>38.5.0</lt></range>
+      </package>
+      <package>
+	<name>thunderbird</name>
+	<range><lt>38.5.0</lt></range>
+      </package>
+      <package>
+	<name>linux-thunderbird</name>
+	<range><lt>38.5.0</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The Mozilla Project reports:</p>
+	<blockquote cite="https://www.mozilla.org/en-US/security/advisories/">
+	  <p>MFSA 2015-134 Miscellaneous memory safety hazards
+	    (rv:43.0 / rv:38.5)</p>
+	  <p>MFSA 2015-135 Crash with JavaScript variable assignment
+	    with unboxed objects</p>
+	  <p>MFSA 2015-136 Same-origin policy violation using
+	    perfomance.getEntries and history navigation</p>
+	  <p>MFSA 2015-137 Firefox allows for control characters to be
+	    set in cookies</p>
+	  <p>MFSA 2015-138 Use-after-free in WebRTC when datachannel
+	    is used after being destroyed</p>
+	  <p>MFSA 2015-139 Integer overflow allocating extremely large
+	    textures</p>
+	  <p>MFSA 2015-140 Cross-origin information leak through web
+	    workers error events</p>
+	  <p>MFSA 2015-141 Hash in data URI is incorrectly parsed</p>
+	  <p>MFSA 2015-142 DOS due to malformed frames in HTTP/2</p>
+	  <p>MFSA 2015-143 Linux file chooser crashes on malformed
+	    images due to flaws in Jasper library</p>
+	  <p>MFSA 2015-144 Buffer overflows found through code
+	    inspection</p>
+	  <p>MFSA 2015-145 Underflow through code inspection</p>
+	  <p>MFSA 2015-146 Integer overflow in MP4 playback in 64-bit
+	    versions</p>
+	  <p>MFSA 2015-147 Integer underflow and buffer overflow
+	    processing MP4 metadata in libstagefright</p>
+	  <p>MFSA 2015-148 Privilege escalation vulnerabilities in
+	    WebExtension APIs</p>
+	  <p>MFSA 2015-149 Cross-site reading attack through data and
+	    view-source URIs</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-7201</cvename>
+      <cvename>CVE-2015-7202</cvename>
+      <cvename>CVE-2015-7203</cvename>
+      <cvename>CVE-2015-7204</cvename>
+      <cvename>CVE-2015-7205</cvename>
+      <cvename>CVE-2015-7207</cvename>
+      <cvename>CVE-2015-7208</cvename>
+      <cvename>CVE-2015-7210</cvename>
+      <cvename>CVE-2015-7211</cvename>
+      <cvename>CVE-2015-7212</cvename>
+      <cvename>CVE-2015-7213</cvename>
+      <cvename>CVE-2015-7214</cvename>
+      <cvename>CVE-2015-7215</cvename>
+      <cvename>CVE-2015-7216</cvename>
+      <cvename>CVE-2015-7217</cvename>
+      <cvename>CVE-2015-7218</cvename>
+      <cvename>CVE-2015-7219</cvename>
+      <cvename>CVE-2015-7220</cvename>
+      <cvename>CVE-2015-7221</cvename>
+      <cvename>CVE-2015-7222</cvename>
+      <cvename>CVE-2015-7223</cvename>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-134/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-135/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-136/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-137/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-138/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-139/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-140/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-141/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-142/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-143/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-144/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-145/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-146/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-147/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-148/</url>
+      <url>https://www.mozilla.org/security/advisories/mfsa2015-149/</url>
+    </references>
+    <dates>
+      <discovery>2015-12-15</discovery>
+      <entry>2015-12-15</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="a5934ba8-a376-11e5-85e9-14dae9d210b8">
+    <topic>java -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>openjdk8</name>
+	<name>openjdk8-jre</name>
+	<range><lt>8.66.17</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Oracle reports:</p>
+	<blockquote cite="http://www.oracle.com/technetwork/topics/security/cpuoct2015-2367953.html#AppendixJAVA">
+	  <p>This Critical Patch Update contains 25 new security fixes
+	    for Oracle Java SE.  24 of these vulnerabilities may be remotely
+	    exploitable without authentication, i.e., may be exploited over a
+	    network without the need for a username and password.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.oracle.com/technetwork/topics/security/cpuoct2015-2367953.html#AppendixJAVA</url>
+      <cvename>CVE-2015-4835</cvename>
+      <cvename>CVE-2015-4881</cvename>
+      <cvename>CVE-2015-4843</cvename>
+      <cvename>CVE-2015-4883</cvename>
+      <cvename>CVE-2015-4860</cvename>
+      <cvename>CVE-2015-4805</cvename>
+      <cvename>CVE-2015-4844</cvename>
+      <cvename>CVE-2015-4901</cvename>
+      <cvename>CVE-2015-4868</cvename>
+      <cvename>CVE-2015-4810</cvename>
+      <cvename>CVE-2015-4806</cvename>
+      <cvename>CVE-2015-4871</cvename>
+      <cvename>CVE-2015-4902</cvename>
+      <cvename>CVE-2015-4840</cvename>
+      <cvename>CVE-2015-4882</cvename>
+      <cvename>CVE-2015-4842</cvename>
+      <cvename>CVE-2015-4734</cvename>
+      <cvename>CVE-2015-4903</cvename>
+      <cvename>CVE-2015-4803</cvename>
+      <cvename>CVE-2015-4893</cvename>
+      <cvename>CVE-2015-4911</cvename>
+      <cvename>CVE-2015-4872</cvename>
+      <cvename>CVE-2015-4906</cvename>
+      <cvename>CVE-2015-4916</cvename>
+      <cvename>CVE-2015-4908</cvename>
+    </references>
+    <dates>
+      <discovery>2015-10-20</discovery>
+      <entry>2015-12-15</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="daadef86-a366-11e5-8b40-20cf30e32f6d">
+    <topic>subversion -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>subversion17</name>
+	<range><ge>1.7.0</ge><lt>1.7.22_1</lt></range>
+      </package>
+      <package>
+	<name>subversion18</name>
+	<range><ge>1.8.0</ge><lt>1.8.15</lt></range>
+      </package>
+      <package>
+	<name>subversion</name>
+	<range><ge>1.9.0</ge><lt>1.9.3</lt></range>
+      </package>
+      <package>
+	<name>mod_dav_svn</name>
+	<range><ge>1.7.0</ge><lt>1.7.22_1</lt></range>
+	<range><ge>1.8.0</ge><lt>1.8.15</lt></range>
+	<range><ge>1.9.0</ge><lt>1.9.3</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Subversion Project reports:</p>
+	<blockquote cite="http://subversion.apache.org/security/">
+	  <p>Remotely triggerable heap overflow and out-of-bounds read caused
+	    by integer overflow in the svn:// protocol parser.</p>
+	  <p>Remotely triggerable heap overflow and out-of-bounds read in
+	    mod_dav_svn caused by integer overflow when parsing skel-encoded
+	    request bodies.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-5343</cvename>
+      <url>http://subversion.apache.org/security/CVE-2015-5343-advisory.txt</url>
+      <cvename>CVE-2015-5259</cvename>
+      <url>http://subversion.apache.org/security/CVE-2015-5259-advisory.txt</url>
+    </references>
+    <dates>
+      <discovery>2015-11-14</discovery>
+      <entry>2015-12-15</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="72c145df-a1e0-11e5-8ad0-00262d5ed8ee">
+    <topic>chromium -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>chromium</name>
+	<!--pcbsd-->
+	<name>chromium-npapi</name>
+	<name>chromium-pulse</name>
+	<range><lt>47.0.2526.80</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Google Chrome Releases reports:</p>
+	<blockquote cite="http://googlechromereleases.blogspot.nl/2015/12/stable-channel-update_8.html">
+	  <p>7 security fixes in this release, including:</p>
+	  <ul>
+	    <li>[548273] High CVE-2015-6788: Type confusion in extensions.
+	      Credit to anonymous.</li>
+	    <li>[557981] High CVE-2015-6789: Use-after-free in Blink. Credit to
+	      cloudfuzzer.</li>
+	    <li>[542054] Medium CVE-2015-6790: Escaping issue in saved pages.
+	      Credit to Inti De Ceukelaire.</li>
+	    <li>[567513] CVE-2015-6791: Various fixes from internal audits,
+	      fuzzing and other initiatives.</li>
+	    <li>Multiple vulnerabilities in V8 fixed at the tip of the 4.7
+	      branch (currently 4.7.80.23).</li>
+	  </ul>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-6788</cvename>
+      <cvename>CVE-2015-6789</cvename>
+      <cvename>CVE-2015-6790</cvename>
+      <cvename>CVE-2015-6791</cvename>
+      <url>http://googlechromereleases.blogspot.nl/2015/12/stable-channel-update_8.html</url>
+    </references>
+    <dates>
+      <discovery>2015-12-08</discovery>
+      <entry>2015-12-13</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="33459061-a1d6-11e5-8794-bcaec565249c">
+    <topic>freeimage -- multiple integer overflows</topic>
+    <affects>
+      <package>
+	<name>freeimage</name>
+	<range><lt>3.16.0_1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Pcheng pcheng reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2015/08/28/1">
+	  <p>An integer overflow issue in the FreeImage project was
+	    reported and fixed recently.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-0852</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2015/08/28/1</url>
+    </references>
+    <dates>
+      <discovery>2015-08-28</discovery>
+      <entry>2015-12-13</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="21bc4d71-9ed8-11e5-8f5c-002590263bf5">
+    <topic>redmine -- information leak vulnerability</topic>
+    <affects>
+      <package>
+	<name>redmine</name>
+	<range><lt>2.6.9</lt></range>
+	<range><ge>3.0.0</ge><lt>3.0.7</lt></range>
+	<range><ge>3.1.0</ge><lt>3.1.3</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Redmine reports:</p>
+	<blockquote cite="http://www.redmine.org/projects/redmine/wiki/Security_Advisories">
+	  <p>Data disclosure in atom feed.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8537</cvename>
+      <url>http://www.redmine.org/projects/redmine/wiki/Security_Advisories</url>
+    </references>
+    <dates>
+      <discovery>2015-12-05</discovery>
+      <entry>2015-12-10</entry>
+      <modified>2015-12-11</modified>
+    </dates>
+  </vuln>
+
+  <vuln vid="be63533c-9ed7-11e5-8f5c-002590263bf5">
+    <topic>redmine -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>redmine</name>
+	<range><lt>2.6.8</lt></range>
+	<range><ge>3.0.0</ge><lt>3.0.6</lt></range>
+	<range><ge>3.1.0</ge><lt>3.1.2</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Redmine reports:</p>
+	<blockquote cite="http://www.redmine.org/projects/redmine/wiki/Security_Advisories">
+	  <p>Potential changeset message disclosure in issues API.</p>
+	  <p>Data disclosure on the time logging form</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8346</cvename>
+      <cvename>CVE-2015-8473</cvename>
+      <url>http://www.redmine.org/projects/redmine/wiki/Security_Advisories</url>
+      <url>http://www.openwall.com/lists/oss-security/2015/11/25/12</url>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/03/7</url>
+    </references>
+    <dates>
+      <discovery>2015-11-14</discovery>
+      <entry>2015-12-10</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="3ec2e0bc-9ed7-11e5-8f5c-002590263bf5">
+    <topic>redmine -- open redirect vulnerability</topic>
+    <affects>
+      <package>
+	<name>redmine</name>
+	<range><ge>2.5.1</ge><lt>2.6.7</lt></range>
+	<range><ge>3.0.0</ge><lt>3.0.5</lt></range>
+	<range><eq>3.1.0</eq></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Redmine reports:</p>
+	<blockquote cite="http://www.redmine.org/projects/redmine/wiki/Security_Advisories">
+	  <p>Open Redirect vulnerability.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8474</cvename>
+      <url>http://www.redmine.org/projects/redmine/wiki/Security_Advisories</url>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/04/1</url>
+    </references>
+    <dates>
+      <discovery>2015-09-20</discovery>
+      <entry>2015-12-10</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="939a7086-9ed6-11e5-8f5c-002590263bf5">
+    <topic>redmine -- potential XSS vulnerability</topic>
+    <affects>
+      <package>
+	<name>redmine</name>
+	<range><lt>2.6.2</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Redmine reports:</p>
+	<blockquote cite="http://www.redmine.org/projects/redmine/wiki/Security_Advisories">
+	  <p>Potential XSS vulnerability when rendering some flash messages.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8477</cvename>
+      <url>http://www.redmine.org/projects/redmine/wiki/Security_Advisories</url>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/05/6</url>
+    </references>
+    <dates>
+      <discovery>2015-02-19</discovery>
+      <entry>2015-12-10</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="49def4b7-9ed6-11e5-8f5c-002590263bf5">
+    <topic>redmine -- information leak vulnerability</topic>
+    <affects>
+      <package>
+	<name>redmine</name>
+	<range><lt>2.4.6</lt></range>
+	<range><ge>2.5.0</ge><lt>2.5.2</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Redmine reports:</p>
+	<blockquote cite="http://www.redmine.org/projects/redmine/wiki/Security_Advisories">
+	  <p>Potential data leak (project names) in the invalid form
+	    authenticity token error screen.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.redmine.org/projects/redmine/wiki/Security_Advisories</url>
+    </references>
+    <dates>
+      <discovery>2014-07-06</discovery>
+      <entry>2015-12-10</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="c2efcd46-9ed5-11e5-8f5c-002590263bf5">
+    <topic>redmine -- open redirect vulnerability</topic>
+    <affects>
+      <package>
+	<name>redmine</name>
+	<range><lt>2.4.5</lt></range>
+	<range><eq>2.5.0</eq></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Redmine reports:</p>
+	<blockquote cite="http://www.redmine.org/projects/redmine/wiki/Security_Advisories">
+	  <p>Open Redirect vulnerability</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2014-1985</cvename>
+      <url>http://www.redmine.org/projects/redmine/wiki/Security_Advisories</url>
+      <url>https://jvn.jp/en/jp/JVN93004610/index.html</url>
+    </references>
+    <dates>
+      <discovery>2014-03-29</discovery>
+      <entry>2015-12-10</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="66ba5931-9ed5-11e5-8f5c-002590263bf5">
+    <topic>redmine -- XSS vulnerability</topic>
+    <affects>
+      <package>
+	<name>redmine</name>
+	<range><ge>2.1.0</ge><lt>2.1.2</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Redmine reports:</p>
+	<blockquote cite="http://www.redmine.org/projects/redmine/wiki/Security_Advisories">
+	  <p>XSS vulnerability</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.redmine.org/projects/redmine/wiki/Security_Advisories</url>
+    </references>
+    <dates>
+      <discovery>2012-09-30</discovery>
+      <entry>2015-12-10</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="0e0385d1-9ed5-11e5-8f5c-002590263bf5">
+    <topic>redmine -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>redmine</name>
+	<range><lt>1.3.2</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Redmine reports:</p>
+	<blockquote cite="http://www.redmine.org/projects/redmine/wiki/Security_Advisories">
+	  <p>Mass-assignemnt vulnerability that would allow an attacker to
+	    bypass part of the security checks.</p>
+	  <p>Persistent XSS vulnerability</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2012-0327</cvename>
+      <url>http://www.redmine.org/projects/redmine/wiki/Security_Advisories</url>
+      <url>http://jvn.jp/en/jp/JVN93406632/</url>
+    </references>
+    <dates>
+      <discovery>2012-03-11</discovery>
+      <entry>2015-12-10</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="ae377aeb-9ed4-11e5-8f5c-002590263bf5">
+    <topic>redmine -- CSRF protection bypass</topic>
+    <affects>
+      <package>
+	<name>redmine</name>
+	<range><lt>1.3.0</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Redmine reports:</p>
+	<blockquote cite="http://www.redmine.org/projects/redmine/wiki/Security_Advisories">
+	  <p>Vulnerability that would allow an attacker to bypass the CSRF
+	    protection.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.redmine.org/projects/redmine/wiki/Security_Advisories</url>
+    </references>
+    <dates>
+      <discovery>2011-12-10</discovery>
+      <entry>2015-12-10</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="23af0425-9eac-11e5-b937-00e0814cab4e">
+    <topic>jenkins -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>jenkins</name>
+	<range><le>1.641</le></range>
+      </package>
+      <package>
+	<name>jenkins-lts</name>
+	<range><le>1.625.3</le></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Jenkins Security Advisory:</p>
+	<blockquote cite="https://wiki.jenkins-ci.org/display/SECURITY/Jenkins+Security+Advisory+2015-12-09">
+	  <h1>Description</h1>
+	  <h5>SECURITY-95 / CVE-2015-7536 (Stored XSS vulnerability through workspace files and archived artifacts)</h5>
+	  <p>In certain configurations, low privilege users were able to
+	    create e.g. HTML files in workspaces and archived artifacts that
+	    could result in XSS when accessed by other users. Jenkins now sends
+	    Content-Security-Policy headers that enables sandboxing and
+	    prohibits script execution by default.</p>
+	  <h5>SECURITY-225 / CVE-2015-7537 (CSRF vulnerability in some administrative actions)</h5>
+	  <p>Several administration/configuration related URLs could be
+	    accessed using GET, which allowed attackers to circumvent CSRF
+	    protection.</p>
+	  <h5>SECURITY-233 / CVE-2015-7538 (CSRF protection ineffective)</h5>
+	  <p>Malicious users were able to circumvent CSRF protection on any
+	    URL by sending specially crafted POST requests.</p>
+	  <h5>SECURITY-234 / CVE-2015-7539 (Jenkins plugin manager vulnerable to MITM attacks)</h5>
+	  <p>While the Jenkins update site data is digitally signed, and the
+	    signature verified by Jenkins, Jenkins did not verify the provided
+	    SHA-1 checksums for the plugin files referenced in the update site
+	    data. This enabled MITM attacks on the plugin manager, resulting
+	    in installation of attacker-provided plugins.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://wiki.jenkins-ci.org/display/SECURITY/Jenkins+Security+Advisory+2015-12-09</url>
+    </references>
+    <dates>
+      <discovery>2015-12-09</discovery>
+      <entry>2015-12-09</entry>
+    </dates>
+  </vuln>
+
   <vuln vid="c8842a84-9ddd-11e5-8c2f-c485083ca99c">
     <topic>flash -- multiple vulnabilities</topic>
     <affects>
@@ -513,16 +3170,23 @@ Notes:
       </package>
       <package>
 	<name>ffmpeg</name>
-	<range><lt>2.8.3,1</lt></range>
+	<range><ge>2.8,1</ge><lt>2.8.3,1</lt></range>
+	<range><lt>2.7.3,1</lt></range>
       </package>
       <package>
 	<name>ffmpeg26</name>
 	<range><lt>2.6.5</lt></range>
       </package>
       <package>
-	<name>ffmpeg-devel</name>
 	<name>ffmpeg25</name>
+	<range><lt>2.5.9</lt></range>
+      </package>
+      <package>
 	<name>ffmpeg24</name>
+	<range><lt>2.4.12</lt></range>
+      </package>
+      <package>
+	<name>ffmpeg-devel</name>
 	<name>ffmpeg23</name>
 	<name>ffmpeg2</name>
 	<name>ffmpeg1</name>
@@ -658,6 +3322,7 @@ Notes:
     <dates>
       <discovery>2015-11-27</discovery>
       <entry>2015-12-02</entry>
+      <modified>2015-12-28</modified>
     </dates>
   </vuln>
 
@@ -846,6 +3511,13 @@ Notes:
 	<range><lt>1.8.7</lt></range>
       </package>
       <package>
+	<name>py27-django18</name>
+	<name>py32-django18</name>
+	<name>py33-django18</name>
+	<name>py34-django18</name>
+	<range><lt>1.8.7</lt></range>
+      </package>
+      <package>
 	<name>py27-django17</name>
 	<name>py32-django17</name>
 	<name>py33-django17</name>
@@ -879,6 +3551,7 @@ Notes:
     <dates>
       <discovery>2015-11-24</discovery>
       <entry>2015-11-30</entry>
+      <modified>2015-12-24</modified>
     </dates>
   </vuln>
 
@@ -1241,11 +3914,21 @@ Notes:
     <description>
       <body xmlns="http://www.w3.org/1999/xhtml">
 	<p>Moodle Release Notes report:</p>
-	<blockquote cite="https://docs.moodle.org/dev/Moodle_2.8.9_release_notes">
-	  <p>A number of security related issues were resolved.  Details of
-	    these issues will be released after a period of approximately one
-	    week to allow system administrators to safely update to the latest
-	    version.</p>
+	<blockquote cite="https://docs.moodle.org/dev/Moodle_2.9.3_release_notes">
+	  <p>MSA-15-0037 Possible to send a message to a user who blocked
+	    messages from non contacts</p>
+	  <p>MSA-15-0038 DDoS possibility in Atto</p>
+	  <p>MSA-15-0039 CSRF in site registration form</p>
+	  <p>MSA-15-0040 Student XSS in survey</p>
+	  <p>MSA-15-0041 XSS in flash video player</p>
+	  <p>MSA-15-0042 CSRF in lesson login form</p>
+	  <p>MSA-15-0043 Web service core_enrol_get_enrolled_users does not
+	    respect course group mode</p>
+	  <p>MSA-15-0044 Capability to view available badges is not
+	    respected</p>
+	  <p>MSA-15-0045 SCORM module allows to bypass access restrictions based
+	    on date</p>
+	  <p>MSA-15-0046 Choice module closing date can be bypassed</p>
 	</blockquote>
       </body>
     </description>
@@ -1257,6 +3940,7 @@ Notes:
     <dates>
       <discovery>2015-11-09</discovery>
       <entry>2015-11-16</entry>
+      <modified>2015-12-21</modified>
     </dates>
   </vuln>
 
@@ -2530,16 +5214,27 @@ Notes:
       </body>
     </description>
     <references>
+      <cvename>CVE-2015-8001</cvename>
+      <cvename>CVE-2015-8002</cvename>
+      <cvename>CVE-2015-8003</cvename>
+      <cvename>CVE-2015-8004</cvename>
+      <cvename>CVE-2015-8005</cvename>
+      <cvename>CVE-2015-8006</cvename>
+      <cvename>CVE-2015-8007</cvename>
+      <cvename>CVE-2015-8008</cvename>
+      <cvename>CVE-2015-8009</cvename>
       <url>https://lists.wikimedia.org/pipermail/mediawiki-announce/2015-October/000181.html</url>
       <url>https://phabricator.wikimedia.org/T91203</url>
       <url>https://phabricator.wikimedia.org/T91205</url>
       <url>https://phabricator.wikimedia.org/T91850</url>
       <url>https://phabricator.wikimedia.org/T95589</url>
       <url>https://phabricator.wikimedia.org/T108616</url>
+      <url>http://www.openwall.com/lists/oss-security/2015/10/29/14</url>
     </references>
     <dates>
       <discovery>2015-10-16</discovery>
       <entry>2015-10-23</entry>
+      <modified>2015-12-24</modified>
     </dates>
   </vuln>
 
@@ -2695,11 +5390,14 @@ Notes:
       </body>
     </description>
     <references>
+      <cvename>CVE-2015-7545</cvename>
       <url>https://raw.githubusercontent.com/git/git/master/Documentation/RelNotes/2.6.1.txt</url>
+      <url>http://www.openwall.com/lists/oss-security/2015/12/11/7</url>
     </references>
     <dates>
       <discovery>2015-09-23</discovery>
       <entry>2015-10-19</entry>
+      <modified>2015-12-12</modified>
     </dates>
   </vuln>
 
@@ -6339,14 +9037,27 @@ Notes:
       </body>
     </description>
     <references>
+      <cvename>CVE-2015-6727</cvename>
+      <cvename>CVE-2013-7444</cvename>
+      <cvename>CVE-2015-6728</cvename>
+      <cvename>CVE-2015-6729</cvename>
+      <cvename>CVE-2015-6730</cvename>
+      <cvename>CVE-2015-6731</cvename>
+      <cvename>CVE-2015-6733</cvename>
+      <cvename>CVE-2015-6734</cvename>
+      <cvename>CVE-2015-6735</cvename>
+      <cvename>CVE-2015-6736</cvename>
+      <cvename>CVE-2015-6737</cvename>
       <url>https://lists.wikimedia.org/pipermail/mediawiki-announce/2015-August/000179.html</url>
       <url>https://phabricator.wikimedia.org/T106893</url>
       <url>https://phabricator.wikimedia.org/T94116</url>
       <url>https://phabricator.wikimedia.org/T97391</url>
+      <url>http://www.openwall.com/lists/oss-security/2015/08/27/6</url>
     </references>
     <dates>
       <discovery>2015-08-10</discovery>
       <entry>2015-08-14</entry>
+      <modified>2015-12-24</modified>
     </dates>
   </vuln>
 
@@ -7703,6 +10414,10 @@ Notes:
     <topic>php-phar -- multiple vulnerabilities</topic>
     <affects>
       <package>
+	<name>php56-phar</name>
+	<range><lt>5.6.11</lt></range>
+      </package>
+      <package>
 	<name>php55-phar</name>
 	<range><lt>5.5.27</lt></range>
       </package>
@@ -7732,6 +10447,7 @@ Notes:
     <dates>
       <discovery>2015-06-24</discovery>
       <entry>2015-07-18</entry>
+      <modified>2015-12-18</modified>
     </dates>
   </vuln>
 
@@ -12943,8 +15659,7 @@ Notes:
       </package>
       <package>
 	<name>freeimage</name>
-	<!-- no known fixed version -->
-	<range><ge>3.13.0</ge></range>
+	<range><ge>3.13.0</ge><lt>3.16.0_1</lt></range>
       </package>
       <package>
 	<name>kodi</name>
@@ -13001,7 +15716,7 @@ Notes:
     <dates>
       <discovery>2015-04-24</discovery>
       <entry>2015-05-15</entry>
-      <modified>2015-09-18</modified>
+      <modified>2015-12-13</modified>
     </dates>
   </vuln>
 

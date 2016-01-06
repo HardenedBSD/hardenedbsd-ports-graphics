@@ -74,6 +74,7 @@
     SUBDIR += cmp3
     SUBDIR += cmt
     SUBDIR += cmus
+    SUBDIR += codec2
     SUBDIR += cpige
     SUBDIR += cplay
     SUBDIR += cpp-xmms2
@@ -532,6 +533,7 @@
     SUBDIR += opencore-amr
     SUBDIR += openspc
     SUBDIR += optimfrog
+    SUBDIR += optimfrog-sse2
     SUBDIR += opus
     SUBDIR += opus-tools
     SUBDIR += opusfile
@@ -607,7 +609,6 @@
     SUBDIR += py-discid
     SUBDIR += py-discogs-client
     SUBDIR += py-eyed3
-    SUBDIR += py-fastaudio
     SUBDIR += py-fmoo-audiotools
     SUBDIR += py-gmusicapi
     SUBDIR += py-id3
