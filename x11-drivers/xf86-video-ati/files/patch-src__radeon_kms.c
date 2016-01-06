@@ -9,15 +9,6 @@
  /* Driver data structures */
  #include "radeon.h"
  #include "radeon_drm_queue.h"
-@@ -303,7 +305,7 @@ static void
- radeon_dirty_update(ScreenPtr screen)
- {
- 	RegionPtr region;
--	PixmapDirtyUpdatePtr ent;
-+	PixmapDirtyUpdatePtr ent = NULL;
- 
- 	if (xorg_list_is_empty(&screen->pixmap_dirty_list))
- 		return;
 @@ -829,7 +831,7 @@ static int radeon_get_drm_master_fd(Scrn
  #endif
      struct pci_device *dev = info->PciInfo;
