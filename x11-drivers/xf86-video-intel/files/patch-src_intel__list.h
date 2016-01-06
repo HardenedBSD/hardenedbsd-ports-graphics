@@ -1,3 +1,6 @@
+These functions are copied from the xorg-server.
+http://lists.x.org/archives/xorg-devel/2016-January/048421.html
+
 --- src/intel_list.h.orig	2014-08-29 11:33:11.000000000 +0200
 +++ src/intel_list.h	2016-01-06 14:03:26.792064000 +0100
 @@ -326,12 +326,14 @@
