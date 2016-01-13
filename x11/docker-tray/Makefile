@@ -5,16 +5,13 @@ PORTNAME=	docker
 PORTVERSION=	1.5
 PORTREVISION=	8
 CATEGORIES=	x11
-MASTER_SITES=	http://offload2.icculus.org:9090/openbox/2/docker/ \
-		http://offload1.icculus.org:9090/openbox/2/docker/
+MASTER_SITES=	https://icculus.org/openbox/2/${PORTNAME}/
 PKGNAMESUFFIX=	-tray
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Dockapp with support for GNOME2 and KDE3 tray icons
 
-BROKEN=		unfetchable
-
-LICENSE=	GPLv2 # (or later)
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/COPYING
 
 USE_XORG=	x11

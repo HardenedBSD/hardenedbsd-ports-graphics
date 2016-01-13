@@ -8,10 +8,8 @@ MASTER_SITES=	http://kernel.ubuntu.com/~cking/tarballs/stress-ng/
 MAINTAINER=	luca.pizzamiglio@gmail.com
 COMMENT=	Stress test benchmarks
 
-LICENSE=	GPLv2 # or later
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/COPYING
-
-BROKEN=		unfetchable
 
 ALL_TARGET=	# empty
 

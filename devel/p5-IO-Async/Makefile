@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	IO-Async
-PORTVERSION=	0.69
+PORTVERSION=	0.70
 CATEGORIES=	devel perl5
 MASTER_SITES=	CPAN
 MASTER_SITE_SUBDIR=	CPAN:PEVANS
@@ -26,11 +26,4 @@ NO_ARCH=	yes
 USES=		perl5
 USE_PERL5=	configure
 
-.include <bsd.port.pre.mk>
-
-.if ${PERL_LEVEL} < 501800
-BUILD_DEPENDS+=	p5-Socket>=2.007:${PORTSDIR}/net/p5-Socket
-RUN_DEPENDS+=	p5-Socket>=2.007:${PORTSDIR}/net/p5-Socket
-.endif
-
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

@@ -377,6 +377,7 @@
     SUBDIR += octave-forge-signal
     SUBDIR += octave-forge-simp
     SUBDIR += octave-forge-sockets
+    SUBDIR += octave-forge-sparsersb
     SUBDIR += octave-forge-specfun
     SUBDIR += octave-forge-special-matrix
     SUBDIR += octave-forge-spline-gcvspl
@@ -388,6 +389,7 @@
     SUBDIR += octave-forge-symband
     SUBDIR += octave-forge-symbolic
     SUBDIR += octave-forge-tcl-octave
+    SUBDIR += octave-forge-tisean
     SUBDIR += octave-forge-tsa
     SUBDIR += octave-forge-video
     SUBDIR += octave-forge-xraylib
@@ -453,7 +455,6 @@
     SUBDIR += p5-Math-Geometry
     SUBDIR += p5-Math-Geometry-Planar
     SUBDIR += p5-Math-Geometry-Planar-GPC
-    SUBDIR += p5-Math-Geometry-Planar-GPC-Polygon
     SUBDIR += p5-Math-Geometry-Planar-GPC-PolygonXS
     SUBDIR += p5-Math-Geometry-Planar-Offset
     SUBDIR += p5-Math-Geometry-Voronoi
@@ -611,6 +612,7 @@
     SUBDIR += py-pyfst
     SUBDIR += py-pyhull
     SUBDIR += py-pymc
+    SUBDIR += py-pyvtk
     SUBDIR += py-roman
     SUBDIR += py-scientific
     SUBDIR += py-statsmodels

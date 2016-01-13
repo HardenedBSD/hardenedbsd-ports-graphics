@@ -9,7 +9,6 @@
     SUBDIR += autotrust
     SUBDIR += axfr2acl
     SUBDIR += bind-tools
-    SUBDIR += bind10
     SUBDIR += bind9-devel
     SUBDIR += bind910
     SUBDIR += bind99
@@ -162,7 +161,6 @@
     SUBDIR += py-adns
     SUBDIR += py-bonjour
     SUBDIR += py-dns
-    SUBDIR += py-dns3
     SUBDIR += py-dnschain
     SUBDIR += py-dnspython
     SUBDIR += py-easyzone
@@ -171,6 +169,7 @@
     SUBDIR += py-ldns
     SUBDIR += py-namebench
     SUBDIR += py-publicsuffix
+    SUBDIR += py-py3dns
     SUBDIR += py-pydnstable
     SUBDIR += py-pywdns
     SUBDIR += py-twistedNames

@@ -2,21 +2,18 @@
 # $FreeBSD$
 
 PORTNAME=	pure-xml
-PORTVERSION=	0.6
-PORTREVISION=	3
+PORTVERSION=	0.7
 CATEGORIES=	textproc
-MASTER_SITES=	https://cdn.bitbucket.org/purelang/pure-lang/downloads/
+MASTER_SITES=	https://bitbucket.org/purelang/pure-lang/downloads/
 DIST_SUBDIR=	pure
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Pure language interface for libxml2 and libxslt
 
-BROKEN=		unfetchable
-
 LICENSE=	GPLv3 LGPL3
 LICENSE_COMB=	dual
 
-USES=		pure
+USES=		pkgconfig pure
 USE_GNOME=	libxml2 libxslt
 PORTDOCS=	README
 PORTEXAMPLES=	*

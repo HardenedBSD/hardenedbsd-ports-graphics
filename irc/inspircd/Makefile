@@ -2,9 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	inspircd
-PORTVERSION=	2.0.18
+PORTVERSION=	2.0.20
 DISTVERSIONPREFIX=	v
-PORTREVISION=	2
+PORTREVISION=	0
 CATEGORIES=	irc
 
 MAINTAINER=	feld@FreeBSD.org
@@ -96,8 +96,7 @@ PLIST_SUB+=	PGSQL="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MSQLITE}
-USES+=	pkgconfig
-USE_SQLITE=	3
+USES+=	pkgconfig sqlite
 EXTRAS:=${EXTRAS},m_sqlite3.cpp
 PLIST_SUB+=	SQLITE=""
 .else
@@ -145,6 +144,7 @@ pre-configure:
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|DATA_PATH "/inspircd.pid"|"/var/run/inspircd/inspircd.pid"|' ${WRKSRC}/src/inspircd.cpp
+	@${REINPLACE_CMD} -e 's|conf/examples|examples|g' ${WRKSRC}/docs/conf/inspircd.conf.example
 
 post-install:
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/${PORTNAME}/modules/*.so

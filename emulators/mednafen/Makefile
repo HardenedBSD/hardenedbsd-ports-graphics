@@ -5,14 +5,12 @@ PORTVERSION=	0.9.33.2
 PORTREVISION=	4
 PORTEPOCH=	1
 CATEGORIES=	emulators games
-MASTER_SITES=	SF/${PORTNAME}/Mednafen/${PORTVERSION}
+MASTER_SITES=	http://mednafen.fobby.net/releases/files/
 
 MAINTAINER=	acm@FreeBSD.org
 COMMENT=	Portable multi-system emulator
 
-BROKEN=		unfetchable
-
-LICENSE=	GPLv2 # or later
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/COPYING
 
 LIB_DEPENDS=	libcdio.so:${PORTSDIR}/sysutils/libcdio \

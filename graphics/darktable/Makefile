@@ -21,9 +21,8 @@ ONLY_FOR_ARCHS=	i386 amd64
 ONLY_FOR_ARCHS_REASON=	uses SSE instructions
 
 USES=		compiler:c++11-lib cmake:outsource desktop-file-utils	\
-		ninja pkgconfig tar:xz
+		ninja pkgconfig sqlite tar:xz
 USE_GNOME=	gtk20 intltool librsvg2
-USE_SQLITE=	yes
 USE_LDCONFIG=	${PREFIX}/lib/${PORTNAME}
 INSTALLS_ICONS=	yes
 LDFLAGS+=	-L${LOCALBASE}/lib -lintl
@@ -73,7 +72,7 @@ GRAPHMAGICK_CMAKE_OFF=	-DUSE_GRAPHICSMAGICK:BOOL=OFF
 LIBSECRET_LIB_DEPENDS=	libsecret-1.so:${PORTSDIR}/security/libsecret
 LIBSECRET_CMAKE_OFF=	-DUSE_LIBSECRET:BOOL=OFF
 
-LUA_USES=		lua:5.2
+LUA_USES=		lua:52
 LUA_CMAKE_OFF=		-DUSE_LUA:BOOL=OFF
 
 NLS_USES=		gettext

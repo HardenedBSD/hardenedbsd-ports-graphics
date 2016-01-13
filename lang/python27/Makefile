@@ -1,7 +1,8 @@
 # $FreeBSD$
 
 PORTNAME=	python27
-PORTVERSION=	2.7.11
+PORTVERSION=	${PYTHON_PORTVERSION}
+PORTREVISION=	1
 CATEGORIES=	lang python ipv6
 MASTER_SITES=	PYTHON/ftp/python/${PORTVERSION}
 DISTNAME=	Python-${PORTVERSION}
@@ -73,6 +74,7 @@ THREADS_LDFLAGS=	-lpthread
 UCS2_CONFIGURE_ON=	--enable-unicode=ucs2
 UCS4_CONFIGURE_ON=	--enable-unicode=ucs4
 
+.include "${.CURDIR}/Makefile.version"
 .include <bsd.port.options.mk>
 
 # http://bugs.python.org/issue22521

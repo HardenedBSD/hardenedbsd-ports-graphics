@@ -17,19 +17,11 @@ BUILD_DEPENDS=	roundcube>=1.0:${PORTSDIR}/mail/roundcube
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	kitist
-GH_PROJECT=	html5_notifier
 
 NO_BUILD=	yes
+NO_ARCH=	yes
 
 WWWDIR=		${PREFIX}/www/roundcube/plugins/${PORTNAME}
-
-x-generate-plist: build
-	cd ${WRKSRC}; \
-	${FIND} . ! -type d ! -name '*.orig' | ${SORT} | \
-		${SED} -e "s,^\.,%%WWWDIR%%," >${WRKDIR}/pkg-plist.tmp ; \
-	${FIND} . -type d | ${SORT} -r | ${SED} \
-		-e "s,^\.$$,@dirrmtry %%WWWDIR%%," \
-		-e "s,^\.,@dirrm %%WWWDIR%%," >>${WRKDIR}/pkg-plist.tmp
 
 do-install:
 	${MKDIR} ${STAGEDIR}${WWWDIR}

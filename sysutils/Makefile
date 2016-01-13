@@ -31,6 +31,7 @@
     SUBDIR += anacron
     SUBDIR += and
     SUBDIR += ansible
+    SUBDIR += ansible1
     SUBDIR += apachetop
     SUBDIR += apcpwr
     SUBDIR += apcupsd
@@ -104,6 +105,7 @@
     SUBDIR += bsdstats
     SUBDIR += btsixad
     SUBDIR += bulk_extractor
+    SUBDIR += burp
     SUBDIR += busybox
     SUBDIR += byobu
     SUBDIR += cbsd
@@ -125,6 +127,7 @@
     SUBDIR += cfengine-masterfiles
     SUBDIR += cfengine-masterfiles36
     SUBDIR += cfengine-masterfiles37
+    SUBDIR += cfengine-masterfiles38
     SUBDIR += cfengine22
     SUBDIR += cfengine32
     SUBDIR += cfengine33
@@ -132,6 +135,7 @@
     SUBDIR += cfengine35
     SUBDIR += cfengine36
     SUBDIR += cfengine37
+    SUBDIR += cfengine38
     SUBDIR += chgrep
     SUBDIR += cinnamon-control-center
     SUBDIR += cinnamon-settings-daemon
@@ -652,6 +656,7 @@
     SUBDIR += p5-Samba-SIDhelper
     SUBDIR += p5-Schedule-At
     SUBDIR += p5-Schedule-Cron
+    SUBDIR += p5-Schedule-Cron-Events
     SUBDIR += p5-Schedule-Load
     SUBDIR += p5-Schedule-Match
     SUBDIR += p5-Shell-Command
