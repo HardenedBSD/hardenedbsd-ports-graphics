@@ -189,6 +189,7 @@
     SUBDIR += gtic
     SUBDIR += gtk-vnc
     SUBDIR += gtknetcat
+    SUBDIR += guacamole-server
     SUBDIR += gupnp
     SUBDIR += gupnp-av
     SUBDIR += gupnp-dlna
@@ -334,11 +335,14 @@
     SUBDIR += libopennet
     SUBDIR += liboping
     SUBDIR += libosip2
+    SUBDIR += libp0f
     SUBDIR += libpcap
     SUBDIR += libpcapnav
     SUBDIR += libproxy
     SUBDIR += libproxy-gnome
+    SUBDIR += libproxy-gnome3
     SUBDIR += libproxy-kde
+    SUBDIR += libproxy-mozjs
     SUBDIR += libproxy-perl
     SUBDIR += libproxy-python
     SUBDIR += libproxy-webkit
@@ -968,6 +972,7 @@
     SUBDIR += py-port-for
     SUBDIR += py-pybeanstalk
     SUBDIR += py-pygeoip
+    SUBDIR += py-pyldap
     SUBDIR += py-pynmsg
     SUBDIR += py-pynsq
     SUBDIR += py-pypcap
@@ -1015,6 +1020,7 @@
     SUBDIR += qjsonrpc
     SUBDIR += qoauth
     SUBDIR += qt4-network
+    SUBDIR += qt5-enginio
     SUBDIR += qt5-network
     SUBDIR += qtweetlib
     SUBDIR += quagga

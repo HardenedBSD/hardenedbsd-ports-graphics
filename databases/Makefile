@@ -53,6 +53,7 @@
     SUBDIR += dbtool
     SUBDIR += dbview
     SUBDIR += elixir-calecto
+    SUBDIR += elixir-db_connection
     SUBDIR += elixir-ecto
     SUBDIR += elixir-ecto_migrate
     SUBDIR += elixir-exredis
@@ -189,6 +190,8 @@
     SUBDIR += metakit
     SUBDIR += monetdb
     SUBDIR += mongodb
+    SUBDIR += mongodb32
+    SUBDIR += mongodb32-tools
     SUBDIR += mrtg-mysql-load
     SUBDIR += mtools-mongodb
     SUBDIR += mtop
@@ -225,7 +228,6 @@
     SUBDIR += mysqltcl
     SUBDIR += mysqltuner
     SUBDIR += mytop
-    SUBDIR += mywwwatcher
     SUBDIR += nagios-check_mongodb
     SUBDIR += nagios-check_postgres_replication
     SUBDIR += nagios-check_redis
@@ -575,7 +577,6 @@
     SUBDIR += pgworksheet
     SUBDIR += php-adodb-ext
     SUBDIR += php-mdcached
-    SUBDIR += php5-creole
     SUBDIR += php5-dba
     SUBDIR += php5-interbase
     SUBDIR += php5-mssql
@@ -591,8 +592,6 @@
     SUBDIR += php5-pdo_pgsql
     SUBDIR += php5-pdo_sqlite
     SUBDIR += php5-pgsql
-    SUBDIR += php5-propel
-    SUBDIR += php5-redis
     SUBDIR += php5-sqlite3
     SUBDIR += php5-sybase_ct
     SUBDIR += php5-tarantool
@@ -789,8 +788,6 @@
     SUBDIR += py-tarantool
     SUBDIR += py-umemcache
     SUBDIR += py-whisper
-    SUBDIR += py32-gdbm
-    SUBDIR += py32-sqlite3
     SUBDIR += py33-gdbm
     SUBDIR += py33-sqlite3
     SUBDIR += py34-gdbm
@@ -928,6 +925,7 @@
     SUBDIR += spatialite-tools
     SUBDIR += spatialite_gui
     SUBDIR += speedtables
+    SUBDIR += sql-workbench
     SUBDIR += sqlbuddy
     SUBDIR += sqlcached
     SUBDIR += sqlcipher

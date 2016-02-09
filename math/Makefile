@@ -399,6 +399,7 @@
     SUBDIR += open-axiom
     SUBDIR += openblas
     SUBDIR += openfst
+    SUBDIR += openlibm
     SUBDIR += orpie
     SUBDIR += p5-AI-DecisionTree
     SUBDIR += p5-AI-Genetic
@@ -581,6 +582,7 @@
     SUBDIR += py-bitmath
     SUBDIR += py-bitvector
     SUBDIR += py-bottleneck
+    SUBDIR += py-cdecimal
     SUBDIR += py-colormath
     SUBDIR += py-cryptominisat
     SUBDIR += py-fastcluster
@@ -702,6 +704,7 @@
     SUBDIR += wxMaxima
     SUBDIR += x12arima
     SUBDIR += xblas
+    SUBDIR += xfce4-calculator-plugin
     SUBDIR += xgobi
     SUBDIR += xgraph
     SUBDIR += xlapack

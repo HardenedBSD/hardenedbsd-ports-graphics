@@ -3,7 +3,7 @@
 
 PORTNAME=	graphviz
 PORTVERSION=	2.38.0
-PORTREVISION=	10
+PORTREVISION=	11
 CATEGORIES=	graphics tk
 MASTER_SITES=	http://www.graphviz.org/pub/graphviz/ARCHIVE/
 
@@ -162,7 +162,8 @@ CONFIGURE_ARGS+=	--program-transform-name="s/x/x/" \
 		--with-fontconfigincludedir=${LOCALBASE}/include \
 		--with-fontconfiglibdir=${LOCALBASE}/lib \
 		--disable-io --disable-ocaml --disable-java \
-		--disable-sharp
+		--disable-sharp \
+		--disable-silent-rules
 
 .if ${PORT_OPTIONS:MMING}
 BROKEN=	Ming incomplete, uses removed libgraph
@@ -296,6 +297,10 @@ post-patch:
 	${REINPLACE_CMD} -e 's|GTS_LIBS)|GTS_LIBS) $$(MATH_LIBS)|' \
 		${WRKSRC}/cmd/smyrna/Makefile.in
 	${CP} ${WRKSRC}/lib/cgraph/cgraph.h ${WRKSRC}/plugin/ming/
+.if ${OSVERSION} >= 1100093
+	${REINPLACE_CMD} -e 's|SF_FLAGS|SFIO_FLAGS|g' \
+		${WRKSRC}/lib/sfio/*.[ch]
+.endif
 .if ! ${PORT_OPTIONS:MDOCS}
 	${REINPLACE_CMD} -e 's| install-txtDATA$$||' \
 		${WRKSRC}/Makefile.in

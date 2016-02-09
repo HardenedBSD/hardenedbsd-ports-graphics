@@ -17,4 +17,7 @@ CONFIGURE_ENV+=	HOME=${WRKSRC}
 USES=		dos2unix
 
 .include "${.CURDIR}/../../Mk/bsd.octave.mk"
+
+BROKEN=		doesn't build
+
 .include <bsd.port.mk>

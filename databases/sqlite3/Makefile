@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	sqlite3
-PORTVERSION=	3.10.0
+PORTVERSION=	3.10.2
+PORTREVISION=	1
 CATEGORIES=	databases
 MASTER_SITES=	https://www.sqlite.org/2016/ http://www2.sqlite.org/2016/ http://www3.sqlite.org/2016/
 DISTNAME=	sqlite-autoconf-${PORTVERSION:C/\.([[:digit:]])[[:>:]]/0\1/g:S/.//g}00
@@ -11,8 +12,6 @@ MAINTAINER=	pavelivolkov@gmail.com
 COMMENT=	SQL database engine in a C library
 
 LICENSE=	PD
-
-CONFLICTS=	sqlcipher-[0-9]*
 
 USES=		libtool ncurses pathfix
 USE_LDCONFIG=	yes
