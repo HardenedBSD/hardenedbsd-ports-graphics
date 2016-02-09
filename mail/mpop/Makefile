@@ -2,14 +2,14 @@
 # $FreeBSD$
 
 PORTNAME=	mpop
-DISTVERSION=	1.2.3
+DISTVERSION=	1.2.4
 CATEGORIES=	mail
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${DISTVERSION}
 
 MAINTAINER=	jbeich@FreeBSD.org
 COMMENT=	Small and fast POP3 client
 
-LICENSE=	GPLv3 # (or later)
+LICENSE=	GPLv3+
 
 USES=		cpe gmake makeinfo pkgconfig tar:xz
 CPE_VENDOR=	martin_lambers

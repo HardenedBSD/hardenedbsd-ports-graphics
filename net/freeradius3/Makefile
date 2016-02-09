@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	freeradius
-DISTVERSION=	3.0.10
+DISTVERSION=	3.0.11
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.freeradius.org/pub/freeradius/%SUBDIR%/ \
 		ftp://ftp.ntua.gr/pub/net/radius/freeradius/%SUBDIR%/ \
@@ -154,7 +154,7 @@ PLIST_SUB+=	UNIXODBC="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MFIREBIRD}
-USE_FIREBIRD=	YES
+USES+=		firebird
 CONFIGURE_ARGS+=--with-rlm_sql_firebird
 PLIST_SUB+=	FIREBIRD=""
 .else

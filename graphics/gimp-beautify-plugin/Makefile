@@ -11,7 +11,7 @@ PKGNAMESUFFIX=	-plugin
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	GIMP plug-ins to both quickly and easily beautify photo
 
-LICENSE=	GPLv3 # or later
+LICENSE=	GPLv3+
 
 BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/fontconfig.pc:${PORTSDIR}/x11-fonts/fontconfig \
 		${LOCALBASE}/libdata/pkgconfig/freetype2.pc:${PORTSDIR}/print/freetype2 \
@@ -28,6 +28,7 @@ USES=		gettext gmake pkgconfig
 USE_GCC=	yes
 USE_GNOME=	atk cairo gdkpixbuf2 gtk20
 USE_XORG=	x11 xcomposite xcursor xdamage xext xfixes xi xinerama xrandr xrender
+TMPDIR=		${WRKDIR}
 
 PLUGIN_DIR?=	libexec/gimp/2.2/plug-ins
 PLUGINS=	beautify \

@@ -565,6 +565,7 @@
     SUBDIR += linux-f10-sdl_ttf
     SUBDIR += linux-f10-tiff
     SUBDIR += linux-f10-ungif
+    SUBDIR += llpp
     SUBDIR += lprof-devel
     SUBDIR += lua-gd
     SUBDIR += luminance
@@ -767,7 +768,6 @@
     SUBDIR += php5-exif
     SUBDIR += php5-ffmpeg
     SUBDIR += php5-gd
-    SUBDIR += php5-swfed
     SUBDIR += php55-exif
     SUBDIR += php55-gd
     SUBDIR += php56-exif
@@ -839,7 +839,6 @@
     SUBDIR += py-graph
     SUBDIR += py-graph-core
     SUBDIR += py-graph-dot
-    SUBDIR += py-graphviz
     SUBDIR += py-graphy
     SUBDIR += py-gvgen
     SUBDIR += py-imaging
@@ -864,6 +863,7 @@
     SUBDIR += py-pyganim
     SUBDIR += py-pyggel
     SUBDIR += py-pyglet
+    SUBDIR += py-pygraphviz
     SUBDIR += py-pygooglechart
     SUBDIR += py-pyproj
     SUBDIR += py-qt4-svg
@@ -891,6 +891,7 @@
     SUBDIR += qt4-opengl
     SUBDIR += qt4-pixeltool
     SUBDIR += qt4-svg
+    SUBDIR += qt5-3d
     SUBDIR += qt5-graphicaleffects
     SUBDIR += qt5-imageformats
     SUBDIR += qt5-opengl
@@ -954,6 +955,7 @@
     SUBDIR += sam2p
     SUBDIR += sampleicc
     SUBDIR += sane-backends
+    SUBDIR += sane-epkowa
     SUBDIR += sane-frontends
     SUBDIR += scale2x
     SUBDIR += scantailor

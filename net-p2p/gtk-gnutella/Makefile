@@ -35,14 +35,14 @@
 #
 
 PORTNAME=	gtk-gnutella
-PORTVERSION=	1.1.6
+PORTVERSION=	1.1.8
 CATEGORIES=	net-p2p ipv6
 MASTER_SITES=	SF
 
 MAINTAINER=	woodsb02@gmail.com
 COMMENT=	GTK based Gnutella client
 
-LICENSE=	GPLv2 # (or later)
+LICENSE=	GPLv2+
 
 USES=		iconv localbase pkgconfig tar:bzip2
 USE_GNOME=	glib20 libxml2

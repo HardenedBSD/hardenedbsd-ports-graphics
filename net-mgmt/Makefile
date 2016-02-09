@@ -28,6 +28,7 @@
     SUBDIR += ccnet
     SUBDIR += cdpd
     SUBDIR += cdpr
+    SUBDIR += cdpsnarf
     SUBDIR += centreon-clib
     SUBDIR += check_ipmi_sensor
     SUBDIR += check_logfiles
@@ -268,6 +269,7 @@
     SUBDIR += py-ipy
     SUBDIR += py-pyang
     SUBDIR += py-pysmi
+    SUBDIR += py-pyzabbix
     SUBDIR += py-snmp4
     SUBDIR += py-snmp4-apps
     SUBDIR += py-snmp4-mibs

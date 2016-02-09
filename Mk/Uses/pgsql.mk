@@ -31,7 +31,7 @@ _INCLUDE_USES_PGSQL_MK=	yes
 #	to add dependencies; use WANT_PGSQL as explained above
 #
 
-VALID_PGSQL_VER=	9.0 9.1 9.2 9.3 9.4
+VALID_PGSQL_VER=	9.0 9.1 9.2 9.3 9.4 9.5
 
 # Override non-default LIBVERS like this:
 #PGSQL99_LIBVER=6
@@ -127,7 +127,7 @@ LIB_DEPENDS+=	libpq.so.${PGSQL${PGSQL_VER_NODOT}_LIBVER}:${PORTSDIR}/databases/p
 
 _USE_PGSQL_DEP=		client contrib docs pgtcl pltcl plperl server
 _USE_PGSQL_DEP_client=	psql
-_USE_PGSQL_DEP_contrib=	pgbench
+_USE_PGSQL_DEP_contrib=	vacuumlo
 _USE_PGSQL_DEP_docs=	postgresql${PGSQL_VER_NODOT}-docs>0
 _USE_PGSQL_DEP_pgtcl=	${LOCALBASE}/lib/pgtcl/pkgIndex.tcl
 _USE_PGSQL_DEP_plperl=	postgresql${PGSQL_VER_NODOT}-plperl>0

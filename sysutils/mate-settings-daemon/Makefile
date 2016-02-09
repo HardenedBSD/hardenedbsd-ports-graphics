@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	mate-settings-daemon
-PORTVERSION=	1.10.2
+PORTVERSION=	1.12.1
 CATEGORIES=	sysutils mate
 MASTER_SITES=	MATE
 DIST_SUBDIR=	mate
@@ -61,7 +61,7 @@ GLIB_SCHEMAS=	org.mate.SettingsDaemon.plugins.a11y-keyboard.gschema.xml \
 OPTIONS_DEFINE=	PULSEAUDIO
 OPTIONS_SUB=	yes
 
-PULSEAUDIO_CONFIGURE_ENABLE=	pulseaudio
+PULSEAUDIO_CONFIGURE_ENABLE=	pulse
 PULSEAUDIO_LIB_DEPENDS=		libpulse.so:${PORTSDIR}/audio/pulseaudio
 
 .include <bsd.port.mk>

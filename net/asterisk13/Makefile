@@ -1,8 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	asterisk
-PORTVERSION=	13.6.0
-PORTREVISION=	1
+PORTVERSION=	13.7.2
 CATEGORIES=	net
 MASTER_SITES=	http://downloads.asterisk.org/pub/telephony/%SUBDIR%/:main,g729
 MASTER_SITE_SUBDIR=	asterisk/:main \
@@ -24,12 +23,11 @@ EXTRACT_ONLY:=	${DISTNAME}${EXTRACT_SUFX}
 
 ONLY_FOR_ARCHS=	i386 amd64 powerpc sparc64
 
-USES=		bison cpe gmake iconv localbase ncurses shebangfix
+USES=		bison cpe gmake iconv localbase ncurses shebangfix sqlite
 USE_CSTD=	gnu89
 USE_GNOME=	libxml2
 USE_LDCONFIG=	yes
 USE_OPENSSL=	yes
-USE_SQLITE=	3
 USE_RC_SUBR=	asterisk
 
 GNU_CONFIGURE=	yes
@@ -61,7 +59,7 @@ OPTIONS_DEFINE=			ASTVERSION BACKTRACE CURL EXCHANGE FREETDS LDAP LUA \
 				MP3PLAYER OOH323 PJSIP PORTAUDIO RADIUS SNMP \
 				SPANDSP SRTP SYSINFO XMPP
 OPTIONS_DEFAULT=		CURL FREETDS GCC GSM LUA MP3PLAYER NEWT ODBC PGSQL PJSIP \
-				PORTAUDIO RADIUS SNMP SPEEX SQLITE2 VORBIS \
+				PORTAUDIO RADIUS SNMP SPANDSP SPEEX SQLITE2 VORBIS \
 				XMPP
 
 OPTIONS_DEFINE_i386=		DAHDI
@@ -249,6 +247,9 @@ post-patch:
 .else
 	@${REINPLACE_CMD} -e '/#define HAVE_SYSINFO 1/d' ${WRKSRC}/configure
 	@${REINPLACE_CMD} -e '/%%LIBSYSINFO%%/d' ${WRKSRC}/main/Makefile
+.endif
+.if ${OPSYS} == FreeBSD && (${OSVERSION} < 1000015 && !(defined(WITH_OPENSSL_PORT) || (!defined(WITH_OPENSSL_BASE) && exists(${LOCALBASE}/lib/libcrypto.so))))
+	@${REINPLACE_CMD} -e 's/SSL_OP_NO_TLSv1[_12]*;/0;/' ${WRKSRC}/main/tcptls.c
 .endif
 
 .if exists(${FILESDIR}/.asterisk.makeopts)

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	iverilog
-PORTVERSION=	10.0
+PORTVERSION=	10.1
 CATEGORIES=	cad
 MASTER_SITES=	ftp://icarus.com/pub/eda/verilog/v${PORTVERSION:C,\.[0-9]$,,}/
 DISTNAME=	verilog-${PORTVERSION}
@@ -14,6 +14,8 @@ LICENSE=	GPLv2
 
 GNU_CONFIGURE=	yes
 USES=		bison gmake
+
+MAKE_JOBS_UNSAFE=	yes
 
 .include <bsd.port.options.mk>
 

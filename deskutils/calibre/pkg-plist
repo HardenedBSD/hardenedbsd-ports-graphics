@@ -153,6 +153,7 @@ lib/calibre/calibre/devices/usbobserver/test.py
 lib/calibre/calibre/devices/user_defined/__init__.py
 lib/calibre/calibre/devices/user_defined/driver.py
 lib/calibre/calibre/devices/utils.py
+lib/calibre/calibre/devices/winusb.py
 lib/calibre/calibre/ebooks/BeautifulSoup.py
 lib/calibre/calibre/ebooks/__init__.py
 lib/calibre/calibre/ebooks/azw4/__init__.py
@@ -797,6 +798,7 @@ lib/calibre/calibre/gui2/dialogs/drm_error_ui.py
 lib/calibre/calibre/gui2/dialogs/duplicates.py
 lib/calibre/calibre/gui2/dialogs/edit_authors_dialog.py
 lib/calibre/calibre/gui2/dialogs/edit_authors_dialog_ui.py
+lib/calibre/calibre/gui2/dialogs/exim.py
 lib/calibre/calibre/gui2/dialogs/job_view_ui.py
 lib/calibre/calibre/gui2/dialogs/jobs_ui.py
 lib/calibre/calibre/gui2/dialogs/match_books.py
@@ -955,10 +957,12 @@ lib/calibre/calibre/gui2/store/search/search.py
 lib/calibre/calibre/gui2/store/search/search_ui.py
 lib/calibre/calibre/gui2/store/search_result.py
 lib/calibre/calibre/gui2/store/stores/__init__.py
+lib/calibre/calibre/gui2/store/stores/amazon_au_plugin.py
 lib/calibre/calibre/gui2/store/stores/amazon_ca_plugin.py
 lib/calibre/calibre/gui2/store/stores/amazon_de_plugin.py
 lib/calibre/calibre/gui2/store/stores/amazon_es_plugin.py
 lib/calibre/calibre/gui2/store/stores/amazon_fr_plugin.py
+lib/calibre/calibre/gui2/store/stores/amazon_in_plugin.py
 lib/calibre/calibre/gui2/store/stores/amazon_it_plugin.py
 lib/calibre/calibre/gui2/store/stores/amazon_plugin.py
 lib/calibre/calibre/gui2/store/stores/amazon_uk_plugin.py
@@ -1239,6 +1243,7 @@ lib/calibre/calibre/utils/config.py
 lib/calibre/calibre/utils/config_base.py
 lib/calibre/calibre/utils/date.py
 lib/calibre/calibre/utils/dbus_service.py
+lib/calibre/calibre/utils/exim.py
 lib/calibre/calibre/utils/file_associations.py
 lib/calibre/calibre/utils/file_type_icons.py
 lib/calibre/calibre/utils/filenames.py
@@ -1275,6 +1280,7 @@ lib/calibre/calibre/utils/icu_test.py
 lib/calibre/calibre/utils/img.py
 lib/calibre/calibre/utils/imghdr.py
 lib/calibre/calibre/utils/inotify.py
+lib/calibre/calibre/utils/ip_routing.py
 lib/calibre/calibre/utils/ipc/__init__.py
 lib/calibre/calibre/utils/ipc/job.py
 lib/calibre/calibre/utils/ipc/launch.py
@@ -1283,6 +1289,7 @@ lib/calibre/calibre/utils/ipc/proxy.py
 lib/calibre/calibre/utils/ipc/server.py
 lib/calibre/calibre/utils/ipc/simple_worker.py
 lib/calibre/calibre/utils/ipc/worker.py
+lib/calibre/calibre/utils/iphlpapi.py
 lib/calibre/calibre/utils/ipython.py
 lib/calibre/calibre/utils/linux_trash.py
 lib/calibre/calibre/utils/localization.py
@@ -1928,10 +1935,19 @@ lib/calibre/tinycss/version.py
 %%DATADIR%%/viewer/images.js
 %%DATADIR%%/viewer/jquery_scrollTo.js
 %%DATADIR%%/viewer/mathjax/MathJax.js
+%%DATADIR%%/viewer/mathjax/extensions/AssistiveMML.js
+%%DATADIR%%/viewer/mathjax/extensions/CHTML-preview.js
 %%DATADIR%%/viewer/mathjax/extensions/FontWarnings.js
+%%DATADIR%%/viewer/mathjax/extensions/HTML-CSS/handle-floats.js
+%%DATADIR%%/viewer/mathjax/extensions/HelpDialog.js
+%%DATADIR%%/viewer/mathjax/extensions/MatchWebFonts.js
 %%DATADIR%%/viewer/mathjax/extensions/MathEvents.js
+%%DATADIR%%/viewer/mathjax/extensions/MathML/content-mathml.js
+%%DATADIR%%/viewer/mathjax/extensions/MathML/mml3.js
 %%DATADIR%%/viewer/mathjax/extensions/MathMenu.js
 %%DATADIR%%/viewer/mathjax/extensions/MathZoom.js
+%%DATADIR%%/viewer/mathjax/extensions/Safe.js
+%%DATADIR%%/viewer/mathjax/extensions/TeX/AMScd.js
 %%DATADIR%%/viewer/mathjax/extensions/TeX/AMSmath.js
 %%DATADIR%%/viewer/mathjax/extensions/TeX/AMSsymbols.js
 %%DATADIR%%/viewer/mathjax/extensions/TeX/HTML.js
@@ -1946,6 +1962,7 @@ lib/calibre/tinycss/version.py
 %%DATADIR%%/viewer/mathjax/extensions/TeX/enclose.js
 %%DATADIR%%/viewer/mathjax/extensions/TeX/extpfeil.js
 %%DATADIR%%/viewer/mathjax/extensions/TeX/mathchoice.js
+%%DATADIR%%/viewer/mathjax/extensions/TeX/mediawiki-texvc.js
 %%DATADIR%%/viewer/mathjax/extensions/TeX/mhchem.js
 %%DATADIR%%/viewer/mathjax/extensions/TeX/newcommand.js
 %%DATADIR%%/viewer/mathjax/extensions/TeX/noErrors.js
@@ -1953,6 +1970,7 @@ lib/calibre/tinycss/version.py
 %%DATADIR%%/viewer/mathjax/extensions/TeX/unicode.js
 %%DATADIR%%/viewer/mathjax/extensions/TeX/verb.js
 %%DATADIR%%/viewer/mathjax/extensions/asciimath2jax.js
+%%DATADIR%%/viewer/mathjax/extensions/fast-preview.js
 %%DATADIR%%/viewer/mathjax/extensions/jsMath2jax.js
 %%DATADIR%%/viewer/mathjax/extensions/mml2jax.js
 %%DATADIR%%/viewer/mathjax/extensions/tex2jax.js

@@ -1,14 +1,14 @@
 # $FreeBSD$
 
 PORTNAME=	warzone2100
-PORTVERSION=	3.1.2
+PORTVERSION=	3.1.3
 CATEGORIES=	games
 MASTER_SITES=	SF/${PORTNAME}/releases/${PORTVERSION}/
 
 MAINTAINER=	amdmi3@FreeBSD.org
 COMMENT=	Innovative 3D real-time strategy game
 
-LICENSE=	GPLv2 # or later
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/COPYING
 
 BUILD_DEPENDS=	zip:${PORTSDIR}/archivers/zip \

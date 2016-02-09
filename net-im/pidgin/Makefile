@@ -29,7 +29,7 @@ CONFIGURE_ARGS=	--disable-consoleui \
 		--enable-screensaver \
 		--with-dynamic_prpls=${PRPL_MODULES:S/,$//}
 
-post-stage:
+post-stage-PERL-on:
 	@${SED} -i '' -e 's|^${STAGEDIR}||g' \
 		${STAGEDIR}${PREFIX}/lib/pidgin/perl/auto/Pidgin/.packlist
 

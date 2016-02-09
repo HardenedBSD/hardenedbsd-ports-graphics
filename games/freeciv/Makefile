@@ -2,9 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	freeciv
-PORTVERSION=	2.5.1
+PORTVERSION=	2.5.3
 CATEGORIES=	games
-MASTER_SITES=	SF/freeciv/Freeciv%20${PORTVERSION:R}/${PORTVERSION}
+MASTER_SITES=	SF/freeciv/Freeciv%20${PORTVERSION:R}/${PORTVERSION} \
+		http://download.gna.org/freeciv/stable/
 
 MAINTAINER=	johans@FreeBSD.org
 COMMENT=	Free turn-based multiplayer strategy
@@ -13,8 +14,7 @@ RUN_DEPENDS=	hicolor-icon-theme>=0:${PORTSDIR}/misc/hicolor-icon-theme
 LIB_DEPENDS=	libltdl.so:${PORTSDIR}/devel/libltdl \
 		libcurl.so:${PORTSDIR}/ftp/curl
 
-USES=		gettext gmake iconv libtool pkgconfig tar:bzip2 python
-USE_SQLITE=	yes
+USES=		gettext gmake iconv libtool pkgconfig tar:bzip2 python sqlite
 GNU_CONFIGURE=	yes
 LDFLAGS+=	-L${LOCALBASE}/lib
 CPPFLAGS+=	-I${LOCALBASE}/include

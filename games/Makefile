@@ -1,7 +1,7 @@
 # $FreeBSD$
 #
 
-    COMMENT = Games
+    COMMENT = Games and related software
 
     SUBDIR += 0ad
     SUBDIR += 0verkill
@@ -212,7 +212,6 @@
     SUBDIR += dsnake
     SUBDIR += duckmaze
     SUBDIR += duel
-    SUBDIR += duke3d-data
     SUBDIR += dunelegacy
     SUBDIR += dungeon
     SUBDIR += dungeoncrawl
@@ -409,6 +408,7 @@
     SUBDIR += hohlin
     SUBDIR += hoichess
     SUBDIR += holotz-castle
+    SUBDIR += hoverboard-sdl
     SUBDIR += hypatia_engine
     SUBDIR += iagno
     SUBDIR += icbm3d
@@ -546,6 +546,7 @@
     SUBDIR += linux-rtcw
     SUBDIR += linux-ssamtfe
     SUBDIR += linux-ssamtse
+    SUBDIR += linux-unigine-heaven
     SUBDIR += linux-unrealgold
     SUBDIR += linux-uplink-demo
     SUBDIR += linux-ut
@@ -626,6 +627,8 @@
     SUBDIR += nethack33-nox11
     SUBDIR += nethack34
     SUBDIR += nethack34-nox11
+    SUBDIR += nethack36
+    SUBDIR += nethack36-nox11
     SUBDIR += netherearth
     SUBDIR += netpanzer
     SUBDIR += netradiant
@@ -891,6 +894,7 @@
     SUBDIR += sjeng
     SUBDIR += ski
     SUBDIR += sl
+    SUBDIR += slade
     SUBDIR += slashem-tty
     SUBDIR += slump
     SUBDIR += slune

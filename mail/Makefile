@@ -33,6 +33,7 @@
     SUBDIR += bayespam
     SUBDIR += bbmail
     SUBDIR += biabam
+    SUBDIR += bincimap
     SUBDIR += bmf
     SUBDIR += bogofilter
     SUBDIR += bogofilter-sqlite
@@ -69,6 +70,7 @@
     SUBDIR += claws-mail-tnef
     SUBDIR += claws-mail-vcalendar
     SUBDIR += clawsker
+    SUBDIR += cleanup-maildir
     SUBDIR += cone
     SUBDIR += coolmail
     SUBDIR += courier
@@ -362,6 +364,7 @@
     SUBDIR += p5-Mail-CheckUser
     SUBDIR += p5-Mail-ClamAV
     SUBDIR += p5-Mail-DKIM
+    SUBDIR += p5-Mail-DMARC
     SUBDIR += p5-Mail-DeliveryStatus-BounceParser
     SUBDIR += p5-Mail-DomainKeys
     SUBDIR += p5-Mail-Ezmlm
@@ -467,7 +470,6 @@
     SUBDIR += php56-imap
     SUBDIR += phplist
     SUBDIR += phpmailer
-    SUBDIR += phpmailer2
     SUBDIR += pine-pgp-filters
     SUBDIR += pm-lib
     SUBDIR += policyd2

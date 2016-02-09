@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	tin
-PORTVERSION=	2.3.1
+PORTVERSION=	2.3.2
 CATEGORIES+=	news ipv6
 MASTER_SITES=	ftp://ftp.tin.org/pub/news/clients/tin/v${PORTVERSION:R}/ \
 		ftp://ftp.sunet.se/pub/news/readers/tin/v${PORTVERSION:R}/ \
@@ -24,7 +24,7 @@ LIB_DEPENDS=	libuu.so:${PORTSDIR}/converters/uulib \
 		libpcre.so:${PORTSDIR}/devel/pcre
 RUN_DEPENDS=	${LOCALBASE}/etc/mime.types:${PORTSDIR}/misc/mime-support
 
-USES=		gmake iconv shebangfix tar:bzip2
+USES=		gmake iconv ncurses shebangfix tar:bzip2
 GNU_CONFIGURE=	yes
 SHEBANG_FILES=	tools/opt-case.pl tools/tinews.pl tools/url_handler.pl \
 		tools/w2r.pl

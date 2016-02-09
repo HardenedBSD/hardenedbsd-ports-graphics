@@ -7,6 +7,7 @@
     SUBDIR += ADMsnmp
     SUBDIR += R-cran-ROAuth
     SUBDIR += R-cran-digest
+    SUBDIR += R-cran-openssl
     SUBDIR += aescrypt
     SUBDIR += aespipe
     SUBDIR += afl
@@ -50,6 +51,7 @@
     SUBDIR += calife
     SUBDIR += ccrypt
     SUBDIR += ccsrch
+    SUBDIR += certificate-transparency
     SUBDIR += cfs
     SUBDIR += cfv
     SUBDIR += chaosreader
@@ -109,6 +111,7 @@
     SUBDIR += dsniff
     SUBDIR += duo
     SUBDIR += easy-rsa
+    SUBDIR += easy-rsa2
     SUBDIR += easypg
     SUBDIR += elixir-comeonin
     SUBDIR += elixir-comeonin_i18n
@@ -233,6 +236,7 @@
     SUBDIR += httprint
     SUBDIR += hydra
     SUBDIR += i2p
+    SUBDIR += i2pd
     SUBDIR += iaikpkcs11wrapper
     SUBDIR += idea
     SUBDIR += identify
@@ -279,6 +283,7 @@
     SUBDIR += l5
     SUBDIR += lasso
     SUBDIR += lastpass-cli
+    SUBDIR += letsencrypt.sh
     SUBDIR += libassuan
     SUBDIR += libbeid
     SUBDIR += libbf
@@ -464,6 +469,7 @@
     SUBDIR += p5-Authen-Ticket
     SUBDIR += p5-Authen-TypeKey
     SUBDIR += p5-Business-PayPal-EWP
+    SUBDIR += p5-Bytes-Random-Secure
     SUBDIR += p5-CACertOrg-CA
     SUBDIR += p5-CSP
     SUBDIR += p5-Cisco-Hash
@@ -539,7 +545,9 @@
     SUBDIR += p5-Crypt-Rabbit
     SUBDIR += p5-Crypt-RandPasswd
     SUBDIR += p5-Crypt-Random
+    SUBDIR += p5-Crypt-Random-Seed
     SUBDIR += p5-Crypt-Random-Source
+    SUBDIR += p5-Crypt-Random-TESHA2
     SUBDIR += p5-Crypt-Rijndael
     SUBDIR += p5-Crypt-Rijndael_PP
     SUBDIR += p5-Crypt-SKey
@@ -570,6 +578,7 @@
     SUBDIR += p5-Dancer-Plugin-Auth-Extensible-Provider-Usergroup
     SUBDIR += p5-Dancer-Plugin-Passphrase
     SUBDIR += p5-Dancer2-Plugin-Auth-Extensible
+    SUBDIR += p5-Dancer2-Plugin-Auth-Extensible-Provider-DBIC
     SUBDIR += p5-Dancer2-Plugin-Auth-Extensible-Provider-Usergroup
     SUBDIR += p5-Dancer2-Plugin-Passphrase
     SUBDIR += p5-Data-Entropy
@@ -668,6 +677,7 @@
     SUBDIR += p5-openxpki
     SUBDIR += p5-openxpki-i18n
     SUBDIR += pad
+    SUBDIR += pam-modules
     SUBDIR += pam-mysql
     SUBDIR += pam-pgsql
     SUBDIR += pam_fprint
@@ -773,7 +783,6 @@
     SUBDIR += pks
     SUBDIR += pktsuckers
     SUBDIR += please
-    SUBDIR += polarssl
     SUBDIR += polarssl13
     SUBDIR += poly1305aes
     SUBDIR += pond
@@ -797,6 +806,7 @@
     SUBDIR += py-Products.PlonePAS
     SUBDIR += py-Products.PluggableAuthService
     SUBDIR += py-RestrictedPython
+    SUBDIR += py-scrypt
     SUBDIR += py-SecretStorage
     SUBDIR += py-acme
     SUBDIR += py-artifacts
@@ -849,13 +859,17 @@
     SUBDIR += py-pyaff4
     SUBDIR += py-pyclamd
     SUBDIR += py-pycrypto
+    SUBDIR += py-pycryptodome
     SUBDIR += py-pycryptopp
     SUBDIR += py-pydeep
     SUBDIR += py-pyelliptic
     SUBDIR += py-pylibacl
+    SUBDIR += py-pymacaroons-pynacl
     SUBDIR += py-pyme
     SUBDIR += py-pynacl
+    SUBDIR += py-pyotp
     SUBDIR += py-pyptlib
+    SUBDIR += py-pysaml2
     SUBDIR += py-pyscard
     SUBDIR += py-pysha3
     SUBDIR += py-python-gnupg
@@ -866,6 +880,7 @@
     SUBDIR += py-requests-kerberos
     SUBDIR += py-rsa
     SUBDIR += py-service_identity
+    SUBDIR += py-signedjson
     SUBDIR += py-slowaes
     SUBDIR += py-ssh
     SUBDIR += py-sslstrip
@@ -1052,6 +1067,7 @@
     SUBDIR += stoken
     SUBDIR += strobe
     SUBDIR += strongswan
+    SUBDIR += stud
     SUBDIR += stunnel
     SUBDIR += subversion-gnome-keyring
     SUBDIR += subversion-kwallet

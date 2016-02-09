@@ -16,6 +16,9 @@ CONFIGURE_TARGET=	configure
 USE_RUBY=	yes
 USE_GNOME=	glib20
 
+BROKEN_RUBY22=	yes
+BROKEN_RUBY23=	yes
+
 PLIST=		${.CURDIR}/pkg-plist
 
 XMMS2_SLAVE=	ruby

@@ -9,7 +9,7 @@ MASTER_SITES=	http://triptico.com/download/mp/
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Programming text editor
 
-LICENSE=	GPLv2 # (or later)
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/COPYING
 
 USES=		iconv ncurses
@@ -69,6 +69,7 @@ post-patch:
 		's|<ncursesw/|<| ; \
 		 s|-I/usr/local/include|| ; \
 		 s|-L/usr/local/lib|| ; \
+		 s|-lncursesw|${LDFLAGS} -lncursesw| ; \
 		 /gtk+/s|3.0|${CONFOPT_GTK}.0| ; \
 		 /OK/s|3.0|${CONFOPT_GTK}.0| ; \
 		 /CONFOPT_GTK/s|3|${CONFOPT_GTK}|' ${WRKSRC}/config.sh

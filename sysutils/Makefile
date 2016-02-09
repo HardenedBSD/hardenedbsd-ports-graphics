@@ -31,6 +31,7 @@
     SUBDIR += anacron
     SUBDIR += and
     SUBDIR += ansible
+    SUBDIR += ansible1
     SUBDIR += apachetop
     SUBDIR += apcpwr
     SUBDIR += apcupsd
@@ -126,6 +127,7 @@
     SUBDIR += cfengine-masterfiles
     SUBDIR += cfengine-masterfiles36
     SUBDIR += cfengine-masterfiles37
+    SUBDIR += cfengine-masterfiles38
     SUBDIR += cfengine22
     SUBDIR += cfengine32
     SUBDIR += cfengine33
@@ -133,6 +135,7 @@
     SUBDIR += cfengine35
     SUBDIR += cfengine36
     SUBDIR += cfengine37
+    SUBDIR += cfengine38
     SUBDIR += chgrep
     SUBDIR += cinnamon-control-center
     SUBDIR += cinnamon-settings-daemon
@@ -340,6 +343,7 @@
     SUBDIR += gconf-editor
     SUBDIR += gdisk
     SUBDIR += gdmap
+    SUBDIR += genisoimage
     SUBDIR += geomWatch
     SUBDIR += geomgui
     SUBDIR += getdelta
@@ -436,10 +440,12 @@
     SUBDIR += jadm
     SUBDIR += jail-primer
     SUBDIR += jail2
+    SUBDIR += jailadmin
     SUBDIR += jailctl
     SUBDIR += jaildaemon
     SUBDIR += jailme
     SUBDIR += jailrc
+    SUBDIR += jailutils
     SUBDIR += javaservicewrapper
     SUBDIR += jdiskreport
     SUBDIR += jfbterm
@@ -501,7 +507,6 @@
     SUBDIR += lmon
     SUBDIR += lnav
     SUBDIR += log_analysis
-    SUBDIR += loganalyzer
     SUBDIR += logrotate
     SUBDIR += logstalgia
     SUBDIR += logstash
@@ -760,10 +765,10 @@
     SUBDIR += pstacku
     SUBDIR += pstree
     SUBDIR += ptools
-    SUBDIR += puppet
     SUBDIR += puppet-lint
     SUBDIR += puppet-mode.el
     SUBDIR += puppet37
+    SUBDIR += puppet38
     SUBDIR += puppet4
     SUBDIR += pv
     SUBDIR += pwd_unmkdb
@@ -776,6 +781,7 @@
     SUBDIR += py-croniter
     SUBDIR += py-crontab
     SUBDIR += py-danzfs
+    SUBDIR += py-diffoscope
     SUBDIR += py-dlipower
     SUBDIR += py-drmaa
     SUBDIR += py-execnet

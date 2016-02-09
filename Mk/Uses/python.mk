@@ -10,14 +10,14 @@
 #
 # version 	If your port requires only some set of Python versions, you
 # 		can set this to [min]-[max] or min+ or -max or as an
-# 		explicit version or as a meta port version (eg. 3.2-3.3 for
-# 		[min]-[max], 2.7+ or -3.2 for min+ and -max, 2.7 for an
+# 		explicit version or as a meta port version (eg. 3.3-3.4 for
+# 		[min]-[max], 2.7+ or -3.3 for min+ and -max, 2.7 for an
 # 		explicit version or 3 for a meta port version). Example:
 #
 #			USES=python:2.7		# Only use Python 2.7
-#			USES=python:3.2+	# Use Python 3.2 or newer
-#			USES=python:3.2-3.3	# Use Python 3.2 or 3.3
-#			USES=python:-3.2	# Use any Python up to 3.2
+#			USES=python:3.3+	# Use Python 3.3 or newer
+#			USES=python:3.3-3.4	# Use Python 3.3 or 3.4
+#			USES=python:-3.3	# Use any Python up to 3.3
 #			USES=python:2		# Use the Python 2 meta port
 #			USES=python		# Use the set default Python
 #						# version
@@ -220,7 +220,7 @@
 _INCLUDE_USES_PYTHON_MK=	yes
 
 # What Python version and what Python interpreters are currently supported?
-_PYTHON_VERSIONS=		2.7 3.4 3.5 3.3 3.2	# preferred first
+_PYTHON_VERSIONS=		2.7 3.4 3.5 3.3	# preferred first
 _PYTHON_PORTBRANCH=		2.7		# ${_PYTHON_VERSIONS:[1]}
 _PYTHON_BASECMD=		${LOCALBASE}/bin/python
 _PYTHON_RELPORTDIR=		${PORTSDIR}/lang/python
@@ -327,10 +327,8 @@ _WANTS_META_PORT=	3
 # hint. Just warn maintainers, if the versions do not match
 # (_PYTHON_VERSION_NONSUPPORTED).
 _PYTHON_VERSION:=	${PYTHON_VERSION:S/^python//}
-_PYTHON_CMD=		${LOCALBASE}/bin/${PYTHON_VERSION}
 .else
 _PYTHON_VERSION:=	${PYTHON_DEFAULT_VERSION:S/^python//}
-_PYTHON_CMD=		${LOCALBASE}/bin/${PYTHON_DEFAULT_VERSION}
 .endif # defined(PYTHON_VERSION)
 
 # Validate Python version whether it meets the version restriction.
@@ -362,7 +360,6 @@ __VER=		${ver}
 	!(!empty(_PYTHON_VERSION_MAXIMUM) && ( \
 		${__VER} > ${_PYTHON_VERSION_MAXIMUM}))
 _PYTHON_VERSION=	${ver}
-_PYTHON_CMD=		${LOCALBASE}/bin/python${ver}
 .endif
 .endfor
 .if !defined(_PYTHON_VERSION)

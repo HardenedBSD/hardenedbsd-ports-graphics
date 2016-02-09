@@ -370,6 +370,7 @@
     SUBDIR += posixtestsuite
     SUBDIR += proxyper
     SUBDIR += pspresent
+    SUBDIR += py-tqdm
     SUBDIR += py-YABT
     SUBDIR += py-osd
     SUBDIR += py-pexpect
@@ -392,6 +393,7 @@
     SUBDIR += qt4-l10n
     SUBDIR += qt4-qtconfig
     SUBDIR += qt4-qtdemo
+    SUBDIR += qt5-l10n
     SUBDIR += qt5ct
     SUBDIR += quotes
     SUBDIR += raspberrypi-userland

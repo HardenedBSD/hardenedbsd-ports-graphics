@@ -377,6 +377,7 @@
     SUBDIR += octave-forge-signal
     SUBDIR += octave-forge-simp
     SUBDIR += octave-forge-sockets
+    SUBDIR += octave-forge-sparsersb
     SUBDIR += octave-forge-specfun
     SUBDIR += octave-forge-special-matrix
     SUBDIR += octave-forge-spline-gcvspl
@@ -388,6 +389,7 @@
     SUBDIR += octave-forge-symband
     SUBDIR += octave-forge-symbolic
     SUBDIR += octave-forge-tcl-octave
+    SUBDIR += octave-forge-tisean
     SUBDIR += octave-forge-tsa
     SUBDIR += octave-forge-video
     SUBDIR += octave-forge-xraylib
@@ -397,6 +399,7 @@
     SUBDIR += open-axiom
     SUBDIR += openblas
     SUBDIR += openfst
+    SUBDIR += openlibm
     SUBDIR += orpie
     SUBDIR += p5-AI-DecisionTree
     SUBDIR += p5-AI-Genetic
@@ -579,6 +582,7 @@
     SUBDIR += py-bitmath
     SUBDIR += py-bitvector
     SUBDIR += py-bottleneck
+    SUBDIR += py-cdecimal
     SUBDIR += py-colormath
     SUBDIR += py-cryptominisat
     SUBDIR += py-fastcluster
@@ -700,6 +704,7 @@
     SUBDIR += wxMaxima
     SUBDIR += x12arima
     SUBDIR += xblas
+    SUBDIR += xfce4-calculator-plugin
     SUBDIR += xgobi
     SUBDIR += xgraph
     SUBDIR += xlapack

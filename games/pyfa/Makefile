@@ -2,14 +2,14 @@
 # $FreeBSD$
 
 PORTNAME=	pyfa
-PORTVERSION=	1.17.1
+PORTVERSION=	1.18.0
 DISTVERSIONPREFIX=	v
 CATEGORIES=	games python
 
 MAINTAINER=	andrey@bsdnir.info
 COMMENT=	Fitting tool for EVE Online
 
-LICENSE=	GPLv3 # or later
+LICENSE=	GPLv3+
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}dateutil>0:${PORTSDIR}/devel/py-dateutil \

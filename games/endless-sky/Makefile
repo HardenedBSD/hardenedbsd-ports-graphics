@@ -2,14 +2,15 @@
 # $FreeBSD$
 
 PORTNAME=	endless-sky
-PORTVERSION=	0.8.8
+PORTVERSION=	0.8.11
 DISTVERSIONPREFIX=	v
 CATEGORIES=	games
 
 MAINTAINER=	amdmi3@FreeBSD.org
 COMMENT=	Space exploration and combat game similar to Escape Velocity
 
-LICENSE=	GPLv3 # or later
+LICENSE=	GPLv3+
+LICENSE_FILE=	${WRKSRC}/license.txt
 
 LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png
 
@@ -29,6 +30,6 @@ post-build:
 		${WRKSRC}/source/Files.cpp
 
 post-install:
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/${PORTNAME}
+	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/${PORTNAME}
 
 .include <bsd.port.mk>
