@@ -18,7 +18,7 @@
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
-MESABASEVERSION=	11.1.1
+MESABASEVERSION=	11.1.2
 # if there is a subversion, don't include the '-' between 7.11-rc2.
 MESASUBVERSION=	
 
@@ -73,6 +73,8 @@ MESA_LLVM_VER=37
 CONFIGURE_ARGS+=	--disable-dri3
 
 CONFIGURE_ARGS+=	--enable-gbm
+
+CONFIGURE_ARGS+=	--enable-glx-tls
 
 # libEGL, dri and clover need gallium enabled.
 # the third option in --with-egl-platforms is wayland.
