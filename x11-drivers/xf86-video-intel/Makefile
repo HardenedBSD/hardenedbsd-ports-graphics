@@ -2,8 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-intel
-PORTVERSION=	2.99.917
+PORTVERSION=	2.99.917.1
 CATEGORIES=	x11-drivers
+MASTER_SITES=	http://rainbow-runner.nl/freebsd/
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Driver for Intel integrated graphics chipsets
@@ -28,10 +29,10 @@ USE_XORG=	glproto \
 USES+=		cpe
 CPE_VENDOR=	x
 
-CONFIGURE_ENV+=	xorg_cv_cc_flag__Wno_maybe_uninitialized=no
 CONFIGURE_ARGS+=	--enable-sna \
-			--disable-uxa \
 			--disable-dri3
+# default to uxa since sna gives a black screen (which mouse cursor, though)
+CONFIGURE_ARGS+=	--with-default-accel=uxa
 INSTALL_TARGET=	install-strip
 
 .include <bsd.port.options.mk>

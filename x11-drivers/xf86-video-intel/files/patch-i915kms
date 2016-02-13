@@ -1,28 +1,10 @@
---- src/intel_device.c.orig	2014-11-18 22:50:39.000000000 +0100
-+++ src/intel_device.c	2014-12-21 20:26:36.204491002 +0100
-@@ -323,6 +323,7 @@
- 	 * and search for a matching entry in /dev.
- 	 */
+--- src/intel_device.c.orig	2016-02-12 21:18:24.019141000 +0100
++++ src/intel_device.c	2016-02-12 21:19:45.023765000 +0100
+@@ -204,6 +204,7 @@
+ }
  
-+	/* XXX devq query here */
- 	base = sprintf(path,
- 		       "/sys/bus/pci/devices/%04x:%02x:%02x.%d/",
- 		       pci->domain, pci->bus, pci->dev, pci->func);
-@@ -336,7 +337,7 @@
- 
- 		sprintf(path + base, "driver");
- 		if (stat(path, &st)) {
--			if (xf86LoadKernelModule("i915"))
-+			if (xf86LoadKernelModule("i915kms"))
- 				return -1;
- 			(void)xf86LoadKernelModule("fbcon");
- 		}
-@@ -399,7 +400,7 @@
- 
- 	ret = drmCheckModesettingSupported(id);
- 	if (ret) {
--		if (xf86LoadKernelModule("i915"))
-+		if (xf86LoadKernelModule("i915kms"))
- 			ret = drmCheckModesettingSupported(id);
- 		if (ret)
- 			return -1;
+ static const char *kernel_module_names[] ={
++	"i915kms",
+ 	"i915",
+ 	NULL,
+ };
