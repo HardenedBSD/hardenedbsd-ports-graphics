@@ -1,6 +1,6 @@
---- src/intel_device.c.orig	2016-02-12 21:18:24.019141000 +0100
-+++ src/intel_device.c	2016-02-12 21:19:45.023765000 +0100
-@@ -204,6 +204,7 @@
+--- src/intel_device.c.orig	2016-02-16 09:25:09.124344000 +0100
++++ src/intel_device.c	2016-02-16 09:22:49.541922000 +0100
+@@ -204,6 +207,7 @@
  }
  
  static const char *kernel_module_names[] ={
@@ -8,3 +8,12 @@
  	"i915",
  	NULL,
  };
+@@ -425,7 +429,7 @@
+ 		 pci->domain, pci->bus, pci->dev, pci->func);
+ 
+ 	ret = drmCheckModesettingSupported(id);
+-	if (ret) {
++	if (ret || 1) {
+ 		if (load_i915_kernel_module() == 0)
+ 			ret = drmCheckModesettingSupported(id);
+ 		if (ret)
