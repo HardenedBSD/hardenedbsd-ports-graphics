@@ -42,6 +42,7 @@
     SUBDIR += R-cran-reshape2
     SUBDIR += R-cran-rngtools
     SUBDIR += R-cran-rstudioapi
+    SUBDIR += R-cran-tidyr
     SUBDIR += SpecTcl
     SUBDIR += aap
     SUBDIR += aarch64-binutils
@@ -947,6 +948,7 @@
     SUBDIR += hs-mueval
     SUBDIR += hs-murmur-hash
     SUBDIR += hs-mutable-containers
+    SUBDIR += hs-ncurses
     SUBDIR += hs-newtype
     SUBDIR += hs-old-locale
     SUBDIR += hs-old-time
@@ -1123,6 +1125,7 @@
     SUBDIR += libbobcat
     SUBDIR += libbonobo
     SUBDIR += libbonobo-reference
+    SUBDIR += libbrotli
     SUBDIR += libbson
     SUBDIR += libburn
     SUBDIR += libc++
@@ -1392,6 +1395,7 @@
     SUBDIR += linux_libusb
     SUBDIR += lion
     SUBDIR += lldb37
+    SUBDIR += lldb38
     SUBDIR += llnextgen
     SUBDIR += llvm-cheri
     SUBDIR += llvm-devel
@@ -3742,19 +3746,10 @@
     SUBDIR += php5-blitz-devel
     SUBDIR += php5-dav
     SUBDIR += php5-geshi
-    SUBDIR += php5-gettext
     SUBDIR += php5-ice
-    SUBDIR += php5-json
     SUBDIR += php5-msgpack
-    SUBDIR += php5-pcntl
     SUBDIR += php5-pinba
-    SUBDIR += php5-readline
-    SUBDIR += php5-shmop
-    SUBDIR += php5-sysvmsg
-    SUBDIR += php5-sysvsem
-    SUBDIR += php5-sysvshm
     SUBDIR += php5-thrift
-    SUBDIR += php5-tokenizer
     SUBDIR += php55-gettext
     SUBDIR += php55-json
     SUBDIR += php55-pcntl
@@ -3773,6 +3768,16 @@
     SUBDIR += php56-sysvsem
     SUBDIR += php56-sysvshm
     SUBDIR += php56-tokenizer
+    SUBDIR += php70-gettext
+    SUBDIR += php70-intl
+    SUBDIR += php70-json
+    SUBDIR += php70-pcntl
+    SUBDIR += php70-readline
+    SUBDIR += php70-shmop
+    SUBDIR += php70-sysvmsg
+    SUBDIR += php70-sysvsem
+    SUBDIR += php70-sysvshm
+    SUBDIR += php70-tokenizer
     SUBDIR += phpbt
     SUBDIR += phpsh
     SUBDIR += phpunit
@@ -3995,6 +4000,7 @@
     SUBDIR += py-decorator
     SUBDIR += py-decoratortools
     SUBDIR += py-defusedxml
+    SUBDIR += py-delfick_error
     SUBDIR += py-deliciousapi
     SUBDIR += py-demjson
     SUBDIR += py-dexml
@@ -4180,6 +4186,7 @@
     SUBDIR += py-omniorb
     SUBDIR += py-omniorb-3
     SUBDIR += py-optik
+    SUBDIR += py-option_merge
     SUBDIR += py-orbit
     SUBDIR += py-ordereddict
     SUBDIR += py-oslo.i18n
@@ -4367,6 +4374,7 @@
     SUBDIR += py-stsci.distutils
     SUBDIR += py-subversion
     SUBDIR += py-subvertpy
+    SUBDIR += py-sure
     SUBDIR += py-sysctl
     SUBDIR += py-sysv_ipc
     SUBDIR += py-tables
@@ -4377,6 +4385,7 @@
     SUBDIR += py-tempora
     SUBDIR += py-tempstorage
     SUBDIR += py-termcolor
+    SUBDIR += py-terminable_thread
     SUBDIR += py-termstyle
     SUBDIR += py-testgears
     SUBDIR += py-testoob

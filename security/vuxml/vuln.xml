@@ -55,9 +55,722 @@ Help is also available from ports-security@freebsd.org.
 Notes:
   * Please add new entries to the beginning of this file.
   * Do not forget port variants (linux-f10-libxml2, libxml2, etc.)
-
 -->
 <vuxml xmlns="http://www.vuxml.org/apps/vuxml-1">
+  <vuln vid="006e3b7c-d7d7-11e5-b85f-0018fe623f2b">
+    <topic>jasper -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+        <name>jasper</name>
+        <range><le>1.900.1_16</le></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+        <p>oCERT reports:</p>
+        <blockquote cite="http://www.ocert.org/advisories/ocert-2014-012.html">
+          <p>The library is affected by a double-free vulnerability in function
+            jas_iccattrval_destroy()
+            as well as a heap-based buffer overflow in function jp2_decode().
+            A specially crafted jp2 file can be used to trigger the vulnerabilities.</p>
+        </blockquote>
+        <p>oCERT reports:</p>
+        <blockquote cite="http://www.ocert.org/advisories/ocert-2015-001.html">
+          <p>The library is affected by an off-by-one error in a buffer boundary check
+            in jpc_dec_process_sot(), leading to a heap based buffer overflow, as well
+            as multiple unrestricted stack memory use issues in jpc_qmfb.c, leading to
+            stack overflow.
+            A specially crafted jp2 file can be used to trigger the vulnerabilities.</p>
+        </blockquote>
+        <p>oCERT reports:</p>
+        <blockquote cite="http://www.ocert.org/advisories/ocert-2014-009.html">
+          <p>Multiple off-by-one flaws, leading to heap-based buffer overflows, were
+            found in the way JasPer decoded JPEG 2000 files. A specially crafted file
+            could cause an application using JasPer to crash or,
+            possibly, execute arbitrary code.</p>
+        </blockquote>
+        <p>limingxing reports:</p>
+        <blockquote cite="http://seclists.org/oss-sec/2016/q1/233">
+          <p>A vulnerability was found in the way the JasPer's jas_matrix_clip()
+            function parses certain JPEG 2000 image files. A specially crafted file
+            could cause an application using JasPer to crash.</p>
+        </blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://www.ocert.org/advisories/ocert-2014-012.html</url>
+      <url>https://bugzilla.redhat.com/show_bug.cgi?id=1173157</url>
+      <url>https://bugzilla.redhat.com/show_bug.cgi?id=1173162</url>
+      <url>http://www.ocert.org/advisories/ocert-2015-001.html</url>
+      <url>https://bugzilla.redhat.com/show_bug.cgi?id=1179282</url>
+      <url>http://www.ocert.org/advisories/ocert-2014-009.html</url>
+      <url>https://bugzilla.redhat.com/show_bug.cgi?id=1167537</url>
+      <url>http://seclists.org/oss-sec/2016/q1/233</url>
+      <url>https://bugzilla.redhat.com/show_bug.cgi?id=1302636</url>
+      <cvename>CVE-2014-8137</cvename>
+      <cvename>CVE-2014-8138</cvename>
+      <cvename>CVE-2014-8157</cvename>
+      <cvename>CVE-2014-8158</cvename>
+      <cvename>CVE-2014-9029</cvename>
+      <cvename>CVE-2016-2089</cvename>
+    </references>
+    <dates>
+      <discovery>2014-12-10</discovery>
+      <entry>2016-02-20</entry>
+      <modified>2016-02-20</modified>
+    </dates>
+  </vuln>
+
+  <vuln vid="368993bb-d685-11e5-8858-00262d5ed8ee">
+    <topic>chromium -- same origin bypass</topic>
+    <affects>
+      <package>
+	<name>chromium</name>
+	<name>chromium-npapi</name>
+	<name>chromium-pulse</name>
+	<range><lt>48.0.2564.116</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Google Chrome Releases reports:</p>
+	<blockquote cite="http://googlechromereleases.blogspot.nl/2016/02/stable-channel-update_18.html">
+	  <p>[583431] Critical CVE-2016-1629: Same-origin bypass in Blink
+	    and Sandbox escape in Chrome. Credit to anonymous.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2016-1629</cvename>
+      <url>http://googlechromereleases.blogspot.nl/2016/02/stable-channel-update_18.html</url>
+    </references>
+    <dates>
+      <discovery>2016-02-18</discovery>
+      <entry>2016-02-18</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="2dd7e97e-d5e8-11e5-bcbd-bc5ff45d0f28">
+    <topic>glibc -- getaddrinfo stack-based buffer overflow</topic>
+    <affects>
+      <package>
+	<name>linux_base-c6</name>
+	<name>linux_base-c6_64</name>
+	<range><lt>6.7_1</lt></range>
+      </package>
+      <package>
+	<name>linux_base-f10</name>
+	<range><ge>0</ge></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Fabio Olive Leite reports:</p>
+	<blockquote cite="https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2015-7547">
+	  <p>A stack-based buffer overflow was found in libresolv when invoked
+	    from nss_dns, allowing specially crafted DNS responses to seize
+	    control of EIP in the DNS client. The buffer overflow occurs in the
+	    functions send_dg (send datagram) and send_vc (send TCP) for the
+	    NSS module libnss_dns.so.2 when calling getaddrinfo with AF_UNSPEC
+	    family, or in some cases AF_INET6 family. The use of AF_UNSPEC (or
+	    AF_INET6 in some cases) triggers the low-level resolver code to
+	    send out two parallel queries for A and AAAA. A mismanagement of
+	    the buffers used for those queries could result in the response of
+	    a query writing beyond the alloca allocated buffer created by
+	    __res_nquery.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-7547</cvename>
+      <freebsdpr>ports/207272</freebsdpr>
+      <url>https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2015-7547</url>
+      <url>https://blog.des.no/2016/02/freebsd-and-cve-2015-7547/</url>
+      <url>https://googleonlinesecurity.blogspot.no/2016/02/cve-2015-7547-glibc-getaddrinfo-stack.html</url>
+      <url>https://sourceware.org/ml/libc-alpha/2016-02/msg00416.html</url>
+    </references>
+    <dates>
+      <discovery>2016-02-16</discovery>
+      <entry>2016-02-18</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="56562efb-d5e4-11e5-b2bd-002590263bf5">
+    <topic>squid -- SSL/TLS processing remote DoS</topic>
+    <affects>
+      <package>
+	<name>squid</name>
+	<range><ge>3.5.13</ge><lt>3.5.14</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Squid security advisory 2016:1 reports:</p>
+	<blockquote cite="http://www.squid-cache.org/Advisories/SQUID-2016_1.txt">
+	  <p>Due to incorrectly handling server errors Squid is vulnerable to a
+	    denial of service attack when connecting to TLS or SSL servers.</p>
+	  <p>This problem allows any trusted client to perform a denial of
+	    service attack on the Squid service regardless of whether TLS or
+	    SSL is configured for use in the proxy.</p>
+	  <p>Misconfigured client or server software may trigger this issue
+	    to perform a denial of service unintentionally.</p>
+	  <p>However, the bug is exploitable only if Squid is built using the
+	    --with-openssl option.</p>
+	</blockquote>
+	<p>The FreeBSD port does not use SSL by default and is not vulnerable
+	  in the default configuration.</p>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2016-2390</cvename>
+      <freebsdpr>ports/207294</freebsdpr>
+      <url>http://www.squid-cache.org/Advisories/SQUID-2016_1.txt</url>
+    </references>
+    <dates>
+      <discovery>2016-02-16</discovery>
+      <entry>2016-02-18</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="dd563930-d59a-11e5-8fa8-14dae9d210b8">
+    <topic>adminer -- remote code execution</topic>
+    <affects>
+      <package>
+	<name>adminer</name>
+	<range><lt>4.2.4</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Jakub Vrana reports:</p>
+	<blockquote cite="https://github.com/vrana/adminer/commit/e5352cc5acad21513bb02677e2021b80bf7e7b8b">
+	  <p>Fix remote code execution in SQLite query</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://github.com/vrana/adminer/commit/e5352cc5acad21513bb02677e2021b80bf7e7b8b</url>
+    </references>
+    <dates>
+      <discovery>2016-02-06</discovery>
+      <entry>2016-02-17</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="18201a1c-d59a-11e5-8fa8-14dae9d210b8">
+    <topic>adminer -- XSS vulnerability</topic>
+    <affects>
+      <package>
+	<name>adminer</name>
+	<range><lt>4.2.3</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Jakub Vrana reports:</p>
+	<blockquote cite="https://github.com/vrana/adminer/commit/4be0b6655e0bf415960659db2a6dd4e60eebbd66">
+	  <p>Fix XSS in indexes (non-MySQL only)</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://github.com/vrana/adminer/commit/4be0b6655e0bf415960659db2a6dd4e60eebbd66</url>
+    </references>
+    <dates>
+      <discovery>2015-11-08</discovery>
+      <entry>2016-02-17</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="ad91ee9b-d599-11e5-8fa8-14dae9d210b8">
+    <topic>adminer -- XSS vulnerability</topic>
+    <affects>
+      <package>
+	<name>adminer</name>
+	<range><lt>4.2.2</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Jakub Vrana reports:</p>
+	<blockquote cite="https://github.com/vrana/adminer/commit/596f8df373cd3efe5bcb6013858bd7a6bb5ecb2c">
+	  <p>Fix XSS in alter table</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://github.com/vrana/adminer/commit/596f8df373cd3efe5bcb6013858bd7a6bb5ecb2c</url>
+    </references>
+    <dates>
+      <discovery>2015-08-05</discovery>
+      <entry>2016-02-17</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="8cf54d73-d591-11e5-8fa8-14dae9d210b8">
+    <topic>adminer -- XSS vulnerability</topic>
+    <affects>
+      <package>
+	<name>adminer</name>
+	<range><lt>4.2.0</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Jakub Vrana reports:</p>
+	<blockquote cite="https://github.com/vrana/adminer/commit/c990de3b3ee1816afb130bd0e1570577bf54a8e5">
+	  <p>Fix XSS in login form</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://github.com/vrana/adminer/commit/c990de3b3ee1816afb130bd0e1570577bf54a8e5</url>
+      <url>https://sourceforge.net/p/adminer/bugs-and-features/436/</url>
+    </references>
+    <dates>
+      <discovery>2015-01-30</discovery>
+      <entry>2016-02-17</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="95b92e3b-d451-11e5-9794-e8e0b747a45a">
+    <topic>libgcrypt -- side-channel attack on ECDH</topic>
+    <affects>
+      <package>
+	<name>libgcrypt</name>
+	<range><lt>1.6.5</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>GnuPG reports:</p>
+	<blockquote cite="https://lists.gnupg.org/pipermail/gnupg-announce/2016q1/000384.html">
+	  <p>Mitigate side-channel attack on ECDH with Weierstrass curves.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-7511</cvename>
+      <url>https://lists.gnupg.org/pipermail/gnupg-announce/2016q1/000384.html</url>
+    </references>
+    <dates>
+      <discovery>2016-02-09</discovery>
+      <entry>2016-02-16</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="f1bf28c5-d447-11e5-b2bd-002590263bf5">
+    <topic>xdelta3 -- buffer overflow vulnerability</topic>
+    <affects>
+      <package>
+	<name>xdelta3</name>
+	<range><lt>3.0.9,1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Stepan Golosunov reports:</p>
+	<blockquote cite="http://www.openwall.com/lists/oss-security/2016/02/08/1">
+	  <p>Buffer overflow was found and fixed in xdelta3 binary diff tool
+	    that allows arbitrary code execution from input files at least on
+	    some systems.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2014-9765</cvename>
+      <url>http://www.openwall.com/lists/oss-security/2016/02/08/1</url>
+      <url>https://github.com/jmacd/xdelta-devel/commit/ef93ff74203e030073b898c05e8b4860b5d09ef2</url>
+    </references>
+    <dates>
+      <discovery>2014-10-08</discovery>
+      <entry>2016-02-16</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="172b22cb-d3f6-11e5-ac9e-485d605f4717">
+    <topic>firefox -- Same-origin-policy violation using Service Workers with plugins</topic>
+    <affects>
+      <package>
+	<name>firefox</name>
+	<range><lt>44.0.2,1</lt></range>
+      </package>
+      <package>
+	<name>linux-firefox</name>
+	<range><lt>44.0.2,1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The Mozilla Foundation reports:</p>
+	<blockquote cite="https://www.mozilla.org/en-US/security/known-vulnerabilities/firefox/#firefox44.0.2">
+	  <p>MFSA 2016-13 Jason Pang of OneSignal reported that service workers intercept
+	    responses to plugin network requests made through the browser. Plugins which
+	    make security decisions based on the content of network requests can have these
+	    decisions subverted if a service worker forges responses to those requests. For
+	    example, a forged crossdomain.xml could allow a malicious site to violate the
+	    same-origin policy using the Flash plugin.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2016-1949</cvename>
+      <url>https://www.mozilla.org/en-US/security/advisories/mfsa2016-13/</url>
+    </references>
+    <dates>
+      <discovery>2016-02-11</discovery>
+      <entry>2016-02-15</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="07718e2b-d29d-11e5-a95f-b499baebfeaf">
+    <topic>nghttp2 -- Out of memory in nghttpd, nghttp, and libnghttp2_asio</topic>
+    <affects>
+      <package>
+	<name>nghttp2</name>
+	<range><lt>1.7.1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Nghttp2 reports:</p>
+	<blockquote cite="https://nghttp2.org/blog/2016/02/11/nghttp2-v1-7-1/">
+	  <p>Out of memory in nghttpd, nghttp, and libnghttp2_asio applications
+	   due to unlimited incoming HTTP header fields.</p>
+	  <p>nghttpd, nghttp, and libnghttp2_asio applications do not limit the memory usage
+	   for the incoming HTTP header field. If peer sends specially crafted HTTP/2
+	   HEADERS frames and CONTINUATION frames, they will crash with out of memory
+	   error.</p>
+	  <p>Note that libnghttp2 itself is not affected by this vulnerability.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://nghttp2.org/blog/2016/02/11/nghttp2-v1-7-1/</url>
+      <cvename>CVE-2016-1544</cvename>
+    </references>
+    <dates>
+      <discovery>2016-02-03</discovery>
+      <entry>2016-02-13</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="3aa8b781-d2c4-11e5-b2bd-002590263bf5">
+    <topic>horde -- XSS vulnerabilies</topic>
+    <affects>
+      <package>
+	<name>horde</name>
+	<range><lt>5.2.9</lt></range>
+      </package>
+      <package>
+	<name>pear-Horde_Core</name>
+	<range><lt>2.22.6</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>The Horde Team reports:</p>
+	<blockquote cite="http://lists.horde.org/archives/announce/2016/001149.html">
+	  <p>Fixed XSS vulnerabilities in menu bar and form renderer.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2015-8807</cvename>
+      <cvename>CVE-2016-2228</cvename>
+      <url>https://github.com/horde/horde/commit/11d74fa5a22fe626c5e5a010b703cd46a136f253</url>
+      <url>https://bugs.horde.org/ticket/14213</url>
+      <url>https://github.com/horde/horde/commit/f03301cf6edcca57121a15e80014c4d0f29d99a0</url>
+      <url>https://github.com/horde/horde/commit/ab07a1b447de34e13983b4d7ceb18b58c3a358d8</url>
+      <url>http://www.openwall.com/lists/oss-security/2016/02/06/4</url>
+      <url>http://lists.horde.org/archives/announce/2016/001149.html</url>
+    </references>
+    <dates>
+      <discovery>2016-02-02</discovery>
+      <entry>2016-02-14</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="e8b6605b-d29f-11e5-8458-6cc21735f730">
+    <topic>PostgreSQL -- Security Fixes for Regular Expressions, PL/Java.</topic>
+    <affects>
+      <package>
+	<name>postgresql91-server</name>
+	<range><ge>9.1.0</ge><lt>9.1.20</lt></range>
+      </package>
+      <package>
+	<name>postgresql92-server</name>
+	<range><ge>9.2.0</ge><lt>9.2.15</lt></range>
+      </package>
+      <package>
+	<name>postgresql93-server</name>
+	<range><ge>9.3.0</ge><lt>9.3.11</lt></range>
+      </package>
+      <package>
+	<name>postgresql94-server</name>
+	<range><ge>9.4.0</ge><lt>9.4.6</lt></range>
+      </package>
+      <package>
+	<name>postgresql95-server</name>
+	<range><ge>9.5.0</ge><lt>9.5.1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>PostgreSQL project reports:</p>
+	<blockquote cite="http://www.postgresql.org/about/news/1644/">
+	  <p>
+	  Security Fixes for Regular Expressions, PL/Java
+	  </p>
+	  <ul>
+	    <li>CVE-2016-0773: This release closes security hole CVE-2016-0773,
+	     an issue with regular expression (regex) parsing. Prior code allowed
+	     users to pass in expressions which included out-of-range Unicode
+	     characters, triggering a backend crash.  This issue is critical for
+	     PostgreSQL systems with untrusted users or which generate regexes
+	     based on user input.
+	    </li>
+	    <li>CVE-2016-0766: The update also fixes CVE-2016-0766, a privilege
+	     escalation issue for users of PL/Java.  Certain custom configuration
+	     settings (GUCS) for PL/Java will now be modifiable only by the
+	     database superuser
+	    </li>
+	  </ul>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2016-0773</cvename>
+      <cvename>CVE-2016-0766</cvename>
+    </references>
+    <dates>
+      <discovery>2016-02-08</discovery>
+      <entry>2016-02-12</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="5d8e56c3-9e67-4d5b-81c9-3a409dfd705f">
+    <topic>flash -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>linux-c6-flashplugin</name>
+	<name>linux-f10-flashplugin</name>
+	<name>linux-c6_64-flashplugin</name>
+	<range><lt>11.2r202.569</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Adobe reports:</p>
+	<blockquote cite="https://helpx.adobe.com/security/products/flash-player/apsb16-04.html">
+	  <p>These updates resolve a type confusion vulnerability that
+	    could lead to code execution (CVE-2016-0985).</p>
+	  <p>These updates resolve use-after-free vulnerabilities that
+	    could lead to code execution (CVE-2016-0973, CVE-2016-0974,
+	    CVE-2016-0975, CVE-2016-0982, CVE-2016-0983, CVE-2016-0984).</p>
+	  <p>These updates resolve a heap buffer overflow vulnerability
+	    that could lead to code execution (CVE-2016-0971).</p>
+	  <p>These updates resolve memory corruption vulnerabilities
+	    that could lead to code execution (CVE-2016-0964,
+	    CVE-2016-0965, CVE-2016-0966, CVE-2016-0967, CVE-2016-0968,
+	    CVE-2016-0969, CVE-2016-0970, CVE-2016-0972, CVE-2016-0976,
+	    CVE-2016-0977, CVE-2016-0978, CVE-2016-0979, CVE-2016-0980,
+	    CVE-2016-0981).</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2016-0964</cvename>
+      <cvename>CVE-2016-0965</cvename>
+      <cvename>CVE-2016-0966</cvename>
+      <cvename>CVE-2016-0967</cvename>
+      <cvename>CVE-2016-0968</cvename>
+      <cvename>CVE-2016-0969</cvename>
+      <cvename>CVE-2016-0970</cvename>
+      <cvename>CVE-2016-0971</cvename>
+      <cvename>CVE-2016-0972</cvename>
+      <cvename>CVE-2016-0973</cvename>
+      <cvename>CVE-2016-0974</cvename>
+      <cvename>CVE-2016-0975</cvename>
+      <cvename>CVE-2016-0976</cvename>
+      <cvename>CVE-2016-0977</cvename>
+      <cvename>CVE-2016-0978</cvename>
+      <cvename>CVE-2016-0979</cvename>
+      <cvename>CVE-2016-0980</cvename>
+      <cvename>CVE-2016-0981</cvename>
+      <cvename>CVE-2016-0982</cvename>
+      <cvename>CVE-2016-0983</cvename>
+      <cvename>CVE-2016-0984</cvename>
+      <cvename>CVE-2016-0985</cvename>
+      <url>https://helpx.adobe.com/security/products/flash-player/apsb16-04.html</url>
+    </references>
+    <dates>
+      <discovery>2016-02-09</discovery>
+      <entry>2016-02-10</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="515b4327-cf8a-11e5-96d6-14dae9d210b8">
+    <topic>dnscrypt-proxy -- code execution</topic>
+    <affects>
+      <package>
+	<name>dnscrypt-proxy</name>
+	<range><ge>1.1.0</ge><lt>1.6.1</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Frank Denis reports:</p>
+	<blockquote cite="https://github.com/jedisct1/dnscrypt-proxy/blob/1d129f7d5f0d469308967cbe4eacb4a6919f1fa1/NEWS#L2-L8">
+	  <p>Malformed packets could lead to denial of service or code
+	    execution.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://github.com/jedisct1/dnscrypt-proxy/blob/1d129f7d5f0d469308967cbe4eacb4a6919f1fa1/NEWS#L2-L8</url>
+    </references>
+    <dates>
+      <discovery>2016-02-02</discovery>
+      <entry>2016-02-10</entry>
+      <modified>2016-02-14</modified>
+    </dates>
+  </vuln>
+
+  <vuln vid="36034227-cf81-11e5-9c2b-00262d5ed8ee">
+    <topic>chromium -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>chromium</name>
+	<name>chromium-npapi</name>
+	<name>chromium-pulse</name>
+	<range><lt>48.0.2564.109</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Google Chrome Releases reports:</p>
+	<blockquote cite="http://googlechromereleases.blogspot.nl/2016/02/stable-channel-update_9.html">
+	  <p>6 security fixes in this release, including:</p>
+	  <ul>
+	    <li>[546677] High CVE-2016-1622: Same-origin bypass in Extensions.
+	      Credit to anonymous.</li>
+	    <li>[577105] High CVE-2016-1623: Same-origin bypass in DOM. Credit
+	      to Mariusz Mlynski.</li>
+	    <li>[583607] High CVE-2016-1624: Buffer overflow in Brotli. Credit
+	      to lukezli.</li>
+	    <li>[509313] Medium CVE-2016-1625: Navigation bypass in Chrome
+	      Instant. Credit to Jann Horn.</li>
+	    <li>[571480] Medium CVE-2016-1626: Out-of-bounds read in PDFium.
+	      Credit to anonymous, working with HP's Zero Day Initiative.</li>
+	    <li>[585517] CVE-2016-1627: Various fixes from internal audits,
+	      fuzzing and other initiatives.</li>
+	  </ul>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2016-1622</cvename>
+      <cvename>CVE-2016-1623</cvename>
+      <cvename>CVE-2016-1624</cvename>
+      <cvename>CVE-2016-1625</cvename>
+      <cvename>CVE-2016-1626</cvename>
+      <cvename>CVE-2016-1627</cvename>
+      <url>http://googlechromereleases.blogspot.nl/2016/02/stable-channel-update_9.html</url>
+    </references>
+    <dates>
+      <discovery>2016-02-08</discovery>
+      <entry>2016-02-09</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="8f10fa04-cf6a-11e5-96d6-14dae9d210b8">
+    <topic>graphite2 -- code execution vulnerability</topic>
+    <affects>
+      <package>
+	<name>graphite2</name>
+	<range><lt>1.3.5</lt></range>
+      </package>
+      <package>
+	<name>silgraphite</name>
+	<range><lt>2.3.1_4</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Talos reports:</p>
+	<blockquote cite="http://blog.talosintel.com/2016/02/vulnerability-spotlight-libgraphite.html">
+	  <ul>
+	  <li><p>An exploitable denial of service vulnerability exists
+	    in the font handling of Libgraphite. A specially crafted font can cause
+	    an out-of-bounds read potentially resulting in an information leak or
+	    denial of service.</p></li>
+	  <li><p>A specially crafted font can cause a buffer overflow
+	    resulting in potential code execution.</p></li>
+	  <li><p>An exploitable NULL pointer dereference exists in the
+	    bidirectional font handling functionality of Libgraphite. A specially
+	    crafted font can cause a NULL pointer dereference resulting in a
+	    crash.</p></li>
+	  </ul>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://blog.talosintel.com/2016/02/vulnerability-spotlight-libgraphite.html</url>
+      <cvename>CVE-2016-1521</cvename>
+      <cvename>CVE-2016-1522</cvename>
+      <cvename>CVE-2016-1523</cvename>
+      <cvename>CVE-2016-1526</cvename>
+    </references>
+    <dates>
+      <discovery>2016-02-05</discovery>
+      <entry>2016-02-09</entry>
+      <modified>2016-02-18</modified>
+    </dates>
+  </vuln>
+
+  <vuln vid="1cecd5e0-c372-11e5-96d6-14dae9d210b8">
+    <topic>xymon-server -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>xymon-server</name>
+	<range><lt>4.3.25</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>J.C. Cleaver reports:</p>
+	<blockquote cite="http://lists.xymon.com/pipermail/xymon/2016-February/042986.html">
+	  <ul>
+	  <li><p>CVE-2016-2054: Buffer overflow in xymond handling of
+	    "config" command</p></li>
+	  <li><p> CVE-2016-2055: Access to possibly confidential files
+	    in the Xymon configuration directory</p></li>
+	  <li><p>CVE-2016-2056: Shell command injection in the
+	    "useradm" and "chpasswd" web applications</p></li>
+	  <li><p>CVE-2016-2057: Incorrect permissions on IPC queues
+	    used by the xymond daemon can bypass IP access filtering</p></li>
+	  <li><p>CVE-2016-2058: Javascript injection in "detailed status
+	    webpage" of monitoring items; XSS vulnerability via malformed
+	    acknowledgment messages</p></li>
+	  </ul>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>http://lists.xymon.com/pipermail/xymon/2016-February/042986.html</url>
+      <cvename>CVE-2016-2054</cvename>
+      <cvename>CVE-2016-2055</cvename>
+      <cvename>CVE-2016-2056</cvename>
+      <cvename>CVE-2016-2057</cvename>
+      <cvename>CVE-2016-2058</cvename>
+    </references>
+    <dates>
+      <discovery>2016-01-19</discovery>
+      <entry>2016-02-09</entry>
+    </dates>
+  </vuln>
+
   <vuln vid="85eb4e46-cf16-11e5-840f-485d605f4717">
     <topic>php -- pcre vulnerability</topic>
     <affects>
@@ -2811,7 +3524,7 @@ Notes:
       <package>
 	<name>qemu-sbruno</name>
 	<name>qemu-user-static</name>
-	<range><ge>0</ge></range>
+	<range><lt>2.5.50.g20160213</lt></range>
       </package>
     </affects>
     <description>
@@ -2835,10 +3548,13 @@ Notes:
       <freebsdpr>ports/205814</freebsdpr>
       <url>http://www.openwall.com/lists/oss-security/2015/12/28/6</url>
       <url>https://lists.gnu.org/archive/html/qemu-devel/2015-12/msg04629.html</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=007cd223de527b5f41278f2d886c1a4beb3e67aa</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/007cd223de527b5f41278f2d886c1a4beb3e67aa</url>
     </references>
     <dates>
       <discovery>2015-12-28</discovery>
       <entry>2016-01-03</entry>
+      <modified>2016-02-13</modified>
     </dates>
   </vuln>
 
@@ -2893,7 +3609,7 @@ Notes:
       <package>
 	<name>qemu-sbruno</name>
 	<name>qemu-user-static</name>
-	<range><ge>0</ge></range>
+	<range><lt>2.5.50.g20160213</lt></range>
       </package>
     </affects>
     <description>
@@ -2915,10 +3631,13 @@ Notes:
       <freebsdpr>ports/205814</freebsdpr>
       <url>http://www.openwall.com/lists/oss-security/2015/12/22/8</url>
       <url>https://lists.gnu.org/archive/html/qemu-devel/2015-12/msg02930.html</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=64ffbe04eaafebf4045a3ace52a360c14959d196</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/64ffbe04eaafebf4045a3ace52a360c14959d196</url>
     </references>
     <dates>
       <discovery>2015-12-23</discovery>
       <entry>2016-01-03</entry>
+      <modified>2016-02-13</modified>
     </dates>
   </vuln>
 
@@ -2933,7 +3652,7 @@ Notes:
       <package>
 	<name>qemu-sbruno</name>
 	<name>qemu-user-static</name>
-	<range><ge>0</ge></range>
+	<range><lt>2.5.50.g20160213</lt></range>
       </package>
     </affects>
     <description>
@@ -2954,10 +3673,13 @@ Notes:
       <freebsdpr>ports/205814</freebsdpr>
       <url>http://www.openwall.com/lists/oss-security/2015/12/21/7</url>
       <url>https://lists.gnu.org/archive/html/qemu-devel/2015-12/msg03737.html</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=36fef36b91f7ec0435215860f1458b5342ce2811</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/36fef36b91f7ec0435215860f1458b5342ce2811</url>
     </references>
     <dates>
       <discovery>2015-12-21</discovery>
       <entry>2016-01-03</entry>
+      <modified>2016-02-13</modified>
     </dates>
   </vuln>
 
@@ -2972,7 +3694,7 @@ Notes:
       <package>
 	<name>qemu-sbruno</name>
 	<name>qemu-user-static</name>
-	<range><ge>0</ge></range>
+	<range><lt>2.5.50.g20160213</lt></range>
       </package>
     </affects>
     <description>
@@ -2994,10 +3716,13 @@ Notes:
       <freebsdpr>ports/205814</freebsdpr>
       <url>http://www.openwall.com/lists/oss-security/2015/12/15/4</url>
       <url>https://lists.gnu.org/archive/html/qemu-devel/2015-12/msg02299.html</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=aa4a3dce1c88ed51b616806b8214b7c8428b7470</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/aa4a3dce1c88ed51b616806b8214b7c8428b7470</url>
     </references>
     <dates>
       <discovery>2015-12-15</discovery>
       <entry>2016-01-03</entry>
+      <modified>2016-02-13</modified>
     </dates>
   </vuln>
 
@@ -3195,7 +3920,7 @@ Notes:
       <package>
 	<name>qemu-sbruno</name>
 	<name>qemu-user-static</name>
-	<range><ge>0</ge></range>
+	<range><lt>2.5.50.g20160213</lt></range>
       </package>
     </affects>
     <description>
@@ -3219,10 +3944,13 @@ Notes:
       <freebsdpr>ports/205814</freebsdpr>
       <url>http://www.openwall.com/lists/oss-security/2015/11/25/3</url>
       <url>https://lists.gnu.org/archive/html/qemu-devel/2015-10/msg03911.html</url>
+      <url>http://git.qemu.org/?p=qemu.git;a=commit;h=00837731d254908a841d69298a4f9f077babaf24</url>
+      <url>https://github.com/seanbruno/qemu-bsd-user/commit/00837731d254908a841d69298a4f9f077babaf24</url>
     </references>
     <dates>
       <discovery>2015-10-16</discovery>
       <entry>2016-01-03</entry>
+      <modified>2016-02-13</modified>
     </dates>
   </vuln>
 
@@ -9415,11 +10143,13 @@ Notes:
     </description>
     <references>
       <freebsdpr>ports/203186</freebsdpr>
+      <url>http://www.squid-cache.org/Advisories/SQUID-2015_3.txt</url>
       <url>http://www.openwall.com/lists/oss-security/2015/09/18/1</url>
     </references>
     <dates>
       <discovery>2015-09-18</discovery>
       <entry>2015-09-18</entry>
+      <modified>2016-02-18</modified>
     </dates>
   </vuln>
 
@@ -10816,6 +11546,10 @@ Notes:
     <description>
       <body xmlns="http://www.w3.org/1999/xhtml">
 	<blockquote cite="http://www.openssh.com/txt/release-7.0">
+	  <p>OpenSSH 6.8 and 6.9 incorrectly set TTYs to be world-writable.
+	    Local attackers may be able to write arbitrary messages to
+	    logged-in users, including terminal escape sequences. Reported
+	    by Nikolay Edigaryev.</p>
 	  <p>Fixed a privilege separation
 	    weakness related to PAM support. Attackers who could successfully
 	    compromise the pre-authentication process for remote code
@@ -10830,11 +11564,14 @@ Notes:
     </description>
     <references>
       <url>http://www.openssh.com/txt/release-7.0</url>
+      <cvename>CVE-2015-6563</cvename>
+      <cvename>CVE-2015-6564</cvename>
+      <cvename>CVE-2015-6565</cvename>
     </references>
     <dates>
       <discovery>2015-08-11</discovery>
       <entry>2015-08-21</entry>
-      <modified>2016-01-15</modified>
+      <modified>2016-02-14</modified>
     </dates>
   </vuln>
 
@@ -11102,7 +11839,7 @@ Notes:
     <affects>
       <package>
 	<name>jasper</name>
-	<range><le>1.900.1_14</le></range>
+	<range><le>1.900.1_16</le></range>
       </package>
     </affects>
     <description>
@@ -11132,7 +11869,7 @@ Notes:
     <dates>
       <discovery>2015-08-17</discovery>
       <entry>2015-08-18</entry>
-      <modified>2015-08-20</modified>
+      <modified>2016-02-20</modified>
     </dates>
   </vuln>
 
