@@ -1034,6 +1034,7 @@
     SUBDIR += idutils
     SUBDIR += ifd-test
     SUBDIR += imake
+    SUBDIR += include-what-you-use
     SUBDIR += inilib
     SUBDIR += iniparser
     SUBDIR += initutil
@@ -3925,6 +3926,7 @@
     SUBDIR += py-argh
     SUBDIR += py-argparse
     SUBDIR += py-args
+    SUBDIR += py-arrow
     SUBDIR += py-aspects
     SUBDIR += py-aspyct
     SUBDIR += py-astroid
@@ -3965,6 +3967,7 @@
     SUBDIR += py-click
     SUBDIR += py-clint
     SUBDIR += py-clonedigger
+    SUBDIR += py-cloudpickle
     SUBDIR += py-cmdln
     SUBDIR += py-codegen
     SUBDIR += py-cog
