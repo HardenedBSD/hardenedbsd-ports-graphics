@@ -74,7 +74,13 @@ CONFIGURE_ARGS+=	--disable-dri3
 
 CONFIGURE_ARGS+=	--enable-gbm
 
-CONFIGURE_ARGS+=	--enable-glx-tls
+# There are issues that need to be fixed to use TLS model "initial-exec"
+# So stick with "global-dynamic"'s model for now. kan@ is working on a
+# patch for rtld. We might want to backport global-dynamic or
+# pthread_setspecific which it uses now by default. But since this
+# configure switch is going away ...
+# https://lists.freebsd.org/pipermail/freebsd-arch/2016-February/017699.html
+#CONFIGURE_ARGS+=	--enable-glx-tls
 
 # libEGL, dri and clover need gallium enabled.
 # the third option in --with-egl-platforms is wayland.
