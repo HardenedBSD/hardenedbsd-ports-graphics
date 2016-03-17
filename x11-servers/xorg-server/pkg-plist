@@ -22,6 +22,7 @@ include/xorg/damage.h
 include/xorg/damagestr.h
 include/xorg/dbestruct.h
 include/xorg/dgaproc.h
+include/xorg/displaymode.h
 include/xorg/dix.h
 include/xorg/dixaccess.h
 include/xorg/dixevents.h
