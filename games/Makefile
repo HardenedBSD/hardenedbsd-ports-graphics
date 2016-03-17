@@ -121,6 +121,7 @@
     SUBDIR += burrtools
     SUBDIR += bygfoot
     SUBDIR += bzflag
+    SUBDIR += bzflag-server
     SUBDIR += cake
     SUBDIR += caph
     SUBDIR += capicity
@@ -341,6 +342,7 @@
     SUBDIR += gnake
     SUBDIR += gnarr
     SUBDIR += gno3dtet
+    SUBDIR += gnome-2048
     SUBDIR += gnome-chess
     SUBDIR += gnome-games
     SUBDIR += gnome-klotski
@@ -409,6 +411,7 @@
     SUBDIR += hoichess
     SUBDIR += holotz-castle
     SUBDIR += hoverboard-sdl
+    SUBDIR += hs-scroll
     SUBDIR += hypatia_engine
     SUBDIR += iagno
     SUBDIR += icbm3d
@@ -512,6 +515,7 @@
     SUBDIR += lianliankan
     SUBDIR += libdungeonmaker
     SUBDIR += libfov
+    SUBDIR += libgames-support
     SUBDIR += libggz
     SUBDIR += libkdegames
     SUBDIR += libkmahjongg
@@ -547,6 +551,7 @@
     SUBDIR += linux-ssamtfe
     SUBDIR += linux-ssamtse
     SUBDIR += linux-unigine-heaven
+    SUBDIR += linux-unigine-valley
     SUBDIR += linux-unrealgold
     SUBDIR += linux-uplink-demo
     SUBDIR += linux-ut
@@ -952,6 +957,8 @@
     SUBDIR += teeworlds
     SUBDIR += teg
     SUBDIR += tenebrae
+    SUBDIR += tesseract
+    SUBDIR += tesseract-data
     SUBDIR += tetrinet
     SUBDIR += tetrinet-x
     SUBDIR += tetrons

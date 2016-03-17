@@ -3,7 +3,7 @@
 
 PORTNAME=	apache-openoffice
 PORTVERSION=	${AOOVERSION1}.${AOOVERSION2}.${SVNREVISION}
-#PORTREVISION=	1
+PORTREVISION=	3
 PORTEPOCH=	4
 CATEGORIES=	editors java
 MASTER_SITES=	https://dist.apache.org/repos/dist/dev/openoffice/${AOOVERSION}-${AOORC}-r${SVNREVISION}/source/ \
@@ -55,7 +55,6 @@ BUILD_DEPENDS=								\
 		${LOCALBASE}/bin/unzip:${PORTSDIR}/archivers/unzip	\
 		zip:${PORTSDIR}/archivers/zip				\
 		ant:${PORTSDIR}/devel/apache-ant			\
-		${LOCALBASE}/include/boost/shared_ptr.hpp:${PORTSDIR}/devel/boost-libs \
 		dmake:${PORTSDIR}/devel/dmake				\
 		epm:${PORTSDIR}/devel/epm				\
 		${LOCALBASE}/bin/gperf:${PORTSDIR}/devel/gperf		\
@@ -159,7 +158,7 @@ WIKI_PUBLISHER_DESC=	Build and install Wiki Publisher extension
 CCACHE_DESC=		Mimimize compile time of C/C++ programs
 
 CUPS_CONFIGURE_ENABLE=		cups
-CUPS_LIB_DEPENDS=		libcups.so:${PORTSDIR}/print/cups-client
+CUPS_LIB_DEPENDS=		libcups.so:${PORTSDIR}/print/cups
 
 GNOME_CONFIGURE_ENABLE=		dbus gconf lockdown
 GNOME_LIB_DEPENDS=		libdbus-glib-1.so:${PORTSDIR}/devel/dbus-glib
@@ -176,6 +175,8 @@ MMEDIA_USE=			GSTREAMER=yes
 SDK_CONFIGURE_ENABLE=		odk
 
 PDFIMPORT_CONFIGURE_ENABLE=	pdfimport
+PDFIMPORT_LIB_DEPENDS=		libboost_system.so:${PORTSDIR}/devel/boost-libs
+PDFIMPORT_BUILD_DEPENDS_OFF=	${LOCALBASE}/include/boost/shared_ptr.hpp:${PORTSDIR}/devel/boost-libs
 
 WIKI_PUBLISHER_CONFIGURE_ENABLE=	wiki-publisher
 

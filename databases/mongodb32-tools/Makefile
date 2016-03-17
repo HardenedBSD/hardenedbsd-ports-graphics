@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	mongodb32-tools
-PORTVERSION=	3.2.1
+PORTVERSION=	3.2.4
 DISTVERSIONPREFIX=	r
 CATEGORIES=	databases net
 
@@ -39,6 +39,13 @@ MAKE_ENV=	GOPATH="${WRKSRC}/.gopath:${WRKSRC}/vendor" \
 USES=	localbase
 MY_TAGS=	-tags "${USE_MY_TAGS}"
 
+.include <bsd.port.pre.mk>
+
+.if ${OSVERSION} < 1000000
+# Cannot be built
+IGNORE=	unsupported on FreeBSD 9 or older
+.endif
+
 post-patch:
 	@cd ${WRKSRC} ; ${MKDIR} ${WRKSRC}/.gopath/src/github.com/${GH_ACCOUNT} ; \
 		${LN} -sf ${WRKSRC} ${WRKSRC}/.gopath/src/github.com/${GH_ACCOUNT}/${GH_PROJECT}
@@ -62,4 +69,4 @@ post-install:
 	${INSTALL_MAN} ${WRKSRC}/${x} ${STAGEDIR}${DOCSDIR}
 .endfor
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

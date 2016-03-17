@@ -2,10 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	mongo-c-driver
-PORTVERSION=	1.3.2
+PORTVERSION=	1.3.4
 CATEGORIES=	devel
 
-MAINTAINER=	waitman@waitman.net
+MAINTAINER=	ports@bsdserwis.com
 COMMENT=	C Driver for MongoDB
 
 LICENSE=	APACHE20

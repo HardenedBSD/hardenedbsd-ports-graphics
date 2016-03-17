@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	mongodb32
-PORTVERSION=	3.2.1
+PORTVERSION=	3.2.4
 DISTVERSIONPREFIX=	r
 CATEGORIES=	databases net
 MASTER_SITES=	https://fastdl.mongodb.org/src/ \
@@ -11,30 +11,41 @@ MASTER_SITES=	https://fastdl.mongodb.org/src/ \
 DISTNAME=	mongodb-src-${DISTVERSIONPREFIX}${PORTVERSION}
 
 MAINTAINER=	brendan+freebsd@bbqsrc.net
-COMMENT=	NOSQL distributed document-oriented database
+COMMENT=	Distributed document-oriented "NoSQL" database
 
 # mongodb is AGPLv3, C++ driver is APACHE20
 LICENSE=	AGPLv3 APACHE20
 LICENSE_COMB=	multi
 
+# Bugs when compiled with < Clang 3.7
+#  - https://jira.mongodb.org/browse/SERVER-21217
+#  - https://jira.mongodb.org/browse/SERVER-22740
+BUILD_DEPENDS=	${LOCALBASE}/bin/clang37:${PORTSDIR}/lang/clang37
 LIB_DEPENDS=	libpcre.so:${PORTSDIR}/devel/pcre \
 		libsnappy.so:${PORTSDIR}/archivers/snappy
 TEST_DEPENDS=	${PYTHON_PKGNAMEPREFIX}yaml>=3.11:${PORTSDIR}/devel/py-yaml \
 		${PYTHON_PKGNAMEPREFIX}pymongo>=3.0:${PORTSDIR}/databases/pymongo
 
-ONLY_FOR_ARCHS=	i386 amd64
-ONLY_FOR_ARCHS_REASON=	"not yet ported to anything other than i386 and amd64"
+CPP=	${LOCALBASE}/bin/clang-cpp37
+CC=	${LOCALBASE}/bin/clang37
+CXX=	${LOCALBASE}/bin/clang++37
+CHOSEN_COMPILER_TYPE=	clang
 
-OPTIONS_DEFINE=	SASL SSL
-OPTIONS_DEFAULT=SSL
+ONLY_FOR_ARCHS=	amd64
+ONLY_FOR_ARCHS_REASON=	"Only supported on amd64 (i386 deprecated in v3)"
+
+CONFLICTS_BUILD=	mongo-cxx-driver
+OPTIONS_DEFINE=		SASL SSL
+OPTIONS_DEFAULT=	SASL SSL
 
 SASL_LIB_DEPENDS=	libsasl2.so:${PORTSDIR}/security/cyrus-sasl2
-SASL_MAKE_ARGS=	--use-sasl-client
+SASL_MAKE_ARGS=		--use-sasl-client
 
 SSL_USE=	openssl=yes
 SSL_MAKE_ARGS=	--ssl
 
 USES=		cpe execinfo python:build scons
+
 MAKE_ARGS=	--prefix=${STAGEDIR}${PREFIX} \
 		--use-system-pcre --use-system-snappy \
 		--release
@@ -47,10 +58,18 @@ USE_RC_SUBR=	mongod
 ALL_TARGET=	core
 TEST_TARGET=	unittests
 
+.include <bsd.port.pre.mk>
+
+.if ${OSVERSION} < 1000000
+# Cannot be built
+IGNORE=	unsupported on FreeBSD 9 or older
+.endif
+
 post-install:
 .for f in mongo mongod mongoperf mongos mongosniff
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/${f}
 .endfor
+	${CP} ${WRKSRC}/rpm/mongod.conf ${STAGEDIR}${PREFIX}/etc/mongodb.conf.sample
 
 do-test:
 	@cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} \
@@ -62,4 +81,4 @@ PORTSCOUT=	limitw:1,even
 
 CPE_PRODUCT=	mongodb
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

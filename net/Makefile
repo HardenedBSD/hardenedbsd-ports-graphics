@@ -141,6 +141,7 @@
     SUBDIR += freeradius2
     SUBDIR += freeradius3
     SUBDIR += freerdp
+    SUBDIR += freeswitch
     SUBDIR += freevrrpd
     SUBDIR += fspclient
     SUBDIR += fspd
@@ -155,6 +156,7 @@
     SUBDIR += gkrellmwireless2
     SUBDIR += glflow
     SUBDIR += glib-networking
+    SUBDIR += glusterfs
     SUBDIR += gnet2
     SUBDIR += gnetcat
     SUBDIR += gnome-nettool
@@ -252,14 +254,10 @@
     SUBDIR += ipsorc
     SUBDIR += ipsumdump
     SUBDIR += ipsvd
+    SUBDIR += ipxe
     SUBDIR += irrd
     SUBDIR += isboot-kmod
-    SUBDIR += isc-dhcp41-client
-    SUBDIR += isc-dhcp41-relay
     SUBDIR += isc-dhcp41-server
-    SUBDIR += isc-dhcp42-client
-    SUBDIR += isc-dhcp42-relay
-    SUBDIR += isc-dhcp42-server
     SUBDIR += isc-dhcp43-client
     SUBDIR += isc-dhcp43-relay
     SUBDIR += isc-dhcp43-server
@@ -275,6 +273,7 @@
     SUBDIR += jsch
     SUBDIR += jumpgate
     SUBDIR += jwhois
+    SUBDIR += kafkacat
     SUBDIR += kamailio
     SUBDIR += kdenetwork4
     SUBDIR += kdenetwork4-filesharing
@@ -442,6 +441,7 @@
     SUBDIR += nload
     SUBDIR += nmsg
     SUBDIR += nocatsplash
+    SUBDIR += norm
     SUBDIR += nos-ttb
     SUBDIR += nph
     SUBDIR += ns3
@@ -453,7 +453,6 @@
     SUBDIR += ntimed
     SUBDIR += ntlmaps
     SUBDIR += ntop
-    SUBDIR += ntopng
     SUBDIR += ntp
     SUBDIR += ntp-devel
     SUBDIR += ntraceroute
@@ -780,7 +779,6 @@
     SUBDIR += p5-Sort-Key-IPv4
     SUBDIR += p5-Test-URI
     SUBDIR += p5-URI
-    SUBDIR += p5-URI-db
     SUBDIR += p5-URI-FromHash
     SUBDIR += p5-URI-Match
     SUBDIR += p5-URI-Nested
@@ -789,6 +787,7 @@
     SUBDIR += p5-URI-SmartURI
     SUBDIR += p5-URI-Template
     SUBDIR += p5-URI-Template-Restrict
+    SUBDIR += p5-URI-db
     SUBDIR += p5-URI-ws
     SUBDIR += p5-VM-EC2
     SUBDIR += p5-VM-EC2-Security-CredentialCache
@@ -884,10 +883,6 @@
     SUBDIR += pen
     SUBDIR += pfinger
     SUBDIR += phamm
-    SUBDIR += php5-ldap
-    SUBDIR += php5-soap
-    SUBDIR += php5-sockets
-    SUBDIR += php5-xmlrpc
     SUBDIR += php55-ldap
     SUBDIR += php55-soap
     SUBDIR += php55-sockets
@@ -896,6 +891,10 @@
     SUBDIR += php56-soap
     SUBDIR += php56-sockets
     SUBDIR += php56-xmlrpc
+    SUBDIR += php70-ldap
+    SUBDIR += php70-soap
+    SUBDIR += php70-sockets
+    SUBDIR += php70-xmlrpc
     SUBDIR += phpldapadmin
     SUBDIR += pim6-tools
     SUBDIR += pim6dd
@@ -944,6 +943,7 @@
     SUBDIR += py-impacket
     SUBDIR += py-ipaddress
     SUBDIR += py-iplib
+    SUBDIR += py-kafka-python
     SUBDIR += py-kombu
     SUBDIR += py-ldap
     SUBDIR += py-ldap3
@@ -991,6 +991,7 @@
     SUBDIR += py-ripe.atlas.sagan
     SUBDIR += py-ripe.atlas.tools
     SUBDIR += py-s3cmd
+    SUBDIR += py-s3transfer
     SUBDIR += py-simplesoap
     SUBDIR += py-smbpasswd
     SUBDIR += py-soappy
@@ -1075,7 +1076,6 @@
     SUBDIR += rubygem-amq-protocol
     SUBDIR += rubygem-amqp
     SUBDIR += rubygem-amqp-utils
-    SUBDIR += rubygem-amqp067
     SUBDIR += rubygem-aws-s3
     SUBDIR += rubygem-aws-ses
     SUBDIR += rubygem-bunny
@@ -1125,6 +1125,7 @@
     SUBDIR += rubygem-oauth2
     SUBDIR += rubygem-octokit
     SUBDIR += rubygem-octopress-deploy
+    SUBDIR += rubygem-omniauth-azure-oauth2
     SUBDIR += rubygem-omniauth-facebook
     SUBDIR += rubygem-omniauth-github
     SUBDIR += rubygem-omniauth-github-discourse
@@ -1167,7 +1168,6 @@
     SUBDIR += samba-nmblookup
     SUBDIR += samba-smbclient
     SUBDIR += samba36
-    SUBDIR += samba4
     SUBDIR += samba41
     SUBDIR += samba42
     SUBDIR += samba43
@@ -1211,6 +1211,7 @@
     SUBDIR += socat
     SUBDIR += socketbind
     SUBDIR += socketpipe
+    SUBDIR += socketw
     SUBDIR += sofia-sip
     SUBDIR += spideroak
     SUBDIR += splatd

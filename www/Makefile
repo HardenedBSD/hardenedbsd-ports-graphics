@@ -3,7 +3,6 @@
 
     COMMENT = Ports related to the World Wide Web
 
-    SUBDIR += MT
     SUBDIR += R-cran-RgoogleMaps
     SUBDIR += R-cran-htmlwidgets
     SUBDIR += R-cran-httpuv
@@ -227,6 +226,7 @@
     SUBDIR += get_flash_videos
     SUBDIR += getleft
     SUBDIR += gist
+    SUBDIR += gitlab-workhorse
     SUBDIR += glassfish
     SUBDIR += glpi
     SUBDIR += gnome-user-share
@@ -239,6 +239,7 @@
     SUBDIR += grafana
     SUBDIR += grafana2
     SUBDIR += grails
+    SUBDIR += graylog-web-interface
     SUBDIR += gregarius
     SUBDIR += groupoffice
     SUBDIR += grr
@@ -470,6 +471,7 @@
     SUBDIR += mod_gzip2
     SUBDIR += mod_h264_streaming
     SUBDIR += mod_hosts_access
+    SUBDIR += mod_http2-devel
     SUBDIR += mod_jail
     SUBDIR += mod_jk
     SUBDIR += mod_layout22
@@ -489,9 +491,9 @@
     SUBDIR += mod_myvhost
     SUBDIR += mod_ntlm2
     SUBDIR += mod_perl2
-    SUBDIR += mod_php5
     SUBDIR += mod_php55
     SUBDIR += mod_php56
+    SUBDIR += mod_php70
     SUBDIR += mod_proctitle
     SUBDIR += mod_proxy_html
     SUBDIR += mod_proxy_uwsgi
@@ -1433,7 +1435,6 @@
     SUBDIR += pecl-varnish
     SUBDIR += pecl-yaf
     SUBDIR += pecl-yar
-    SUBDIR += pecl-zendopcache
     SUBDIR += perlbal
     SUBDIR += pglogd
     SUBDIR += phalcon
@@ -1441,14 +1442,15 @@
     SUBDIR += php-plurk-api
     SUBDIR += php-screw
     SUBDIR += php-templates
-    SUBDIR += php5-session
-    SUBDIR += php5-tidy
     SUBDIR += php55-opcache
     SUBDIR += php55-session
     SUBDIR += php55-tidy
     SUBDIR += php56-opcache
     SUBDIR += php56-session
     SUBDIR += php56-tidy
+    SUBDIR += php70-opcache
+    SUBDIR += php70-session
+    SUBDIR += php70-tidy
     SUBDIR += phpbb
     SUBDIR += phpbb3
     SUBDIR += phpgroupware
@@ -1537,11 +1539,14 @@
     SUBDIR += py-django-extensions
     SUBDIR += py-django-filer
     SUBDIR += py-django-formtools
+    SUBDIR += py-django-happenings
     SUBDIR += py-django-haystack
+    SUBDIR += py-django-htmlmin
     SUBDIR += py-django-json-rpc
     SUBDIR += py-django-keyedcache
     SUBDIR += py-django-ldapdb
     SUBDIR += py-django-livesettings
+    SUBDIR += py-django-markdownx
     SUBDIR += py-django-markwhat
     SUBDIR += py-django-mezzanine
     SUBDIR += py-django-mezzanine-filebrowser
@@ -1560,10 +1565,6 @@
     SUBDIR += py-django-registration
     SUBDIR += py-django-registration-defaults
     SUBDIR += py-django-registration-redux
-    SUBDIR += py-djangorestframework
-    SUBDIR += py-djangorestframework-csv
-    SUBDIR += py-djangorestframework-filters
-    SUBDIR += py-djangorestframework-xml
     SUBDIR += py-django-reversion
     SUBDIR += py-django-sekizai
     SUBDIR += py-django-signals-ahoy
@@ -1585,6 +1586,10 @@
     SUBDIR += py-django18
     SUBDIR += py-django19
     SUBDIR += py-django_compressor
+    SUBDIR += py-djangorestframework
+    SUBDIR += py-djangorestframework-csv
+    SUBDIR += py-djangorestframework-filters
+    SUBDIR += py-djangorestframework-xml
     SUBDIR += py-djangotoolbox
     SUBDIR += py-djblets
     SUBDIR += py-dojango
@@ -1772,6 +1777,7 @@
     SUBDIR += py-tvdb_api
     SUBDIR += py-twistedWeb
     SUBDIR += py-twistedWeb2
+    SUBDIR += py-txrequests
     SUBDIR += py-uliweb
     SUBDIR += py-urlgrabber
     SUBDIR += py-urljr
@@ -1831,6 +1837,7 @@
     SUBDIR += rsstool
     SUBDIR += rt40
     SUBDIR += rt42
+    SUBDIR += rtv
     SUBDIR += ruby-aws
     SUBDIR += ruby-google
     SUBDIR += ruby-wgettsv
@@ -2065,6 +2072,7 @@
     SUBDIR += sqstat
     SUBDIR += squid
     SUBDIR += squid_radius_auth
+    SUBDIR += squidanalyzer
     SUBDIR += squidclamav
     SUBDIR += squidguard
     SUBDIR += squidpurge

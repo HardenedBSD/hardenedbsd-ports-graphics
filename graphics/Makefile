@@ -172,6 +172,7 @@
     SUBDIR += exiftran
     SUBDIR += exiv2
     SUBDIR += exrtools
+    SUBDIR += farbfeld
     SUBDIR += feh
     SUBDIR += ffff
     SUBDIR += fig2sxd
@@ -342,6 +343,7 @@
     SUBDIR += hs-svgcairo
     SUBDIR += hsetroot
     SUBDIR += hugin
+    SUBDIR += hugin-2016
     SUBDIR += hugin-devel
     SUBDIR += icat
     SUBDIR += icc-profiles-basiccolor
@@ -538,6 +540,7 @@
     SUBDIR += libwmf-nox11
     SUBDIR += libwpg
     SUBDIR += libwpg03
+    SUBDIR += libyuv
     SUBDIR += lightzone
     SUBDIR += linplasma
     SUBDIR += linux-adobesvg
@@ -576,6 +579,7 @@
     SUBDIR += maim
     SUBDIR += makehuman
     SUBDIR += mandelbulber
+    SUBDIR += mapcache
     SUBDIR += mapnik
     SUBDIR += mapserver
     SUBDIR += mapyrus
@@ -738,7 +742,6 @@
     SUBDIR += partio
     SUBDIR += pdf2svg
     SUBDIR += pear-Horde_Image
-    SUBDIR += pear-IO_SWF
     SUBDIR += pear-Image_3D
     SUBDIR += pear-Image_Barcode
     SUBDIR += pear-Image_Barcode2
@@ -765,13 +768,13 @@
     SUBDIR += php-gdal
     SUBDIR += php-libpuzzle
     SUBDIR += php-magickwand
-    SUBDIR += php5-exif
     SUBDIR += php5-ffmpeg
-    SUBDIR += php5-gd
     SUBDIR += php55-exif
     SUBDIR += php55-gd
     SUBDIR += php56-exif
     SUBDIR += php56-gd
+    SUBDIR += php70-exif
+    SUBDIR += php70-gd
     SUBDIR += phplot
     SUBDIR += picpuz
     SUBDIR += piddle
@@ -845,6 +848,7 @@
     SUBDIR += py-mcomix
     SUBDIR += py-ming
     SUBDIR += py-nwdiag
+    SUBDIR += py-opencolorio
     SUBDIR += py-opencv
     SUBDIR += py-openexr
     SUBDIR += py-opengl
@@ -863,8 +867,8 @@
     SUBDIR += py-pyganim
     SUBDIR += py-pyggel
     SUBDIR += py-pyglet
-    SUBDIR += py-pygraphviz
     SUBDIR += py-pygooglechart
+    SUBDIR += py-pygraphviz
     SUBDIR += py-pyproj
     SUBDIR += py-qt4-svg
     SUBDIR += py-qt5-svg

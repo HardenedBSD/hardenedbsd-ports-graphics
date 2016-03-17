@@ -3,7 +3,7 @@
 
 PORTNAME=	foomatic-filters
 PORTVERSION=	4.0.17
-PORTREVISION=	4
+PORTREVISION=	6
 CATEGORIES=	print
 MASTER_SITES=	http://www.openprinting.org/download/foomatic/
 
@@ -14,6 +14,8 @@ LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/COPYING
 
 LIB_DEPENDS=	libdbus-1.so:${PORTSDIR}/devel/dbus
+
+CONFLICTS=	cups-filters-[0-9]*
 
 USES=		autoreconf ghostscript perl5 pkgconfig
 GNU_CONFIGURE=	yes
@@ -46,7 +48,7 @@ MPAGE_DESC=		Print multiple pages per sheet of paper
 .include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MCUPS_IMAGE}
-RUN_DEPENDS+=	${LOCALBASE}/lib/libcupsimage.so:${PORTSDIR}/print/cups-image
+RUN_DEPENDS+=	${LOCALBASE}/lib/libcupsimage.so:${PORTSDIR}/print/cups
 .endif
 
 .if ${PORT_OPTIONS:MA2PS}

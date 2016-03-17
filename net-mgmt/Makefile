@@ -17,6 +17,7 @@
     SUBDIR += bandwidthd
     SUBDIR += bgpq
     SUBDIR += bgpq3
+    SUBDIR += bgpuma
     SUBDIR += bpft
     SUBDIR += braa
     SUBDIR += bsnmp-jails
@@ -187,6 +188,7 @@
     SUBDIR += ocsinventory-ng
     SUBDIR += omping
     SUBDIR += openlldp
+    SUBDIR += openvmps
     SUBDIR += p0f
     SUBDIR += p0f2
     SUBDIR += p5-AnyEvent-SNMP
@@ -252,9 +254,9 @@
     SUBDIR += pandorafms_server
     SUBDIR += percona-monitoring-plugins
     SUBDIR += pftabled
-    SUBDIR += php5-snmp
     SUBDIR += php55-snmp
     SUBDIR += php56-snmp
+    SUBDIR += php70-snmp
     SUBDIR += phpip
     SUBDIR += phpipam
     SUBDIR += phpweathermap
@@ -310,6 +312,7 @@
     SUBDIR += statsd
     SUBDIR += statsite
     SUBDIR += subcalc
+    SUBDIR += super_mediator
     SUBDIR += sx
     SUBDIR += sysmon
     SUBDIR += tcpreplay
@@ -341,5 +344,9 @@
     SUBDIR += zabbix24-frontend
     SUBDIR += zabbix24-proxy
     SUBDIR += zabbix24-server
+    SUBDIR += zabbix3-agent
+    SUBDIR += zabbix3-frontend
+    SUBDIR += zabbix3-proxy
+    SUBDIR += zabbix3-server
 
 .include <bsd.port.subdir.mk>
