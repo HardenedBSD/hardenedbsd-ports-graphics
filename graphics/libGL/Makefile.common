@@ -18,9 +18,9 @@
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
-MESABASEVERSION=	11.1.2
+MESABASEVERSION=	11.2.0
 # if there is a subversion, don't include the '-' between 7.11-rc2.
-MESASUBVERSION=	
+MESASUBVERSION=	rc3
 
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
 
@@ -55,7 +55,7 @@ python_OLD_CMD=	"/usr/bin/env[[:space:]]python"
 python_CMD=	${LOCALBASE}/bin/python2
 SHEBANG_FILES=	src/gallium/*/*/*.py src/gallium/tools/trace/*.py \
 		src/gallium/drivers/svga/svgadump/svga_dump.py \
-		src/glsl/tests/compare_ir src/mapi/glapi/gen/*.py
+		src/mapi/glapi/gen/*.py
 SHEBANG_FILES+=	src/mapi/mapi_abi.py
 
 MASTERDIR=		${.CURDIR}/../../graphics/libGL
