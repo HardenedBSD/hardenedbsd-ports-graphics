@@ -6,12 +6,17 @@ PORTVERSION=	3.4.8
 PORTREVISION=	9
 CATEGORIES=	sysutils
 DISTVERSION=	$(PORTVERSION:S/a/alpha/:S/b/beta/:S/r/rc/)
+.if !defined(MASTERDIR)
 PKGNAMESUFFIX=	34
+.endif
 DISTFILES=	syslog-ng_${DISTVERSION}.tar.gz
 MASTER_SITES=	http://www.balabit.com/downloads/files/syslog-ng/open-source-edition/${DISTVERSION}/source/
 
 MAINTAINER=	cy@FreeBSD.org
 COMMENT=	Powerful syslogd replacement
+
+DEPRECATED=	EOL, no longer supported by bababit.hu
+EXPIRATION_DATE=	2016-06-30
 
 LIB_DEPENDS=	libevtlog.so:${PORTSDIR}/sysutils/eventlog
 
@@ -65,10 +70,7 @@ CONFIGURE_ARGS+=	--disable-tcp-wrapper
 
 .if ${PORT_OPTIONS:MSPOOF}
 LIB_DEPENDS+=		libnet.so:${PORTSDIR}/net/libnet
-LIBNET_CONFIG?=		${LOCALBASE}/bin/libnet11-config
-CONFIGURE_ARGS+=	--enable-spoof-source --with-libnet=${LOCALBASE}/bin
-CFLAGS+=		`${LIBNET_CONFIG} --cflags` -I${LOCALBASE}/include
-LDFLAGS+=		`${LIBNET_CONFIG} --libs`
+CONFIGURE_ARGS+=	--enable-spoof-source
 .else
 CONFIGURE_ARGS+=	--disable-spoof-source
 .endif
@@ -121,7 +123,6 @@ CONFIGURE_ARGS+=        --disable-json
 .endif
 
 post-patch:
-	@${REINPLACE_CMD} -e 's:libnet-config:libnet11-config:g' ${WRKSRC}/configure
 	@${LN} ${WRKSRC}/scl/syslog-ng.conf ${WRKSRC}/scl/syslog-ng.conf.sample
 	@${LN} ${WRKSRC}/scl/scl.conf ${WRKSRC}/scl/scl.conf.sample
 

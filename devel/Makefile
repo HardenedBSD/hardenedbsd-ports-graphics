@@ -273,6 +273,7 @@
     SUBDIR += cloudabi-binutils-x86_64
     SUBDIR += cloudabi-toolchain
     SUBDIR += cmake
+    SUBDIR += cmake-doc
     SUBDIR += cmake-fedora
     SUBDIR += cmake-gui
     SUBDIR += cmake-modules
@@ -1150,6 +1151,7 @@
     SUBDIR += libconcurrent
     SUBDIR += libconfig
     SUBDIR += libconfuse
+    SUBDIR += libcrossguid
     SUBDIR += libcutl
     SUBDIR += libcwd
     SUBDIR += libcxxrt
@@ -1264,6 +1266,7 @@
     SUBDIR += libnaji
     SUBDIR += libnfc
     SUBDIR += libnotify
+    SUBDIR += libnsutils
     SUBDIR += libnxt
     SUBDIR += liboil
     SUBDIR += libol
@@ -1285,6 +1288,7 @@
     SUBDIR += libowfat
     SUBDIR += libpafe
     SUBDIR += libpafe-ruby
+    SUBDIR += libparserutils
     SUBDIR += libpasori
     SUBDIR += libpci
     SUBDIR += libpciaccess
@@ -1299,6 +1303,7 @@
     SUBDIR += libpololu-avr
     SUBDIR += libpru
     SUBDIR += libpthread-stubs
+    SUBDIR += libqb
     SUBDIR += libqcow
     SUBDIR += libqxt
     SUBDIR += libr3
@@ -1530,6 +1535,7 @@
     SUBDIR += ndesk-dbus-glib
     SUBDIR += ndesk-options
     SUBDIR += netscape-java40
+    SUBDIR += netsurf-buildsystem
     SUBDIR += newfile
     SUBDIR += newt
     SUBDIR += newtonsoft-json
@@ -1541,6 +1547,7 @@
     SUBDIR += notify-sharp
     SUBDIR += noweb
     SUBDIR += npth
+    SUBDIR += nsgenbind
     SUBDIR += nspr
     SUBDIR += nuitka
     SUBDIR += nxt-python
@@ -3488,6 +3495,7 @@
     SUBDIR += p5-strictures
     SUBDIR += p5-subatom
     SUBDIR += p5-subversion
+    SUBDIR += p5-superclass
     SUBDIR += p5-syntax
     SUBDIR += p5-threads
     SUBDIR += p5-threads-shared
@@ -3701,7 +3709,6 @@
     SUBDIR += pecl-hidef
     SUBDIR += pecl-hrtime
     SUBDIR += pecl-htscanner
-    SUBDIR += pecl-inclued
     SUBDIR += pecl-inotify
     SUBDIR += pecl-intl
     SUBDIR += pecl-jsmin
@@ -4109,7 +4116,6 @@
     SUBDIR += py-hypothesis
     SUBDIR += py-icalendar
     SUBDIR += py-ice
-    SUBDIR += py-icu
     SUBDIR += py-iniparse
     SUBDIR += py-initgroups
     SUBDIR += py-instant
@@ -4159,6 +4165,7 @@
     SUBDIR += py-libvirt
     SUBDIR += py-libzfs
     SUBDIR += py-ll-core
+    SUBDIR += py-llfuse
     SUBDIR += py-lock_file
     SUBDIR += py-lockfile
     SUBDIR += py-log4py
@@ -4268,6 +4275,7 @@
     SUBDIR += py-pygit2
     SUBDIR += py-pygithub
     SUBDIR += py-pygpx
+    SUBDIR += py-pyicu
     SUBDIR += py-pyinotify
     SUBDIR += py-pyinstaller
     SUBDIR += py-pykde4
@@ -4332,6 +4340,7 @@
     SUBDIR += py-rauth
     SUBDIR += py-raven
     SUBDIR += py-rcsparse
+    SUBDIR += py-re2
     SUBDIR += py-rednose
     SUBDIR += py-repl
     SUBDIR += py-repoze.lru
@@ -4827,6 +4836,7 @@
     SUBDIR += rubygem-debugger-xml
     SUBDIR += rubygem-deep_merge
     SUBDIR += rubygem-deep_test
+    SUBDIR += rubygem-deface
     SUBDIR += rubygem-default_value_for
     SUBDIR += rubygem-delayed_job
     SUBDIR += rubygem-delayer

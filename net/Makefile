@@ -75,6 +75,7 @@
     SUBDIR += coda6_client
     SUBDIR += coda6_server
     SUBDIR += corkscrew
+    SUBDIR += corosync
     SUBDIR += courier-authlib-ldap
     SUBDIR += crtmpserver
     SUBDIR += cryptcat
@@ -136,6 +137,7 @@
     SUBDIR += fping
     SUBDIR += freebsd-tftp
     SUBDIR += freebsd-uucp
+    SUBDIR += freediameter
     SUBDIR += freenet6
     SUBDIR += freeradius-client
     SUBDIR += freeradius2
@@ -327,7 +329,6 @@
     SUBDIR += libnetdude
     SUBDIR += libnfs
     SUBDIR += libnids
-    SUBDIR += libnids-libnet11
     SUBDIR += libnss-cache
     SUBDIR += libnss-mysql
     SUBDIR += liboauth
@@ -813,6 +814,7 @@
     SUBDIR += p5-ldap2pw
     SUBDIR += p5-perl-ldap
     SUBDIR += p5-srv2pf
+    SUBDIR += pacemaker
     SUBDIR += packetdrill
     SUBDIR += packter-agent
     SUBDIR += panoptis
@@ -1119,6 +1121,7 @@
     SUBDIR += rubygem-macaddr
     SUBDIR += rubygem-net-ldap
     SUBDIR += rubygem-net-netrc
+    SUBDIR += rubygem-net-ping
     SUBDIR += rubygem-netrc
     SUBDIR += rubygem-network_interface
     SUBDIR += rubygem-oauth

@@ -3,7 +3,7 @@
 
 PORTNAME=	audacity
 PORTVERSION=	2.1.2
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	audio
 MASTER_SITES=	https://github.com/audacity/audacity/archive/
 DISTNAME=	Audacity-${PORTVERSION}
@@ -25,8 +25,8 @@ BROKEN_powerpc64=	Does not build
 WRKSRC=		${WRKDIR}/${PORTNAME}-Audacity-${PORTVERSION}
 
 GNU_CONFIGURE=	yes
-USES=		compiler:c++11-lib cpe desktop-file-utils gmake iconv pkgconfig shared-mime-info shebangfix dos2unix
-NLS_USES=	gettext
+USES=		autoreconf compiler:c++11-lib cpe desktop-file-utils gettext-tools gmake iconv libtool pkgconfig shared-mime-info shebangfix dos2unix
+NLS_USES=	gettext-runtime
 NLS_CONFIGURE_ENABLE=	nls
 NLS_CONFIGURE_WITH=	libintl-prefix="${LOCALBASE}"
 OPTIONS_SUB=	yes
@@ -37,8 +37,8 @@ PORTDOCS=	README.txt
 DOS2UNIX_GLOB=	Makefile.* *.c* *.h
 SHEBANG_FILES=	lib-src/lv2/build
 
-OPTIONS_DEFINE=	NLS DEBUG DOCS DYNLOAD FFMPEG FLAC ID3TAG LADSPA LAME LV2 MAD \
-		SBSMS SOUNDTOUCH TWOLAME VAMP VORBIS VST
+OPTIONS_DEFINE=	NLS DEBUG DOCS ALSA DYNLOAD FFMPEG FLAC ID3TAG LADSPA LAME LV2 \
+		MAD SBSMS SOUNDTOUCH TWOLAME VAMP VORBIS VST
 OPTIONS_DEFAULT=	FLAC ID3TAG LADSPA MAD \
 			SBSMS SOUNDTOUCH TWOLAME VAMP VORBIS VST
 
@@ -79,6 +79,13 @@ DEBUG_CONFIGURE_WITH=	debug
 
 DOCS_BUILD_DEPENDS=	docbook-to-man:${PORTSDIR}/textproc/docbook-to-man \
 			docbook2man:${PORTSDIR}/textproc/docbook-utils
+
+ALSA_CONFIGURE_OFF=	--disable-alsa
+ALSA_CONFIGURE_WITH=	alsa
+ALSA_CFLAGS=		-I${LOCALBASE}/include
+ALSA_CXXFLAGS=		-I${LOCALBASE}/include
+ALSA_LDFLAGS=		-L${LOCALBASE}/lib
+ALSA_LIB_DEPENDS=	libasound.so:${PORTSDIR}/audio/alsa-lib
 
 DYNLOAD_BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/libavcodec.pc:${PORTSDIR}/multimedia/ffmpeg
 DYNLOAD_BUILD_DEPENDS=	${LOCALBASE}/include/lame/lame.h:${PORTSDIR}/audio/lame
@@ -134,10 +141,6 @@ VST_CONFIGURE_ENABLE=	vst
 .if ${CHOSEN_COMPILER_TYPE} == gcc
 CXXFLAGS+=	-std=c++11
 .endif
-
-post-configure:
-	${REINPLACE_CMD} -e '/SNDFILE_CFLAGS/s,%%LOCALBASE%%,${LOCALBASE},'\
-		${WRKSRC}/lib-src/libnyquist/Makefile
 
 post-install:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
