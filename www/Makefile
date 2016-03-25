@@ -3,7 +3,6 @@
 
     COMMENT = Ports related to the World Wide Web
 
-    SUBDIR += MT
     SUBDIR += R-cran-RgoogleMaps
     SUBDIR += R-cran-htmlwidgets
     SUBDIR += R-cran-httpuv
@@ -227,6 +226,7 @@
     SUBDIR += get_flash_videos
     SUBDIR += getleft
     SUBDIR += gist
+    SUBDIR += gitlab-workhorse
     SUBDIR += glassfish
     SUBDIR += glpi
     SUBDIR += gnome-user-share
@@ -239,6 +239,7 @@
     SUBDIR += grafana
     SUBDIR += grafana2
     SUBDIR += grails
+    SUBDIR += graylog-web-interface
     SUBDIR += gregarius
     SUBDIR += groupoffice
     SUBDIR += grr
@@ -470,6 +471,7 @@
     SUBDIR += mod_gzip2
     SUBDIR += mod_h264_streaming
     SUBDIR += mod_hosts_access
+    SUBDIR += mod_http2-devel
     SUBDIR += mod_jail
     SUBDIR += mod_jk
     SUBDIR += mod_layout22
@@ -1539,6 +1541,7 @@
     SUBDIR += py-django-formtools
     SUBDIR += py-django-happenings
     SUBDIR += py-django-haystack
+    SUBDIR += py-django-htmlmin
     SUBDIR += py-django-json-rpc
     SUBDIR += py-django-keyedcache
     SUBDIR += py-django-ldapdb
@@ -1562,10 +1565,6 @@
     SUBDIR += py-django-registration
     SUBDIR += py-django-registration-defaults
     SUBDIR += py-django-registration-redux
-    SUBDIR += py-djangorestframework
-    SUBDIR += py-djangorestframework-csv
-    SUBDIR += py-djangorestframework-filters
-    SUBDIR += py-djangorestframework-xml
     SUBDIR += py-django-reversion
     SUBDIR += py-django-sekizai
     SUBDIR += py-django-signals-ahoy
@@ -1587,6 +1586,10 @@
     SUBDIR += py-django18
     SUBDIR += py-django19
     SUBDIR += py-django_compressor
+    SUBDIR += py-djangorestframework
+    SUBDIR += py-djangorestframework-csv
+    SUBDIR += py-djangorestframework-filters
+    SUBDIR += py-djangorestframework-xml
     SUBDIR += py-djangotoolbox
     SUBDIR += py-djblets
     SUBDIR += py-dojango
@@ -1834,6 +1837,7 @@
     SUBDIR += rsstool
     SUBDIR += rt40
     SUBDIR += rt42
+    SUBDIR += rtv
     SUBDIR += ruby-aws
     SUBDIR += ruby-google
     SUBDIR += ruby-wgettsv

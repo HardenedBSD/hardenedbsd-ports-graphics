@@ -210,7 +210,6 @@
     SUBDIR += mysql-q4m
     SUBDIR += mysql-udf
     SUBDIR += mysql-udf-sys
-    SUBDIR += mysql-workbench52
     SUBDIR += mysql-xql
     SUBDIR += mysql2odbc
     SUBDIR += mysql2pgsql
@@ -576,6 +575,7 @@
     SUBDIR += pgtcl
     SUBDIR += pgtop
     SUBDIR += pgtune
+    SUBDIR += pguri
     SUBDIR += pgworksheet
     SUBDIR += php-adodb-ext
     SUBDIR += php-mdcached

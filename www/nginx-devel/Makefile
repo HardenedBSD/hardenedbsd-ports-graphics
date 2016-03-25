@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	nginx
-PORTVERSION=	1.9.11
-PORTREVISION=	2
+PORTVERSION=	1.9.12
 CATEGORIES=	www
 MASTER_SITES=	http://nginx.org/download/
 MASTER_SITES+=	LOCAL/osa
@@ -381,7 +380,7 @@ JAVA_VERSION=	1.8
 JAVA_VENDOR=	openjdk
 JAVA_BUILD=	yes
 JAVA_RUN=	yes
-NGINX_CLOJURE_VERSION=	0.4.3
+NGINX_CLOJURE_VERSION=	0.4.4
 GH_ACCOUNT+=	nginx-clojure:clojure
 GH_PROJECT+=	nginx-clojure:clojure
 GH_TAGNAME+=	v${NGINX_CLOJURE_VERSION}:clojure
@@ -397,7 +396,7 @@ GH_TAGNAME+=	${GIT_CT_VERSION}:ct
 CONFIGURE_ARGS+=--add-dynamic-module=${WRKSRC_ct}
 NGINX_OPENSSL=	yes
 USE_HTTP_SSL=	yes
-USE_OPENSSL_PORT=	yes
+WITH_OPENSSL_PORT=	yes
 .endif
 
 .if ${PORT_OPTIONS:MECHO}
@@ -515,12 +514,12 @@ EXTRA_PATCHES+=	${PATCHDIR}/extra-patch-ngx_http_notice_module.c
 
 .if ${PORT_OPTIONS:MHTTP_PERL}
 CATEGORIES+=	perl5
-CONFIGURE_ARGS+=--with-http_perl_module
+CONFIGURE_ARGS+=--with-http_perl_module=dynamic
 USES+=		perl5
 .endif
 
 .if ${PORT_OPTIONS:MHTTP_PUSH}
-GIT_PUSH_VERSION=	0.99.5
+GIT_PUSH_VERSION=	0.99.7
 GH_ACCOUNT+=	slact:push
 GH_PROJECT+=	nchan:push
 GH_TAGNAME+=	v${GIT_PUSH_VERSION}:push
@@ -558,10 +557,10 @@ CONFIGURE_ARGS+=--add-module=${WRKDIR}/ngx_http_response-${NGINX_RESPONSE_VERSIO
 .endif
 
 .if ${PORT_OPTIONS:MHTTP_SUBS_FILTER}
-NGINX_HTTP_SUBS_FILTER_VERSION=	0.6.2
+NGINX_HTTP_SUBS_FILTER_VERSION=	0.6.4
 GH_ACCOUNT+=	yaoweibin:subs_filter
 GH_PROJECT+=	ngx_http_substitutions_filter_module:subs_filter
-GH_TAGNAME+=	${NGINX_HTTP_SUBS_FILTER_VERSION}:subs_filter
+GH_TAGNAME+=	v${NGINX_HTTP_SUBS_FILTER_VERSION}:subs_filter
 CONFIGURE_ARGS+=--add-module=${WRKSRC_subs_filter}
 .endif
 
@@ -706,7 +705,7 @@ CONFIGURE_ARGS+=--add-module=${WRKSRC_memc}
 .endif
 
 .if ${PORT_OPTIONS:MMODSECURITY}
-NGINX_MODSECURITY_VERSION=	2.9.1-RC1
+NGINX_MODSECURITY_VERSION=	2.9.1
 LIB_DEPENDS+=	libapr-1.so:${PORTSDIR}/devel/apr1 \
 		libcurl.so:${PORTSDIR}/ftp/curl \
 		libluajit-5.1.so:${PORTSDIR}/lang/luajit \
@@ -738,11 +737,12 @@ CONFIGURE_ARGS+=--without-http_rewrite_module \
 .endif
 
 .if ${PORT_OPTIONS:MPASSENGER}
-PASSENGER_VERSION=	5.0.25
+PASSENGER_VERSION=	5.0.26
 MASTER_SITES+=	http://s3.amazonaws.com/phusion-passenger/releases/:passenger
 DISTFILES+=	passenger-${PASSENGER_VERSION}.tar.gz:passenger
-CONFIGURE_ARGS+=--add-module=${WRKDIR}/passenger-${PASSENGER_VERSION}/src/nginx_module
-EXTRA_PATCHES+=	${PATCHDIR}/extra-patch-passenger-build-nginx.rb
+CONFIGURE_ARGS+=--add-dynamic-module=${WRKDIR}/passenger-${PASSENGER_VERSION}/src/nginx_module
+EXTRA_PATCHES+=	${PATCHDIR}/extra-patch-passenger-build-nginx.rb \
+		${PATCHDIR}/extra-patch-passenger-src-nginx_module-config
 .if empty(PORT_OPTIONS:MDEBUG)
 CONFIGURE_ENV+=	OPTIMIZE="yes"
 CFLAGS+=	-DNDEBUG
@@ -879,14 +879,14 @@ CONFIGURE_ARGS+=--add-module=${WRKSRC_xss}
 NGINX_OPENSSL=	yes
 USE_HTTP_SSL=	yes
 CONFIGURE_ARGS+=--with-http_v2_module
-USE_OPENSSL_PORT=	yes
+WITH_OPENSSL_PORT=	yes
 .endif
 
 .if ${PORT_OPTIONS:MNJS}
 GH_ACCOUNT+=	nginx:njs
 GH_PROJECT+=	njs:njs
-GH_TAGNAME+=	bb38609:njs
-CONFIGURE_ARGS+=--add-module=${WRKSRC_njs}/nginx
+GH_TAGNAME+=	4030015:njs
+CONFIGURE_ARGS+=--add-dynamic-module=${WRKSRC_njs}/nginx
 .endif
 
 .if ${PORT_OPTIONS:MSTREAM}
@@ -1000,6 +1000,11 @@ post-patch:
 	@${REINPLACE_CMD} 's!%%HTTP_PORT%%!${HTTP_PORT}!; \
 		s!%%PREFIX%%!${PREFIX}!' \
 		${WRKSRC}/conf/nginx.conf
+.if ${PORT_OPTIONS:MHTTP_ACCESSKEY}
+	@${REINPLACE_CMD} \
+		'128s!NGX_OK!NGX_DECLINED!' \
+		${WRKDIR}/nginx-accesskey-${NGINX_ACCESSKEY_VERSION}/ngx_http_accesskey_module.c
+.endif
 .if ${PORT_OPTIONS:MHTTP_AUTH_KRB5}
 	@${REINPLACE_CMD} \
 		's!%%GSSAPILIBS%%!${GSSAPILIBS}!' \
@@ -1015,11 +1020,6 @@ post-patch:
 	@${REINPLACE_CMD} \
 		's!^inline!static inline!' \
 		${WRKDIR}/mod_zip-${NGINX_ZIP_VERSION}/ngx_http_zip_parsers.*
-.endif
-.if ${PORT_OPTIONS:MCLOJURE}
-	@${REINPLACE_CMD} \
-		'54,57d' \
-		${WRKSRC_clojure}/src/c/config
 .endif
 .if ${PORT_OPTIONS:MDRIZZLE}
 	@${REINPLACE_CMD} \

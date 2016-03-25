@@ -4,8 +4,8 @@
 # adwaita-icon-theme, gnome-themes-standard and mate-themes
 
 PORTNAME=	gtk
-PORTVERSION=	3.18.7
-PORTREVISION?=	0
+PORTVERSION=	3.18.8
+PORTREVISION?=	1
 CATEGORIES=	x11-toolkits
 MASTER_SITES=	GNOME/sources/gtk+/${PORTVERSION:C/^([0-9]+\.[0-9]+).*/\1/}
 PKGNAMESUFFIX=	3
@@ -46,7 +46,7 @@ LIBS+=		-L${LOCALBASE}/lib
 INSTALLS_ICONS=	yes
 INSTALL_TARGET=	install-strip
 
-LIBVERSION=	0.1800.7
+LIBVERSION=	0.1800.8
 PLIST_SUB+=	LIBVERSION=${LIBVERSION}
 
 GLIB_SCHEMAS=	org.gtk.Demo.gschema.xml \
@@ -65,7 +65,7 @@ COLORD_DESC=	Color profile support
 COLORD_LIB_DEPENDS=	libcolord.so:${PORTSDIR}/graphics/colord
 COLORD_CONFIGURE_ENABLE=colord
 
-CUPS_LIB_DEPENDS=	libcups.so:${PORTSDIR}/print/cups-client
+CUPS_LIB_DEPENDS=	libcups.so:${PORTSDIR}/print/cups
 CUPS_CONFIGURE_ENABLE=	cups
 
 CLOUDPRINT_DESC=	Cloud printing support

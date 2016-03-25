@@ -5,6 +5,87 @@ they are unavoidable.
 You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
+20160311:
+  AFFECTS: print/hplip
+  AUTHOR: tijl@FreeBSD.org
+
+  HPLIP has been updated to verion 3.16.2.  As part of the update support
+  for the hpijs/foomatic-rip filter has been dropped.  This has long been
+  unsupported upstream.  If you used this filter with your printer you'll
+  have to reconfigure it.
+
+20160311:
+  AFFECTS: print/cups-base, print/cups-client, print/cups-image
+  AUTHOR: tijl@FreeBSD.org
+
+  The cups-base, cups-client and cups-image packages have been combined
+  into one cups package.  If you build your own ports the easiest way to
+  update is to delete these packages first and then build and install
+  print/cups.
+
+20160306:
+  AFFECTS: net-mgmt/yaf
+  AUTHOR: pi@FreeBSD.org
+
+  YAF is updated to version 2.8.1 with many new OPTIONS. Please use
+  the default options to get same behavior as previous version.
+
+20160302:
+  AFFECTS: audio/alsa-utils, www/firefox, www/firefox-esr, www/seamonkey
+  AUTHOR: jbeich@FreeBSD.org
+
+  ALSA backend in libcubeb as used by Firefox has an unresolved issue
+  with the OSS patch in audio/alsa-plugins. To avoid excessive CPU
+  usage when playing HTML5 videos rebuild the port with BUFSZ_P2
+  option enabled or reset options to default.
+
+  However, with BUFSZ_P2 enabled alsa-utils may crash:
+
+    $ aplay test.wav
+    Playing WAVE 'test.wav' : Signed 16 bit Little Endian, Rate 48000 Hz, Stereo
+    Assertion failed: (err >= 0), function set_params, file aplay.c, line 1289.
+    Aborted by signal Abort trap...
+
+20160229:
+  AFFECTS: users of security/openssh-portable-devel
+  AUTHOR: bdrewery@FreeBSD.org
+
+  openssh-portable-devel has been removed since it is stale, insecure and
+  not worth maintaining any longer.
+
+  Users should switch back to openssh-portable.
+
+  Using packages:
+
+    # pkg delete openssh-portable-devel
+    # pkg install openssh-portable
+
+  Using ports:
+
+    # portmaster -o security/openssh-portable openssh-portable-devel
+
+  OR
+
+    # portupgrade -o security/openssh-portable security/openssh-portable-devel
+
+20160228:
+  AFFECTS: users of mail/postfix
+  AUTHOR: ohauer@FreeBSD.org
+
+   Postfix has been updated to version 3.1, VDA and native SPF is no
+   longer supported.
+
+   - if VDA support is needed, users should stay on mail/postfix211
+   - SPF support can be added to postfix via one of the mail/*spf* ports
+
+   The Dovecot SASL OPTION was removed, Dovecot SASL support is always given
+   from now on.  In addition, for each mail/postfix* port there is now a
+   mail/postfix*-sasl slave port providing Cyrus SASL as default.
+
+   To stay on postfix-2.11.x run the command:
+
+   # pkg set -o mail/postfix:mail/postfix211
+
 20160217:
   AFFECTS: users of www/nginx-devel
   AUTHOR: osa@FreeBSD.org
@@ -151,7 +232,7 @@ you update your ports collection, before attempting any port upgrades.
 
   OR
 
-    # portmaster -o www/node4 www/node
+    # portmaster -o www/node4 node
 
 20151210:
   AFFECTS: users of comms/gammu
@@ -414,7 +495,7 @@ you update your ports collection, before attempting any port upgrades.
   'pkg delete -f jpeg' before 'pkg upgrade'.
 
   If using portmaster:
-  # portmaster -o graphics/jpeg-turbo graphics/jpeg
+  # portmaster -o graphics/jpeg-turbo jpeg
 
   If using portupgrade:
   # portupgrade -f -o graphics/jpeg-turbo graphics/jpeg
