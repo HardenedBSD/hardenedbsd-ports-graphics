@@ -4,7 +4,7 @@
 PORTNAME=	cups
 PORTVERSION=	2.1.3
 DISTVERSIONSUFFIX=-source
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	print
 MASTER_SITES=	http://www.cups.org/software/${PORTVERSION}/
 
@@ -51,28 +51,28 @@ OPTIONS_DEFINE=		AVAHI DBUS DOCS GNUTLS IPPTOOL LIBPAPER NLS X11
 OPTIONS_DEFAULT=	AVAHI DBUS GNUTLS LIBPAPER
 OPTIONS_SUB=		yes
 
-AVAHI_LIB_DEPENDS=	libavahi-client.so:${PORTSDIR}/net/avahi-app
+AVAHI_LIB_DEPENDS=	libavahi-client.so:net/avahi-app
 AVAHI_CONFIGURE_ENABLE=	avahi
 AVAHI_SUB_LIST=		AVAHI_DAEMON=avahi_daemon
 AVAHI_SUB_LIST_OFF=	AVAHI_DAEMON=
 
-DBUS_LIB_DEPENDS=	libdbus-1.so:${PORTSDIR}/devel/dbus
+DBUS_LIB_DEPENDS=	libdbus-1.so:devel/dbus
 DBUS_CONFIGURE_ENABLE=	dbus
 DBUS_SUB_LIST=		DBUS_DAEMON=dbus
 DBUS_SUB_LIST_OFF=	DBUS_DAEMON=
 
-GNUTLS_LIB_DEPENDS=	libgnutls.so:${PORTSDIR}/security/gnutls
+GNUTLS_LIB_DEPENDS=	libgnutls.so:security/gnutls
 GNUTLS_CONFIGURE_ON=	--enable-gnutls
 GNUTLS_CONFIGURE_OFF=	--disable-ssl
 
 IPPTOOL_DESC=		Internet Printing Protocol testing tool
 
-LIBPAPER_LIB_DEPENDS=	libpaper.so:${PORTSDIR}/print/libpaper
+LIBPAPER_LIB_DEPENDS=	libpaper.so:print/libpaper
 LIBPAPER_CONFIGURE_ENABLE=libpaper
 
 X11_DESC=		Install desktop menu item
-X11_BUILD_DEPENDS=	xdg-open:${PORTSDIR}/devel/xdg-utils
-X11_RUN_DEPENDS=	xdg-open:${PORTSDIR}/devel/xdg-utils
+X11_BUILD_DEPENDS=	xdg-open:devel/xdg-utils
+X11_RUN_DEPENDS=	xdg-open:devel/xdg-utils
 
 .if defined(CUPS_OVERWRITE_BASE)
 PLIST_SUB+=	OVERWRITE=""

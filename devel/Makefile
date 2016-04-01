@@ -506,7 +506,7 @@
     SUBDIR += erlang-rebar3_hex
     SUBDIR += erlang-recon
     SUBDIR += erlang-sbroker
-    SUBDIR += erlang-ssl_verify_hostname
+    SUBDIR += erlang-ssl_verify_fun
     SUBDIR += erlang-syslog
     SUBDIR += es-eric6
     SUBDIR += etcd
@@ -714,6 +714,7 @@
     SUBDIR += gnustep
     SUBDIR += gnustep-make
     SUBDIR += go-bindata
+    SUBDIR += go-btree
     SUBDIR += go-flags
     SUBDIR += go-hashicorp-logutils
     SUBDIR += go-json-rest
@@ -1151,6 +1152,7 @@
     SUBDIR += libconcurrent
     SUBDIR += libconfig
     SUBDIR += libconfuse
+    SUBDIR += libcppformat
     SUBDIR += libcrossguid
     SUBDIR += libcutl
     SUBDIR += libcwd
@@ -2722,6 +2724,7 @@
     SUBDIR += p5-MooseX-Log-Log4perl
     SUBDIR += p5-MooseX-MarkAsMethods
     SUBDIR += p5-MooseX-Meta-TypeConstraint-ForceCoercion
+    SUBDIR += p5-MooseX-Meta-TypeConstraint-Mooish
     SUBDIR += p5-MooseX-MetaDescription
     SUBDIR += p5-MooseX-Method-Signatures
     SUBDIR += p5-MooseX-MethodAttributes
@@ -3931,6 +3934,7 @@
     SUBDIR += py-ToscaWidgets
     SUBDIR += py-TurboJinja
     SUBDIR += py-ZopeUndo
+    SUBDIR += py-adb
     SUBDIR += py-akismet
     SUBDIR += py-aniso8601
     SUBDIR += py-anonfunc
@@ -4053,6 +4057,7 @@
     SUBDIR += py-epsilon
     SUBDIR += py-evdev
     SUBDIR += py-event
+    SUBDIR += py-exam
     SUBDIR += py-extras
     SUBDIR += py-extremes
     SUBDIR += py-ezpyinline
@@ -4162,6 +4167,7 @@
     SUBDIR += py-liblarch
     SUBDIR += py-libpeas
     SUBDIR += py-libplist
+    SUBDIR += py-libusb1
     SUBDIR += py-libvirt
     SUBDIR += py-libzfs
     SUBDIR += py-ll-core
@@ -4229,6 +4235,7 @@
     SUBDIR += py-pbr
     SUBDIR += py-pefile
     SUBDIR += py-period
+    SUBDIR += py-petname
     SUBDIR += py-pex
     SUBDIR += py-phabricator
     SUBDIR += py-phonenumbers
@@ -4294,6 +4301,7 @@
     SUBDIR += py-pytest
     SUBDIR += py-pytest-cache
     SUBDIR += py-pytest-capturelog
+    SUBDIR += py-pytest-django
     SUBDIR += py-pytest-localserver
     SUBDIR += py-pytest-runner
     SUBDIR += py-pytest-timeout
@@ -4404,6 +4412,7 @@
     SUBDIR += py-spyder
     SUBDIR += py-sqlcc
     SUBDIR += py-statgrab
+    SUBDIR += py-statsd
     SUBDIR += py-stdnum
     SUBDIR += py-stevedore
     SUBDIR += py-stsci.distutils
@@ -4444,6 +4453,7 @@
     SUBDIR += py-tvrage
     SUBDIR += py-tw.forms
     SUBDIR += py-twiggy
+    SUBDIR += py-twine
     SUBDIR += py-twisted
     SUBDIR += py-twisted152
     SUBDIR += py-twistedCore
@@ -4732,14 +4742,13 @@
     SUBDIR += rubygem-abstract
     SUBDIR += rubygem-actionpack-action_caching
     SUBDIR += rubygem-actionview
-    SUBDIR += rubygem-actionview41
     SUBDIR += rubygem-active_scaffold
     SUBDIR += rubygem-activejob
     SUBDIR += rubygem-activemessaging
     SUBDIR += rubygem-activerecord-deprecated_finders
     SUBDIR += rubygem-activesupport
     SUBDIR += rubygem-activesupport4
-    SUBDIR += rubygem-activesupport41
+    SUBDIR += rubygem-akismet
     SUBDIR += rubygem-algebrick
     SUBDIR += rubygem-algorithms
     SUBDIR += rubygem-allison
@@ -4810,7 +4819,6 @@
     SUBDIR += rubygem-coercible
     SUBDIR += rubygem-coffee-rails
     SUBDIR += rubygem-coffee-rails4
-    SUBDIR += rubygem-coffee-rails41
     SUBDIR += rubygem-coffee-script
     SUBDIR += rubygem-coffee-script-source
     SUBDIR += rubygem-colorize
@@ -4937,7 +4945,6 @@
     SUBDIR += rubygem-iobuffer
     SUBDIR += rubygem-jammit
     SUBDIR += rubygem-jbuilder
-    SUBDIR += rubygem-jbuilder-rails41
     SUBDIR += rubygem-jekyll-coffeescript
     SUBDIR += rubygem-jeweler
     SUBDIR += rubygem-jmespath
@@ -5009,10 +5016,10 @@
     SUBDIR += rubygem-octopress-hooks
     SUBDIR += rubygem-oj
     SUBDIR += rubygem-omniauth_crowd
-    SUBDIR += rubygem-omniauth_crowd-rails41
     SUBDIR += rubygem-open3_backport
     SUBDIR += rubygem-open4
     SUBDIR += rubygem-orm_adapter
+    SUBDIR += rubygem-p4ruby
     SUBDIR += rubygem-paint
     SUBDIR += rubygem-paperclip
     SUBDIR += rubygem-parser
@@ -5104,6 +5111,7 @@
     SUBDIR += rubygem-sdoc
     SUBDIR += rubygem-semantic_puppet
     SUBDIR += rubygem-semi_semantic
+    SUBDIR += rubygem-sentry-raven
     SUBDIR += rubygem-sequel
     SUBDIR += rubygem-sequel3
     SUBDIR += rubygem-settingslogic
@@ -5126,7 +5134,6 @@
     SUBDIR += rubygem-sprockets
     SUBDIR += rubygem-sprockets-helpers
     SUBDIR += rubygem-sprockets-rails
-    SUBDIR += rubygem-sprockets-rails-rails41
     SUBDIR += rubygem-sprockets-sass
     SUBDIR += rubygem-sprockets211
     SUBDIR += rubygem-sprockets22
@@ -5242,6 +5249,7 @@
     SUBDIR += smv
     SUBDIR += soapui
     SUBDIR += sope
+    SUBDIR += sope3
     SUBDIR += sourcenav
     SUBDIR += sparc64-binutils
     SUBDIR += sparc64-gcc

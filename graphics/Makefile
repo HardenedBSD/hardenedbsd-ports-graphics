@@ -532,13 +532,11 @@
     SUBDIR += libspiro
     SUBDIR += libsvg
     SUBDIR += libsvg-cairo
-    SUBDIR += libtxc_dxtn
     SUBDIR += libvisual
     SUBDIR += libvisual04
     SUBDIR += libvisual04-plugins
     SUBDIR += libwmf
     SUBDIR += libwmf-nox11
-    SUBDIR += libwpg
     SUBDIR += libwpg03
     SUBDIR += libyuv
     SUBDIR += lightzone

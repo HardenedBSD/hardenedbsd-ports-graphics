@@ -23,6 +23,7 @@
     SUBDIR += bestfit
     SUBDIR += bibletime
     SUBDIR += biblical-curse
+    SUBDIR += binclock
     SUBDIR += biosfont-demos
     SUBDIR += birthday
     SUBDIR += bogosort
@@ -419,6 +420,7 @@
     SUBDIR += shc
     SUBDIR += shuffle
     SUBDIR += shuffle-db
+    SUBDIR += seabios
     SUBDIR += since
     SUBDIR += skyutils
     SUBDIR += sloccount

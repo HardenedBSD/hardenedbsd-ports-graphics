@@ -14,8 +14,8 @@ COMMENT?=	GNU binary tools
 LICENSE=	GPLv3 LGPL3
 LICENSE_COMB=	multi
 
-BUILD_DEPENDS=	${LOCALBASE}/lib/libgmp.so:${PORTSDIR}/math/gmp \
-		${LOCALBASE}/lib/libmpfr.so:${PORTSDIR}/math/mpfr
+BUILD_DEPENDS=	${LOCALBASE}/lib/libgmp.so:math/gmp \
+		${LOCALBASE}/lib/libmpfr.so:math/mpfr
 
 CONFLICTS=	libbfd-[0-9]*
 
@@ -48,6 +48,8 @@ INFO=		as \
 
 CONFIGURE_ARGS+=	--disable-werror \
 			--with-sysroot=/
+
+MAKE_ENV+=	ac_cv_func_sbrk=0
 
 OPTIONS_SUB=	yes
 NLS_USES=	gettext
