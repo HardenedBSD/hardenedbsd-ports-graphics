@@ -986,6 +986,7 @@
     SUBDIR += traindirector
     SUBDIR += traingame
     SUBDIR += tremulous
+    SUBDIR += trenchbroom
     SUBDIR += trigger-data
     SUBDIR += trigger-rally
     SUBDIR += trimines
@@ -1193,6 +1194,7 @@
     SUBDIR += zatacka
     SUBDIR += zaz
     SUBDIR += zephulor
+    SUBDIR += zhlt
     SUBDIR += znibbles
     SUBDIR += zoom
     SUBDIR += ztrack

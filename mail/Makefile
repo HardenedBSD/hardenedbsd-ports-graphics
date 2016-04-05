@@ -362,6 +362,7 @@
     SUBDIR += p5-Mail-Audit
     SUBDIR += p5-Mail-Audit-Attach
     SUBDIR += p5-Mail-Box
+    SUBDIR += p5-Mail-Box-IMAP4-SSL
     SUBDIR += p5-Mail-Box-Parser-C
     SUBDIR += p5-Mail-Bulkmail
     SUBDIR += p5-Mail-Cache
@@ -510,6 +511,7 @@
     SUBDIR += procmail
     SUBDIR += prom-wl
     SUBDIR += proxsmtp
+    SUBDIR += py-email-reply-parser
     SUBDIR += py-Products.MailHost
     SUBDIR += py-Products.SecureMailHost
     SUBDIR += py-apolicy
@@ -591,7 +593,6 @@
     SUBDIR += ruby-rmail
     SUBDIR += rubygem-actionmailer
     SUBDIR += rubygem-actionmailer4
-    SUBDIR += rubygem-actionmailer41
     SUBDIR += rubygem-email_reply_parser
     SUBDIR += rubygem-email_reply_parser-discourse
     SUBDIR += rubygem-exception_notification

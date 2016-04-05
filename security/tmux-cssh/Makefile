@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	tmux-cssh
-PORTVERSION=	20150518
+PORTVERSION=	20151014
 CATEGORIES=	security
 
 MAINTAINER=	jrm@ftfl.ca
@@ -10,7 +10,7 @@ COMMENT=	ClusterSSH features using tmux, but not X11
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
-RUN_DEPENDS=	${LOCALBASE}/bin/tmux:${PORTSDIR}/sysutils/tmux
+RUN_DEPENDS=	${LOCALBASE}/bin/tmux:sysutils/tmux
 
 NO_BUILD=	YES
 

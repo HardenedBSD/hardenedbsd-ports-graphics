@@ -51,8 +51,8 @@ OPTIONS_DEFINE=	DOCS
 
 .include <bsd.port.pre.mk>
 
-.if ${OPSYS} == FreeBSD && ${CHOSEN_COMPILER_TYPE} == "gcc"
-LIB_DEPENDS+=	libboost_system.so:${PORTSDIR}/devel/boost-libs
+.if ${CHOSEN_COMPILER_TYPE} == "gcc"
+LIB_DEPENDS+=	libboost_system.so:devel/boost-libs
 LDFLAGS+=	-lboost_system
 .endif
 
