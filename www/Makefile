@@ -554,7 +554,6 @@
     SUBDIR += nginx-devel
     SUBDIR += nibbleblog
     SUBDIR += node
-    SUBDIR += node-devel
     SUBDIR += node010
     SUBDIR += node012
     SUBDIR += node4
@@ -563,6 +562,7 @@
     SUBDIR += npapi-xine
     SUBDIR += npc
     SUBDIR += npm
+    SUBDIR += npm2
     SUBDIR += npm012
     SUBDIR += nspluginwrapper
     SUBDIR += obhttpd
@@ -1431,6 +1431,7 @@
     SUBDIR += pecl-amfext
     SUBDIR += pecl-http
     SUBDIR += pecl-http1
+    SUBDIR += pecl-http2
     SUBDIR += pecl-solr
     SUBDIR += pecl-sphinx
     SUBDIR += pecl-swish
@@ -1534,6 +1535,7 @@
     SUBDIR += py-django-configurations
     SUBDIR += py-django-contact-form
     SUBDIR += py-django-contrib-comments
+    SUBDIR += py-django-cors-headers
     SUBDIR += py-django-countries
     SUBDIR += py-django-crispy-forms
     SUBDIR += py-django-datetime-widget
@@ -1846,6 +1848,7 @@
     SUBDIR += rsstool
     SUBDIR += rt40
     SUBDIR += rt42
+    SUBDIR += rt44
     SUBDIR += rtv
     SUBDIR += ruby-aws
     SUBDIR += ruby-google
@@ -1901,6 +1904,7 @@
     SUBDIR += rubygem-gitlab-grack
     SUBDIR += rubygem-gollum-grit_adapter
     SUBDIR += rubygem-gollum-lib
+    SUBDIR += rubygem-gollum-rugged_adapter
     SUBDIR += rubygem-gon
     SUBDIR += rubygem-gon-rails4
     SUBDIR += rubygem-hackpad-cli
