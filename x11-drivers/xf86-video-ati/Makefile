@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-ati
-PORTVERSION=	7.6.1
+PORTVERSION=	7.7.0
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
