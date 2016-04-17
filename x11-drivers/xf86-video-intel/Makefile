@@ -2,9 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-intel
-PORTVERSION=	2.99.917.1
+PORTVERSION=	2.99.917.20160417
 CATEGORIES=	x11-drivers
-MASTER_SITES=	http://rainbow-runner.nl/freebsd/
+MASTER_SITES=	LOCAL/kwm \
+		http://rainbow-runner.nl/freebsd/
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Driver for Intel integrated graphics chipsets
