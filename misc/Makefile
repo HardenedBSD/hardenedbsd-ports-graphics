@@ -65,7 +65,6 @@
     SUBDIR += dejagnu
     SUBDIR += delay
     SUBDIR += detachtty
-    SUBDIR += diary-hercules
     SUBDIR += diction
     SUBDIR += digitemp
     SUBDIR += display
@@ -276,6 +275,7 @@
     SUBDIR += mtx
     SUBDIR += najitool
     SUBDIR += newer
+    SUBDIR += nms
     SUBDIR += nsf
     SUBDIR += numchar
     SUBDIR += nut

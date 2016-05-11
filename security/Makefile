@@ -119,7 +119,6 @@
     SUBDIR += elixir-comeonin
     SUBDIR += elixir-comeonin_i18n
     SUBDIR += elixir-jose
-    SUBDIR += engine_pkcs11
     SUBDIR += erlang-jose
     SUBDIR += erlang-p1tls
     SUBDIR += esteidfirefoxplugin
@@ -289,6 +288,7 @@
     SUBDIR += lasso
     SUBDIR += lastpass-cli
     SUBDIR += letsencrypt.sh
+    SUBDIR += libadacrypt
     SUBDIR += libassuan
     SUBDIR += libbeid
     SUBDIR += libbf
@@ -492,6 +492,7 @@
     SUBDIR += p5-Crypt-CipherSaber
     SUBDIR += p5-Crypt-Cracklib
     SUBDIR += p5-Crypt-Ctr
+    SUBDIR += p5-Crypt-Curve25519
     SUBDIR += p5-Crypt-DES
     SUBDIR += p5-Crypt-DES_EDE3
     SUBDIR += p5-Crypt-DES_PP
@@ -501,6 +502,7 @@
     SUBDIR += p5-Crypt-ECB
     SUBDIR += p5-Crypt-Eksblowfish
     SUBDIR += p5-Crypt-Enigma
+    SUBDIR += p5-Crypt-Format
     SUBDIR += p5-Crypt-GCrypt
     SUBDIR += p5-Crypt-GOST
     SUBDIR += p5-Crypt-GOST_PP
@@ -545,6 +547,7 @@
     SUBDIR += p5-Crypt-RHash
     SUBDIR += p5-Crypt-RIPEMD160
     SUBDIR += p5-Crypt-RSA
+    SUBDIR += p5-Crypt-RSA-Parse
     SUBDIR += p5-Crypt-RSA-Yandex
     SUBDIR += p5-Crypt-Rabbit
     SUBDIR += p5-Crypt-RandPasswd
@@ -667,6 +670,7 @@
     SUBDIR += p5-POE-Filter-SSL
     SUBDIR += p5-Parse-Snort
     SUBDIR += p5-PerlCryptLib
+    SUBDIR += p5-Protocol-ACME
     SUBDIR += p5-SAVI-Perl
     SUBDIR += p5-SHA
     SUBDIR += p5-Safe-Hole
@@ -958,6 +962,7 @@
     SUBDIR += ruby-hmac
     SUBDIR += ruby-password
     SUBDIR += ruby-tcpwrap
+    SUBDIR += rubygem-airbrussh
     SUBDIR += rubygem-attr_encrypted
     SUBDIR += rubygem-bcrypt
     SUBDIR += rubygem-bcrypt-ruby
@@ -1093,6 +1098,7 @@
     SUBDIR += tinc
     SUBDIR += tinyca
     SUBDIR += titus
+    SUBDIR += tls-check
     SUBDIR += tlswrap
     SUBDIR += tmux-cssh
     SUBDIR += tor

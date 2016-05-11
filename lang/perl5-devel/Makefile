@@ -23,13 +23,14 @@ LICENSE_FILE_ART10=	${WRKSRC}/Artistic
 LICENSE_FILE_GPLv1=	${WRKSRC}/Copying
 
 TEST_TARGET=	test_harness
-TEST_ENV=	${MAKE_ENV} TEST_JOBS=${MAKE_JOBS_NUMBER}
+TEST_ENV=	${MAKE_ENV} TEST_JOBS=${MAKE_JOBS_NUMBER} \
+		LD_LIBRARY_PATH=${WRKSRC}
 
 # XXX Remove github things.
 USE_GITHUB=	yes
 GH_ACCOUNT=	Perl
 GH_PROJECT=	perl5
-GH_TAGNAME=	v5.23.9-30-g4caf7d8
+GH_TAGNAME=	v5.25.0-8-g51f69a2
 
 OPTIONS_DEFINE=	DEBUG GDBM PERL_64BITINT PTHREAD \
 		MULTIPLICITY SITECUSTOMIZE
@@ -63,7 +64,6 @@ PERL_MALLOC_CONFIGURE_ON=	-Dusemymalloc=y
 PERL_MALLOC_CONFIGURE_OFF=	-Dusemymalloc=n
 
 # XXX uncomment PORTSCOUT line
-# For the "release" Perl ports, this should be:
 #PORTSCOUT=	limit:^${PERL_VER}.
 
 .include "version.mk"
@@ -85,10 +85,13 @@ _ARCH_LIB=	${_PRIV_LIB}/${PERL_ARCH}
 # XXX releases are .tar.xz, add: tar:xz
 USES=	cpe
 
+# XXX replace all LIBPERL_VER occurences with PERL_VERSION
+LIBPERL_VER=	${PORTVERSION:C/[^0-9.]//}
+
 HAS_CONFIGURE=	yes
 CONFIGURE_SCRIPT=Configure
 CONFIGURE_ARGS=	-sde -Dprefix=${PREFIX} \
-	-Dlibperl=libperl.so.${PORTVERSION} \
+	-Dlibperl=libperl.so.${LIBPERL_VER} \
 	-Darchlib=${PREFIX}/${_ARCH_LIB} \
 	-Dprivlib=${PREFIX}/${_PRIV_LIB} \
 	-Dman3dir=${PREFIX}/${PERLMANPREFIX_REL}/man/man3 \
@@ -106,8 +109,11 @@ CONFIGURE_ARGS=	-sde -Dprefix=${PREFIX} \
 # shrpldflags is used for libperl.so, so remove all the extra bits inherited from lddlflags.
 # XXX change the soname to $$(LIBPERL:R)
 CONFIGURE_ARGS+= \
-	-Alddlflags='-L${WRKSRC} -L${PREFIX}/${_ARCH_LIB}/CORE -Wl,-rpath=${PREFIX}/${_ARCH_LIB}/CORE -lperl' \
-	-Dshrpldflags='$$(LDDLFLAGS:N-L${WRKSRC}:N-L${PREFIX}/${_ARCH_LIB}/CORE:N-Wl,-rpath=${PREFIX}/${_ARCH_LIB}/CORE:N-lperl) -Wl,-soname,$$(LIBPERL)'
+	-Alddlflags='-L${WRKSRC} -L${PREFIX}/${_ARCH_LIB}/CORE -lperl' \
+	-Dshrpldflags='$$(LDDLFLAGS:N-L${WRKSRC}:N-L${PREFIX}/${_ARCH_LIB}/CORE:N-lperl) -Wl,-soname,$$(LIBPERL)'
+
+# Give a hint of where libperl.so can be found.
+USE_LDCONFIG=	${PREFIX}/${_ARCH_LIB}/CORE
 
 # XXX Remove
 CONFIGURE_ARGS+=	-Dusedevel -Uversiononly
@@ -161,8 +167,10 @@ PLIST_SUB+=	PERL_VERSION=${PERL_VERSION} \
 		SITE_PERL=${SITE_PERL_REL} \
 		SITE_ARCH=${SITE_ARCH_REL} \
 		PRIV_LIB=${_PRIV_LIB} \
+		PKGNAMESUFFIX=${PKGNAMESUFFIX} \
 		ARCH_LIB=${_ARCH_LIB}
-PLIST_SUB+=	PORTVERSION=${PORTVERSION} # XXX Remove
+# XXX Remove and change to PERL_VERSION in the plist.
+PLIST_SUB+=	LIBPERL_VER=${LIBPERL_VER}
 
 _PERL5_DEFAULT_FILE=	/tmp/PERL5_DEFAULT
 
@@ -214,7 +222,7 @@ pre-everything::
 	@${ECHO_MSG} "DEFAULT_VERSIONS+=perl5=${PERL_VER}"
 	@${ECHO_MSG} ""
 	@${ECHO_MSG} "##################################################"
-.if !(defined(PACKAGE_BUILDING) || defined(BATCH))
+.  if !(defined(PACKAGE_BUILDING) || defined(BATCH))
 	@sleep 30
 .  endif
 .endif
@@ -245,8 +253,8 @@ pre-everything::
 # portmaster/portupgrade will remove the installed Perl version, and it will
 # remove any way to guess what the default Perl version is needed.
 post-extract:
-	${LN} -s libperl.so.${PORTVERSION} ${WRKSRC}/libperl.so
-	${LN} -s libperl.so.${PORTVERSION} ${WRKSRC}/libperl.so.${PERL_VER}
+	${LN} -s libperl.so.${LIBPERL_VER} ${WRKSRC}/libperl.so
+	${LN} -s libperl.so.${LIBPERL_VER} ${WRKSRC}/libperl.so.${PERL_VER}
 .if !defined(PACKAGE_BUILDING)
 	@${ECHO_CMD} "PERL5_DEFAULT=${PERL5_DEFAULT}" > ${_PERL5_DEFAULT_FILE}
 .endif
@@ -271,16 +279,25 @@ post-patch-PTHREAD-off:
 	${REINPLACE_CMD} -e 's|%%PTHREAD_LIBS%%||g;' \
 		${WRKSRC}/hints/freebsd.sh
 
+post-build:
+	@${REINPLACE_CMD} -e '/^lddlflags/s|-L${WRKSRC} ||' \
+		${WRKSRC}/lib/Config_heavy.pl
+.if ${CC} == /nxb-bin/usr/bin/cc
+	@${REINPLACE_CMD} -e 's=/nxb-bin==' \
+		${WRKSRC}/lib/Config.pm ${WRKSRC}/lib/Config_heavy.pl
+# Restore Config.pm's timestamp so that Perl's build system does not think it
+# needs to rebuild everything.
+	@${TOUCH} -r ${WRKSRC}/lib/Config.pm.bak ${WRKSRC}/lib/Config.pm
+.endif
+
 post-install:
 	${MKDIR} ${STAGEDIR}${SITE_MAN1} ${STAGEDIR}${SITE_MAN3}
 	${MKDIR} ${STAGEDIR}${SITE_ARCH}/auto
 	${MKDIR} ${STAGEDIR}${SITE_PERL}/auto
 	${LN} ${STAGEDIR}${PREFIX}/bin/perl${PERL_VERSION} ${STAGEDIR}${PREFIX}/bin/perl5
-	${LN} -sf libperl.so.${PORTVERSION} ${STAGEDIR}${PREFIX}/${_ARCH_LIB}/CORE/libperl.so
-	${LN} -sf libperl.so.${PORTVERSION} ${STAGEDIR}${PREFIX}/${_ARCH_LIB}/CORE/libperl.so.${PERL_VER}
+	${LN} -sf libperl.so.${LIBPERL_VER} ${STAGEDIR}${PREFIX}/${_ARCH_LIB}/CORE/libperl.so
+	${LN} -sf libperl.so.${LIBPERL_VER} ${STAGEDIR}${PREFIX}/${_ARCH_LIB}/CORE/libperl.so.${PERL_VER}
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/perl${PERL_VERSION}
-	# XXX Remove the ECHO_CMD
-	# Force PERL_PORT in case the devel has the same version as the latest release
 	${MKDIR} ${STAGEDIR}${SITE_ARCH}/machine
 	${MKDIR} ${STAGEDIR}${SITE_ARCH}/sys
 	# h2ph needs perl, but perl is not installed, it's only
@@ -295,6 +312,6 @@ post-install:
 			${STRIP_CMD} $$f; \
 			${CHMOD} 444 $$f; \
 		done
-	${INSTALL_DATA} ${WRKDIR}/perl-man.conf ${STAGEDIR}${PREFIX}/etc/man.d/perl${PERL_VER}.conf
+	${INSTALL_DATA} ${WRKDIR}/perl-man.conf ${STAGEDIR}${PREFIX}/etc/man.d/perl${PKGNAMESUFFIX}.conf
 
 .include <bsd.port.mk>

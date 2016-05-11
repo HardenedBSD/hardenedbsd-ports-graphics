@@ -2,9 +2,9 @@
 
 PORTNAME=	kipi-plugins
 PORTVERSION=	${DIGIKAM_VER}
+PORTREVISION=	1
 PORTEPOCH=	1
 CATEGORIES=	graphics kde
-DISTFILES=	#
 
 MAINTAINER=	kde@FreeBSD.org
 COMMENT=	KDE 4 kipi graphics plugins (meta port)
@@ -27,7 +27,7 @@ ${plugin:tu}_DESC=	${${plugin}_DESC}
 ${plugin:tu}_RUN_DEPENDS=	kipi-plugin-${plugin}>=${DIGIKAM_VER}:graphics/kipi-plugin-${plugin}
 .endfor
 
-NLS_DEP=	digikam-l10n>=${DIGIKAM_VER}:graphics/digikam-kde4-l10n
-DOCS_DEP=	digikam-doc>=${DIGIKAM_VER}:graphics/digikam-kde4-doc
+NLS_RUN_DEPENDS=	digikam-l10n>=${DIGIKAM_VER}:graphics/digikam-kde4-l10n
+DOCS_RUN_DEPENDS=	digikam-doc>=${DIGIKAM_VER}:graphics/digikam-kde4-doc
 
 .include <bsd.port.mk>

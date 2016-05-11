@@ -9,6 +9,7 @@
     SUBDIR += R-cran-RSQLite.extfuns
     SUBDIR += R-cran-sqldf
     SUBDIR += WWWdb
+    SUBDIR += adabase
     SUBDIR += adminer
     SUBDIR += adodb
     SUBDIR += adodb5
@@ -249,6 +250,7 @@
     SUBDIR += p5-AnyEvent-DBD-Pg
     SUBDIR += p5-AnyEvent-Memcached
     SUBDIR += p5-AnyEvent-Redis
+    SUBDIR += p5-App-Sqitch
     SUBDIR += p5-AsciiDB-TagFile
     SUBDIR += p5-BDB
     SUBDIR += p5-BSON
@@ -492,7 +494,6 @@
     SUBDIR += p5-Time-Piece-MySQL
     SUBDIR += p5-TokyoCabinet
     SUBDIR += p5-mysql-genocide
-    SUBDIR += p5-qdbm
     SUBDIR += p5-tokyotyrant
     SUBDIR += pear-DB
     SUBDIR += pear-DBA
@@ -537,6 +538,7 @@
     SUBDIR += pecl-memcache
     SUBDIR += pecl-memcached
     SUBDIR += pecl-mongo
+    SUBDIR += pecl-mongodb
     SUBDIR += pecl-mysqlnd_ms
     SUBDIR += pecl-mysqlnd_qc
     SUBDIR += pecl-pdo_user
@@ -738,6 +740,7 @@
     SUBDIR += py-htsql-pgsql
     SUBDIR += py-kyotocabinet
     SUBDIR += py-leveldb
+    SUBDIR += py-motor
     SUBDIR += py-mycli
     SUBDIR += py-mysql-connector-python
     SUBDIR += py-mysql-connector-python2
@@ -757,6 +760,7 @@
     SUBDIR += py-psycogreen
     SUBDIR += py-psycopg
     SUBDIR += py-psycopg2
+    SUBDIR += py-psycopg2cffi
     SUBDIR += py-pyPgSQL
     SUBDIR += py-pyhs
     SUBDIR += py-pylibmc
@@ -799,6 +803,7 @@
     SUBDIR += py35-sqlite3
     SUBDIR += pydbx
     SUBDIR += pymongo
+    SUBDIR += pymongo28
     SUBDIR += pypy-gdbm
     SUBDIR += pypy-sqlite3
     SUBDIR += pyspatialite
@@ -832,7 +837,6 @@
     SUBDIR += rrdman
     SUBDIR += rrdmerge
     SUBDIR += rrdtool
-    SUBDIR += rrdtool10
     SUBDIR += rrdtool12
     SUBDIR += ruby-bdb
     SUBDIR += ruby-cdb
@@ -934,6 +938,8 @@
     SUBDIR += sqldeveloper
     SUBDIR += sqlite-ext-miscfuncs
     SUBDIR += sqlite-ext-pcre
+    SUBDIR += sqlite-ext-regexp
+    SUBDIR += sqlite-ext-spellfix
     SUBDIR += sqlite2
     SUBDIR += sqlite3
     SUBDIR += sqlitebrowser
@@ -948,6 +954,7 @@
     SUBDIR += tarantool
     SUBDIR += tarantool-c
     SUBDIR += tcl-Mysql
+    SUBDIR += tcl-lmdb
     SUBDIR += tcl-sqlite3
     SUBDIR += tdb
     SUBDIR += tdbc

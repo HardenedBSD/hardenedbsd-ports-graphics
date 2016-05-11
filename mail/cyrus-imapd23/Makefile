@@ -63,7 +63,6 @@ LISTEXT_DESC=		Enable IMAP List extensions
 LISTEXT_CONFIGURE_ENABLE=listext
 MURDER_DESC=		Enable IMAP Murder support
 MURDER_CONFIGURE_ENABLE=murder
-MURDER_CFLAGS=
 MURDER_MAKE_ENV=	PTHREAD_LIBS="-lpthread"
 MYSQL_USE=		MYSQL=yes
 MYSQL_CONFIGURE_ON=	--with-mysql=yes \
@@ -83,7 +82,7 @@ SNMP_5_LIB_DEPENDS=	libnetsnmp.so:net-mgmt/net-snmp
 SNMP_5_CONFIGURE_ON=	--with-snmp=${LOCALBASE}
 SNMP_5_CONFIGURE_OFF=	--with-snmp=no
 SQLITE_DESC=		Enable SQLite backend (experimental)
-SQLITE_USE=		SQLITE=yes
+SQLITE_USES=		sqlite
 SQLITE_CONFIGURE_ON=	--with-sqlite=${LOCALBASE}
 
 # Autocreate Inbox and Autosieve patches from UoA

@@ -286,6 +286,7 @@
     SUBDIR += rate
     SUBDIR += rcpd
     SUBDIR += remarp
+    SUBDIR += resource-agents
     SUBDIR += riemann
     SUBDIR += rotorouter
     SUBDIR += routers2
@@ -320,6 +321,8 @@
     SUBDIR += sysmon
     SUBDIR += tcpreplay
     SUBDIR += tcptrack
+    SUBDIR += telegraf
+    SUBDIR += tornova
     SUBDIR += torrus
     SUBDIR += unifi3
     SUBDIR += unifi4
@@ -327,7 +330,6 @@
     SUBDIR += vidalia
     SUBDIR += virt-viewer
     SUBDIR += wdiag
-    SUBDIR += weathermap
     SUBDIR += weplab
     SUBDIR += whatmask
     SUBDIR += wifimgr

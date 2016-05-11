@@ -156,6 +156,7 @@
     SUBDIR += elasticsearch-plugin-head
     SUBDIR += elasticsearch-plugin-hq
     SUBDIR += elasticsearch-plugin-marvel
+    SUBDIR += elasticsearch-plugin-migration
     SUBDIR += elasticsearch-plugin-sql
     SUBDIR += elasticsearch-river-rabbitmq
     SUBDIR += elasticsearch2
@@ -364,6 +365,7 @@
     SUBDIR += kibana42
     SUBDIR += kibana43
     SUBDIR += kibana44
+    SUBDIR += kibana45
     SUBDIR += kmfl-european-latin
     SUBDIR += kmfl-khmer
     SUBDIR += kmfl-sil-ezra
@@ -546,8 +548,6 @@
     SUBDIR += p5-Devel-TraceSAX
     SUBDIR += p5-DocSet
     SUBDIR += p5-EBook-Tools
-    SUBDIR += p5-ElasticSearch-SearchBuilder
-    SUBDIR += p5-ElasticSearch-legacy
     SUBDIR += p5-Excel-Template
     SUBDIR += p5-Excel-Writer-XLSX
     SUBDIR += p5-File-Inplace
@@ -1253,7 +1253,6 @@
     SUBDIR += py-mwparserfromhell
     SUBDIR += py-nltk
     SUBDIR += py-openpyxl
-    SUBDIR += py-openpyxl1
     SUBDIR += py-paragrep
     SUBDIR += py-pdfminer
     SUBDIR += py-pss
@@ -1290,6 +1289,7 @@
     SUBDIR += py-sparqlwrapper
     SUBDIR += py-sphinx
     SUBDIR += py-sphinx-intl
+    SUBDIR += py-sphinx-me
     SUBDIR += py-sphinx_numfig
     SUBDIR += py-sphinx_rtd_theme
     SUBDIR += py-sphinx_wikipedia
@@ -1415,7 +1415,6 @@
     SUBDIR += rubygem-fog-xml
     SUBDIR += rubygem-gemoji
     SUBDIR += rubygem-gherkin
-    SUBDIR += rubygem-gherkin3
     SUBDIR += rubygem-github-linguist
     SUBDIR += rubygem-github-markdown
     SUBDIR += rubygem-github-markup
@@ -1424,8 +1423,8 @@
     SUBDIR += rubygem-heredoc_unindent
     SUBDIR += rubygem-hikidoc
     SUBDIR += rubygem-html-pipeline
-    SUBDIR += rubygem-html-pipeline1
     SUBDIR += rubygem-html-pipeline-gitlab
+    SUBDIR += rubygem-html-pipeline1
     SUBDIR += rubygem-htmlentities
     SUBDIR += rubygem-ini
     SUBDIR += rubygem-itextomml
@@ -1712,6 +1711,7 @@
     SUBDIR += yould
     SUBDIR += zenxml
     SUBDIR += zorba
+    SUBDIR += zsh-syntax-highlighting
     SUBDIR += zu-aspell
     SUBDIR += zu-hunspell
 
