@@ -103,6 +103,7 @@ agk:*:172:
 polipo:*:173:
 flowtools:*:174:
 twms:*:175:
+mlvpn:*:176:
 gdnsd:*:179:
 rt:*:180:
 nagios:*:181:
@@ -126,6 +127,7 @@ yate:*:204:
 gnugk:*:205:
 gini:*:206:
 _mixminion:*:207:
+_dnsdist:*:208:
 gogs:*:209:
 shoutcast:*:210:
 git:*:211:

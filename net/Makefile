@@ -248,9 +248,11 @@
     SUBDIR += igmpproxy
     SUBDIR += ilbc
     SUBDIR += imapproxy
+    SUBDIR += intel-ixl-kmod
     SUBDIR += iodine
     SUBDIR += ip2location
     SUBDIR += ip6_int
+    SUBDIR += ipdecap
     SUBDIR += ipgrab
     SUBDIR += iplog
     SUBDIR += ipsorc
@@ -396,6 +398,7 @@
     SUBDIR += miniupnpd
     SUBDIR += miredo
     SUBDIR += miruo
+    SUBDIR += mlvpn
     SUBDIR += mono-zeroconf
     SUBDIR += mopd
     SUBDIR += morebalance
@@ -414,6 +417,7 @@
     SUBDIR += nakenchat
     SUBDIR += nanomsg
     SUBDIR += nast
+    SUBDIR += nats
     SUBDIR += nbd-server
     SUBDIR += nc
     SUBDIR += ncp
@@ -782,6 +786,7 @@
     SUBDIR += p5-Socks
     SUBDIR += p5-Sort-Key-IPv4
     SUBDIR += p5-Test-URI
+    SUBDIR += p5-TFTP
     SUBDIR += p5-URI
     SUBDIR += p5-URI-FromHash
     SUBDIR += p5-URI-Match
@@ -882,6 +887,7 @@
     SUBDIR += pecl-mosquitto
     SUBDIR += pecl-oauth
     SUBDIR += pecl-radius
+    SUBDIR += pecl-smbclient
     SUBDIR += pecl-yaz
     SUBDIR += pecl-yp
     SUBDIR += pecl-zmq
@@ -1181,6 +1187,7 @@
     SUBDIR += samba41
     SUBDIR += samba42
     SUBDIR += samba43
+    SUBDIR += samba44
     SUBDIR += samplicator
     SUBDIR += sbd
     SUBDIR += scamper
@@ -1396,6 +1403,7 @@
     SUBDIR += zeroconf-ioslave
     SUBDIR += zerotier
     SUBDIR += zillion
+    SUBDIR += zmap
     SUBDIR += zsync
 
 .include <bsd.port.subdir.mk>

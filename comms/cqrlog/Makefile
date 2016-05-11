@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	cqrlog
-PORTVERSION=	1.9.1
-PORTREVISION=	1
+PORTVERSION=	2.0.1
 DISTVERSIONPREFIX=	v
 CATEGORIES=	comms hamradio
 
@@ -53,14 +52,22 @@ post-patch:
 		${FILESDIR}/environmentoptions.xml.in \
 		> ${WRKSRC}/environmentoptions.xml
 	${REINPLACE_CMD} -e s!%%LOCALBASE%%!${LOCALBASE}!g \
-		${WRKSRC}/src/dData.pas ${WRKSRC}/src/dUtils.pas \
-		${WRKSRC}/src/fLoTWExport.pas ${WRKSRC}/src/fPreferences.pas \
-		${WRKSRC}/src/fRotControl.pas ${WRKSRC}/src/fTRXControl.pas \
-		${WRKSRC}/src/fGrayline.pas
-	${REINPLACE_CMD} -e s!%%PREFIX%%!${PREFIX}!g \
+		${WRKSRC}/help/cwd.html ${WRKSRC}/help/h1.html \
+		${WRKSRC}/src/cqrlog.lpi ${WRKSRC}/src/dData.pas \
+		${WRKSRC}/src/dUtils.pas ${WRKSRC}/src/fLoTWExport.lrs \
+		${WRKSRC}/src/fLoTWExport.pas ${WRKSRC}/src/fLoTWExport.lfm \
+		${WRKSRC}/src/fPreferences.pas ${WRKSRC}/src/fRotControl.pas \
+		${WRKSRC}/src/fTRXControl.pas ${WRKSRC}/src/fGrayline.pas \
+		${WRKSRC}/src/fPreferences.lfm ${WRKSRC}/src/fPreferences.pas \
+		${WRKSRC}/src/fPreferences.lrs
+	${REINPLACE_CMD} -e s!%%DATADIR%%!${DATADIR}!g \
 		${WRKSRC}/src/dData.pas ${WRKSRC}/src/fGrayline.pas
 	${REINPLACE_CMD} -e s!%%LAZARUSDIR%%!${LAZARUS_DIR}!g \
 		${WRKSRC}/Makefile
 	${RM} -rf ${WRKSRC}/src/mysql
+	${LAZARUS_DIR}/tools/lazres ${WRKSRC}/src/fLoTWExport.lrs \
+		${WRKSRC}/src/fLoTWExport.lfm
+	${LAZARUS_DIR}/tools/lazres ${WRKSRC}/src/fPreferences.lrs \
+		${WRKSRC}/src/fPreferences.lfm
 
 .include <bsd.port.mk>

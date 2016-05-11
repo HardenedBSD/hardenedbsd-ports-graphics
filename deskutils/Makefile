@@ -93,7 +93,6 @@
     SUBDIR += gnome-weather
     SUBDIR += gnote
     SUBDIR += gnotime
-    SUBDIR += gnustep-notebook
     SUBDIR += gnustep-wrapper
     SUBDIR += gourmet
     SUBDIR += griffith
@@ -131,7 +130,6 @@
     SUBDIR += kdeplasma-addons
     SUBDIR += kruler
     SUBDIR += ksshaskpass
-    SUBDIR += ladon
     SUBDIR += launchy
     SUBDIR += libgcal
     SUBDIR += libopensync-plugin-vformat-devel
@@ -201,7 +199,6 @@
     SUBDIR += py-vobject
     SUBDIR += pybookreader
     SUBDIR += pypanel
-    SUBDIR += qlabels
     SUBDIR += qorganizer
     SUBDIR += qrfcview
     SUBDIR += qtm

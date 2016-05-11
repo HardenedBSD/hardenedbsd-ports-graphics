@@ -293,6 +293,19 @@
     SUBDIR += opensmtpd
     SUBDIR += opensmtpd-devel
     SUBDIR += opensmtpd-extras
+    SUBDIR += opensmtpd-extras-filter-clamav
+    SUBDIR += opensmtpd-extras-filter-dkim
+    SUBDIR += opensmtpd-extras-filter-dnsbl
+    SUBDIR += opensmtpd-extras-filter-pause
+    SUBDIR += opensmtpd-extras-filter-regex
+    SUBDIR += opensmtpd-extras-filter-spamassassin
+    SUBDIR += opensmtpd-extras-table-mysql
+    SUBDIR += opensmtpd-extras-table-passwd
+    SUBDIR += opensmtpd-extras-table-postgresql
+    SUBDIR += opensmtpd-extras-table-python
+    SUBDIR += opensmtpd-extras-table-redis
+    SUBDIR += opensmtpd-extras-table-socketmap
+    SUBDIR += opensmtpd-extras-table-sqlite
     SUBDIR += openwebmail
     SUBDIR += osbf-lua
     SUBDIR += ovs
@@ -327,6 +340,7 @@
     SUBDIR += p5-Email-MIME-Encodings
     SUBDIR += p5-Email-MIME-RFC2047
     SUBDIR += p5-Email-MessageID
+    SUBDIR += p5-Email-Outlook-Message
     SUBDIR += p5-Email-Reply
     SUBDIR += p5-Email-Send
     SUBDIR += p5-Email-Sender
@@ -573,6 +587,7 @@
     SUBDIR += roundcube
     SUBDIR += roundcube-air
     SUBDIR += roundcube-automatic_addressbook
+    SUBDIR += roundcube-carddav
     SUBDIR += roundcube-contextmenu
     SUBDIR += roundcube-groupvice
     SUBDIR += roundcube-html5_notifier

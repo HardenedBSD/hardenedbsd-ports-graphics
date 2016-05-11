@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	gdal
-PORTVERSION=	2.0.2
-PORTREVISION=	2
+PORTVERSION=	2.1.0
 CATEGORIES=	graphics geography
 MASTER_SITES=	http://download.osgeo.org/gdal/${PORTVERSION}/ \
 		ftp://ftp.remotesensing.org/pub/gdal/${PORTVERSION}/ \
@@ -105,7 +104,7 @@ PROJ_LIB_DEPENDS=	libproj.so:graphics/proj
 SPATIALITE_CONFIGURE_WITH=	spatialite
 SPATIALITE_LIB_DEPENDS=	libspatialite.so:databases/spatialite
 SQLITE_CONFIGURE_WITH=	sqlite3
-SQLITE_USE=		SQLITE=yes
+SQLITE_USES=		sqlite
 WEBP_CONFIGURE_WITH=	webp
 WEBP_LIB_DEPENDS=	libwebp.so:graphics/webp
 XERCES_CONFIGURE_WITH=	xerces

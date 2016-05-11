@@ -102,6 +102,7 @@
     SUBDIR += gcc5-devel
     SUBDIR += gcc6-aux
     SUBDIR += gcc6-devel
+    SUBDIR += gcc7-devel
     SUBDIR += gcl
     SUBDIR += gforth
     SUBDIR += ghc
@@ -239,6 +240,7 @@
     SUBDIR += perl5.18
     SUBDIR += perl5.20
     SUBDIR += perl5.22
+    SUBDIR += perl5.24
     SUBDIR += petite-chez
     SUBDIR += pfe
     SUBDIR += phantomjs

@@ -116,7 +116,6 @@
     SUBDIR += domoticz
     SUBDIR += dotclear
     SUBDIR += dotproject
-    SUBDIR += download-gemist
     SUBDIR += drood
     SUBDIR += drraw
     SUBDIR += drupal6
@@ -557,6 +556,7 @@
     SUBDIR += node010
     SUBDIR += node012
     SUBDIR += node4
+    SUBDIR += node5
     SUBDIR += nostromo
     SUBDIR += npapi-vlc
     SUBDIR += npapi-xine
@@ -984,7 +984,6 @@
     SUBDIR += p5-HTTP-BrowserDetect
     SUBDIR += p5-HTTP-Cache-Transparent
     SUBDIR += p5-HTTP-CookieJar
-    SUBDIR += p5-HTTP-CookieMonster
     SUBDIR += p5-HTTP-Cookies
     SUBDIR += p5-HTTP-Cookies-Mozilla
     SUBDIR += p5-HTTP-Cookies-iCab
@@ -1044,7 +1043,6 @@
     SUBDIR += p5-LWP-Authen-OAuth
     SUBDIR += p5-LWP-Authen-Wsse
     SUBDIR += p5-LWP-ConnCache-MaxKeepAliveRequests
-    SUBDIR += p5-LWP-ConsoleLogger
     SUBDIR += p5-LWP-MediaTypes
     SUBDIR += p5-LWP-Online
     SUBDIR += p5-LWP-Protocol-PSGI
@@ -1280,7 +1278,6 @@
     SUBDIR += p5-WWW-LongURL
     SUBDIR += p5-WWW-Mechanize
     SUBDIR += p5-WWW-Mechanize-CGI
-    SUBDIR += p5-WWW-Mechanize-Cached
     SUBDIR += p5-WWW-Mechanize-DecodedContent
     SUBDIR += p5-WWW-Mechanize-FormFiller
     SUBDIR += p5-WWW-Mechanize-GZip
@@ -1510,6 +1507,7 @@
     SUBDIR += py-bottle-cork
     SUBDIR += py-cachecontrol
     SUBDIR += py-cactus
+    SUBDIR += py-caldav
     SUBDIR += py-cherrypy
     SUBDIR += py-cherrypy-old
     SUBDIR += py-clientform
@@ -1521,6 +1519,7 @@
     SUBDIR += py-cssutils
     SUBDIR += py-django
     SUBDIR += py-django-allauth
+    SUBDIR += py-django-annotations
     SUBDIR += py-django-annoying
     SUBDIR += py-django-app-plugins
     SUBDIR += py-django-appconf
@@ -1533,6 +1532,7 @@
     SUBDIR += py-django-classy-tags
     SUBDIR += py-django-cms
     SUBDIR += py-django-configurations
+    SUBDIR += py-django-constance
     SUBDIR += py-django-contact-form
     SUBDIR += py-django-contrib-comments
     SUBDIR += py-django-cors-headers
@@ -1568,6 +1568,7 @@
     SUBDIR += py-django-pipeline
     SUBDIR += py-django-pipeline13
     SUBDIR += py-django-piston
+    SUBDIR += py-django-post_office
     SUBDIR += py-django-profiles
     SUBDIR += py-django-recaptcha
     SUBDIR += py-django-redis
@@ -1770,6 +1771,7 @@
     SUBDIR += py-scriptaculous
     SUBDIR += py-seafdav
     SUBDIR += py-seafobj
+    SUBDIR += py-searx
     SUBDIR += py-selector
     SUBDIR += py-selenium
     SUBDIR += py-slimit
@@ -2072,9 +2074,9 @@
     SUBDIR += smarty3
     SUBDIR += smb_auth
     SUBDIR += snarf
-    SUBDIR += sogo
+    SUBDIR += sogo2
     SUBDIR += sogo3
-    SUBDIR += sogo-activesync
+    SUBDIR += sogo2-activesync
     SUBDIR += sogo3-activesync
     SUBDIR += spawn-fcgi
     SUBDIR += spdylay
@@ -2082,6 +2084,7 @@
     SUBDIR += spreadlogd
     SUBDIR += sqstat
     SUBDIR += squid
+    SUBDIR += squid-devel
     SUBDIR += squid_radius_auth
     SUBDIR += squidanalyzer
     SUBDIR += squidclamav

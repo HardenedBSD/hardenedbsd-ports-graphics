@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	tcl-lmdb
-PORTVERSION=	0.3.3
+PORTVERSION=	0.3.5
 CATEGORIES=	databases
 
 MAINTAINER=	gahr@FreeBSD.org
@@ -15,22 +15,20 @@ LIB_DEPENDS=	liblmdb.so:databases/lmdb
 USE_GITHUB=	yes
 GH_ACCOUNT=	ray2501
 
-USES=		gmake tcl
-GNU_CONFIGURE=	yes
+USES=		gmake tcl:tea
+CONFIGURE_ARGS=	--with-system-lmdb
 CFLAGS+=	-I${LOCALBASE}/include
+CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
-CONFIGURE_ARGS+=--with-tcl=${TCL_LIBDIR} --with-system-lmdb
-CONFIGURE_ENV+=	CPPFLAGS="${CFLAGS}"
 
 TEST_TARGET=	test
 
-TCLPKG=		lmdb${PORTVERSION}
-PLIST_FILES=	lib/${TCLPKG}/lib${TCLPKG}.so \
-		lib/${TCLPKG}/pkgIndex.tcl \
+PLIST_FILES=	lib/${TCL_PKG}/lib${TCL_PKG}.so \
+		lib/${TCL_PKG}/pkgIndex.tcl \
 		man/mann/lmdb.n.gz
 
 post-install:
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/${TCLPKG}/lib${TCLPKG}.so
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/${TCL_PKG}/lib${TCL_PKG}.so
 
 .include <bsd.port.mk>
 
