@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	wayland
-PORTVERSION=	1.9.90
+PORTVERSION=	1.10.0
 CATEGORIES=	graphics
 MASTER_SITES=	http://rainbow-runner.nl/freebsd/
 #http://wayland.freedesktop.org/releases/
@@ -10,8 +10,8 @@ MASTER_SITES=	http://rainbow-runner.nl/freebsd/
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Wayland composite "server"
 
-LIB_DEPENDS=	libexpat.so:${PORTSDIR}/textproc/expat2 \
-		libffi.so:${PORTSDIR}/devel/libffi
+LIB_DEPENDS=	libexpat.so:textproc/expat2 \
+		libffi.so:devel/libffi
 
 WITH_DEBUG=	1
 USES=		gmake libtool pathfix pkgconfig tar:xz
