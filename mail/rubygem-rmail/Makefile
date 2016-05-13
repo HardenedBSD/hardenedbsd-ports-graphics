@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	rmail
-PORTVERSION=	1.1.1
+PORTVERSION=	1.1.2
 CATEGORIES=	mail rubygems
 MASTER_SITES=	RG
 
@@ -13,7 +13,6 @@ LICENSE=	BSD3CLAUSE
 
 NO_ARCH=	yes
 USE_RUBY=	yes
-USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=	yes
+USES=		gem
 
 .include <bsd.port.mk>

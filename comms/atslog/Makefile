@@ -3,12 +3,14 @@
 
 PORTNAME=	atslog
 PORTVERSION=	2.1.1
-PORTREVISION=	7
+PORTREVISION=	8
 CATEGORIES=	comms
 MASTER_SITES=	BERLIOS
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Software for collecting and analyzing calls from different PBX models
+
+BROKEN_powerpc64=	Does not build
 
 OPTIONS_DEFINE=	EXAMPLES LIBWRAP WWW WWWGD DOCS
 OPTIONS_DEFAULT=	LIBWRAP MYSQL WWW WWWGD
@@ -39,7 +41,7 @@ WANT_PHP_WEB=	yes
 USE_PHP+=	gd
 .endif
 .if ${PORT_OPTIONS:MMYSQL}
-USE_PHP+=	mysql
+USE_PHP+=	mysqli
 .endif
 .if ${PORT_OPTIONS:MPGSQL}
 USE_PHP+=	pgsql
@@ -48,14 +50,14 @@ USE_PHP+=	pgsql
 
 .if ${PORT_OPTIONS:MMYSQL}
 USE_MYSQL=	yes
-BUILD_DEPENDS+=	p5-DBD-mysql>=0:${PORTSDIR}/databases/p5-DBD-mysql
-RUN_DEPENDS+=	p5-DBD-mysql>=0:${PORTSDIR}/databases/p5-DBD-mysql
+BUILD_DEPENDS+=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
+RUN_DEPENDS+=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
 .endif
 
 .if ${PORT_OPTIONS:MPGSQL}
 USES+=		pgsql
-BUILD_DEPENDS+=	p5-DBD-Pg>=0:${PORTSDIR}/databases/p5-DBD-Pg
-RUN_DEPENDS+=	p5-DBD-Pg>=0:${PORTSDIR}/databases/p5-DBD-Pg
+BUILD_DEPENDS+=	p5-DBD-Pg>=0:databases/p5-DBD-Pg
+RUN_DEPENDS+=	p5-DBD-Pg>=0:databases/p5-DBD-Pg
 .endif
 
 .if ! ${PORT_OPTIONS:MLIBWRAP}
@@ -106,6 +108,7 @@ do-install:
 		${INSTALL_DATA} "{}" "${STAGEDIR}${WWWDIR}/{}" \;
 	${MV} ${STAGEDIR}${WWWDIR}/include/config.inc.php.default ${STAGEDIR}${WWWDIR}/include/config.inc.php.sample
 
+do-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 .for i in ${PORTDOCS}
 	${INSTALL_DATA} ${WRKSRC}/${i} ${STAGEDIR}${DOCSDIR}

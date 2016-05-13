@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	cuba
-PORTVERSION=	3.4.0
-PORTREVISION=	1
+PORTVERSION=	3.6.0
 CATEGORIES=	www rubygems
 MASTER_SITES=	RG
 
@@ -12,11 +11,10 @@ COMMENT=	Microframework for web applications
 
 LICENSE=	MIT
 
-RUN_DEPENDS=	rubygem-rack16>=0:${PORTSDIR}/www/rubygem-rack16
+RUN_DEPENDS=	rubygem-rack16>=1.6.0:www/rubygem-rack16
 
 NO_ARCH=	yes
 USE_RUBY=	yes
-USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=	yes
+USES=		gem
 
 .include <bsd.port.mk>

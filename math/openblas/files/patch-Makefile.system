@@ -1,6 +1,6 @@
---- Makefile.system.orig	2014-12-04 00:14:21.000000000 +0900
-+++ Makefile.system	2015-02-23 05:27:11.000000000 +0900
-@@ -199,6 +199,7 @@
+--- Makefile.system.orig	2015-10-27 20:44:50 UTC
++++ Makefile.system
+@@ -218,6 +218,7 @@ MD5SUM = md5 -r
  endif
  
  ifeq ($(OSNAME), FreeBSD)
@@ -8,7 +8,25 @@
  MD5SUM = md5 -r
  endif
  
-@@ -981,15 +982,6 @@
+@@ -889,9 +890,17 @@ SYMBOLSUFFIX =
+ endif
+ 
+ ifndef LIBNAMESUFFIX
++ifndef SMP
+ LIBPREFIX = lib$(SYMBOLPREFIX)openblas$(SYMBOLSUFFIX)
+ else
++LIBPREFIX = lib$(SYMBOLPREFIX)openblasp$(SYMBOLSUFFIX)
++endif
++else
++ifndef SMP
+ LIBPREFIX = lib$(SYMBOLPREFIX)openblas$(SYMBOLSUFFIX)_$(LIBNAMESUFFIX)
++else
++LIBPREFIX = lib$(SYMBOLPREFIX)openblasp$(SYMBOLSUFFIX)_$(LIBNAMESUFFIX)
++endif
+ endif
+ 
+ KERNELDIR	= $(TOPDIR)/kernel/$(ARCH)
+@@ -1020,24 +1029,8 @@ ifndef LIBSUFFIX
  LIBSUFFIX = a
  endif
  
@@ -21,18 +39,19 @@
 -LIBNAME_P	= $(LIBPREFIX)_$(LIBCORE)p$(REVISION)_p.$(LIBSUFFIX)
 -endif
 -else
- ifndef SMP
+-ifndef SMP
  LIBNAME		= $(LIBPREFIX)$(REVISION).$(LIBSUFFIX)
  LIBNAME_P	= $(LIBPREFIX)$(REVISION)_p.$(LIBSUFFIX)
-@@ -997,7 +989,6 @@
- LIBNAME		= $(LIBPREFIX)p$(REVISION).$(LIBSUFFIX)
- LIBNAME_P	= $(LIBPREFIX)p$(REVISION)_p.$(LIBSUFFIX)
- endif
+-else
+-LIBNAME		= $(LIBPREFIX)p$(REVISION).$(LIBSUFFIX)
+-LIBNAME_P	= $(LIBPREFIX)p$(REVISION)_p.$(LIBSUFFIX)
 -endif
- 
+-endif
+-
  
  LIBDLLNAME   = $(LIBPREFIX).dll
-@@ -1028,7 +1019,7 @@
+ LIBSONAME    = $(LIBNAME:.$(LIBSUFFIX)=.so)
+@@ -1067,7 +1060,7 @@ LIB_COMPONENTS = CBLAS
  endif
  
  export OSNAME

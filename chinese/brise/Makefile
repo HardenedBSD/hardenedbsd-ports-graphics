@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	brise
-PORTVERSION=	0.32
+PORTVERSION=	0.35
 DISTVERSIONPREFIX=	${PORTNAME}-
 CATEGORIES=	chinese textproc
 
@@ -10,11 +10,13 @@ COMMENT=	Rime Schema Repository
 
 LICENSE=	GPLv3
 
-BUILD_DEPENDS=	rime_deployer:${PORTSDIR}/chinese/librime
+BUILD_DEPENDS=	rime_deployer:chinese/librime
+
+BROKEN_FreeBSD_9=	does not build (segmentation fault)
 
 USES=		gmake
 USE_GITHUB=	yes
-GH_ACCOUNT=	lotem
+GH_ACCOUNT=	rime
 
 MAKE_ARGS+=	RIME_DATA_DIR=${DATADIR}
 

@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	jekyll-sitemap
-PORTVERSION=	0.9.0
+PORTVERSION=	0.10.0
 CATEGORIES=	textproc rubygems
 MASTER_SITES=	RG
 
@@ -13,7 +13,6 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 NO_ARCH=	yes
 USE_RUBY=	yes
-USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=	yes
+USES=		gem
 
 .include <bsd.port.mk>

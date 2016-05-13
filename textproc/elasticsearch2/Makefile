@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	elasticsearch
-PORTVERSION=	2.1.0
+PORTVERSION=	2.3.0
+PORTREVISION=	1
 CATEGORIES=	textproc java devel
 MASTER_SITES=	http://download.elasticsearch.org/${PORTNAME}/${PORTNAME}/ \
 		http://mirrors.rit.edu/zi/
@@ -26,7 +27,7 @@ OPTIONS_DEFINE=	DOCS
 
 .include <bsd.port.options.mk>
 
-LUCENEVER=	5.3.1
+LUCENEVER=	5.5.0
 CONFIG_FILES=	elasticsearch.yml logging.yml
 BINS=		elasticsearch.in.sh \
 		elasticsearch \
@@ -71,6 +72,7 @@ do-install:
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/elasticsearch/lib
 	(cd ${WRKSRC}/lib && ${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/lib/elasticsearch/lib/ "-name *\.jar")
 
+	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/elasticsearch/modules
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/elasticsearch/plugins
 	@${MKDIR} ${STAGEDIR}${PREFIX}/libexec/elasticsearch
 	@${MKDIR} ${STAGEDIR}${ELASTIC_DBDIR} ${STAGEDIR}${ELASTIC_LOGDIR}

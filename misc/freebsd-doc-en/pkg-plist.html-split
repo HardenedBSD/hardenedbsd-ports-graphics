@@ -20,6 +20,7 @@
 %%DOCSDIR%%/%%DOCLANG%%/articles/building-products/trademarks.html
 %%DOCSDIR%%/%%DOCLANG%%/articles/committers-guide/ar01s13.html
 %%DOCSDIR%%/%%DOCLANG%%/articles/committers-guide/archs.html
+%%DOCSDIR%%/%%DOCLANG%%/articles/committers-guide/benefits.html
 %%DOCSDIR%%/%%DOCLANG%%/articles/committers-guide/bugzilla.html
 %%DOCSDIR%%/%%DOCLANG%%/articles/committers-guide/commit-log-message.html
 %%DOCSDIR%%/%%DOCLANG%%/articles/committers-guide/committer.types.html
@@ -887,7 +888,6 @@
 %%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/conflicts.html
 %%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/dads-after-port-mk.html
 %%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/dads-arch-neutral.html
-%%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/dads-avoiding-linuxisms.html
 %%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/dads-cc.html
 %%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/dads-cflags.html
 %%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/dads-deprecated.html
@@ -900,6 +900,7 @@
 %%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/dads-rerolling-distfiles.html
 %%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/dads-sh-exec.html
 %%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/dads-sysctl.html
+%%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/dads-use-posix-standards.html
 %%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/distfile-survey.html
 %%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/gnome-components.html
 %%DOCSDIR%%/%%DOCLANG%%/books/porters-handbook/handbook.html

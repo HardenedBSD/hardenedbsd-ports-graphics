@@ -2,10 +2,12 @@
 
 PORTNAME=		${SAMBA_BASENAME}36
 PORTVERSION=		3.6.25
-PORTREVISION?=		1
+PORTREVISION?=		3
 CATEGORIES?=		net
 MASTER_SITES=		SAMBA/samba SAMBA/samba/stable SAMBA/samba/pre
 DISTNAME=		${SAMBA_BASENAME}-${PORTVERSION:S|.p|pre|:S|.r|rc|:S|.t|tp|:S|.a|alpha|}
+PATCH_SITES=		https://www.samba.org/samba/ftp/patches/security/
+PATCHFILES=		samba-3.6.25-security-2015-12-16.patch:-p1
 
 MAINTAINER?=		timur@FreeBSD.org
 COMMENT?=		Free SMB and CIFS client and server for Unix
@@ -14,6 +16,10 @@ LICENSE=		GPLv3
 LICENSE_FILE=		${WRKDIR}/${DISTNAME}/COPYING
 
 CONFLICTS?=		*samba3[2-5]-3.*
+
+DEPRECATED=		not supported by the upstream
+EXPIRATION_DATE=	2016-04-01
+
 # Additional patches from Sernet.de
 PATCH_STRIP=		-p1
 EXTRA_PATCHES=		${PATCHDIR}/sernet.patch
@@ -93,16 +99,16 @@ CONFIGURE_ENV+=		ac_cv_header_sys_mount_h=yes
 # XXX: readdir test fails on ZFS, bringing unusable replacement code
 CONFIGURE_ENV+=		libreplace_cv_READDIR_NEEDED=no
 # tdb
-BUILD_DEPENDS+=		tdb>=1.2.6:${PORTSDIR}/databases/tdb
-RUN_DEPENDS+=		tdb>=1.2.6:${PORTSDIR}/databases/tdb
+BUILD_DEPENDS+=		tdb>=1.2.6:databases/tdb
+RUN_DEPENDS+=		tdb>=1.2.6:databases/tdb
 CONFIGURE_ARGS+=	--without-libtdb --enable-external-libtdb
 # talloc
-BUILD_DEPENDS+=		talloc>=2.0.1:${PORTSDIR}/devel/talloc
-RUN_DEPENDS+=		talloc>=2.0.1:${PORTSDIR}/devel/talloc
+BUILD_DEPENDS+=		talloc>=2.0.1:devel/talloc
+RUN_DEPENDS+=		talloc>=2.0.1:devel/talloc
 CONFIGURE_ARGS+=	--without-libtalloc --enable-external-libtalloc
 # tevent
-BUILD_DEPENDS+=		tevent>=0.9.11:${PORTSDIR}/devel/tevent
-RUN_DEPENDS+=		tevent>=0.9.11:${PORTSDIR}/devel/tevent
+BUILD_DEPENDS+=		tevent>=0.9.11:devel/tevent
+RUN_DEPENDS+=		tevent>=0.9.11:devel/tevent
 CONFIGURE_ARGS+=	--without-libtevent --enable-external-libtevent
 # These options are common for all (sub)ports
 CONFIGURE_ARGS+=	${ICONV_CONFIGURE_BASE} \
@@ -189,7 +195,7 @@ SAMBA_WANT_LDAP=	yes
 .endif
 
 .if ${PORT_OPTIONS:MCUPS}
-LIB_DEPENDS+=		libcups.so:${PORTSDIR}/print/cups-client
+LIB_DEPENDS+=		libcups.so:print/cups
 CONFIGURE_ARGS+=	--enable-cups --enable-iprint
 SUB_LIST+=		CUPS=""
 .else
@@ -200,7 +206,7 @@ SUB_LIST+=		CUPS="@comment "
 .if ${PORT_OPTIONS:MMAX_DEBUG}
 CPPFLAGS+=		-g
 LDFLAGS+=		-g
-LIB_DEPENDS+=		libdmalloc.so:${PORTSDIR}/devel/dmalloc
+LIB_DEPENDS+=		libdmalloc.so:devel/dmalloc
 CONFIGURE_ARGS+=	--enable-debug
 #			--enable-socket-wrapper --enable-nss-wrapper \
 #			--enable-developer --enable-krb5developer \
@@ -273,7 +279,7 @@ CONFIGURE_ARGS+=	--disable-fam
 .if ${PORT_OPTIONS:MACL_SUPPORT}
 CONFIGURE_ARGS+=	--with-acl-support
 WANT_EXP_MODULES+=	vfs_zfsacl
-LIB_DEPENDS+=		libsunacl.so:${PORTSDIR}/sysutils/libsunacl
+LIB_DEPENDS+=		libsunacl.so:sysutils/libsunacl
 .else
 CONFIGURE_ARGS+=	--without-acl-support
 .endif
@@ -296,7 +302,7 @@ PLIST_SUB+=		SMBPASS="@comment "
 .	if ! ${PORT_OPTIONS:MADS}
 IGNORE=			dynamic DNS updates require ADS support. Disable DNSUPDATE support
 .	endif
-LIB_DEPENDS+=		libuuid.so:${PORTSDIR}/misc/e2fsprogs-libuuid
+LIB_DEPENDS+=		libuuid.so:misc/e2fsprogs-libuuid
 CONFIGURE_ARGS+=	--with-dnsupdate
 .else
 CONFIGURE_ARGS+=	--without-dnsupdate
@@ -305,7 +311,7 @@ CONFIGURE_ARGS+=	--without-dnsupdate
 .if ${PORT_OPTIONS:MAVAHI}
 CPPFLAGS+=		`pkg-config --cflags avahi-client`
 CONFIGURE_ENV+=		DNSSD_LIBS="`pkg-config --libs avahi-client`"
-LIB_DEPENDS+=		libavahi-client.so:${PORTSDIR}/net/avahi-app
+LIB_DEPENDS+=		libavahi-client.so:net/avahi-app
 CONFIGURE_ARGS+=	--enable-avahi
 .else
 CONFIGURE_ARGS+=	--disable-avahi
@@ -318,7 +324,7 @@ CONFIGURE_ARGS+=	--disable-pthreadpool
 .endif
 
 .if ${PORT_OPTIONS:MPOPT}
-LIB_DEPENDS+=		libpopt.so:${PORTSDIR}/devel/popt
+LIB_DEPENDS+=		libpopt.so:devel/popt
 CONFIGURE_ARGS+=	--without-included-popt
 .else
 CONFIGURE_ARGS+=	--with-included-popt

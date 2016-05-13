@@ -10,10 +10,11 @@ COMMENT=	Pandora FMS console
 LICENSE=	${PANDORA_LICENSE}
 LICENSE_FILE=	${PANDORA_LICENSE_FILE}
 
-RUN_DEPENDS=	${LOCALBASE}/bin/twopi:${PORTSDIR}/graphics/graphviz
+RUN_DEPENDS=	${LOCALBASE}/bin/twopi:graphics/graphviz
 
 USES=		shebangfix
-SHEBANG_FILES=	include/languages/util-all \
+SHEBANG_FILES=	include/languages/extract_newlines.sh \
+		include/languages/util-all \
 		include/languages/util-bzr-update \
 		include/languages/util-compile-mo \
 		include/languages/util-create-po \
@@ -26,22 +27,21 @@ OPTIONS_DEFINE=	DOCS PGSQL
 DOCS_DESC=	Install AUTHORS and ChangeLog
 PGSQL_DESC=	Use PostgreSQL backend (experimental)
 
-USE_PHP=	curl gd gettext json ldap mbstring mysql snmp session \
-		xml zip zlib
+USE_PHP=	curl filter gd gettext hash json ldap mbstring mysql \
+		snmp session xml zip zlib
 WANT_PHP_WEB=	yes
 USE_APACHE_RUN=	22+
 
-SUB_FILES+=	pandora_console.conf pkg-message
+SUB_FILES+=	pandora_console.conf pkg-message newsyslog.conf
+SUB_LIST+=	WWWOWN=${WWWOWN} WWWGRP=${WWWGRP}
+
+PGSQL_USE=	PHP=pgsql
 
 .include "${.CURDIR}/../pandorafms_server/bsd.pandora.mk"
 
+PORTREVISION=	2
+
 PANDORA_INSTALLER_ARGS+=	--destdir ${STAGEDIR}
-
-.include <bsd.port.pre.mk>
-
-.if ${PORT_OPTIONS:MPGSQL}
-USE_PHP+=	pgsql
-.endif
 
 post-patch:
 	@${REINPLACE_CMD} \
@@ -52,26 +52,25 @@ post-patch:
 		${WRKSRC}/pandoradb.data*.sql
 	@${REINPLACE_CMD} \
 		-e 's|/bin/bash|/bin/sh|g' \
-		${WRKSRC}/extras/check_other_languages.sh \
-		${WRKSRC}/include/languages/extract_newlines.sh
+		${WRKSRC}/extras/check_other_languages.sh
 
 post-install:
 	@cd ${STAGEDIR}${WWWDIR} \
-		&& ${RM} -rf pandora_console_install* *.spec \
-			extras/check_other_languages.sh.bak \
-			include/languages/extract_newlines.sh.bak \
-			*.sql.bak COPYING ${PORTDOCS} DEBIAN/ \
-			attachment/collections/.empty attachment/downloads/.gitignore
+		&& ${RM} -rf pandora_console_[il]* DEBIAN/ *.spec \
+			attachment/downloads/.gitignore ${PORTDOCS} \
+			*.sql.bak extras/check_other_languages.sh.bak
 	@cd ${STAGEDIR}${WWWDIR} && ${MV} install.php install_old.php
-.if ${PORT_OPTIONS:MDOCS}
+	@(d=${STAGEDIR}${PREFIX}/${APACHEETCDIR}/Includes; ${MKDIR} $$d; \
+		${INSTALL_DATA} ${WRKDIR}/pandora_console.conf \
+			$$d/pandora_console.conf.sample)
+	@(d=${STAGEDIR}${PREFIX}/etc/newsyslog.conf.d; ${MKDIR} $$d; \
+		${INSTALL_DATA} ${WRKDIR}/newsyslog.conf \
+			$$d/pandora_console.conf)
+
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 .for x in ${PORTDOCS}
 	${INSTALL_DATA} ${WRKSRC}/${x} ${STAGEDIR}${DOCSDIR}
 .endfor
-.endif
-	@${MKDIR} ${STAGEDIR}${PREFIX}/${APACHEETCDIR}/Includes
-	${INSTALL_DATA} ${WRKDIR}/pandora_console.conf \
-		${STAGEDIR}${PREFIX}/${APACHEETCDIR}/Includes/pandora_console.conf.sample
-	@${LN} -sf ${_LICENSE_DIR}/${LICENSE} ${STAGEDIR}${WWWDIR}/COPYING
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

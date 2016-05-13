@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	drupal6
-PORTVERSION=	6.37
+PORTVERSION=	6.38
 CATEGORIES=	www
 MASTER_SITES=	http://ftp.drupal.org/files/projects/
 DISTNAME=	drupal-${PORTVERSION}
@@ -10,6 +10,11 @@ DIST_SUBDIR=	drupal
 
 MAINTAINER=	simon.wright@gmx.net
 COMMENT=	Database driven web content management system (CMS)
+
+BROKEN_powerpc64=	Does not build
+
+DEPRECATED=	EOL upstream as of 2016-02-24
+EXPIRATION_DATE=	2016-04-24
 
 USES=		drupal:6 shebangfix
 SHEBANG_FILES=	scripts/drupal.sh
@@ -38,7 +43,7 @@ USE_PHP+=	mysql
 USE_PHP+=	mysqli
 .endif
 .if ${PORT_OPTIONS:MPGSQL}
-RUN_DEPENDS+=	${LOCALBASE}/share/pear/DB.php:${PORTSDIR}/databases/pear-DB
+RUN_DEPENDS+=	${LOCALBASE}/share/pear/DB.php:databases/pear-DB
 USE_PHP+=	pgsql
 .endif
 

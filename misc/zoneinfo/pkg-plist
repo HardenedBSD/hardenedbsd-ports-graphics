@@ -100,6 +100,7 @@
 %%DATADIR%%/America/Edmonton
 %%DATADIR%%/America/Eirunepe
 %%DATADIR%%/America/El_Salvador
+%%DATADIR%%/America/Fort_Nelson
 %%DATADIR%%/America/Fortaleza
 %%DATADIR%%/America/Glace_Bay
 %%DATADIR%%/America/Godthab
@@ -171,7 +172,6 @@
 %%DATADIR%%/America/Regina
 %%DATADIR%%/America/Resolute
 %%DATADIR%%/America/Rio_Branco
-%%DATADIR%%/America/Santa_Isabel
 %%DATADIR%%/America/Santarem
 %%DATADIR%%/America/Santiago
 %%DATADIR%%/America/Santo_Domingo
@@ -219,6 +219,7 @@
 %%DATADIR%%/Asia/Bahrain
 %%DATADIR%%/Asia/Baku
 %%DATADIR%%/Asia/Bangkok
+%%DATADIR%%/Asia/Barnaul
 %%DATADIR%%/Asia/Beirut
 %%DATADIR%%/Asia/Bishkek
 %%DATADIR%%/Asia/Brunei
@@ -279,6 +280,7 @@
 %%DATADIR%%/Asia/Tehran
 %%DATADIR%%/Asia/Thimphu
 %%DATADIR%%/Asia/Tokyo
+%%DATADIR%%/Asia/Tomsk
 %%DATADIR%%/Asia/Ulaanbaatar
 %%DATADIR%%/Asia/Urumqi
 %%DATADIR%%/Asia/Ust-Nera
@@ -351,6 +353,7 @@
 %%DATADIR%%/Etc/Zulu
 %%DATADIR%%/Europe/Amsterdam
 %%DATADIR%%/Europe/Andorra
+%%DATADIR%%/Europe/Astrakhan
 %%DATADIR%%/Europe/Athens
 %%DATADIR%%/Europe/Belgrade
 %%DATADIR%%/Europe/Berlin
@@ -370,6 +373,7 @@
 %%DATADIR%%/Europe/Jersey
 %%DATADIR%%/Europe/Kaliningrad
 %%DATADIR%%/Europe/Kiev
+%%DATADIR%%/Europe/Kirov
 %%DATADIR%%/Europe/Lisbon
 %%DATADIR%%/Europe/Ljubljana
 %%DATADIR%%/Europe/London
@@ -396,6 +400,7 @@
 %%DATADIR%%/Europe/Stockholm
 %%DATADIR%%/Europe/Tallinn
 %%DATADIR%%/Europe/Tirane
+%%DATADIR%%/Europe/Ulyanovsk
 %%DATADIR%%/Europe/Uzhgorod
 %%DATADIR%%/Europe/Vaduz
 %%DATADIR%%/Europe/Vatican

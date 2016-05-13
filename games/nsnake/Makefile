@@ -5,20 +5,21 @@ PORTNAME=	nsnake
 PORTVERSION=	1.4
 PORTREVISION=	2
 CATEGORIES=	games
-MASTER_SITES=	http://releases.malikania.fr/nsnake/
+MASTER_SITES=	http://releases.malikania.fr/nsnake/1.4.0/
 
 MAINTAINER=	demelier.david@gmail.com
 COMMENT=	Snake game written in C and ncurses
 
-LICENSE=	MIT
+LICENSE=	ISCL
 
-USES=		tar:tgz
+USES=		ncurses tar:tgz
 
 OPTIONS_DEFINE=	DOCS
 OPTIONS_SUB=	yes
 
 do-build:
-	(cd ${WRKSRC} && ${CC} ${CFLAGS} -o ${PORTNAME} ${PORTNAME}.c -lcurses)
+	(cd ${WRKSRC} && ${CC} ${CFLAGS} -o ${PORTNAME} ${PORTNAME}.c \
+		${LDFLAGS} -lncurses)
 
 do-install:
 	(cd ${WRKSRC} \

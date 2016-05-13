@@ -23,8 +23,8 @@ SRCS+= file_sync_client.cpp
 SRCS+= line_printer.cpp
 SRCS+= services.cpp
 SRCS+= shell_service_protocol.cpp
-# XXX SuffFindDeps may fail to restore suffix lost in transformation
 SRCS+= ../adb/sockets.cpp
+SRCS+= sysdeps_unix.cpp
 SRCS+= transport.cpp
 SRCS+= transport_local.cpp
 SRCS+= transport_usb.cpp
@@ -34,6 +34,7 @@ TEST_SRCS+= adb_utils_test.cpp
 TEST_SRCS+= fdevent_test.cpp
 TEST_SRCS+= shell_service_protocol_test.cpp
 TEST_SRCS+= socket_test.cpp
+TEST_SRCS+= sysdeps_test.cpp
 TEST_SRCS+= transport_test.cpp
 
 .PATH: ${.CURDIR}/client
@@ -46,30 +47,42 @@ SRCS+= usb_libusb.cpp
 .PATH: ${.CURDIR}/../base
 SRCS+= file.cpp
 SRCS+= logging.cpp
-SRCS+= strings.cpp
+SRCS+= parsenetaddress.cpp
 SRCS+= stringprintf.cpp
+SRCS+= strings.cpp
 TEST_SRCS+= file_test.cpp
 TEST_SRCS+= logging_test.cpp
+TEST_SRCS+= parsenetaddress_test.cpp
 TEST_SRCS+= stringprintf_test.cpp
 TEST_SRCS+= strings_test.cpp
 TEST_SRCS+= test_main.cpp
 TEST_SRCS+= test_utils.cpp
 
+.PATH: ${.CURDIR}/../libcrypto_utils
+SRCS+= android_pubkey.c
+
+.PATH: ${.CURDIR}/../libcrypto_utils/tests
+TEST_SRCS+= android_pubkey_test.cpp
+
 .PATH: ${.CURDIR}/../libcutils
-SRCS+= socket_inaddr_any_server.c
-SRCS+= socket_local_client.c
-SRCS+= socket_local_server.c
-SRCS+= socket_loopback_client.c
-SRCS+= socket_loopback_server.c
-SRCS+= socket_network_client.c
+SRCS+= socket_inaddr_any_server_unix.c
+SRCS+= socket_local_client_unix.c
+SRCS+= socket_local_server_unix.c
+SRCS+= socket_loopback_client_unix.c
+SRCS+= socket_loopback_server_unix.c
+SRCS+= socket_network_client_unix.c
 SRCS+= load_file.c
 SRCS+= threads.c
 
 # required by base/file.cpp
 .PATH: ${.CURDIR}/../liblog
+SRCS+= config_write.c
 SRCS+= fake_log_device.c
-SRCS+= logd_write.c
-CPPFLAGS.logd_write.c+= -DFAKE_LOG_DEVICE=1
+SRCS+= fake_writer.c
+SRCS+= logger_lock.c
+SRCS+= logger_name.c
+SRCS+= logger_write.c
+CPPFLAGS.config_write.c+= -DFAKE_LOG_DEVICE=1
 
 REVISION?= $$(${GIT} rev-parse --short=12 HEAD 2>/dev/null || echo unknown)
 
@@ -83,6 +96,7 @@ CPPFLAGS+= -D_FILE_OFFSET_BITS=64
 CPPFLAGS+= -I${.CURDIR}
 CPPFLAGS+= -I${.CURDIR}/../include
 CPPFLAGS+= -I${.CURDIR}/../base/include
+CPPFLAGS+= -I${.CURDIR}/../libcrypto_utils/include
 CPPFLAGS+= ${CPPFLAGS.${.IMPSRC:T}}
 CPPFLAGS+= $$(${PKG_CONFIG} libcrypto --cflags 2>/dev/null)
 CPPFLAGS+= $$(${PKG_CONFIG} libusb-1.0 --cflags 2>/dev/null)

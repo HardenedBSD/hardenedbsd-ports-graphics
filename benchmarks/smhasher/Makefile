@@ -3,6 +3,7 @@
 
 PORTNAME=	smhasher
 PORTVERSION=	1.0
+DISTVERSIONPREFIX=	v
 PORTREVISION=	1
 CATEGORIES=	benchmarks
 
@@ -11,10 +12,10 @@ COMMENT=	Hash Algorithm Benchmarking
 
 LICENSE=	MIT
 
+BROKEN_powerpc64=	Does not build
+
 USE_GITHUB=	yes
 GH_ACCOUNT=	gvnn3
-GH_PROJECT=	smhasher
-DISTVERSIONPREFIX=	v
 
 USES=		cmake
 

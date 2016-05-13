@@ -2,20 +2,20 @@
 # $FreeBSD$
 
 PORTNAME=	aifad
-PORTVERSION=	2.0.6
+PORTVERSION=	2.0.8
 DISTVERSIONPREFIX=	v
 CATEGORIES=	devel
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Machine learning system
 
-LICENSE=	GPLv3
+LICENSE=	LGPL21+
 
-BUILD_DEPENDS=	menhir:${PORTSDIR}/devel/menhir \
-		ocaml-cfg>0:${PORTSDIR}/devel/ocaml-cfg \
-		ocaml-pcre>0:${PORTSDIR}/devel/ocaml-pcre \
-		ocaml-res>0:${PORTSDIR}/devel/ocaml-res
-LIB_DEPENDS=	libpcre.so:${PORTSDIR}/devel/pcre
+BUILD_DEPENDS=	menhir:devel/menhir \
+		ocaml-cfg>0:devel/ocaml-cfg \
+		ocaml-pcre>0:devel/ocaml-pcre \
+		ocaml-res>0:devel/ocaml-res
+LIB_DEPENDS=	libpcre.so:devel/pcre
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mmottl
@@ -38,7 +38,7 @@ post-install:
 post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
-	
+
 post-install-EXAMPLES-on:
 	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
 	(cd ${WRKSRC}/examples && ${INSTALL_DATA} * ${STAGEDIR}${EXAMPLESDIR})

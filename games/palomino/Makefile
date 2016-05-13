@@ -3,9 +3,9 @@
 
 PORTNAME=	palomino
 PORTVERSION=	20131231
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	games
-MASTER_SITES=	http://www.palomino3d.org/software/${PORTNAME}/
+MASTER_SITES=	SF/palomino-sim
 DISTFILES=	${PORTNAME}_src_${PORTVERSION}.txz \
 		${PORTNAME}_data_misc_${MISC_VER}${EXTRACT_SUFX} \
 		${PORTNAME}_data_models_${MODELS_VER}${EXTRACT_SUFX} \
@@ -15,12 +15,10 @@ DISTFILES=	${PORTNAME}_src_${PORTVERSION}.txz \
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Action flight simulation computer program using OSG
 
-BROKEN=		unfetchable
-
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE_GNU_GPL_2.txt
 
-LIB_DEPENDS=	libosg.so:${PORTSDIR}/graphics/osg
+LIB_DEPENDS=	libosg.so:graphics/osg
 
 USES=		alias cmake lua:51 tar:xz
 USE_GL=		gl
@@ -40,8 +38,8 @@ GUI_DESC=	Enable FLTK GUI
 
 OPTIONS_SUB=	yes
 
-GUI_LIB_DEPENDS=	libfltk.so:${PORTSDIR}/x11-toolkits/fltk
-PLIB_BUILD_DEPENDS=	${LOCALBASE}/lib/libplibsl.a:${PORTSDIR}/x11-toolkits/plib
+GUI_LIB_DEPENDS=	libfltk.so:x11-toolkits/fltk
+PLIB_BUILD_DEPENDS=	${LOCALBASE}/lib/libplibsl.a:x11-toolkits/plib
 
 PORTDOCS=	*
 
@@ -84,6 +82,15 @@ post-patch:
 	@${REINPLACE_CMD} -e '/LUABIND_SCRIPTS_DIR/ s|"scripts"|"${DATADIR}/scripts"|' \
 		${WRKSRC}/src/lua_bind/defs.hh
 	@${REINPLACE_CMD} -e 's|doc/html/|${DOCSDIR}/|' ${WRKSRC}/src/gui/gui.cc
+
+	@${REINPLACE_CMD} -e 's/computeBound/computeBoundingBox/g' \
+		${WRKSRC}/src/object/object.cc \
+		${WRKSRC}/src/fx/partsys_medium.cc
+
+	@${REINPLACE_CMD} -e 's/CameraNode/Camera/g' \
+		${WRKSRC}/src/hud/hud.cc \
+		${WRKSRC}/src/hud/hud.hh \
+		${WRKSRC}/src/hud/hud_text.cc
 
 post-install:
 	@${MKDIR} ${STAGEDIR}${DATADIR}

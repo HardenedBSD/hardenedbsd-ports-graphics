@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	r18n-core
-PORTVERSION=	2.1.0
+PORTVERSION=	2.1.3
 CATEGORIES=	devel rubygems
 MASTER_SITES=	RG
 
@@ -14,7 +14,6 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 NO_ARCH=	yes
 USE_RUBY=	yes
-USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=	yes
+USES=		gem
 
 .include <bsd.port.mk>

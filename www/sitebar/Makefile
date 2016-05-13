@@ -10,6 +10,8 @@ DISTNAME=	SiteBar-${PORTVERSION}
 MAINTAINER=	gunter@six-two.net
 COMMENT=	The Bookmark Server for Personal and Team Use
 
+BROKEN_powerpc64=	Does not build
+
 USES=		tar:bzip2
 USE_PHP=	mysql pcre
 WANT_PHP_WEB=	yes
@@ -24,7 +26,5 @@ do-install:
 		${FIND} . ! -type d -exec ${INSTALL_DATA} {} ${STAGEDIR}${DATADIR}/{} \;
 	@${FIND} ${STAGEDIR}${DATADIR} ! -type d | \
 		${SED} 's,^${STAGEDIR}${PREFIX}/,,' >> ${TMPPLIST}
-	@${FIND} ${STAGEDIR}${DATADIR} -type d | ${SORT} -r | \
-		${SED} 's,^${STAGEDIR}${PREFIX}/,@dirrm ,' >> ${TMPPLIST}
 
 .include <bsd.port.mk>

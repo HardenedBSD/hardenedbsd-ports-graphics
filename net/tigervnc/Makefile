@@ -2,30 +2,30 @@
 # $FreeBSD$
 
 PORTNAME=	tigervnc
-PORTVERSION=	1.5.0
+PORTVERSION=	1.6.0
 DISTVERSIONPREFIX=	v
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	net x11-servers
 
 MAINTAINER=	meta+ports@vmeta.jp
 COMMENT=	High-performance, platform-neutral implementation of VNC
 
-LICENSE=	GPLv2
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/LICENCE.TXT
 
-PATCH_DEPENDS=	${NONEXISTENT}:${PORTSDIR}/x11-servers/xorg-server:patch
-BUILD_DEPENDS=	${LOCALBASE}/include/GL/internal/dri_interface.h:${PORTSDIR}/graphics/dri \
-		${LOCALBASE}/libdata/pkgconfig/fontutil.pc:${PORTSDIR}/x11-fonts/font-util \
-		bash:${PORTSDIR}/shells/bash
+PATCH_DEPENDS=	${NONEXISTENT}:x11-servers/xorg-server:patch
+BUILD_DEPENDS=	${LOCALBASE}/include/GL/internal/dri_interface.h:graphics/dri \
+		${LOCALBASE}/libdata/pkgconfig/fontutil.pc:x11-fonts/font-util \
+		bash:shells/bash
 # almost equivalent to x11-servers/xorg-server's
-RUN_DEPENDS=	${LOCALBASE}/share/X11/xkb/rules/base:${PORTSDIR}/x11/xkeyboard-config \
-		xkbcomp:${PORTSDIR}/x11/xkbcomp
+RUN_DEPENDS=	${LOCALBASE}/share/X11/xkb/rules/base:x11/xkeyboard-config \
+		xkbcomp:x11/xkbcomp
 
 CONFLICTS=	tridiavnc-[0-9]* \
 		tightvnc-[0-9]* \
 		vnc-[0-9]*
 
-USES=		autoreconf:build cmake cpe gmake libtool pkgconfig python
+USES=		autoreconf:build cmake cpe gmake jpeg libtool pkgconfig python
 USE_GL=		gl
 USE_LDCONFIG=	yes
 USE_OPENSSL=	yes
@@ -39,20 +39,19 @@ USE_XORG+=	bigreqsproto compositeproto damageproto fixesproto fontsproto glproto
 
 CFLAGS+=	-fPIC
 
-OPTIONS_DEFINE=		GNUTLS NLS PAM VIEWER HPJPG DOCS
+OPTIONS_DEFINE=		GNUTLS NLS PAM VIEWER DOCS
 OPTIONS_DEFAULT=	GNUTLS NLS PAM VIEWER
 VIEWER_DESC=		Build vncviewer
-HPJPG_DESC=		Build with High-Performance JPEG support
 
 .include <bsd.port.options.mk>
 
 CMAKE_ARGS=	-G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${STAGE}${PREFIX}
 
 .if ${PORT_OPTIONS:MGNUTLS}
-LIB_DEPENDS+=	libtasn1.so:${PORTSDIR}/security/libtasn1 \
-		libgcrypt.so:${PORTSDIR}/security/libgcrypt \
-		libgpg-error.so:${PORTSDIR}/security/libgpg-error \
-		libgnutls.so:${PORTSDIR}/security/gnutls
+LIB_DEPENDS+=	libtasn1.so:security/libtasn1 \
+		libgcrypt.so:security/libgcrypt \
+		libgpg-error.so:security/libgpg-error \
+		libgnutls.so:security/gnutls
 CONFIGURE_ARGS+=	--enable-glx-tls
 CMAKE_ARGS+=	-DENABLE_GNUTLS=1
 .else
@@ -76,10 +75,10 @@ CMAKE_ARGS+=	-DENABLE_PAM=0
 
 .if ${PORT_OPTIONS:MVIEWER}
 CMAKE_ARGS+=	-DBUILD_VIEWER=1
-LIB_DEPENDS+=	libpng.so:${PORTSDIR}/graphics/png \
-		libfltk.so:${PORTSDIR}/x11-toolkits/fltk
+LIB_DEPENDS+=	libpng.so:graphics/png \
+		libfltk.so:x11-toolkits/fltk
 # ImageMagick is required to generate icons during build process
-BUILD_DEPENDS+=	${LOCALBASE}/bin/convert:${PORTSDIR}/graphics/ImageMagick
+BUILD_DEPENDS+=	${LOCALBASE}/bin/convert:graphics/ImageMagick
 USE_XORG+=	xcursor xfixes xft xinerama
 PLIST_SUB+=	VIEWER=""
 INSTALLS_ICONS=	yes
@@ -88,12 +87,6 @@ DESKTOP_ENTRIES=	"TigerVNC viewer" "Connect to VNC server and display remote des
 .else
 CMAKE_ARGS+=	-DBUILD_VIEWER=0
 PLIST_SUB+=	VIEWER="@comment "
-.endif
-
-.if ${PORT_OPTIONS:MHPJPG}
-LIB_DEPENDS+=	libturbojpeg.so:${PORTSDIR}/graphics/libjpeg-turbo
-.else
-USES+=		jpeg
 .endif
 
 MAKE_ARGS+=	TIGERVNC_SRCDIR=${WRKSRC}
@@ -134,8 +127,8 @@ post-patch:
 	@cd ${WRKSRC}/unix/xserver/ && ${PATCH} -p1 < ${WRKSRC}/unix/xserver${TIGERVNC_XORG_PATCH_VER}.patch
 
 post-configure:
-	@cd ${WRKSRC}/unix/xserver/ && ${SETENV} ${CONFIGURE_ENV} ${AUTORECONF} -fiv
-	@cd ${WRKSRC}/unix/xserver/ && ${SETENV} ${CONFIGURE_ENV} ./configure ${CONFIGURE_ARGS}
+	@cd ${WRKSRC}/unix/xserver/ && ${SETENV} ${CONFIGURE_ENV} ${MAKE_ENV} ${AUTORECONF} -fiv
+	@cd ${WRKSRC}/unix/xserver/ && ${SETENV} ${CONFIGURE_ENV} ${MAKE_ENV} ./configure ${CONFIGURE_ARGS}
 
 post-build:
 	@cd ${WRKSRC}/unix/xserver/ && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${MAKE_ARGS} SHELL=${LOCALBASE}/bin/bash

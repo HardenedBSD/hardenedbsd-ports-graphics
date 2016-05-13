@@ -12,6 +12,9 @@ MAINTAINER=	matthew@FreeBSD.org
 COMMENT=	PHP application to administer LDAP over the web
 
 LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/LICENSE
+
+BROKEN_powerpc64=	Does not build
 
 USES=		cpe tar:tgz
 CPE_VENDOR=	deon_george
@@ -39,11 +42,7 @@ post-patch:
 	${FIND} . ! -type d ! -name ${CFGFILE}.example ! -name .cvsignore   \
 	    ! -name .gitignore ! -name *.orig | ${SORT} |		    \
 	    ${SED} -e "s!^\.!%%WWWDIR%%!"			>${PLIST} ; \
-	${CAT} ${PKGDIR}/pkg-plist-chunk		       >>${PLIST} ; \
-	${FIND} . -type d | ${SORT} -r | ${SED}				    \
-	    -e 's!^\./${CFGDIR}$$!@dirrmtry %%WWWDIR%%/${CFGDIR}!'	    \
-	    -e 's!^\.$$!@dirrmtry %%WWWDIR%%!'				    \
-	    -e 's!^\.!@dirrm %%WWWDIR%%!'		       >>${PLIST}
+	${CAT} ${PKGDIR}/pkg-plist-chunk		       >>${PLIST}
 
 do-install:
 	cd ${WRKSRC} ;				    	 \

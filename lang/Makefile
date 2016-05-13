@@ -27,7 +27,6 @@
     SUBDIR += c
     SUBDIR += ccl
     SUBDIR += cdent
-    SUBDIR += cduce
     SUBDIR += ceylon
     SUBDIR += cfortran
     SUBDIR += chibi-scheme
@@ -40,9 +39,9 @@
     SUBDIR += clang35
     SUBDIR += clang36
     SUBDIR += clang37
+    SUBDIR += clang38
     SUBDIR += clojure
     SUBDIR += clojure-mode.el
-    SUBDIR += cloudabi-clang
     SUBDIR += clover
     SUBDIR += cmucl
     SUBDIR += cmucl-extra
@@ -103,6 +102,7 @@
     SUBDIR += gcc5-devel
     SUBDIR += gcc6-aux
     SUBDIR += gcc6-devel
+    SUBDIR += gcc7-devel
     SUBDIR += gcl
     SUBDIR += gforth
     SUBDIR += ghc
@@ -124,6 +124,7 @@
     SUBDIR += guile
     SUBDIR += guile2
     SUBDIR += harbour
+    SUBDIR += haskell-mode.el
     SUBDIR += hla
     SUBDIR += hope
     SUBDIR += hs-brainfuck
@@ -236,22 +237,22 @@
     SUBDIR += pcc
     SUBDIR += pecl-perl
     SUBDIR += perl5-devel
-    SUBDIR += perl5.16
     SUBDIR += perl5.18
     SUBDIR += perl5.20
     SUBDIR += perl5.22
+    SUBDIR += perl5.24
     SUBDIR += petite-chez
     SUBDIR += pfe
     SUBDIR += phantomjs
     SUBDIR += pharo
     SUBDIR += phc
     SUBDIR += php-mode.el
-    SUBDIR += php5
-    SUBDIR += php5-extensions
     SUBDIR += php55
     SUBDIR += php55-extensions
     SUBDIR += php56
     SUBDIR += php56-extensions
+    SUBDIR += php70
+    SUBDIR += php70-extensions
     SUBDIR += php_doc
     SUBDIR += picoc
     SUBDIR += pike78
@@ -274,7 +275,6 @@
     SUBDIR += python2
     SUBDIR += python27
     SUBDIR += python3
-    SUBDIR += python32
     SUBDIR += python33
     SUBDIR += python34
     SUBDIR += python35
@@ -294,6 +294,7 @@
     SUBDIR += ruby20
     SUBDIR += ruby21
     SUBDIR += ruby22
+    SUBDIR += ruby23
     SUBDIR += runawk
     SUBDIR += rust
     SUBDIR += rust-nightly

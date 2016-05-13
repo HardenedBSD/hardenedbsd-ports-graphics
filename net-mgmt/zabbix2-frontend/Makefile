@@ -8,6 +8,7 @@ CATEGORIES=	net-mgmt
 MASTERDIR=	${.CURDIR}/../zabbix2-server
 
 NO_BUILD=	yes
+NO_ARCH=	yes
 PATCHDIR=
 PLIST=		${PKGDIR}/pkg-plist.frontend
 
@@ -18,6 +19,8 @@ WANT_PHP_WEB=	yes
 OPTIONS_DEFINE=	MYSQL MYSQLI PGSQL SQLITE ORACLE
 OPTIONS_DEFAULT=	MYSQL MYSQLI
 MYSQLI_DESC=	MySQLI backend
+
+MYSQL_VARS=	IGNORE_WITH_PHP+=70
 
 .include <bsd.port.options.mk>
 

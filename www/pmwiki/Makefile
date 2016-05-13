@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	pmwiki
-PORTVERSION=	2.2.81
+PORTVERSION=	2.2.83
 PORTEPOCH=	1
 CATEGORIES=	www
 MASTER_SITES=	http://www.pmwiki.org/pub/pmwiki/
@@ -12,6 +12,8 @@ COMMENT=	WikiWikiWeb clone using PHP
 
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/docs/COPYING.txt
+
+BROKEN_powerpc64=	Does not build
 
 USES=		cpe tar:tgz
 USE_PHP=	mbstring session

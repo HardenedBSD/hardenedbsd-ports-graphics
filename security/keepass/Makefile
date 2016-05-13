@@ -1,21 +1,20 @@
-# Created by: Ben Woods <woodsb02@gmail.com>
+# Created by: Ben Woods <woodsb02@FreeBSD.org>
 # $FreeBSD$
 
 PORTNAME=	keepass
-PORTVERSION=	2.30
-PORTREVISION=	1
+PORTVERSION=	2.33
 CATEGORIES=	security
 MASTER_SITES=	SF/${PORTNAME}/KeePass%202.x/${PORTVERSION}
 DISTNAME=	KeePass-${PORTVERSION}-Source
 
-MAINTAINER=	woodsb02@gmail.com
+MAINTAINER=	woodsb02@FreeBSD.org
 COMMENT=	Light-weight and easy-to-use password manager
 
-LICENSE=	GPLv2 # or later
+LICENSE=	GPLv2+
 
-BUILD_DEPENDS=	icotool:${PORTSDIR}/graphics/icoutils
-LIB_DEPENDS=	libgcrypt.so:${PORTSDIR}/security/libgcrypt \
-		libgdiplus.so:${PORTSDIR}/x11-toolkits/libgdiplus
+BUILD_DEPENDS=	icotool:graphics/icoutils
+LIB_DEPENDS=	libgcrypt.so:security/libgcrypt \
+		libgdiplus.so:x11-toolkits/libgdiplus
 
 EXTRACT_AFTER_ARGS=	-d ${WRKDIR}/${DISTNAME}
 
@@ -39,8 +38,8 @@ XSEL_DESC=	Use the xsel utility for clipboard copying
 
 OPTIONS_DEFAULT=	XDOTOOL XSEL
 
-XDOTOOL_RUN_DEPENDS=	xdotool:${PORTSDIR}/x11/xdotool
-XSEL_RUN_DEPENDS=	xsel:${PORTSDIR}/x11/xsel-conrad
+XDOTOOL_RUN_DEPENDS=	xdotool:x11/xdotool
+XSEL_RUN_DEPENDS=	xsel:x11/xsel-conrad
 
 do-build:
 	# Extract icons

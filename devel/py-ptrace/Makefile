@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	ptrace
-PORTVERSION=	0.7
+PORTVERSION=	0.8.1
 CATEGORIES=	devel python
 MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
@@ -12,8 +12,9 @@ MAINTAINER=	sbz@FreeBSD.org
 COMMENT=	Python binding of ptrace
 
 LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/COPYING
 
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}distorm>0:${PORTSDIR}/devel/py-distorm
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}distorm>0:devel/py-distorm
 
 USES=		python
 USE_PYTHON=	distutils autoplist
@@ -21,7 +22,7 @@ USE_PYTHON=	distutils autoplist
 DOCSDIR=	${PREFIX}/share/doc/py-${PORTNAME}
 EXAMPLESDIR=	${PREFIX}/share/examples/py-${PORTNAME}
 
-PORTDOCS=	AUTHORS ChangeLog PKG-INFO README README.cptrace TODO
+PORTDOCS=	PKG-INFO README
 PORTEXAMPLES=	itrace.py simple_dbg.py
 
 OPTIONS_DEFINE= DOCS EXAMPLES

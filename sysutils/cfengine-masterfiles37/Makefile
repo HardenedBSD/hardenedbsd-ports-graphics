@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	cfengine-masterfiles
-PORTVERSION=	3.7.2
+PORTVERSION=	3.7.3
 CATEGORIES=	sysutils
 MASTER_SITES=	https://cfengine-package-repos.s3.amazonaws.com/tarballs/
 
@@ -19,11 +19,11 @@ CPE_VENDOR=	gnu
 PKGNAMESUFFIX=	37
 .endif
 
-RUN_DEPENDS=	cf-agent:${PORTSDIR}/sysutils/cfengine${PKGNAMESUFFIX}
+RUN_DEPENDS=	cf-agent:sysutils/cfengine${PKGNAMESUFFIX}
 
 FETCH_BEFORE_ARGS=	-o ${DISTDIR}/${DISTFILES}
 
-CONFLICTS=	cfengine-masterfiles[234]*
+CONFLICTS=	cfengine-masterfiles[689]*
 
 MAKE_JOBS_UNSAFE=	yes
 USES=		cpe

@@ -3,27 +3,26 @@
 
 PORTNAME=	plplot
 PORTVERSION=	5.11.1
-PORTREVISION=	1
+PORTREVISION=	3
 CATEGORIES=	math science
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTVERSION}%20Source
 
-MAINTAINER=	woodsb02@gmail.com
+MAINTAINER=	woodsb02@FreeBSD.org
 COMMENT=	Scientific plotting package
 
-LICENSE=	LGPL21 # (or later)
+LICENSE=	LGPL21+
 
-BUILD_DEPENDS=	bash:${PORTSDIR}/shells/bash \
-		${FREEFONT_DIR}/FreeMono.ttf:${PORTSDIR}/x11-fonts/freefont-ttf
-LIB_DEPENDS=	libLASi.so:${PORTSDIR}/devel/lasi \
-		libltdl.so:${PORTSDIR}/devel/libltdl \
-		libqhull.so:${PORTSDIR}/math/qhull5 \
-		libfreetype.so:${PORTSDIR}/print/freetype2
-RUN_DEPENDS=	bash:${PORTSDIR}/shells/bash \
-		${FREEFONT_DIR}/FreeMono.ttf:${PORTSDIR}/x11-fonts/freefont-ttf
+BUILD_DEPENDS=	bash:shells/bash \
+		${FREEFONT_DIR}/FreeMono.ttf:x11-fonts/freefont-ttf
+LIB_DEPENDS=	libLASi.so:devel/lasi \
+		libltdl.so:devel/libltdl \
+		libfreetype.so:print/freetype2
+RUN_DEPENDS=	bash:shells/bash \
+		${FREEFONT_DIR}/FreeMono.ttf:x11-fonts/freefont-ttf
 
 USE_GNOME=	pango
 USE_PERL5=	build
-USES=		cmake ghostscript gmake perl5 pkgconfig
+USES=		cmake ghostscript gmake localbase perl5 pathfix pkgconfig
 CMAKE_ARGS=	-DENABLE_java:BOOL=OFF \
 		-DENABLE_octave:BOOL=OFF \
 		-DENABLE_pdl:BOOL=OFF \
@@ -32,6 +31,7 @@ CMAKE_ARGS=	-DENABLE_java:BOOL=OFF \
 		-DENABLE_ocaml:BOOL=OFF \
 		-DENABLE_pyqt4:BOOL=OFF \
 		-DPL_FREETYPE_FONT_PATH:PATH="${FREEFONT_DIR}" \
+		-DCMAKE_INSTALL_PKG_CONFIG_DIR:PATH="${PREFIX}/libdata/pkgconfig" \
 		-DPLD_plmeta:BOOL=OFF
 CFLAGS+=	-D_IS_BUILDING_PLPLOT_PORT_
 USE_LDCONFIG=	yes
@@ -39,7 +39,9 @@ USE_LDCONFIG=	yes
 FREEFONT_DIR=	${LOCALBASE}/share/fonts/freefont-ttf
 
 OPTIONS_DEFINE=	FORTRAN GD LUA PYTHON QT4 TCLTK THREADS WXGTK X11 DOCS
-OPTIONS_DEFAULT=THREADS X11
+OPTIONS_RADIO=	QHULL
+OPTIONS_RADIO_QHULL=	QHULL2012 QHULL2003
+OPTIONS_DEFAULT=	QHULL2012 THREADS X11
 OPTIONS_SUB=	yes
 
 FORTRAN_USES=		fortran
@@ -47,7 +49,7 @@ FORTRAN_CONFIGURE_ENV=	CMAKE_Fortran_COMPILER="${FC}"
 FORTRAN_CMAKE_ON=	-DENABLE_f95:BOOL=ON
 FORTRAN_CMAKE_OFF=	-DENABLE_f95:BOOL=OFF
 
-GD_LIB_DEPENDS=		libgd.so:${PORTSDIR}/graphics/gd
+GD_LIB_DEPENDS=		libgd.so:graphics/gd
 GD_CMAKE_ON=		-DPLD_png:BOOL=ON
 
 LUA_USES=		lua:51
@@ -55,14 +57,21 @@ LUA_CMAKE_ON=		-DLUA_EXECUTABLE:FILEPATH="${LUA_CMD}"
 LUA_CMAKE_OFF=		-DENABLE_lua:BOOL=OFF
 
 PYTHON_USES=		python
-PYTHON_BUILD_DEPENDS=	swig:${PORTSDIR}/devel/swig13 \
+PYTHON_BUILD_DEPENDS=	swig:devel/swig13 \
 			${PYNUMPY}
 PYTHON_RUN_DEPENDS=	${PYNUMPY}
 PYTHON_CONFIGURE_ENV=	PYTHON_VERSION="${PYTHON_VERSION}"
 PYTHON_CMAKE_OFF=	-DENABLE_python:BOOL=OFF
 
-TCLTK_LIB_DEPENDS=	libitk.so:${PORTSDIR}/x11-toolkits/itk
-TCLTK_RUN_DEPENDS=	iwidgets>0:${PORTSDIR}/x11-toolkits/iwidgets
+QHULL2003_DESC=		Legacy Qhull support
+QHULL2012_DESC=		Latest Qhull support
+QHULL2012_LIB_DEPENDS=	libqhull.so.6:math/qhull
+QHULL2003_LIB_DEPENDS=	libqhull.so.5:math/qhull5
+QHULL2012_CMAKE_ON=	-DQHULL_INCLUDE_DIRS="${LOCALBASE}/include/libqhull"
+QHULL2012_2FIX=		lib/nn/delaunay.c src/plgridd.c
+
+TCLTK_LIB_DEPENDS=	libitk.so:x11-toolkits/itk
+TCLTK_RUN_DEPENDS=	iwidgets>0:x11-toolkits/iwidgets
 TCLTK_USES=		tk
 ITCL_VER=		3.4
 ITK_VER=		3.3
@@ -85,7 +94,7 @@ THREADS_CMAKE_OFF=	-DTHREADS_HAVE_PTHREAD_ARG:BOOL=OFF
 QT4_USE=		QT4=corelib,gui,svg,xml,moc_build,qmake_build,rcc_build,uic_build
 QT4_CMAKE_OFF=		-DENABLE_qt:BOOL=OFF -DDEFAULT_NO_QT_DEVICES:BOOL=ON
 
-WXGTK_LIB_DEPENDS=	libagg.so:${PORTSDIR}/graphics/agg
+WXGTK_LIB_DEPENDS=	libagg.so:graphics/agg
 WXGTK_USE=		WX=2.6+
 WXGTK_CMAKE_ON=		-DwxWidgets_CONFIG_EXECUTABLE:FILEPATH="${WX_CONFIG}"
 WXGTK_CMAKE_OFF=	-DENABLE_wxwidgets:BOOL=OFF
@@ -105,5 +114,11 @@ pre-configure:
 		${WRKSRC}/cmake/modules/FindLTDL.cmake
 	${GREP} -lR "/usr/local" ${WRKSRC}/cmake/modules | ${XARGS} \
 		${REINPLACE_CMD} -e 's|/usr/local|${LOCALBASE}|g'
+.if ${PORT_OPTIONS:MQHULL2012}
+. for src in ${QHULL2012_2FIX}
+	${REINPLACE_CMD} -e 's|qhull/qhull_a|libqhull/qhull_a|'	\
+		${WRKSRC}/${src}
+. endfor
+.endif
 
 .include <bsd.port.mk>

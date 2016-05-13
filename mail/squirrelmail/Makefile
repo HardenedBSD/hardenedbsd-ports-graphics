@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	squirrelmail
-PORTVERSION=	20151031
+PORTVERSION=	20160216
 CATEGORIES=	mail www
 MASTER_SITES=	LOCAL/adamw/squirrelmail
 DISTNAME=	${PORTNAME}-${PORTVERSION}_0200-SVN.stable
@@ -12,6 +12,8 @@ MAINTAINER=	adamw@FreeBSD.org
 COMMENT=	Webmail system which accesses mail over IMAP
 
 LICENSE=	GPLv2
+
+BROKEN_powerpc64=	Does not build
 
 # This snapshot tarball contains php 5.4 and 5.5 compatibility
 # patches, but the only guaranteed compatibility is with php 5.3.
@@ -47,7 +49,7 @@ SUB_LIST=	SQUIRRELDIR=${SQUIRRELDIR} SMUSER=${SMUSER} SMGROUP=${SMGROUP}
 
 CONFLICTS=	squirreloutlook-[0-9]*
 
-DATABASE_RUN_DEPENDS=	${LOCALBASE}/share/pear/DB.php:${PORTSDIR}/databases/pear-DB
+DATABASE_RUN_DEPENDS=	${LOCALBASE}/share/pear/DB.php:databases/pear-DB
 LDAP_USE=	PHP=ldap
 
 post-patch:

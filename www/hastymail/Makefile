@@ -10,8 +10,10 @@ MASTER_SITES=	SF/${PORTNAME}/OldFiles
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Small, fast and secure yet powerful IMAP webmail
 
-LICENSE=	GPLv2 # or later
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/COPYING
+
+BROKEN_powerpc64=	Does not build
 
 NO_BUILD=	yes
 SUB_FILES=	pkg-message

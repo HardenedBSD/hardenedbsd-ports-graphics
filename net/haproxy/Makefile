@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	haproxy
-PORTVERSION=	1.6.2
-PORTREVISION=	1
+PORTVERSION=	1.6.5
 CATEGORIES=	net www
 MASTER_SITES=	http://www.haproxy.org/download/1.6/src/
 DISTFILES=	${PORTNAME}-${DISTVERSION}${EXTRACT_SUFX}
@@ -14,7 +13,7 @@ COMMENT=	Reliable, high performance TCP/HTTP load balancer
 LICENSE=	GPLv2 LGPL21
 LICENSE_COMB=	multi
 
-CONFLICTS=	haproxy-devel-[0-9]*
+CONFLICTS_INSTALL=	haproxy-devel-[0-9]*
 
 USES=		cpe gmake
 USE_RC_SUBR=	haproxy
@@ -37,13 +36,13 @@ OPTIONS_DEFAULT=	SPCRE OPENSSL
 .include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MDPCRE}
-LIB_DEPENDS+=	libpcre.so:${PORTSDIR}/devel/pcre
+LIB_DEPENDS+=	libpcre.so:devel/pcre
 MAKE_ARGS+=	USE_PCRE=1 USE_PCRE_JIT=1
 .endif
 
 .if ${PORT_OPTIONS:MSPCRE}
-BUILD_DEPENDS+=	${LOCALBASE}/lib/libpcre.a:${PORTSDIR}/devel/pcre
-MAKE_ARGS+=	USE_STATIC_PCRE=1 USE_PCRE_JIT=1
+BUILD_DEPENDS+=	${LOCALBASE}/lib/libpcre.a:devel/pcre
+MAKE_ARGS+=	USE_PCRE=1 USE_STATIC_PCRE=1 USE_PCRE_JIT=1
 .endif
 
 .if ${PORT_OPTIONS:MDEVICEATLAS}

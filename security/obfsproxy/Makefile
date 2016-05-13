@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	obfsproxy
-PORTVERSION=	0.2.10
+PORTVERSION=	0.2.13
 PORTEPOCH=	1
 CATEGORIES=	security net python
 MASTER_SITES=	http://www.c-s.li/ports/
@@ -12,10 +12,10 @@ COMMENT=	Pluggable transport proxy
 
 LICENSE=	BSD3CLAUSE
 
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}pyptlib>=0.0.5:${PORTSDIR}/security/py-pyptlib \
-		${PYTHON_PKGNAMEPREFIX}argparse>0:${PORTSDIR}/devel/py-argparse \
-		${PYTHON_PKGNAMEPREFIX}pycrypto>=2.1:${PORTSDIR}/security/py-pycrypto \
-		${PYTHON_PKGNAMEPREFIX}yaml>=0:${PORTSDIR}/devel/py-yaml
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}pyptlib>=0.0.5:security/py-pyptlib \
+		${PYTHON_PKGNAMEPREFIX}argparse>0:devel/py-argparse \
+		${PYTHON_PKGNAMEPREFIX}pycrypto>=2.1:security/py-pycrypto \
+		${PYTHON_PKGNAMEPREFIX}yaml>=0:devel/py-yaml
 
 USE_PYTHON=	distutils
 USES=		python twisted

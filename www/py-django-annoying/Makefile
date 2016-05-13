@@ -2,16 +2,21 @@
 # $FreeBSD$
 
 PORTNAME=	django-annoying
-PORTVERSION=	0.8.0
+PORTVERSION=	0.9.0
+DISTVERSIONPREFIX=	v
 CATEGORIES=	www python
-MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
-MAINTAINER=	ports@FreeBSD.org
-COMMENT=	Application to eliminate annoying things in the Django framework
+MAINTAINER=	cs@FreeBSD.org
+COMMENT=	Eliminate annoying things in the Django framework
 
-RUN_DEPENDS=	${PYTHON_SITELIBDIR}/django/bin/django-admin.py:${PORTSDIR}/www/py-django
+LICENSE=	BSD3CLAUSE
 
+RUN_DEPENDS=	${PYTHON_SITELIBDIR}/django/bin/django-admin.py:www/py-django18
+
+USE_GITHUB=	yes
+
+GH_ACCOUNT=	skorokithakis
 USES=		python
 USE_PYTHON=	autoplist distutils
 

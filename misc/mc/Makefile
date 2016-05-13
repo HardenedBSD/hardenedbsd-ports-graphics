@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	mc
-PORTVERSION=	4.8.15
+PORTVERSION=	4.8.17
 CATEGORIES=	misc shells
 MASTER_SITES=	http://ftp.midnight-commander.org/ \
 		http://ftp.osuosl.org/pub/midnightcommander/ \
@@ -11,12 +11,10 @@ DISTFILES=	${PORTNAME}-${DISTVERSION}${EXTRACT_SUFX} \
 		${PORTNAME}.png:icons
 EXTRACT_ONLY=	${PORTNAME}-${DISTVERSION}${EXTRACT_SUFX}
 
-MAINTAINER=	woodsb02@gmail.com
+MAINTAINER=	woodsb02@FreeBSD.org
 COMMENT=	Midnight Commander, a free Norton Commander Clone
 
 LICENSE=	GPLv3
-
-LIB_DEPENDS=	libssh2.so:${PORTSDIR}/security/libssh2
 
 CONFLICTS=	mc-light-4*
 
@@ -30,14 +28,15 @@ USE_GNOME=	glib20
 GNU_CONFIGURE=	yes
 CONFIGURE_ENV=	ZIP=${ZIP_CMD} UNZIP=${UNZIP_CMD}
 
-OPTIONS_DEFINE=	DOCS EDITOR ICONV NLS SMB SUBSHELL X11
+OPTIONS_DEFINE=	DOCS EDITOR ICONV NLS SFTP SMB SUBSHELL X11
 
 OPTIONS_SINGLE=	SCREEN
 OPTIONS_SINGLE_SCREEN=	SLANG NCURSES
 
-OPTIONS_DEFAULT=	EDITOR ICONV SLANG SMB SUBSHELL X11
+OPTIONS_DEFAULT=EDITOR ICONV SFTP SLANG SMB SUBSHELL X11
 
 EDITOR_DESC=	Build with internal editor
+SFTP_DESC=	Support for SFTP (via libssh)
 SUBSHELL_DESC=	Build with subshell support
 
 OPTIONS_SUB=	yes
@@ -54,7 +53,10 @@ NLS_USES=		gettext
 NLS_CPPFLAGS=		-I${LOCALBASE}/include
 NLS_LDFLAGS=		-L${LOCALBASE}/lib
 
-SLANG_LIB_DEPENDS=	libslang.so:${PORTSDIR}/devel/libslang2
+SFTP_LIB_DEPENDS=	libssh2.so:security/libssh2
+SFTP_CONFIGURE_ENABLE=	vfs-sftp
+
+SLANG_LIB_DEPENDS=	libslang.so:devel/libslang2
 SLANG_CONFIGURE_ON=	--with-screen=slang --with-slang-includes=${LOCALBASE}/include
 
 SMB_CONFIGURE_ENABLE=	vfs-smb

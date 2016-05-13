@@ -11,7 +11,7 @@
 #					  Valid values for "fedora": all version numbers
 #					  e.g. 10 for fedora 10
 #					  Valid values for "centos": all version numbers
-#					  e.g. 6.6 for centos 6.6
+#					  e.g. 6.7 for centos 6.7
 #					  This is used to set MASTER_SITE_{,SRC_}SUBDIR
 #					  if it isn't already set.
 # MASTER_SITE_SRC_SUBDIR
@@ -44,9 +44,9 @@ USE_LINUX_PREFIX=	yes
 NO_WRKSUBDIR=		yes
 NO_BUILD=			yes
 
-.	if ${USE_LINUX} == "c6" || ${USE_LINUX} == "yes" # default to CentOS
+.	if ${USE_LINUX} == "c6" || ${USE_LINUX} == "c6_64" || ${USE_LINUX} == "yes" # default to CentOS
 # Do not build CentOS 6 ports if overridden by f10
-.		if defined(OVERRIDE_LINUX_NONBASE_PORT) && ${OVERRIDE_LINUX_NONBASE_PORTS} == "f10"
+.		if defined(OVERRIDE_LINUX_NONBASE_PORTS) && ${OVERRIDE_LINUX_NONBASE_PORTS} == "f10"
 IGNORE=	This port requires CentOS ${LINUX_DIST_VER}. Please remove OVERRIDE_LINUX_NONBASE_PORTS=f10 in /etc/make.conf.
 .		endif
 .	endif
@@ -63,7 +63,7 @@ LINUX_DIST=	fedora
 LINUX_DIST_VER=	10
 .else			# default to CentOS
 LINUX_DIST=	centos
-LINUX_DIST_VER=	6.6
+LINUX_DIST_VER=	6.7
 .endif
 
 .if defined(LINUX_DIST)
@@ -111,10 +111,32 @@ PKGNAMEPREFIX?=			linux-${USE_LINUX}-
 DISTVERSION=	${PORTVERSION}-${RPMVERSION}
 DISTNAME?=		${PORTNAME}-${DISTVERSION}
 DISTFILES?=		${DISTNAME}${EXTRACT_SUFX}
-BIN_DISTFILES:=		${DISTFILES}
+BIN_DISTFILES:=		${DISTFILES} ${LIB_DISTFILES}
 SRC_DISTFILES?=		${DISTNAME}${SRC_SUFX}:SOURCE
 EXTRACT_ONLY?=		${BIN_DISTFILES:C/:[^:]+$//}
 WRKSRC:=		${WRKSRC:S/-${RPMVERSION}$//}
+
+# Define files to install.
+# Ports can want to install 32bit things only (if OVERRIDE_LINUX_NONBASE_PORTS) is off,
+# they can want to install both 32bit and 64bit things of only one package,
+# or they can want to install a 64bit only binary and e.g. 32/64bit libraries.
+
+# The following glue is supposed to handle this.
+# FIXME: Sensibly refactor this part, it looks like spaghetti.
+
+.   if defined(OVERRIDE_LINUX_NONBASE_PORTS) && ${OVERRIDE_LINUX_NONBASE_PORTS} == "c6_64"
+_32BIT_LINUX_RPM_ARCH=  i686
+.       if ${DISTFILES} == ${DISTNAME}${EXTRACT_SUFX} && ${USE_LINUX_RPM} != "nolib"
+_32BIT_LIB_DISTFILES:=   ${DISTFILES:S/${LINUX_RPM_ARCH}/${_32BIT_LINUX_RPM_ARCH}/g}
+.       elif defined(LIB_DISTFILES)
+_32BIT_LIB_DISTFILES=   ${LIB_DISTFILES:S/${LINUX_RPM_ARCH}/${_32BIT_LINUX_RPM_ARCH}/g}
+.       endif
+
+BIN_DISTFILES:=         ${BIN_DISTFILES} ${_32BIT_LIB_DISTFILES}
+DISTFILES+=             ${_32BIT_LIB_DISTFILES}
+.   endif
+DISTFILES+=             ${LIB_DISTFILES}
+
 
 .	if defined(PACKAGE_BUILDING)
 DISTFILES+=		${SRC_DISTFILES}
@@ -127,7 +149,7 @@ EXTRACT_CMD?=			${TAR}
 EXTRACT_BEFORE_ARGS?=	--no-same-permissions --no-same-owner -xf
 EXTRACT_AFTER_ARGS?=
 .else
-EXTRACT_DEPENDS+=	rpm2archive:${PORTSDIR}/archivers/rpm4
+EXTRACT_DEPENDS+=	rpm2archive:archivers/rpm4
 EXTRACT_CMD?=	rpm2archive
 EXTRACT_BEFORE_ARGS?=	<
 EXTRACT_AFTER_ARGS?=	| ${TAR} xf - --no-same-permissions --no-same-owner
@@ -162,7 +184,7 @@ PLIST?=		${MASTERDIR}/pkg-plist.${LINUX_RPM_ARCH}
 _LINUX_BASE_SUFFIX=		f10
 .	elif ${USE_LINUX} == "c6" || ${USE_LINUX} == "yes"
 _LINUX_BASE_SUFFIX=		c6
-.	elif ${USE_LINUX} == "c6_64
+.	elif ${USE_LINUX} == "c6_64"
 _LINUX_BASE_SUFFIX=		c6
 .	else
 # other linux_base ports do not provide a pkg-plist file

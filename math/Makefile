@@ -20,6 +20,7 @@
     SUBDIR += R-cran-RSvgDevice
     SUBDIR += R-cran-RcppArmadillo
     SUBDIR += R-cran-RcppEigen
+    SUBDIR += R-cran-Rmpfr
     SUBDIR += R-cran-SparseM
     SUBDIR += R-cran-SuppDists
     SUBDIR += R-cran-VGAM
@@ -34,6 +35,7 @@
     SUBDIR += R-cran-forecast
     SUBDIR += R-cran-fracdiff
     SUBDIR += R-cran-geepack
+    SUBDIR += R-cran-gmp
     SUBDIR += R-cran-gpclib
     SUBDIR += R-cran-gss
     SUBDIR += R-cran-gtable
@@ -61,6 +63,7 @@
     SUBDIR += R-cran-spdep
     SUBDIR += R-cran-sspir
     SUBDIR += R-cran-stabledist
+    SUBDIR += R-cran-survey
     SUBDIR += R-cran-xts
     SUBDIR += R-cran-zoo
     SUBDIR += aamath
@@ -160,7 +163,7 @@
     SUBDIR += gap
     SUBDIR += gdcalc
     SUBDIR += geg
-    SUBDIR += geogebra-i18n
+    SUBDIR += geogebra
     SUBDIR += geonext
     SUBDIR += gexpr
     SUBDIR += ggobi
@@ -262,6 +265,7 @@
     SUBDIR += ltl2ba
     SUBDIR += lybniz
     SUBDIR += math77
+    SUBDIR += mathmod
     SUBDIR += mathomatic
     SUBDIR += matio
     SUBDIR += matlab-installer
@@ -377,6 +381,7 @@
     SUBDIR += octave-forge-signal
     SUBDIR += octave-forge-simp
     SUBDIR += octave-forge-sockets
+    SUBDIR += octave-forge-sparsersb
     SUBDIR += octave-forge-specfun
     SUBDIR += octave-forge-special-matrix
     SUBDIR += octave-forge-spline-gcvspl
@@ -388,15 +393,18 @@
     SUBDIR += octave-forge-symband
     SUBDIR += octave-forge-symbolic
     SUBDIR += octave-forge-tcl-octave
+    SUBDIR += octave-forge-tisean
     SUBDIR += octave-forge-tsa
     SUBDIR += octave-forge-video
     SUBDIR += octave-forge-xraylib
     SUBDIR += octave-forge-zenity
+    SUBDIR += octave-forge-zeromq
     SUBDIR += ogdf
     SUBDIR += oleo
     SUBDIR += open-axiom
     SUBDIR += openblas
     SUBDIR += openfst
+    SUBDIR += openlibm
     SUBDIR += orpie
     SUBDIR += p5-AI-DecisionTree
     SUBDIR += p5-AI-Genetic
@@ -453,7 +461,6 @@
     SUBDIR += p5-Math-Geometry
     SUBDIR += p5-Math-Geometry-Planar
     SUBDIR += p5-Math-Geometry-Planar-GPC
-    SUBDIR += p5-Math-Geometry-Planar-GPC-Polygon
     SUBDIR += p5-Math-Geometry-Planar-GPC-PolygonXS
     SUBDIR += p5-Math-Geometry-Planar-Offset
     SUBDIR += p5-Math-Geometry-Voronoi
@@ -552,14 +559,15 @@
     SUBDIR += pear-Math_Combinatorics
     SUBDIR += pecl-big_int
     SUBDIR += pecl-bitset
+    SUBDIR += pecl-bitset2
     SUBDIR += pecl-stats
     SUBDIR += pecl-trader
-    SUBDIR += php5-bcmath
-    SUBDIR += php5-gmp
     SUBDIR += php55-bcmath
     SUBDIR += php55-gmp
     SUBDIR += php56-bcmath
     SUBDIR += php56-gmp
+    SUBDIR += php70-bcmath
+    SUBDIR += php70-gmp
     SUBDIR += physcalc
     SUBDIR += picosat
     SUBDIR += plman
@@ -580,6 +588,7 @@
     SUBDIR += py-bitmath
     SUBDIR += py-bitvector
     SUBDIR += py-bottleneck
+    SUBDIR += py-cdecimal
     SUBDIR += py-colormath
     SUBDIR += py-cryptominisat
     SUBDIR += py-fastcluster
@@ -592,6 +601,7 @@
     SUBDIR += py-graphillion
     SUBDIR += py-gsl
     SUBDIR += py-igraph
+    SUBDIR += py-luminol
     SUBDIR += py-mathdom
     SUBDIR += py-matplotlib
     SUBDIR += py-mpmath
@@ -611,6 +621,7 @@
     SUBDIR += py-pyfst
     SUBDIR += py-pyhull
     SUBDIR += py-pymc
+    SUBDIR += py-pyvtk
     SUBDIR += py-roman
     SUBDIR += py-scientific
     SUBDIR += py-statsmodels
@@ -663,6 +674,7 @@
     SUBDIR += slgrace
     SUBDIR += snns
     SUBDIR += solitaire
+    SUBDIR += sound-of-sorting
     SUBDIR += spar
     SUBDIR += spblas
     SUBDIR += speedcrunch
@@ -700,6 +712,7 @@
     SUBDIR += wxMaxima
     SUBDIR += x12arima
     SUBDIR += xblas
+    SUBDIR += xfce4-calculator-plugin
     SUBDIR += xgobi
     SUBDIR += xgraph
     SUBDIR += xlapack

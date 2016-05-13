@@ -5,18 +5,14 @@ PORTNAME=	consed
 PORTVERSION=	27.0
 CATEGORIES=	biology
 # MASTER_SITES=	http://www.phrap.org/consed/distributions/${PORTVERSION}/
-MASTER_SITES=	http://bozeman.mbt.washington.edu/consed/distributions/${PORTVERSION}/
+# MASTER_SITES=	http://bozeman.mbt.washington.edu/consed/distributions/${PORTVERSION}/
 DISTNAME=	${PORTNAME}_linux
 
 MAINTAINER=	mzaki@m.u-tokyo.ac.jp
 COMMENT=	Graphical tool for editing Phrap assemblies
 
-BROKEN=		Unfetchable
-DEPRECATED=	Broken for more than 6 months
-EXPIRATION_DATE=	2015-11-26
-
-RUN_DEPENDS=	phred:${PORTSDIR}/biology/phred \
-		phrap:${PORTSDIR}/biology/phrap
+RUN_DEPENDS=	phred:biology/phred \
+		phrap:biology/phrap
 
 CONFLICTS_INSTALL=	phd2fasta-[0-9]*
 

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	kramdown
-PORTVERSION=	1.9.0
+PORTVERSION=	1.11.1
 CATEGORIES=	textproc rubygems
 MASTER_SITES=	RG
 
@@ -14,11 +14,10 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 
 NO_ARCH=	yes
 USE_RUBY=	yes
-USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=	yes
-USES=		shebangfix
-SHEBANG_FILES=	benchmark/*.sh
+USES=		gem shebangfix
 
 PLIST_FILES=	bin/kramdown
+
+SHEBANG_FILES=	benchmark/*.sh
 
 .include <bsd.port.mk>

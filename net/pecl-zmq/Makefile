@@ -1,8 +1,8 @@
 # $FreeBSD$
 
 PORTNAME=	zmq
-PORTVERSION=	1.1.2
-PORTREVISION=	2
+PORTVERSION=	1.1.3
+PORTREVISION=	1
 CATEGORIES=	net pear
 MASTER_SITES=	http://pecl.php.net/get/
 PKGNAMEPREFIX=	pecl-
@@ -13,7 +13,7 @@ COMMENT=	PHP bindings for ZeroMQ
 
 LICENSE=	BSD3CLAUSE
 
-LIB_DEPENDS=	libzmq.so:${PORTSDIR}/net/libzmq4
+LIB_DEPENDS=	libzmq.so:net/libzmq4
 
 USES=		tar:tgz pkgconfig
 USE_PHP=	yes

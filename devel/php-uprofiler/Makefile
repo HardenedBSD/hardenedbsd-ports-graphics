@@ -11,6 +11,8 @@ COMMENT=	Lightweight profiler for PHP
 
 LICENSE=	APACHE20
 
+BROKEN_powerpc64=	Does not build
+
 USE_GITHUB=	yes
 GH_ACCOUNT=	FriendsOfPHP
 GH_TAGNAME=	483c1e5
@@ -20,5 +22,6 @@ USE_PHP=	yes
 USE_PHPIZE=	yes
 USE_PHPEXT=	yes
 USES=		tar:tgz
+IGNORE_WITH_PHP=	70
 
 .include <bsd.port.mk>

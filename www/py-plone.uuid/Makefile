@@ -13,12 +13,13 @@ COMMENT=	UUIDs for content items
 
 LICENSE=	BSD3CLAUSE
 
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}zope.browserpage>=0:${PORTSDIR}/devel/py-zope.browserpage \
-		${PYTHON_PKGNAMEPREFIX}zope.interface>=0:${PORTSDIR}/devel/py-zope.interface \
-		${PYTHON_PKGNAMEPREFIX}zope.lifecycleevent>=0:${PORTSDIR}/devel/py-zope.lifecycleevent \
-		${PYTHON_PKGNAMEPREFIX}zope.publisher>=0:${PORTSDIR}/devel/py-zope.publisher
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}zope.browserpage>=0:devel/py-zope.browserpage \
+		${PYTHON_PKGNAMEPREFIX}zope.interface>=0:devel/py-zope.interface \
+		${PYTHON_PKGNAMEPREFIX}zope.lifecycleevent>=0:devel/py-zope.lifecycleevent \
+		${PYTHON_PKGNAMEPREFIX}zope.publisher>=0:devel/py-zope.publisher
 
+NO_ARCH=	yes
 USES=		python zip
-USE_PYTHON=	distutils autoplist
+USE_PYTHON=	autoplist distutils
 
 .include <bsd.port.mk>

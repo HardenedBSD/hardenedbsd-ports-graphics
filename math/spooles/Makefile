@@ -5,7 +5,8 @@ PORTNAME=	spooles
 PORTVERSION=	2.2
 PORTREVISION=	12
 CATEGORIES=	math
-MASTER_SITES=	http://www.netlib.org/linalg/spooles/
+MASTER_SITES=	${MASTER_SITE_NETLIB}
+MASTER_SITE_SUBDIR=linalg/spooles
 .ifdef WITH_MPI
 PKGNAMESUFFIX=	-mpich
 .endif
@@ -16,11 +17,15 @@ EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
 MAINTAINER=	maho@FreeBSD.org
 COMMENT=	SParse Object Oriented Linear Equations Solver
 
+LICENSE=	PD
+
 .if defined(WITH_MPI)
-BUILD_DEPENDS=	${LOCALBASE}/lib/libmpich.a:${PORTSDIR}/net/mpich2
+BUILD_DEPENDS=	${LOCALBASE}/lib/libmpich.a:net/mpich2
 .endif
 
 USES=		gmake tar:tgz
+
+OPTIONS_DEFINE=	DOCS
 
 .if defined(WITH_MPI)
 PLIST_SUB+=	MPI=""
@@ -36,7 +41,7 @@ CONFLICTS=	spooles-mpich-2*
 
 .if ${PORT_OPTIONS:MDOCS}
 DISTFILES+=	${DISTNAME}${EXTRACT_SUFX} AllInOne.ps.gz Eigen.ps.gz \
-	 	Install.ps.gz LinSol.ps.gz Ordering.ps.gz \
+		Install.ps.gz LinSol.ps.gz Ordering.ps.gz \
 		PP99.ps.gz ReferenceManual.ps.gz
 .endif
 
@@ -47,8 +52,6 @@ PICFLAG?=	-fpic
 .endif
 
 .SILENT:
-
-OPTIONS_DEFINE=	DOCS
 
 pre-everything::
 .if !defined(WITH_MPI)

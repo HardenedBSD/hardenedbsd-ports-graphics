@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	erlang
-PORTVERSION=	18.2.1
+PORTVERSION=	18.3.3
+PORTREVISION=	2
 CATEGORIES=	lang parallel java
 MASTER_SITES=	http://www.erlang.org/download/:erlangorg		\
 		http://erlang.stacken.kth.se/download/:erlangorg	\
@@ -16,7 +17,7 @@ EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
 
 PATCH_SITES=	http://olgeni.olgeni.com/~olgeni/distfiles/ \
 		LOCAL/olgeni
-PATCHFILES=
+PATCHFILES=	patch-otp-18.3.1 patch-otp-18.3.2 patch-otp-18.3.3
 
 MAINTAINER=	olgeni@FreeBSD.org
 COMMENT=	Functional programming language from Ericsson
@@ -43,12 +44,12 @@ SCTP_DESC=	Enable SCTP support
 SMP_DESC=	Enable SMP support
 WX_DESC=	Enable WX application
 
-OPTIONS_DEFAULT=KQUEUE OPENSSL SCTP SMP THREADS
+OPTIONS_DEFAULT=HIPE KQUEUE OPENSSL SCTP SMP THREADS
 OPTIONS_EXCLUDE_DragonFly=	HIPE SCTP
 
-ERL_RELEASE=	18.2.1
+ERL_RELEASE=	18.3
 
-USES=		gmake perl5
+USES=		gmake ncurses perl5
 USE_PERL5=	build
 GNU_CONFIGURE=	yes
 LDFLAGS+=	-L${LOCALBASE}/lib
@@ -58,10 +59,6 @@ LDFLAGS+=	-L${LOCALBASE}/lib
 .if ${PORT_OPTIONS:MDOCS}
 DISTFILES+=	${ERLANG_DOCS}:erlangorg
 .endif
-
-# See http://wiki.freebsd.org/DTrace to learn how to enable DTrace
-# on your system. You will need to configure STRIP, WITH_CTF and
-# CFLAGS in your make.conf before building.
 
 # If you run Erlang and get a message resembling "WARNING: number of
 # probes fixed does not match the number of defined probes (54 != 132,
@@ -79,6 +76,8 @@ USE_GCC?=	yes
 
 .if ${PORT_OPTIONS:MDTRACE}
 CONFIGURE_ARGS+=--with-dynamic-trace=dtrace
+CFLAGS+=	-fno-omit-frame-pointer
+STRIP=
 .else
 CONFIGURE_ARGS+=--without-dynamic-trace
 .endif
@@ -123,7 +122,7 @@ CONFIGURE_ARGS+=--with-wx-config=${WX_CONFIG}
 
 .if ${PORT_OPTIONS:MODBC}
 CONFIGURE_ARGS+=--with-odbc
-LIB_DEPENDS+=	libodbc.so:${PORTSDIR}/databases/unixODBC
+LIB_DEPENDS+=	libodbc.so:databases/unixODBC
 .else
 CONFIGURE_ARGS+=--without-odbc
 .endif
@@ -187,6 +186,11 @@ pre-configure:
 	echo "disabled by port options" > ${WRKSRC}/lib/wx/SKIP
 .endif
 
+post-configure:
+.if ${PORT_OPTIONS:MODBC}
+	${RM} ${WRKSRC}/lib/odbc/SKIP
+.endif
+
 post-install:
 	for SECTION in 1 3 4 6 7; do \
 		${TAR} --unlink -xzpf ${DISTDIR}/${DIST_SUBDIR}/${ERLANG_MAN} \
@@ -197,6 +201,26 @@ post-install:
 .if ${PORT_OPTIONS:MDOCS}
 	${TAR} --unlink -xzpf ${DISTDIR}/${DIST_SUBDIR}/${ERLANG_DOCS} \
 		-C ${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}
+
+	${MV} ${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/erts-7.3/* \
+		${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/erts-7.3.1
+	${RMDIR} ${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/erts-7.3
+
+	${MV} ${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/lib/inets-6.2/* \
+		${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/lib/inets-6.2.3
+	${RMDIR} ${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/lib/inets-6.2
+
+	${MV} ${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/lib/mnesia-4.13.3/* \
+		${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/lib/mnesia-4.13.4
+	${RMDIR} ${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/lib/mnesia-4.13.3
+
+	${MV} ${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/lib/ssl-7.3/* \
+		${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/lib/ssl-7.3.2
+	${RMDIR} ${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/lib/ssl-7.3
+
+	${MV} ${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/lib/common_test-1.12/* \
+		${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/lib/common_test-1.12.1
+	${RMDIR} ${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/lib/common_test-1.12
 
 	${INSTALL_DATA} ${WRKSRC}/lib/dialyzer/doc/*.txt \
 		${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/lib/dialyzer-*/doc/
@@ -218,11 +242,7 @@ post-install:
 .if ! ${PORT_OPTIONS:MWX}
 	${RM} -r ${STAGEDIR}${PREFIX}/lib/erlang/lib/wx-*
 .endif
-
-	@cd ${STAGEDIR}${PREFIX}; ${FIND} lib/${ERLANG_LIB}/* -type d -empty \
-		| ${SORT} \
-		| ${SED} -e 's#^#@dir #g' \
-		> ${TMPPLIST}
+	${FIND} ${STAGEDIR}${PREFIX}/lib/${ERLANG_LIB}/* -type d -empty -delete
 
 	@cd ${STAGEDIR}${PREFIX}; ${FIND} lib/${ERLANG_LIB}/* -type f -o -type l \
 		| ${SORT} \

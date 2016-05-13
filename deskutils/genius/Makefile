@@ -2,19 +2,19 @@
 # $FreeBSD$
 
 PORTNAME=	genius
-PORTVERSION=	1.0.20
+PORTVERSION=	1.0.21
 CATEGORIES=	deskutils gnome
 MASTER_SITES=	GNOME \
 		http://ftp.5z.com/pub/genius/
 
-MAINTAINER=	woodsb02@gmail.com
+MAINTAINER=	woodsb02@FreeBSD.org
 COMMENT=	Arbitrary precision calculator for Gnome Desktop Environment
 
 LICENSE=	GPLv3
 
-BUILD_DEPENDS=	rarian-sk-config:${PORTSDIR}/textproc/rarian
-LIB_DEPENDS=	libmpfr.so:${PORTSDIR}/math/mpfr
-RUN_DEPENDS=	rarian-sk-config:${PORTSDIR}/textproc/rarian
+BUILD_DEPENDS=	rarian-sk-config:textproc/rarian
+LIB_DEPENDS=	libmpfr.so:math/mpfr
+RUN_DEPENDS=	rarian-sk-config:textproc/rarian
 
 USES=		desktop-file-utils gmake libtool pathfix pkgconfig \
 		readline shared-mime-info tar:xz

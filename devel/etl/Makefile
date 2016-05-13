@@ -8,10 +8,10 @@ CATEGORIES=	devel lang
 MASTER_SITES=	SF/synfig/releases/${SYNFIG_VERSION}/source/
 DISTNAME=	ETL-${PORTVERSION}
 
-MAINTAINER=	woodsb02@gmail.com
+MAINTAINER=	woodsb02@FreeBSD.org
 COMMENT=	Voria Extended Class and Template Library
 
-LICENSE=	GPLv2 # (or later)
+LICENSE=	GPLv2+
 
 NO_ARCH=	yes
 

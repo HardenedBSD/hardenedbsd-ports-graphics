@@ -9,12 +9,12 @@ MASTER_SITES=	http://launchpadlibrarian.net/164010578/ \
 		http://www.c-s.li/ports/
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
-MAINTAINER=	cs@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Extensions to the Python library's unit testing framework
 
 LICENSE=	MIT
 
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}extras>=0.0.3:${PORTSDIR}/devel/py-extras
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}extras>=0.0.3:devel/py-extras
 
 USES=		python
 USE_PYTHON=	distutils

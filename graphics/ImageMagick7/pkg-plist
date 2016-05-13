@@ -23,6 +23,7 @@ bin/stream
 @sample etc/ImageMagick-7/policy.xml.sample
 @sample etc/ImageMagick-7/quantization-table.xml.sample
 @sample etc/ImageMagick-7/thresholds.xml.sample
+@sample etc/ImageMagick-7/type-apple.xml.sample
 @sample etc/ImageMagick-7/type-dejavu.xml.sample
 @sample etc/ImageMagick-7/type-ghostscript.xml.sample
 @sample etc/ImageMagick-7/type-windows.xml.sample
@@ -79,16 +80,15 @@ include/ImageMagick-7/MagickCore/fourier.h
 include/ImageMagick-7/MagickCore/fx.h
 include/ImageMagick-7/MagickCore/gem.h
 include/ImageMagick-7/MagickCore/geometry.h
-include/ImageMagick-7/MagickCore/hashmap.h
 include/ImageMagick-7/MagickCore/histogram.h
 include/ImageMagick-7/MagickCore/identify.h
 include/ImageMagick-7/MagickCore/image-view.h
 include/ImageMagick-7/MagickCore/image.h
 include/ImageMagick-7/MagickCore/layer.h
+include/ImageMagick-7/MagickCore/linked-list.h
 include/ImageMagick-7/MagickCore/list.h
 include/ImageMagick-7/MagickCore/locale_.h
 include/ImageMagick-7/MagickCore/log.h
-include/ImageMagick-7/MagickCore/magic-private.h
 include/ImageMagick-7/MagickCore/magic.h
 include/ImageMagick-7/MagickCore/magick-baseconfig.h
 include/ImageMagick-7/MagickCore/magick-config.h
@@ -316,8 +316,6 @@ lib/ImageMagick-%%PORTVERSION%%/config-%%QBIT%%%%HDRI%%/configure.xml
 %%MODULES%%lib/ImageMagick-%%PORTVERSION%%/modules-%%QBIT%%%%HDRI%%/coders/pnm.so
 %%MODULES%%lib/ImageMagick-%%PORTVERSION%%/modules-%%QBIT%%%%HDRI%%/coders/pango.la
 %%MODULES%%lib/ImageMagick-%%PORTVERSION%%/modules-%%QBIT%%%%HDRI%%/coders/pango.so
-%%MODULES%%lib/ImageMagick-%%PORTVERSION%%/modules-%%QBIT%%%%HDRI%%/coders/preview.la
-%%MODULES%%lib/ImageMagick-%%PORTVERSION%%/modules-%%QBIT%%%%HDRI%%/coders/preview.so
 %%MODULES%%lib/ImageMagick-%%PORTVERSION%%/modules-%%QBIT%%%%HDRI%%/coders/ps.la
 %%MODULES%%lib/ImageMagick-%%PORTVERSION%%/modules-%%QBIT%%%%HDRI%%/coders/ps.so
 %%MODULES%%lib/ImageMagick-%%PORTVERSION%%/modules-%%QBIT%%%%HDRI%%/coders/ps2.la
@@ -455,6 +453,7 @@ man/man1/convert.1.gz
 man/man1/display.1.gz
 man/man1/identify.1.gz
 man/man1/import.1.gz
+man/man1/magick-script.1.gz
 man/man1/magick.1.gz
 man/man1/mogrify.1.gz
 man/man1/montage.1.gz
@@ -591,6 +590,7 @@ man/man1/stream.1.gz
 %%PORTDOCS%%%%DOCSDIR%%-7/www/Magick++/FormatCharacters.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/Magick++/Future.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/Magick++/Geometry.html
+%%PORTDOCS%%%%DOCSDIR%%-7/www/Magick++/Image++.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/Magick++/Image.fig
 %%PORTDOCS%%%%DOCSDIR%%-7/www/Magick++/Image.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/Magick++/Image.png
@@ -619,6 +619,7 @@ man/man1/stream.1.gz
 %%PORTDOCS%%%%DOCSDIR%%-7/www/advanced-windows-installation.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/animate.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/api.html
+%%PORTDOCS%%%%DOCSDIR%%-7/www/api/Image++.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/api/MagickCore/ImageMagick_8h-source.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/api/MagickCore/ImageMagick_8h.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/api/MagickCore/MagickCore_8h-source.html
@@ -1390,6 +1391,7 @@ man/man1/stream.1.gz
 %%PORTDOCS%%%%DOCSDIR%%-7/www/api/layer.php
 %%PORTDOCS%%%%DOCSDIR%%-7/www/api/list.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/api/list.php
+%%PORTDOCS%%%%DOCSDIR%%-7/www/api/magick++-classes.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/api/magick-deprecate.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/api/magick-deprecate.php
 %%PORTDOCS%%%%DOCSDIR%%-7/www/api/magick-image.html
@@ -1465,7 +1467,6 @@ man/man1/stream.1.gz
 %%PORTDOCS%%%%DOCSDIR%%-7/www/contact.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/convert.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/css/README.txt
-%%PORTDOCS%%%%DOCSDIR%%-7/www/css/bootstrap.css
 %%PORTDOCS%%%%DOCSDIR%%-7/www/css/magick.css
 %%PORTDOCS%%%%DOCSDIR%%-7/www/display.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/distribute-pixel-cache.html
@@ -1486,14 +1487,15 @@ man/man1/stream.1.gz
 %%PORTDOCS%%%%DOCSDIR%%-7/www/install-source.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/jp2.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/js/README.txt
-%%PORTDOCS%%%%DOCSDIR%%-7/www/js/bootstrap.js
 %%PORTDOCS%%%%DOCSDIR%%-7/www/js/magick.js
 %%PORTDOCS%%%%DOCSDIR%%-7/www/license.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/links.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/magick++.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/magick-core.html
+%%PORTDOCS%%%%DOCSDIR%%-7/www/magick-script.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/magick-vector-graphics.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/magick-wand.html
+%%PORTDOCS%%%%DOCSDIR%%-7/www/magick.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/miff.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/mogrify.html
 %%PORTDOCS%%%%DOCSDIR%%-7/www/montage.html

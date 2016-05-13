@@ -1,9 +1,9 @@
 # $FreeBSD$
 
-PORTREVISION=	0
+PORTREVISION=	1
 CATEGORIES=	sysutils
 
-COMMENT=	Gstreamer compact disc input and control library
+COMMENT=	GStreamer compact disc input and control library
 
 GST_PLUGIN=	cdio
 DIST=		ugly

@@ -3,14 +3,14 @@
 
 PORTNAME=	amavisd-milter
 PORTVERSION=	1.6.0
-PORTREVISION=	2
+PORTREVISION=	4
 CATEGORIES=	security mail
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTNAME}-${PORTVERSION}
 
 MAINTAINER=	rx@rx.cz
 COMMENT=	Milter for amavisd-new
 
-RUN_DEPENDS=	amavisd:${PORTSDIR}/security/amavisd-new
+RUN_DEPENDS=	amavisd:security/amavisd-new
 
 ##
 # Use the following quirks to choose which sendmail to use (ports or system):
@@ -31,7 +31,7 @@ AMAVISDIR?=	/var/amavis
 RUNDIR=		/var/run/amavis
 
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS=	--localstatedir=${RUNDIR} --with-working-dir=tmp
+CONFIGURE_ARGS=	--localstatedir=${RUNDIR} --with-working-dir=${AMAVISDIR}/tmp
 USE_RC_SUBR=	${PORTNAME}
 
 SUB_LIST=	AMAVISUSER=${AMAVISUSER} \
@@ -64,6 +64,5 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/${f} ${STAGEDIR}${DOCSDIR}
 .endfor
 	${INSTALL} -d -o ${AMAVISUSER} -g ${AMAVISGROUP} -m 755 ${STAGEDIR}${RUNDIR}
-	${INSTALL} -d -o ${AMAVISUSER} -g ${AMAVISGROUP} -m 750 ${STAGEDIR}${RUNDIR}/tmp
 
 .include <bsd.port.post.mk>

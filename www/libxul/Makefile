@@ -2,41 +2,41 @@
 # $FreeBSD$
 
 PORTNAME=	libxul
-DISTVERSION=	38.4.0
-PORTREVISION=	1
+DISTVERSION=	45.1.1
 CATEGORIES?=	www devel
 MASTER_SITES=	MOZILLA/firefox/releases/${DISTVERSION}esr/source \
-		MOZILLA/firefox/candidates/${DISTVERSION}esr-candidates/build2/source
+		MOZILLA/firefox/candidates/${DISTVERSION}esr-candidates/build1/source
 DISTNAME=	firefox-${DISTVERSION}esr.source
 
 MAINTAINER?=	gecko@FreeBSD.org
 COMMENT?=	Mozilla runtime package that can be used to bootstrap XUL+XPCOM apps
 
-BUILD_DEPENDS=	nspr>=4.10.10:${PORTSDIR}/devel/nspr \
-		nss>=3.19.2.1:${PORTSDIR}/security/nss \
-		libevent2>=2.0.21_2:${PORTSDIR}/devel/libevent2 \
-		soundtouch>=1.8.0:${PORTSDIR}/audio/soundtouch \
-		harfbuzz>=0.9.34:${PORTSDIR}/print/harfbuzz \
-		graphite2>=1.2.4:${PORTSDIR}/graphics/graphite2 \
-		libvorbis>=1.3.5,3:${PORTSDIR}/audio/libvorbis \
-		libvpx>=1.3.0:${PORTSDIR}/multimedia/libvpx \
-		sqlite3>=3.8.9:${PORTSDIR}/databases/sqlite3 \
-		${PYTHON_PKGNAMEPREFIX}sqlite3>0:${PORTSDIR}/databases/py-sqlite3 \
-		v4l_compat>0:${PORTSDIR}/multimedia/v4l_compat \
-		autoconf-2.13:${PORTSDIR}/devel/autoconf213 \
-		zip:${PORTSDIR}/archivers/zip \
-		unzip:${PORTSDIR}/archivers/unzip
-#		opus>=1.1:${PORTSDIR}/audio/opus \
+BUILD_DEPENDS=	nspr>=4.12:devel/nspr \
+		nss>=3.21.1:security/nss \
+		libevent2>=2.0.21_2:devel/libevent2 \
+		soundtouch>=1.9.0:audio/soundtouch \
+		harfbuzz>=1.1.0:print/harfbuzz \
+		graphite2>=1.3.6:graphics/graphite2 \
+		png>=1.6.19:graphics/png \
+		libvorbis>=1.3.5,3:audio/libvorbis \
+		libvpx>=1.5.0:multimedia/libvpx \
+		sqlite3>=3.9.1:databases/sqlite3 \
+		${PYTHON_PKGNAMEPREFIX}sqlite3>0:databases/py-sqlite3 \
+		v4l_compat>0:multimedia/v4l_compat \
+		autoconf-2.13:devel/autoconf213 \
+		yasm:devel/yasm \
+		zip:archivers/zip \
+		unzip:archivers/unzip
 
-LIB_DEPENDS=	libv4l2.so:${PORTSDIR}/multimedia/libv4l
+LIB_DEPENDS=	libv4l2.so:multimedia/libv4l
 
-WRKSRC=		${WRKDIR}/mozilla-esr38
+WRKSRC:=	${WRKDIR}/firefox-${DISTVERSION}esr
 CONFLICTS_INSTALL=	libxul-1.9.*
 
 USE_QT5=	# empty
 QT_NONSTANDARD=	yes
 USE_GL=		gl
-USES=		pathfix tar:bzip2
+USES=		pathfix tar:xz
 MAKE_ENV=	SKIP_GRE_REGISTRATION=1 mozappdir=${PREFIX}/lib/${MOZILLA}
 LDFLAGS+=	-Wl,-rpath,${PREFIX}/lib/${MOZ_RPATH}
 USE_LDCONFIG=	${PREFIX}/lib/${MOZILLA}
@@ -45,42 +45,25 @@ MOZ_OPTIONS?=	--enable-application=xulrunner
 USE_GECKO=	gecko
 CPE_PRODUCT=	firefox_esr
 MOZILLA_EXEC_NAME=xulrunner
-USE_MOZILLA=	-opus
+USE_MOZILLA=	# empty
 MOZILLA_PLIST_DIRS=	bin include lib share/idl libdata
 MOZ_PKGCONFIG_FILES=	libxul-embedding libxul mozilla-js \
 			mozilla-plugin
 
-OPTIONS_DEFAULT=	GTK2
+OPTIONS_EXCLUDE=	GSTREAMER LOGGING
+OPTIONS_DEFINE=		RUST
+OPTIONS_DEFAULT=	BUNDLED_CAIRO GTK2
 
 OPTIONS_SINGLE+=	TOOLKIT
 OPTIONS_SINGLE_TOOLKIT=	GTK2 GTK3
 
 .include "${.CURDIR}/../../www/firefox/Makefile.options"
-.include <bsd.port.pre.mk>
 
 .if ${USE_MOZILLA:M-nss}
 MOZ_PKGCONFIG_FILES+=	mozilla-nss
 .endif
 
-.if ${PORT_OPTIONS:MALSA}
-RUN_DEPENDS+=	alsa-lib>=1.0.27.2_1:${PORTSDIR}/audio/alsa-lib
-.endif
-
-.if ! ${PORT_OPTIONS:MBUNDLED_CAIRO}
-BUILD_DEPENDS+=	cairo>=1.12.16_1,2:${PORTSDIR}/graphics/cairo
-.endif
-
-.if ${PORT_OPTIONS:MGSTREAMER}
-RUN_DEPENDS+=	gstreamer1-libav>=1.2.4_1:${PORTSDIR}/multimedia/gstreamer1-libav
-.endif
-
-.if ${PORT_OPTIONS:MGTK3}
-BUILD_DEPENDS+=	gtk3>=3.14.6:${PORTSDIR}/x11-toolkits/gtk30
-.endif
-
 post-patch:
-	@${REINPLACE_CMD} -e '/MOZPNG/s/=[0-9]*/=10511/' \
-		${WRKSRC}/configure.in
 	@${REINPLACE_CMD} -e 's|%%LOCALBASE%%|${LOCALBASE}|g' \
 		${WRKSRC}/xulrunner/stub/nsXULStub.cpp
 
@@ -94,4 +77,4 @@ post-build:
 		s|%%MOZ_LIBDIR%%|${PREFIX}/lib/${MOZILLA}|g" \
 		${WRKSRC}/xulrunner/installer/*.pc.in || ${TRUE}
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

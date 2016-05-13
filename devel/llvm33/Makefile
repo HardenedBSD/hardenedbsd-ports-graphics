@@ -11,6 +11,8 @@ PKGNAMESUFFIX=	${LLVM_SUFFIX}
 MAINTAINER=	brooks@FreeBSD.org
 COMMENT=	Low Level Virtual Machine
 
+BROKEN_powerpc64=	Does not build
+
 LLVM_SUFFIX=	${PORTVERSION:S/.//g}
 LLVM_PREFIX=	${PREFIX}/llvm${LLVM_SUFFIX}
 DOCSDIR=	${PREFIX}/share/doc/${PORTNAME}${LLVM_SUFFIX}
@@ -96,12 +98,12 @@ RELEASE_TYPE=		Release
 .endif
 
 .if ${PORT_OPTIONS:MCMAKE}
-BUILD_DEPENDS+=	cmake:${PORTSDIR}/devel/cmake
+BUILD_DEPENDS+=	cmake:devel/cmake
 PORTDATA+=	cmake
 .endif
 
 .if ${PORT_OPTIONS:MDOCS} || ${PORT_OPTIONS:MMANPAGES}
-BUILD_DEPENDS+=	sphinx-build:${PORTSDIR}/textproc/py-sphinx
+BUILD_DEPENDS+=	sphinx-build:textproc/py-sphinx
 .endif
 
 .if ${PORT_OPTIONS:MDOCS}
@@ -119,8 +121,8 @@ USES+=			python:-2.9,build
 .endif
 
 .if ${PORT_OPTIONS:MLTOPLUGIN}
-BUILD_DEPENDS+=		ld.gold:${PORTSDIR}/devel/binutils
-RUN_DEPENDS+=		ld.gold:${PORTSDIR}/devel/binutils
+BUILD_DEPENDS+=		ld.gold:devel/binutils
+RUN_DEPENDS+=		ld.gold:devel/binutils
 CONFIGURE_ARGS+=	--with-binutils-include=${LOCALBASE}/include
 PLIST_FILES+=		llvm${LLVM_SUFFIX}/lib/LLVMgold.so
 .endif
@@ -137,7 +139,9 @@ NOT_FOR_ARCH=	ia64
 
 .include <bsd.port.pre.mk>
 
-.if ${ARCH} == "arm"
+.if ${ARCH} == "aarch64"
+BROKEN=		Does not compile on aarch64
+.elif ${ARCH} == "arm"
 BROKEN=		Does not compile on arm
 .elif ${ARCH} == "sparc64"
 BROKEN=		does not compile on sparc64
@@ -256,13 +260,6 @@ build-plist:
 	${FIND} ${STAGEDIR}${DOCSDIR} -type f | \
 	    ${SED} -e 's|${STAGEDIR}${DOCSDIR}|%%PORTDOCS%%%%DOCSDIR%%|' | \
 	    ${SORT} >> ${PLIST}
-	${FIND} ${STAGEDIR}${LLVM_PREFIX} -type d | \
-	    ${SED} -e 's|${STAGEDIR}${PREFIX}/||' | \
-	    ${SORT} -r | ${SED} -e 's|^|@dirrm |' >> ${PLIST}
-	echo "%%LIT%%@dirrm %%PYTHON_SITELIBDIR%%/lit${LLVM_SUFFIX}" >> ${PLIST}
-	${FIND} ${STAGEDIR}${DOCSDIR} -type d | \
-	    ${SED} -e 's|${STAGEDIR}${DOCSDIR}|%%PORTDOCS%%@dirrm %%DOCSDIR%%|' | \
-	    ${SORT} -r >> ${PLIST}
 
 .if make(svn-patch)
 .if !defined(PATCH_REV)

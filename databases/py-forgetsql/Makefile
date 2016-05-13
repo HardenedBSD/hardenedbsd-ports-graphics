@@ -12,15 +12,19 @@ DISTNAME=	forgetSQL-${PORTVERSION}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Python module for object-oriented access to SQL databases
 
+LICENSE=	LGPL21
+LICENSE_FILE=	${WRKSRC}/COPYING
+
 USES=		python:2
 USE_PYTHON=	distutils autoplist
+NO_ARCH=	yes
 
-DOCS=	BUGS README TODO
+PORTDOCS=	BUGS README TODO
 
 OPTIONS_DEFINE=	DOCS MYSQL PGSQL
 
-MYSQL_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}MySQLdb>=1.2.2:${PORTSDIR}/databases/py-MySQLdb
-PGSQL_RUN_DEPENDS=	${PYTHON_SITELIBDIR}/psycopgmodule.so:${PORTSDIR}/databases/py-psycopg
+MYSQL_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}MySQLdb>=1.2.2:databases/py-MySQLdb
+PGSQL_RUN_DEPENDS=	${PYTHON_SITELIBDIR}/psycopgmodule.so:databases/py-psycopg
 
 .include <bsd.port.options.mk>
 
@@ -37,11 +41,11 @@ post-install:
 	@${ECHO_MSG} "===> you should install py-psycopg or py-MySQLdb from ports/databases."
 	@${ECHO}
 .endif
-.if ${PORT_OPTIONS:MDOCS}
-	${INSTALL} -d -o root -g wheel -m 0755 ${STAGEDIR}${DOCSDIR}
-.for f in ${DOCS}
+
+post-install-DOCS-on:
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
+.for f in ${PORTDOCS}
 	${INSTALL_DATA} ${WRKSRC}/${f} ${STAGEDIR}${DOCSDIR}/
 .endfor
-.endif
 
 .include <bsd.port.mk>

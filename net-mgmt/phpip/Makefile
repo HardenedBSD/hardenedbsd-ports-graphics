@@ -11,14 +11,18 @@ DISTNAME=	${PORTNAME}-4.3.2-build-${SNAPSHOT}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Complete IPv4 IPAM (IP address management) suite
 
-LICENSE=	GPLv2 # or later
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/COPYING
+
+BROKEN_powerpc64=	Does not build
 
 SNAPSHOT=	200611081420
 NO_BUILD=	yes
 USE_PHP=	mysql
 USES=		dos2unix
 WANT_PHP_WEB=	yes
+
+IGNORE_WITH_PHP=	70
 
 PHPIP?=		www/phpip
 PLIST_SUB+=	PHPIP=${PHPIP} WWWOWN=${WWWOWN} WWWGRP=${WWWGRP}

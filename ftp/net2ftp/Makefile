@@ -12,7 +12,10 @@ COMMENT=	Web-based FTP client written in PHP
 
 LICENSE=	GPLv2
 
+BROKEN_powerpc64=	Does not build
+
 USES=		zip
+IGNORE_WITH_PHP=	70
 NO_BUILD=	YES
 .if !defined(WITHOUT_PHP_DEPENDS)
 USE_PHP=	ftp mysql pcre session zlib

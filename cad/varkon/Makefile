@@ -15,8 +15,8 @@ COMMENT=	Free CAD system and applications development tool
 LICENSE=	GPLv2 LGPL20
 LICENSE_COMB=	dual
 
-LIB_DEPENDS=	libtiff.so:${PORTSDIR}/graphics/tiff
-RUN_DEPENDS=	xdg-open:${PORTSDIR}/devel/xdg-utils
+LIB_DEPENDS=	libtiff.so:graphics/tiff
+RUN_DEPENDS=	xdg-open:devel/xdg-utils
 
 WRKSRC=		${WRKDIR}/Varkon_${PORTVERSION}
 BUILD_WRKSRC=	${WRKSRC}/sources
@@ -63,6 +63,8 @@ do-install:
 	@${MKDIR} ${STAGEDIR}${VARKON_PREFIX}/cnf/ini
 	${INSTALL_DATA} ${WRKSRC}/cnf/ini/english/linux \
 		${STAGEDIR}${VARKON_PREFIX}/cnf/ini/freebsd
+
+do-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}	#Varkon Manual
 	@(cd ${WRKSRC}/man && ${COPYTREE_SHARE} . ${STAGEDIR}${DOCSDIR})
 

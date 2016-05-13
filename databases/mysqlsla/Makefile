@@ -9,14 +9,14 @@ CATEGORIES=	databases
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Mysqlsla analyzes general, slow, and raw MySQL statement logs
 
-LICENSE=	GPLv2 # or later
+LICENSE=	GPLv2+
 
-RUN_DEPENDS=	p5-DBI>=0:${PORTSDIR}/databases/p5-DBI \
-		p5-Term-ReadKey>=0:${PORTSDIR}/devel/p5-Term-ReadKey
+RUN_DEPENDS=	p5-DBI>=0:databases/p5-DBI \
+		p5-Term-ReadKey>=0:devel/p5-Term-ReadKey
 
 NO_ARCH=	yes
 USES=		perl5 shebangfix
-WRKSRC=		${WRKDIR}/${GH_PROJECT}-${GH_TAGNAME_EXTRACT}/${PORTNAME}
+WRKSRC_SUBDIR=	${PORTNAME}
 
 PLIST_FILES=	bin/mysqlsla \
 		man/man3/mysqlsla.3.gz

@@ -9,10 +9,11 @@ COMMENT=	Ice (Internet Communications Engine) language mapping for Python
 
 LICENSE=	GPLv2
 
-BUILD_DEPENDS=	mcpp:${PORTSDIR}/devel/mcpp
-LIB_DEPENDS=	libIce.so.${LIB_VRS}:${PORTSDIR}/devel/ice
+BUILD_DEPENDS=	mcpp:devel/mcpp
+LIB_DEPENDS=	libIce.so.${LIB_VRS}:devel/ice
 
 USES=		python shebangfix
+USE_PYTHON=	py3kplist
 SLAVE_PORT=	yes
 MASTERDIR=	${.CURDIR}/../ice
 PLIST=		${.CURDIR}/pkg-plist
@@ -27,9 +28,7 @@ MAKE_ENV+=	PYTHON_VERSION=${PYTHON_VERSION}
 LIB_VRS=	${PORTVERSION:S|.||g:C|[0-9]$||}
 PLIST_SUB=	LIB_VERSION="${PORTVERSION}" LIB_VRS="${LIB_VRS}"
 
-OPTIONS_DEFINE=	DEBUG TESTS
-OPTIONS_DEFAULT=TESTS
-TESTS_DESC=	Run tests
+OPTIONS_DEFINE=	DEBUG TEST
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PYSITEDIR}/Ice/*.so.*

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	elementary
-PORTVERSION=	1.16.0
+PORTVERSION=	1.16.1
 CATEGORIES=	x11-toolkits enlightenment
 MASTER_SITES=	http://download.enlightenment.org/rel/libs/${PORTNAME}/
 
@@ -11,7 +11,7 @@ COMMENT=	Simple widget toolkit using EFL
 
 LICENSE=	LGPL21
 
-LIB_DEPENDS=	libefl.so:${PORTSDIR}/devel/efl
+LIB_DEPENDS=	libefl.so:devel/efl
 
 DIST_SUBDIR=	enlightenment
 GNU_CONFIGURE=	yes

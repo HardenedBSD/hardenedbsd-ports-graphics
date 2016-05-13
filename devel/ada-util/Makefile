@@ -3,7 +3,7 @@
 
 PORTNAME=	ada-util
 PORTVERSION=	1.8.0
-PORTREVISION=	1
+PORTREVISION=	3
 CATEGORIES=	devel
 
 MAINTAINER=	marino@FreeBSD.org
@@ -12,10 +12,9 @@ COMMENT=	Utility library for Ada 2005 applications
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
-BUILD_DEPENDS=	gprbuild:${PORTSDIR}/devel/gprbuild \
-		xmlada>=4.4:${PORTSDIR}/textproc/xmlada \
-		${LOCALBASE}/lib/gnat/ahven.gpr:${PORTSDIR}/devel/ahven
-LIB_DEPENDS=	libcurl.so:${PORTSDIR}/ftp/curl
+BUILD_DEPENDS=	gprbuild:devel/gprbuild \
+		${LOCALBASE}/lib/gnat/ahven.gpr:devel/ahven
+LIB_DEPENDS=	libcurl.so:ftp/curl
 
 USES=		ada gmake
 USE_GITHUB=	yes
@@ -54,5 +53,9 @@ post-patch:
 
 post-install:
 	${RM} -r ${STAGEDIR}${PREFIX}/lib/gnat/manifests
+	# Scoop up all the source files gprinstall missed. (!)
+	${INSTALL_DATA} ${WRKSRC}/src/*.ad[bs] ${WRKSRC}/src/http/*.ad[bs] \
+		${WRKSRC}/src/os-linux/*.ad[bs] \
+		${STAGEDIR}${PREFIX}/include/util.static
 
 .include <bsd.port.mk>

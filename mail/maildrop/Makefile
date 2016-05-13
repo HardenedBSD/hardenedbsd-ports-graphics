@@ -39,8 +39,8 @@ LDFLAGS+=	-L${LOCALBASE}/lib
 
 CONFLICTS=	courier-0.65* libunicode-[0-9]*
 
-LIB_DEPENDS+=	libpcre.so:${PORTSDIR}/devel/pcre \
-		libcourier-unicode.so:${PORTSDIR}/devel/courier-unicode
+LIB_DEPENDS+=	libpcre.so:devel/pcre \
+		libcourier-unicode.so:devel/courier-unicode
 
 MAILDROP_LOG_COLUMNS?=	72	# lenght of 'File:' line in log
 
@@ -59,7 +59,7 @@ DOCS=	AUTHORS INSTALL INSTALL.html README README.html README.postfix \
 
 .if exists(${.CURDIR}/../../security/courier-authlib/Makefile.opt)
 .include "${.CURDIR}/../../security/courier-authlib/Makefile.opt"
-OPTIONS_MULTI_AUTHLIB:=	${OPTIONS_DEFINE}
+OPTIONS_MULTI_AUTHLIB:=	${OPTIONS_DEFINE:NDOCS}
 OPTIONS_DEFINE=		AUTHLIB
 OPTIONS_MULTI=		AUTHLIB
 AUTHLIB_DESC=		Courier Auth Library support
@@ -73,9 +73,9 @@ MAILWRAPPER_DESC=	Let configure guess which sendmail binary to use
 OPTIONS_SUB=		yes
 GDBM_CONFIGURE_ON=	--with-db=gdbm
 GDBM_CONFIGURE_OFF=	--with-db=db
-GDBM_LIB_DEPENDS=	libgdbm.so:${PORTSDIR}/databases/gdbm
+GDBM_LIB_DEPENDS=	libgdbm.so:databases/gdbm
 IDN_CONFIGURE_WITH=	libidn
-IDN_LIB_DEPENDS=	libidn.so:${PORTSDIR}/dns/libidn
+IDN_LIB_DEPENDS=	libidn.so:dns/libidn
 MAILWRAPPER_CONFIGURE_OFF=	--enable-sendmail=/usr/sbin/sendmail
 DOVECOTAUTH_CONFIGURE_ENABLE=	dovecotauth
 
@@ -122,8 +122,8 @@ post-patch:
 .if exists(${.CURDIR}/../../security/courier-authlib/Makefile.dep)
 .include "${.CURDIR}/../../security/courier-authlib/Makefile.dep"
 .endif
-BUILD_DEPENDS+=	courierauthconfig:${PORTSDIR}/security/courier-authlib-base
-RUN_DEPENDS+=	courierauthconfig:${PORTSDIR}/security/courier-authlib-base
+BUILD_DEPENDS+=	courierauthconfig:security/courier-authlib-base
+RUN_DEPENDS+=	courierauthconfig:security/courier-authlib-base
 CONFIGURE_ARGS+=	--enable-authlib
 .else
 CONFIGURE_ARGS+=	--disable-authlib

@@ -2,9 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	qcad
-PORTVERSION=	3.12.3.0
+PORTVERSION=	3.12.5.0
 DISTVERSIONPREFIX=	v
-PORTREVISION=	4
+PORTREVISION=	0
 CATEGORIES=	cad
 DIST_SUBDIR=	${PORTNAME}
 
@@ -13,8 +13,9 @@ COMMENT=	Professional CAD system
 
 LICENSE=	GPLv3
 
-BUILD_DEPENDS=	bash:${PORTSDIR}/shells/bash	\
-		${LOCALBASE}/lib/libopenNURBS.a:${PORTSDIR}/graphics/opennurbs
+BUILD_DEPENDS=	bash:shells/bash	\
+		${LOCALBASE}/lib/libopenNURBS.a:graphics/opennurbs
+LIB_DEPENDS=	libquazip.so:archivers/quazip
 
 MAKE_JOBS_UNSAFE=yes
 
@@ -40,8 +41,7 @@ RESDIR=		${WRKSRC}/release
 .endif
 
 SHRLIBS=	qcadcore qcadecmaapi qcadentity qcadgrid qcadgui qcadoperations	\
-		qcadsnap qcadspatialindex qcadstemmer spatialindexnavel qcadzip \
-		quazip
+		qcadsnap qcadspatialindex qcadstemmer spatialindexnavel qcadzip 
 STALIBS=	dxflib stemmer
 SHRDIR=		fonts libraries patterns plugins scripts ts
 #QSCRIPTS should not be installed to avoid conflicts with texlive-base

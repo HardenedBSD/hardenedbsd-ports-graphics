@@ -2,13 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	simpy
-PORTVERSION=	2.3.1
-PORTREVISION=	1
+PORTVERSION=	3.0.8
 CATEGORIES=	devel python
-MASTER_SITES=	CHEESESHOP \
-		SF/${PORTNAME}/${PORTNAME}/SimPy-${PORTVERSION}
+MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
-DISTNAME=	SimPy-${PORTVERSION}
 
 MAINTAINER=	wen@FreeBSD.org
 COMMENT=	Simulation in Python
@@ -17,22 +14,17 @@ LICENSE=	LGPL21
 
 NO_ARCH=	yes
 USES=		python
-USE_PYTHON=	distutils
-PYDISTUTILS_PKGNAME=	SimPy
+USE_PYTHON=	autoplist distutils
 
 OPTIONS_DEFINE=	TKINTER DOCS
 TKINTER_DESC=	py-tkinter for plot
 
-.include <bsd.port.options.mk>
+PORTDOCS=	*
 
-.if ${PORT_OPTIONS:MTKINTER}
-RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}tkinter>0:${PORTSDIR}/x11-toolkits/py-tkinter
-.endif
+TKINTER_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}tkinter>0:x11-toolkits/py-tkinter
 
-post-install:
-.if ${PORT_OPTIONS:MDOCS}
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	(cd ${WRKSRC}/docs && ${COPYTREE_SHARE} . ${STAGEDIR}${DOCSDIR})
-.endif
 
 .include <bsd.port.mk>

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	tivoka
-PORTVERSION=	3.2.1
+PORTVERSION=	3.4.2
 CATEGORIES=	www
 
 MAINTAINER=	ports@FreeBSD.org
@@ -10,6 +10,8 @@ COMMENT=	JSON-RPC client/server library for PHP
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
+
+BROKEN_powerpc64=	Does not build
 
 OPTIONS_DEFINE=	EXAMPLES
 

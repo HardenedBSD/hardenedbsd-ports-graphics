@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	privoxy
-PORTVERSION=	3.0.23
+PORTVERSION=	3.0.24
 CATEGORIES=	www ipv6
 MASTER_SITES=	SF/ijbswa/Sources/${PORTVERSION}%20%28stable%29
 DISTNAME=	privoxy-${PORTVERSION}-stable-src
@@ -10,12 +10,12 @@ DISTNAME=	privoxy-${PORTVERSION}-stable-src
 MAINTAINER=	fk@fabiankeil.de
 COMMENT=	Privoxy is a web proxy with advanced filtering capabilities
 
-LIB_DEPENDS=	libpcre.so:${PORTSDIR}/devel/pcre
+LIB_DEPENDS=	libpcre.so:devel/pcre
 
 WRKSRC=		${WRKDIR}/privoxy-${PORTVERSION}-stable
 
-USES=		cpe gmake shebangfix
-USE_AUTOTOOLS=	autoconf
+USES=		autoreconf cpe gmake shebangfix
+GNU_CONFIGURE=	yes
 SHEBANG_FILES=	tools/privoxy-log-parser.pl tools/privoxy-regression-test.pl tools/uagen.pl
 
 USE_RC_SUBR=	privoxy
@@ -45,7 +45,7 @@ FORCE_DESC=		Support bypassing of blocks
 PRIVOXY_TOOLS_DESC=	Install Privoxy-Log-Parser, uagen, etc.
 TOGGLE_DESC=		Support for remote toggling
 
-OPTIONS_DEFAULT=	BROKEN_STRPTIME EDITOR DOCS FORCE TOGGLE
+OPTIONS_DEFAULT=	EDITOR DOCS FORCE TOGGLE PRIVOXY_TOOLS
 
 OPTIONS_SUB=	yes
 
@@ -65,7 +65,7 @@ TOGGLE_CONFIGURE_OFF=	--disable-toggle
 
 PRIVOXY_TOOLS_USES=	perl5
 PRIVOXY_TOOLS_USE=	PERL5=run
-PRIVOXY_TOOLS_RUN_DEPENDS=	curl:${PORTSDIR}/ftp/curl
+PRIVOXY_TOOLS_RUN_DEPENDS=	curl:ftp/curl
 
 post-patch:
 	${REINPLACE_CMD} \
@@ -75,10 +75,12 @@ post-patch:
 		-e 's,^\(filterfile user\),#\1,' \
 		${WRKSRC}/config
 	${REINPLACE_CMD} \
+		-e 's,\(/etc/privoxy\),${PREFIX}\1,' ${WRKSRC}/tools/uagen.pl
+
+post-patch-DOCS-on:
+	${REINPLACE_CMD} \
 		-e 's,^#\(user-manual\) http://www.privoxy.org/user-manual/,\1 ${DOCSDIR}/user-manual,' \
 		${WRKSRC}/config
-	${REINPLACE_CMD} \
-		-e 's,\(/etc/privoxy\),${PREFIX}\1,' ${WRKSRC}/tools/uagen.pl
 
 pre-configure:
 	@(cd ${WRKSRC}; ${AUTOHEADER})

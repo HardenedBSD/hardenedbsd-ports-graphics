@@ -2,10 +2,11 @@
 # $FreeBSD$
 
 PORTNAME=	bundy
-PORTVERSION=	0.20150304
-PORTREVISION=	1
+PORTVERSION=	0.20160125
+PORTREVISION=	3
 CATEGORIES=	dns
-MASTER_SITES=	LOCAL/mat/bundy GH
+MASTER_SITES=	LOCAL/mat/bundy SF/boost/boost/1.55.0:boost
+DISTFILES+=	boost_1_55_0.tar.bz2:boost
 
 MAINTAINER=	mat@FreeBSD.org
 COMMENT=	Bundy DNS server suite
@@ -16,20 +17,19 @@ LICENSE_NAME=	ISC License
 LICENSE_FILE=	${WRKSRC}/COPYING
 LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
-BUILD_DEPENDS=	${LOCALBASE}/include/boost/interprocess/sync/interprocess_upgradable_mutex.hpp:${PORTSDIR}/devel/boost-libs \
-		${LOCALBASE}/include/log4cplus/logger.h:${PORTSDIR}/devel/log4cplus \
-		sqlite3>=3.3.9:${PORTSDIR}/databases/sqlite3 \
-		${PYTHON_PKGNAMEPREFIX}sqlite3>0:${PORTSDIR}/databases/py-sqlite3
-LIB_DEPENDS=	libbotan-1.10.so:${PORTSDIR}/security/botan110 \
-		liblog4cplus.so:${PORTSDIR}/devel/log4cplus \
-		libicuuc.so:${PORTSDIR}/devel/icu \
-		libgmp.so:${PORTSDIR}/math/gmp \
-		libsqlite3.so:${PORTSDIR}/databases/sqlite3
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}sqlite3>0:${PORTSDIR}/databases/py-sqlite3
+BUILD_DEPENDS=	${LOCALBASE}/include/log4cplus/logger.h:devel/log4cplus \
+		sqlite3>=3.3.9:databases/sqlite3 \
+		${PYTHON_PKGNAMEPREFIX}sqlite3>0:databases/${PYTHON_PKGNAMEPREFIX}sqlite3
+LIB_DEPENDS=	libbotan-1.10.so:security/botan110 \
+		liblog4cplus.so:devel/log4cplus \
+		libicuuc.so:devel/icu \
+		libgmp.so:math/gmp \
+		libsqlite3.so:databases/sqlite3
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}sqlite3>0:databases/${PYTHON_PKGNAMEPREFIX}sqlite3
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bundy-dns
-GH_TAGNAME=	97ac840
+GH_TAGNAME=	d310c5d
 
 USE_OPENSSL=	yes
 
@@ -41,6 +41,9 @@ GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--localstatedir=/var	\
 		--without-werror \
 		--enable-install-configurations
+INSTALL_TARGET=	install-strip
+
+CPPFLAGS+=	-I${WRKDIR}/boost_1_55_0
 
 OPTIONS_DEFINE=	DOCS
 
@@ -52,8 +55,12 @@ post-install:
 
 .include <bsd.port.pre.mk>
 
-.if defined(PACKAGE_BUILDING) && ${PYTHON_VER} != ${PYTHON_DEFAULT}
-IGNORE=	you have python ${PYTHON_DEFAULT} set as the default, and this needs ${PYTHON_VER}
+.if ${PYTHON_REL} < 3500
+PYOEXTENSION=	pyo
+.else
+PYOEXTENSION=	opt-1.pyc
 .endif
+
+PLIST_SUB+=	PYOEXTENSION=${PYOEXTENSION}
 
 .include <bsd.port.post.mk>

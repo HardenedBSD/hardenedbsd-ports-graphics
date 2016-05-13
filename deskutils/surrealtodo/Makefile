@@ -10,12 +10,15 @@ DISTNAME=	surrealtodo_v${PORTVERSION}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Surreal ToDo is an AJAX enabled web 2.0 list manager
 
+BROKEN_powerpc64=	Does not build
+
 USES=		zip
 USE_PHP+=	mysql
 USE_MYSQL=	yes
 NO_BUILD=	yes
 WWWOWN=		www
 WWWGRP=		${WWWOWN}
+IGNORE_WITH_PHP=	70
 
 PKGMESSAGE=	${WRKDIR}/${PORTNAME}/pkg-message
 SUB_FILES=	pkg-message
@@ -34,7 +37,7 @@ USE_PHP+=	pgsql
 USE_APACHE_RUN=	22
 .endif
 .if ${PORT_OPTIONS:MLIGHTTPD}
-RUN_DEPENDS+=	lighttpd:${PORTSDIR}/www/lighttpd
+RUN_DEPENDS+=	lighttpd:www/lighttpd
 .endif
 
 do-install:

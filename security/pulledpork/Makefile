@@ -12,10 +12,10 @@ COMMENT=	Script to update snort-2.8+ rules
 
 LICENSE=	GPLv2
 
-RUN_DEPENDS=	p5-Crypt-SSLeay>=0.57:${PORTSDIR}/security/p5-Crypt-SSLeay \
-		p5-LWP-Protocol-https>=6.00:${PORTSDIR}/www/p5-LWP-Protocol-https \
-		p5-libwww>=0:${PORTSDIR}/www/p5-libwww \
-		${LOCALBASE}/share/certs/ca-root-nss.crt:${PORTSDIR}/security/ca_root_nss
+RUN_DEPENDS=	p5-Crypt-SSLeay>=0.57:security/p5-Crypt-SSLeay \
+		p5-LWP-Protocol-https>=6.00:www/p5-LWP-Protocol-https \
+		p5-libwww>=0:www/p5-libwww \
+		${LOCALBASE}/share/certs/ca-root-nss.crt:security/ca_root_nss
 
 NO_BUILD=	yes
 USES=		perl5 shebangfix
@@ -26,7 +26,6 @@ SUB_FILES=	pkg-message
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	shirkdog
-GH_PROJECT=	${PORTNAME}
 GH_TAGNAME=	8b9441a
 
 OPTIONS_DEFINE=	DOCS

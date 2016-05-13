@@ -156,10 +156,11 @@ OPTIONS_FILE?=	${PORT_DBDIR}/${OPTIONS_NAME}/options
 _OPTIONS_FLAGS=	ALL_TARGET BROKEN CATEGORIES CFLAGS CONFIGURE_ENV CONFLICTS \
 		CONFLICTS_BUILD CONFLICTS_INSTALL CPPFLAGS CXXFLAGS \
 		DESKTOP_ENTRIES DISTFILES EXTRA_PATCHES EXTRACT_ONLY \
-		GH_ACCOUNT GH_PROJECT GH_TAGNAME IGNORE INFO INSTALL_TARGET \
-		LDFLAGS LIBS MAKE_ARGS MAKE_ENV PATCHFILES PATCH_SITES \
-		PLIST_DIRS PLIST_DIRSTRY PLIST_FILES PLIST_SUB PORTDOCS \
-		PORTEXAMPLES SUB_FILES SUB_LIST TEST_TARGET USES
+		GH_ACCOUNT GH_PROJECT GH_TAGNAME GH_TUPLE IGNORE INFO \
+		INSTALL_TARGET LDFLAGS LIBS MAKE_ARGS MAKE_ENV MASTER_SITES \
+		PATCHFILES PATCH_SITES PLIST_DIRS PLIST_DIRSTRY PLIST_FILES \
+		PLIST_SUB PORTDOCS PORTEXAMPLES SUB_FILES SUB_LIST \
+		TEST_TARGET USES
 _OPTIONS_DEPENDS=	PKG FETCH EXTRACT PATCH BUILD LIB RUN
 
 # The format here is target_family:priority:target-type
@@ -214,6 +215,16 @@ OPTIONS_DEFAULT+=	${OPTIONS_DEFAULT_${ARCH}}
 
 _ALL_EXCLUDE=	${OPTIONS_EXCLUDE_${ARCH}} ${OPTIONS_EXCLUDE} \
 		${OPTIONS_SLAVE} ${OPTIONS_EXCLUDE_${OPSYS}}
+
+.for opt in ${OPTIONS_DEFINE:O:u}
+.  if !${_ALL_EXCLUDE:M${opt}}
+.    for opt_implied in ${${opt}_IMPLIES}
+.       if ${_ALL_EXCLUDE:M${opt_implied}}
+_ALL_EXCLUDE+=	${opt}
+.       endif
+.    endfor
+.  endif
+.endfor
 
 # Remove options the port maintainer doesn't want
 .for opt in ${_ALL_EXCLUDE:O:u}
@@ -499,14 +510,10 @@ ${_u:tu}=		${${opt}_VARS:M${var}=*:C/[^=]*=//:C/^"(.*)"$$/\1/}
 .      endfor
 .    endif
 .    if defined(${opt}_CONFIGURE_ENABLE)
-.      for iopt in ${${opt}_CONFIGURE_ENABLE}
-CONFIGURE_ARGS+=	--enable-${iopt}
-.      endfor
+CONFIGURE_ARGS+=	${${opt}_CONFIGURE_ENABLE:S/^/--enable-/}
 .    endif
 .    if defined(${opt}_CONFIGURE_WITH)
-.      for iopt in ${${opt}_CONFIGURE_WITH}
-CONFIGURE_ARGS+=	--with-${iopt}
-.      endfor
+CONFIGURE_ARGS+=	${${opt}_CONFIGURE_WITH:S/^/--with-/}
 .    endif
 .    for configure in CONFIGURE CMAKE QMAKE
 .      if defined(${opt}_${configure}_ON)
@@ -547,14 +554,10 @@ ${_u:tu}=		${${opt}_VARS_OFF:M${var}=*:C/[^=]*=//:C/^"(.*)"$$/\1/}
 .      endfor
 .    endif
 .    if defined(${opt}_CONFIGURE_ENABLE)
-.      for iopt in ${${opt}_CONFIGURE_ENABLE}
-CONFIGURE_ARGS+=	--disable-${iopt:C/=.*//}
-.      endfor
+CONFIGURE_ARGS+=	${${opt}_CONFIGURE_ENABLE:S/^/--disable-/:C/=.*//}
 .    endif
 .    if defined(${opt}_CONFIGURE_WITH)
-.      for iopt in ${${opt}_CONFIGURE_WITH}
-CONFIGURE_ARGS+=	--without-${iopt:C/=.*//}
-.      endfor
+CONFIGURE_ARGS+=	${${opt}_CONFIGURE_WITH:S/^/--without-/:C/=.*//}
 .    endif
 .    for configure in CONFIGURE CMAKE QMAKE
 .      if defined(${opt}_${configure}_OFF)

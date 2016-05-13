@@ -1,12 +1,10 @@
---- mix.exs.orig	2015-09-14 14:31:47 UTC
+--- mix.exs.orig	2016-03-28 15:07:12 UTC
 +++ mix.exs
-@@ -6,8 +6,7 @@ defmodule Joken.Mixfile do
-      version: "0.16.0",
+@@ -9,7 +9,6 @@ defmodule Joken.Mixfile do
       elixir: "~> 1.0",
       description: description,
--     package: package,
--     deps: deps]
-+     package: package]
-   end
- 
-   def application do
+      package: package,
+-     deps: deps,
+      consolidate_protocols: Mix.env != :test,
+      test_coverage: [tool: ExCoveralls],
+      name: "Joken",

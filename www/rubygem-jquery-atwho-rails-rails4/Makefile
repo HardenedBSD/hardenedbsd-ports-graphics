@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	jquery-atwho-rails
-PORTVERSION=	1.1.0
+PORTVERSION=	1.3.2
 CATEGORIES=	www rubygems
 MASTER_SITES=	RG
 PKGNAMESUFFIX=	-rails4
@@ -14,7 +14,6 @@ LICENSE=	MIT
 NO_ARCH=	yes
 
 USE_RUBY=	yes
-USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=	yes
+USES=		gem
 
 .include <bsd.port.mk>

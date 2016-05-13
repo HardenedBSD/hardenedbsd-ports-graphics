@@ -3,7 +3,7 @@
 
 PORTNAME=	weberp
 PORTVERSION=	4.12.3
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	finance www
 MASTER_SITES=	SF/web-erp/
 DISTNAME=	webERP_${PORTVERSION}
@@ -13,11 +13,13 @@ COMMENT=	Open-Source Web-Based ERP System
 
 LICENSE=	GPLv2
 
+BROKEN_powerpc64=	Does not build
+
 PORTSCOUT=	skipv:3.12
 
 USES=		gettext shebangfix zip
 SHEBANG_FILES=	report_runner.php
-USE_PHP=	mysql gettext
+USE_PHP=	mysqli gettext
 WRKSRC=		${WRKDIR}/webERP
 
 NO_BUILD=	yes

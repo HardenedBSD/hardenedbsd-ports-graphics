@@ -5,21 +5,18 @@ PORTNAME=	twoftpd
 PORTVERSION=	1.42
 PORTREVISION=	1
 CATEGORIES=	ftp
-MASTER_SITES=	http://untroubled.org/archive/${PORTNAME}/
+MASTER_SITES=	http://untroubled.org/${PORTNAME}/archive/
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Simple, secure, efficient FTP server
 
-LICENSE=	GPLv2
+LICENSE=	GPLv2+
+LICENSE_FILE=	${WRKSRC}/COPYING
 
-BROKEN=		Does not fetch
-BUILD_DEPENDS=	${LOCALBASE}/bin/bg-installer:${PORTSDIR}/devel/bglibs
-LIB_DEPENDS=	libcvm-v2client.so:${PORTSDIR}/security/cvm
+BUILD_DEPENDS=	${LOCALBASE}/bin/bg-installer:devel/bglibs
+LIB_DEPENDS=	libcvm-v2client.so:security/cvm
 
-OPTIONS_DEFINE=	DOCS
-
-CPPFLAGS+=	-I${LOCALBASE}/include
-LDFLAGS+=	-L${LOCALBASE}/lib
+USES=		localbase
 
 BGLIBS_LIB=	${LOCALBASE}/lib/bglibs
 BGLIBS_INCLUDE=	${LOCALBASE}/include/bglibs
@@ -31,6 +28,8 @@ PLIST_FILES=	bin/twoftpd-anon bin/twoftpd-anon-conf \
 		bin/twoftpd-switch bin/twoftpd-xfer \
 		man/man1/twoftpd-auth.1.gz man/man1/twoftpd-switch.1.gz \
 		man/man1/twoftpd-xfer.1.gz
+
+OPTIONS_DEFINE=	DOCS
 
 post-patch:
 	@${REINPLACE_CMD} -e 's,timezone,tm.tm_gmtoff,' ${WRKSRC}/statmod.c
@@ -51,6 +50,8 @@ do-install:
 .for f in twoftpd-auth.1 twoftpd-switch.1 twoftpd-xfer.1
 	${INSTALL_MAN} ${WRKSRC}/${f} ${STAGEDIR}${MAN1PREFIX}/man/man1/
 .endfor
+
+do-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 .for i in NEWS README TODO
 	(cd ${WRKSRC} && ${INSTALL_DATA} ${i} ${STAGEDIR}${DOCSDIR})

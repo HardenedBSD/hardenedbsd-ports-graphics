@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	xmedcon
-PORTVERSION=	0.13.0
-PORTREVISION=	3
+PORTVERSION=	0.14.1
 CATEGORIES=	graphics
 MASTER_SITES=	SF/${PORTNAME}/XMedCon-Source/${PORTVERSION}
 
@@ -32,6 +31,12 @@ OPTIONS_SUB=	yes
 
 X11_CONFIGURE_ENABLE=	gui
 X11_USE=		GNOME=gtk20
+X11_DESKTOP_ENTRIES=	"XMedCon" \
+			"" \
+			"${PREFIX}/etc/xmedcon.png" \
+			"${PORTNAME}" \
+			"" \
+			""
 
 GLIB_DESC=		With Glib
 GLIB_CONFIGURE_ENABLE=	glib
@@ -62,13 +67,9 @@ INW_CONFIGURE_ENABLE=	inw
 GIF_CONFIGURE_OFF=	--disable-gif
 
 PNG_CONFIGURE_ENABLE=	png
-PNG_LIB_DEPENDS=	libpng.so:${PORTSDIR}/graphics/png
+PNG_LIB_DEPENDS=	libpng.so:graphics/png
 
 .include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MX11}
-DESKTOP_ENTRIES="XMedCon" "" "${PREFIX}/etc/xmedcon.png" "${PORTNAME}" "" ""
-.endif
 
 .if empty(PORT_OPTIONS:MACR_NEMA) || empty(PORT_OPTIONS:MDICOM)
 CONFIGURE_ARGS+=	--disable-acr
@@ -86,12 +87,10 @@ post-patch:
 	@${REINPLACE_CMD} -e '/xmedcon.1/d' \
 		${WRKSRC}/man/Makefile.in
 
-post-install:
-.if ${PORT_OPTIONS:MX11}
+post-install-X11-on:
 .for file in xmedcon.png xmedconrc xmedconrc.linux
 	${INSTALL_DATA} ${WRKSRC}/etc/${file} ${STAGEDIR}${PREFIX}/etc
 .endfor
 	${INSTALL_MAN} ${WRKSRC}/man/xmedcon.1 ${STAGEDIR}${MANPREFIX}/man/man1
-.endif
 
 .include <bsd.port.mk>

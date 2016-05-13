@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	Test-Prereq
-PORTVERSION=	1.038
-PORTREVISION=	1
+PORTVERSION=	1.039
 CATEGORIES=	devel perl5
 MASTER_SITES=	CPAN
 PKGNAMEPREFIX=	p5-
@@ -14,7 +13,7 @@ COMMENT=	Check if Makefile.PL has the right pre-requisites
 LICENSE=	ART10 GPLv1
 LICENSE_COMB=	dual
 
-BUILD_DEPENDS=	p5-Module-Info>=0:${PORTSDIR}/devel/p5-Module-Info
+BUILD_DEPENDS=	p5-Module-Info>=0:devel/p5-Module-Info
 RUN_DEPENDS:=	${BUILD_DEPENDS}
 
 USES=		perl5

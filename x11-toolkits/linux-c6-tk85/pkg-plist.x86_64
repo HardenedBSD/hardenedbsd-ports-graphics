@@ -1,5 +1,7 @@
 usr/bin/wish
 usr/bin/wish8.5
+usr/lib/libtk8.5.so
+usr/lib/tk8.5/pkgIndex.tcl
 usr/lib64/libtk8.5.so
 usr/lib64/tk8.5/pkgIndex.tcl
 usr/share/doc/tk-8.5.7/README
@@ -258,19 +260,3 @@ usr/%%DATADIR%%8.5/ttk/winTheme.tcl
 usr/%%DATADIR%%8.5/ttk/xpTheme.tcl
 usr/%%DATADIR%%8.5/unsupported.tcl
 usr/%%DATADIR%%8.5/xmfbox.tcl
-@dirrmtry usr/%%DATADIR%%8.5/ttk
-@dirrmtry usr/%%DATADIR%%8.5/msgs
-@dirrmtry usr/%%DATADIR%%8.5/images
-@dirrmtry usr/%%DATADIR%%8.5/demos/images
-@dirrmtry usr/%%DATADIR%%8.5/demos
-@dirrmtry usr/%%DATADIR%%8.5
-@dirrmtry usr/share/man/mann
-@dirrmtry usr/share/man/man1
-@dirrmtry usr/share/man
-@dirrmtry usr/share/doc/tk-8.5.7
-@dirrmtry usr/share/doc
-@dirrmtry usr/share
-@dirrmtry usr/lib64/tk8.5
-@dirrmtry usr/lib64
-@dirrmtry usr/bin
-@dirrmtry usr

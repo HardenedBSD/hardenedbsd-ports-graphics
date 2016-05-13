@@ -3,6 +3,7 @@
 
 PORTNAME=	tiff
 PORTVERSION=	4.0.6
+PORTREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	ftp://ftp.remotesensing.org/pub/libtiff/ \
 		http://download.osgeo.org/libtiff/
@@ -13,7 +14,7 @@ COMMENT=	Tools and library routines for working with TIFF images
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/COPYRIGHT
 
-LIB_DEPENDS=	libjbig.so:${PORTSDIR}/graphics/jbigkit
+LIB_DEPENDS=	libjbig.so:graphics/jbigkit
 
 USES=		cpe jpeg libtool
 CPE_PRODUCT=	libtiff

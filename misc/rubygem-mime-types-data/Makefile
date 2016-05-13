@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	mime-types-data
-PORTVERSION=	3.2015.1120
+PORTVERSION=	3.2016.0221
 CATEGORIES=	misc rubygems
 MASTER_SITES=	RG
 
@@ -14,7 +14,6 @@ LICENSE_FILE=	${WRKSRC}/Licence.md
 
 NO_ARCH=	yes
 USE_RUBY=	yes
-USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=	yes
+USES=		gem
 
 .include <bsd.port.mk>

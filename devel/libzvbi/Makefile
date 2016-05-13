@@ -3,7 +3,7 @@
 
 PORTNAME=	libzvbi
 PORTVERSION=	0.2.35
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	SF/zapping/zvbi/${PORTVERSION}
 DISTNAME=	${PORTNAME:S/lib//}-${PORTVERSION}
@@ -11,15 +11,22 @@ DISTNAME=	${PORTNAME:S/lib//}-${PORTVERSION}
 MAINTAINER=	oliver@FreeBSD.org
 COMMENT=	Routines to access raw VBI capture devices
 
-LIB_DEPENDS+=	libpng.so:${PORTSDIR}/graphics/png \
-		libunicode.so:${PORTSDIR}/devel/libunicode
+LICENSE=	GPLv2+
 
-USES=		gettext libtool pathfix pkgconfig tar:bzip2
+LIB_DEPENDS+=	libpng.so:graphics/png \
+		libunicode.so:devel/libunicode
+
+USES=		iconv libtool localbase pathfix tar:bzip2
 GNU_CONFIGURE=	yes
+CONFIGURE_ARGS=	--without-doxygen
+INSTALL_TARGET=	install-strip
 USE_LDCONFIG=	yes
 
-CPPFLAGS+=	-I${LOCALBASE}/include
-LIBS+=		-L${LOCALBASE}/lib
+OPTIONS_DEFINE=	NLS
+OPTIONS_SUB=	yes
+
+NLS_CONFIGURE_ENABLE=nls
+NLS_USES=	gettext-runtime
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|#cpu (\([^)]*\))|defined(__\1__)|g' \

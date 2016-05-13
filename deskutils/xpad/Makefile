@@ -2,17 +2,16 @@
 # $FreeBSD$
 
 PORTNAME=	xpad
-PORTVERSION=	4.5.0
-PORTREVISION=	1
+PORTVERSION=	4.7.0
 CATEGORIES=	deskutils
-MASTER_SITES=	http://launchpad.net/${PORTNAME}/trunk/4.5/+download/
+MASTER_SITES=	https://launchpad.net/${PORTNAME}/trunk/${PORTVERSION}/+download/
 
 MAINTAINER=	jgh@FreeBSD.org
 COMMENT=	Virtual note-pad system for your X11 desktop
 
 LICENSE=	GPLv3
 
-RUN_DEPENDS=	gnome-icon-theme>=0:${PORTSDIR}/misc/gnome-icon-theme
+RUN_DEPENDS=	gnome-icon-theme>=0:misc/gnome-icon-theme
 
 OPTIONS_DEFINE=	NLS DOCS
 OPTIONS_SUB=	yes
@@ -35,6 +34,8 @@ NLS_CONFIGURE_ENABLE=	nls
 post-patch:
 	@${REINPLACE_CMD} -e 's|glib/glist.h|glib.h|g' \
 		${WRKSRC}/src/xpad-undo.c
+	@${REINPLACE_CMD} -e 's|/etc/xdg/autostart|${LOCALBASE}/etc/xdg/autostart|g' \
+		${WRKSRC}/Makefile.am
 
 post-install:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}

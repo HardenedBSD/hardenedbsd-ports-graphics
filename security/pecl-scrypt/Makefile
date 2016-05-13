@@ -13,11 +13,14 @@ COMMENT=	PHP wrapper to Colin Percival's scrypt implementation
 
 LICENSE=	BSD2CLAUSE
 
+BROKEN_powerpc64=	Does not build
+
 USES=		compiler tar:tgz
 USE_PHP=	hash
 USE_PHPEXT=	yes
 USE_PHP_BUILD=	yes
 INSTALL_TARGET=	install-strip
+IGNORE_WITH_PHP=	70
 
 DOCSDIR=	${PREFIX}/share/doc/${PKGNAMEPREFIX}${PORTNAME}
 PORTDOCS=	README.md

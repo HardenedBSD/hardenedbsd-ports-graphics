@@ -5,14 +5,10 @@ PORTNAME=	mp3stat
 PORTVERSION=	2.6.01
 PORTREVISION=	12
 CATEGORIES=	audio
-MASTER_SITES=	https://signal-lost.homeip.net/files/ \
-		http://www.sourcefiles.org/Multimedia/MP3/Tools/Processing/
-DISTNAME=	${PORTNAME}_${PORTVERSION}
+MASTER_SITES=	http://BSDforge.com/projects/source/audio/mp3stat/
 
-MAINTAINER=	ports@FreeBSD.org
-COMMENT=	Read information about mp3s and oggs bitstream
-
-BROKEN=		unfetchable
+MAINTAINER=	portmaster@BSDforge.com
+COMMENT=	Read information about an MP3's, or OGG's bitstream
 
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/COPYING
@@ -23,8 +19,6 @@ USE_GNOME=	gtk20
 
 LDFLAGS+=	-Wl,--rpath,${LOCALBASE}/lib
 
-WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
-
 PORTDOCS=	README
 PLIST_FILES=	bin/mp3stat \
 		lib/mp3stat/input_mp3.so \
@@ -34,7 +28,7 @@ PLIST_FILES=	bin/mp3stat \
 OPTIONS_DEFINE=		VORBIS DOCS
 OPTIONS_DEFAULT=	VORBIS
 
-VORBIS_LIB_DEPENDS=	libvorbis.so:${PORTSDIR}/audio/libvorbis
+VORBIS_LIB_DEPENDS=	libvorbis.so:audio/libvorbis
 VORBIS_PLIST_FILES=	lib/mp3stat/input_vorb.so
 VORBIS_MAKE_ARGS_OFF=	VORBIS=""
 

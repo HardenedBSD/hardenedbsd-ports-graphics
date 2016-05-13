@@ -15,7 +15,6 @@
     SUBDIR += bluegps
     SUBDIR += bluez-firmware
     SUBDIR += bpl+
-    SUBDIR += cdr_read
     SUBDIR += chirp
     SUBDIR += chu
     SUBDIR += comserv
@@ -79,12 +78,16 @@
     SUBDIR += klog
     SUBDIR += kremotecontrol
     SUBDIR += kvasd
+    SUBDIR += libcodec2
     SUBDIR += libconcord
+    SUBDIR += libfap
     SUBDIR += libfec
     SUBDIR += libimobiledevice
     SUBDIR += libirman
     SUBDIR += libmodbus
     SUBDIR += librs232
+    SUBDIR += libsdr
+    SUBDIR += libsdr-gui
     SUBDIR += libticables2
     SUBDIR += libticalcs2
     SUBDIR += libusbmuxd
@@ -138,8 +141,11 @@
     SUBDIR += py-serial
     SUBDIR += pyla
     SUBDIR += qico
+    SUBDIR += qpage
     SUBDIR += qrq
     SUBDIR += qsstv
+    SUBDIR += qt5-connectivity
+    SUBDIR += qt5-sensors
     SUBDIR += qt5-serialport
     SUBDIR += qtel
     SUBDIR += quisk
@@ -149,6 +155,7 @@
     SUBDIR += rubygem-ruby-termios
     SUBDIR += rxtx
     SUBDIR += scmxx
+    SUBDIR += sdr-wspr
     SUBDIR += ser2net
     SUBDIR += serialoverip
     SUBDIR += seyon
@@ -191,6 +198,7 @@
     SUBDIR += xnec2c
     SUBDIR += xnecview
     SUBDIR += xwota
+    SUBDIR += yaac
     SUBDIR += yagiuda
     SUBDIR += yaps
     SUBDIR += yfklog

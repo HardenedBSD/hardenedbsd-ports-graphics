@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	firefox-i18n
-PORTVERSION=	43.0.1
+PORTVERSION=	46.0.1
 CATEGORIES=	www
 MASTER_SITES=	MOZILLA/${PORTNAME:S|-i18n||}/releases/${DISTVERSION}/linux-i686/xpi \
 		MOZILLA/${PORTNAME:S|-i18n||}/candidates/${DISTVERSION}-candidates/build1/linux-i686/xpi
@@ -13,9 +13,9 @@ DIST_SUBDIR=	xpi/${DISTNAME}
 MAINTAINER=	gecko@FreeBSD.org
 COMMENT=	Localized interface for Firefox
 
-EXTRACT_DEPENDS=	zip:${PORTSDIR}/archivers/zip
+EXTRACT_DEPENDS=	zip:archivers/zip
 
-USES=		zip:infozip gecko:firefox,43,build
+USES=		zip:infozip gecko:firefox,46,build
 USE_XPI=	firefox linux-firefox
 
 NO_ARCH=	yes
@@ -32,7 +32,7 @@ PLISTF?=	${WRKDIR}/plist_files
 .include <bsd.port.pre.mk>
 
 .ifndef WITHOUT_SWITCHER
-RUN_DEPENDS+=	xpi-quick-locale-switcher>=0:${PORTSDIR}/www/xpi-quick-locale-switcher
+RUN_DEPENDS+=	xpi-quick-locale-switcher>=0:www/xpi-quick-locale-switcher
 .endif
 
 .include "${.CURDIR}/Makefile.lang"

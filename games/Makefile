@@ -1,7 +1,7 @@
 # $FreeBSD$
 #
 
-    COMMENT = Games
+    COMMENT = Games and related software
 
     SUBDIR += 0ad
     SUBDIR += 0verkill
@@ -14,6 +14,7 @@
     SUBDIR += 54321
     SUBDIR += 7kaa
     SUBDIR += CaribbeanStud
+    SUBDIR += cockatrice
     SUBDIR += HeroesOfMightAndMagic
     SUBDIR += KnightCap
     SUBDIR += abbayedesmorts
@@ -38,7 +39,6 @@
     SUBDIR += an
     SUBDIR += angband
     SUBDIR += anki
-    SUBDIR += annelid
     SUBDIR += antipolix
     SUBDIR += aop
     SUBDIR += apoolGL
@@ -121,6 +121,7 @@
     SUBDIR += burrtools
     SUBDIR += bygfoot
     SUBDIR += bzflag
+    SUBDIR += bzflag-server
     SUBDIR += cake
     SUBDIR += caph
     SUBDIR += capicity
@@ -212,7 +213,6 @@
     SUBDIR += dsnake
     SUBDIR += duckmaze
     SUBDIR += duel
-    SUBDIR += duke3d-data
     SUBDIR += dunelegacy
     SUBDIR += dungeon
     SUBDIR += dungeoncrawl
@@ -342,6 +342,7 @@
     SUBDIR += gnake
     SUBDIR += gnarr
     SUBDIR += gno3dtet
+    SUBDIR += gnome-2048
     SUBDIR += gnome-chess
     SUBDIR += gnome-games
     SUBDIR += gnome-klotski
@@ -409,6 +410,8 @@
     SUBDIR += hohlin
     SUBDIR += hoichess
     SUBDIR += holotz-castle
+    SUBDIR += hoverboard-sdl
+    SUBDIR += hs-scroll
     SUBDIR += hypatia_engine
     SUBDIR += iagno
     SUBDIR += icbm3d
@@ -449,7 +452,6 @@
     SUBDIR += kajaani-kombat
     SUBDIR += kajongg
     SUBDIR += kanagram
-    SUBDIR += kanatest
     SUBDIR += kapman
     SUBDIR += kardsgt
     SUBDIR += kartofel
@@ -513,6 +515,7 @@
     SUBDIR += lianliankan
     SUBDIR += libdungeonmaker
     SUBDIR += libfov
+    SUBDIR += libgames-support
     SUBDIR += libggz
     SUBDIR += libkdegames
     SUBDIR += libkmahjongg
@@ -547,6 +550,8 @@
     SUBDIR += linux-rtcw
     SUBDIR += linux-ssamtfe
     SUBDIR += linux-ssamtse
+    SUBDIR += linux-unigine-heaven
+    SUBDIR += linux-unigine-valley
     SUBDIR += linux-unrealgold
     SUBDIR += linux-uplink-demo
     SUBDIR += linux-ut
@@ -627,6 +632,8 @@
     SUBDIR += nethack33-nox11
     SUBDIR += nethack34
     SUBDIR += nethack34-nox11
+    SUBDIR += nethack36
+    SUBDIR += nethack36-nox11
     SUBDIR += netherearth
     SUBDIR += netpanzer
     SUBDIR += netradiant
@@ -843,6 +850,7 @@
     SUBDIR += rnd_jue
     SUBDIR += robocalypto
     SUBDIR += robocode
+    SUBDIR += robocode-naval
     SUBDIR += robotfindskitten
     SUBDIR += rockdodger
     SUBDIR += rocksndiamonds
@@ -892,6 +900,7 @@
     SUBDIR += sjeng
     SUBDIR += ski
     SUBDIR += sl
+    SUBDIR += slade
     SUBDIR += slashem-tty
     SUBDIR += slump
     SUBDIR += slune
@@ -932,7 +941,7 @@
     SUBDIR += super_mario_bros_python
     SUBDIR += super_methane_brothers
     SUBDIR += supertux
-    SUBDIR += supertux-devel
+    SUBDIR += supertux2
     SUBDIR += supertuxkart
     SUBDIR += swell-foop
     SUBDIR += sxsame
@@ -949,6 +958,8 @@
     SUBDIR += teeworlds
     SUBDIR += teg
     SUBDIR += tenebrae
+    SUBDIR += tesseract
+    SUBDIR += tesseract-data
     SUBDIR += tetrinet
     SUBDIR += tetrinet-x
     SUBDIR += tetrons
@@ -976,6 +987,7 @@
     SUBDIR += traindirector
     SUBDIR += traingame
     SUBDIR += tremulous
+    SUBDIR += trenchbroom
     SUBDIR += trigger-data
     SUBDIR += trigger-rally
     SUBDIR += trimines
@@ -1183,6 +1195,7 @@
     SUBDIR += zatacka
     SUBDIR += zaz
     SUBDIR += zephulor
+    SUBDIR += zhlt
     SUBDIR += znibbles
     SUBDIR += zoom
     SUBDIR += ztrack

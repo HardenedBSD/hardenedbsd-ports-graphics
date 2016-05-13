@@ -23,10 +23,12 @@ CONFIGURE_ARGS=	--datadir=${PREFIX}/lib \
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 
+MAKE_JOBS_UNSAFE=	yes
+
 OPTIONS_DEFINE=		SYS_LINALG
 
 SYS_LINALG_DESC=	Enable system ATLAS/LAPACK
-SYS_LINALG_LIB_DEPENDS=	libatlas.so:${PORTSDIR}/math/atlas
+SYS_LINALG_LIB_DEPENDS=	libatlas.so:math/atlas
 SYS_LINALG_CONFIGURE_ENABLE=	sys-linalg
 
 post-patch:

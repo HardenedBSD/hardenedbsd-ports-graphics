@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	libssh
-DISTVERSION=	0.7.2
+DISTVERSION=	0.7.3
 CATEGORIES=	security devel
 MASTER_SITES=	https://git.libssh.org/projects/libssh.git/snapshot/
 
@@ -26,7 +26,7 @@ CMAKE_ARGS=	-DWITH_EXAMPLES:BOOL=OFF \
 		-DWITH_TESTING:BOOL=OFF \
 		-DWITH_ZLIB:BOOL=ON
 
-GCRYPT_LIB_DEPENDS=	libgcrypt.so:${PORTSDIR}/security/libgcrypt
+GCRYPT_LIB_DEPENDS=	libgcrypt.so:security/libgcrypt
 GCRYPT_CMAKE_ON=	-DWITH_GCRYPT:BOOL=ON
 GCRYPT_CMAKE_OFF=	-DWITH_GCRYPT:BOOL=OFF
 

@@ -10,11 +10,11 @@ CATEGORIES=	devel
 MAINTAINER=	amdmi3@FreeBSD.org
 COMMENT=	Perl Incompatible Regular Expressions library
 
+LICENSE=	LGPL3+
+LICENSE_FILE=	${WRKSRC}/COPYING
+
 USE_GITHUB=	yes
 GH_ACCOUNT=	dprokoptsev
-
-LICENSE=	LGPL3 # or later
-LICENSE_FILE=	${WRKSRC}/COPYING
 
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip

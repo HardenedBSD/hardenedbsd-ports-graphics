@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=		Ice
-PORTVERSION=		3.6.0
-PORTREVISION=		1
+PORTVERSION=		3.6.2
 DISTVERSIONPREFIX=	v
 CATEGORIES=		devel
 
@@ -15,32 +14,29 @@ LICENSE=		GPLv2
 SLAVE_PORT?=		no
 
 .if ${SLAVE_PORT} == "no"
-LIB_DEPENDS=		libexpat.so:${PORTSDIR}/textproc/expat2 \
-			libmcpp.so:${PORTSDIR}/devel/mcpp
+LIB_DEPENDS=		libexpat.so:textproc/expat2 \
+			libmcpp.so:devel/mcpp
 USE_OPENSSL=		yes
 .else
 LIB_VRS=		${PORTVERSION:R:S|.||g}
-LIB_DEPENDS+=		libIce.so.${LIB_VRS}:${PORTSDIR}/devel/ice
+LIB_DEPENDS+=		libIce.so.${LIB_VRS}:devel/ice
 PLIST_SUB+=		LIB_VERSION="${PORTVERSION}" LIB_VRS="${LIB_VRS}"
 .endif
 
-OPTIONS_DEFINE?=	DEBUG TESTS
-OPTIONS_DEFAULT?=	TESTS
-TESTS_DESC?=		Build and run tests (requires lang/python)
+OPTIONS_DEFINE?=	DEBUG TEST
 
 .include <bsd.port.options.mk>
 
 USES+=			iconv gmake
 
-.if ${PORT_OPTIONS:MTESTS} && ${SLAVE_PORT} == "no"
+.if ${PORT_OPTIONS:MTEST} && ${SLAVE_PORT} == "no"
 USES+=			python:build
-BUILD_DEPENDS+=		${PYTHON_PKGNAMEPREFIX}passlib>0:${PORTSDIR}/security/py-passlib
+BUILD_DEPENDS+=		${PYTHON_PKGNAMEPREFIX}passlib>0:security/py-passlib
 .endif
 
 WRKSRC=			${WRKDIR}/ice-${PORTVERSION}
 
-USE_BDB=		yes
-WANT_BDB_VER=		5
+USE_BDB=		5
 INVALID_BDB_VER=	40 41 42 43 44 46 47 48 6
 USE_LDCONFIG=		yes
 BUILD_WRKSRC?=		${WRKSRC}/cpp
@@ -62,7 +58,7 @@ BROKEN_sparc64=		Does not compile on ${ARCH}
 MAKE_ENV+=		LP64=yes
 .endif
 
-.if !${PORT_OPTIONS:MTESTS}
+.if !${PORT_OPTIONS:MTEST}
 MAKE_ENV+=		NOTESTS=yes
 .endif
 
@@ -71,16 +67,6 @@ MAKE_ENV+=		LD_LIBRARY_PATH=${WRKSRC}/cpp/lib:$$LD_LIBRARY_PATH
 .endif
 
 .include <bsd.port.pre.mk>
-
-.if defined(PYTHON_REL) && ${PYTHON_REL} >= 3200
-PLIST_SUB+=	PYTHON32=""
-PLIST_SUB+=	PYTHONPRE32="@comment "
-.else
-PLIST_SUB+=	PYTHON32="@comment "
-PLIST_SUB+=	PYTHONPRE32=""
-.endif
-
-PLIST_SUB+=	PYTHON_SUFFIX=${PYTHON_SUFFIX}
 
 .if ${PREFIX} != ${LOCALBASE}
 PYSITEDIR=	${PREFIX}${PYTHON_SITELIBDIR:S|^${LOCALBASE}||}
@@ -135,13 +121,8 @@ post-patch:
 		s|%%PREFIX%%|${PREFIX}|g; \
 		s|%%LOCALBASE%%|${LOCALBASE}|g;' ${WRKSRC}/php/config/Make.rules.php
 
-.if ${PORT_OPTIONS:MTESTS}
-TEST_CMD=		@cd ${BUILD_WRKSRC} && ${PYTHON_CMD} ./allTests.py
-check regression-test test: build
-	${TEST_CMD}
-
-pre-install: regression-test
-.endif
+do-test-TEST-on:
+	@cd ${BUILD_WRKSRC} && ${PYTHON_CMD} ./allTests.py
 
 .if ${SLAVE_PORT} == "no"
 post-install:

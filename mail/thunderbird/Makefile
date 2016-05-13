@@ -2,46 +2,46 @@
 # $FreeBSD$
 
 PORTNAME=	thunderbird
-DISTVERSION=	38.4.0
-PORTREVISION=	1
+DISTVERSION=	45.1.0
 CATEGORIES=	mail news net-im ipv6
 MASTER_SITES=	MOZILLA/${PORTNAME}/releases/${DISTVERSION}/source \
-		MOZILLA/${PORTNAME}/candidates/${DISTVERSION}-candidates/build3/source
+		MOZILLA/${PORTNAME}/candidates/${DISTVERSION}-candidates/build1/source
 DISTFILES=	${PORTNAME}-${DISTVERSION}.source${EXTRACT_SUFX}
 EXTRACT_ONLY=	${PORTNAME}-${DISTVERSION}.source${EXTRACT_SUFX}
 
 MAINTAINER=	gecko@FreeBSD.org
 COMMENT=	Mozilla Thunderbird is standalone mail and news that stands above
 
-BUILD_DEPENDS=	nspr>=4.10.8:${PORTSDIR}/devel/nspr \
-		nss>=3.19.2:${PORTSDIR}/security/nss \
-		libevent2>=2.0.21_2:${PORTSDIR}/devel/libevent2 \
-		soundtouch>=1.8.0:${PORTSDIR}/audio/soundtouch \
-		harfbuzz>=0.9.34:${PORTSDIR}/print/harfbuzz \
-		graphite2>=1.2.4:${PORTSDIR}/graphics/graphite2 \
-		libvorbis>=1.3.5,3:${PORTSDIR}/audio/libvorbis \
-		libvpx>=1.3.0:${PORTSDIR}/multimedia/libvpx \
-		sqlite3>=3.8.9:${PORTSDIR}/databases/sqlite3 \
-		${PYTHON_PKGNAMEPREFIX}sqlite3>0:${PORTSDIR}/databases/py-sqlite3 \
-		v4l_compat>0:${PORTSDIR}/multimedia/v4l_compat \
-		autoconf-2.13:${PORTSDIR}/devel/autoconf213 \
-		zip:${PORTSDIR}/archivers/zip \
-		unzip:${PORTSDIR}/archivers/unzip
-#		opus>=1.1:${PORTSDIR}/audio/opus \
+BUILD_DEPENDS=	nspr>=4.12:devel/nspr \
+		nss>=3.21.1:security/nss \
+		libevent2>=2.0.21_2:devel/libevent2 \
+		soundtouch>=1.9.0:audio/soundtouch \
+		harfbuzz>=1.1.0:print/harfbuzz \
+		graphite2>=1.3.7:graphics/graphite2 \
+		png>=1.6.19:graphics/png \
+		libvorbis>=1.3.5,3:audio/libvorbis \
+		libvpx>=1.5.0:multimedia/libvpx \
+		sqlite3>=3.9.1:databases/sqlite3 \
+		${PYTHON_PKGNAMEPREFIX}sqlite3>0:databases/py-sqlite3 \
+		v4l_compat>0:multimedia/v4l_compat \
+		autoconf-2.13:devel/autoconf213 \
+		yasm:devel/yasm \
+		zip:archivers/zip \
+		unzip:archivers/unzip
 
-LIB_DEPENDS=	libv4l2.so:${PORTSDIR}/multimedia/libv4l
+LIB_DEPENDS=	libv4l2.so:multimedia/libv4l
 
-EM_VERSION=	1.8.2
-L_VERSION=	4.0.4
+EM_VERSION=	1.9.2
+L_VERSION=	4.7.1
 
 SSP_UNSAFE=	yes
 USE_GECKO=	gecko
-USE_MOZILLA=	-opus
+USE_MOZILLA=	# empty
 
 USE_QT5=	# empty
 QT_NONSTANDARD=	yes
 USE_GL=		gl
-USES=		tar:bzip2
+USES=		tar:xz
 
 MOZ_OPTIONS=	--program-transform-name='s/thunderbird/${MOZILLA}/' \
 	--enable-single-profile --disable-profilesharing \
@@ -56,49 +56,32 @@ PORTNAME_ICON_SRC=	${PREFIX}/lib/${MOZILLA}/chrome/icons/default/default48.png
 SYSTEM_PREFS=	${FAKEDIR}/lib/${PORTNAME}/defaults/pref/${PORTNAME}.js
 MOZ_PIS_SCRIPTS=moz_pis_S50cleanhome
 
-OPTIONS_DEFINE=	ENIGMAIL LIGHTNING
-OPTIONS_DEFAULT=CANBERRA ENIGMAIL LIGHTNING
+OPTIONS_EXCLUDE=GSTREAMER LOGGING
+OPTIONS_DEFINE=	ENIGMAIL LIGHTNING RUST
+OPTIONS_SINGLE=	TOOLKIT
+OPTIONS_SINGLE_TOOLKIT=	GTK2 GTK3
+OPTIONS_DEFAULT=BUNDLED_CAIRO CANBERRA ENIGMAIL GTK2 LIGHTNING
 
 .include "${.CURDIR}/../../www/firefox/Makefile.options"
-
-OPTIONS_DEFAULT:=${OPTIONS_DEFAULT:S/GSTREAMER//}
-
 .include <bsd.port.pre.mk>
 
-WRKSRC=		${WRKDIR}/comm-esr38
+WRKSRC:=	${WRKDIR}/${PORTNAME}-${DISTVERSION}
 MOZSRC:=	${WRKSRC}/mozilla
 
 XPI_LIBDIR=	${PREFIX}/lib/xpi
 
-.if ${PORTVERSION:R:R} < 33
-CONFIGURE_TARGET:=${CONFIGURE_TARGET:S/portbld/unknown/}
-MOZ_OPTIONS:=	${MOZ_OPTIONS:S/${CONFIGURE_TARGET}//}
-.endif
-
-.if ${PORT_OPTIONS:MALSA}
-RUN_DEPENDS+=	alsa-lib>=1.0.27.2_1:${PORTSDIR}/audio/alsa-lib
-.endif
-
-.if ! ${PORT_OPTIONS:MBUNDLED_CAIRO}
-BUILD_DEPENDS+=	cairo>=1.12.16_1,2:${PORTSDIR}/graphics/cairo
-.endif
-
-.if ${PORT_OPTIONS:MGSTREAMER}
-RUN_DEPENDS+=	gstreamer1-libav>=1.2.4_1:${PORTSDIR}/multimedia/gstreamer1-libav
-.endif
-
 .if ${PORT_OPTIONS:MENIGMAIL}
 MASTER_SITES+=	https://www.enigmail.net/download/source/:enigmail
 DISTFILES+=	${EM_DISTFILE}:enigmail
-RUN_DEPENDS+=	gpg:${PORTSDIR}/security/gnupg
+RUN_DEPENDS+=	gpg2:security/gnupg
 EM_DISTNAME=	enigmail-${EM_VERSION}
 EM_DISTFILE=	${EM_DISTNAME}.tar.gz
-EM_XPI_FILE=	${WRKSRC}/mailnews/extensions/enigmail/build/${EM_DISTNAME}-${OPSYS:tl}-${ARCH:S/amd64/x86_64/:S/i386/x86/:S/powerpc/ppc/}-gcc3.xpi
+EM_XPI_FILE=	${WRKSRC}/mailnews/extensions/enigmail/build/${EM_DISTNAME}.xpi
 EM_ORIG_ID=	{847b3a00-7ab1-11d4-8f02-006008948af5}
 EM_ID=		${PORTNAME}@mozilla-enigmail.org
 EM_ID_RFILES=	${XPI_LIBDIR}/${EM_ID}/install.rdf \
 		${XPI_LIBDIR}/${EM_ID}/components/enigmail.js \
-		${XPI_LIBDIR}/${EM_ID}/modules/enigmailCommon.jsm
+		${XPI_LIBDIR}/${EM_ID}/modules/app.jsm
 .endif
 
 .if ${PORT_OPTIONS:MLIGHTNING}
@@ -121,8 +104,6 @@ post-extract:
 .endif
 
 post-patch:
-	@${REINPLACE_CMD} -e '/MOZPNG/s/=[0-9]*/=10511/' \
-		${MOZSRC}/configure.in ${WRKSRC}/configure.in
 	@${REINPLACE_CMD} -e 's|%%LOCALBASE%%|${LOCALBASE}|g' \
 		${WRKSRC}/mail/app/nsMailApp.cpp
 .if ${PORT_OPTIONS:MENIGMAIL}
@@ -149,7 +130,7 @@ post-configure:
 		${SETENV} ${CONFIGURE_ENV} ${MAKE_ENV} ./configure
 
 post-build:
-	${DO_MAKE_BUILD:S/${MAKEFILE}/Makefile/} all xpi \
+	${DO_MAKE_BUILD:N-j*:S,${MAKEFILE},Makefile,} all xpi \
 		-C ${WRKSRC}/mailnews/extensions/enigmail
 .endif
 

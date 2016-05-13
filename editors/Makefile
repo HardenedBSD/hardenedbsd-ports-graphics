@@ -13,7 +13,6 @@
     SUBDIR += beav
     SUBDIR += biew
     SUBDIR += bitedit
-    SUBDIR += bless
     SUBDIR += boiling-egg
     SUBDIR += bvi
     SUBDIR += calligra
@@ -53,6 +52,7 @@
     SUBDIR += emacs-devel
     SUBDIR += emacs-nox11
     SUBDIR += fb
+    SUBDIR += fileobj
     SUBDIR += flim
     SUBDIR += fpc-ide
     SUBDIR += fte
@@ -192,6 +192,8 @@
     SUBDIR += libreoffice-xh
     SUBDIR += libreoffice-zu
     SUBDIR += libreoffice4
+    SUBDIR += linux-sublime
+    SUBDIR += linux-sublime3
     SUBDIR += madedit
     SUBDIR += manedit
     SUBDIR += mg
@@ -229,8 +231,6 @@
     SUBDIR += ssam
     SUBDIR += ssed
     SUBDIR += sted
-    SUBDIR += sublime
-    SUBDIR += sublime3
     SUBDIR += tamago
     SUBDIR += tea
     SUBDIR += teco
@@ -241,6 +241,7 @@
     SUBDIR += texstudio
     SUBDIR += textroom
     SUBDIR += texworks
+    SUBDIR += the
     SUBDIR += thoteditor
     SUBDIR += tpad
     SUBDIR += tree-widget
@@ -254,6 +255,7 @@
     SUBDIR += vim
     SUBDIR += vim-lite
     SUBDIR += winefish
+    SUBDIR += with-editor
     SUBDIR += wordgrinder
     SUBDIR += xcoral
     SUBDIR += xed

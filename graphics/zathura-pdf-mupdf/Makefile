@@ -2,29 +2,27 @@
 # $FreeBSD$
 
 PORTNAME=	zathura-pdf-mupdf
-PORTVERSION=	0.2.8
+PORTVERSION=	0.3.0
 CATEGORIES=	graphics
 MASTER_SITES=	http://pwmt.org/projects/zathura-pdf-mupdf/download/
 
 MAINTAINER=	udvzsolt@gmail.com
 COMMENT=	MuPDF render PDF plugin for Zathura PDF viewer
 
-LICENSE=	zlib
-LICENSE_NAME=	zlib license
+LICENSE=	ZLIB
 LICENSE_FILE=	${WRKSRC}/LICENSE
-LICENSE_PERMS=	dist-mirror pkg-mirror auto-accept
 
-BUILD_DEPENDS=	zathura:${PORTSDIR}/graphics/zathura \
-		mupdf>=1.8,1:${PORTSDIR}/graphics/mupdf
-RUN_DEPENDS=	zathura:${PORTSDIR}/graphics/zathura
-LIB_DEPENDS=	libjbig2dec.so:${PORTSDIR}/graphics/jbig2dec \
-		libopenjp2.so:${PORTSDIR}/graphics/openjpeg
+BUILD_DEPENDS=	zathura:graphics/zathura \
+		mupdf>=1.8,1:graphics/mupdf
+RUN_DEPENDS=	zathura:graphics/zathura
+LIB_DEPENDS=	libjbig2dec.so:graphics/jbig2dec \
+		libopenjp2.so:graphics/openjpeg
 
 PLIST_FILES=	lib/zathura/pdf.so share/applications/zathura-pdf-mupdf.desktop
 
 MAKE_ARGS=	MUPDF_LIB=-lmupdf_pic OPENSSL_INC=-I${OPENSSLINC} \
 		OPENSSL_LIB="-L${OPENSSLLIB} -lcrypto"
-USES=		desktop-file-utils gmake pkgconfig
+USES=		compiler:c11 desktop-file-utils gmake pkgconfig
 USE_GNOME=	glib20 gtk30
 USE_OPENSSL=	yes
 

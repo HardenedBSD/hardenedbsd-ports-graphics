@@ -13,9 +13,9 @@ COMMENT=	Framework for controlling access to system-wide components
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-LIB_DEPENDS=	libexpat.so:${PORTSDIR}/textproc/expat2 \
-		libmozjs-17.0.so:${PORTSDIR}/lang/spidermonkey170
-RUN_DEPENDS=	dbus-launch:${PORTSDIR}/devel/dbus
+LIB_DEPENDS=	libexpat.so:textproc/expat2 \
+		libmozjs-17.0.so:lang/spidermonkey170
+RUN_DEPENDS=	dbus-launch:devel/dbus
 
 USERS=		polkitd
 GROUPS=		polkitd
@@ -44,11 +44,17 @@ LDFLAGS+=	-L${LOCALBASE}/lib
 INSTALL_TARGET=	install-strip
 
 OPTIONS_DEFINE=	MANPAGES
-MANPAGES_BUILD_DEPENDS=	docbook-sgml>=4.5:${PORTSDIR}/textproc/docbook-sgml \
-		docbook-xsl>=1.76:${PORTSDIR}/textproc/docbook-xsl
+MANPAGES_BUILD_DEPENDS=	docbook-sgml>=4.5:textproc/docbook-sgml \
+		docbook-xsl>=1.76:textproc/docbook-xsl
 MANPAGES_USE=	gnome=libxslt:build
 MANPAGES_CONFIGURE_ENABLE=	man-pages
 OPTIONS_SUB=	yes
+
+.include <bsd.port.pre.mk>
+
+.if (${ARCH} == "armv6" || ${ARCH} == "armv6hf")
+USE_GCC=       yes
+.endif
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|/usr/bin/|${PREFIX}/bin/|g' \
@@ -66,4 +72,4 @@ post-install:
 	${MKDIR} ${STAGEDIR}/var/lib/polkit-1/localauthority/${i}
 .endfor
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

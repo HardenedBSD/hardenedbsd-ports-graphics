@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	Products.LDAPUserFolder
-PORTVERSION=	2.26
-PORTREVISION=	1
+PORTVERSION=	2.27
 CATEGORIES=	devel python zope
 MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
@@ -14,15 +13,16 @@ COMMENT=	LDAP-enabled Zope 2 user folder
 
 LICENSE=	ZPL21
 
-BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}setuptools-git>=0.4.2:${PORTSDIR}/devel/py-setuptools-git
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}ldap>=2.0.6:${PORTSDIR}/net/py-ldap
+BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}setuptools-git>=0.4.2:devel/py-setuptools-git
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}ldap>=2.0.6:net/py-ldap
 
 OPTIONS_DEFINE=		POSIXGROUP_PATCH
 POSIXGROUP_PATCH_DESC=	Use posixGroup for group membership
 OPTIONS_DEFAULT=	POSIXGROUP_PATCH
 
-USE_PYTHON=	distutils
-USES=		python:2
+NO_ARCH=	yes
+USES=		python:2.7
+USE_PYTHON=	autoplist distutils
 
 .include <bsd.port.options.mk>
 

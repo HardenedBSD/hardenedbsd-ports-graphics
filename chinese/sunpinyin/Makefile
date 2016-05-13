@@ -3,6 +3,7 @@
 
 PORTNAME=	sunpinyin
 DISTVERSION=	2.0.4rc3
+PORTREVISION=	1
 CATEGORIES=	chinese devel
 MASTER_SITES=	GH:1 SF/open-gram:2
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}:1 \
@@ -14,7 +15,7 @@ COMMENT=	Statistical language model based input method engine
 LICENSE=	LGPL21 CDDL
 LICENSE_COMB=	dual
 
-LIB_DEPENDS=	libsqlite3.so:${PORTSDIR}/databases/sqlite3
+LIB_DEPENDS=	libsqlite3.so:databases/sqlite3
 
 USE_GITHUB=	yes
 GH_TAGNAME=	a8bd811

@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	gb
-PORTVERSION=	0.3.1
+PORTVERSION=	0.4.0
 DISTVERSIONPREFIX=	v
 CATEGORIES=	devel
 
@@ -10,8 +10,9 @@ COMMENT=	Project based build tool for Go
 
 LICENSE=	MIT
 
-BUILD_DEPENDS=	${LOCALBASE}/bin/go:${PORTSDIR}/lang/go
+BUILD_DEPENDS=	${LOCALBASE}/bin/go:lang/go
 
+USES=		go
 USE_GITHUB=	yes
 GH_ACCOUNT=	constabulary
 
@@ -28,6 +29,4 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	( cd ${WRKSRC} && ${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}/ ; )
 
-.include <bsd.port.pre.mk>
-.include "${PORTSDIR}/lang/go/files/bsd.go.mk"
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

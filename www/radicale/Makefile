@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=		radicale
-PORTVERSION=		1.0.1
+PORTVERSION=		1.1.1
 PORTREVISION=		0
 CATEGORIES=		www python
 MASTER_SITES=		CHEESESHOP
@@ -35,11 +35,11 @@ USES+=		python
 .endif
 
 .if ${PORT_OPTIONS:MHTTP}
-RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}requests1>=0:${PORTSDIR}/www/py-requests1
+RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}requests1>=0:www/py-requests1
 .endif
 
 .if ${PORT_OPTIONS:MLDAP}
-RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}ldap>=0:${PORTSDIR}/net/py-ldap
+RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}ldap>=0:net/py-ldap
 .endif
 
 post-patch:

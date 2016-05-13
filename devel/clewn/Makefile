@@ -5,16 +5,18 @@ PORTNAME=	clewn
 PORTVERSION=	1.14
 PORTREVISION=	1
 CATEGORIES=	devel editors
-MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTNAME}-${PORTVERSION}/
+MASTER_SITES=	SF/${PORTNAME}/OldFiles/${PORTNAME}-${PORTVERSION}/
 
 MAINTAINER=	giacomomariani@yahoo.it
 COMMENT=	Clewn provides Gdb support within Vim
 
-BROKEN=		Does not fetch
-RUN_DEPENDS=	vim:${PORTSDIR}/editors/vim
+RUN_DEPENDS=	vim:editors/vim
 
-USES=		gmake readline
+USES=		gmake ncurses readline
 GNU_CONFIGURE=	yes
 CONFIGURE_ENV=	vimdir=${PREFIX}/share/vim/vimfiles
+
+post-patch:
+	${REINPLACE_CMD} -e 's|-lcurses|-lncurses|' ${WRKSRC}/configure
 
 .include <bsd.port.mk>

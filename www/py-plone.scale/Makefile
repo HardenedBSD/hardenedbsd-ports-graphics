@@ -1,8 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	plone.scale
-PORTVERSION=	1.3.2
-PORTREVISION=	2
+PORTVERSION=	1.4.1
 CATEGORIES=	www python zope
 MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
@@ -13,12 +12,13 @@ COMMENT=	Image scaling
 
 LICENSE=	BSD3CLAUSE
 
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}zope.annotation>=0:${PORTSDIR}/devel/py-zope.annotation \
-		${PYTHON_PKGNAMEPREFIX}zope.component>=0:${PORTSDIR}/devel/py-zope.component \
-		${PYTHON_PKGNAMEPREFIX}zope.interface>=0:${PORTSDIR}/devel/py-zope.interface \
-		${PYTHON_PKGNAMEPREFIX}Persistence>=0:${PORTSDIR}/devel/py-Persistence
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}zope.annotation>=0:devel/py-zope.annotation \
+		${PYTHON_PKGNAMEPREFIX}zope.component>=0:devel/py-zope.component \
+		${PYTHON_PKGNAMEPREFIX}zope.interface>=0:devel/py-zope.interface \
+		${PYTHON_PKGNAMEPREFIX}Persistence>=0:devel/py-Persistence
 
-USES=		python:2 zip
-USE_PYTHON=	distutils autoplist
+NO_ARCH=	yes
+USES=		python:2.7
+USE_PYTHON=	autoplist distutils
 
 .include <bsd.port.mk>

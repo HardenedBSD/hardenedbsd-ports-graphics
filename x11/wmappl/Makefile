@@ -10,14 +10,15 @@ MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTNAME}-${PORTVERSION}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Application launcher dockapp similar to wmbutton
 
-LICENSE=	GPLv2 # (or later)
+LICENSE=	GPLv2+
+LICENSE_FILE=	${WRKSRC}/COPYING
 
 USE_XORG=	ice sm x11 xext xpm
 GNU_CONFIGURE=	yes
 
 OPTIONS_DEFINE=		DOCS IMLIB2
 
-IMLIB2_LIB_DEPENDS= 	libImlib2.so:${PORTSDIR}/graphics/imlib2
+IMLIB2_LIB_DEPENDS= 	libImlib2.so:graphics/imlib2
 IMLIB2_CONFIGURE_ENABLE=Imlib2
 
 post-extract:
@@ -30,8 +31,8 @@ post-patch:
 		 s|/usr/share/pixmaps/mini|${LOCALBASE}/share/pixmaps|' \
 		${WRKSRC}/src/wmappl.c
 
-post-install:
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
-	(cd ${WRKSRC} && ${INSTALL_DATA} README ${STAGEDIR}${DOCSDIR})
+	${INSTALL_DATA} ${WRKSRC}/README ${STAGEDIR}${DOCSDIR}
 
 .include <bsd.port.mk>

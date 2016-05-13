@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	npm
-PORTVERSION=	2.14.7
-PORTREVISION=	2
+PORTVERSION=	3.8.8
 CATEGORIES=	www
 MASTER_SITES=	LOCAL/sunpoet
 
@@ -12,13 +11,10 @@ COMMENT=	Node package manager
 
 LICENSE=	MIT
 
-RUN_DEPENDS=	gmake:${PORTSDIR}/devel/gmake
+RUN_DEPENDS=	gmake:devel/gmake \
+		node>=0.8.0:www/node
 
-OPTIONS_SINGLE=	BACKEND
-OPTIONS_SINGLE_BACKEND=	NODE NODE_DEVEL
-OPTIONS_DEFAULT=NODE
-NODE_DESC=	Use www/node as backend
-NODE_DEVEL_DESC=Use www/node-devel as backend
+CONFLICTS_INSTALL=	npm2-[0-9]*
 
 MAKE_ARGS=	npm_config_prefix=${STAGEDIR}${PREFIX}
 MANPREFIX=	${PREFIX}/lib/node_modules/npm
@@ -35,11 +31,7 @@ SHEBANG_FILES=	lib/utils/completion.sh \
 		node_modules/request/node_modules/node-uuid/benchmark/bench.sh \
 		scripts/clean-old.sh \
 		scripts/release.sh \
-		scripts/relocate.sh \
-		test/update-test.sh
-
-NODE_DEVEL_RUN_DEPENDS=	node-devel>=0.8.0:${PORTSDIR}/www/node-devel
-NODE_RUN_DEPENDS=	node>=0.8.0:${PORTSDIR}/www/node
+		scripts/relocate.sh
 
 .include <bsd.port.pre.mk>
 

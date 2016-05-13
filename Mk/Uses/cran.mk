@@ -28,8 +28,8 @@ MASTER_SITE_CRAN_ARCHIVE+=	${MASTER_SITE_CRAN:S,$,Archive/${PORTNAME}/,}
 
 MASTER_SITES?=	${MASTER_SITE_CRAN} ${MASTER_SITE_CRAN_ARCHIVE}
 
-BUILD_DEPENDS+=	${LOCALBASE}/bin/R:${PORTSDIR}/math/R
-RUN_DEPENDS+=	${LOCALBASE}/bin/R:${PORTSDIR}/math/R
+BUILD_DEPENDS+=	${LOCALBASE}/bin/R:math/R
+RUN_DEPENDS+=	${LOCALBASE}/bin/R:math/R
 
 PKGNAMEPREFIX?=	R-cran-
 
@@ -45,7 +45,7 @@ R_COMMAND=	${LOCALBASE}/bin/R
 R_POSTCMD_CHECK_OPTIONS?=	--timings
 
 .if !exists(${LOCALBASE}/bin/pdflatex)
-R_POSTCMD_CHECK_OPTIONS+=	--no-manual --no-rebuild-vignettes
+R_POSTCMD_CHECK_OPTIONS+=	--no-manual --no-build-vignettes
 .endif
 
 do-test:

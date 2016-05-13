@@ -8,14 +8,13 @@ PORTEPOCH=	1
 CATEGORIES=	audio
 MASTER_SITES=	http://mark.foster.cc/pub/freebsd/ports/distfiles/ \
 		http://BSDforge.com/projects/source/audio/cd2mp3/ \
-		http://bsd6.BSDforge.com/projects/source/audio/cd2mp3/ \
 		LOCAL/feld
 
 MAINTAINER=	portmaster@BSDforge.com
 COMMENT=	Easy to use CD Ripping and MP3 Encoding tool
 
-RUN_DEPENDS=	lame:${PORTSDIR}/audio/lame \
-		dagrab:${PORTSDIR}/audio/dagrab
+RUN_DEPENDS=	lame:audio/lame \
+		dagrab:audio/dagrab
 
 USES=		perl5 shebangfix
 USE_PERL5=	run

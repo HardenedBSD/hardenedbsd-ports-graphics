@@ -3,14 +3,14 @@
 
 PORTNAME=	lightsquid
 PORTVERSION=	1.8
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	www
 MASTER_SITES=	SF
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Light and fast web based squid proxy traffic analyser
 
-LICENSE=	GPLv2 # or later
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/doc/gnugpl.txt
 
 USES=		perl5 shebangfix tar:tgz
@@ -33,7 +33,7 @@ SUB_FILES=	pkg-message
 OPTIONS_DEFINE=		GD DOCS
 OPTIONS_DEFAULT=	GD
 
-GD_RUN_DEPENDS=	p5-GD>=0:${PORTSDIR}/graphics/p5-GD
+GD_RUN_DEPENDS=	p5-GD>=0:graphics/p5-GD
 DOCS_SUB_LIST=	NOTEWORK="Read ${DOCSDIR}/readme.txt."
 DOCS_SUB_LIST_OFF=NOTEWORK=
 

@@ -3,8 +3,8 @@
 
 PORTNAME=	cc65
 PORTVERSION=	2.13.3
-PORTREVISION=	1
 DISTVERSIONPREFIX=	sources-
+PORTREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://bj.spline.de/cc65/ \
 		http://cc65.oldos.net/ \
@@ -12,6 +12,8 @@ MASTER_SITES=	http://bj.spline.de/cc65/ \
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Cross-compiler for 6502-based systems, includes 65816 assembler
+
+LICENSE=	ZLIB
 
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 
@@ -26,8 +28,6 @@ SHEBANG_FILES=	src/ca65html/ca65html \
 SUB_FILES=	pkg-message
 
 OPTIONS_DEFINE=	DOCS EXAMPLES
-
-.include <bsd.port.options.mk>
 
 post-patch:
 	@${FIND} ${WRKSRC} -name "gcc.mak" | ${XARGS} ${REINPLACE_CMD} -e \
@@ -48,12 +48,14 @@ post-patch:
 pre-install:
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/cc65/tgi
 
-post-install:
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 .for i in BUGS CREDITS compile.txt internal.txt newvers.txt readme.1st
 	${INSTALL_DATA} ${WRKSRC}/doc/${i} ${STAGEDIR}${DOCSDIR}
 .endfor
 	${INSTALL_DATA} ${WRKSRC}/src/ca65/macpack/*.mac ${STAGEDIR}${DOCSDIR}
+
+post-install-EXAMPLES-on:
 	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
 	(cd ${WRKSRC}/samples && ${COPYTREE_SHARE} . ${STAGEDIR}${EXAMPLESDIR})
 

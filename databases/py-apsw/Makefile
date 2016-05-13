@@ -2,24 +2,24 @@
 # $FreeBSD$
 
 PORTNAME=	apsw
-PORTVERSION=	3.8.0.2
+PORTVERSION=	3.11.1
 DISTVERSIONSUFFIX=	-r1
-PORTREVISION=	2
 CATEGORIES=	databases python
-MASTER_SITES=	GOOGLE_CODE
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
-MAINTAINER=	rnejdl@ringofsaturn.com
-COMMENT=	APSW stands for Another Python SQLite Wrapper
+MAINTAINER=	ports@FreeBSD.org
+COMMENT=	Another Python SQLite Wrapper
 
-LIB_DEPENDS=	libsqlite3.so:${PORTSDIR}/databases/sqlite3
+LICENSE=	ZLIB
 
-PYDISTUTILS_PKGVERSION=	${PORTVERSION}_r1
-PYDISTUTILS_EGGINFO=	apsw-${PORTVERSION}.post1-py${PYTHON_VER}.egg-info
-USES=		python zip
-USE_PYTHON=	distutils
+USE_GITHUB=	yes
+GH_ACCOUNT=	rogerbinns
 
-CFLAGS+=	-I${LOCALBASE}/include
-LDFLAGS+=	-L${LOCALBASE}/lib
+USES=		localbase python sqlite:3
+USE_PYTHON=	distutils autoplist
+PYDISTUTILS_EGGINFO=	apsw-${PORTVERSION|.post1-py${PYTHON_VER}.egg-info
+
+post-install:
+	@${STRIP_CMD} ${STAGEDIR}${PYTHONPREFIX_SITELIBDIR}/apsw.so
 
 .include <bsd.port.mk>

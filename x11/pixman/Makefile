@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	pixman
-PORTVERSION=	0.32.8
+PORTVERSION=	0.34.0
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
@@ -23,4 +23,10 @@ INSTALL_TARGET=	install-strip
 # where the build of the tests crashes ld; see PR bin/202284.
 MAKE_ARGS=      SUBDIRS=pixman
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${ARCH} == "powerpc64" || ${ARCH} == "powerpc"
+CONFIGURE_ARGS+=	--disable-vmx
+.endif
+
+.include <bsd.port.post.mk>

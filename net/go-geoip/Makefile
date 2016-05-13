@@ -11,19 +11,19 @@ COMMENT=	Go library to wrap the libgeoip C library
 
 LICENSE=	MIT
 
-LIB_DEPENDS=	libGeoIP.so:${PORTSDIR}/net/GeoIP
+LIB_DEPENDS=	libGeoIP.so:net/GeoIP
 
-USES=		compiler
+USES=		compiler go
 USE_GITHUB=	yes
 GH_ACCOUNT=	abh
-GH_PROJECT=	${PORTNAME}
 GH_TAGNAME=	da13074
 
-GO_PKGNAME=	github.com/${GH_ACCOUNT}/${GH_PROJECT}
+GO_PKGNAME=	github.com/${GH_ACCOUNT}/${PORTNAME}
 
 .include <bsd.port.pre.mk>
-.include "${PORTSDIR}/lang/go/files/bsd.go.mk"
+
 .if ${COMPILER_TYPE} == clang && ${CC} == cc
 CC=	clang
 .endif
+
 .include <bsd.port.post.mk>

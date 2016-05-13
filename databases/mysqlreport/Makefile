@@ -12,14 +12,14 @@ COMMENT=	Mysqlreport makes a friendly report of important MySQL status values
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-RUN_DEPENDS=	p5-DBD-mysql>=0:${PORTSDIR}/databases/p5-DBD-mysql \
-		p5-DBI>=0:${PORTSDIR}/databases/p5-DBI \
-		p5-Term-ReadKey>=0:${PORTSDIR}/devel/p5-Term-ReadKey
+RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql \
+		p5-DBI>=0:databases/p5-DBI \
+		p5-Term-ReadKey>=0:devel/p5-Term-ReadKey
 
 NO_ARCH=	yes
 NO_BUILD=	yes
 USES=		perl5 shebangfix
-WRKSRC=		${WRKDIR}/${GH_PROJECT}-${GH_TAGNAME_EXTRACT}/${PORTNAME}
+WRKSRC_SUBDIR=	${PORTNAME}
 
 PLIST_FILES=	bin/mysqlreport
 PORTDOCS=	COPYING mysqlreportguide.html mysqlreportdoc.html

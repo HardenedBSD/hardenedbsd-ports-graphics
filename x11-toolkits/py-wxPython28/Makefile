@@ -3,19 +3,19 @@
 
 PORTNAME=	wxPython
 PORTVERSION=	2.8.12.1
-PORTREVISION?=	7
+DISTVERSIONPREFIX=	src-
+PORTREVISION?=	8
 CATEGORIES=	x11-toolkits python
 MASTER_SITES=	SF/wxpython/wxPython/${PORTVERSION}
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 PKGNAMESUFFIX=	28
-DISTNAME=	${PORTNAME}-src-${PORTVERSION}
 
 MAINTAINER=	python@FreeBSD.org
 COMMENT=	Python bindings for the wxWidgets/GTK GUI toolkit
 
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}opengl>=0:${PORTSDIR}/graphics/py-opengl
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}PyOpenGL>=0:graphics/py-PyOpenGL
 
-WRKSRC=		${WRKDIR}/${DISTNAME}/wxPython
+WRKSRC_SUBDIR=	wxPython
 
 DIST_SUBDIR=	python
 USE_PYTHON=	distutils
@@ -75,8 +75,8 @@ PYDISTUTILS_BUILDARGS+=	\
 			INSTALL_MULTIVERSION=1
 .else
 ## These are shared
-RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}wxPython28-common>0:${PORTSDIR}/x11-toolkits/py-wxPython28-common \
-		${PYTHON_SITELIBDIR}/wxversion.py:${PORTSDIR}/x11-toolkits/py-wxPython-common
+RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}wxPython28-common>0:x11-toolkits/py-wxPython28-common \
+		${PYTHON_SITELIBDIR}/wxversion.py:x11-toolkits/py-wxPython-common
 
 PYDISTUTILS_BUILDARGS+=	\
 			NO_HEADERS=1 \

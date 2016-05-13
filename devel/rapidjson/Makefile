@@ -14,9 +14,10 @@ LICENSE_NAME=	RapidJSON
 LICENSE_FILE=	${WRKSRC}/license.txt
 LICENSE_PERMS=	${_LICENSE_PERMS_DEFAULT}
 
+BROKEN_powerpc64=	Does not build
+
 USE_GITHUB=	yes
 GH_ACCOUNT=	miloyip
-GH_PROJECT=	rapidjson
 
 USES=		cmake gmake
 

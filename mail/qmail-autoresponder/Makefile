@@ -5,14 +5,12 @@ PORTNAME=	qmail-autoresponder
 PORTVERSION=	0.97
 PORTREVISION=	2
 CATEGORIES=	mail
-MASTER_SITES=	http://untroubled.org/${PORTNAME}/
+MASTER_SITES=	http://untroubled.org/${PORTNAME}/archive/
 
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Rate-limited autoresponder for qmail
 
-BROKEN=		unfetchable
-
-LIB_DEPENDS=	libbg-sysdeps.so:${PORTSDIR}/devel/bglibs
+LIB_DEPENDS=	libbg-sysdeps.so:devel/bglibs
 
 USE_MYSQL=	yes
 

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	ruby-prof
-PORTVERSION=	0.15.8
+PORTVERSION=	0.15.9
 CATEGORIES=	devel rubygems
 MASTER_SITES=	RG
 
@@ -13,8 +13,7 @@ LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 USE_RUBY=	yes
-USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=	yes
+USES=		gem
 
 PLIST_FILES=	bin/ruby-prof bin/ruby-prof-check-trace
 

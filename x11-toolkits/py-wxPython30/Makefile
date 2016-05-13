@@ -2,18 +2,18 @@
 
 PORTNAME=	wxPython
 PORTVERSION=	3.0.2.0
+DISTVERSIONPREFIX=	src-
 CATEGORIES=	x11-toolkits python
 MASTER_SITES=	SF/wxpython/wxPython/${PORTVERSION}
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 PKGNAMESUFFIX=	30
-DISTNAME=	${PORTNAME}-src-${PORTVERSION}
 
 MAINTAINER=	python@FreeBSD.org
 COMMENT=	GUI toolkit for the Python programming language
 
 DIST_SUBDIR=	python
 
-WRKSRC=		${WRKDIR}/${DISTNAME}/wxPython
+WRKSRC_SUBDIR=	wxPython
 
 USES=		compiler:c++11-lib python tar:bzip2
 
@@ -37,7 +37,7 @@ do-install:
 WXPORT=		gtk2
 WX_PYTHON_DIR=	wx-${WX_VERSION}-${WXPORT}
 
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}wxPython-common>0:${PORTSDIR}/x11-toolkits/py-wxPython-common
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}wxPython-common>0:x11-toolkits/py-wxPython-common
 
 USES+=		gettext pkgconfig
 USE_WX=		3.0

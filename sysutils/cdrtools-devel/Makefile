@@ -18,7 +18,7 @@
 ###########################################################################
 
 PORTNAME=	cdrtools
-PORTVERSION=	3.01a24
+PORTVERSION=	3.02a04
 PORTEPOCH=	1
 CATEGORIES=	sysutils audio
 MASTER_SITES=	SF/${PORTNAME}/alpha
@@ -65,13 +65,13 @@ RSCSI_DESC=	Build rscsi suid root remote SCSI access daemon
 
 .if ${PORT_OPTIONS:MCDDA2MP3}
 PLIST_SUB+=	CDDA2MP3=""
-RUN_DEPENDS+=	lame:${PORTSDIR}/audio/lame
+RUN_DEPENDS+=	lame:audio/lame
 .else
 PLIST_SUB+=	CDDA2MP3="@comment "
 .endif
 .if ${PORT_OPTIONS:MCDDA2OGG}
 PLIST_SUB+=	CDDA2OGG=""
-RUN_DEPENDS+=	oggenc:${PORTSDIR}/audio/vorbis-tools
+RUN_DEPENDS+=	oggenc:audio/vorbis-tools
 .else
 PLIST_SUB+=	CDDA2OGG="@comment "
 .endif
@@ -86,9 +86,13 @@ PKGNAMESUFFIX?=	-devel
 
 MAKE_ENV=	CCOM=cc GMAKE_NOWARN=true INS_BASE=${LOCALBASE} \
 		INS_RBASE=${LOCALBASE}
-CDRTLSTARGET=	${ARCH:S/powerpc64/powerpc/}-freebsd-cc
+CDRTLSTARGET=	${ARCH}-${OPSYS:tl}-cc
+CDRTLSXARCH!=	${UNAME} -m
 
-.if exists(/usr/include/iconv.h) || exists(${LOCALBASE}/lib/libiconv.a) || \
+.if exists(/usr/include/iconv.h)
+USES+=		iconv
+.endif
+.if exists(${LOCALBASE}/lib/libiconv.a) || \
 	exists(${LOCALBASE}/lib/libintl.a) || ${PORT_OPTIONS:MNLS}
 MAKE_ENV+=	DEFOSINCDIRS=${LOCALBASE}/include LDPATH=-L${LOCALBASE}/lib
 USES+=		gettext iconv
@@ -100,9 +104,9 @@ post-extract:
 	@${CP} -fp ${PORTSDIR}/Templates/${i} ${WRKSRC}/${j}
 .endfor
 .endfor
-.if ${CDRTLSTARGET} != "i386-freebsd-cc"
+.if ${CDRTLSXARCH} != "i386"
 	@${LN} -sf ${WRKSRC}/RULES/i386-freebsd-cc.rul \
-		${WRKSRC}/RULES/${CDRTLSTARGET}.rul
+		${WRKSRC}/RULES/${CDRTLSXARCH}-${OPSYS:tl}-cc.rul
 .endif
 
 post-patch:

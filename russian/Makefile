@@ -3,7 +3,6 @@
 
     COMMENT = Russian support
 
-    SUBDIR += MT
     SUBDIR += artwiz-ru
     SUBDIR += aspell
     SUBDIR += bugzilla44
@@ -24,7 +23,6 @@
     SUBDIR += koi8r-ps
     SUBDIR += libreoffice
     SUBDIR += mueller-dic
-    SUBDIR += muttprint
     SUBDIR += mythes
     SUBDIR += napster
     SUBDIR += p5-Convert-Cyrillic
@@ -35,7 +33,6 @@
     SUBDIR += p5-cyrillic
     SUBDIR += py-pytils
     SUBDIR += rubygem-russian
-    SUBDIR += rubygem-rutils
     SUBDIR += rux
     SUBDIR += stardict-bars
     SUBDIR += stardict-computer

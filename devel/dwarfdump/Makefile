@@ -4,15 +4,13 @@
 PORTNAME=	dwarfdump
 PORTVERSION=	20130207
 CATEGORIES=	devel
-MASTER_SITES=	http://reality.sgiweb.org/davea/
+MASTER_SITES=	http://www.prevanders.net/
 DISTNAME=	libdwarf-${PORTVERSION}
 
 MAINTAINER=	joerg@FreeBSD.org
 COMMENT=	Tool to display DWARF debugging information in ELF files
 
-BROKEN=		unfetchable
-
-BUILD_DEPENDS=	${LOCALBASE}/lib/libdwarf.a:${PORTSDIR}/devel/libdwarf
+BUILD_DEPENDS=	${LOCALBASE}/lib/libdwarf.a:devel/libdwarf
 
 WRKSRC=		${WRKDIR}/dwarf-${PORTVERSION}/dwarfdump
 

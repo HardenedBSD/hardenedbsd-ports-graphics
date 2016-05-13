@@ -1,19 +1,18 @@
 # $FreeBSD$
 
 PORTNAME=	libgcrypt
-PORTVERSION=	1.6.4
-PORTREVISION=	3
+PORTVERSION=	1.7.0
 CATEGORIES=	security
 MASTER_SITES=	GNUPG
 
-MAINTAINER=	cpm@fbsd.es
+MAINTAINER=	cpm@FreeBSD.org
 COMMENT=	General purpose crypto library based on code used in GnuPG
 
-LICENSE=	GPLv2 LGPL21
+LICENSE=	GPLv2+ LGPL21+
 LICENSE_COMB=	multi
 
-BUILD_DEPENDS=	libgpg-error>=1.8:${PORTSDIR}/security/libgpg-error
-RUN_DEPENDS=	libgpg-error>=1.8:${PORTSDIR}/security/libgpg-error
+BUILD_DEPENDS=	libgpg-error>=1.8:security/libgpg-error
+RUN_DEPENDS=	libgpg-error>=1.8:security/libgpg-error
 
 USES=		cpe libtool makeinfo tar:bzip2
 CPE_VENDOR=	gnupg
@@ -40,11 +39,6 @@ CONFIGURE_ARGS+=	--disable-asm
 post-patch:
 	${RM} -f ${WRKSRC}/doc/gcrypt.info*
 	${REINPLACE_CMD} -e 's|ALIGN (3)|ALIGN (2)|g' ${WRKSRC}/mpi/i386/*.S
-
-# Fix crash at cipher/salsa20.c module on amd64
-.if ${ARCH} == "amd64" && exists(/usr/bin/clang)
-CFLAGS:=	${CFLAGS:N-O*} -O2
-.endif
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/${PORTNAME}.so

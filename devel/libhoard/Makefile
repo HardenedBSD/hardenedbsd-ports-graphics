@@ -10,8 +10,10 @@ DISTNAME=	Hoard-${PORTVERSION}-source
 MAINTAINER=	uffe@uffe.org
 COMMENT=	Fast, scalable, and memory-efficient allocator for MP
 
-LICENSE=	GPLv2 # or later
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/../COPYING
+
+BROKEN_powerpc64=	Does not build
 
 BROKEN_mips=	no spin lock implementation is available for this platform
 BROKEN_mips64=	no spin lock implementation is available for this platform

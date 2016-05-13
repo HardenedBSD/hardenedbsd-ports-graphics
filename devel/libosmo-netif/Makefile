@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	libosmo-netif
-PORTVERSION=	0.0.5
+PORTVERSION=	0.0.6
 CATEGORIES=	devel
 MASTER_SITES=	http://git.osmocom.org/libosmo-netif/snapshot/ \
 		http://chaosophia.net/downloads/osmocom/${PORTNAME}/
@@ -12,8 +12,10 @@ COMMENT=	Library containing common/shared code regarding network interface
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-LIB_DEPENDS=	libosmocore.so:${PORTSDIR}/devel/libosmocore \
-		libosmoabis.so:${PORTSDIR}/devel/libosmo-abis
+BROKEN_powerpc64=	Does not build
+
+LIB_DEPENDS=	libosmocore.so:devel/libosmocore \
+		libosmoabis.so:devel/libosmo-abis
 
 USES=		autoreconf libtool pathfix pkgconfig
 PATHFIX_MAKEFILEIN=Makefile.am

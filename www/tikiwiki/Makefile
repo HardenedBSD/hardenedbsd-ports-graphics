@@ -2,9 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	tikiwiki
-PORTVERSION=	13.1
+PORTVERSION=	15.0
 CATEGORIES=	www
-MASTER_SITES=	SF/${PORTNAME}/Tiki_13.x_Fomalhaut/${PORTVERSION}/
+MASTER_SITES=	SF/${PORTNAME}/Tiki_15.x_Situla/${PORTVERSION}/
 DISTNAME=	tiki-${PORTVERSION}
 
 MAINTAINER=	ports@FreeBSD.org
@@ -13,17 +13,19 @@ COMMENT=	Powerful PHP based Wiki/CMS/Groupware
 LICENSE=	LGPL21
 LICENSE_FILE=	${WRKSRC}/license.txt
 
-USE_PHP=	gettext pcre posix session xml zlib
+BROKEN_powerpc64=	Does not build
+
+USE_PHP=	dom gettext pcre posix session xml zlib
 WANT_PHP_WEB=	yes
 
 NO_BUILD=	yes
 NO_MTREE=	yes
 TIKIWIKI_DIR?=	www/${PORTNAME}-${PORTVERSION}
 SUB_FILES=	pkg-message
-SUB_LIST+=	PORTNAME=${PORTNAME} TIKIWIKI_DIR=${TIKIWIKI_DIR}
+SUB_LIST+=	TIKIWIKI_DIR=${TIKIWIKI_DIR}
 
-post-extract:
-	@${FIND} ${WRKSRC} -name '.DS_Store' -o -name '.git' | ${XARGS} ${RM} -rf
+WRI_DIR=	db dump img/trackers img/wiki img/wiki_up modules/cache \
+		temp temp/cache templates_c templates whelp
 
 do-install:
 	@${MKDIR} ${STAGEDIR}${PREFIX}/${TIKIWIKI_DIR}
@@ -34,16 +36,16 @@ do-install:
 # The benefits of a fixed pkg-plist aren't worth it, autogen!
 
 post-install:
-	@${ECHO_CMD} "@owner ${WWWOWN}" >> ${TMPPLIST}
-	@${ECHO_CMD} "@group ${WWWGRP}" >> ${TMPPLIST}
 	@(cd ${STAGEDIR}${PREFIX}; ${FIND} * \( -type f -or -type l \) | \
-		${SORT} >> ${TMPPLIST})
-	@${ECHO_CMD} "@owner" >> ${TMPPLIST}
-	@${ECHO_CMD} "@group" >> ${TMPPLIST}
-	@${ECHO_CMD} "@dir ${TIKIWIKI_DIR}/lib/test/core/Profile" >> ${TMPPLIST}
-	@${ECHO_CMD} "@dir ${TIKIWIKI_DIR}/permissioncheck/meta_755" >> ${TMPPLIST}
-	@${ECHO_CMD} "@dir ${TIKIWIKI_DIR}/permissioncheck/meta_775" >> ${TMPPLIST}
-	@${ECHO_CMD} "@dir ${TIKIWIKI_DIR}/permissioncheck/meta_777" >> ${TMPPLIST}
-	@${ECHO_CMD} "@dir ${TIKIWIKI_DIR}/vendor_extra/elfinder/files" >> ${TMPPLIST}
+		${SORT} | ${SED} -e 's/^/@(${WWWOWN},${WWWGRP},) /' >> ${TMPPLIST})
+	@(cd ${STAGEDIR}${PREFIX}; ${FIND} * -type d -empty | \
+		${SORT} -r | ${SED} -e 's/^/@dir /' >> ${TMPPLIST})
+
+	@${ECHO_CMD} "@mode 777" >> ${TMPPLIST}
+.for i in ${WRI_DIR} do
+	@${MKDIR} ${STAGEDIR}${PREFIX}/${TIKIWIKI_DIR}/${i}
+	@${ECHO_CMD} "@dir ${TIKIWIKI_DIR}/${i}" >> ${TMPPLIST}
+.endfor
+	@${ECHO_CMD} "@mode" >> ${TMPPLIST}
 
 .include <bsd.port.mk>

@@ -2,9 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	firefox
-DISTVERSION=	43.0.1
+DISTVERSION=	46.0.1
 DISTVERSIONSUFFIX=.source
-PORTREVISION=	1
 PORTEPOCH=	1
 CATEGORIES=	www ipv6
 MASTER_SITES=	MOZILLA/${PORTNAME}/releases/${DISTVERSION}/source \
@@ -13,29 +12,29 @@ MASTER_SITES=	MOZILLA/${PORTNAME}/releases/${DISTVERSION}/source \
 MAINTAINER=	gecko@FreeBSD.org
 COMMENT=	Web browser based on the browser portion of Mozilla
 
-BUILD_DEPENDS=	nspr>=4.10.10:${PORTSDIR}/devel/nspr \
-		nss>=3.19.4:${PORTSDIR}/security/nss \
-		libevent2>=2.0.21_2:${PORTSDIR}/devel/libevent2 \
-		soundtouch>=1.8.0:${PORTSDIR}/audio/soundtouch \
-		harfbuzz>=0.9.42:${PORTSDIR}/print/harfbuzz \
-		graphite2>=1.2.4:${PORTSDIR}/graphics/graphite2 \
-		libvorbis>=1.3.5,3:${PORTSDIR}/audio/libvorbis \
-		libvpx>=1.3.0:${PORTSDIR}/multimedia/libvpx \
-		sqlite3>=3.8.9:${PORTSDIR}/databases/sqlite3 \
-		${PYTHON_PKGNAMEPREFIX}sqlite3>0:${PORTSDIR}/databases/py-sqlite3 \
-		v4l_compat>0:${PORTSDIR}/multimedia/v4l_compat \
-		autoconf-2.13:${PORTSDIR}/devel/autoconf213 \
-		yasm:${PORTSDIR}/devel/yasm \
-		zip:${PORTSDIR}/archivers/zip \
-		unzip:${PORTSDIR}/archivers/unzip
-#		opus>=1.1:${PORTSDIR}/audio/opus \
+BUILD_DEPENDS=	nspr>=4.12:devel/nspr \
+		nss>=3.22.3:security/nss \
+		libevent2>=2.0.21_2:devel/libevent2 \
+		soundtouch>=1.9.0:audio/soundtouch \
+		harfbuzz>=1.1.3:print/harfbuzz \
+		graphite2>=1.3.7:graphics/graphite2 \
+		png>=1.6.19:graphics/png \
+		libvorbis>=1.3.5,3:audio/libvorbis \
+		libvpx>=1.5.0:multimedia/libvpx \
+		sqlite3>=3.10.2:databases/sqlite3 \
+		${PYTHON_PKGNAMEPREFIX}sqlite3>0:databases/py-sqlite3 \
+		v4l_compat>0:multimedia/v4l_compat \
+		autoconf-2.13:devel/autoconf213 \
+		yasm:devel/yasm \
+		zip:archivers/zip \
+		unzip:archivers/unzip
 
-LIB_DEPENDS=	libv4l2.so:${PORTSDIR}/multimedia/libv4l
+LIB_DEPENDS=	libv4l2.so:multimedia/libv4l
 
 USE_GECKO=	gecko
 CONFLICTS_INSTALL=	firefox-esr-45.* firefox-esr-3[18].* firefox-esr-24.*
 MOZ_PKGCONFIG_FILES=	# empty
-USE_MOZILLA=	-opus
+USE_MOZILLA=	# empty
 MOZILLA_NAME=	Firefox
 
 USE_QT5=	# empty
@@ -49,32 +48,23 @@ MOZ_OPTIONS=	--program-transform-name='s/firefox/${MOZILLA}/' \
 		--enable-application=browser \
 		--enable-official-branding
 
-OPTIONS_EXCLUDE=	LOGGING
-OPTIONS_DEFAULT=	GTK2
+OPTIONS_EXCLUDE=	GSTREAMER LOGGING
+OPTIONS_DEFINE=		RUST
+OPTIONS_DEFAULT=	BUNDLED_CAIRO GTK3 ${OPTIONS_DEFAULT_${OPSYS}_${OSREL:R}_${ARCH}}
+
+# XXX lang/rust currently builds only on these platforms
+OPTIONS_DEFAULT_DragonFly_4_x86_64=	RUST
+OPTIONS_DEFAULT_FreeBSD_10_amd64=	RUST
+OPTIONS_DEFAULT_FreeBSD_10_i386=	RUST
+OPTIONS_DEFAULT_FreeBSD_11_amd64=	RUST
+OPTIONS_DEFAULT_FreeBSD_11_i386=	RUST
 
 OPTIONS_SINGLE+=	TOOLKIT
 OPTIONS_SINGLE_TOOLKIT=	GTK2 GTK3
 
 .include "${.CURDIR}/../../www/firefox/Makefile.options"
-.include <bsd.port.pre.mk>
 
 WRKSRC:=	${WRKDIR}/${PORTNAME}-${DISTVERSION}
-
-.if ${PORT_OPTIONS:MALSA}
-RUN_DEPENDS+=	alsa-lib>=1.0.27.2_1:${PORTSDIR}/audio/alsa-lib
-.endif
-
-.if ! ${PORT_OPTIONS:MBUNDLED_CAIRO}
-BUILD_DEPENDS+=	cairo>=1.12.16_1,2:${PORTSDIR}/graphics/cairo
-.endif
-
-.if ${PORT_OPTIONS:MGSTREAMER}
-RUN_DEPENDS+=	gstreamer1-libav>=1.2.4_1:${PORTSDIR}/multimedia/gstreamer1-libav
-.endif
-
-.if ${PORT_OPTIONS:MGTK3}
-BUILD_DEPENDS+=	gtk3>=3.14.6:${PORTSDIR}/x11-toolkits/gtk30
-.endif
 
 post-extract:
 	@${SED} -e 's|@FIREFOX_ICON@|${FIREFOX_ICON}|' -e 's|@MOZILLA@|${MOZILLA}|' \
@@ -82,8 +72,6 @@ post-extract:
 		<${FILESDIR}/firefox.desktop.in >${WRKDIR}/${MOZILLA}.desktop
 
 post-patch:
-	@${REINPLACE_CMD} -e '/MOZPNG/s/=[0-9]*/=10511/' \
-		${WRKSRC}/configure.in
 	@${REINPLACE_CMD} -e 's|%%LOCALBASE%%|${LOCALBASE}|g' \
 		${WRKSRC}/browser/app/nsBrowserApp.cpp
 
@@ -96,4 +84,4 @@ post-install:
 	${INSTALL_DATA} ${WRKDIR}/${MOZILLA}.desktop ${STAGEDIR}${PREFIX}/share/applications/
 	${LN} -sf ${FIREFOX_ICON_SRC} ${STAGEDIR}${PREFIX}/share/pixmaps/${FIREFOX_ICON}
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

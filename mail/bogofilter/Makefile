@@ -10,9 +10,12 @@ MASTER_SITES=	SF/bogofilter/bogofilter-current/bogofilter-${PORTVERSION}
 MAINTAINER?=	mandree@FreeBSD.org
 COMMENT=	Fast, teachable, learning spam detector
 
+LICENSE=	GPLv2
+
 .if !defined(MASTERDIR) || ${MASTERDIR} == ${.CURDIR}
 # building master port
-USE_BDB=	41+
+USE_BDB=	5+
+INVALID_BDB_VER=48
 .endif
 
 OPTIONS_DEFINE=		GSL UNICODE DOCS
@@ -22,7 +25,7 @@ UNICODE_DESC=		Normalize tokens to Unicode (UTF-8) (recommended)
 
 CONFLICTS_INSTALL?=	bogofilter-sqlite-[0-9]* bogofilter-qdbm-[0-9]* bogofilter-tc-[0-9]* [a-z][a-z]-bogofilter-[0-9]*
 
-USES=		cpe perl5 shebangfix tar:bzip2
+USES+=		cpe perl5 shebangfix tar:bzip2
 SHEBANG_FILES=	contrib/randomtrain.sh contrib/scramble.sh \
 		src/tests/unsort.pl contrib/*.pl
 USE_PERL5=	run
@@ -32,10 +35,12 @@ CPE_VENDOR=	bogofilter_project
 
 UNICODE_USES=	iconv
 UNICODE_CONFIGURE_ENABLE=	unicode
-GSL_LIB_DEPENDS=	libgsl.so:${PORTSDIR}/math/gsl
+GSL_LIB_DEPENDS=	libgsl.so:math/gsl
 GSL_CONFIGURE_ARGS_OFF=	--with-included-gsl
 
 PORTDOCS=	*
+
+TEST_TARGET=	check
 
 .include <bsd.port.pre.mk>
 

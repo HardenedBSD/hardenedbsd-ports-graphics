@@ -5,7 +5,7 @@ PORTNAME=	alsa-utils
 PORTVERSION=	1.0.22
 PORTREVISION=	2
 CATEGORIES=	audio linux
-MASTER_SITES=	CENTOS_LINUX_UPDATES
+MASTER_SITES=	CENTOS_LINUX
 
 MAINTAINER=	emulation@FreeBSD.org
 COMMENT=	Advanced Linux Sound Architecture libraries (Linux CentOS ${LINUX_DIST_VER})
@@ -19,7 +19,7 @@ USE_LINUX_APPS=	alsalib alsa-plugins-oss
 
 ONLY_FOR_ARCHS=	i386 amd64
 USE_LINUX=	c6
-USE_LINUX_RPM=	yes
+USE_LINUX_RPM=	nolib
 RPMVERSION=	9.el6_6
 
 .include <bsd.port.mk>

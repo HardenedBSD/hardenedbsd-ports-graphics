@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	asciidoctor
-PORTVERSION=	1.5.3
+PORTVERSION=	1.5.4
 CATEGORIES=	textproc rubygems
 MASTER_SITES=	RG
 
@@ -13,8 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.adoc
 
 NO_ARCH=	yes
 USE_RUBY=	yes
-USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=	yes
+USES=		gem
 
 PLIST_FILES+=	bin/asciidoctor bin/asciidoctor-safe
 

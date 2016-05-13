@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	taskjuggler
-PORTVERSION=	3.5.0
+PORTVERSION=	3.6.0
 CATEGORIES=	deskutils rubygems
 MASTER_SITES=	RG
 
@@ -10,14 +10,14 @@ MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	Project management tool for UNIX based operating systems
 
 LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/COPYING
 
-RUN_DEPENDS=	rubygem-mail>=2.4.3:${PORTSDIR}/mail/rubygem-mail \
-		rubygem-term-ansicolor>=1.0.7:${PORTSDIR}/devel/rubygem-term-ansicolor
+RUN_DEPENDS=	rubygem-mail>=2.4.3:mail/rubygem-mail \
+		rubygem-term-ansicolor>=1.0.7:devel/rubygem-term-ansicolor
 
 NO_ARCH=	yes
 USE_RUBY=	yes
-USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=	yes
+USES=		gem
 
 PLIST_FILES=	bin/tj3 \
 		bin/tj3client \

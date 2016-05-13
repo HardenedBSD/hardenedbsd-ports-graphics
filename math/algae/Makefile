@@ -10,8 +10,10 @@ MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTNAME}-${PORTVERSION}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Programming language for numerical analysis
 
-LICENSE=	GPLv2 # or later
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/LICENSE
+
+BROKEN_powerpc64=	Does not build
 
 BROKEN_ia64=	does not compile
 BROKEN_powerpc=	does not compile

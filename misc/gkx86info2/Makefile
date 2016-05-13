@@ -11,8 +11,11 @@ MASTER_SITES=	http://anchois.free.fr/ \
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	GKrellM2 plugin that simply prints the current clock speed
 
-BUILD_DEPENDS=	${LOCALBASE}/include/gkrellm2/gkrellm.h:${PORTSDIR}/sysutils/gkrellm2
-RUN_DEPENDS=	gkrellm:${PORTSDIR}/sysutils/gkrellm2
+LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/COPYING
+
+BUILD_DEPENDS=	${LOCALBASE}/include/gkrellm2/gkrellm.h:sysutils/gkrellm2
+RUN_DEPENDS=	gkrellm:sysutils/gkrellm2
 
 ONLY_FOR_ARCHS=	i386 amd64
 USES=		pkgconfig
@@ -24,15 +27,17 @@ PLUGINDIR=	${STAGEDIR}${PREFIX}/libexec/gkrellm2/plugins
 OPTIONS_DEFINE=	DOCS
 
 do-build:
-	@cd ${WRKSRC} && eval ${CC} ${CFLAGS} -fPIC -o MHz.o -c MHz.c
-	@cd ${WRKSRC} && eval ${CC} ${CFLAGS} -fPIC \
+	@cd ${WRKSRC} && ${CC} ${CFLAGS} -fPIC -o MHz.o -c MHz.c
+	@cd ${WRKSRC} && ${CC} ${CFLAGS} -fPIC \
 		`pkg-config gtk+-2.0 --cflags` -c gkx86info.c
-	@cd ${WRKSRC} && eval ${CC} ${CFLAGS} -shared \
+	@cd ${WRKSRC} && ${CC} ${CFLAGS} -shared \
 		 -o ${PORTNAME}.so MHz.o gkx86info.o
 
 do-install:
 	@${MKDIR} ${PLUGINDIR}
 	${INSTALL_LIB} ${WRKSRC}/${PORTNAME}.so ${PLUGINDIR}
+
+do-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${WRKSRC}/README ${STAGEDIR}${DOCSDIR}
 

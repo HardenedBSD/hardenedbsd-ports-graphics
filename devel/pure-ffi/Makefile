@@ -2,9 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	pure-ffi
-PORTVERSION=	0.13
+PORTVERSION=	0.14
 CATEGORIES=	devel
-MASTER_SITES=	https://cdn.bitbucket.org/purelang/pure-lang/downloads/
+MASTER_SITES=	https://bitbucket.org/purelang/pure-lang/downloads/
 DIST_SUBDIR=	pure
 
 MAINTAINER=	lichray@gmail.com
@@ -13,9 +13,9 @@ COMMENT=	Pure language interface to libffi
 LICENSE=	GPLv3 LGPL3
 LICENSE_COMB=	dual
 
-LIB_DEPENDS+=	libffi.so:${PORTSDIR}/devel/libffi
+LIB_DEPENDS+=	libffi.so:devel/libffi
 
-USES=		pure
+USES=		pkgconfig pure
 
 PLIST_FILES=	lib/pure/ffi.pure \
 		lib/pure/ffi.so

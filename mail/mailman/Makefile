@@ -2,13 +2,14 @@
 # $FreeBSD$
 
 PORTNAME=	mailman
-DISTVERSION=	2.1.20
+DISTVERSION=	2.1.22
 CATEGORIES=	mail
 MASTER_SITES=	GNU \
 		SF/${PORTNAME}/Mailman%202.1%20%28stable%29/${PORTVERSION} \
 		https://launchpad.net/mailman/${DISTVERSION:R}/${DISTVERSION}/+download/
 DIST_SUBDIR=	mailman
 
+PATCH_SITES=	LOCAL/mandree
 PATCH_DIST_STRIP=	-p1
 
 MAINTAINER=	mandree@FreeBSD.org
@@ -51,7 +52,7 @@ GROUPS=		${MM_GROUPNAME}
 MAILMANDIR=	${PREFIX}/${MM_DIR}
 PLIST_SUB=	MMDIR=${MM_DIR} IMGDIR=${IMGDIR} MM_USERNAME=${MM_USERNAME} MM_GROUPNAME=${MM_GROUPNAME}
 SUB_FILES=	pkg-message pkg-install pkg-deinstall
-SUB_LIST=	MAILMANDIR=${MAILMANDIR} USER=${MM_USERNAME} GROUP=${MM_GROUPNAME}
+SUB_LIST=	MAILMANDIR=${MAILMANDIR} USER=${MM_USERNAME} GROUP=${MM_GROUPNAME} PYTHON_CMD="${PYTHON_CMD}"
 
 PORTDOCS=	ACKNOWLEDGMENTS BUGS FAQ INSTALL NEWS README README-I18N.en \
 		README.CONTRIB README.NETSCAPE \
@@ -93,8 +94,8 @@ MAIL_GID?=	mail
 .endif
 
 .if ${PORT_OPTIONS:MPOSTFIX}
-BUILD_DEPENDS+=	${LOCALBASE}/sbin/postconf:${PORTSDIR}/mail/postfix
-RUN_DEPENDS+=	${LOCALBASE}/sbin/postconf:${PORTSDIR}/mail/postfix
+BUILD_DEPENDS+=	postfix:mail/postfix
+RUN_DEPENDS+=	postfix:mail/postfix
 MAIL_GID?=	mailman
 EXTRA_PATCHES+=	${FILESDIR}/postfix-verp.diff
 .endif
@@ -108,22 +109,26 @@ MAIL_GID?=	_smtpd
 .endif
 
 .if ${PORT_OPTIONS:MHTDIG}
-PATCH_SITES+=	http://www.msapiro.net/mm/
-PATCHFILES+=	index_htdig.patch.2.1.20
 PKGNAMESUFFIX+=	-with-htdig
-RUN_DEPENDS+=	htdig:${PORTSDIR}/textproc/htdig
+# how to create PATCHFILES:
+#X fetch http://bazaar.launchpad.net/~msapiro/mailman/htdig/tarball/1643
+#X unpack this tarball, and the original distfile
+#X diff -NEur original-unpack bazaar-unpack | xz --best -c >msapiro-htdig-1643.patch.xz
+#X upload the latter with mode 0644 or similar to freefall's public_distfiles/ directory
+PATCHFILES+=	msapiro-htdig-1643.patch.xz
+RUN_DEPENDS+=	htdig:textproc/htdig
 PLIST_SUB+=	SUB_HTDIG=""
 .else
 PLIST_SUB+=	SUB_HTDIG="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MNAMAZU2}
-RUN_DEPENDS+=	mknmz:${PORTSDIR}/databases/namazu2
+RUN_DEPENDS+=	mknmz:databases/namazu2
 EXTRA_PATCHES+=	${FILESDIR}/extra-patch-Mailman-Cgi-private.py
 .endif
 
-BUILD_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}dnspython>=0:${PORTSDIR}/dns/py-dnspython
-RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}dnspython>=0:${PORTSDIR}/dns/py-dnspython
+BUILD_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}dnspython>=0:dns/py-dnspython
+RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}dnspython>=0:dns/py-dnspython
 
 pre-everything::
 	@${ECHO} ""
@@ -150,6 +155,7 @@ post-patch:
 .if empty(PORT_OPTIONS:MNLS)
 	${REINPLACE_CMD} -e 's/messages//' ${WRKSRC}/Makefile.in
 .endif
+	${MV} ${WRKSRC}/configure.in ${WRKSRC}/configure.ac # suppress warning
 
 .if ${PORT_OPTIONS:MPOSTFIX}
 pre-configure:

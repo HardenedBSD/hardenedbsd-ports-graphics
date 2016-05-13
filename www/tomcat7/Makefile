@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	tomcat
-PORTVERSION=	7.0.65
+PORTVERSION=	7.0.68
 CATEGORIES=	www java
 MASTER_SITES=	APACHE/tomcat/tomcat-7/v${PORTVERSION}/bin
 PKGNAMESUFFIX=	7
@@ -13,7 +13,7 @@ COMMENT=	Open-source Java web server by Apache, 7.x branch
 
 LICENSE=	APACHE20
 
-RUN_DEPENDS=	jsvc:${PORTSDIR}/devel/jakarta-commons-daemon
+RUN_DEPENDS=	jsvc:devel/jakarta-commons-daemon
 
 USES=		cpe
 CPE_VENDOR=	apache

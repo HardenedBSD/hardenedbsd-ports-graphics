@@ -3,7 +3,7 @@
 
 PORTNAME=	bash-completion
 PORTVERSION=	2.1
-PORTREVISION=	5
+PORTREVISION=	6
 PORTEPOCH=	1
 CATEGORIES=	shells
 MASTER_SITES=	http://bash-completion.alioth.debian.org/files/
@@ -13,7 +13,7 @@ COMMENT=	Programmable completion library for Bash
 
 LICENSE=	GPLv2
 
-RUN_DEPENDS=	bash:${PORTSDIR}/shells/bash
+RUN_DEPENDS=	bash:shells/bash
 
 USE_AUTOTOOLS=	aclocal automake
 GNU_CONFIGURE=	yes

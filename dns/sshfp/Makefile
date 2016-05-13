@@ -3,6 +3,7 @@
 
 PORTNAME=	sshfp
 PORTVERSION=	1.2.2
+PORTREVISION=	1
 CATEGORIES=	dns security
 
 MAINTAINER=	ehaupt@FreeBSD.org
@@ -10,22 +11,18 @@ COMMENT=	Generate SSHFP DNS records from knownhosts files or ssh-keyscan
 
 LICENSE=	GPLv2
 
-RUN_DEPENDS+=	${PYTHON_SITELIBDIR}/dns/__init__.py:${PORTSDIR}/dns/py-dnspython \
-		${PYTHON_PKGNAMEPREFIX}argparse>=0.8.0:${PORTSDIR}/devel/py-argparse \
-		${PYTHON_PKGNAMEPREFIX}ipcalc>=0.6:${PORTSDIR}/net-mgmt/py-ipcalc \
-		${PYTHON_SITELIBDIR}/ldns.py:${PORTSDIR}/dns/py-ldns
+RUN_DEPENDS+=	${PYTHON_SITELIBDIR}/dns/__init__.py:dns/py-dnspython \
+		${PYTHON_PKGNAMEPREFIX}argparse>=0.8.0:devel/py-argparse \
+		${PYTHON_PKGNAMEPREFIX}ipcalc>=0.6:net-mgmt/py-ipcalc \
+		${PYTHON_SITELIBDIR}/ldns.py:dns/py-ldns
 
-USES=		python
+USES=		python shebangfix
 NO_BUILD=	yes
 USE_GITHUB=	yes
 GH_ACCOUNT=	xelerance
 
 PY_FILES=	sshfp dane
-
-post-patch:
-.for f in ${PY_FILES} daneldnsx.py
-	@${REINPLACE_CMD} -e '1s|.*|#!${PYTHON_CMD}|' ${WRKSRC}/${f}
-.endfor
+SHEBANG_FILES=	daneldnsx.py ${PY_FILES}
 
 do-install:
 .for f in ${PY_FILES}

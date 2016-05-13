@@ -40,6 +40,7 @@
     SUBDIR += encodings
     SUBDIR += fantasque-sans-mono
     SUBDIR += farsifonts
+    SUBDIR += fifteen
     SUBDIR += fira
     SUBDIR += fntsample
     SUBDIR += font-adobe-100dpi
@@ -108,6 +109,7 @@
     SUBDIR += intlfonts
     SUBDIR += isabella
     SUBDIR += jmk-x11-fonts
+    SUBDIR += junction
     SUBDIR += junicode
     SUBDIR += kaputa
     SUBDIR += khmeros
@@ -137,6 +139,7 @@
     SUBDIR += moveable-type-fonts
     SUBDIR += nexfontsel
     SUBDIR += noto
+    SUBDIR += noto-lite
     SUBDIR += nucleus
     SUBDIR += p5-Font-AFM
     SUBDIR += p5-Font-TTF
@@ -161,6 +164,7 @@
     SUBDIR += suxus
     SUBDIR += symbola
     SUBDIR += terminus-font
+    SUBDIR += terminus-ttf
     SUBDIR += tkfont
     SUBDIR += tlwg-ttf
     SUBDIR += tmu

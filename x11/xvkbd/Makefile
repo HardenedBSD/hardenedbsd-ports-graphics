@@ -9,7 +9,7 @@ MASTER_SITES=	http://homepage3.nifty.com/tsato/xvkbd/
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Virtual keyboard for X applications
 
-LICENSE=	GPLv2 # (or later)
+LICENSE=	GPLv2+
 
 USES=		imake
 USE_XORG=	ice sm x11 xaw xext xmu xpm xt
@@ -20,7 +20,7 @@ OPTIONS_DEFINE=		DOCS NLS XAW3D XTEST
 OPTIONS_DEFAULT=	XTEST
 
 XAW3D_DESC=		Xaw3d widget library support
-XAW3D_LIB_DEPENDS=	libXaw3d.so:${PORTSDIR}/x11-toolkits/Xaw3d
+XAW3D_LIB_DEPENDS=	libXaw3d.so:x11-toolkits/Xaw3d
 XTEST_DESC=		XTEST extensions support
 XTEST_USE=		xorg=xtst
 
@@ -40,8 +40,8 @@ post-patch-XTEST-on:
 	@${REINPLACE_CMD} -e \
 		'/define XTEST/s|^XCOMM |#|' ${WRKSRC}/Imakefile
 
-post-install:
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
-	(cd ${WRKSRC} && ${INSTALL_DATA} README ${STAGEDIR}${DOCSDIR})
+	${INSTALL_DATA} ${WRKSRC}/README ${STAGEDIR}${DOCSDIR}
 
 .include <bsd.port.mk>

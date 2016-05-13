@@ -10,11 +10,10 @@ MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTNAME}-${PORTVERSION}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Gerber file viewer
 
-LICENSE=	GPLv2
+LICENSE=	GPLv2+
+LICENSE_FILE=	${WRKSRC}/COPYING
 
-OPTIONS_DEFINE=	DOCS EXAMPLES
-
-USES=		autoreconf desktop-file-utils gmake libtool pathfix pkgconfig
+USES=		autoreconf desktop-file-utils gmake libtool localbase pathfix pkgconfig
 USE_GNOME=	gtk20
 GNU_CONFIGURE=	yes
 CONFIGURE_ENV=	ac_aux_dir="."
@@ -22,10 +21,9 @@ USE_LDCONFIG=	yes
 INSTALLS_ICONS=	yes
 INSTALL_TARGET=	install-strip
 
-CPPFLAGS+=	-I${LOCALBASE}/include
-LDFLAGS+=	-L${LOCALBASE}/lib
-
 PLIST_SUB=	VERSION="${PORTVERSION}"
+
+OPTIONS_DEFINE=	DOCS EXAMPLES
 
 post-patch:
 	@${REINPLACE_CMD} -e \
@@ -43,7 +41,6 @@ post-patch:
 		${WRKSRC}/src/Makefile.am
 
 post-install:
-	@${MKDIR} ${STAGEDIR}${DESKTOPDIR}
 	(cd ${WRKSRC}/desktop && ${INSTALL_DATA} gerbv.desktop \
 		${STAGEDIR}${DESKTOPDIR})
 	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/scalable/apps
@@ -54,6 +51,8 @@ post-install:
 	(cd ${WRKSRC}/desktop && ${INSTALL_DATA} gerbv-${i}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${i}x${i}/apps/gerbv.png)
 .endfor
+
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	(cd ${WRKSRC}/doc && ${INSTALL_DATA} *.fig *.txt \
 		${STAGEDIR}${DOCSDIR})
@@ -63,6 +62,8 @@ post-install:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}/eagle
 	(cd ${WRKSRC}/doc/eagle && ${INSTALL_DATA} *.pl *.txt \
 		${STAGEDIR}${DOCSDIR}/eagle)
+
+post-install-EXAMPLES-on:
 	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
 	@(cd ${WRKSRC}/example && ${FIND} . \
 		! \( -name "*Makefile*" -or -name ".cvsignore" \) \

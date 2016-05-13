@@ -9,7 +9,6 @@
     SUBDIR += autotrust
     SUBDIR += axfr2acl
     SUBDIR += bind-tools
-    SUBDIR += bind10
     SUBDIR += bind9-devel
     SUBDIR += bind910
     SUBDIR += bind99
@@ -51,6 +50,7 @@
     SUBDIR += dnstop
     SUBDIR += dnstracer
     SUBDIR += dnsutl
+    SUBDIR += dnsviz
     SUBDIR += dnswalk
     SUBDIR += dnswall
     SUBDIR += doc
@@ -62,6 +62,7 @@
     SUBDIR += fpdns
     SUBDIR += gdnsd
     SUBDIR += gdnsd2
+    SUBDIR += gen6dns
     SUBDIR += getdns
     SUBDIR += ghtool
     SUBDIR += hesiod
@@ -100,7 +101,6 @@
     SUBDIR += nsping
     SUBDIR += nss_mdns
     SUBDIR += nss_resinit
-    SUBDIR += odsclient
     SUBDIR += opendd
     SUBDIR += opendnssec
     SUBDIR += opendnssec13
@@ -162,7 +162,6 @@
     SUBDIR += py-adns
     SUBDIR += py-bonjour
     SUBDIR += py-dns
-    SUBDIR += py-dns3
     SUBDIR += py-dnschain
     SUBDIR += py-dnspython
     SUBDIR += py-easyzone
@@ -171,8 +170,10 @@
     SUBDIR += py-ldns
     SUBDIR += py-namebench
     SUBDIR += py-publicsuffix
+    SUBDIR += py-py3dns
     SUBDIR += py-pydnstable
     SUBDIR += py-pywdns
+    SUBDIR += py-tldextract
     SUBDIR += py-twistedNames
     SUBDIR += radns
     SUBDIR += rbldnsd

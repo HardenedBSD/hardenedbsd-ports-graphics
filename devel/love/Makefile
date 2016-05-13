@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	love
-PORTVERSION=	0.9.2
+PORTVERSION=	0.10.0
 CATEGORIES=	devel games
 MASTER_SITES=	https://bitbucket.org/rude/love/downloads/ \
 		http://mirror.amdmi3.ru/distfiles/
@@ -14,18 +14,20 @@ COMMENT=	Open-source 2D game engine
 LICENSE=	ZLIB
 LICENSE_FILE=	${WRKSRC}/license.txt
 
-LIB_DEPENDS=	libIL.so:${PORTSDIR}/graphics/devil \
-		libmodplug.so:${PORTSDIR}/audio/libmodplug \
-		libmpg123.so:${PORTSDIR}/audio/mpg123 \
-		libvorbisfile.so:${PORTSDIR}/audio/libvorbis \
-		libphysfs.so:${PORTSDIR}/devel/physfs \
-		libfreetype.so:${PORTSDIR}/print/freetype2
+LIB_DEPENDS=	libmodplug.so:audio/libmodplug \
+		libmpg123.so:audio/mpg123 \
+		libvorbisfile.so:audio/libvorbis \
+		libphysfs.so:devel/physfs \
+		libfreetype.so:print/freetype2 \
+		libtheora.so:multimedia/libtheora
 
-USES=           gmake openal libtool pkgconfig compiler:c++11-lib \
-		desktop-file-utils shared-mime-info localbase
+USES=		compiler:c++11-lib desktop-file-utils gmake libtool \
+		localbase openal pkgconfig shared-mime-info
 USE_SDL=	sdl2
 USE_GL=		gl glu
 GNU_CONFIGURE=	yes
+CONFIGURE_ENV=	zlib_CFLAGS=" " \
+		zlib_LIBS="-lz"
 WRKSRC=		${WRKDIR}/love-${PORTVERSION}
 INSTALL_TARGET=	install-strip
 
@@ -36,7 +38,7 @@ OPTIONS_DEFAULT_i386=	LUAJIT
 OPTIONS_DEFAULT_amd64=	LUAJIT
 
 LUAJIT_DESC=	Use luajit
-LUAJIT_LIB_DEPENDS=	libluajit-5.1.so:${PORTSDIR}/lang/luajit
+LUAJIT_LIB_DEPENDS=	libluajit-5.1.so:lang/luajit
 LUAJIT_CONFIGURE_ON=	--with-lua=luajit
 LUAJIT_USES_OFF=	lua
 LUAJIT_CONFIGURE_OFF=	--with-lua=lua \

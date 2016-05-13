@@ -5,7 +5,6 @@ PORTNAME=	alsa-plugins-oss
 PORTVERSION=	1.0.21
 PORTREVISION=	3
 CATEGORIES=	audio linux
-PKGNAMEPREFIX=	linux-${USE_LINUX}-
 
 MAINTAINER=	emulation@FreeBSD.org
 COMMENT=	OSS plugin for ALSA (Linux CentOS ${LINUX_DIST_VER})
@@ -14,9 +13,7 @@ LICENSE=	GPLv3
 
 CONFLICTS=	linux-f10-alsa-plugins-oss-[0-9]*
 
-.if defined(PACKAGE_BUILDING)
 SRC_DISTFILES=	alsa-plugins-${PORTVERSION}-${RPMVERSION}${SRC_SUFX}:SOURCE
-.endif
 
 ONLY_FOR_ARCHS=	i386 amd64
 USE_LINUX=	c6

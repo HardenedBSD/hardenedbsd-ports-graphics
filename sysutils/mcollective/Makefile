@@ -3,19 +3,24 @@
 
 PORTNAME=	mcollective
 PORTVERSION=	2.8.2
+PORTREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	http://downloads.puppetlabs.com/${PORTNAME}/
 
 MAINTAINER=	swills@FreeBSD.org
 COMMENT=	Modern scalable datacenter orchestration framework
 
-RUN_DEPENDS=	rubygem-stomp>=0:${PORTSDIR}/devel/rubygem-stomp
+LICENSE=	APACHE20
+LICENSE_FILE=	${WRKSRC}/COPYING
+
+RUN_DEPENDS=	rubygem-stomp>=0:devel/rubygem-stomp
 
 NO_BUILD=	yes
 USE_RUBY=	yes
+USES=		shebangfix
 USE_RC_SUBR=	mcollectived
 
-RUBY_SHEBANG_FILES=	bin/mcollectived bin/mco
+SHEBANG_FILES=	bin/mcollectived bin/mco
 CFG_FILES=	client.cfg data-help.erb discovery-help.erb facts.yaml \
 		metadata-help.erb rpc-help.erb server.cfg
 

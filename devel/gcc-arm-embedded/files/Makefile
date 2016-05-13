@@ -2,7 +2,7 @@
 
 .include "Makefile.inc"
 
-MULTILIB_LIST=	armv6-m,armv7-m,armv7e-m,armv7-r
+MULTILIB_LIST=	armv6-m,armv7-m,armv7e-m,armv7-r,armv8-m.base,armv8-m.main
 PKGVERSION=	GNU Tools for ARM Embedded Processors
 
 BUILD_PREFIX=	${WRKDIR}/build
@@ -225,6 +225,8 @@ build-binutils:
 	 --pdfdir=${DOC_PREFIX}/pdf \
 	 --disable-nls \
 	 --disable-werror \
+	 --disable-sim \
+	 --disable-gdb \
 	 --enable-interwork \
 	 --enable-plugins \
 	 --with-sysroot=${INTERIM_PREFIX}/${TARGET} \
@@ -293,7 +295,7 @@ build-gcc-first:
 	 --with-multilib-list=${MULTILIB_LIST} \
 	 --with-pkgversion="${PKGVERSION}"
 	@${ECHO_MSG} "=====>  Build"
-	@${MAKE_ENV} ${MAKE_CMD} -j${MAKE_JOBS_NUMBER} -C ${BUILD_PREFIX}/gcc-first all ${MAKE_ARGS}
+	@${MAKE_ENV} ${MAKE_CMD} -j${MAKE_JOBS_NUMBER} -C ${BUILD_PREFIX}/gcc-first all-gcc ${MAKE_ARGS}
 	@${ECHO_MSG} "=====>  Install into stage directory"
 	@${MAKE_ENV} ${MAKE_CMD} -C ${BUILD_PREFIX}/gcc-first install-gcc ${MAKE_ARGS}
 	@${RM} -f ${INTERIM_PREFIX}/bin/${TARGET}-gccbug
@@ -467,6 +469,7 @@ build-libstdcxx:
 	 --disable-libquadmath \
 	 --disable-libssp \
 	 --disable-libstdcxx-pch \
+	 --disable-libstdcxx-verbose \
 	 --disable-nls \
 	 --disable-shared \
 	 --disable-threads \

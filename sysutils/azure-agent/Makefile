@@ -1,8 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	azure-agent
-PORTVERSION=	${GH_TAGNAME}.11
-PORTREVISION=	1
+PORTVERSION=	${GH_TAGNAME}.16
 CATEGORIES=	sysutils
 
 MAINTAINER=	gjb@FreeBSD.org
@@ -10,10 +9,11 @@ COMMENT=	The Microsoft Azure Linux Agent
 
 LICENSE=	APACHE20
 
-RUN_DEPENDS=	python:${PORTSDIR}/lang/python \
-		sudo:${PORTSDIR}/security/sudo \
-		bash:${PORTSDIR}/shells/bash \
-		${PYTHON_PKGNAMEPREFIX}pyasn1>=0:${PORTSDIR}/devel/py-pyasn1
+RUN_DEPENDS=	python:lang/python \
+		sudo:security/sudo \
+		bash:shells/bash \
+		${PYTHON_PKGNAMEPREFIX}pyasn1>=0:devel/py-pyasn1 \
+		${LOCALBASE}/share/certs/ca-root-nss.crt:security/ca_root_nss
 
 NO_BUILD=	yes
 USES=		python:2

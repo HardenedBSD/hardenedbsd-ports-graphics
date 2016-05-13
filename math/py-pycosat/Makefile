@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	pycosat
-PORTVERSION=	0.6.0
-PORTREVISION=	1
+PORTVERSION=	0.6.1
 CATEGORIES=	math python
 MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
@@ -14,7 +13,7 @@ COMMENT=	Bindings to PicoSAT (a SAT solver)
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-LIB_DEPENDS=	libpicosat.so:${PORTSDIR}/math/picosat
+LIB_DEPENDS=	libpicosat.so:math/picosat
 
 USES=		python
 USE_PYTHON=	autoplist distutils
@@ -25,9 +24,9 @@ PYDISTUTILS_BUILDARGS=	build_ext \
 			-lpicosat
 
 post-install:
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/python2.7/site-packages/pycosat.so
+	${STRIP_CMD} ${STAGEDIR}${PYTHON_SITELIBDIR}/pycosat.so
 
-regression-test: build
+do-test:
 	@cd ${WRKSRC} && ${PYTHON_CMD} ${PYDISTUTILS_SETUP} test
 
 .include <bsd.port.mk>

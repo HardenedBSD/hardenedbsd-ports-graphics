@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	sqlitebrowser
-PORTVERSION=	3.7.0
+PORTVERSION=	3.8.0
 DISTVERSIONPREFIX=	v
 CATEGORIES=	databases
 
@@ -14,10 +14,9 @@ LICENSE_COMB=	dual
 
 USE_GITHUB=	yes
 
-USES=		cmake desktop-file-utils
+USES=		cmake desktop-file-utils sqlite
 USE_QT4=	corelib network gui qmake_build linguisttools_build \
 		moc_build uic_build rcc_build
-USE_SQLITE=	yes
 
 INSTALLS_ICONS=	yes
 

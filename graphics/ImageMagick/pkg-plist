@@ -23,6 +23,7 @@ bin/stream
 @sample etc/ImageMagick-6/policy.xml.sample
 @sample etc/ImageMagick-6/quantization-table.xml.sample
 @sample etc/ImageMagick-6/thresholds.xml.sample
+@sample etc/ImageMagick-6/type-apple.xml.sample
 @sample etc/ImageMagick-6/type-dejavu.xml.sample
 @sample etc/ImageMagick-6/type-ghostscript.xml.sample
 @sample etc/ImageMagick-6/type-windows.xml.sample
@@ -598,6 +599,7 @@ man/man1/stream.1.gz
 %%PORTDOCS%%%%DOCSDIR%%-6/www/Magick++/FormatCharacters.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/Magick++/Future.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/Magick++/Geometry.html
+%%PORTDOCS%%%%DOCSDIR%%-6/www/Magick++/Image++.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/Magick++/Image.fig
 %%PORTDOCS%%%%DOCSDIR%%-6/www/Magick++/Image.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/Magick++/Image.png
@@ -626,6 +628,7 @@ man/man1/stream.1.gz
 %%PORTDOCS%%%%DOCSDIR%%-6/www/advanced-windows-installation.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/animate.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/api.html
+%%PORTDOCS%%%%DOCSDIR%%-6/www/api/Image++.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/api/MagickCore/ImageMagick_8h-source.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/api/MagickCore/ImageMagick_8h.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/api/MagickCore/MagickCore_8h-source.html
@@ -1366,6 +1369,7 @@ man/man1/stream.1.gz
 %%PORTDOCS%%%%DOCSDIR%%-6/www/api/image.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/api/layer.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/api/list.html
+%%PORTDOCS%%%%DOCSDIR%%-6/www/api/magick++-classes.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/api/magick-deprecate.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/api/magick-image.html
 %%PORTDOCS%%%%DOCSDIR%%-6/www/api/magick-property.html

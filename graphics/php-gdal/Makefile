@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	gdal
-PORTVERSION=	2.0.1
+PORTVERSION=	2.1.0
 CATEGORIES=	graphics
 MASTER_SITES=	http://download.osgeo.org/gdal/${PORTVERSION}/ \
 		ftp://ftp.remotesensing.org/pub/gdal/${PORTVERSION}/ \
@@ -15,11 +15,12 @@ COMMENT=	PHP binding for GDAL
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/../../LICENSE.TXT
 
-BUILD_DEPENDS=	swig3.0:${PORTSDIR}/devel/swig30
-LIB_DEPENDS=	libgdal.so:${PORTSDIR}/graphics/gdal
+BUILD_DEPENDS=	swig3.0:devel/swig30
+LIB_DEPENDS=	libgdal.so:graphics/gdal
 
 ALL_TARGET=	php_gdal.so php_gdalconst.so php_ogr.so php_osr.so
 CFLAGS+=	-fPIC
+IGNORE_WITH_PHP=70
 MAKEFILE=	GNUmakefile
 PHP_MOD_NAME=	php_${PORTNAME}
 USE_PHP=	yes

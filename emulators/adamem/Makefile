@@ -11,7 +11,6 @@ DISTNAME=	${PORTNAME}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	ADAMEm is a portable Coleco ADAM and ColecoVision emulator
 
-BROKEN=		Does not fetch
 NO_WRKSUBDIR=	yes
 USE_XORG=	sm x11 xau xext xfixes xi xrandr
 
@@ -31,6 +30,8 @@ do-install:
 .for f in adamem.snd OS7.rom WP.rom EOS.rom
 	${INSTALL_DATA} ${WRKSRC}/${f} ${STAGEDIR}${DATADIR}
 .endfor
+
+do-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${WRKSRC}/adamem.txt ${STAGEDIR}${DOCSDIR}
 

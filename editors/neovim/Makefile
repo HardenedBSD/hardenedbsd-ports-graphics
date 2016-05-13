@@ -2,31 +2,44 @@
 # $FreeBSD$
 
 PORTNAME=	neovim
-PORTVERSION=	0.0.0.201507060407
-PORTREVISION=	1
+PORTVERSION=	0.1.4
+DISTVERSIONPREFIX=	v
 CATEGORIES=	editors
-MASTER_SITES=	GH
 
-MAINTAINER=	antont@inbox.lv
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Next generation Vim
 
 LICENSE=	APACHE20
 
-BUILD_DEPENDS=	${LUA_MODSHAREDIR}/MessagePack.lua:${PORTSDIR}/devel/lua-MessagePack \
-		${LUA_MODLIBDIR}/bit.so:${PORTSDIR}/devel/lua-bitop \
-		${LUA_MODLIBDIR}/lpeg.so:${PORTSDIR}/devel/lua-lpeg
-LIB_DEPENDS=	libunibilium.so:${PORTSDIR}/devel/unibilium \
-		libvterm.so:${PORTSDIR}/devel/libvterm \
-		libtermkey.so:${PORTSDIR}/devel/libtermkey \
-		libluajit-5.1.so:${PORTSDIR}/lang/luajit \
-		libuv.so:${PORTSDIR}/devel/libuv \
-		libmsgpack.so:${PORTSDIR}/devel/msgpack
+BUILD_DEPENDS=	${LUA_MODLIBDIR}/bit.so:devel/lua-bitop \
+		${LUA_MODLIBDIR}/lpeg.so:devel/lua-lpeg
+LIB_DEPENDS=	libunibilium.so:devel/unibilium \
+		libvterm.so:devel/libvterm \
+		libtermkey.so:devel/libtermkey \
+		libluajit-5.1.so:lang/luajit \
+		libuv.so:devel/libuv \
+		libmsgpack.so:devel/msgpack
 
-USES=		cmake lua
+USES=		cmake:outsource gettext iconv ninja lua:build pathfix pkgconfig
 USE_GITHUB=	yes
-GH_TAGNAME=	1b78ad1
+GH_TUPLE=	tarruda:libmpack:1.0.2:libmpack
 
-CMAKE_ARGS+=	-DLUA_PRG=${LUA_CMD} \
-		-DUSE_BUNDLED_DEPS=OFF
+CMAKE_ARGS=	-DLUA_PRG:FILEPATH="${LUA_CMD}" \
+		-DCMAKE_INSTALL_MANDIR:PATH="${MANPREFIX}/man" \
+		-DDEPS_PREFIX:PATH="${LOCALBASE}"
+
+post-patch:
+	@${REINPLACE_CMD} -e \
+		's|lua_objlen|lua_rawlen| ; \
+		 s|luaL_reg |luaL_Reg | ; \
+		 s|luaL_register(L, NULL, \(.*\));|luaL_setfuncs(L, \1, 0);|' \
+		${WRKSRC_libmpack}/binding/lua/lmpack.c
+
+pre-build:
+	@${MKDIR} ${BUILD_WRKSRC}/src/nvim
+	@(cd ${WRKSRC_libmpack}/binding/lua && ${CC} ${CFLAGS} -fPIC \
+		-I${LUA_INCDIR} -shared lmpack.c -o \
+		${BUILD_WRKSRC}/src/nvim/mpack.so \
+		${LUA_LIBDIR}/liblua-${LUA_VER}.so)
 
 .include <bsd.port.mk>

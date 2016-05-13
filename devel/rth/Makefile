@@ -3,7 +3,7 @@
 
 PORTNAME=	rth
 PORTVERSION=	1.7.0
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	devel www
 MASTER_SITES=	SF/${PORTNAME}/Release%20${PORTVERSION}/Release%20${PORTVERSION}
 DISTNAME=	${PORTNAME}_${PORTVERSION}
@@ -11,9 +11,11 @@ DISTNAME=	${PORTNAME}_${PORTVERSION}
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Web-based requirement, test, and bugtracking system
 
+BROKEN_powerpc64=	Does not build
+
 USES=		zip
 NO_BUILD=	yes
-USE_PHP=	mysql gd
+USE_PHP=	mysqli gd
 
 PLIST_SUB=	WWWOWN="${WWWOWN}" WWWGRP="${WWWGRP}"
 SUB_LIST=	"PKGNAME=${PKGNAME}"

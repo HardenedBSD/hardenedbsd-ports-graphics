@@ -93,10 +93,10 @@ bin/%%HACKNAME%%
 %%DATADIR%%/history
 %%DATADIR%%/juiblex.lev
 %%DATADIR%%/knox.lev
+%%DATADIR%%/license
 @mode 664
 %%DATADIR%%/logfile
 @mode
-%%DATADIR%%/license
 %%DATADIR%%/mapbg.xpm
 %%DATADIR%%/medusa-1.lev
 %%DATADIR%%/medusa-2.lev
@@ -149,4 +149,5 @@ man/man6/lev_comp%%HACKEXT%%.6.gz
 man/man6/%%HACKNAME%%.6.gz
 man/man6/recover%%HACKEXT%%.6.gz
 %%PORTDOCS%%%%DOCSDIR%%/Guidebook.txt
+@dir(games,games,0775) %%DATADIR%%
 @dir(games,games,0775) %%DATADIR%%/save

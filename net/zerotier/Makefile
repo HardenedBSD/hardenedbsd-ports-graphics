@@ -2,14 +2,14 @@
 # $FreeBSD$
 
 PORTNAME=	zerotier
-DISTVERSION=	1.1.0
+PORTVERSION=	1.1.4
 CATEGORIES=	net
-MASTER_SITES=	GH
 
 MAINTAINER=	corsmith@gmail.com
 COMMENT=	Network virtualization everywhere
 
 LICENSE=	GPLv3
+LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 USES=		gmake
 USE_RC_SUBR=	zerotier
@@ -17,7 +17,6 @@ USE_RC_SUBR=	zerotier
 USE_GITHUB=	yes
 GH_ACCOUNT=	zerotier
 GH_PROJECT=	ZeroTierOne
-GH_TAGNAME=	5db538d
 CFLAGS+=	-flax-vector-conversions
 
 PLIST_FILES=	bin/zerotier-cli bin/zerotier-idtool sbin/zerotier-one

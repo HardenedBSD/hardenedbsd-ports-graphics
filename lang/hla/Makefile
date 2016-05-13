@@ -4,11 +4,8 @@
 PORTNAME=	hla
 PORTVERSION=	1.103
 CATEGORIES=	lang
-MASTER_SITES=	http://webster.cs.ucr.edu/AsmTools/HLA/HLAv${PORTVERSION}/:src \
-		http://www.gahr.ch/FreeBSD/HLA/:extra
-DISTFILES=	${PORTNAME}src${EXTRACT_SUFX}:src \
-		bsd.hla.tar.gz:src \
-		lex.yy.c:extra
+MASTER_SITES=	http://www.gahr.ch/FreeBSD/HLA/
+DISTFILES=	${PORTNAME}src${EXTRACT_SUFX} bsd.hla.tar.gz lex.yy.c
 DIST_SUBDIR=	${PORTNAME}
 EXTRACT_ONLY=	${PORTNAME}src${EXTRACT_SUFX}
 
@@ -30,28 +27,28 @@ OPTIONS_DEFINE=	DOCS TEST
 .include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MDOCS} || make(makesum)
-DISTFILES+=	HLARef_html${EXTRACT_SUFX}:src \
-		HLAstdlib_html${EXTRACT_SUFX}:src
+DISTFILES+=	HLARef_html${EXTRACT_SUFX} HLAstdlib_html${EXTRACT_SUFX}
 .endif
 .if ${PORT_OPTIONS:MTEST} || make(makesum)
-DISTFILES+=	hello.hla:extra
+DISTFILES+=	hello.hla
 .endif
 
 post-extract:
 	${MKDIR} ${WRKDIR}/stdlib && \
 	    ${TAR} -zxf ${_DISTDIR}/bsd.${PORTNAME}.tar.gz -C ${WRKDIR}/stdlib
 	${CP} ${_DISTDIR}/lex.yy.c ${WRKSRC}
-.if ${PORT_OPTIONS:MTEST}
+	${FIND} ${WRKDIR} -type d -exec ${CHMOD} 755 {} \;
+
+post-extract-TEST-on:
 	${CP} ${_DISTDIR}/hello.hla ${WRKSRC}
-.endif
-.if ${PORT_OPTIONS:MDOCS}
+
+post-extract-DOCS-on:
 	(${MKDIR} ${WRKDIR}/HLAstdlib && \
 	    ${UNZIP_CMD} -q ${_DISTDIR}/HLAstdlib_html${EXTRACT_SUFX} -d ${WRKDIR}/HLAstdlib \
 	)
 	(${MKDIR} ${WRKDIR}/HLAReference && \
 	    ${UNZIP_CMD} -q ${_DISTDIR}/HLARef_html${EXTRACT_SUFX} -d ${WRKDIR}/HLAReference \
 	)
-.endif
 
 post-patch:
 	@${REINPLACE_CMD} -e '/flex/d; s|gcc|${CC}|; s|-O2|${CFLAGS}|; \
@@ -65,15 +62,15 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/hlaparse ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${WRKDIR}/stdlib/hla/hlalib/hlalib.a ${STAGEDIR}${PREFIX}/lib
 	@${MKDIR} ${STAGEDIR}${PREFIX}/include/hla
+	@${CHMOD} 755 ${WRKDIR}/stdlib/hla/include/include # broken archive
 	(cd ${WRKDIR}/stdlib/hla/include/include && ${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/include/hla)
 
-post-install:
-.if ${PORT_OPTIONS:MDOCS}
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}/Reference ${STAGEDIR}${DOCSDIR}/stdlib
 	(cd ${WRKDIR}/HLAReference && ${COPYTREE_SHARE} . ${STAGEDIR}${DOCSDIR}/Reference)
 	(cd ${WRKDIR}/HLAstdlib && ${COPYTREE_SHARE} . ${STAGEDIR}${DOCSDIR}/stdlib)
-.endif
-.if ${PORT_OPTIONS:MTEST}
+
+do-test-TEST-on:
 	@${ECHO_MSG} ""
 	@${ECHO_MSG} "Testing HLA installation..."
 	@( \
@@ -81,6 +78,5 @@ post-install:
 	    PATH=${PATH}:${STAGEDIR}${PREFIX}/bin ${WRKSRC}/hla ${WRKSRC}/hello.hla && \
 	    ${WRKSRC}/hello \
 	)
-.endif
 
 .include <bsd.port.mk>

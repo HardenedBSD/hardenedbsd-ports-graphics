@@ -3,9 +3,9 @@
 
 PORTNAME=	ultimatestunts
 PORTVERSION=	0.7.7.1
-PORTREVISION=	3
 DISTVERSIONPREFIX=	srcdata-
 DISTVERSION=	${PORTVERSION:S/.//g}
+PORTREVISION=	3
 CATEGORIES=	games
 MASTER_SITES=	SF/${PORTNAME}/sourcecode \
 		SF/nemysisfreebsdp/${CATEGORIES}/:icons
@@ -15,10 +15,10 @@ DISTFILES=	${PORTNAME}-${DISTVERSIONPREFIX}${DISTVERSION}${EXTRACT_SUFX} \
 MAINTAINER=	nemysis@FreeBSD.org
 COMMENT=	Racing game with elaborate stunts
 
-LICENSE=	GPLv2 # or later
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-LIB_DEPENDS=	libvorbisfile.so:${PORTSDIR}/audio/libvorbis
+LIB_DEPENDS=	libvorbisfile.so:audio/libvorbis
 
 USES=		gettext openal:al,alut pkgconfig
 USE_GL=		gl glu

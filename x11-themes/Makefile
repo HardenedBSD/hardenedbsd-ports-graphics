@@ -3,7 +3,10 @@
 
     COMMENT = X11 themes
 
+    SUBDIR += adwaita-common
     SUBDIR += adwaita-icon-theme
+    SUBDIR += adwaita-qt4
+    SUBDIR += adwaita-qt5
     SUBDIR += audacious-skins
     SUBDIR += beastie
     SUBDIR += claws-mail-themes
@@ -55,6 +58,7 @@
     SUBDIR += gnome-themes-extras
     SUBDIR += gnome-themes-standard
     SUBDIR += greybird-theme
+    SUBDIR += gtk-E17-theme
     SUBDIR += gtk-aluminumalloy-cryogenic-theme
     SUBDIR += gtk-aluminumalloy-smog-theme
     SUBDIR += gtk-aluminumalloy-toxic-theme

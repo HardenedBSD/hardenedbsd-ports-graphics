@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	net-ldap
-PORTVERSION=	0.12.1
+PORTVERSION=	0.14.0
 CATEGORIES=	net rubygems
 MASTER_SITES=	RG
 
@@ -13,9 +13,7 @@ LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/License.rdoc
 
 NO_ARCH=	yes
-
 USE_RUBY=	yes
-USE_RUBYGEMS=	yes
-RUBYGEM_AUTOPLIST=	yes
+USES=		gem
 
 .include <bsd.port.mk>
