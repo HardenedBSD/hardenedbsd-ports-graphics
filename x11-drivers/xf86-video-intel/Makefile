@@ -33,7 +33,7 @@ CPE_VENDOR=	x
 CONFIGURE_ARGS+=	--enable-sna \
 			--disable-dri3
 # default to uxa since sna gives a black screen (which mouse cursor, though)
-CONFIGURE_ARGS+=	--with-default-accel=uxa
+CONFIGURE_ARGS+=	--with-default-accel=sna
 INSTALL_TARGET=	install-strip
 
 .include <bsd.port.options.mk>
