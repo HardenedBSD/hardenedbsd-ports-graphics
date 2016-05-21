@@ -1,3 +1,4 @@
+# Created by: Chuck Robey <chuckr@FreeBSD.org>
 # $FreeBSD$
 
 PORTNAME=	mosml
@@ -21,6 +22,7 @@ RESTRICTED=	Restrictions on for-profit distribution
 USES=		compiler:features gmake perl5
 ALL_TARGET=	world
 MAKE_ARGS=	ADDRUNLIBS= \
+		CC="${CC}" \
 		CPP="${CPP} -P -traditional -Dunix -Umsdos" \
 		DOCSDIR="${DOCSDIR}" \
 		DYNLD="${CC} -shared" \
