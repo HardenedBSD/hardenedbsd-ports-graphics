@@ -2,7 +2,7 @@
 
 PORTNAME=	xorg-drivers
 PORTVERSION=	7.7
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
@@ -30,6 +30,7 @@ VIDEO_DRIVERS=		mach64 \
 			nv \
 			r128 \
 			vesa \
+			amdgpu \
 			apm \
 			ark \
 			chips \
@@ -66,8 +67,8 @@ ${a:tu}_DESC=	Install ${a} ${type} driver
 . endfor
 .endfor
 
-OPTIONS_DEFINE_i386=	ATI INTEL OPENCHROME
-OPTIONS_DEFAULT_i386=	ATI INTEL OPENCHROME
+OPTIONS_DEFINE_i386=	AMDGPU ATI INTEL OPENCHROME
+OPTIONS_DEFAULT_i386=	AMDGPU ATI INTEL OPENCHROME
 
 OPTIONS_DEFINE_amd64:=	${OPTIONS_DEFINE_i386}
 OPTIONS_DEFAULT_amd64:=	${OPTIONS_DEFAULT_i386}
@@ -78,6 +79,7 @@ OPTIONS_DEFAULT_sparc64=SUNFFB
 OPTIONS_DEFINE_ia64=	OPENCHROME
 OPTIONS_DEFAULT_ia64=	OPENCHROME
 
+AMDGPU_DESC=		Install amdgpu video driver
 ATI_DESC=		Install ati video driver
 INTEL_DESC=		Install intel video driver
 OPENCHROME_DESC=	Install openchrome video driver
