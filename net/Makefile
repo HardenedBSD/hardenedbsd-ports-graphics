@@ -459,8 +459,10 @@
     SUBDIR += ntimed
     SUBDIR += ntlmaps
     SUBDIR += ntop
+    SUBDIR += ntopng
     SUBDIR += ntp
     SUBDIR += ntp-devel
+    SUBDIR += ntpa
     SUBDIR += ntraceroute
     SUBDIR += nusoap
     SUBDIR += nxproxy
@@ -1226,6 +1228,7 @@
     SUBDIR += sntop
     SUBDIR += sobby
     SUBDIR += socat
+    SUBDIR += sock
     SUBDIR += socketbind
     SUBDIR += socketpipe
     SUBDIR += socketw

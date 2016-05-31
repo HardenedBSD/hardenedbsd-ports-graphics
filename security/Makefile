@@ -115,7 +115,6 @@
     SUBDIR += duo
     SUBDIR += easy-rsa
     SUBDIR += easy-rsa2
-    SUBDIR += easypg
     SUBDIR += elixir-comeonin
     SUBDIR += elixir-comeonin_i18n
     SUBDIR += elixir-jose
@@ -783,6 +782,7 @@
     SUBDIR += pinentry-gnome3
     SUBDIR += pinentry-gtk2
     SUBDIR += pinentry-qt4
+    SUBDIR += pinentry-qt5
     SUBDIR += pinentry-tty
     SUBDIR += pixiewps
     SUBDIR += pkcrack
