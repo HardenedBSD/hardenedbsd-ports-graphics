@@ -758,7 +758,6 @@
     SUBDIR += py-pickleshare
     SUBDIR += py-postgresql
     SUBDIR += py-psycogreen
-    SUBDIR += py-psycopg
     SUBDIR += py-psycopg2
     SUBDIR += py-psycopg2cffi
     SUBDIR += py-pyPgSQL
@@ -795,6 +794,7 @@
     SUBDIR += py-sybase
     SUBDIR += py-tarantool
     SUBDIR += py-umemcache
+    SUBDIR += py-unqlite
     SUBDIR += py-whisper
     SUBDIR += py3-bsddb3
     SUBDIR += py33-gdbm
