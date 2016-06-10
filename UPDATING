@@ -5,6 +5,35 @@ they are unavoidable.
 You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
+20160611
+  AFFECTS: users of textproc/xmlroff
+  AUTHOR: hrs@FreeBSD.org
+
+  The library part of xmlroff has been separated into textproc/libfo.
+  Remove the installed xmlroff first when upgrading it because older
+  xmlroff than 0.6.2_6 have files which libfo installs.  A typical
+  error message is the following:
+
+  pkg-static: libfo-0.6.2 conflicts with xmlroff-0.6.2_5 (installs files into the same place).  Problematic file: /usr/local/include/libfo-0.6/libfo/area/fo-area.h
+
+20160610
+  AFFECTS: users of databases/postgresql-repmgr
+  AUTHOR: bofh@FreeBSD.org
+
+  The port has been repocopied to databases/postgresql-repmgr2 and current
+  post has been updated to 3.x series. If anyone is still looking forward
+  to use the 2.x please upgrade as following.
+
+  # portmaster -o databases/postgresql-repmgr2 databases/postgresql-repmgr
+    or
+  # portupgrade -o databases/postgresql-repmgr2 databases/postgresql-repmgr
+
+  Otherwise if you want to move on with 3.x series just use
+
+  # portmaster -r databases/postgresql-repmgr 
+    or
+  # portupgrade -fr databases/postgresql-repmgr
+
 20160605
   AFFECTS: Users of www/h2o
   AUTHOR: junovitch@FreeBSD.org
