@@ -622,6 +622,7 @@
     SUBDIR += geany-plugin-git-changebar
     SUBDIR += geany-plugin-insertnum
     SUBDIR += geany-plugin-latex
+    SUBDIR += geany-plugin-lineoperations
     SUBDIR += geany-plugin-lipsum
     SUBDIR += geany-plugin-lua
     SUBDIR += geany-plugin-macro
@@ -4801,7 +4802,6 @@
     SUBDIR += rubygem-ast
     SUBDIR += rubygem-astrolabe
     SUBDIR += rubygem-atomic
-    SUBDIR += rubygem-atoulme-antwrap
     SUBDIR += rubygem-attic
     SUBDIR += rubygem-attr_required
     SUBDIR += rubygem-authlogic
@@ -4969,6 +4969,7 @@
     SUBDIR += rubygem-hashery
     SUBDIR += rubygem-hashie
     SUBDIR += rubygem-hashie2
+    SUBDIR += rubygem-health_check
     SUBDIR += rubygem-highline
     SUBDIR += rubygem-hike
     SUBDIR += rubygem-hitimes

@@ -72,7 +72,15 @@ MESA_LLVM_VER=37
 CONFIGURE_ARGS+=	--with-sha1=libcrypto
 
 # DRI3 needs PRIME support in the kernel to work
+# XXX this is for testing only, in ports we probably should autoconfig this
+# if the kernel is new enough.
+.if ${PORT_OPTIONS:MDRI3}
+USE_XORG+=	dri3proto presentproto xshmfence
+LIB_DEPENDS+=	libxcb.so:x11/libxcb
+CONFIGURE_ARGS+=	--enable-dri3
+.else
 CONFIGURE_ARGS+=	--disable-dri3
+.endif
 
 CONFIGURE_ARGS+=	--enable-gbm
 

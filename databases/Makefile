@@ -567,6 +567,8 @@
     SUBDIR += pgfouine
     SUBDIR += pglesslog
     SUBDIR += pgloader
+    SUBDIR += pglogical
+    SUBDIR += pglogical-output
     SUBDIR += pgpool
     SUBDIR += pgpool-II
     SUBDIR += pgpool-II-22
@@ -639,6 +641,7 @@
     SUBDIR += postgis-jdbc
     SUBDIR += postgis20
     SUBDIR += postgis21
+    SUBDIR += postgis22
     SUBDIR += postgresql-jdbc
     SUBDIR += postgresql-libpgeasy
     SUBDIR += postgresql-libpqxx
@@ -704,7 +707,9 @@
     SUBDIR += proftpd-mod_sql_tds
     SUBDIR += puppetdb
     SUBDIR += puppetdb-terminus
+    SUBDIR += puppetdb-terminus3
     SUBDIR += puppetdb-terminus4
+    SUBDIR += puppetdb3
     SUBDIR += puppetdb4
     SUBDIR += pure-sql3
     SUBDIR += puredb
@@ -951,6 +956,7 @@
     SUBDIR += sqliteman
     SUBDIR += sqlitemanager
     SUBDIR += sqliteodbc
+    SUBDIR += sqliteodbc-sqlite2
     SUBDIR += sqlitestudio
     SUBDIR += sqlrelay
     SUBDIR += sqsh
