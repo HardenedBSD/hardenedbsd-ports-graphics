@@ -1,2 +1,3 @@
-SHA256 (mesa-11.2.2.tar.xz) = 40e148812388ec7c6d7b6657d5a16e2e8dabba8b97ddfceea5197947647bdfb4
-SIZE (mesa-11.2.2.tar.xz) = 7860932
+TIMESTAMP = 1465497765
+SHA256 (mesa-12.0.0-rc2.tar.xz) = 4fea2e873e8baf92cefa58695d4e719bcddb279c601077f0e7fafaed1259fbc0
+SIZE (mesa-12.0.0-rc2.tar.xz) = 8550332
