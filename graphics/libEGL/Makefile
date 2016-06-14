@@ -13,6 +13,10 @@ LIB_DEPENDS+=	libpthread-stubs.so:devel/libpthread-stubs \
 		libdevq.so:devel/libdevq \
 		libdrm.so:graphics/libdrm
 
+OPTIONS_DEFINE_amd64=	DRI3
+OPTIONS_DEFINE_i386=	DRI3
+DRI3_DESC=	Experimental: Enable DRI3 support.
+
 USE_GL=		gbm
 USE_XORG=	x11 xau xcb xdmcp
 

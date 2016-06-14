@@ -23,12 +23,15 @@ XORG_CAT=	xserver
 SLAVE_PORT?=	no
 
 OPTIONS_SUB=	yes
-OPTIONS_DEFINE=	SUID
+OPTIONS_DEFINE=	SUID 
 OPTIONS_RADIO=	CONF
 OPTIONS_RADIO_CONF=	HAL DEVD
+OPTIONS_DEFINE_amd64=	DRI3
+OPTIONS_DEFINE_i386=	DRI3
 SUID_DESC=	Install the Xorg server with setuid bit set
 HAL_DESC=	Compile with HAL config support
 DEVD_DESC=	Use devd for autoconfiguration of input devices
+DRI3_DESC=	Experimental: Enable DRI3 support
 OPTIONS_DEFAULT=SUID DEVD
 
 OPTIONS_EXCLUDE_sparc64=	HAL
@@ -50,7 +53,7 @@ USE_OPENSSL=	yes
 CONFIGURE_ARGS?=--disable-dmx --disable-xvfb --disable-xnest \
 		--without-xmlto --disable-docs --disable-devel-docs \
 		--localstatedir=/var --without-dtrace --disable-xephyr \
-		--enable-record=yes --disable-dri3 --disable-xwayland \
+		--enable-record=yes --disable-xwayland \
 		--enable-glamor
 INSTALL_TARGET=	install-strip
 
@@ -60,6 +63,13 @@ SUB_FILES=	pkg-install pkg-deinstall
 # for slave ports we need to overwrite PLIST, so it doesn't overwrite
 # PLIST_FILES, with the masterport plist.
 PLIST=		${.CURDIR}/pkg-plist
+.endif
+
+.if ${PORT_OPTIONS:MDRI3}
+USE_XORG+=	dri3proto
+CONFIGURE_ARGS+=	 --enable-dri3 
+.else
+CONFIGURE_ARGS+=	 --disable-dri3 
 .endif
 
 .include <bsd.port.pre.mk>
