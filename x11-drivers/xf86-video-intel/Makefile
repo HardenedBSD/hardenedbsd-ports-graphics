@@ -35,6 +35,7 @@ USES+=		cpe
 CPE_VENDOR=	x
 
 CONFIGURE_ARGS+=	--with-default-accel=sna
+
 INSTALL_TARGET=	install-strip
 
 OPTIONS_DEFINE_amd64=	DRI3
