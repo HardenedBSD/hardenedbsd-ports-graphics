@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-intel
-PORTVERSION=	2.99.917.20160417
-PORTREVISION=	1
+PORTVERSION=	2.99.917.20160614
 CATEGORIES=	x11-drivers
 MASTER_SITES=	LOCAL/kwm \
 		http://rainbow-runner.nl/freebsd/
@@ -11,7 +10,9 @@ MASTER_SITES=	LOCAL/kwm \
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Driver for Intel integrated graphics chipsets
 
-LIB_DEPENDS=	libxcb-util.so:x11/xcb-util
+LIB_DEPENDS=	libxcb-util.so:x11/xcb-util \
+		libpciaccess.so:devel/libpciaccess \
+		libdrm.so:devel/libdrm
 
 ONLY_FOR_ARCHS=	amd64 i386
 USE_GL=		gl
@@ -21,11 +22,13 @@ XORG_CAT=	driver
 USE_XORG=	glproto \
 		pixman \
 		x11 \
+		xcb \
 		xext \
 		xf86driproto \
 		xineramaproto \
 		xrender \
 		presentproto \
+		xv \
 		xvmc
 
 USES+=		cpe
