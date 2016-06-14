@@ -1206,6 +1206,7 @@
     SUBDIR += libewf
     SUBDIR += libexecinfo
     SUBDIR += libexplain
+    SUBDIR += libfastjson
     SUBDIR += libffi
     SUBDIR += libfirm
     SUBDIR += libfortuna
@@ -3533,6 +3534,7 @@
     SUBDIR += pas2dox
     SUBDIR += pasm
     SUBDIR += patch
+    SUBDIR += pcc-libs
     SUBDIR += pccts
     SUBDIR += pcl
     SUBDIR += pcre
@@ -4040,6 +4042,7 @@
     SUBDIR += py-coverage
     SUBDIR += py-crcmod
     SUBDIR += py-ctags
+    SUBDIR += py-cuisine
     SUBDIR += py-curtsies
     SUBDIR += py-cxx
     SUBDIR += py-cycler
