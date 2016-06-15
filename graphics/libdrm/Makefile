@@ -1,8 +1,10 @@
 # Created by: lesi@FreeBSD.org
 # $FreeBSD$
 
+# before commit, vc4 plist entries (for arm) need to be added.
+
 PORTNAME=	libdrm
-PORTVERSION=	2.4.66
+PORTVERSION=	2.4.68
 PORTEPOCH=	1
 CATEGORIES=	graphics x11
 MASTER_SITES=	http://dri.freedesktop.org/libdrm/
@@ -51,12 +53,19 @@ CONFIGURE_ARGS+=--disable-vmwgfx
 .if ${ARCH} == amd64 || ${ARCH} == i386
 PLIST_SUB+=	INTEL_DRIVER=""
 PLIST_SUB+=	RADEON_DRIVERS=""
+PLIST_SUB+=	VC4_DRIVERS="@comment "
 .elif ${ARCH} == ia64 || ${ARCH} == powerpc || ${ARCH} == powerpc64
 PLIST_SUB+=	INTEL_DRIVER="@comment "
 PLIST_SUB+=	RADEON_DRIVERS=""
+PLIST_SUB+=	VC4_DRIVERS="@comment "
+.elif ${ARCH} == arm6 || ${ARCH} == arm64
+PLIST_SUB+=	INTEL_DRIVER="@comment "
+PLIST_SUB+=	READEON_DRIVERS="@comment"
+PLIST_SUB+=	VC4_DRIVERS=""
 .else
 PLIST_SUB+=	INTEL_DRIVER="@comment "
 PLIST_SUB+=	RADEON_DRIVERS="@comment "
+PLIST_SUB+=	VC4_DRIVERS="@comment "
 .endif
 
 # This variable is not for users. So use a non-default name, intended for
