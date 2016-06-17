@@ -13,6 +13,10 @@ USES=	metaport
 # base
 USE_LINUX=	c6
 
+OVERRIDE_LINUX_BASE_PORT=c6_64
+OVERRIDE_LINUX_NONBASE_PORTS=c6_64
+
+
 # non-base
 
 RUN_DEPENDS+=	linux-${USE_LINUX}-libasyncns>0:dns/linux-c6-libasyncns \
