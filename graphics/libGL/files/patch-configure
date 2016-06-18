@@ -1,6 +1,6 @@
---- configure.orig	2015-12-22 17:04:20.271630000 +0100
-+++ configure	2015-12-22 17:05:17.669976000 +0100
-@@ -858,6 +858,8 @@
+--- configure.orig	2016-05-09 12:56:11 UTC
++++ configure
+@@ -860,6 +860,8 @@ GLPROTO_LIBS
  GLPROTO_CFLAGS
  XLIBGL_LIBS
  XLIBGL_CFLAGS
@@ -8,9 +8,9 @@
 +LIBDEVQ_CFLAGS
  LIBUDEV_LIBS
  LIBUDEV_CFLAGS
- MESA_LLVM
-@@ -1156,6 +1158,8 @@
- LIBDRM_LIBS
+ ENABLE_SHADER_CACHE_FALSE
+@@ -1175,6 +1177,8 @@ OPENSSL_CFLAGS
+ OPENSSL_LIBS
  LIBUDEV_CFLAGS
  LIBUDEV_LIBS
 +LIBDEVQ_CFLAGS
@@ -18,7 +18,7 @@
  XLIBGL_CFLAGS
  XLIBGL_LIBS
  GLPROTO_CFLAGS
-@@ -1966,6 +1970,10 @@
+@@ -2002,6 +2006,10 @@ Some influential environment variables:
                C compiler flags for LIBUDEV, overriding pkg-config
    LIBUDEV_LIBS
                linker flags for LIBUDEV, overriding pkg-config
@@ -29,15 +29,15 @@
    XLIBGL_CFLAGS
                C compiler flags for XLIBGL, overriding pkg-config
    XLIBGL_LIBS linker flags for XLIBGL, overriding pkg-config
-@@ -5246,6 +5254,7 @@
+@@ -5336,6 +5344,7 @@ DRI2PROTO_REQUIRED=2.6
  DRI3PROTO_REQUIRED=1.0
  PRESENTPROTO_REQUIRED=1.0
  LIBUDEV_REQUIRED=151
 +LIBDEVQ_REQUIRED=0.0.2
  GLPROTO_REQUIRED=1.4.14
  LIBOMXIL_BELLAGIO_REQUIRED=0.0
- LIBVA_REQUIRED=0.35.0
-@@ -21035,7 +21044,7 @@
+ LIBVA_REQUIRED=0.38.0
+@@ -21444,7 +21453,7 @@ fi
  
  
  case "$host_os" in
@@ -46,7 +46,7 @@
      dri3_default=yes
      ;;
  *)
-@@ -21543,6 +21552,78 @@
+@@ -22438,6 +22447,78 @@ $as_echo "yes" >&6; }
  	have_libudev=yes
  fi
  
@@ -125,7 +125,7 @@
  # Check whether --enable-sysfs was given.
  if test "${enable_sysfs+set}" = set; then :
    enableval=$enable_sysfs; have_sysfs="$enableval"
-@@ -22258,6 +22339,10 @@
+@@ -23244,6 +23325,10 @@ if test "$have_libudev" = yes; then
      DEFINES="$DEFINES -DHAVE_LIBUDEV"
      have_pci_id=yes
  fi
@@ -136,9 +136,9 @@
  
  if test "$have_sysfs" = yes; then
      DEFINES="$DEFINES -DHAVE_SYSFS"
-@@ -22396,6 +22481,22 @@
+@@ -23379,6 +23464,22 @@ if test "x$enable_dri" = xyes; then
          ;;
-     gnu*)
+     *freebsd* | dragonfly* | *netbsd* | openbsd*)
          DEFINES="$DEFINES -DHAVE_ALIAS"
 +        if test "x$enable_dri3" = xyes; then
 +            DEFINES="$DEFINES -DHAVE_DRI3"
@@ -157,9 +157,9 @@
 +            ;;
 +        esac
          ;;
-     cygwin*)
-         if test "x$with_dri_drivers" = "xyes"; then
-@@ -23195,6 +23296,8 @@
+     gnu*)
+         DEFINES="$DEFINES -DHAVE_ALIAS"
+@@ -24181,6 +24282,8 @@ fi
  
  if test "x$need_pci_id$have_libudev" = xyesyes; then
      GBM_PC_REQ_PRIV="libudev >= $LIBUDEV_REQUIRED"
@@ -168,7 +168,7 @@
  else
      GBM_PC_REQ_PRIV=""
  fi
-@@ -24018,9 +24121,19 @@
+@@ -25012,9 +25115,19 @@ if test "x$enable_opencl" = xyes; then
          as_fn_error $? "cannot enable OpenCL without Gallium" "$LINENO" 5
      fi
  
@@ -188,7 +188,7 @@
  
      if test "x$have_libclc" = xno; then
          as_fn_error $? "pkg-config cannot find libclc.pc which is required to build clover.
-@@ -24835,9 +24948,6 @@
+@@ -25828,9 +25941,6 @@ fi
                  CLANG_LIBDIR=${LLVM_LIBDIR}
              fi
              CLANG_RESOURCE_DIR=$CLANG_LIBDIR/clang/${LLVM_VERSION}
