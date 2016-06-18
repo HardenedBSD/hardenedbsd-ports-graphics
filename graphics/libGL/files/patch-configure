@@ -1,5 +1,5 @@
---- configure.orig	2016-05-09 12:56:11 UTC
-+++ configure
+--- configure.orig	2016-06-18 19:04:45.240922000 +0200
++++ configure	2016-06-18 19:05:15.281086000 +0200
 @@ -860,6 +860,8 @@ GLPROTO_LIBS
  GLPROTO_CFLAGS
  XLIBGL_LIBS
@@ -136,10 +136,16 @@
  
  if test "$have_sysfs" = yes; then
      DEFINES="$DEFINES -DHAVE_SYSFS"
-@@ -23379,6 +23464,22 @@ if test "x$enable_dri" = xyes; then
+@@ -23377,9 +23462,28 @@ if test "x$enable_dri" = xyes; then
+             ;;
+         esac
          ;;
-     *freebsd* | dragonfly* | *netbsd* | openbsd*)
+-    *freebsd* | dragonfly* | *netbsd* | openbsd*)
++    *netbsd* | openbsd*)
          DEFINES="$DEFINES -DHAVE_ALIAS"
+         ;;
++    *freebsd* | dragonfly*)
++        DEFINES="$DEFINES -DHAVE_ALIAS"
 +        if test "x$enable_dri3" = xyes; then
 +            DEFINES="$DEFINES -DHAVE_DRI3"
 +        fi
@@ -156,10 +162,11 @@
 +            fi
 +            ;;
 +        esac
-         ;;
++        ;;
      gnu*)
          DEFINES="$DEFINES -DHAVE_ALIAS"
-@@ -24181,6 +24282,8 @@ fi
+         ;;
+@@ -24181,6 +24285,8 @@ fi
  
  if test "x$need_pci_id$have_libudev" = xyesyes; then
      GBM_PC_REQ_PRIV="libudev >= $LIBUDEV_REQUIRED"
@@ -168,7 +175,7 @@
  else
      GBM_PC_REQ_PRIV=""
  fi
-@@ -25012,9 +25115,19 @@ if test "x$enable_opencl" = xyes; then
+@@ -25012,9 +25118,19 @@ if test "x$enable_opencl" = xyes; then
          as_fn_error $? "cannot enable OpenCL without Gallium" "$LINENO" 5
      fi
  
@@ -188,7 +195,7 @@
  
      if test "x$have_libclc" = xno; then
          as_fn_error $? "pkg-config cannot find libclc.pc which is required to build clover.
-@@ -25828,9 +25941,6 @@ fi
+@@ -25828,9 +25944,6 @@ fi
                  CLANG_LIBDIR=${LLVM_LIBDIR}
              fi
              CLANG_RESOURCE_DIR=$CLANG_LIBDIR/clang/${LLVM_VERSION}
