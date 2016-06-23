@@ -103,6 +103,7 @@
     SUBDIR += bsdmoted
     SUBDIR += bsdploy
     SUBDIR += bsdstats
+    SUBDIR += bstack
     SUBDIR += btsixad
     SUBDIR += bulk_extractor
     SUBDIR += burp
@@ -439,6 +440,7 @@
     SUBDIR += installwatch
     SUBDIR += intel-nvmupdate
     SUBDIR += intel-pcm
+    SUBDIR += intel-qcu
     SUBDIR += iocage
     SUBDIR += iocage-devel
     SUBDIR += iogen
@@ -627,6 +629,7 @@
     SUBDIR += nfsping
     SUBDIR += nitrogen
     SUBDIR += no-login
+    SUBDIR += nomad
     SUBDIR += npadmin
     SUBDIR += nrg2iso
     SUBDIR += ntfsprogs

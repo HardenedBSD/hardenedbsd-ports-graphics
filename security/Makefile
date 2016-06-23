@@ -74,6 +74,7 @@
     SUBDIR += clambc
     SUBDIR += clamcour
     SUBDIR += clamd-stream-client
+    SUBDIR += clamfs
     SUBDIR += clamsmtp
     SUBDIR += clamtk
     SUBDIR += clusterssh
@@ -120,6 +121,7 @@
     SUBDIR += elixir-jose
     SUBDIR += erlang-jose
     SUBDIR += erlang-p1tls
+    SUBDIR += eschalot
     SUBDIR += esteidfirefoxplugin
     SUBDIR += expiretable
     SUBDIR += f-prot

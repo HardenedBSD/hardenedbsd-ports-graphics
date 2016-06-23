@@ -43,6 +43,7 @@
     SUBDIR += R-cran-reshape2
     SUBDIR += R-cran-rngtools
     SUBDIR += R-cran-rstudioapi
+    SUBDIR += R-cran-tibble
     SUBDIR += R-cran-tidyr
     SUBDIR += SpecTcl
     SUBDIR += aap
@@ -2987,9 +2988,6 @@
     SUBDIR += p5-Range-String
     SUBDIR += p5-Rcs
     SUBDIR += p5-Rcs-Agent
-    SUBDIR += p5-ReadLine-Gnu
-    SUBDIR += p5-ReadLine-Perl
-    SUBDIR += p5-ReadLine-TTYtter
     SUBDIR += p5-Readonly
     SUBDIR += p5-Readonly-XS
     SUBDIR += p5-Reflex
@@ -3172,7 +3170,9 @@
     SUBDIR += p5-Term-RawInput
     SUBDIR += p5-Term-ReadKey
     SUBDIR += p5-Term-ReadLine
+    SUBDIR += p5-Term-ReadLine-Gnu
     SUBDIR += p5-Term-ReadLine-Perl
+    SUBDIR += p5-Term-ReadLine-TTYtter
     SUBDIR += p5-Term-ReadLine-Zoid
     SUBDIR += p5-Term-ReadPassword
     SUBDIR += p5-Term-Screen
@@ -4151,6 +4151,7 @@
     SUBDIR += py-hypothesis
     SUBDIR += py-icalendar
     SUBDIR += py-ice
+    SUBDIR += py-inflect
     SUBDIR += py-iniparse
     SUBDIR += py-initgroups
     SUBDIR += py-instant
@@ -4163,6 +4164,10 @@
     SUBDIR += py-isodate
     SUBDIR += py-iterpipes
     SUBDIR += py-itools
+    SUBDIR += py-jaraco.classes
+    SUBDIR += py-jaraco.functools
+    SUBDIR += py-jaraco.itertools
+    SUBDIR += py-jaraco.logging
     SUBDIR += py-jaraco.timing
     SUBDIR += py-jaraco.util
     SUBDIR += py-jcc
@@ -4205,6 +4210,7 @@
     SUBDIR += py-lock_file
     SUBDIR += py-lockfile
     SUBDIR += py-log4py
+    SUBDIR += py-logbook
     SUBDIR += py-logan
     SUBDIR += py-logilab-common
     SUBDIR += py-lxml

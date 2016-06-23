@@ -5,6 +5,54 @@ they are unavoidable.
 You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
+20160621
+  AFFECTS: users of www/redmine
+  AUTHOR: tz@FreeBSD.org
+
+  Redmine was updated from 2.6.9 to 3.2.3. Since this an update over
+  major versions be careful with your update.
+  For further update instructions please have a look at:
+  https://www.redmine.org/projects/redmine/wiki/RedmineUpgrade
+
+20160621
+  AFFECTS: users of ftp/wget
+  AUTHOR: vlad-fbsd@acheronmedia.com
+
+  Wget 1.18 fixes a security vulnerability (CVE-2016-4971) and the fix
+  introduces a backward-incompatibility for HTTP->FTP redirects. Any script that
+  relies on the old behaviour must use --trust-server-names in order to trust
+  the HTTP response and redirect to the new filename.
+
+20160619
+  AFFECTS: users of databases/py-apsw
+  AUTHOR: rm@FreeBSD.org
+
+  SQLite 3.12 completely changed the semantics of VFS.xGetLastError() in an
+  incompatible way. This required a rewrite of the relevant C, Python and test
+  code. If you implement or use this method then you have to rewrite your code
+  too. Also note that running the test suite from an earlier version of APSW
+  against this or future SQLite versions will result in consuming all memory,
+  swap or address space (an underlying integer changed meaning).
+
+20160616
+  AFFECTS: users of security/openssl*, security/libressl*
+  AUTHOR: mat@FreeBSD.org
+
+  Previously, to tell the ports tree, you needed to set:
+
+  WITH_OPENSSL_PORT=yes
+  
+  And if you wanted a port that was not security/openssl, you needed to add,
+  for example:
+
+  OPENSSL_PORT=	security/libressl
+
+  Now, all you need to do is:
+
+  DEFAULT_VERSIONS+=  ssl=libressl
+  
+  Valid values are base, openssl, openssl-devel, libressl, and libressl-devel.
+
 20160614
   AFFECTS: users of www/node, www/node5, and www/node4
   AUTHOR: adamw@FreeBSD.org
