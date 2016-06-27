@@ -212,6 +212,7 @@
     SUBDIR += gpx2map
     SUBDIR += grafana
     SUBDIR += grafana2
+    SUBDIR += grafana3
     SUBDIR += grails
     SUBDIR += graylog-web-interface
     SUBDIR += gregarius
@@ -1777,6 +1778,7 @@
     SUBDIR += py-uliweb
     SUBDIR += py-urlgrabber
     SUBDIR += py-urljr
+    SUBDIR += py-urlobject
     SUBDIR += py-user_agent
     SUBDIR += py-utidy
     SUBDIR += py-w3lib
@@ -1812,6 +1814,7 @@
     SUBDIR += red5
     SUBDIR += redaxo
     SUBDIR += redmine
+    SUBDIR += redmine-a_common_libs
     SUBDIR += redmine-backlogs
     SUBDIR += redmine-basecamp
     SUBDIR += redmine-default_assign
@@ -1822,6 +1825,7 @@
     SUBDIR += redmine-qa_contact
     SUBDIR += redmine-redcarpet_formatter
     SUBDIR += redmine-sidebar_hide
+    SUBDIR += redmine-single_auth
     SUBDIR += redmine-stuff_to_do
     SUBDIR += redmine-wiki_notes
     SUBDIR += rejik

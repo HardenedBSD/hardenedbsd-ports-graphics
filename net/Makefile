@@ -246,6 +246,7 @@
     SUBDIR += ifstat
     SUBDIR += ifstated
     SUBDIR += igmpproxy
+    SUBDIR += iipsrv
     SUBDIR += ilbc
     SUBDIR += imapproxy
     SUBDIR += intel-ixl-kmod
@@ -398,6 +399,7 @@
     SUBDIR += miredo
     SUBDIR += miruo
     SUBDIR += mlvpn
+    SUBDIR += mobile-broadband-provider-info
     SUBDIR += mono-zeroconf
     SUBDIR += mopd
     SUBDIR += morebalance

@@ -3270,6 +3270,7 @@
     SUBDIR += p5-Test-More-UTF8
     SUBDIR += p5-Test-Most
     SUBDIR += p5-Test-Name-FromLine
+    SUBDIR += p5-Test-Needs
     SUBDIR += p5-Test-Net-LDAP
     SUBDIR += p5-Test-Net-RabbitMQ
     SUBDIR += p5-Test-NoTabs
@@ -4002,6 +4003,7 @@
     SUBDIR += py-bluelet
     SUBDIR += py-boto
     SUBDIR += py-botocore
+    SUBDIR += py-calendar
     SUBDIR += py-canonicaljson
     SUBDIR += py-capstone
     SUBDIR += py-cclib
@@ -4493,6 +4495,7 @@
     SUBDIR += py-turbokid
     SUBDIR += py-tvrage
     SUBDIR += py-tw.forms
+    SUBDIR += py-twext
     SUBDIR += py-twiggy
     SUBDIR += py-twine
     SUBDIR += py-twisted
@@ -5297,6 +5300,7 @@
     SUBDIR += simian
     SUBDIR += simple_components
     SUBDIR += skalibs
+    SUBDIR += slibtool
     SUBDIR += slf4j
     SUBDIR += smack
     SUBDIR += smake
@@ -5306,6 +5310,7 @@
     SUBDIR += smokeqt
     SUBDIR += smv
     SUBDIR += soapui
+    SUBDIR += sonarqube
     SUBDIR += sope2
     SUBDIR += sope3
     SUBDIR += sourcenav
