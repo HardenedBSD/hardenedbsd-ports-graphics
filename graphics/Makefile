@@ -132,6 +132,7 @@
     SUBDIR += digikam-kde4
     SUBDIR += digikam-kde4-doc
     SUBDIR += digikam-kde4-l10n
+    SUBDIR += dilay
     SUBDIR += ditaa
     SUBDIR += djview4
     SUBDIR += djview4-qt4
@@ -333,6 +334,7 @@
     SUBDIR += gwenview-kde4
     SUBDIR += gx
     SUBDIR += hdr_tools
+    SUBDIR += hiptext
     SUBDIR += hobbes-icons-xpm
     SUBDIR += hppsmtools
     SUBDIR += hs-HGL
@@ -543,7 +545,6 @@
     SUBDIR += linux-adobesvg
     SUBDIR += linux-c6-cairo
     SUBDIR += linux-c6-dri
-    SUBDIR += linux-c6-dri-compat
     SUBDIR += linux-c6-gdk-pixbuf2
     SUBDIR += linux-c6-glx-utils
     SUBDIR += linux-c6-jpeg

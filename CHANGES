@@ -10,6 +10,23 @@ in the release notes and/or placed into UPDATING.
 
 All ports committers are allowed to commit to this file.
 
+20160627:
+AUTHOR: mat@FreeBSD.org
+
+  USE_OPENSSL has been replaced by USES=ssl.
+
+20160625:
+AUTHOR: adamw@FreeBSD.org
+
+  A new ${opt}_CMAKE_BOOL OPTIONS helper has been added. Instead of:
+
+    FOO_CMAKE_ON=	-DWITH_FOO:BOOL=YES -DWITH_BAR:BOOL=YES
+    FOO_CMAKE_OFF=	-DWITH_FOO:BOOL=NO  -DWITH_BAR:BOOL=NO
+
+  you can use this shortcut:
+
+    SOMEOPT_CMAKE_BOOL=	WITH_FOO WITH_BAR
+
 20160525:
 AUTHOR: mat@FreeBSD.org
 
@@ -295,10 +312,10 @@ AUTHOR: mat@FreeBSD.org
 
 20150528:
 AUTHOR: mat@FreeBSD.org
-  
+
   USE_GITHUB can now fetch multiple distfiles.  It uses a grouping feature
   similar to MASTER_SITES/PATCH_SITES.
-  
+
   Some helpful variables are provided: WRKSRC_<group> for putting things in the
   right place in post-extract, and DISTNAME_<group>/DISTFILE_<group> for use
   with EXTRACT_ONLY.

@@ -5,6 +5,112 @@ they are unavoidable.
 You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
+20160626
+  AFFECTS: users of www/calendarserver
+  AUTHOR: pi@FreeBSD.org
+
+  Please note that updating from the previous version (5.1) to the current
+  version (8.0) requires manual steps. Please consult the pkg-message for
+  details.
+
+20160624
+  AFFECTS: users of shells/zsh
+  AUTHOR: adamw@FreeBSD.org
+
+  zsh now looks for system-wide conf files in ${PREFIX}/etc, instead of
+  /etc. If you have files like zshrc, zshenv, zprofile, zlogin, or zlogout
+  in /etc, either move them to /usr/local/etc or rebuild zsh with the
+  ETCDIR option on.
+
+  Note that this change only affects system-wide conf files, which are not
+  installed or created by a default installation.
+
+20160621
+  AFFECTS: users of www/redmine
+  AUTHOR: tz@FreeBSD.org
+
+  Redmine was updated from 2.6.9 to 3.2.3. Since this an update over
+  major versions be careful with your update.
+  For further update instructions please have a look at:
+  https://www.redmine.org/projects/redmine/wiki/RedmineUpgrade
+
+20160621
+  AFFECTS: users of ftp/wget
+  AUTHOR: vd@FreeBSD.org
+
+  Wget 1.18 fixes a security vulnerability (CVE-2016-4971) and the fix
+  introduces a backward-incompatibility for HTTP->FTP redirects. Any script that
+  relies on the old behaviour must use --trust-server-names in order to trust
+  the HTTP response and redirect to the new filename.
+
+20160619
+  AFFECTS: users of databases/py-apsw
+  AUTHOR: rm@FreeBSD.org
+
+  SQLite 3.12 completely changed the semantics of VFS.xGetLastError() in an
+  incompatible way. This required a rewrite of the relevant C, Python and test
+  code. If you implement or use this method then you have to rewrite your code
+  too. Also note that running the test suite from an earlier version of APSW
+  against this or future SQLite versions will result in consuming all memory,
+  swap or address space (an underlying integer changed meaning).
+
+20160616
+  AFFECTS: users of security/openssl*, security/libressl*
+  AUTHOR: mat@FreeBSD.org
+
+  Previously, to tell the ports tree, you needed to set:
+
+  WITH_OPENSSL_PORT=yes
+  
+  And if you wanted a port that was not security/openssl, you needed to add,
+  for example:
+
+  OPENSSL_PORT=	security/libressl
+
+  Now, all you need to do is:
+
+  DEFAULT_VERSIONS+=  ssl=libressl
+  
+  Valid values are base, openssl, openssl-devel, libressl, and libressl-devel.
+
+20160614
+  AFFECTS: users of www/node, www/node5, and www/node4
+  AUTHOR: adamw@FreeBSD.org
+
+  node now prefers a few libraries from ports to the versions bundled
+  with node. However, node cannot use the libssl from LibreSSL. If you
+  are using LibreSSL as your SSL provider, you must enable the
+  "BUNDLED_SSL" option when building node.
+
+20160611
+  AFFECTS: users of textproc/xmlroff
+  AUTHOR: hrs@FreeBSD.org
+
+  The library part of xmlroff has been separated into textproc/libfo.
+  Remove the installed xmlroff first when upgrading it because older
+  xmlroff than 0.6.2_6 have files which libfo installs.  A typical
+  error message is the following:
+
+  pkg-static: libfo-0.6.2 conflicts with xmlroff-0.6.2_5 (installs files into the same place).  Problematic file: /usr/local/include/libfo-0.6/libfo/area/fo-area.h
+
+20160610
+  AFFECTS: users of databases/postgresql-repmgr
+  AUTHOR: bofh@FreeBSD.org
+
+  The port has been repocopied to databases/postgresql-repmgr2 and current
+  post has been updated to 3.x series. If anyone is still looking forward
+  to use the 2.x please upgrade as following.
+
+  # portmaster -o databases/postgresql-repmgr2 databases/postgresql-repmgr
+    or
+  # portupgrade -o databases/postgresql-repmgr2 databases/postgresql-repmgr
+
+  Otherwise if you want to move on with 3.x series just use
+
+  # portmaster -r databases/postgresql-repmgr
+    or
+  # portupgrade -fr databases/postgresql-repmgr
+
 20160605
   AFFECTS: Users of www/h2o
   AUTHOR: junovitch@FreeBSD.org
@@ -22,7 +128,7 @@ you update your ports collection, before attempting any port upgrades.
   The shared library versions of the libraries have been bumped.
   With this update, the patch for the OPENSSL_VERSION_NUMBER has been
   removed. This causes issues with a number of ports. Patches for many of
-  these issues can be found on 
+  these issues can be found on
   https://wiki.freebsd.org/LibreSSL/Ports#OPENSSL_VERSION_NUMBER
 
   After upgrading to 2.4.0, manually update all packages that depend on
@@ -51,7 +157,7 @@ you update your ports collection, before attempting any port upgrades.
   you pass all options/arguments separated by quotes:
 
       filter myfilter dnsbl "-c /var/chroot/dnsbl" "-h my.dnsbl.com"
-  
+
   Additionally, extras now run in a chroot. Either pass "-C" to skip the
   chroot entirely (not recommended), or put all required config files,
   resolv.conf, and external binaries into the chroot. For example:
@@ -74,7 +180,7 @@ you update your ports collection, before attempting any port upgrades.
   Additionally version 5.9.2 changes the file mode bits for two directories.
   To allow existing installations to start succesfully you must apply the
   following changes
- 
+
   # chown -R root:_smtpq /var/spool/smtpd/offline
   # chmod -R 770 /var/spool/smtpd/offline
   # chmod -R 700 /var/spool/smtpd/purge
@@ -129,7 +235,7 @@ you update your ports collection, before attempting any port upgrades.
 
   The audio/clementine-player port has been updated to v1.3.1, the latest
   upstream release.  The music database code now has a hard dependency on
-  databases/sqlite having the FTS3_TOKENIZER option enabled.  This has 
+  databases/sqlite having the FTS3_TOKENIZER option enabled.  This has
   been made the default option in databases/sqlite.
 
   Without this option, clementine-player will crash on startup.
@@ -211,10 +317,10 @@ you update your ports collection, before attempting any port upgrades.
   AFFECTS: Users of net-mgmt/icinga2
   AUTHOR: lme@FreeBSD.org
 
-  The creation of Icinga2 directories and files in /var is now controlled 
-  by the /etc/rc.conf variable icinga2_mkvar.  Earlier ports always 
-  created the /var entries, but could slow startup significantly when /var 
-  was a normal disk rather than a RAM disk.  icinga2_mkvar defaults to 
+  The creation of Icinga2 directories and files in /var is now controlled
+  by the /etc/rc.conf variable icinga2_mkvar.  Earlier ports always
+  created the /var entries, but could slow startup significantly when /var
+  was a normal disk rather than a RAM disk.  icinga2_mkvar defaults to
   "NO".
 
 20160415:
@@ -289,9 +395,9 @@ you update your ports collection, before attempting any port upgrades.
   BadLock(http://badlock.org) vulnerability, as well as few other
   discovered.
 
-  Please note that Samba 4.1.x and older versions are also affected by 
+  Please note that Samba 4.1.x and older versions are also affected by
   the issues fixed with this release but are not supported anymore. It is
-  strongly recommend to upgrade to a recent version at your earliest 
+  strongly recommend to upgrade to a recent version at your earliest
   convenience.
 
   The security updates include new smb.conf options and a number of
@@ -324,7 +430,7 @@ you update your ports collection, before attempting any port upgrades.
   AFFECTS: All users of www/pecl-http
   AUTHOR: bofh
 
-  www/pecl-http has been updated to the latest 3.x stable release, which 
+  www/pecl-http has been updated to the latest 3.x stable release, which
   supports php70+ and a new port www/pecl-http2 has been created for the
   2.x branch.
 
