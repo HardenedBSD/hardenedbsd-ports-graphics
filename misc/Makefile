@@ -380,6 +380,7 @@
     SUBDIR += py-qt4-doc
     SUBDIR += py-qt5-demo
     SUBDIR += py-qt5-doc
+    SUBDIR += py-socli
     SUBDIR += py-spdx
     SUBDIR += py-spdx-lookup
     SUBDIR += py-tqdm
@@ -411,6 +412,7 @@
     SUBDIR += rubygem-mime-types
     SUBDIR += rubygem-mime-types-data
     SUBDIR += rubygem-mime-types1
+    SUBDIR += rubygem-mime-types29
     SUBDIR += rubygem-mimemagic
     SUBDIR += rubygem-rabbit
     SUBDIR += rubygem-vpim

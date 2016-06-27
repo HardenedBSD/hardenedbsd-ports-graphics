@@ -597,11 +597,13 @@
     SUBDIR += py-fpconst
     SUBDIR += py-gato
     SUBDIR += py-gmpy
+    SUBDIR += py-gmpy2
     SUBDIR += py-gnuplot
     SUBDIR += py-graphillion
     SUBDIR += py-gsl
     SUBDIR += py-igraph
     SUBDIR += py-intspan
+    SUBDIR += py-keras
     SUBDIR += py-luminol
     SUBDIR += py-mathdom
     SUBDIR += py-matplotlib

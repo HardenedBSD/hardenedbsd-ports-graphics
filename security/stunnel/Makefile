@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	stunnel
-PORTVERSION=	5.31
-PORTEPOCH=	1
+PORTVERSION=	5.33
 CATEGORIES=	security
 MASTER_SITES=	https://www.stunnel.org/downloads/%SUBDIR%/ \
 		https://www.stunnel.org/downloads/beta/ \
@@ -74,11 +73,13 @@ CONFIGURE_ARGS+=--with-threads=pthread
 LDFLAGS+=	-lpthread
 .endif
 
-.if ${PORT_OPTIONS:MFIPS} && defined(OPENSSL_PORT) && ${OPENSSL_PORT} == security/libressl
+.include <bsd.port.pre.mk>
+
+.if ${PORT_OPTIONS:MFIPS} && ${SSL_DEFAULT} == libressl
 IGNORE=		LibreSSL does not support FIPS standard
 .endif
 
-.if defined(OPENSSL_PORT) && ${OPENSSL_PORT} == security/libressl
+.if ${SSL_DEFAULT} == libressl
 NO_PACKAGE=	The stunnel license restricts distribution when linked to non-OpenSSL non-base SSL-libraries
 .endif
 
@@ -115,4 +116,4 @@ cert:
 	@${ECHO} ""
 	@(cd ${WRKSRC}/tools/; make install-data-local)
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

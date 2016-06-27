@@ -4,6 +4,7 @@ PORTNAME=	zoneminder
 PORTVERSION=	1.30.0
 DISTVERSIONPREFIX=v
 DISTVERSIONSUFFIX=-rc1
+PORTREVISION=	1
 CATEGORIES=	multimedia
 
 MAINTAINER=	bsd@abinet.ru
@@ -36,10 +37,11 @@ GH_TAGNAME=	c3976f1:crud
 
 WRKSRC=		${WRKDIR}/ZoneMinder-${DISTVERSION}${DISTVERSIONSUFFIX}
 
-USES=		cmake jpeg mysql perl5 shebangfix
+USES=		cmake jpeg mysql perl5 php shebangfix
 USE_RC_SUBR=	zoneminder
-PHP=		json pdo_mysql session
-IGNORE_WITH_PHP=70
+USE_PHP=	json pdo_mysql session gd sockets
+
+ONLY_FOR_ARCHS=	amd64 i386
 
 OPTIONS_DEFINE=	NLS V4L DOCS
 OPTIONS_SUB=	yes
@@ -76,6 +78,12 @@ CMAKE_ARGS+=	-DZM_PERL_MM_PARMS=INSTALLDIRS=site \
 		-DHAVE_SENDFILE=0 \
 		-DCMAKE_REQUIRED_INCLUDES:STRING="${LOCALBASE}/include"
 
+.include <bsd.port.pre.mk>
+
+.if ${OPSYS} == FreeBSD && ${OSVERSION} < 1000000 && ${ARCH} == i386
+CFLAGS+=	-msse
+.endif
+
 PKGMESSAGE=	${WRKDIR}/pkg-message
 
 post-extract:
@@ -101,4 +109,4 @@ post-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	cd ${WRKSRC} && ${INSTALL_MAN} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

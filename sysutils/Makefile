@@ -100,9 +100,11 @@
     SUBDIR += bsdcrashtar
     SUBDIR += bsdhwmon
     SUBDIR += bsdinfo
+    SUBDIR += bsdisks
     SUBDIR += bsdmoted
     SUBDIR += bsdploy
     SUBDIR += bsdstats
+    SUBDIR += bstack
     SUBDIR += btsixad
     SUBDIR += bulk_extractor
     SUBDIR += burp
@@ -129,6 +131,7 @@
     SUBDIR += cfengine-masterfiles36
     SUBDIR += cfengine-masterfiles37
     SUBDIR += cfengine-masterfiles38
+    SUBDIR += cfengine-masterfiles39
     SUBDIR += cfengine22
     SUBDIR += cfengine32
     SUBDIR += cfengine33
@@ -137,6 +140,7 @@
     SUBDIR += cfengine36
     SUBDIR += cfengine37
     SUBDIR += cfengine38
+    SUBDIR += cfengine39
     SUBDIR += chgrep
     SUBDIR += cinnamon-control-center
     SUBDIR += cinnamon-settings-daemon
@@ -437,6 +441,7 @@
     SUBDIR += installwatch
     SUBDIR += intel-nvmupdate
     SUBDIR += intel-pcm
+    SUBDIR += intel-qcu
     SUBDIR += iocage
     SUBDIR += iocage-devel
     SUBDIR += iogen
@@ -625,6 +630,7 @@
     SUBDIR += nfsping
     SUBDIR += nitrogen
     SUBDIR += no-login
+    SUBDIR += nomad
     SUBDIR += npadmin
     SUBDIR += nrg2iso
     SUBDIR += ntfsprogs
