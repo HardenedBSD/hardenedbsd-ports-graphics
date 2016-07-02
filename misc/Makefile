@@ -121,6 +121,7 @@
     SUBDIR += freebsd-doc-tr
     SUBDIR += freebsd-doc-zh_cn
     SUBDIR += freebsd-doc-zh_tw
+    SUBDIR += freebsd-release-manifests
     SUBDIR += freeguide
     SUBDIR += ftdi-eeprom
     SUBDIR += fxload
@@ -374,6 +375,7 @@
     SUBDIR += py-osd
     SUBDIR += py-pexpect
     SUBDIR += py-powerline-status
+    SUBDIR += py-pyprind
     SUBDIR += py-progressbar
     SUBDIR += py-progressbar231
     SUBDIR += py-qt4-demo
