@@ -120,7 +120,7 @@ baselibs() {
 		-type f -exec readelf -d {} + 2>/dev/null)
 	EOF
 	if [ -z "${USESSSL}" -a -n "${found_openssl}" ]; then
-		warn "you need USES=nssl"
+		warn "you need USES=ssl"
 	elif [ -n "${USESSSL}" -a -z "${found_openssl}" ]; then
 		warn "you may not need USES=ssl"
 	fi
@@ -144,7 +144,14 @@ symlinks() {
 				rc=1
 				;;
 			/*)
-				warn "Bad symlink '${l#${STAGEDIR}}' pointing to an absolute pathname '${link}'"
+				# Only warn for symlinks within the package.
+				if [ -e "${STAGEDIR}${link}" ]; then
+					warn "Bad symlink '${l#${STAGEDIR}}' pointing to an absolute pathname '${link}'"
+				fi
+				# Also warn if the symlink exists nowhere.
+				if [ ! -e "${STAGEDIR}${link}" -a ! -e "${link}" ]; then
+					warn "Symlink '${l#${STAGEDIR}}' pointing to '${link}' which does not exist in the stage directory or in localbase"
+				fi
 				;;
 		esac
 	# Use heredoc to avoid losing rc from find|while subshell.
