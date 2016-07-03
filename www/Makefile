@@ -534,7 +534,6 @@
     SUBDIR += node010
     SUBDIR += node012
     SUBDIR += node4
-    SUBDIR += node5
     SUBDIR += nostromo
     SUBDIR += npapi-vlc
     SUBDIR += npapi-xine
@@ -1246,7 +1245,6 @@
     SUBDIR += p5-WWW-Google-Calculator
     SUBDIR += p5-WWW-Google-News
     SUBDIR += p5-WWW-Google-News-TW
-    SUBDIR += p5-WWW-Google-Notebook
     SUBDIR += p5-WWW-Google-PageRank
     SUBDIR += p5-WWW-Google-Video
     SUBDIR += p5-WWW-HatenaDiary
@@ -1826,7 +1824,6 @@
     SUBDIR += redmine-redcarpet_formatter
     SUBDIR += redmine-sidebar_hide
     SUBDIR += redmine-single_auth
-    SUBDIR += redmine-stuff_to_do
     SUBDIR += redmine-wiki_notes
     SUBDIR += rejik
     SUBDIR += rekonq
@@ -2236,6 +2233,7 @@
     SUBDIR += typo3
     SUBDIR += typo3-lts
     SUBDIR += typolight
+    SUBDIR += uchiwa
     SUBDIR += udmsearch
     SUBDIR += uglifyjs
     SUBDIR += usermanager

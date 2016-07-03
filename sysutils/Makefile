@@ -1045,9 +1045,6 @@
     SUBDIR += syslog-ng
     SUBDIR += syslog-ng-devel
     SUBDIR += syslog-ng-incubator
-    SUBDIR += syslog-ng-incubator03
-    SUBDIR += syslog-ng34
-    SUBDIR += syslog-ng35
     SUBDIR += syslog-ng36
     SUBDIR += syslog-ng37
     SUBDIR += syslogger
@@ -1099,6 +1096,7 @@
     SUBDIR += u-boot-cubox-hummingboard
     SUBDIR += u-boot-duovero
     SUBDIR += u-boot-pandaboard
+    SUBDIR += u-boot-pine64
     SUBDIR += u-boot-rpi
     SUBDIR += u-boot-rpi2
     SUBDIR += u-boot-utilite
@@ -1228,6 +1226,7 @@
     SUBDIR += zfs-stats
     SUBDIR += zfs-stats-lite
     SUBDIR += zfsnap
+    SUBDIR += zfsnap2
     SUBDIR += zfstools
     SUBDIR += zidrav
     SUBDIR += zisofs-tools

@@ -121,6 +121,7 @@
     SUBDIR += freebsd-doc-tr
     SUBDIR += freebsd-doc-zh_cn
     SUBDIR += freebsd-doc-zh_tw
+    SUBDIR += freebsd-release-manifests
     SUBDIR += freeguide
     SUBDIR += ftdi-eeprom
     SUBDIR += fxload
@@ -374,6 +375,7 @@
     SUBDIR += py-osd
     SUBDIR += py-pexpect
     SUBDIR += py-powerline-status
+    SUBDIR += py-pyprind
     SUBDIR += py-progressbar
     SUBDIR += py-progressbar231
     SUBDIR += py-qt4-demo
@@ -412,6 +414,7 @@
     SUBDIR += rubygem-mime-types
     SUBDIR += rubygem-mime-types-data
     SUBDIR += rubygem-mime-types1
+    SUBDIR += rubygem-mime-types29
     SUBDIR += rubygem-mimemagic
     SUBDIR += rubygem-rabbit
     SUBDIR += rubygem-vpim

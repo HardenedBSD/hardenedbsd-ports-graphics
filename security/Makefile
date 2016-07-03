@@ -517,6 +517,7 @@
     SUBDIR += p5-Crypt-Imail
     SUBDIR += p5-Crypt-Juniper
     SUBDIR += p5-Crypt-Khazad
+    SUBDIR += p5-Crypt-LE
     SUBDIR += p5-Crypt-License
     SUBDIR += p5-Crypt-Lite
     SUBDIR += p5-Crypt-Loki97
@@ -532,6 +533,7 @@
     SUBDIR += p5-Crypt-OpenSSL-DSA
     SUBDIR += p5-Crypt-OpenSSL-EC
     SUBDIR += p5-Crypt-OpenSSL-ECDSA
+    SUBDIR += p5-Crypt-OpenSSL-PKCS10
     SUBDIR += p5-Crypt-OpenSSL-RSA
     SUBDIR += p5-Crypt-OpenSSL-Random
     SUBDIR += p5-Crypt-OpenSSL-X509
@@ -1156,6 +1158,7 @@
     SUBDIR += ykpers
     SUBDIR += yubico-piv-tool
     SUBDIR += yubikey-personalization-gui
+    SUBDIR += yubikey-piv-manager
     SUBDIR += zebedee
     SUBDIR += zenmap
     SUBDIR += zeronet
