@@ -2,7 +2,7 @@
 
 PORTNAME=	xorg-drivers
 PORTVERSION=	7.7
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
@@ -41,6 +41,7 @@ VIDEO_DRIVERS=		mach64 \
 			i740 \
 			mga \
 			neomagic \
+			nouveau \
 			rendition \
 			s3 \
 			s3virge \
@@ -67,8 +68,8 @@ ${a:tu}_DESC=	Install ${a} ${type} driver
 . endfor
 .endfor
 
-OPTIONS_DEFINE_i386=	AMDGPU ATI INTEL OPENCHROME
-OPTIONS_DEFAULT_i386=	AMDGPU ATI INTEL OPENCHROME
+OPTIONS_DEFINE_i386=	AMDGPU ATI INTEL OPENCHROME NOUVEAU
+OPTIONS_DEFAULT_i386=	AMDGPU ATI INTEL OPENCHROME NOUVEAU
 
 OPTIONS_DEFINE_amd64:=	${OPTIONS_DEFINE_i386}
 OPTIONS_DEFAULT_amd64:=	${OPTIONS_DEFAULT_i386}
@@ -84,6 +85,7 @@ ATI_DESC=		Install ati video driver
 INTEL_DESC=		Install intel video driver
 OPENCHROME_DESC=	Install openchrome video driver
 SUNFFB_DESC=		Install sunffb video driver
+NOUVEAU_DESC=		Install nouveau video driver
 
 # these drivers have a different module name compared to the plugin they install
 QUIRKS=		keyboard:kbd
