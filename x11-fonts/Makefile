@@ -88,7 +88,6 @@
     SUBDIR += fontconfig-reference
     SUBDIR += fontmatrix
     SUBDIR += fonts-indic
-    SUBDIR += fonts-te
     SUBDIR += fontsproto
     SUBDIR += fonttosfnt
     SUBDIR += freefont-ttf
@@ -137,6 +136,7 @@
     SUBDIR += mkitalic
     SUBDIR += mondulkiri
     SUBDIR += montecarlo_fonts
+    SUBDIR += montserrat
     SUBDIR += moveable-type-fonts
     SUBDIR += nexfontsel
     SUBDIR += noto

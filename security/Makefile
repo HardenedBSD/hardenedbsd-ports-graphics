@@ -91,7 +91,6 @@
     SUBDIR += create-cert
     SUBDIR += cryptlib
     SUBDIR += cryptopp
-    SUBDIR += cryptstring
     SUBDIR += cvm
     SUBDIR += cyrus-sasl2
     SUBDIR += cyrus-sasl2-gssapi
@@ -246,7 +245,6 @@
     SUBDIR += iaikpkcs11wrapper
     SUBDIR += idea
     SUBDIR += identify
-    SUBDIR += ifd-slb_rf60
     SUBDIR += ike
     SUBDIR += ike-scan
     SUBDIR += integrit
@@ -407,7 +405,6 @@
     SUBDIR += openconnect
     SUBDIR += opencryptoki
     SUBDIR += openct
-    SUBDIR += openpgpsdk
     SUBDIR += opensaml2
     SUBDIR += opensc
     SUBDIR += openscep
@@ -433,6 +430,7 @@
     SUBDIR += ossec-hids-local
     SUBDIR += ossec-hids-server
     SUBDIR += osslsigncode
+    SUBDIR += otpw
     SUBDIR += outguess
     SUBDIR += p11-kit
     SUBDIR += p5-Apache-Htpasswd
@@ -723,7 +721,6 @@
     SUBDIR += pdfcrack
     SUBDIR += pear-Auth
     SUBDIR += pear-Auth_HTTP
-    SUBDIR += pear-Auth_OpenID
     SUBDIR += pear-Auth_PrefManager
     SUBDIR += pear-Auth_SASL
     SUBDIR += pear-Crypt_Blowfish
@@ -847,6 +844,7 @@
     SUBDIR += py-gnupg
     SUBDIR += py-gnutls
     SUBDIR += py-gpsoauth
+    SUBDIR += py-hkdf
     SUBDIR += py-htpasswd
     SUBDIR += py-itsdangerous
     SUBDIR += py-kerberos
@@ -901,6 +899,7 @@
     SUBDIR += py-service_identity
     SUBDIR += py-signedjson
     SUBDIR += py-slowaes
+    SUBDIR += py-spake2
     SUBDIR += py-ssh
     SUBDIR += py-sslstrip
     SUBDIR += py-stem
@@ -933,8 +932,6 @@
     SUBDIR += quantis-kmod
     SUBDIR += racoon2
     SUBDIR += radamsa
-    SUBDIR += radiusniff
-    SUBDIR += rainbowcrack
     SUBDIR += ranpwd
     SUBDIR += ratproxy
     SUBDIR += rats
@@ -1072,7 +1069,6 @@
     SUBDIR += sshguard-ipfw
     SUBDIR += sshguard-null
     SUBDIR += sshguard-pf
-    SUBDIR += sshit
     SUBDIR += sshpass
     SUBDIR += ssl-admin
     SUBDIR += sslscan
@@ -1129,7 +1125,6 @@
     SUBDIR += vault
     SUBDIR += vinetto
     SUBDIR += vlock
-    SUBDIR += vlog
     SUBDIR += vm-to-tor
     SUBDIR += vnccrack
     SUBDIR += vpnc

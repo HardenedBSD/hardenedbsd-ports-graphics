@@ -3,6 +3,7 @@
 
 PORTNAME?=	R
 PORTVERSION=	3.3.1
+PORTREVISION=	2
 CATEGORIES=	math lang
 MASTER_SITES=	http://cran.r-project.org/%SUBDIR%/ \
 		ftp://cran.r-project.org/pub/R/%SUBDIR%/ \
@@ -20,7 +21,7 @@ MASTER_SITES=	http://cran.r-project.org/%SUBDIR%/ \
 		http://probability.ca/cran/%SUBDIR%/
 MASTER_SITE_SUBDIR=	src/base/R-${PORTVERSION:C|\..*||}
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	jrm@ftfl.ca
 COMMENT?=	Language for statistical computing and graphics
 
 LICENSE=	GPLv2
