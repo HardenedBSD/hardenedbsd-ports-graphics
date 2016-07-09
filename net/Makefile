@@ -456,7 +456,6 @@
     SUBDIR += nss-pam-ldapd-sasl
     SUBDIR += nss_ldap
     SUBDIR += nsscache
-    SUBDIR += nstxd
     SUBDIR += ntimed
     SUBDIR += ntlmaps
     SUBDIR += ntop
@@ -1023,6 +1022,7 @@
     SUBDIR += py-txamqp
     SUBDIR += py-txrestapi
     SUBDIR += py-uritemplate
+    SUBDIR += py-uritemplate.py
     SUBDIR += py-urllib3
     SUBDIR += py-wolframalpha
     SUBDIR += py-xmlrpc
@@ -1242,7 +1242,6 @@
     SUBDIR += spread
     SUBDIR += spread-j
     SUBDIR += spread4
-    SUBDIR += sprinkle
     SUBDIR += sqtop
     SUBDIR += srelay
     SUBDIR += ss5
@@ -1299,6 +1298,7 @@
     SUBDIR += thcrut
     SUBDIR += throttled
     SUBDIR += tigervnc
+    SUBDIR += tigervnc-devel
     SUBDIR += tightvnc
     SUBDIR += tintin++
     SUBDIR += tiny-network-utilities

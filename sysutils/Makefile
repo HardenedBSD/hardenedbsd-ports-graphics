@@ -90,7 +90,6 @@
     SUBDIR += biosfont
     SUBDIR += bkpupsd
     SUBDIR += bksh
-    SUBDIR += bontmia
     SUBDIR += boxbackup
     SUBDIR += boxbackup-devel
     SUBDIR += brasero
@@ -189,7 +188,6 @@
     SUBDIR += cw
     SUBDIR += daa2iso
     SUBDIR += dae
-    SUBDIR += daedalus
     SUBDIR += daemonize
     SUBDIR += daemontools
     SUBDIR += daemontools-encore
@@ -468,7 +466,6 @@
     SUBDIR += jailutils
     SUBDIR += javaservicewrapper
     SUBDIR += jdiskreport
-    SUBDIR += jfbterm
     SUBDIR += jkill
     SUBDIR += jobd
     SUBDIR += jps
@@ -596,14 +593,14 @@
     SUBDIR += monitord
     SUBDIR += monitorix
     SUBDIR += mono-kmod
-    SUBDIR += moosefs-cgi
-    SUBDIR += moosefs-cgiserv
-    SUBDIR += moosefs-chunkserver
-    SUBDIR += moosefs-cli
-    SUBDIR += moosefs-client
-    SUBDIR += moosefs-master
-    SUBDIR += moosefs-metalogger
-    SUBDIR += moosefs-netdump
+    SUBDIR += moosefs2-cgi
+    SUBDIR += moosefs2-cgiserv
+    SUBDIR += moosefs2-chunkserver
+    SUBDIR += moosefs2-cli
+    SUBDIR += moosefs2-client
+    SUBDIR += moosefs2-master
+    SUBDIR += moosefs2-metalogger
+    SUBDIR += moosefs2-netdump
     SUBDIR += moreutils
     SUBDIR += most
     SUBDIR += mount.app
@@ -738,7 +735,6 @@
     SUBDIR += pcbsd-syscache
     SUBDIR += pcbsd-utils
     SUBDIR += pcbsd-utils-qt5
-    SUBDIR += pcfclock
     SUBDIR += pciutils
     SUBDIR += pcpustat
     SUBDIR += pdixtract
@@ -895,7 +891,6 @@
     SUBDIR += roottail
     SUBDIR += rsnapshot
     SUBDIR += rsyncbackup
-    SUBDIR += rsyncmanager
     SUBDIR += rsyncrypto
     SUBDIR += rsyslog7
     SUBDIR += rsyslog8
@@ -936,6 +931,7 @@
     SUBDIR += rubygem-hiera-file
     SUBDIR += rubygem-hiera1
     SUBDIR += rubygem-hieracles
+    SUBDIR += rubygem-itamae
     SUBDIR += rubygem-librarian-puppet
     SUBDIR += rubygem-log4r
     SUBDIR += rubygem-logify
@@ -953,6 +949,7 @@
     SUBDIR += rubygem-smart_proxy_dynflow
     SUBDIR += rubygem-smart_proxy_remote_execution_ssh
     SUBDIR += rubygem-smart_proxy_salt
+    SUBDIR += rubygem-specinfra
     SUBDIR += rubygem-sys-admin
     SUBDIR += rubygem-sys-cpu
     SUBDIR += rubygem-sys-filesystem
@@ -1109,6 +1106,7 @@
     SUBDIR += ucspi-tcp
     SUBDIR += ucspi-unix
     SUBDIR += udfclient
+    SUBDIR += uefi-edk2-bhyve
     SUBDIR += ufs_copy
     SUBDIR += uhidd
     SUBDIR += uif2iso
@@ -1140,7 +1138,6 @@
     SUBDIR += vils
     SUBDIR += vimpager
     SUBDIR += virtualmin
-    SUBDIR += vlogger
     SUBDIR += vm-bhyve
     SUBDIR += vmdktool
     SUBDIR += vmtouch
