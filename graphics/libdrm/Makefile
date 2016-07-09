@@ -1,8 +1,6 @@
 # Created by: lesi@FreeBSD.org
 # $FreeBSD$
 
-# before commit, vc4 plist entries (for arm) need to be added.
-
 PORTNAME=	libdrm
 PORTVERSION=	2.4.68
 PORTREVISION=	1
