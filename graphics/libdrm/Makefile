@@ -13,6 +13,7 @@ MASTER_SITES=	http://dri.freedesktop.org/libdrm/
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Userspace interface to kernel Direct Rendering Module services
 
+BUILD_DEPENDS=	libdevq>=0.0.3:devel/libdevq
 LIB_DEPENDS=	libpciaccess.so:devel/libpciaccess \
 		libdevq.so:devel/libdevq \
 		libpthread-stubs.so:devel/libpthread-stubs
