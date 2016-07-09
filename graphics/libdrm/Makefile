@@ -5,6 +5,7 @@
 
 PORTNAME=	libdrm
 PORTVERSION=	2.4.68
+PORTREVISION=	1
 PORTEPOCH=	1
 CATEGORIES=	graphics x11
 MASTER_SITES=	http://dri.freedesktop.org/libdrm/
@@ -13,6 +14,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Userspace interface to kernel Direct Rendering Module services
 
 LIB_DEPENDS=	libpciaccess.so:devel/libpciaccess \
+		libdevq.so:devel/libdevq \
 		libpthread-stubs.so:devel/libpthread-stubs
 
 USES=		libtool pkgconfig tar:bzip2
