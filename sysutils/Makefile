@@ -1087,11 +1087,13 @@
     SUBDIR += tw_cli
     SUBDIR += tzdialog
     SUBDIR += u-boot-bananapi
+    SUBDIR += u-boot-bananapim2
     SUBDIR += u-boot-beaglebone
     SUBDIR += u-boot-cubieboard
     SUBDIR += u-boot-cubieboard2
     SUBDIR += u-boot-cubox-hummingboard
     SUBDIR += u-boot-duovero
+    SUBDIR += u-boot-olimex-a20-som-evb
     SUBDIR += u-boot-pandaboard
     SUBDIR += u-boot-pine64
     SUBDIR += u-boot-rpi
@@ -1107,6 +1109,7 @@
     SUBDIR += ucspi-unix
     SUBDIR += udfclient
     SUBDIR += uefi-edk2-bhyve
+    SUBDIR += uefi-edk2-bhyve-csm
     SUBDIR += ufs_copy
     SUBDIR += uhidd
     SUBDIR += uif2iso

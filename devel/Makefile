@@ -208,7 +208,8 @@
     SUBDIR += c2mdoc
     SUBDIR += caf
     SUBDIR += calibrator
-    SUBDIR += capstone
+    SUBDIR += capstone3
+    SUBDIR += capstone4
     SUBDIR += cargo
     SUBDIR += cask
     SUBDIR += catch
@@ -713,8 +714,10 @@
     SUBDIR += go-bindata
     SUBDIR += go-btree
     SUBDIR += go-flags
+    SUBDIR += go-go.uuid
     SUBDIR += go-hashicorp-logutils
     SUBDIR += go-json-rest
+    SUBDIR += go-metrics
     SUBDIR += go-pretty
     SUBDIR += go-raw
     SUBDIR += go-runewidth
@@ -1403,6 +1406,7 @@
     SUBDIR += linux_kdump
     SUBDIR += linux_libusb
     SUBDIR += lion
+    SUBDIR += liteide
     SUBDIR += lldb37
     SUBDIR += lldb38
     SUBDIR += llnextgen
@@ -4363,6 +4367,7 @@
     SUBDIR += py-raven
     SUBDIR += py-rcsparse
     SUBDIR += py-re2
+    SUBDIR += py-rebulk
     SUBDIR += py-rednose
     SUBDIR += py-repl
     SUBDIR += py-repoze.lru
@@ -4947,6 +4952,7 @@
     SUBDIR += rubygem-grit
     SUBDIR += rubygem-guess_html_encoding
     SUBDIR += rubygem-gyoku
+    SUBDIR += rubygem-hamster
     SUBDIR += rubygem-hashdiff
     SUBDIR += rubygem-hashery
     SUBDIR += rubygem-hashie
