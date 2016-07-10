@@ -2,7 +2,7 @@
 
 PORTNAME=	mplayer2
 PORTVERSION=	${MPLAYER2_PORT_VERSION}
-PORTREVISION=	19
+PORTREVISION=	21
 CATEGORIES=	multimedia audio
 MASTER_SITES=	LOCAL/gblach/
 
@@ -219,4 +219,10 @@ post-install:
 		${STAGEDIR}${PREFIX}/etc/mplayer/${conf}.conf.sample
 .endfor
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if defined(PACKAGE_BUILDING) && ${PYTHON_VER} != ${PYTHON_DEFAULT}
+IGNORE= you have python ${PYTHON_DEFAULT} set as the default, and this needs ${PYTHON_VER}
+.endif
+
+.include <bsd.port.post.mk>

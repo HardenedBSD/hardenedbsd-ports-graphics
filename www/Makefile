@@ -60,6 +60,8 @@
     SUBDIR += c-icap-modules
     SUBDIR += cadaver
     SUBDIR += calamaris
+    SUBDIR += calamaris-devel
+    SUBDIR += caldavzap
     SUBDIR += calendarserver
     SUBDIR += castget
     SUBDIR += caudium14
@@ -77,7 +79,6 @@
     SUBDIR += choqok
     SUBDIR += chpasswd
     SUBDIR += chromium
-    SUBDIR += chtml
     SUBDIR += ckeditor
     SUBDIR += cl-lml
     SUBDIR += cl-lml-sbcl
@@ -114,37 +115,9 @@
     SUBDIR += dojo-shrinksafe
     SUBDIR += dokuwiki
     SUBDIR += domoticz
-    SUBDIR += dotclear
     SUBDIR += dotproject
     SUBDIR += drood
     SUBDIR += drraw
-    SUBDIR += drupal6
-    SUBDIR += drupal6-advanced_help
-    SUBDIR += drupal6-cck
-    SUBDIR += drupal6-chaos
-    SUBDIR += drupal6-ckeditor
-    SUBDIR += drupal6-content_access
-    SUBDIR += drupal6-geshifilter
-    SUBDIR += drupal6-google_analytics
-    SUBDIR += drupal6-image
-    SUBDIR += drupal6-imce
-    SUBDIR += drupal6-menu_block
-    SUBDIR += drupal6-mimedetect
-    SUBDIR += drupal6-nice_menus
-    SUBDIR += drupal6-nodewords
-    SUBDIR += drupal6-page_title
-    SUBDIR += drupal6-panels
-    SUBDIR += drupal6-path_redirect
-    SUBDIR += drupal6-pathauto
-    SUBDIR += drupal6-print
-    SUBDIR += drupal6-seo_checklist
-    SUBDIR += drupal6-services
-    SUBDIR += drupal6-tagadelic
-    SUBDIR += drupal6-token
-    SUBDIR += drupal6-views
-    SUBDIR += drupal6-webform
-    SUBDIR += drupal6-wysiwyg
-    SUBDIR += drupal6-zeropoint
     SUBDIR += drupal7
     SUBDIR += drupal7-wysiwyg
     SUBDIR += drush
@@ -237,6 +210,7 @@
     SUBDIR += gpx2map
     SUBDIR += grafana
     SUBDIR += grafana2
+    SUBDIR += grafana3
     SUBDIR += grails
     SUBDIR += graylog-web-interface
     SUBDIR += gregarius
@@ -331,7 +305,6 @@
     SUBDIR += httpsqs
     SUBDIR += httptunnel
     SUBDIR += httrack
-    SUBDIR += hudson
     SUBDIR += hydra
     SUBDIR += hypermail
     SUBDIR += igal2
@@ -532,6 +505,7 @@
     SUBDIR += moodle28
     SUBDIR += moodle29
     SUBDIR += moodle30
+    SUBDIR += moodle31
     SUBDIR += mozplugger
     SUBDIR += multisort
     SUBDIR += multiwatch
@@ -548,6 +522,7 @@
     SUBDIR += netstiff
     SUBDIR += netsurf
     SUBDIR += newsbeuter
+    SUBDIR += nextcloud
     SUBDIR += nghttp2
     SUBDIR += nginx
     SUBDIR += nginx-devel
@@ -556,7 +531,6 @@
     SUBDIR += node010
     SUBDIR += node012
     SUBDIR += node4
-    SUBDIR += node5
     SUBDIR += nostromo
     SUBDIR += npapi-vlc
     SUBDIR += npapi-xine
@@ -838,6 +812,7 @@
     SUBDIR += p5-Dancer-Plugin-Lexicon
     SUBDIR += p5-Dancer-Plugin-Memcached
     SUBDIR += p5-Dancer-Plugin-REST
+    SUBDIR += p5-Dancer-Plugin-RPC
     SUBDIR += p5-Dancer-Plugin-SiteMap
     SUBDIR += p5-Dancer-Plugin-ValidationClass
     SUBDIR += p5-Dancer-Session-Cookie
@@ -1267,7 +1242,6 @@
     SUBDIR += p5-WWW-Google-Calculator
     SUBDIR += p5-WWW-Google-News
     SUBDIR += p5-WWW-Google-News-TW
-    SUBDIR += p5-WWW-Google-Notebook
     SUBDIR += p5-WWW-Google-PageRank
     SUBDIR += p5-WWW-Google-Video
     SUBDIR += p5-WWW-HatenaDiary
@@ -1433,7 +1407,6 @@
     SUBDIR += pecl-sphinx
     SUBDIR += pecl-swish
     SUBDIR += pecl-twig
-    SUBDIR += pecl-varnish
     SUBDIR += pecl-yaf
     SUBDIR += pecl-yar
     SUBDIR += perlbal
@@ -1562,6 +1535,7 @@
     SUBDIR += py-django-mptt
     SUBDIR += py-django-openid-auth
     SUBDIR += py-django-otp
+    SUBDIR += py-django-otp-yubikey
     SUBDIR += py-django-overextends
     SUBDIR += py-django-paging
     SUBDIR += py-django-photologue
@@ -1761,7 +1735,6 @@
     SUBDIR += py-requestbuilder
     SUBDIR += py-requests
     SUBDIR += py-requests-futures
-    SUBDIR += py-requests-oauth-hook
     SUBDIR += py-requests-oauthlib
     SUBDIR += py-requests-toolbelt
     SUBDIR += py-requests1
@@ -1797,7 +1770,7 @@
     SUBDIR += py-txrequests
     SUBDIR += py-uliweb
     SUBDIR += py-urlgrabber
-    SUBDIR += py-urljr
+    SUBDIR += py-urlobject
     SUBDIR += py-user_agent
     SUBDIR += py-utidy
     SUBDIR += py-w3lib
@@ -1833,6 +1806,7 @@
     SUBDIR += red5
     SUBDIR += redaxo
     SUBDIR += redmine
+    SUBDIR += redmine-a_common_libs
     SUBDIR += redmine-backlogs
     SUBDIR += redmine-basecamp
     SUBDIR += redmine-default_assign
@@ -1840,10 +1814,11 @@
     SUBDIR += redmine-http-auth
     SUBDIR += redmine-issue_templates
     SUBDIR += redmine-knowledgebase
+    SUBDIR += redmine-ldap_sync
     SUBDIR += redmine-qa_contact
     SUBDIR += redmine-redcarpet_formatter
     SUBDIR += redmine-sidebar_hide
-    SUBDIR += redmine-stuff_to_do
+    SUBDIR += redmine-single_auth
     SUBDIR += redmine-wiki_notes
     SUBDIR += rejik
     SUBDIR += rekonq
@@ -1851,7 +1826,6 @@
     SUBDIR += repos-style
     SUBDIR += resin3
     SUBDIR += retawq
-    SUBDIR += reviewboard
     SUBDIR += revive-adserver
     SUBDIR += rnews
     SUBDIR += roundup
@@ -1866,7 +1840,6 @@
     SUBDIR += rtv
     SUBDIR += ruby-aws
     SUBDIR += ruby-google
-    SUBDIR += ruby-wgettsv
     SUBDIR += rubygem-ace-rails-ap
     SUBDIR += rubygem-actionpack
     SUBDIR += rubygem-actionpack4
@@ -2079,11 +2052,9 @@
     SUBDIR += sfnt2woff
     SUBDIR += shellinabox
     SUBDIR += shttpd
-    SUBDIR += simplog
     SUBDIR += sit
     SUBDIR += sitebar
     SUBDIR += sitecopy
-    SUBDIR += siteframe
     SUBDIR += skytemplate
     SUBDIR += slowcgi
     SUBDIR += smarty2
@@ -2182,14 +2153,12 @@
     SUBDIR += trac-keywordsecretticket
     SUBDIR += trac-ldap
     SUBDIR += trac-ldapauthstore
-    SUBDIR += trac-mastertickets
     SUBDIR += trac-math
     SUBDIR += trac-mercurial
     SUBDIR += trac-navadd
     SUBDIR += trac-permredirect
     SUBDIR += trac-privatetickets
     SUBDIR += trac-pydotorgtheme
-    SUBDIR += trac-robotstxt
     SUBDIR += trac-scrumburndown
     SUBDIR += trac-spam-filter
     SUBDIR += trac-subtickets
@@ -2252,7 +2221,7 @@
     SUBDIR += twms
     SUBDIR += typo3
     SUBDIR += typo3-lts
-    SUBDIR += typolight
+    SUBDIR += uchiwa
     SUBDIR += udmsearch
     SUBDIR += uglifyjs
     SUBDIR += usermanager
@@ -2260,7 +2229,6 @@
     SUBDIR += uwsgitop
     SUBDIR += uzbl
     SUBDIR += validator
-    SUBDIR += varnish-libvmod-header
     SUBDIR += varnish-libvmod-maxminddb
     SUBDIR += varnish-libvmod-saintmode
     SUBDIR += varnish-nagios
@@ -2306,7 +2274,6 @@
     SUBDIR += webtrees
     SUBDIR += wgetpaste
     SUBDIR += wikicalc
-    SUBDIR += wikindx
     SUBDIR += wml
     SUBDIR += woof
     SUBDIR += wordpress
@@ -2314,7 +2281,6 @@
     SUBDIR += wsmake
     SUBDIR += www6to4
     SUBDIR += wwwoffle
-    SUBDIR += wwwstat
     SUBDIR += xapian-omega
     SUBDIR += xaraya
     SUBDIR += xcache
@@ -2325,18 +2291,15 @@
     SUBDIR += xpi-adblock
     SUBDIR += xpi-adblock_plus
     SUBDIR += xpi-clear_cache_button
-    SUBDIR += xpi-clearfields
     SUBDIR += xpi-close-all-tabs
     SUBDIR += xpi-colorfultabs
     SUBDIR += xpi-conkeror
-    SUBDIR += xpi-cookiesafe
     SUBDIR += xpi-cssviewer
     SUBDIR += xpi-cutemenus-crystalsvg
     SUBDIR += xpi-default_full_zoom_level
     SUBDIR += xpi-delicious
     SUBDIR += xpi-downthemall
     SUBDIR += xpi-errorzilla
-    SUBDIR += xpi-fasterfox
     SUBDIR += xpi-firebug
     SUBDIR += xpi-firefox-showcase
     SUBDIR += xpi-firemobilesimulator
@@ -2349,7 +2312,6 @@
     SUBDIR += xpi-formfox
     SUBDIR += xpi-foxmarks
     SUBDIR += xpi-foxyproxy
-    SUBDIR += xpi-gbrain
     SUBDIR += xpi-gdata_provider
     SUBDIR += xpi-ghostery
     SUBDIR += xpi-gmail-manager
@@ -2373,7 +2335,6 @@
     SUBDIR += xpi-live_http_headers
     SUBDIR += xpi-live_pagerank
     SUBDIR += xpi-menueditor
-    SUBDIR += xpi-mldonkey
     SUBDIR += xpi-modify_headers
     SUBDIR += xpi-mrtech-local-install
     SUBDIR += xpi-neo-diggler
@@ -2384,7 +2345,6 @@
     SUBDIR += xpi-pencil
     SUBDIR += xpi-pentadactyl
     SUBDIR += xpi-permatabs
-    SUBDIR += xpi-prism
     SUBDIR += xpi-quick-locale-switcher
     SUBDIR += xpi-quickproxy
     SUBDIR += xpi-resurrectpages
@@ -2400,7 +2360,6 @@
     SUBDIR += xpi-stumbleupon
     SUBDIR += xpi-stylish
     SUBDIR += xpi-table2clipboard
-    SUBDIR += xpi-tabletools
     SUBDIR += xpi-tabmixplus
     SUBDIR += xpi-tagzilla
     SUBDIR += xpi-togglewordwrap
@@ -2420,7 +2379,6 @@
     SUBDIR += xshttpd-devel
     SUBDIR += xsp
     SUBDIR += yabb
-    SUBDIR += yahoo-ui
     SUBDIR += yanopaste
     SUBDIR += yaws
     SUBDIR += yii

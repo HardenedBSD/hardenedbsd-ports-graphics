@@ -11,6 +11,7 @@
     SUBDIR += bind-tools
     SUBDIR += bind9-devel
     SUBDIR += bind910
+    SUBDIR += bind911
     SUBDIR += bind99
     SUBDIR += bindgraph
     SUBDIR += bundy
@@ -37,6 +38,7 @@
     SUBDIR += dnscrypt-wrapper
     SUBDIR += dnsdbck
     SUBDIR += dnsdist
+    SUBDIR += dnsenum
     SUBDIR += dnsflood
     SUBDIR += dnshistory
     SUBDIR += dnsjava
@@ -45,6 +47,7 @@
     SUBDIR += dnsmax-perl
     SUBDIR += dnsperf
     SUBDIR += dnsproxy
+    SUBDIR += dnsrecon
     SUBDIR += dnsreflector
     SUBDIR += dnstable
     SUBDIR += dnstop
@@ -79,7 +82,6 @@
     SUBDIR += knot2
     SUBDIR += ldapdns
     SUBDIR += ldns
-    SUBDIR += ldnsm
     SUBDIR += libasr
     SUBDIR += libasr-devel
     SUBDIR += libbind
@@ -170,6 +172,7 @@
     SUBDIR += py-namebench
     SUBDIR += py-publicsuffix
     SUBDIR += py-py3dns
+    SUBDIR += py-pycares
     SUBDIR += py-pydnstable
     SUBDIR += py-pywdns
     SUBDIR += py-tldextract

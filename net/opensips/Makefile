@@ -3,6 +3,7 @@
 
 PORTNAME=		opensips
 PORTVERSION=		2.1.2
+PORTREVISION=		1
 CATEGORIES=		net
 MASTER_SITES=		http://opensips.org/pub/opensips/${PORTVERSION}/
 
@@ -15,7 +16,7 @@ LICENSE_FILE=		${WRKSRC}/COPYING
 BROKEN_powerpc64=	Does not build
 
 LIB_DEPENDS=		libxml2.so:textproc/libxml2 \
-			libxmlrpc.so:net/xmlrpc-c-devel \
+			libxmlrpc.so:net/xmlrpc-c \
 			libpcre.so:devel/pcre \
 			libconfuse.so:devel/libconfuse \
 			librabbitmq.so:net/rabbitmq-c-devel \
@@ -45,7 +46,7 @@ USE_GCC=		yes
 NOPRECIOUSMAKEVARS=	yes
 
 OPTIONS_DEFINE=		DEBUG DOCS EXAMPLES GEOIP HTTP LDAP MEMCACHED MYSQL PGSQL RADIUS TESTS TLS UNIXODBC
-OPTIONS_DEFAULT=	DOCS EXAMPLES GEOIP HTTP LDAP MEMCACHED PGSQL RADIUS TLS
+OPTIONS_DEFAULT=	GEOIP HTTP LDAP MEMCACHED PGSQL RADIUS TLS
 OPTIONS_SUB=		yes
 
 GEOIP_DESC=		Build with GeoIP support

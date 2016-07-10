@@ -33,7 +33,6 @@
     SUBDIR += dailystrips
     SUBDIR += deforaos-todo
     SUBDIR += devd-notifier
-    SUBDIR += displaycalibrator
     SUBDIR += dlume
     SUBDIR += docear
     SUBDIR += dosage
@@ -188,6 +187,7 @@
     SUBDIR += plasma-applet-yawp
     SUBDIR += plopfolio
     SUBDIR += preferences
+    SUBDIR += puush
     SUBDIR += py-bugwarrior
     SUBDIR += py-khal
     SUBDIR += py-pycarddav

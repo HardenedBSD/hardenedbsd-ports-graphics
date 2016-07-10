@@ -107,6 +107,7 @@ lib/calibre/calibre/devices/kobo/__init__.py
 lib/calibre/calibre/devices/kobo/bookmark.py
 lib/calibre/calibre/devices/kobo/books.py
 lib/calibre/calibre/devices/kobo/driver.py
+lib/calibre/calibre/devices/kobo/kobotouch_config.py
 lib/calibre/calibre/devices/manager.py
 lib/calibre/calibre/devices/mime.py
 lib/calibre/calibre/devices/misc.py
@@ -130,6 +131,8 @@ lib/calibre/calibre/devices/nook/__init__.py
 lib/calibre/calibre/devices/nook/driver.py
 lib/calibre/calibre/devices/nuut2/__init__.py
 lib/calibre/calibre/devices/nuut2/driver.py
+lib/calibre/calibre/devices/paladin/__init__.py
+lib/calibre/calibre/devices/paladin/driver.py
 lib/calibre/calibre/devices/prs505/__init__.py
 lib/calibre/calibre/devices/prs505/driver.py
 lib/calibre/calibre/devices/prs505/sony_cache.py
@@ -348,7 +351,10 @@ lib/calibre/calibre/ebooks/metadata/lrx.py
 lib/calibre/calibre/ebooks/metadata/meta.py
 lib/calibre/calibre/ebooks/metadata/mobi.py
 lib/calibre/calibre/ebooks/metadata/odt.py
+lib/calibre/calibre/ebooks/metadata/opf.py
 lib/calibre/calibre/ebooks/metadata/opf2.py
+lib/calibre/calibre/ebooks/metadata/opf3.py
+lib/calibre/calibre/ebooks/metadata/opf3_test.py
 lib/calibre/calibre/ebooks/metadata/pdb.py
 lib/calibre/calibre/ebooks/metadata/pdf.py
 lib/calibre/calibre/ebooks/metadata/plucker.py
@@ -379,6 +385,7 @@ lib/calibre/calibre/ebooks/metadata/tag_mapper.py
 lib/calibre/calibre/ebooks/metadata/toc.py
 lib/calibre/calibre/ebooks/metadata/topaz.py
 lib/calibre/calibre/ebooks/metadata/txt.py
+lib/calibre/calibre/ebooks/metadata/utils.py
 lib/calibre/calibre/ebooks/metadata/worker.py
 lib/calibre/calibre/ebooks/metadata/xisbn.py
 lib/calibre/calibre/ebooks/metadata/xmp.py
@@ -469,6 +476,7 @@ lib/calibre/calibre/ebooks/oeb/polish/tests/cascade.py
 lib/calibre/calibre/ebooks/oeb/polish/tests/container.py
 lib/calibre/calibre/ebooks/oeb/polish/tests/main.py
 lib/calibre/calibre/ebooks/oeb/polish/tests/parsing.py
+lib/calibre/calibre/ebooks/oeb/polish/tests/structure.py
 lib/calibre/calibre/ebooks/oeb/polish/toc.py
 lib/calibre/calibre/ebooks/oeb/polish/utils.py
 lib/calibre/calibre/ebooks/oeb/reader.py
@@ -767,9 +775,11 @@ lib/calibre/calibre/gui2/device_drivers/configwidget.py
 lib/calibre/calibre/gui2/device_drivers/configwidget_ui.py
 lib/calibre/calibre/gui2/device_drivers/mtp_config.py
 lib/calibre/calibre/gui2/device_drivers/mtp_folder_browser.py
+lib/calibre/calibre/gui2/device_drivers/tabbed_device_config.py
 lib/calibre/calibre/gui2/dialogs/__init__.py
 lib/calibre/calibre/gui2/dialogs/add_empty_book.py
 lib/calibre/calibre/gui2/dialogs/add_from_isbn.py
+lib/calibre/calibre/gui2/dialogs/add_from_isbn_ui.py
 lib/calibre/calibre/gui2/dialogs/authors_edit.py
 lib/calibre/calibre/gui2/dialogs/book_info.py
 lib/calibre/calibre/gui2/dialogs/catalog.py
@@ -1091,6 +1101,7 @@ lib/calibre/calibre/gui2/tweak_book/save.py
 lib/calibre/calibre/gui2/tweak_book/search.py
 lib/calibre/calibre/gui2/tweak_book/spell.py
 lib/calibre/calibre/gui2/tweak_book/templates.py
+lib/calibre/calibre/gui2/tweak_book/text_search.py
 lib/calibre/calibre/gui2/tweak_book/toc.py
 lib/calibre/calibre/gui2/tweak_book/ui.py
 lib/calibre/calibre/gui2/tweak_book/undo.py
@@ -1190,7 +1201,7 @@ lib/calibre/calibre/plugins/speedup.so
 lib/calibre/calibre/plugins/sqlite_custom.so
 lib/calibre/calibre/plugins/tokenizer.so
 lib/calibre/calibre/plugins/unrar.so
-lib/calibre/calibre/plugins/z%%QT_LIBDIR%%2.so
+lib/calibre/calibre/plugins/zlib2.so
 lib/calibre/calibre/ptempfile.py
 lib/calibre/calibre/rpdb.py
 lib/calibre/calibre/spell/__init__.py
@@ -1302,6 +1313,7 @@ lib/calibre/calibre/utils/ipc/simple_worker.py
 lib/calibre/calibre/utils/ipc/worker.py
 lib/calibre/calibre/utils/iphlpapi.py
 lib/calibre/calibre/utils/ipython.py
+lib/calibre/calibre/utils/iso8601.py
 lib/calibre/calibre/utils/linux_trash.py
 lib/calibre/calibre/utils/localization.py
 lib/calibre/calibre/utils/localunzip.py
@@ -1339,6 +1351,7 @@ lib/calibre/calibre/utils/rapydscript.py
 lib/calibre/calibre/utils/recycle_bin.py
 lib/calibre/calibre/utils/resources.py
 lib/calibre/calibre/utils/rss_gen.py
+lib/calibre/calibre/utils/run_tests.py
 lib/calibre/calibre/utils/search_query_parser.py
 lib/calibre/calibre/utils/serve_coffee.py
 lib/calibre/calibre/utils/sftp.py
@@ -1932,6 +1945,7 @@ lib/calibre/tinycss/version.py
 %%DATADIR%%/templates/inline_toc_styles.css
 %%DATADIR%%/templates/lrf.xsl
 %%DATADIR%%/templates/new_book.html
+%%DATADIR%%/templates/new_nav.html
 %%DATADIR%%/templates/rtf.xsl
 %%DATADIR%%/tracer.epub
 %%DATADIR%%/user-manual-translation-stats.json

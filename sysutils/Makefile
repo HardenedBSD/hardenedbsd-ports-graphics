@@ -90,7 +90,6 @@
     SUBDIR += biosfont
     SUBDIR += bkpupsd
     SUBDIR += bksh
-    SUBDIR += bontmia
     SUBDIR += boxbackup
     SUBDIR += boxbackup-devel
     SUBDIR += brasero
@@ -100,9 +99,11 @@
     SUBDIR += bsdcrashtar
     SUBDIR += bsdhwmon
     SUBDIR += bsdinfo
+    SUBDIR += bsdisks
     SUBDIR += bsdmoted
     SUBDIR += bsdploy
     SUBDIR += bsdstats
+    SUBDIR += bstack
     SUBDIR += btsixad
     SUBDIR += bulk_extractor
     SUBDIR += burp
@@ -129,6 +130,7 @@
     SUBDIR += cfengine-masterfiles36
     SUBDIR += cfengine-masterfiles37
     SUBDIR += cfengine-masterfiles38
+    SUBDIR += cfengine-masterfiles39
     SUBDIR += cfengine22
     SUBDIR += cfengine32
     SUBDIR += cfengine33
@@ -137,6 +139,7 @@
     SUBDIR += cfengine36
     SUBDIR += cfengine37
     SUBDIR += cfengine38
+    SUBDIR += cfengine39
     SUBDIR += chgrep
     SUBDIR += cinnamon-control-center
     SUBDIR += cinnamon-settings-daemon
@@ -185,7 +188,6 @@
     SUBDIR += cw
     SUBDIR += daa2iso
     SUBDIR += dae
-    SUBDIR += daedalus
     SUBDIR += daemonize
     SUBDIR += daemontools
     SUBDIR += daemontools-encore
@@ -274,6 +276,7 @@
     SUBDIR += fetchlog
     SUBDIR += ffs2recov
     SUBDIR += file
+    SUBDIR += filebeat
     SUBDIR += filedupe
     SUBDIR += filelight-kde4
     SUBDIR += fileprune
@@ -436,6 +439,7 @@
     SUBDIR += installwatch
     SUBDIR += intel-nvmupdate
     SUBDIR += intel-pcm
+    SUBDIR += intel-qcu
     SUBDIR += iocage
     SUBDIR += iocage-devel
     SUBDIR += iogen
@@ -462,7 +466,6 @@
     SUBDIR += jailutils
     SUBDIR += javaservicewrapper
     SUBDIR += jdiskreport
-    SUBDIR += jfbterm
     SUBDIR += jkill
     SUBDIR += jobd
     SUBDIR += jps
@@ -553,6 +556,8 @@
     SUBDIR += mcollective-nettest-client
     SUBDIR += mcollective-nettest-common
     SUBDIR += mcollective-nrpe-agent
+    SUBDIR += mcollective-nrpe-client
+    SUBDIR += mcollective-nrpe-common
     SUBDIR += mcollective-puppet-agent
     SUBDIR += mcollective-puppet-client
     SUBDIR += mcollective-puppet-common
@@ -588,14 +593,14 @@
     SUBDIR += monitord
     SUBDIR += monitorix
     SUBDIR += mono-kmod
-    SUBDIR += moosefs-cgi
-    SUBDIR += moosefs-cgiserv
-    SUBDIR += moosefs-chunkserver
-    SUBDIR += moosefs-cli
-    SUBDIR += moosefs-client
-    SUBDIR += moosefs-master
-    SUBDIR += moosefs-metalogger
-    SUBDIR += moosefs-netdump
+    SUBDIR += moosefs2-cgi
+    SUBDIR += moosefs2-cgiserv
+    SUBDIR += moosefs2-chunkserver
+    SUBDIR += moosefs2-cli
+    SUBDIR += moosefs2-client
+    SUBDIR += moosefs2-master
+    SUBDIR += moosefs2-metalogger
+    SUBDIR += moosefs2-netdump
     SUBDIR += moreutils
     SUBDIR += most
     SUBDIR += mount.app
@@ -622,6 +627,7 @@
     SUBDIR += nfsping
     SUBDIR += nitrogen
     SUBDIR += no-login
+    SUBDIR += nomad
     SUBDIR += npadmin
     SUBDIR += nrg2iso
     SUBDIR += ntfsprogs
@@ -712,6 +718,7 @@
     SUBDIR += p5-arclog
     SUBDIR += p5-reslog
     SUBDIR += packer
+    SUBDIR += packetbeat
     SUBDIR += pacman
     SUBDIR += paicc
     SUBDIR += pam_mount
@@ -728,7 +735,6 @@
     SUBDIR += pcbsd-syscache
     SUBDIR += pcbsd-utils
     SUBDIR += pcbsd-utils-qt5
-    SUBDIR += pcfclock
     SUBDIR += pciutils
     SUBDIR += pcpustat
     SUBDIR += pdixtract
@@ -850,6 +856,7 @@
     SUBDIR += qpxtool
     SUBDIR += qsynergy
     SUBDIR += qt5-qtpaths
+    SUBDIR += qtpass
     SUBDIR += quicksynergy
     SUBDIR += qzeitgeist
     SUBDIR += racktables
@@ -884,7 +891,6 @@
     SUBDIR += roottail
     SUBDIR += rsnapshot
     SUBDIR += rsyncbackup
-    SUBDIR += rsyncmanager
     SUBDIR += rsyncrypto
     SUBDIR += rsyslog7
     SUBDIR += rsyslog8
@@ -925,6 +931,7 @@
     SUBDIR += rubygem-hiera-file
     SUBDIR += rubygem-hiera1
     SUBDIR += rubygem-hieracles
+    SUBDIR += rubygem-itamae
     SUBDIR += rubygem-librarian-puppet
     SUBDIR += rubygem-log4r
     SUBDIR += rubygem-logify
@@ -942,6 +949,7 @@
     SUBDIR += rubygem-smart_proxy_dynflow
     SUBDIR += rubygem-smart_proxy_remote_execution_ssh
     SUBDIR += rubygem-smart_proxy_salt
+    SUBDIR += rubygem-specinfra
     SUBDIR += rubygem-sys-admin
     SUBDIR += rubygem-sys-cpu
     SUBDIR += rubygem-sys-filesystem
@@ -1034,9 +1042,6 @@
     SUBDIR += syslog-ng
     SUBDIR += syslog-ng-devel
     SUBDIR += syslog-ng-incubator
-    SUBDIR += syslog-ng-incubator03
-    SUBDIR += syslog-ng34
-    SUBDIR += syslog-ng35
     SUBDIR += syslog-ng36
     SUBDIR += syslog-ng37
     SUBDIR += syslogger
@@ -1063,6 +1068,8 @@
     SUBDIR += tkdvd
     SUBDIR += tlsdate
     SUBDIR += tm
+    SUBDIR += tmate
+    SUBDIR += tmate-slave
     SUBDIR += tmpreaper
     SUBDIR += tmpwatch
     SUBDIR += tmux
@@ -1086,6 +1093,7 @@
     SUBDIR += u-boot-cubox-hummingboard
     SUBDIR += u-boot-duovero
     SUBDIR += u-boot-pandaboard
+    SUBDIR += u-boot-pine64
     SUBDIR += u-boot-rpi
     SUBDIR += u-boot-rpi2
     SUBDIR += u-boot-utilite
@@ -1098,6 +1106,7 @@
     SUBDIR += ucspi-tcp
     SUBDIR += ucspi-unix
     SUBDIR += udfclient
+    SUBDIR += uefi-edk2-bhyve
     SUBDIR += ufs_copy
     SUBDIR += uhidd
     SUBDIR += uif2iso
@@ -1129,7 +1138,6 @@
     SUBDIR += vils
     SUBDIR += vimpager
     SUBDIR += virtualmin
-    SUBDIR += vlogger
     SUBDIR += vm-bhyve
     SUBDIR += vmdktool
     SUBDIR += vmtouch
@@ -1215,6 +1223,7 @@
     SUBDIR += zfs-stats
     SUBDIR += zfs-stats-lite
     SUBDIR += zfsnap
+    SUBDIR += zfsnap2
     SUBDIR += zfstools
     SUBDIR += zidrav
     SUBDIR += zisofs-tools

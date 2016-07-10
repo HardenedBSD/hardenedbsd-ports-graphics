@@ -133,6 +133,7 @@ bin/openxpkictl
 %%SITE_ARCH%%/OpenXPKI/Server/ACL.pm
 %%SITE_ARCH%%/OpenXPKI/Server/API.pm
 %%SITE_ARCH%%/OpenXPKI/Server/API/Default.pm
+%%SITE_ARCH%%/OpenXPKI/Server/API/Housekeeping.pm
 %%SITE_ARCH%%/OpenXPKI/Server/API/Object.pm
 %%SITE_ARCH%%/OpenXPKI/Server/API/Profile.pm
 %%SITE_ARCH%%/OpenXPKI/Server/API/Secret.pm
@@ -305,13 +306,9 @@ bin/openxpkictl
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Persister/Null.pm
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Stub.pm
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator.pm
-%%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/ApprovalSignature.pm
-%%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/Bulk.pm
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/CertIdentifierExists.pm
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/CertSubject.pm
-%%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/CertSubjectAltNameParts.pm
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/CertSubjectFields.pm
-%%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/CertSubjectParts.pm
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/Connector.pm
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/InvalidityTime.pm
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/KeyLength.pm
@@ -321,7 +318,6 @@ bin/openxpkictl
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/ReasonCode.pm
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/Regex.pm
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/RelativeDate.pm
-%%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/SPKAC.pm
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/SmartcardPINUnblockAuthIDs.pm
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/ValidityTime.pm
 %%SITE_ARCH%%/OpenXPKI/Server/Workflow/Validator/ValidityWindow.pm
@@ -468,6 +464,7 @@ bin/openxpkictl
 %%PERL5_MAN3%%/OpenXPKI::Server::ACL.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::API.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::API::Default.3.gz
+%%PERL5_MAN3%%/OpenXPKI::Server::API::Housekeeping.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::API::Object.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::API::Profile.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::API::Secret.3.gz
@@ -634,13 +631,9 @@ bin/openxpkictl
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Persister::DBI::SequenceId.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Persister::Null.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator.3.gz
-%%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::ApprovalSignature.3.gz
-%%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::Bulk.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::CertIdentifierExists.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::CertSubject.3.gz
-%%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::CertSubjectAltNameParts.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::CertSubjectFields.3.gz
-%%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::CertSubjectParts.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::Connector.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::InvalidityTime.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::KeyLength.3.gz
@@ -650,7 +643,6 @@ bin/openxpkictl
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::ReasonCode.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::Regex.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::RelativeDate.3.gz
-%%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::SPKAC.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::SmartcardPINUnblockAuthIDs.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::ValidityTime.3.gz
 %%PERL5_MAN3%%/OpenXPKI::Server::Workflow::Validator::ValidityWindow.3.gz
@@ -681,6 +673,7 @@ bin/openxpkictl
 %%PERL5_MAN3%%/OpenXPKI::Workflow::Handler.3.gz
 %%PERL5_MAN3%%/OpenXPKI::i18n.3.gz
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/cgi-bin/download.fcgi
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/cgi-bin/rpc.fcgi
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/cgi-bin/sc.fcgi
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/cgi-bin/scep
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/cgi-bin/soap.fcgi
@@ -788,6 +781,7 @@ bin/openxpkictl
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/config.d/realm/ca-one/workflow/global/action/noop2.yaml
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/config.d/realm/ca-one/workflow/global/action/noop3.yaml
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/config.d/realm/ca-one/workflow/global/action/skip.yaml
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/config.d/realm/ca-one/workflow/global/condition/is_automated_request.yaml
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/config.d/realm/ca-one/workflow/global/condition/is_batch_mode.yaml
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/config.d/realm/ca-one/workflow/global/condition/is_certificate_owner.yaml
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/config.d/realm/ca-one/workflow/global/condition/is_creator.yaml
@@ -852,6 +846,8 @@ bin/openxpkictl
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/notification/rt/csr_created_comment.txt
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/notification/rt/csr_rejected.txt
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/notification/rt/test.txt
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/rpc/default.conf
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/rpc/log.conf
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/sc/default.conf
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/sc/log.conf
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/config/openxpki/scep/default.conf

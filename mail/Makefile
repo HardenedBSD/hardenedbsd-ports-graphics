@@ -23,7 +23,6 @@
     SUBDIR += ask
     SUBDIR += asmail
     SUBDIR += assp
-    SUBDIR += atmail
     SUBDIR += automx
     SUBDIR += autorespond
     SUBDIR += autosig
@@ -105,7 +104,6 @@
     SUBDIR += dovecot2-pigeonhole
     SUBDIR += drac
     SUBDIR += dracmail
-    SUBDIR += dsbl-testers
     SUBDIR += dspam
     SUBDIR += ecartis
     SUBDIR += elm
@@ -120,7 +118,6 @@
     SUBDIR += evolution
     SUBDIR += evolution-ews
     SUBDIR += evolution-mapi
-    SUBDIR += exact
     SUBDIR += exilog
     SUBDIR += exim
     SUBDIR += exim-doc-html
@@ -148,7 +145,6 @@
     SUBDIR += gensig
     SUBDIR += getmail
     SUBDIR += gkrellmmailwatch2
-    SUBDIR += gld
     SUBDIR += gmime2
     SUBDIR += gmime2-sharp
     SUBDIR += gmime24
@@ -228,7 +224,6 @@
     SUBDIR += mailpile
     SUBDIR += mailscanner
     SUBDIR += mailsync
-    SUBDIR += mailtray
     SUBDIR += mailx
     SUBDIR += mairix
     SUBDIR += masqmail
@@ -258,7 +253,6 @@
     SUBDIR += minimalist
     SUBDIR += missey
     SUBDIR += mixmaster
-    SUBDIR += ml
     SUBDIR += mlmmj
     SUBDIR += mls
     SUBDIR += mmr
@@ -266,6 +260,7 @@
     SUBDIR += mpop
     SUBDIR += mreport
     SUBDIR += msgconvert
+    SUBDIR += msglint
     SUBDIR += msmtp
     SUBDIR += mu
     SUBDIR += mu4e
@@ -278,6 +273,7 @@
     SUBDIR += mutt_vc_query
     SUBDIR += muttils
     SUBDIR += nbsmtp
+    SUBDIR += neomutt
     SUBDIR += nmh
     SUBDIR += nmzmail
     SUBDIR += noattach
@@ -298,9 +294,18 @@
     SUBDIR += opensmtpd-extras-filter-clamav
     SUBDIR += opensmtpd-extras-filter-dkim
     SUBDIR += opensmtpd-extras-filter-dnsbl
+    SUBDIR += opensmtpd-extras-filter-lua
+    SUBDIR += opensmtpd-extras-filter-monkey
     SUBDIR += opensmtpd-extras-filter-pause
+    SUBDIR += opensmtpd-extras-filter-perl
+    SUBDIR += opensmtpd-extras-filter-python
     SUBDIR += opensmtpd-extras-filter-regex
     SUBDIR += opensmtpd-extras-filter-spamassassin
+    SUBDIR += opensmtpd-extras-queue-python
+    SUBDIR += opensmtpd-extras-queue-ram
+    SUBDIR += opensmtpd-extras-scheduler-python
+    SUBDIR += opensmtpd-extras-scheduler-ram
+    SUBDIR += opensmtpd-extras-table-ldap
     SUBDIR += opensmtpd-extras-table-mysql
     SUBDIR += opensmtpd-extras-table-passwd
     SUBDIR += opensmtpd-extras-table-postgresql
@@ -308,6 +313,7 @@
     SUBDIR += opensmtpd-extras-table-redis
     SUBDIR += opensmtpd-extras-table-socketmap
     SUBDIR += opensmtpd-extras-table-sqlite
+    SUBDIR += opensmtpd-extras-tool-stats
     SUBDIR += openwebmail
     SUBDIR += osbf-lua
     SUBDIR += ovs
@@ -482,7 +488,6 @@
     SUBDIR += pecl-mailparse
     SUBDIR += pecl-pop3
     SUBDIR += perdition
-    SUBDIR += pflogstats
     SUBDIR += pflogsumm
     SUBDIR += pfqueue
     SUBDIR += pgpsendmail
@@ -494,7 +499,6 @@
     SUBDIR += pine-pgp-filters
     SUBDIR += pm-lib
     SUBDIR += policyd2
-    SUBDIR += pop3gwd
     SUBDIR += pop3lite
     SUBDIR += pop3proxy
     SUBDIR += pop3vscan
@@ -552,7 +556,6 @@
     SUBDIR += qmail-activedir
     SUBDIR += qmail-auditor
     SUBDIR += qmail-autoresponder
-    SUBDIR += qmail-conf
     SUBDIR += qmail-contrib
     SUBDIR += qmail-dk
     SUBDIR += qmail-ldap
@@ -731,7 +734,6 @@
     SUBDIR += vmailmgr
     SUBDIR += vpopmail
     SUBDIR += vqadmin
-    SUBDIR += vqregister
     SUBDIR += vrfy
     SUBDIR += wanderlust
     SUBDIR += wanderlust-devel
@@ -739,7 +741,6 @@
     SUBDIR += whoson
     SUBDIR += wmbiff
     SUBDIR += wmmaiload
-    SUBDIR += wmpop3
     SUBDIR += x-face-e21
     SUBDIR += xbuffy
     SUBDIR += xcite

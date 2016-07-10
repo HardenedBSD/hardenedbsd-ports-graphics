@@ -5,6 +5,7 @@
 
     SUBDIR += 2ping
     SUBDIR += TkTopNetFlows
+    SUBDIR += adcli
     SUBDIR += aggregate
     SUBDIR += aircrack-ng
     SUBDIR += ap-utils
@@ -88,7 +89,6 @@
     SUBDIR += ipaudit
     SUBDIR += ipcad
     SUBDIR += ipcalc
-    SUBDIR += ipfm
     SUBDIR += ipplan
     SUBDIR += ipv6calc
     SUBDIR += ipv6gen
@@ -96,6 +96,7 @@
     SUBDIR += irrtoolset
     SUBDIR += isic
     SUBDIR += jnettop
+    SUBDIR += kapacitor
     SUBDIR += kismet
     SUBDIR += klg
     SUBDIR += lanmap
@@ -166,7 +167,6 @@
     SUBDIR += netmagis-utils
     SUBDIR += netmagis-www
     SUBDIR += netmask
-    SUBDIR += netmond
     SUBDIR += netspoc
     SUBDIR += netustad
     SUBDIR += netwag
@@ -326,6 +326,7 @@
     SUBDIR += torrus
     SUBDIR += unifi3
     SUBDIR += unifi4
+    SUBDIR += unifi5
     SUBDIR += victorops-nagios
     SUBDIR += vidalia
     SUBDIR += virt-viewer

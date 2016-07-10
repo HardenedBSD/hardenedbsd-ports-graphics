@@ -1,10 +1,10 @@
 # $FreeBSD$
 
 PORTNAME=	gcc-arm-embedded
-PORTVERSION=	5.3.20160330
+PORTVERSION=	5.4.20160622
 PORTREVISION=	0
 CATEGORIES=	devel
-MASTER_SITES=	http://launchpad.net/gcc-arm-embedded/5.0/5-2016-q1-update/+download/
+MASTER_SITES=	http://launchpad.net/gcc-arm-embedded/5.0/5-2016-q2-update/+download/
 DISTNAME=	${ORIGINAL_PACKAGE_NAME}-src
 
 MAINTAINER=	lev@FreeBSD.org
@@ -16,7 +16,7 @@ LICENSE_COMB=	multi
 BROKEN_powerpc64=	Does not build
 
 OPTIONS_DEFINE=	PURE PYGDB EXAMPLES HTML PDF DOCS
-OPTIONS_DEFAULT=EXAMPLES PYGDB
+OPTIONS_DEFAULT=PYGDB
 PURE_DESC=	Use all libraries from bundle, do not depend on anything
 HTML_DESC=	Install HTML documentation
 PDF_DESC=	Install PDF documentation (requires TeX, it is huge)
@@ -48,8 +48,8 @@ GNU_CONFIGURE=	yes
 PATCH_WRKSRC=	${WRKDIR}/${ORIGINAL_PACKAGE_NAME}
 BUILD_WRKSRC=	${WRKDIR}
 
-GCC_VERSION=		5.3.1
-FULL_VERSION=		5_3-2016q1-20160330
+GCC_VERSION=		5.4.1
+FULL_VERSION=		5_4-2016q2-20160622
 TARGET=			arm-none-eabi
 ORIGINAL_PACKAGE_NAME=	gcc-${TARGET}-${FULL_VERSION}
 
