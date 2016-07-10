@@ -34,6 +34,8 @@ include/libdrm/savage_drm.h
 include/libdrm/sis_drm.h
 include/libdrm/tegra_drm.h
 include/libdrm/vc4_drm.h
+%%VC4_DRIVERS%%include/libdrm/vc4_packet.h
+%%VC4_DRIVERS%%include/libdrm/vc4_qpu_defines.h
 include/libdrm/via_drm.h
 %%KMS%%include/libkms/libkms.h
 include/xf86drm.h
@@ -61,6 +63,7 @@ libdata/pkgconfig/libdrm.pc
 %%INTEL_DRIVER%%libdata/pkgconfig/libdrm_intel.pc
 %%NOUVEAU%%libdata/pkgconfig/libdrm_nouveau.pc
 %%RADEON_DRIVERS%%libdata/pkgconfig/libdrm_radeon.pc
+%%VC4_DRIVERS%%libdata/pkgconfig/libdrm_vc4.pc
 %%KMS%%libdata/pkgconfig/libkms.pc
 %%MAN%%man/man3/drmAvailable.3.gz
 %%MAN%%man/man3/drmHandleEvent.3.gz

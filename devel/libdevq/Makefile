@@ -2,18 +2,21 @@
 # $FreeBSD$
 
 PORTNAME=	libdevq
-PORTVERSION=	0.0.2
-PORTREVISION=	1
+PORTVERSION=	0.0.3
 CATEGORIES=	devel
-MASTER_SITES=	http://rainbow-runner.nl/freebsd/
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Generic Device Query and Monitor interface
 
+USE_GITHUB=	yes
+GH_ACCOUNT=	freebsd
+
 GNU_CONFIGURE=	yes
-USES=		libtool pathfix tar:xz
+USES=		autoreconf libtool pathfix tar:xz
 USE_LDCONFIG=	yes
 INSTALL_TARGET=	install-strip
+
+PATHFIX_MAKEFILEIN=	Makefile.am
 
 OPTIONS_DEFINE=	PROGRAMS
 OPTIONS_SUB=	yes
