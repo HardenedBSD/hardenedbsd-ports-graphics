@@ -1,12 +1,6 @@
-<<<<<<< HEAD
---- configure.orig	2016-06-18 19:04:45.240922000 +0200
-+++ configure	2016-06-18 19:05:15.281086000 +0200
-@@ -860,6 +860,8 @@ GLPROTO_LIBS
-=======
 --- configure.orig	2016-07-08 12:46:20.268123000 +0200
 +++ configure	2016-07-08 13:06:42.801841000 +0200
 @@ -867,6 +867,8 @@
->>>>>>> 6ace0ac1169f76a41d366603fe848684a21a92de
  GLPROTO_CFLAGS
  XLIBGL_LIBS
  XLIBGL_CFLAGS
@@ -15,11 +9,7 @@
  LIBUDEV_LIBS
  LIBUDEV_CFLAGS
  ENABLE_SHADER_CACHE_FALSE
-<<<<<<< HEAD
-@@ -1175,6 +1177,8 @@ OPENSSL_CFLAGS
-=======
 @@ -1200,6 +1202,8 @@
->>>>>>> 6ace0ac1169f76a41d366603fe848684a21a92de
  OPENSSL_LIBS
  LIBUDEV_CFLAGS
  LIBUDEV_LIBS
@@ -28,11 +18,7 @@
  XLIBGL_CFLAGS
  XLIBGL_LIBS
  GLPROTO_CFLAGS
-<<<<<<< HEAD
-@@ -2002,6 +2006,10 @@ Some influential environment variables:
-=======
 @@ -2041,6 +2045,10 @@
->>>>>>> 6ace0ac1169f76a41d366603fe848684a21a92de
                C compiler flags for LIBUDEV, overriding pkg-config
    LIBUDEV_LIBS
                linker flags for LIBUDEV, overriding pkg-config
@@ -43,11 +29,7 @@
    XLIBGL_CFLAGS
                C compiler flags for XLIBGL, overriding pkg-config
    XLIBGL_LIBS linker flags for XLIBGL, overriding pkg-config
-<<<<<<< HEAD
-@@ -5336,6 +5344,7 @@ DRI2PROTO_REQUIRED=2.6
-=======
 @@ -5379,6 +5387,7 @@
->>>>>>> 6ace0ac1169f76a41d366603fe848684a21a92de
  DRI3PROTO_REQUIRED=1.0
  PRESENTPROTO_REQUIRED=1.0
  LIBUDEV_REQUIRED=151
@@ -55,11 +37,7 @@
  GLPROTO_REQUIRED=1.4.14
  LIBOMXIL_BELLAGIO_REQUIRED=0.0
  LIBVA_REQUIRED=0.38.0
-<<<<<<< HEAD
-@@ -21444,7 +21453,7 @@ fi
-=======
 @@ -21721,7 +21730,7 @@
->>>>>>> 6ace0ac1169f76a41d366603fe848684a21a92de
  
  
  case "$host_os" in
@@ -68,11 +46,7 @@
      dri3_default=yes
      ;;
  *)
-<<<<<<< HEAD
-@@ -22438,6 +22447,78 @@ $as_echo "yes" >&6; }
-=======
 @@ -22849,6 +22858,78 @@
->>>>>>> 6ace0ac1169f76a41d366603fe848684a21a92de
  	have_libudev=yes
  fi
  
@@ -151,11 +125,7 @@
  # Check whether --enable-sysfs was given.
  if test "${enable_sysfs+set}" = set; then :
    enableval=$enable_sysfs; have_sysfs="$enableval"
-<<<<<<< HEAD
-@@ -23244,6 +23325,10 @@ if test "$have_libudev" = yes; then
-=======
 @@ -23655,6 +23736,10 @@
->>>>>>> 6ace0ac1169f76a41d366603fe848684a21a92de
      DEFINES="$DEFINES -DHAVE_LIBUDEV"
      have_pci_id=yes
  fi
@@ -166,20 +136,10 @@
  
  if test "$have_sysfs" = yes; then
      DEFINES="$DEFINES -DHAVE_SYSFS"
-<<<<<<< HEAD
-@@ -23377,9 +23462,28 @@ if test "x$enable_dri" = xyes; then
-             ;;
-         esac
-=======
 @@ -23793,6 +23878,22 @@
->>>>>>> 6ace0ac1169f76a41d366603fe848684a21a92de
          ;;
--    *freebsd* | dragonfly* | *netbsd* | openbsd*)
-+    *netbsd* | openbsd*)
+     gnu*)
          DEFINES="$DEFINES -DHAVE_ALIAS"
-         ;;
-+    *freebsd* | dragonfly*)
-+        DEFINES="$DEFINES -DHAVE_ALIAS"
 +        if test "x$enable_dri3" = xyes; then
 +            DEFINES="$DEFINES -DHAVE_DRI3"
 +        fi
@@ -196,17 +156,10 @@
 +            fi
 +            ;;
 +        esac
-+        ;;
-     gnu*)
-         DEFINES="$DEFINES -DHAVE_ALIAS"
          ;;
-<<<<<<< HEAD
-@@ -24181,6 +24285,8 @@ fi
-=======
      cygwin*)
          if test "x$with_dri_drivers" = "xyes"; then
 @@ -24646,6 +24747,8 @@
->>>>>>> 6ace0ac1169f76a41d366603fe848684a21a92de
  
  if test "x$need_pci_id$have_libudev" = xyesyes; then
      GBM_PC_REQ_PRIV="libudev >= $LIBUDEV_REQUIRED"
@@ -215,11 +168,7 @@
  else
      GBM_PC_REQ_PRIV=""
  fi
-<<<<<<< HEAD
-@@ -25012,9 +25118,19 @@ if test "x$enable_opencl" = xyes; then
-=======
 @@ -25581,9 +25684,19 @@
->>>>>>> 6ace0ac1169f76a41d366603fe848684a21a92de
          as_fn_error $? "cannot enable OpenCL without Gallium" "$LINENO" 5
      fi
  
@@ -239,9 +188,6 @@
  
      if test "x$have_libclc" = xno; then
          as_fn_error $? "pkg-config cannot find libclc.pc which is required to build clover.
-<<<<<<< HEAD
-@@ -25828,9 +25944,6 @@ fi
-=======
 @@ -26112,9 +26225,9 @@
  strip_unwanted_llvm_flags() {
      # Use \> (marks the end of the word)
@@ -256,7 +202,6 @@
  	-e 's/-D_GNU_SOURCE\>//g' \
  	-e 's/-pedantic\>//g' \
 @@ -26403,9 +26516,6 @@
->>>>>>> 6ace0ac1169f76a41d366603fe848684a21a92de
                  CLANG_LIBDIR=${LLVM_LIBDIR}
              fi
              CLANG_RESOURCE_DIR=$CLANG_LIBDIR/clang/${LLVM_VERSION}
