@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	go-ethereum
-PORTVERSION=	1.4.3
+PORTVERSION=	1.4.7
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-p2p
 
@@ -10,7 +10,6 @@ COMMENT=	Go implementation of the Ethereum y/w paper
 
 LICENSE=	GPLv3
 
-LIB_DEPENDS=	libgmp.so:math/gmp
 BUILD_DEPENDS=	go:lang/go
 RUN_DEPENDS=	go:lang/go
 
@@ -26,7 +25,7 @@ RLPDUMP_DESC=	Prints RLP structures
 USE_GITHUB=	yes
 GH_ACCOUNT=	ethereum
 
-USE_GCC=	4.8+
+USE_GCC=	yes
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/build/bin/geth ${STAGEDIR}${PREFIX}/bin

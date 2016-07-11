@@ -15,7 +15,7 @@ Ruby_Include_MAINTAINER=	ruby@FreeBSD.org
 # [variables that a user may define]
 #
 # RUBY_VER		- (See below)
-# RUBY_DEFAULT_VER	- Set to (e.g.) "2.0" if you want to refer to "ruby20"
+# RUBY_DEFAULT_VER	- Set to (e.g.) "2.1" if you want to refer to "ruby21"
 #			  just as "ruby".
 # RUBY_ARCH		- (See below)
 # RUBY_RD_HTML		- Define if you want HTML files generated from RD files.
@@ -165,17 +165,7 @@ RUBY?=			${LOCALBASE}/bin/${RUBY_NAME}
 .if defined(RUBY_VER)
 # When adding a version, please keep the comment in
 # Mk/bsd.default-versions.mk in sync.
-. if ${RUBY_VER} == 2.0
-#
-# Ruby 2.0
-#
-RUBY_RELVERSION=	2.0.0
-RUBY_PORTREVISION=	0
-RUBY_PORTEPOCH=		1
-RUBY_PATCHLEVEL=	648
-RUBY20=			""	# PLIST_SUB helpers
-
-. elif ${RUBY_VER} == 2.1
+. if ${RUBY_VER} == 2.1
 #
 # Ruby 2.1
 #
@@ -211,14 +201,13 @@ RUBY23=			""	# PLIST_SUB helpers
 #
 # Other versions
 #
-IGNORE=	Only ruby 2.0, 2.1, 2.2 and 2.3 are supported
+IGNORE=	Only ruby 2.1, 2.2 and 2.3 are supported
 _INVALID_RUBY_VER=	1
 . endif
 .endif # defined(RUBY_VER)
 
 .if !defined(_INVALID_RUBY_VER)
 
-RUBY20?=		"@comment "
 RUBY21?=		"@comment "
 RUBY22?=		"@comment "
 RUBY23?=		"@comment "
@@ -340,7 +329,6 @@ PLIST_SUB+=		${PLIST_RUBY_DIRS:C,DIR="(${LOCALBASE}|${PREFIX})/,DIR=",} \
 			RUBY_SUFFIX="${RUBY_SUFFIX}" \
 			RUBY_NAME="${RUBY_NAME}" \
 			RUBY_DEFAULT_SUFFIX="${RUBY_DEFAULT_SUFFIX}" \
-			RUBY20=${RUBY20} \
 			RUBY21=${RUBY21} \
 			RUBY22=${RUBY22} \
 			RUBY23=${RUBY23}
@@ -458,18 +446,15 @@ RUBY_RD_HTML_FILES=	${RUBY_RD_FILES:S/.rb$//:S/.rd././:S/.rd$//:S/$/.html/}
 
 PLIST_SUB+=		RUBY_RD_HTML_FILES=""
 
-pre-install:	ruby-rd-build
-
-ruby-rd-build:
 .if !empty(RUBY_RD_FILES)
+_USES_install+=	290:ruby-rd-build
+ruby-rd-build:
 	@${ECHO_MSG} "===>  Generating HTML documents from RD documents"
 	@cd ${WRKSRC}; for rd in ${RUBY_RD_FILES}; do \
 		html=$$(echo $$rd | ${SED} 's/\.rb$$//;s/\.rd\././;s/\.rd$$//').html; \
 		${ECHO_MSG} "${RUBY_RD2} $$rd > $$html"; \
 		${RUBY_RD2} $$rd > $$html; \
 	done
-.else
-	@${DO_NADA}
 .endif
 
 .else

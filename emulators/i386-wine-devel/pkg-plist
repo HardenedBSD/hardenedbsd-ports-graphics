@@ -207,6 +207,8 @@ include/wine/windows/d3d10_1.idl
 include/wine/windows/d3d10_1shader.h
 include/wine/windows/d3d10effect.h
 include/wine/windows/d3d10misc.h
+include/wine/windows/d3d10sdklayers.h
+include/wine/windows/d3d10sdklayers.idl
 include/wine/windows/d3d10shader.h
 include/wine/windows/d3d11.h
 include/wine/windows/d3d11.idl
@@ -238,6 +240,11 @@ include/wine/windows/d3dx10async.h
 %%STAGING%%include/wine/windows/d3dx10core.h
 %%STAGING%%include/wine/windows/d3dx10core.idl
 include/wine/windows/d3dx10tex.h
+include/wine/windows/d3dx11.h
+include/wine/windows/d3dx11async.h
+include/wine/windows/d3dx11core.h
+include/wine/windows/d3dx11core.idl
+include/wine/windows/d3dx11tex.h
 include/wine/windows/d3dx9.h
 include/wine/windows/d3dx9anim.h
 include/wine/windows/d3dx9core.h
@@ -1082,6 +1089,7 @@ lib32/libXdmcp.so.6
 lib32/libXext.so.6
 lib32/libXfixes.so.3
 lib32/libXi.so.6
+lib32/libXinerama.so.1
 lib32/libXrandr.so.2
 lib32/libXrender.so.1
 lib32/libXxf86vm.so.1
@@ -1867,6 +1875,7 @@ lib32/wine/fakedlls/msxml2.dll
 lib32/wine/fakedlls/msxml3.dll
 lib32/wine/fakedlls/msxml4.dll
 lib32/wine/fakedlls/msxml6.dll
+lib32/wine/fakedlls/ncrypt.dll
 lib32/wine/fakedlls/nddeapi.dll
 lib32/wine/fakedlls/ndis.sys
 lib32/wine/fakedlls/net.exe
@@ -2216,12 +2225,10 @@ lib32/wine/libcomdlg32.def
 lib32/wine/libcompstui.def
 lib32/wine/libcomsvcs.def
 lib32/wine/libcredui.def
-lib32/wine/libcrtdll.def
 lib32/wine/libcrypt32.def
 lib32/wine/libcryptdll.def
 lib32/wine/libcryptnet.def
 lib32/wine/libcryptui.def
-lib32/wine/libctl3d32.def
 lib32/wine/libd2d1.def
 lib32/wine/libd3d10.def
 lib32/wine/libd3d10_1.def
@@ -2230,9 +2237,9 @@ lib32/wine/libd3d11.def
 lib32/wine/libd3d8.def
 lib32/wine/libd3d9.def
 lib32/wine/libd3dcompiler.def
-lib32/wine/libd3dim.def
 lib32/wine/libd3drm.def
 lib32/wine/libd3dx10.def
+lib32/wine/libd3dx11.def
 lib32/wine/libd3dx9.def
 lib32/wine/libd3dxof.def
 lib32/wine/libdbgeng.def
@@ -2241,9 +2248,7 @@ lib32/wine/libdciman32.def
 lib32/wine/libddraw.def
 lib32/wine/libdinput.a
 lib32/wine/libdinput8.def
-lib32/wine/libdmusic32.def
 lib32/wine/libdnsapi.def
-lib32/wine/libdplay.def
 lib32/wine/libdplayx.def
 lib32/wine/libdpnet.def
 lib32/wine/libdsound.def
@@ -2291,8 +2296,6 @@ lib32/wine/libmsvcr71.def
 lib32/wine/libmsvcr80.def
 lib32/wine/libmsvcr90.def
 lib32/wine/libmsvcrt.def
-lib32/wine/libmsvcrt20.def
-lib32/wine/libmsvcrt40.def
 lib32/wine/libmsvcrtd.def
 lib32/wine/libmsvfw32.def
 lib32/wine/libmswsock.def
@@ -2302,7 +2305,7 @@ lib32/wine/libnewdev.def
 lib32/wine/libnormaliz.def
 lib32/wine/libntdll.def
 lib32/wine/libntdsapi.def
-lib32/wine/libntoskrnl.exe.def
+lib32/wine/libntoskrnl.def
 lib32/wine/libodbc32.def
 lib32/wine/libodbccp32.def
 lib32/wine/libole32.def
@@ -2327,7 +2330,6 @@ lib32/wine/librsaenh.def
 lib32/wine/librtutils.def
 lib32/wine/libsecur32.def
 lib32/wine/libsensapi.def
-lib32/wine/libserialui.def
 lib32/wine/libsetupapi.def
 lib32/wine/libsfc.def
 lib32/wine/libsfc_os.def
@@ -2347,7 +2349,7 @@ lib32/wine/libtapi32.def
 lib32/wine/libunicows.def
 lib32/wine/liburl.def
 lib32/wine/liburlmon.def
-lib32/wine/libusbd.sys.def
+lib32/wine/libusbd.def
 lib32/wine/libuser32.def
 lib32/wine/libuserenv.def
 lib32/wine/libusp10.def
@@ -2477,6 +2479,7 @@ lib32/wine/msxml2.dll.so
 lib32/wine/msxml3.dll.so
 lib32/wine/msxml4.dll.so
 lib32/wine/msxml6.dll.so
+lib32/wine/ncrypt.dll.so
 lib32/wine/nddeapi.dll.so
 lib32/wine/ndis.sys.so
 lib32/wine/net.exe.so

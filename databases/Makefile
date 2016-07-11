@@ -21,6 +21,7 @@
     SUBDIR += apq-mysql
     SUBDIR += apq-odbc
     SUBDIR += apq-pgsql
+    SUBDIR += ateam_mysql_ldap_auth
     SUBDIR += autobackupmysql
     SUBDIR += bbdb
     SUBDIR += beansdb
@@ -175,7 +176,9 @@
     SUBDIR += liquibase
     SUBDIR += lmdb
     SUBDIR += luadbi
+    SUBDIR += luasql-firebird
     SUBDIR += luasql-mysql
+    SUBDIR += luasql-odbc
     SUBDIR += luasql-postgres
     SUBDIR += luasql-sqlite3
     SUBDIR += mantis
@@ -209,8 +212,6 @@
     SUBDIR += mysql-proxy
     SUBDIR += mysql-q4m
     SUBDIR += mysql-udf
-    SUBDIR += mysql-udf-sys
-    SUBDIR += mysql-xql
     SUBDIR += mysql2odbc
     SUBDIR += mysql2pgsql
     SUBDIR += mysql55-client
@@ -242,7 +243,6 @@
     SUBDIR += opentsdb
     SUBDIR += oracle7-client
     SUBDIR += oracle8-client
-    SUBDIR += oracle_odbc_driver
     SUBDIR += p5-Amazon-SimpleDB
     SUBDIR += p5-Amon2-DBI
     SUBDIR += p5-AnyEvent-BDB
@@ -553,6 +553,7 @@
     SUBDIR += pg_citus
     SUBDIR += pg_reorg
     SUBDIR += pg_rman
+    SUBDIR += pg_stat_kcache
     SUBDIR += pg_statsinfo
     SUBDIR += pgaccess
     SUBDIR += pgadmin3
@@ -565,6 +566,8 @@
     SUBDIR += pgfouine
     SUBDIR += pglesslog
     SUBDIR += pgloader
+    SUBDIR += pglogical
+    SUBDIR += pglogical-output
     SUBDIR += pgpool
     SUBDIR += pgpool-II
     SUBDIR += pgpool-II-22
@@ -572,6 +575,7 @@
     SUBDIR += pgpool-II-30
     SUBDIR += pgpool-II-33
     SUBDIR += pgpoolAdmin
+    SUBDIR += pgreplay
     SUBDIR += pgrouting
     SUBDIR += pgsphere
     SUBDIR += pgtcl
@@ -629,6 +633,7 @@
     SUBDIR += php70-pdo_pgsql
     SUBDIR += php70-pdo_sqlite
     SUBDIR += php70-pgsql
+    SUBDIR += php70-redis
     SUBDIR += php70-sqlite3
     SUBDIR += phpminiadmin
     SUBDIR += phpmyadmin
@@ -636,6 +641,7 @@
     SUBDIR += postgis-jdbc
     SUBDIR += postgis20
     SUBDIR += postgis21
+    SUBDIR += postgis22
     SUBDIR += postgresql-jdbc
     SUBDIR += postgresql-libpgeasy
     SUBDIR += postgresql-libpqxx
@@ -647,11 +653,7 @@
     SUBDIR += postgresql-plv8js
     SUBDIR += postgresql-relay
     SUBDIR += postgresql-repmgr
-    SUBDIR += postgresql90-client
-    SUBDIR += postgresql90-pgtcl
-    SUBDIR += postgresql90-plperl
-    SUBDIR += postgresql90-plpython
-    SUBDIR += postgresql90-server
+    SUBDIR += postgresql-repmgr2
     SUBDIR += postgresql91-client
     SUBDIR += postgresql91-contrib
     SUBDIR += postgresql91-docs
@@ -692,7 +694,6 @@
     SUBDIR += postgresql95-plpython
     SUBDIR += postgresql95-pltcl
     SUBDIR += postgresql95-server
-    SUBDIR += postgresql_autodoc
     SUBDIR += powerarchitect
     SUBDIR += proftpd-mod_sql_mysql
     SUBDIR += proftpd-mod_sql_odbc
@@ -701,7 +702,9 @@
     SUBDIR += proftpd-mod_sql_tds
     SUBDIR += puppetdb
     SUBDIR += puppetdb-terminus
+    SUBDIR += puppetdb-terminus3
     SUBDIR += puppetdb-terminus4
+    SUBDIR += puppetdb3
     SUBDIR += puppetdb4
     SUBDIR += pure-sql3
     SUBDIR += puredb
@@ -742,6 +745,7 @@
     SUBDIR += py-mysql-connector-python
     SUBDIR += py-mysql-connector-python2
     SUBDIR += py-mysql2pgsql
+    SUBDIR += py-mysqlclient
     SUBDIR += py-odbc
     SUBDIR += py-oops
     SUBDIR += py-oursql
@@ -755,7 +759,6 @@
     SUBDIR += py-pickleshare
     SUBDIR += py-postgresql
     SUBDIR += py-psycogreen
-    SUBDIR += py-psycopg
     SUBDIR += py-psycopg2
     SUBDIR += py-psycopg2cffi
     SUBDIR += py-pyPgSQL
@@ -776,10 +779,12 @@
     SUBDIR += py-riak
     SUBDIR += py-rrdtool_lgpl
     SUBDIR += py-south
-    SUBDIR += py-sqlalchemy
-    SUBDIR += py-sqlalchemy-devel
     SUBDIR += py-sqlalchemy-migrate
     SUBDIR += py-sqlalchemy06
+    SUBDIR += py-sqlalchemy07
+    SUBDIR += py-sqlalchemy08
+    SUBDIR += py-sqlalchemy09
+    SUBDIR += py-sqlalchemy10
     SUBDIR += py-sqlite3
     SUBDIR += py-sqlite3dbm
     SUBDIR += py-sqlobject
@@ -790,6 +795,7 @@
     SUBDIR += py-sybase
     SUBDIR += py-tarantool
     SUBDIR += py-umemcache
+    SUBDIR += py-unqlite
     SUBDIR += py-whisper
     SUBDIR += py3-bsddb3
     SUBDIR += py33-gdbm
@@ -946,6 +952,7 @@
     SUBDIR += sqliteman
     SUBDIR += sqlitemanager
     SUBDIR += sqliteodbc
+    SUBDIR += sqliteodbc-sqlite2
     SUBDIR += sqlitestudio
     SUBDIR += sqlrelay
     SUBDIR += sqsh
@@ -958,6 +965,7 @@
     SUBDIR += tcl-sqlite3
     SUBDIR += tdb
     SUBDIR += tdbc
+    SUBDIR += tile38
     SUBDIR += tinycdb
     SUBDIR += tokyocabinet
     SUBDIR += tokyotyrant

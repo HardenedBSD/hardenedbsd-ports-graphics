@@ -1,9 +1,10 @@
 # Created by: Rusmir Dusko <nemysis@FreeBSD.org>
 # $FreeBSD$
 
-PORTNAME=	py-fishcrypt
+PORTNAME=	fishcrypt
 DISTVERSION=	5.31
 CATEGORIES=	irc security
+PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 DIST_SUBDIR=	python
 
 MAINTAINER=	nemysis@FreeBSD.org
@@ -14,6 +15,7 @@ RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}pycrypto>=0:security/py-pycrypto \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	fladd
+GH_PROJECT=	py-${PORTNAME}
 GH_TAGNAME=	43554b1a
 
 USES=		dos2unix python:run

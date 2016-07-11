@@ -4,8 +4,7 @@ PORTNAME=	robocode
 PORTVERSION=	0.9.2
 DISTVERSIONSUFFIX=	-setup
 CATEGORIES=	games java
-MASTER_SITES=	SF
-MASTER_SITE_SUBDIR=	${PORTNAME}/naval-robocode/${PORTVERSION}
+MASTER_SITES=	SF/${PORTNAME}/naval-robocode/${PORTVERSION}
 PKGNAMESUFFIX=	-naval
 EXTRACT_SUFX=	.jar
 DIST_SUBDIR=	java
@@ -14,6 +13,8 @@ MAINTAINER=	dbaio@bsd.com.br
 COMMENT=	Game for learning Java[tm] programming language
 
 LICENSE=	EPL
+
+PORTSCOUT=	limit:^\d+\.\d+\.\d+$$
 
 USES=		dos2unix zip
 DOS2UNIX_GLOB=	*.css *.team *.properties package-list MANIFEST.MF

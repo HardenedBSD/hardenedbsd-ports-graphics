@@ -11,6 +11,7 @@ bin/vspviewer
 %%DATADIR%%/DegenGeom.vspscript
 %%DATADIR%%/Disk.vsppart
 %%DATADIR%%/Duct.vsppart
+%%DATADIR%%/DumpResults.vspscript
 %%DATADIR%%/Fuselage.vspscript
 %%DATADIR%%/LICENSE
 %%DATADIR%%/N0012_VSP.af
@@ -25,6 +26,7 @@ bin/vspviewer
 %%DATADIR%%/SubSurface.vspscript
 %%DATADIR%%/TestAll.vspscript
 %%DATADIR%%/TestAnalysis.vspscript
+%%DATADIR%%/TestAreaProj.vspscript
 %%DATADIR%%/TransportFuse.vsppart
 %%DATADIR%%/Wing.vspscript
 %%DATADIR%%/b737a.af

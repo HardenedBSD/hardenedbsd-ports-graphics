@@ -124,7 +124,6 @@
     SUBDIR += crlibm
     SUBDIR += cryptominisat
     SUBDIR += cvc3
-    SUBDIR += dcdflib
     SUBDIR += diehard
     SUBDIR += dieharder
     SUBDIR += djbfft
@@ -156,7 +155,6 @@
     SUBDIR += fpc-gmp
     SUBDIR += fpc-numlib
     SUBDIR += freemat
-    SUBDIR += fricas
     SUBDIR += fxt
     SUBDIR += galculator
     SUBDIR += gambit
@@ -248,7 +246,6 @@
     SUBDIR += libjbigi
     SUBDIR += liblbfgs
     SUBDIR += libmissing
-    SUBDIR += libneural
     SUBDIR += libocas
     SUBDIR += liborigin
     SUBDIR += libproj4
@@ -401,7 +398,6 @@
     SUBDIR += octave-forge-zeromq
     SUBDIR += ogdf
     SUBDIR += oleo
-    SUBDIR += open-axiom
     SUBDIR += openblas
     SUBDIR += openfst
     SUBDIR += openlibm
@@ -597,11 +593,13 @@
     SUBDIR += py-fpconst
     SUBDIR += py-gato
     SUBDIR += py-gmpy
+    SUBDIR += py-gmpy2
     SUBDIR += py-gnuplot
     SUBDIR += py-graphillion
     SUBDIR += py-gsl
     SUBDIR += py-igraph
     SUBDIR += py-intspan
+    SUBDIR += py-keras
     SUBDIR += py-luminol
     SUBDIR += py-mathdom
     SUBDIR += py-matplotlib
@@ -714,7 +712,6 @@
     SUBDIR += x12arima
     SUBDIR += xblas
     SUBDIR += xfce4-calculator-plugin
-    SUBDIR += xgobi
     SUBDIR += xgraph
     SUBDIR += xlapack
     SUBDIR += xldlas
