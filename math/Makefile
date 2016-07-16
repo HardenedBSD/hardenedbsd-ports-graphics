@@ -46,6 +46,7 @@
     SUBDIR += R-cran-lazyeval
     SUBDIR += R-cran-lme4
     SUBDIR += R-cran-maxLik
+    SUBDIR += R-cran-mcmc
     SUBDIR += R-cran-memisc
     SUBDIR += R-cran-minqa
     SUBDIR += R-cran-miscTools
@@ -96,6 +97,7 @@
     SUBDIR += blitz++
     SUBDIR += blocksolve95
     SUBDIR += bsdnt
+    SUBDIR += cadabra2
     SUBDIR += calc
     SUBDIR += calcoo
     SUBDIR += calctool
@@ -620,6 +622,7 @@
     SUBDIR += py-pyfst
     SUBDIR += py-pyhull
     SUBDIR += py-pymc
+    SUBDIR += py-pysparse
     SUBDIR += py-pyvtk
     SUBDIR += py-roman
     SUBDIR += py-scientific

@@ -137,6 +137,7 @@
     SUBDIR += elixir-phoenix
     SUBDIR += elixir-phoenix_ecto
     SUBDIR += elixir-phoenix_html
+    SUBDIR += elixir-phoenix_pubsub
     SUBDIR += elixir-webassembly
     SUBDIR += emacs-w3m
     SUBDIR += encode-explorer
@@ -203,10 +204,12 @@
     SUBDIR += glpi
     SUBDIR += gnome-user-share
     SUBDIR += gnome-web-photo
+    SUBDIR += gohugo
     SUBDIR += google-appengine
     SUBDIR += google-sitemapgen
     SUBDIR += googlebook_dl
     SUBDIR += goose
+    SUBDIR += gotty
     SUBDIR += gpx2map
     SUBDIR += grafana
     SUBDIR += grafana2
@@ -388,6 +391,7 @@
     SUBDIR += mediawiki124
     SUBDIR += mediawiki125
     SUBDIR += mediawiki126
+    SUBDIR += mediawiki127
     SUBDIR += mergelog
     SUBDIR += mgstat
     SUBDIR += mhonarc
@@ -1592,10 +1596,13 @@
     SUBDIR += py-flask-admin
     SUBDIR += py-flask-bootstrap
     SUBDIR += py-flask-cache
+    SUBDIR += py-flask-compress
     SUBDIR += py-flask-cors
     SUBDIR += py-flask-flatpages
+    SUBDIR += py-flask-login
     SUBDIR += py-flask-oauthlib
     SUBDIR += py-flask-restful
+    SUBDIR += py-flask-restplus
     SUBDIR += py-flask-sockets
     SUBDIR += py-flask-uploads
     SUBDIR += py-flask-wtf
@@ -1615,6 +1622,7 @@
     SUBDIR += py-graphite-web
     SUBDIR += py-grequests
     SUBDIR += py-gunicorn
+    SUBDIR += py-html
     SUBDIR += py-html5lib
     SUBDIR += py-http-parser
     SUBDIR += py-httplib2
@@ -1937,6 +1945,7 @@
     SUBDIR += rubygem-layout_yullio_generator
     SUBDIR += rubygem-less
     SUBDIR += rubygem-lighthouse-api
+    SUBDIR += rubygem-link_header
     SUBDIR += rubygem-maruku
     SUBDIR += rubygem-mechanize
     SUBDIR += rubygem-mechanize26
@@ -1983,6 +1992,7 @@
     SUBDIR += rubygem-raindrops
     SUBDIR += rubygem-ramaze
     SUBDIR += rubygem-raphael-rails
+    SUBDIR += rubygem-rdf
     SUBDIR += rubygem-redcloth
     SUBDIR += rubygem-redis-rack
     SUBDIR += rubygem-redis-rails
@@ -2080,6 +2090,7 @@
     SUBDIR += squidstats
     SUBDIR += squidview
     SUBDIR += srg
+    SUBDIR += stagit
     SUBDIR += subsonic
     SUBDIR += subsonic-standalone
     SUBDIR += suphp

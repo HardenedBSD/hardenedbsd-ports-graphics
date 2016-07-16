@@ -189,6 +189,7 @@
     SUBDIR += ocsinventory-agent
     SUBDIR += ocsinventory-ng
     SUBDIR += omping
+    SUBDIR += onionlauncher
     SUBDIR += openlldp
     SUBDIR += openvmps
     SUBDIR += p0f
@@ -324,7 +325,6 @@
     SUBDIR += telegraf
     SUBDIR += tornova
     SUBDIR += torrus
-    SUBDIR += unifi3
     SUBDIR += unifi4
     SUBDIR += unifi5
     SUBDIR += victorops-nagios

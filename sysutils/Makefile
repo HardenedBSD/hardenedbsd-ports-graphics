@@ -10,6 +10,7 @@
     SUBDIR += LPRng
     SUBDIR += LPRngTool
     SUBDIR += abck
+    SUBDIR += abduco
     SUBDIR += abgx360
     SUBDIR += abgx360gui
     SUBDIR += accountsservice
@@ -1087,15 +1088,19 @@
     SUBDIR += tw_cli
     SUBDIR += tzdialog
     SUBDIR += u-boot-bananapi
+    SUBDIR += u-boot-bananapim2
     SUBDIR += u-boot-beaglebone
     SUBDIR += u-boot-cubieboard
     SUBDIR += u-boot-cubieboard2
     SUBDIR += u-boot-cubox-hummingboard
     SUBDIR += u-boot-duovero
+    SUBDIR += u-boot-olimex-a20-som-evb
+    SUBDIR += u-boot-orangepi-one
     SUBDIR += u-boot-pandaboard
     SUBDIR += u-boot-pine64
     SUBDIR += u-boot-rpi
     SUBDIR += u-boot-rpi2
+    SUBDIR += u-boot-sinovoip-bpi-m3
     SUBDIR += u-boot-utilite
     SUBDIR += u-boot-wandboard
     SUBDIR += ua
@@ -1107,6 +1112,7 @@
     SUBDIR += ucspi-unix
     SUBDIR += udfclient
     SUBDIR += uefi-edk2-bhyve
+    SUBDIR += uefi-edk2-bhyve-csm
     SUBDIR += ufs_copy
     SUBDIR += uhidd
     SUBDIR += uif2iso
