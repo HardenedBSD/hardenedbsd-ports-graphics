@@ -64,6 +64,7 @@
     SUBDIR += elixir-postgrex
     SUBDIR += elixir-timex_ecto
     SUBDIR += emma
+    SUBDIR += erlang-couchbeam
     SUBDIR += erlang-epgsql
     SUBDIR += erlang-eredis
     SUBDIR += evolution-data-server
@@ -828,6 +829,7 @@
     SUBDIR += qt5-sqldrivers-sqlite2
     SUBDIR += qt5-sqldrivers-sqlite3
     SUBDIR += qt5-sqldrivers-tds
+    SUBDIR += radix.v2
     SUBDIR += rdb
     SUBDIR += rdfdb
     SUBDIR += recutils

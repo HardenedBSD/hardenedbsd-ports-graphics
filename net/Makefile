@@ -169,6 +169,8 @@
     SUBDIR += go-amqp
     SUBDIR += go-cs
     SUBDIR += go-geoip
+    SUBDIR += go-httppath
+    SUBDIR += go-httptreemux
     SUBDIR += go.net
     SUBDIR += gofish
     SUBDIR += gogoc
@@ -295,7 +297,6 @@
     SUBDIR += l2tpd
     SUBDIR += l4ip
     SUBDIR += ladvd
-    SUBDIR += lam
     SUBDIR += lambdamoo
     SUBDIR += latd
     SUBDIR += ldap-stats
@@ -996,6 +997,7 @@
     SUBDIR += py-pysocks
     SUBDIR += py-pystun
     SUBDIR += py-python-bitcoinrpc
+    SUBDIR += py-python-ntlm
     SUBDIR += py-pyvmomi
     SUBDIR += py-pyzmq
     SUBDIR += py-qt4-network
