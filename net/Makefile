@@ -297,7 +297,6 @@
     SUBDIR += l2tpd
     SUBDIR += l4ip
     SUBDIR += ladvd
-    SUBDIR += lam
     SUBDIR += lambdamoo
     SUBDIR += latd
     SUBDIR += ldap-stats
@@ -363,6 +362,7 @@
     SUBDIR += libunp
     SUBDIR += libutp
     SUBDIR += libvncserver
+    SUBDIR += libwebsockets
     SUBDIR += libzapojit
     SUBDIR += libzmq2
     SUBDIR += libzmq3
@@ -947,6 +947,7 @@
     SUBDIR += py-avahi
     SUBDIR += py-beanstalkc
     SUBDIR += py-cloudfiles
+    SUBDIR += py-coherence
     SUBDIR += py-dpkt
     SUBDIR += py-dugong
     SUBDIR += py-ec2-cli-tools
@@ -998,6 +999,7 @@
     SUBDIR += py-pysocks
     SUBDIR += py-pystun
     SUBDIR += py-python-bitcoinrpc
+    SUBDIR += py-python-ntlm
     SUBDIR += py-pyvmomi
     SUBDIR += py-pyzmq
     SUBDIR += py-qt4-network
@@ -1023,6 +1025,7 @@
     SUBDIR += py-twitter-tools
     SUBDIR += py-txamqp
     SUBDIR += py-txrestapi
+    SUBDIR += py-upnp-inspector
     SUBDIR += py-uritemplate
     SUBDIR += py-uritemplate.py
     SUBDIR += py-urllib3

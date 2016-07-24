@@ -19,7 +19,7 @@ CONFLICTS?=		*samba3[2-6]-3.* samba4-4.0.* samba41-4.1.* samba42-4.2.* samba43-4
 
 SAMBA4_BASENAME=	samba
 SAMBA4_PORTNAME=	${SAMBA4_BASENAME}4
-SAMBA4_VERSION=		4.4.3
+SAMBA4_VERSION=		4.4.5
 SAMBA4_DISTNAME=	${SAMBA4_BASENAME}-${SAMBA4_VERSION:S|.p|pre|:S|.r|rc|:S|.t|tp|:S|.a|alpha|}
 
 WRKSRC?=		${WRKDIR}/${DISTNAME}
@@ -90,6 +90,10 @@ BUILD_DEPENDS+=		p5-Parse-Pidl>=4.3.1:devel/p5-Parse-Pidl
 BUILD_DEPENDS+=		${PYTHON_PKGNAMEPREFIX}dnspython>=1.9.4:dns/py-dnspython
 RUN_DEPENDS+=		${PYTHON_PKGNAMEPREFIX}dnspython>=1.9.4:dns/py-dnspython
 PLIST_SUB+=		PY_DNSPYTHON="@comment "
+#
+BUILD_DEPENDS+=		${PYTHON_PKGNAMEPREFIX}iso8601>=0.1.11:devel/py-iso8601
+RUN_DEPENDS+=		${PYTHON_PKGNAMEPREFIX}iso8601>=0.1.11:devel/py-iso8601
+PLIST_SUB+=		PY_ISO8601="@comment "
 # talloc
 BUILD_DEPENDS+=		talloc>=2.1.6:devel/talloc
 RUN_DEPENDS+=		talloc>=2.1.6:devel/talloc
@@ -459,7 +463,7 @@ pre-configure:
 
 # XXX: Gross hack to allow build newer Samba while old one is installed.
 # This implies that LINKFLAGS_PYEMBED contains flags which are already
-# used in other parts of LINKFLAGS, namely -L$(LOCALBASE)/lib and -pthread
+# used in other parts of LINKFLAGS, namely -L${LOCALBASE}/lib and -pthread
 post-configure:
 	-${REINPLACE_CMD} -e 's|LINKFLAGS_PYEMBED.*|LINKFLAGS_PYEMBED = []|' \
 		${CONFIGURE_WRKSRC}/bin/c4che/default.cache.py

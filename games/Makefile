@@ -294,6 +294,7 @@
     SUBDIR += freera
     SUBDIR += freesweep
     SUBDIR += freesynd
+    SUBDIR += freetennis
     SUBDIR += fretsonfire
     SUBDIR += fretsonfire-data
     SUBDIR += frikqcc
@@ -671,6 +672,7 @@
     SUBDIR += openmortal
     SUBDIR += openmsx
     SUBDIR += openmw
+    SUBDIR += openomf
     SUBDIR += openpref
     SUBDIR += openra
     SUBDIR += opensfx

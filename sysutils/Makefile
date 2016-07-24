@@ -10,6 +10,7 @@
     SUBDIR += LPRng
     SUBDIR += LPRngTool
     SUBDIR += abck
+    SUBDIR += abduco
     SUBDIR += abgx360
     SUBDIR += abgx360gui
     SUBDIR += accountsservice
@@ -86,6 +87,7 @@
     SUBDIR += bchunk
     SUBDIR += beadm
     SUBDIR += beadm-devel
+    SUBDIR += bhyve-firmware
     SUBDIR += bhyve-rc
     SUBDIR += biosfont
     SUBDIR += bkpupsd
@@ -168,6 +170,7 @@
     SUBDIR += consolehm
     SUBDIR += consolekit
     SUBDIR += consul
+    SUBDIR += consul-alerts
     SUBDIR += contractor
     SUBDIR += copytape
     SUBDIR += coreutils
@@ -339,6 +342,7 @@
     SUBDIR += fusefs-simple-mtpfs
     SUBDIR += fusefs-smbnetfs
     SUBDIR += fusefs-sqlfs
+    SUBDIR += fusefs-squashfuse
     SUBDIR += fusefs-sshfs
     SUBDIR += fusefs-unionfs
     SUBDIR += fusefs-wdfs
@@ -1094,10 +1098,12 @@
     SUBDIR += u-boot-cubox-hummingboard
     SUBDIR += u-boot-duovero
     SUBDIR += u-boot-olimex-a20-som-evb
+    SUBDIR += u-boot-orangepi-one
     SUBDIR += u-boot-pandaboard
     SUBDIR += u-boot-pine64
     SUBDIR += u-boot-rpi
     SUBDIR += u-boot-rpi2
+    SUBDIR += u-boot-sinovoip-bpi-m3
     SUBDIR += u-boot-utilite
     SUBDIR += u-boot-wandboard
     SUBDIR += ua

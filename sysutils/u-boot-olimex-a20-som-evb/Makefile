@@ -13,7 +13,7 @@ LICENSE=	GPLv2
 
 BUILD_DEPENDS=	arm-none-eabi-gcc:devel/arm-none-eabi-gcc
 
-UBOOT_VERSION?=	2016.05
+UBOOT_VERSION?=	2016.07
 BOARD_CONFIG?=	A20-Olimex-SOM-EVB_defconfig
 MODEL?=		olimex-a20-som-evb
 
@@ -34,8 +34,8 @@ MAKE_ARGS+=	ARCH=arm \
 
 .include <bsd.port.pre.mk>
 
-.if ${OSVERSION} < 1100000
-IGNORE=		requires FreeBSD 11 or later
+.if ${OSVERSION} < 1000000
+IGNORE=		requires FreeBSD 10 or later
 .endif
 
 post-patch:
@@ -52,7 +52,6 @@ do-install:
 		${STAGEDIR}/${PREFIX}/${U_BOOT_DIR}
 	${INSTALL_DATA} ${WRKSRC}/spl/sunxi-spl.bin \
 		${STAGEDIR}/${PREFIX}/${U_BOOT_DIR}
-	${INSTALL_DATA} ${.CURDIR}/pkg-descr \
-		${STAGEDIR}/${PREFIX}/${U_BOOT_DIR}/README
+	${INSTALL_DATA} ${DESCR} ${STAGEDIR}/${PREFIX}/${U_BOOT_DIR}/README
 
 .include <bsd.port.post.mk>

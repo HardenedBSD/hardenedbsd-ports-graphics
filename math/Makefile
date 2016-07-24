@@ -40,12 +40,14 @@
     SUBDIR += R-cran-gss
     SUBDIR += R-cran-gtable
     SUBDIR += R-cran-igraph
+    SUBDIR += R-cran-influenceR
     SUBDIR += R-cran-inline
     SUBDIR += R-cran-irlba
     SUBDIR += R-cran-labeling
     SUBDIR += R-cran-lazyeval
     SUBDIR += R-cran-lme4
     SUBDIR += R-cran-maxLik
+    SUBDIR += R-cran-mcmc
     SUBDIR += R-cran-memisc
     SUBDIR += R-cran-minqa
     SUBDIR += R-cran-miscTools

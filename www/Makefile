@@ -137,6 +137,7 @@
     SUBDIR += elixir-phoenix
     SUBDIR += elixir-phoenix_ecto
     SUBDIR += elixir-phoenix_html
+    SUBDIR += elixir-phoenix_pubsub
     SUBDIR += elixir-webassembly
     SUBDIR += emacs-w3m
     SUBDIR += encode-explorer
@@ -203,10 +204,12 @@
     SUBDIR += glpi
     SUBDIR += gnome-user-share
     SUBDIR += gnome-web-photo
+    SUBDIR += gohugo
     SUBDIR += google-appengine
     SUBDIR += google-sitemapgen
     SUBDIR += googlebook_dl
     SUBDIR += goose
+    SUBDIR += gotty
     SUBDIR += gpx2map
     SUBDIR += grafana
     SUBDIR += grafana2
@@ -1593,10 +1596,14 @@
     SUBDIR += py-flask-admin
     SUBDIR += py-flask-bootstrap
     SUBDIR += py-flask-cache
+    SUBDIR += py-flask-compress
     SUBDIR += py-flask-cors
     SUBDIR += py-flask-flatpages
+    SUBDIR += py-flask-login
     SUBDIR += py-flask-oauthlib
     SUBDIR += py-flask-restful
+    SUBDIR += py-flask-restplus
+    SUBDIR += py-flask-restplus08
     SUBDIR += py-flask-sockets
     SUBDIR += py-flask-uploads
     SUBDIR += py-flask-wtf
@@ -1616,6 +1623,7 @@
     SUBDIR += py-graphite-web
     SUBDIR += py-grequests
     SUBDIR += py-gunicorn
+    SUBDIR += py-html
     SUBDIR += py-html5lib
     SUBDIR += py-http-parser
     SUBDIR += py-httplib2
@@ -1623,6 +1631,7 @@
     SUBDIR += py-imdbpy
     SUBDIR += py-jonpy
     SUBDIR += py-jswebkit
+    SUBDIR += py-kallithea
     SUBDIR += py-mechanize
     SUBDIR += py-meld
     SUBDIR += py-meld3
@@ -2083,6 +2092,7 @@
     SUBDIR += squidstats
     SUBDIR += squidview
     SUBDIR += srg
+    SUBDIR += stagit
     SUBDIR += subsonic
     SUBDIR += subsonic-standalone
     SUBDIR += suphp

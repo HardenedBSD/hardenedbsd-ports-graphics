@@ -6,7 +6,8 @@ PORTVERSION?=	1.10.0
 CATEGORIES=	lang
 MASTER_SITES=	http://static.rust-lang.org/dist/:src \
 		http://static.rust-lang.org/dist/:bootstrap \
-		https://github.com/dhuseby/rust-manual-snapshots/raw/master/:bootstrap
+		https://github.com/dhuseby/rust-manual-snapshots/raw/master/:bootstrap \
+		LOCAL/marino:bootstrap
 DISTNAME?=	${PORTNAME}c-${PORTVERSION}
 DISTFILES?=	${DISTNAME}-src${EXTRACT_SUFX}:src
 DISTFILES+=	${RUST_BOOT}:bootstrap
@@ -80,7 +81,7 @@ LLNEXTGEN_BUILD_DEPENDS=	LLnextgen:devel/llnextgen
 PORT_LLVM_DESC=	Build against devel/llvm${LLVM_VER} instead of bundled version
 PORT_LLVM_BUILD_DEPENDS=	${LLVM_PREFIX}/bin/FileCheck:devel/llvm${LLVM_VER}
 PORT_LLVM_CONFIGURE_ON=		--llvm-root=${LLVM_PREFIX}
-LLVM_VER?=			36 # XXX Move to DEFAULT_VERSIONS
+LLVM_VER?=			38
 LLVM_PREFIX=			${LOCALBASE}/llvm${LLVM_VER}
 
 # Note that make test does not work when rust is already installed

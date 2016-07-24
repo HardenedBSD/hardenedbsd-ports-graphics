@@ -365,6 +365,7 @@
     SUBDIR += imlib2
     SUBDIR += imlib2_loaders
     SUBDIR += impressive
+    SUBDIR += imv
     SUBDIR += inkscape
     SUBDIR += intel-backlight
     SUBDIR += intergif
@@ -459,6 +460,7 @@
     SUBDIR += lcms2
     SUBDIR += leafpak
     SUBDIR += lensfun
+    SUBDIR += lepton
     SUBDIR += leptonica
     SUBDIR += lfview
     SUBDIR += lib3ds
@@ -601,6 +603,7 @@
     SUBDIR += npretty
     SUBDIR += nurbs++
     SUBDIR += nvidia-texture-tools
+    SUBDIR += ocaml-images
     SUBDIR += ocaml-lablgl
     SUBDIR += ocrad
     SUBDIR += ocre
@@ -841,6 +844,7 @@
     SUBDIR += py-graph-dot
     SUBDIR += py-graphy
     SUBDIR += py-gvgen
+    SUBDIR += py-imageio
     SUBDIR += py-imagesize
     SUBDIR += py-mcomix
     SUBDIR += py-ming
