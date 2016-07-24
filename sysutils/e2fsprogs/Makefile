@@ -33,6 +33,16 @@ BUILD_DEPENDS+=	gdd:sysutils/coreutils
 
 PORTDOCS=	NOTICE README RELEASE-NOTES SUBMITTING-PATCHES
 
+OPTIONS_DEFINE=			PARALLELTESTS
+OPTIONS_SINGLE=			SELFTEST
+OPTIONS_SINGLE_SELFTEST=	NOTESTS SMALLTESTS ALLTESTS
+OPTIONS_DEFAULT=		SMALLTESTS
+SELFTEST_DESC=	Choose which set of self-tests to run
+NOTESTS_DESC=	Do not run any self-tests (DISCOURAGED)
+SMALLTESTS_DESC=Run sets that fit into 500 MB disk space (DEFAULT)
+ALLTESTS_DESC=	Run all self-tests
+PARALLELTESTS_DESC=	Run self-tests in parallel (requires more disk space)
+
 post-extract:
 	@${CHMOD} u+w ${WRKSRC}/po/*.po ${WRKSRC}/po/*.pot \
 		${WRKSRC}/${CONFIGURE_SCRIPT}
@@ -45,23 +55,13 @@ PKGDEINSTALL=	${PKGINSTALL}
 MAKE_ARGS+=	V=1
 .endif
 
-OPTIONS_DEFINE=			PARALLELTESTS
-OPTIONS_SINGLE=			SELFTEST
-OPTIONS_SINGLE_SELFTEST=	NOTESTS SMALLTESTS ALLTESTS
-OPTIONS_DEFAULT=		SMALLTESTS
-SELFTEST_DESC=	Choose which set of self-tests to run
-NOTESTS_DESC=	Do not run any self-tests (DISCOURAGED)
-SMALLTESTS_DESC=Run sets that fit into 500 MB disk space (DEFAULT)
-ALLTESTS_DESC=	Run all self-tests
-PARALLELTESTS_DESC=	Run self-tests in parallel (requires more disk space)
-
 .include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MNLS}
 USES+=		gettext iconv:build
 .endif
 
-.if empty(PORT_OPTIONS:MNOTESTS)
+.if empty(PORT_OPTIONS:MNOTESTS) && ${MASTERDIR} == ${.CURDIR}
 USES+=		perl5
 USE_PERL5=	build
 .endif
@@ -126,9 +126,20 @@ post-patch::
 		u_mke2fs_opt_offset
 	@${MV} ${WRKSRC}/tests/${i} ${WRKSRC}/tests/disabled_test-${i}
 .endfor
+# m_rootdir behaves erratically on 9.x and fails randomly,
+# but may succeed when run again. Disable for now.
+.if ${OSVERSION} < 1000000
+.for i in m_rootdir
+	@${MV} ${WRKSRC}/tests/${i} ${WRKSRC}/tests/disabled_test-${i}
+.endfor
+.endif
 .endif
 
 .if ${MASTERDIR} == ${.CURDIR}
+.if ${OPSYS} == FreeBSD && ${OSVERSION} >= 1100000
+BROKEN=self-test failures on FreeBSD 11+ hint to data corruption issues.
+.endif
+
 pre-build:
 # fix up Makefile ordering for parallel builds
 	cd ${WRKSRC}/lib/et && ${DO_MAKE_BUILD} compile_et
@@ -178,11 +189,15 @@ post-build:
 # test on each and every system and not just package building hosts.
 # There have been subtle failures induced by Linux-isms in the past.
 # -- Matthias Andree, package maintainer, 2007-09-18
+.if empty(PORT_OPTIONS:MNOTESTS)
 	@${ECHO_CMD} '===>  Running e2fsprogs self-test suite'
 # do not add -j options unconditionally to ${MAKE_CMD} below, this might break
 # due to excessive disk space use.
 	cd ${WRKSRC}/tests && ${MKDIR} ${WRKDIR}/tmp && ${MAKE_CMD} check ${_CHECK_JOBS} ${_checkaddargs} \
 	    || { head -n30000 ${WRKSRC}/tests/*.failed 2>/dev/null ; exit 1 ; }
+.else
+	@${ECHO_CMD} '===>  SKIPPING e2fsprogs self-test suite (DISCOURAGED!)'
+.endif
 
 post-install:
 	${RM} -f ${STAGEDIR}${PREFIX}/sbin/uuidd

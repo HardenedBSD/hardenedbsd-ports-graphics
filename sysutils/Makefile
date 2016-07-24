@@ -87,6 +87,7 @@
     SUBDIR += bchunk
     SUBDIR += beadm
     SUBDIR += beadm-devel
+    SUBDIR += bhyve-firmware
     SUBDIR += bhyve-rc
     SUBDIR += biosfont
     SUBDIR += bkpupsd
@@ -169,6 +170,7 @@
     SUBDIR += consolehm
     SUBDIR += consolekit
     SUBDIR += consul
+    SUBDIR += consul-alerts
     SUBDIR += contractor
     SUBDIR += copytape
     SUBDIR += coreutils
@@ -340,6 +342,7 @@
     SUBDIR += fusefs-simple-mtpfs
     SUBDIR += fusefs-smbnetfs
     SUBDIR += fusefs-sqlfs
+    SUBDIR += fusefs-squashfuse
     SUBDIR += fusefs-sshfs
     SUBDIR += fusefs-unionfs
     SUBDIR += fusefs-wdfs
