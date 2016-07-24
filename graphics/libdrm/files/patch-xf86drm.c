@@ -1,6 +1,6 @@
---- xf86drm.c.orig	2016-04-28 02:44:16.000000000 +0200
-+++ xf86drm.c	2016-07-17 15:34:03.331330000 +0200
-@@ -59,6 +59,10 @@
+--- xf86drm.c.orig	2016-07-24 20:50:03.999898000 +0200
++++ xf86drm.c	2016-07-24 20:53:31.587058000 +0200
+@@ -62,6 +62,10 @@
  #endif
  #include <math.h>
  
@@ -11,8 +11,8 @@
  /* Not all systems have MAP_FAILED defined */
  #ifndef MAP_FAILED
  #define MAP_FAILED ((void *)-1)
-@@ -79,8 +83,12 @@
- #define DRM_RENDER_MINOR_NAME	"renderD"
+@@ -82,8 +86,12 @@
+ #define DRM_RENDER_MINOR_NAME   "renderD"
  #endif
  
 -#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__DragonFly__)
@@ -26,15 +26,15 @@
  #endif
  
  #ifdef __NetBSD__
-@@ -529,6 +537,7 @@ static int drmGetMinorType(int minor)
+@@ -532,6 +540,7 @@ static int drmGetMinorType(int minor)
      }
  }
  
-+#if !defined(__FreeBSD__)
++#if !defined(__FreeBSD__) && !defined(__DragonFly__)
  static const char *drmGetMinorName(int type)
  {
      switch (type) {
-@@ -542,6 +551,7 @@ static const char *drmGetMinorName(int t
+@@ -545,6 +554,7 @@ static const char *drmGetMinorName(int t
          return NULL;
      }
  }
@@ -42,28 +42,27 @@
  
  /**
   * Open the device by bus ID.
-@@ -2816,6 +2826,16 @@ static char *drmGetMinorNameForFD(int fd
+@@ -2817,6 +2827,15 @@ static char *drmGetMinorNameForFD(int fd
  
  out_close_dir:
- 	closedir(sysdir);
+     closedir(sysdir);
++#elif defined(__FreeBSD__) || defined(__DragonFly__)
++    struct stat buf;
++    char name[64];
 +
-+#elif defined(__FreeBSD__)
-+	struct stat buf;
-+	char name[64];
++    fstat(fd, &buf);
++    snprintf(name, sizeof(name), "/dev/%s",
++             devname(buf.st_rdev, S_IFCHR));
 +
-+	fstat(fd, &buf);
-+	snprintf(name, sizeof(name), "/dev/%s",
-+		 devname(buf.st_rdev, S_IFCHR));
-+
-+	return strdup(name);
++    return strdup(name);
  #else
  #warning "Missing implementation of drmGetMinorNameForFD"
  #endif
-@@ -2853,12 +2873,19 @@ static int drmParseSubsystemType(int maj
+@@ -2854,12 +2873,19 @@ static int drmParseSubsystemType(int maj
          return DRM_BUS_PCI;
  
      return -EINVAL;
-+#elif defined(__FreeBSD__)
++#elif defined(__FreeBSD__) || defined(__DragonFly__)
 +    /* XXX: Don't know how to get the subsystem type, hardcode for now.
 +     * The code following the call to this function needs depends on
 +     * information provided by the /pci subsystem on linux. No replacement
@@ -75,11 +74,11 @@
  #endif
  }
  
-+#if !defined(__FreeBSD__)
++#if !defined(__FreeBSD__) && !defined(__DragonFly__)
  static int drmParsePciBusInfo(int maj, int min, drmPciBusInfoPtr info)
  {
  #ifdef __linux__
-@@ -2900,6 +2927,66 @@ static int drmParsePciBusInfo(int maj, i
+@@ -2901,6 +2927,66 @@ static int drmParsePciBusInfo(int maj, i
      return -EINVAL;
  #endif
  }
@@ -146,11 +145,11 @@
  
  static int drmCompareBusInfo(drmDevicePtr a, drmDevicePtr b)
  {
-@@ -2970,6 +3057,32 @@ static int drmParsePciDeviceInfo(const c
+@@ -2971,6 +3057,32 @@ static int drmParsePciDeviceInfo(const c
      device->subdevice_id = config[46] | (config[47] << 8);
  
      return 0;
-+#elif defined(__FreeBSD__)
++#elif defined(__FreeBSD__) || defined(__DragonFly__)
 +
 +    int fd, vendor_id = 0, device_id = 0, subvendor_id = 0, 
 +	subdevice_id = 0, revision_id = 0;
@@ -179,11 +178,11 @@
  #else
  #warning "Missing implementation of drmParsePciDeviceInfo"
      return -EINVAL;
-@@ -3028,7 +3141,12 @@ static int drmProcessPciDevice(drmDevice
+@@ -3029,7 +3141,12 @@ static int drmProcessPciDevice(drmDevice
  
      (*device)->businfo.pci = (drmPciBusInfoPtr)addr;
  
-+#if defined(__FreeBSD__)
++#if defined(__FreeBSD__) || defined(__DragonFly__)
 +    ret = drmParsePciBusInfoBSD(node, (*device)->businfo.pci);
 +#else
      ret = drmParsePciBusInfo(maj, min, (*device)->businfo.pci);
