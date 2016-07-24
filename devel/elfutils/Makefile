@@ -3,9 +3,9 @@
 
 PORTNAME=	elfutils
 PORTVERSION=	0.163
-PORTREVISION=	5
+PORTREVISION=	6
 CATEGORIES=	devel
-MASTER_SITES=	https://fedorahosted.org/releases/e/l/elfutils/$(PORTVERSION)/
+MASTER_SITES=	https://fedorahosted.org/releases/e/l/elfutils/${PORTVERSION}/
 
 MAINTAINER=	cem@FreeBSD.org
 COMMENT=	Library for manipulating ELF files and partial implementation of binutils
@@ -27,20 +27,31 @@ NLS_CONFIGURE_ENABLE=	nls
 
 USES=		gmake libtool tar:bzip2
 USE_AUTOTOOLS=	automake:env
-USE_GCC=	4.9+
+USE_GCC=	4.8+
 GNU_CONFIGURE=	yes
+USE_LDCONFIG=	yes
+
+CFLAGS+=	-Wno-unused-parameter
+# Give i386 a prayer of building, and we can fix the warnings later:
+CFLAGS_i386+=	-Wno-error
 
 # Avoid conflict with binutils / elftoolchain programs with the same names:
 CONFIGURE_ARGS+=	--program-prefix=eu-
 
 post-patch:
 	@${CP} -a \
-	    $(LOCALBASE)/share/gnulib/lib/obstack.c \
-	    $(LOCALBASE)/share/gnulib/lib/obstack.h \
-	    $(LOCALBASE)/share/gnulib/lib/obstack_printf.c \
-	    $(WRKSRC)/lib
+	    ${LOCALBASE}/share/gnulib/lib/obstack.c \
+	    ${LOCALBASE}/share/gnulib/lib/obstack.h \
+	    ${LOCALBASE}/share/gnulib/lib/obstack_printf.c \
+	    ${WRKSRC}/lib
 
 pre-configure:
-	@cd $(WRKSRC) && ${AUTOMAKE}
+	@cd ${WRKSRC} && ${AUTOMAKE}
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${OSVERSION} < 1003000
+IGNORE=		requires FreeBSD 10.3 (futimens)
+.endif
+
+.include <bsd.port.post.mk>

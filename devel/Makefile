@@ -56,6 +56,7 @@
     SUBDIR += acsccid
     SUBDIR += activitymail
     SUBDIR += ada-util
+    SUBDIR += adaid
     SUBDIR += adabooch
     SUBDIR += adacurses
     SUBDIR += adime
@@ -115,6 +116,7 @@
     SUBDIR += atlas
     SUBDIR += atlas-devel
     SUBDIR += atlassian-plugin-sdk
+    SUBDIR += aunit
     SUBDIR += autobook
     SUBDIR += autoconf
     SUBDIR += autoconf-archive
@@ -454,6 +456,7 @@
     SUBDIR += elixir-lager_logger
     SUBDIR += elixir-msgpax
     SUBDIR += elixir-nadia
+    SUBDIR += elixir-nimble_csv
     SUBDIR += elixir-paratize
     SUBDIR += elixir-plug
     SUBDIR += elixir-poison
@@ -461,6 +464,7 @@
     SUBDIR += elixir-red_black_tree
     SUBDIR += elixir-sorted_set
     SUBDIR += elixir-timex
+    SUBDIR += elixir-tirexs
     SUBDIR += elixir-tzdata
     SUBDIR += embb
     SUBDIR += epl.el
@@ -1604,6 +1608,7 @@
     SUBDIR += ode
     SUBDIR += ois
     SUBDIR += okteta
+    SUBDIR += omake
     SUBDIR += omniNotify
     SUBDIR += omniORB
     SUBDIR += omniORB-4.1
@@ -3289,6 +3294,7 @@
     SUBDIR += p5-Test-Requires
     SUBDIR += p5-Test-Requires-Git
     SUBDIR += p5-Test-RequiresInternet
+    SUBDIR += p5-Test-Roo
     SUBDIR += p5-Test-Script
     SUBDIR += p5-Test-Script-Run
     SUBDIR += p5-Test-SharedFork
@@ -4208,6 +4214,7 @@
     SUBDIR += py-logbook
     SUBDIR += py-logan
     SUBDIR += py-logilab-common
+    SUBDIR += py-louie
     SUBDIR += py-lxml
     SUBDIR += py-magic
     SUBDIR += py-manuel
