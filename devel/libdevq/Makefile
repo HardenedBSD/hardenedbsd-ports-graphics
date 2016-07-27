@@ -3,7 +3,7 @@
 
 PORTNAME=	libdevq
 PORTVERSION=	0.0.3
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	devel
 
 MAINTAINER=	x11@FreeBSD.org
@@ -13,7 +13,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	freebsd
 
 GNU_CONFIGURE=	yes
-USES=		autoreconf libtool pathfix tar:xz
+USES=		autoreconf libtool pathfix #tar:xz
 USE_LDCONFIG=	yes
 INSTALL_TARGET=	install-strip
 
