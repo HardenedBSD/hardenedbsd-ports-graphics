@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	fluxbb
-PORTVERSION=	1.5.9
+PORTVERSION=	1.5.10
 CATEGORIES=	www
 MASTER_SITES=	http://fluxbb.org/download/releases/${PORTVERSION}/
 
@@ -14,10 +14,9 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 
 BROKEN_powerpc64=	Does not build
 
-USES=		cpe
+USES=		cpe php
 SUB_FILES=	pkg-message
 NO_BUILD=	yes
-USE_PHP=	yes
 
 OPTIONS_DEFINE=	MYSQL PGSQL SQLITE
 OPTIONS_DEFAULT=	MYSQL

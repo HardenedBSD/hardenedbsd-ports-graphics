@@ -23,7 +23,6 @@
     SUBDIR += dzip
     SUBDIR += ecm
     SUBDIR += engrampa
-    SUBDIR += epkg
     SUBDIR += fastjar
     SUBDIR += file-roller
     SUBDIR += fpc-bzip2
@@ -73,6 +72,8 @@
     SUBDIR += linux-f10-ucl
     SUBDIR += linux-f10-upx
     SUBDIR += lrzip
+    SUBDIR += lua-lzlib
+    SUBDIR += lzfse
     SUBDIR += lzip
     SUBDIR += lzlib
     SUBDIR += lzma

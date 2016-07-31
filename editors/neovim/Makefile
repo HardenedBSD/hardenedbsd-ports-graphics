@@ -4,9 +4,10 @@
 PORTNAME=	neovim
 PORTVERSION=	0.1.4
 DISTVERSIONPREFIX=	v
+PORTREVISION=	2
 CATEGORIES=	editors
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	gor@clogic.com.ua
 COMMENT=	Next generation Vim
 
 LICENSE=	APACHE20
@@ -18,7 +19,7 @@ LIB_DEPENDS=	libunibilium.so:devel/unibilium \
 		libtermkey.so:devel/libtermkey \
 		libluajit-5.1.so:lang/luajit \
 		libuv.so:devel/libuv \
-		libmsgpack.so:devel/msgpack
+		libmsgpackc.so:devel/msgpack
 
 USES=		cmake:outsource gettext iconv ninja lua:build pathfix pkgconfig
 USE_GITHUB=	yes

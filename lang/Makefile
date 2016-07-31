@@ -9,7 +9,6 @@
     SUBDIR += afnix
     SUBDIR += alchemist.el
     SUBDIR += algol68g
-    SUBDIR += alisp
     SUBDIR += angelscript
     SUBDIR += arena
     SUBDIR += asis
@@ -99,6 +98,7 @@
     SUBDIR += gcc5
     SUBDIR += gcc5-aux
     SUBDIR += gcc5-devel
+    SUBDIR += gcc6
     SUBDIR += gcc6-aux
     SUBDIR += gcc6-devel
     SUBDIR += gcc7-devel
@@ -133,7 +133,6 @@
     SUBDIR += icc
     SUBDIR += ici
     SUBDIR += icon
-    SUBDIR += intel2gas
     SUBDIR += intercal
     SUBDIR += io
     SUBDIR += itcl
@@ -158,7 +157,6 @@
     SUBDIR += linux-f10-tcl85
     SUBDIR += linux-j
     SUBDIR += lua-ada
-    SUBDIR += lua-mode.el
     SUBDIR += lua51
     SUBDIR += lua52
     SUBDIR += lua53
@@ -290,14 +288,12 @@
     SUBDIR += rexx-wrapper
     SUBDIR += rhino
     SUBDIR += rubinius
-    SUBDIR += ruby20
     SUBDIR += ruby21
     SUBDIR += ruby22
     SUBDIR += ruby23
     SUBDIR += runawk
     SUBDIR += rust
     SUBDIR += rust-nightly
-    SUBDIR += s9fes
     SUBDIR += sagittarius-scheme
     SUBDIR += sather-specification
     SUBDIR += sather-tutorial
@@ -328,7 +324,6 @@
     SUBDIR += spl
     SUBDIR += squeak
     SUBDIR += squirrel
-    SUBDIR += stalin
     SUBDIR += starlogo
     SUBDIR += stldoc
     SUBDIR += swi-pl
@@ -340,6 +335,7 @@
     SUBDIR += tcl84
     SUBDIR += tcl85
     SUBDIR += tcl86
+    SUBDIR += tcl87
     SUBDIR += tclX
     SUBDIR += tinypy
     SUBDIR += tolua

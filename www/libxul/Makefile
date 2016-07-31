@@ -2,10 +2,11 @@
 # $FreeBSD$
 
 PORTNAME=	libxul
-DISTVERSION=	45.1.1
+DISTVERSION=	45.2.0
+PORTREVISION=	2
 CATEGORIES?=	www devel
 MASTER_SITES=	MOZILLA/firefox/releases/${DISTVERSION}esr/source \
-		MOZILLA/firefox/candidates/${DISTVERSION}esr-candidates/build1/source
+		MOZILLA/firefox/candidates/${DISTVERSION}esr-candidates/build2/source
 DISTNAME=	firefox-${DISTVERSION}esr.source
 
 MAINTAINER?=	gecko@FreeBSD.org
@@ -33,8 +34,6 @@ LIB_DEPENDS=	libv4l2.so:multimedia/libv4l
 WRKSRC:=	${WRKDIR}/firefox-${DISTVERSION}esr
 CONFLICTS_INSTALL=	libxul-1.9.*
 
-USE_QT5=	# empty
-QT_NONSTANDARD=	yes
 USE_GL=		gl
 USES=		pathfix tar:xz
 MAKE_ENV=	SKIP_GRE_REGISTRATION=1 mozappdir=${PREFIX}/lib/${MOZILLA}

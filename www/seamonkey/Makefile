@@ -4,7 +4,7 @@
 PORTNAME=	seamonkey
 DISTVERSION=	2.39
 MOZILLA_VER=	42 # above + 3
-PORTREVISION=	8
+PORTREVISION=	10
 CATEGORIES?=	www mail news editors irc ipv6
 MASTER_SITES=	MOZILLA/${PORTNAME}/releases/${DISTVERSION}/source \
 		MOZILLA/${PORTNAME}/candidates/${DISTVERSION}-candidates/build1/source
@@ -38,8 +38,6 @@ L_VERSION=	4.4
 
 SSP_UNSAFE=	yes
 USE_GECKO=	gecko
-USE_QT5=	# empty
-QT_NONSTANDARD=	yes
 USE_GL=		gl
 USES=		tar:xz
 MOZ_PIS_SCRIPTS=	moz_pis_S50cleanhome

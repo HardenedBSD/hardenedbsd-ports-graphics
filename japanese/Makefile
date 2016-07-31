@@ -88,6 +88,7 @@
     SUBDIR += font-mplus-ipa
     SUBDIR += font-mplus-outline
     SUBDIR += font-naga10
+    SUBDIR += font-nasu
     SUBDIR += font-ricty
     SUBDIR += font-ricty-discord
     SUBDIR += font-sazanami
@@ -106,7 +107,6 @@
     SUBDIR += groff
     SUBDIR += gskk
     SUBDIR += gsuica
-    SUBDIR += guesswork-classic
     SUBDIR += hns
     SUBDIR += ibus-anthy
     SUBDIR += ibus-mozc
@@ -128,7 +128,6 @@
     SUBDIR += jpilot
     SUBDIR += jstrings
     SUBDIR += jvim3
-    SUBDIR += jyuroku
     SUBDIR += kakasi
     SUBDIR += kana-no-quiz
     SUBDIR += kanjipad
@@ -174,7 +173,6 @@
     SUBDIR += mozc-el
     SUBDIR += mozc-server
     SUBDIR += mozc-tool
-    SUBDIR += mtools
     SUBDIR += multiskkserv
     SUBDIR += mutt-devel
     SUBDIR += mypaedia-fpw-package
@@ -274,7 +272,6 @@
     SUBDIR += tegaki-recognize
     SUBDIR += tegaki-zinnia-japanese
     SUBDIR += tex-ptex
-    SUBDIR += texinfo
     SUBDIR += tgif
     SUBDIR += tiarra
     SUBDIR += timidity++-slang

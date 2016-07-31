@@ -65,6 +65,8 @@ WARNING+=	"WITH_BDB_VER is deprecated and will be removed on 2016-08-01. Use DEF
 BDB_DEFAULT:=${WITH_BDB_VER}
 .endif
 
+.include "${PORTSDIR}/Mk/bsd.default-versions.mk"
+
 _BDB_DEFAULT_save:=${BDB_DEFAULT}
 
 _DB_PORTS=		48 5 6
@@ -77,7 +79,7 @@ _DB_DEFAULTS+=	6
 # Dependency lines for different db versions
 db48_DEPENDS=	libdb-4.8.so:databases/db48
 db5_DEPENDS=	libdb-5.3.so:databases/db5
-db6_DEPENDS=	libdb-6.1.so:databases/db6
+db6_DEPENDS=	libdb-6.2.so:databases/db6
 # Detect db versions by finding some files
 db48_FIND=	${LOCALBASE}/include/db48/db.h
 db5_FIND=	${LOCALBASE}/include/db5/db.h
@@ -91,11 +93,13 @@ BDB_DEFAULT=	${${BDB_UNIQUENAME:tu:S,-,_,}_WITH_BDB_VER}
 
 # Override _bdb_ARGS with global BDB_DEFAULT if the maintainer did not
 # ask for a more specific version.
-.if defined(BDB_DEFAULT)
-. if ${BDB_DEFAULT} != 1
+. if ${_bdb_ARGS} == yes
+.  if ${BDB_DEFAULT} != 1
 _bdb_ARGS=	${BDB_DEFAULT}
+.  else
+_bdb_ARGS:=	48+
+.  endif
 . endif
-.endif
 
 # Compatiblity hack:
 # upgrade older plussed versions to 48+
@@ -105,10 +109,6 @@ _BDB_OLDPLUSVERS=4+ 40+ 41+ 42+ 43+ 44+ 45+ 46+ 47+
 _bdb_ARGS:=	48+
 . endif
 .endfor
-
-.if ${_bdb_ARGS} == yes
-_bdb_ARGS:=	48+
-.endif
 
 # 1. detect installed versions
 _INST_BDB_VER=
@@ -196,8 +196,8 @@ BDB_LIB_NAME=		db-5.3
 BDB_LIB_CXX_NAME=	db_cxx-5.3
 BDB_LIB_DIR=		${LOCALBASE}/lib/db5
 . elif ${_BDB_VER} == 6
-BDB_LIB_NAME=		db-6.1
-BDB_LIB_CXX_NAME=	db_cxx-6.1
+BDB_LIB_NAME=		db-6.2
+BDB_LIB_CXX_NAME=	db_cxx-6.2
 BDB_LIB_DIR=		${LOCALBASE}/lib/db6
 . endif
 BDB_LIB_NAME?=		db${_BDB_VER}

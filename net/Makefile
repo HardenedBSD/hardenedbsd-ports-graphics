@@ -169,6 +169,8 @@
     SUBDIR += go-amqp
     SUBDIR += go-cs
     SUBDIR += go-geoip
+    SUBDIR += go-httppath
+    SUBDIR += go-httptreemux
     SUBDIR += go.net
     SUBDIR += gofish
     SUBDIR += gogoc
@@ -246,6 +248,7 @@
     SUBDIR += ifstat
     SUBDIR += ifstated
     SUBDIR += igmpproxy
+    SUBDIR += iipsrv
     SUBDIR += ilbc
     SUBDIR += imapproxy
     SUBDIR += intel-ixl-kmod
@@ -261,7 +264,6 @@
     SUBDIR += ipxe
     SUBDIR += irrd
     SUBDIR += isboot-kmod
-    SUBDIR += isc-dhcp41-server
     SUBDIR += isc-dhcp43-client
     SUBDIR += isc-dhcp43-relay
     SUBDIR += isc-dhcp43-server
@@ -295,7 +297,6 @@
     SUBDIR += l2tpd
     SUBDIR += l4ip
     SUBDIR += ladvd
-    SUBDIR += lam
     SUBDIR += lambdamoo
     SUBDIR += latd
     SUBDIR += ldap-stats
@@ -399,6 +400,7 @@
     SUBDIR += miredo
     SUBDIR += miruo
     SUBDIR += mlvpn
+    SUBDIR += mobile-broadband-provider-info
     SUBDIR += mono-zeroconf
     SUBDIR += mopd
     SUBDIR += morebalance
@@ -455,12 +457,13 @@
     SUBDIR += nss-pam-ldapd-sasl
     SUBDIR += nss_ldap
     SUBDIR += nsscache
-    SUBDIR += nstxd
     SUBDIR += ntimed
     SUBDIR += ntlmaps
     SUBDIR += ntop
+    SUBDIR += ntopng
     SUBDIR += ntp
     SUBDIR += ntp-devel
+    SUBDIR += ntpa
     SUBDIR += ntraceroute
     SUBDIR += nusoap
     SUBDIR += nxproxy
@@ -469,7 +472,6 @@
     SUBDIR += ocserv
     SUBDIR += ohphone
     SUBDIR += olsrd
-    SUBDIR += omcmd
     SUBDIR += omnitty
     SUBDIR += onenetd
     SUBDIR += onioncat
@@ -951,6 +953,7 @@
     SUBDIR += py-gntp
     SUBDIR += py-gspread
     SUBDIR += py-gspreadsheet
+    SUBDIR += py-haproxy-log-analysis
     SUBDIR += py-impacket
     SUBDIR += py-ipaddress
     SUBDIR += py-iplib
@@ -962,6 +965,7 @@
     SUBDIR += py-libcloud
     SUBDIR += py-libdnet
     SUBDIR += py-libnet
+    SUBDIR += py-magic-wormhole
     SUBDIR += py-matrix-synapse
     SUBDIR += py-maxminddb
     SUBDIR += py-miniupnpc
@@ -988,10 +992,12 @@
     SUBDIR += py-pynsq
     SUBDIR += py-pypcap
     SUBDIR += py-pysendfile
+    SUBDIR += py-pyshark
     SUBDIR += py-pysmb
     SUBDIR += py-pysocks
     SUBDIR += py-pystun
     SUBDIR += py-python-bitcoinrpc
+    SUBDIR += py-python-ntlm
     SUBDIR += py-pyvmomi
     SUBDIR += py-pyzmq
     SUBDIR += py-qt4-network
@@ -1018,6 +1024,7 @@
     SUBDIR += py-txamqp
     SUBDIR += py-txrestapi
     SUBDIR += py-uritemplate
+    SUBDIR += py-uritemplate.py
     SUBDIR += py-urllib3
     SUBDIR += py-wolframalpha
     SUBDIR += py-xmlrpc
@@ -1226,6 +1233,7 @@
     SUBDIR += sntop
     SUBDIR += sobby
     SUBDIR += socat
+    SUBDIR += sock
     SUBDIR += socketbind
     SUBDIR += socketpipe
     SUBDIR += socketw
@@ -1236,7 +1244,6 @@
     SUBDIR += spread
     SUBDIR += spread-j
     SUBDIR += spread4
-    SUBDIR += sprinkle
     SUBDIR += sqtop
     SUBDIR += srelay
     SUBDIR += ss5
@@ -1293,6 +1300,7 @@
     SUBDIR += thcrut
     SUBDIR += throttled
     SUBDIR += tigervnc
+    SUBDIR += tigervnc-devel
     SUBDIR += tightvnc
     SUBDIR += tintin++
     SUBDIR += tiny-network-utilities
@@ -1381,7 +1389,6 @@
     SUBDIR += xipmsg
     SUBDIR += xisp
     SUBDIR += xmlrpc-c
-    SUBDIR += xmlrpc-c-devel
     SUBDIR += xmlrpc-epi
     SUBDIR += xorp
     SUBDIR += xprobe

@@ -132,6 +132,7 @@
     SUBDIR += digikam-kde4
     SUBDIR += digikam-kde4-doc
     SUBDIR += digikam-kde4-l10n
+    SUBDIR += dilay
     SUBDIR += ditaa
     SUBDIR += djview4
     SUBDIR += djview4-qt4
@@ -289,7 +290,6 @@
     SUBDIR += gpaint
     SUBDIR += gphoto2
     SUBDIR += gpicview
-    SUBDIR += gplot
     SUBDIR += gpsmanshp
     SUBDIR += gracula
     SUBDIR += grads
@@ -333,6 +333,7 @@
     SUBDIR += gwenview-kde4
     SUBDIR += gx
     SUBDIR += hdr_tools
+    SUBDIR += hiptext
     SUBDIR += hobbes-icons-xpm
     SUBDIR += hppsmtools
     SUBDIR += hs-HGL
@@ -363,8 +364,8 @@
     SUBDIR += imgv
     SUBDIR += imlib2
     SUBDIR += imlib2_loaders
-    SUBDIR += import-pictures
     SUBDIR += impressive
+    SUBDIR += imv
     SUBDIR += inkscape
     SUBDIR += intel-backlight
     SUBDIR += intergif
@@ -459,6 +460,7 @@
     SUBDIR += lcms2
     SUBDIR += leafpak
     SUBDIR += lensfun
+    SUBDIR += lepton
     SUBDIR += leptonica
     SUBDIR += lfview
     SUBDIR += lib3ds
@@ -468,13 +470,11 @@
     SUBDIR += libGLw
     SUBDIR += libafterimage
     SUBDIR += libart_lgpl
-    SUBDIR += libaux
     SUBDIR += libboard
     SUBDIR += libbpg
     SUBDIR += libcaca
     SUBDIR += libcdr01
     SUBDIR += libchamplain
-    SUBDIR += libchamplain08
     SUBDIR += libdmtx
     SUBDIR += libdrm
     SUBDIR += libecwj2
@@ -543,7 +543,6 @@
     SUBDIR += linux-adobesvg
     SUBDIR += linux-c6-cairo
     SUBDIR += linux-c6-dri
-    SUBDIR += linux-c6-dri-compat
     SUBDIR += linux-c6-gdk-pixbuf2
     SUBDIR += linux-c6-glx-utils
     SUBDIR += linux-c6-jpeg
@@ -604,7 +603,6 @@
     SUBDIR += npretty
     SUBDIR += nurbs++
     SUBDIR += nvidia-texture-tools
-    SUBDIR += ocaml-images
     SUBDIR += ocaml-lablgl
     SUBDIR += ocrad
     SUBDIR += ocre
@@ -845,8 +843,8 @@
     SUBDIR += py-graph-dot
     SUBDIR += py-graphy
     SUBDIR += py-gvgen
+    SUBDIR += py-imageio
     SUBDIR += py-imagesize
-    SUBDIR += py-imaging
     SUBDIR += py-mcomix
     SUBDIR += py-ming
     SUBDIR += py-nwdiag
@@ -924,7 +922,6 @@
     SUBDIR += rigsofrods-pagedgeometry
     SUBDIR += ristretto
     SUBDIR += ruby-gd
-    SUBDIR += ruby-gdal
     SUBDIR += ruby-image_size
     SUBDIR += ruby-imlib2
     SUBDIR += ruby-svg
@@ -1048,8 +1045,6 @@
     SUBDIR += waifu2x-converter-cpp
     SUBDIR += wayland
     SUBDIR += webp
-    SUBDIR += whirlgif
-    SUBDIR += white_dune
     SUBDIR += wings
     SUBDIR += wmicons
     SUBDIR += wxsvg

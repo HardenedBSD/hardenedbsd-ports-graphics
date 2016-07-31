@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	borgbackup
-PORTVERSION=	1.0.2
+PORTVERSION=	1.0.6
 CATEGORIES=	archivers python
 MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
@@ -23,19 +23,20 @@ OPTIONS_DEFAULT=
 
 FUSE_RUN_DEPENDS=	${PYTHONPREFIX_SITELIBDIR}/llfuse.so:devel/py-llfuse
 
-USES=		python:3.4+
+USES=		python:3.4+ ssl
 USE_PYTHON=	autoplist distutils
-USE_OPENSSL=	yes
+
+.include <bsd.port.options.mk>
+
+# borg requires openssl>=1.0.0
+.if ${OSVERSION} < 1000015
+WITH_OPENSSL_PORT=yes
+.endif
 
 .include <bsd.port.pre.mk>
 
 .if defined(PACKAGE_BUILDING) && ${PYTHON_VER} != ${PYTHON_DEFAULT}
 IGNORE=	you have python ${PYTHON_DEFAULT} set as the default, and this needs ${PYTHON_VER}
-.endif
-
-# borg requires openssl>=1.0.0
-.if ${OSVERSION} < 1000015
-WITH_OPENSSL_PORT=yes
 .endif
 
 post-install:

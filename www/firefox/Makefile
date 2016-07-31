@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	firefox
-DISTVERSION=	46.0.1
+DISTVERSION=	47.0.1
+PORTREVISION=	2
 DISTVERSIONSUFFIX=.source
 PORTEPOCH=	1
 CATEGORIES=	www ipv6
@@ -13,15 +14,15 @@ MAINTAINER=	gecko@FreeBSD.org
 COMMENT=	Web browser based on the browser portion of Mozilla
 
 BUILD_DEPENDS=	nspr>=4.12:devel/nspr \
-		nss>=3.22.3:security/nss \
+		nss>=3.23:security/nss \
 		libevent2>=2.0.21_2:devel/libevent2 \
 		soundtouch>=1.9.0:audio/soundtouch \
-		harfbuzz>=1.1.3:print/harfbuzz \
-		graphite2>=1.3.7:graphics/graphite2 \
-		png>=1.6.19:graphics/png \
+		harfbuzz>=1.2.2:print/harfbuzz \
+		graphite2>=1.3.8:graphics/graphite2 \
+		png>=1.6.21:graphics/png \
 		libvorbis>=1.3.5,3:audio/libvorbis \
 		libvpx>=1.5.0:multimedia/libvpx \
-		sqlite3>=3.10.2:databases/sqlite3 \
+		sqlite3>=3.11.0:databases/sqlite3 \
 		${PYTHON_PKGNAMEPREFIX}sqlite3>0:databases/py-sqlite3 \
 		v4l_compat>0:multimedia/v4l_compat \
 		autoconf-2.13:devel/autoconf213 \
@@ -37,8 +38,6 @@ MOZ_PKGCONFIG_FILES=	# empty
 USE_MOZILLA=	# empty
 MOZILLA_NAME=	Firefox
 
-USE_QT5=	# empty
-QT_NONSTANDARD=	yes
 USE_GL=		gl
 USES=		tar:xz
 

@@ -1,28 +1,29 @@
 # Created by: jrm@ftfl.ca
 # $FreeBSD$
 
-PORTNAME=		diamond
-PORTVERSION=		0.7.12
+PORTNAME=	diamond
+PORTVERSION=	0.8.14
 DISTVERSIONPREFIX=	v
-PORTREVISION=		1
-CATEGORIES=		biology
+CATEGORIES=	biology
 
-MAINTAINER=		jrm@ftfl.ca
-COMMENT=		BLAST-compatible local sequence aligner
+MAINTAINER=	jrm@ftfl.ca
+COMMENT=	BLAST-compatible local sequence aligner
 
-LICENSE=		BSD2CLAUSE
+LICENSE=	BSD2CLAUSE
 
-LIB_DEPENDS=		libboost_system.so:devel/boost-libs
+ONLY_FOR_ARCHS=	amd64
 
-ONLY_FOR_ARCHS=		amd64
+USES=		cmake:outsource compiler:c++11-lang
 
-USES=			cmake:outsource
+CFLAGS+=	-DNDEBUG
 
-CFLAGS+=		-DNDEBUG
+USE_GITHUB=	yes
+GH_ACCOUNT=	bbuchfink
 
-USE_GITHUB=		yes
-GH_ACCOUNT=		bbuchfink
+PLIST_FILES=	bin/diamond
 
-PLIST_FILES=		bin/diamond
+.if ! defined(PACKAGE_BUILDING)
+CXXFLAGS+=	-march=native
+.endif
 
 .include <bsd.port.mk>

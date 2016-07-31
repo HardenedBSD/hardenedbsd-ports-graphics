@@ -1,4 +1,5 @@
-SHA256 (rustc-1.8.0-src.tar.gz) = af4466147e8d4db4de2a46e07494d2dc2d96313c5b37da34237f511c905f7449
-SIZE (rustc-1.8.0-src.tar.gz) = 25641320
-SHA256 (rust-stage0-2016-02-17-4d3eebf-dragonfly-x86_64-765bb5820ad406e966ec0ac51c8070b656459b02.tar.bz2) = 4e4155a410042ffa149ac26e94c1c5cd9f24aae7e647deed54e694f88cf33d5c
-SIZE (rust-stage0-2016-02-17-4d3eebf-dragonfly-x86_64-765bb5820ad406e966ec0ac51c8070b656459b02.tar.bz2) = 18130945
+TIMESTAMP = 1468246199
+SHA256 (rustc-1.10.0-src.tar.gz) = a4015aacf4f6d8a8239253c4da46e7abaa8584f8214d1828d2ff0a8f56176869
+SIZE (rustc-1.10.0-src.tar.gz) = 25967780
+SHA256 (rustc-1.9.0-x86_64-unknown-dragonfly.tar.gz) = d5fdb96c71255486bf67aced572b0b704f578e4d2abf4edce26d69d7662653ef
+SIZE (rustc-1.9.0-x86_64-unknown-dragonfly.tar.gz) = 38705998

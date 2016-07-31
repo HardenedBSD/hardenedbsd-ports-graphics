@@ -42,6 +42,7 @@
     SUBDIR += farsifonts
     SUBDIR += fifteen
     SUBDIR += fira
+    SUBDIR += firacode
     SUBDIR += fntsample
     SUBDIR += font-adobe-100dpi
     SUBDIR += font-adobe-75dpi
@@ -87,7 +88,6 @@
     SUBDIR += fontconfig-reference
     SUBDIR += fontmatrix
     SUBDIR += fonts-indic
-    SUBDIR += fonts-te
     SUBDIR += fontsproto
     SUBDIR += fonttosfnt
     SUBDIR += freefont-ttf
@@ -136,6 +136,7 @@
     SUBDIR += mkitalic
     SUBDIR += mondulkiri
     SUBDIR += montecarlo_fonts
+    SUBDIR += montserrat
     SUBDIR += moveable-type-fonts
     SUBDIR += nexfontsel
     SUBDIR += noto

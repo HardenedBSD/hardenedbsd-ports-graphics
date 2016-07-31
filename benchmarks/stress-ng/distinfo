@@ -1,2 +1,3 @@
-SHA256 (stress-ng-0.06.01.tar.gz) = e9d1bcbdfb3da4813db9b0ef27690ca02241eb3fd3fcd81d2ef765ff8cd463ae
-SIZE (stress-ng-0.06.01.tar.gz) = 311781
+TIMESTAMP = 1468422944
+SHA256 (stress-ng-0.06.10.tar.gz) = 4bd8117508da946b11d299b094465612b3eaf220313035622327f6e9db669d46
+SIZE (stress-ng-0.06.10.tar.gz) = 329746
