@@ -4454,6 +4454,7 @@
     SUBDIR += py-snack
     SUBDIR += py-snackwich
     SUBDIR += py-sortedcontainers
+    SUBDIR += py-sourcemap
     SUBDIR += py-spark
     SUBDIR += py-speaklater
     SUBDIR += py-spyder
@@ -4511,6 +4512,7 @@
     SUBDIR += py-twistedFlow
     SUBDIR += py-twistedRunner
     SUBDIR += py-txaio
+    SUBDIR += py-typing
     SUBDIR += py-tzlocal
     SUBDIR += py-ua_parser
     SUBDIR += py-ujson
@@ -4862,6 +4864,7 @@
     SUBDIR += rubygem-cf-uaa-lib
     SUBDIR += rubygem-childprocess
     SUBDIR += rubygem-chronic
+    SUBDIR += rubygem-chronic_duration
     SUBDIR += rubygem-clamp
     SUBDIR += rubygem-classifier
     SUBDIR += rubygem-classifier-reborn
@@ -5075,6 +5078,7 @@
     SUBDIR += rubygem-notiffany
     SUBDIR += rubygem-notify
     SUBDIR += rubygem-nprogress-rails
+    SUBDIR += rubygem-numerizer
     SUBDIR += rubygem-octopress-hooks
     SUBDIR += rubygem-oj
     SUBDIR += rubygem-omniauth_crowd
