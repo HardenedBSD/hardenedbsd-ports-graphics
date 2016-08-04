@@ -536,6 +536,7 @@
     SUBDIR += logtool
     SUBDIR += logwatch
     SUBDIR += lookat
+    SUBDIR += lr
     SUBDIR += lsof
     SUBDIR += ltrace
     SUBDIR += luckybackup
@@ -605,6 +606,14 @@
     SUBDIR += moosefs2-master
     SUBDIR += moosefs2-metalogger
     SUBDIR += moosefs2-netdump
+    SUBDIR += moosefs3-cgi
+    SUBDIR += moosefs3-cgiserv
+    SUBDIR += moosefs3-chunkserver
+    SUBDIR += moosefs3-cli
+    SUBDIR += moosefs3-client
+    SUBDIR += moosefs3-master
+    SUBDIR += moosefs3-metalogger
+    SUBDIR += moosefs3-netdump
     SUBDIR += moreutils
     SUBDIR += most
     SUBDIR += mount.app
@@ -850,6 +859,7 @@
     SUBDIR += py-stdiff
     SUBDIR += py-supervisor
     SUBDIR += py-tmuxp
+    SUBDIR += py-uptime
     SUBDIR += py-zdaemon
     SUBDIR += py-zfs
     SUBDIR += pydf
@@ -1192,6 +1202,7 @@
     SUBDIR += xcdroast
     SUBDIR += xcpustate
     SUBDIR += xdu
+    SUBDIR += xe
     SUBDIR += xe-guest-utilities
     SUBDIR += xen-guest-tools
     SUBDIR += xen-tools
