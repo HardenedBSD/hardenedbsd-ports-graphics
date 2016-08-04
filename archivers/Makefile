@@ -55,6 +55,7 @@
     SUBDIR += lcab
     SUBDIR += lha
     SUBDIR += lha-ac
+    SUBDIR += lhasa
     SUBDIR += libarc
     SUBDIR += libarchive
     SUBDIR += libcabinet
@@ -239,6 +240,7 @@
     SUBDIR += zipper
     SUBDIR += zoo
     SUBDIR += zopfli
+    SUBDIR += zstd
     SUBDIR += zutils
 
 .include <bsd.port.subdir.mk>

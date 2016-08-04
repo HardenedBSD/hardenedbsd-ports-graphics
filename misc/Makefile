@@ -76,6 +76,7 @@
     SUBDIR += elixir-uuid
     SUBDIR += elscreen
     SUBDIR += erlang-mimerl
+    SUBDIR += erlang-mimetypes
     SUBDIR += esniper
     SUBDIR += estic
     SUBDIR += excel-writer
@@ -373,6 +374,7 @@
     SUBDIR += py-osd
     SUBDIR += py-pexpect
     SUBDIR += py-powerline-status
+    SUBDIR += py-pyfiglet
     SUBDIR += py-pyprind
     SUBDIR += py-progressbar
     SUBDIR += py-progressbar231

@@ -28,7 +28,9 @@
 .if !defined(_INCLUDE_USES_SSL_MK)
 _INCLUDE_USES_SSL_MK=	yes
 
-.include "${PORTSDIR}/Mk/bsd.default-versions.mk"
+.if !empty(ssl_ARGS)
+IGNORE=	"USES=ssl does not take any argument."
+.endif
 
 .if ${SSL_DEFAULT} == base
 OPENSSLBASE=		/usr

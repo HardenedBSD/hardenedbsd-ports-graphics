@@ -56,6 +56,7 @@
     SUBDIR += acsccid
     SUBDIR += activitymail
     SUBDIR += ada-util
+    SUBDIR += adaid
     SUBDIR += adabooch
     SUBDIR += adacurses
     SUBDIR += adime
@@ -115,6 +116,7 @@
     SUBDIR += atlas
     SUBDIR += atlas-devel
     SUBDIR += atlassian-plugin-sdk
+    SUBDIR += aunit
     SUBDIR += autobook
     SUBDIR += autoconf
     SUBDIR += autoconf-archive
@@ -454,6 +456,7 @@
     SUBDIR += elixir-lager_logger
     SUBDIR += elixir-msgpax
     SUBDIR += elixir-nadia
+    SUBDIR += elixir-nimble_csv
     SUBDIR += elixir-paratize
     SUBDIR += elixir-plug
     SUBDIR += elixir-poison
@@ -461,6 +464,7 @@
     SUBDIR += elixir-red_black_tree
     SUBDIR += elixir-sorted_set
     SUBDIR += elixir-timex
+    SUBDIR += elixir-tirexs
     SUBDIR += elixir-tzdata
     SUBDIR += embb
     SUBDIR += epl.el
@@ -472,6 +476,7 @@
     SUBDIR += erlang-bbmustache
     SUBDIR += erlang-bear
     SUBDIR += erlang-certifi
+    SUBDIR += erlang-cf
     SUBDIR += erlang-clique
     SUBDIR += erlang-common_lib
     SUBDIR += erlang-cuttlefish
@@ -713,6 +718,7 @@
     SUBDIR += gnulibiberty
     SUBDIR += gnustep
     SUBDIR += gnustep-make
+    SUBDIR += go-bayesian
     SUBDIR += go-bindata
     SUBDIR += go-btree
     SUBDIR += go-cobra
@@ -1403,6 +1409,7 @@
     SUBDIR += linux-c6-libglade2
     SUBDIR += linux-c6-libpciaccess
     SUBDIR += linux-c6-libsigc++20
+    SUBDIR += linux-c6-libthai
     SUBDIR += linux-c6-ncurses-base
     SUBDIR += linux-c6-nspr
     SUBDIR += linux-c6-qt47
@@ -1604,6 +1611,7 @@
     SUBDIR += ode
     SUBDIR += ois
     SUBDIR += okteta
+    SUBDIR += omake
     SUBDIR += omniNotify
     SUBDIR += omniORB
     SUBDIR += omniORB-4.1
@@ -2721,6 +2729,7 @@
     SUBDIR += p5-MooseX-Clone
     SUBDIR += p5-MooseX-CompileTime-Traits
     SUBDIR += p5-MooseX-ConfigFromFile
+    SUBDIR += p5-MooseX-CoverableModifiers
     SUBDIR += p5-MooseX-Daemonize
     SUBDIR += p5-MooseX-Declare
     SUBDIR += p5-MooseX-Emulate-Class-Accessor-Fast
@@ -3289,6 +3298,7 @@
     SUBDIR += p5-Test-Requires
     SUBDIR += p5-Test-Requires-Git
     SUBDIR += p5-Test-RequiresInternet
+    SUBDIR += p5-Test-Roo
     SUBDIR += p5-Test-Script
     SUBDIR += p5-Test-Script-Run
     SUBDIR += p5-Test-SharedFork
@@ -3810,6 +3820,7 @@
     SUBDIR += php56-sysvsem
     SUBDIR += php56-sysvshm
     SUBDIR += php56-tokenizer
+    SUBDIR += php70-APCu
     SUBDIR += php70-gettext
     SUBDIR += php70-intl
     SUBDIR += php70-json
@@ -3959,6 +3970,7 @@
     SUBDIR += py-apipkg
     SUBDIR += py-appdirs
     SUBDIR += py-application
+    SUBDIR += py-apptools
     SUBDIR += py-apscheduler
     SUBDIR += py-archetypes.querywidget
     SUBDIR += py-archetypes.referencebrowserwidget
@@ -4208,6 +4220,7 @@
     SUBDIR += py-logbook
     SUBDIR += py-logan
     SUBDIR += py-logilab-common
+    SUBDIR += py-louie
     SUBDIR += py-lxml
     SUBDIR += py-magic
     SUBDIR += py-manuel
@@ -4311,6 +4324,7 @@
     SUBDIR += py-pyee
     SUBDIR += py-pyelftools
     SUBDIR += py-pyev
+    SUBDIR += py-pyface
     SUBDIR += py-pyflakes
     SUBDIR += py-pygit2
     SUBDIR += py-pygithub
@@ -4446,6 +4460,7 @@
     SUBDIR += py-snack
     SUBDIR += py-snackwich
     SUBDIR += py-sortedcontainers
+    SUBDIR += py-sourcemap
     SUBDIR += py-spark
     SUBDIR += py-speaklater
     SUBDIR += py-spyder
@@ -4503,6 +4518,7 @@
     SUBDIR += py-twistedFlow
     SUBDIR += py-twistedRunner
     SUBDIR += py-txaio
+    SUBDIR += py-typing
     SUBDIR += py-tzlocal
     SUBDIR += py-ua_parser
     SUBDIR += py-ujson
@@ -4854,6 +4870,7 @@
     SUBDIR += rubygem-cf-uaa-lib
     SUBDIR += rubygem-childprocess
     SUBDIR += rubygem-chronic
+    SUBDIR += rubygem-chronic_duration
     SUBDIR += rubygem-clamp
     SUBDIR += rubygem-classifier
     SUBDIR += rubygem-classifier-reborn
@@ -5067,6 +5084,7 @@
     SUBDIR += rubygem-notiffany
     SUBDIR += rubygem-notify
     SUBDIR += rubygem-nprogress-rails
+    SUBDIR += rubygem-numerizer
     SUBDIR += rubygem-octopress-hooks
     SUBDIR += rubygem-oj
     SUBDIR += rubygem-omniauth_crowd

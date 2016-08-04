@@ -2,7 +2,7 @@ COMMENT=	The ${PHP_MODNAME} shared extension for php
 
 USES+=	php:ext
 PHP_MODNAME=	${PKGNAMESUFFIX:S/-//}
-PHP_DEFAULT=	7.0
+PHP_VER=	70
 IGNORE_WITH_PHP=	55 56
 
 EXTSUBDIR=	${DISTNAME}/ext/${PHP_MODNAME}
@@ -209,6 +209,8 @@ USE_OPENSSL=	yes
 .endif
 
 .if ${PHP_MODNAME} == "opcache"
+# This is needed by Zend extensions, keep before everything.
+PHP_MOD_PRIO=	10
 CONFIGURE_ARGS+=--enable-opcache
 USES+=	localbase
 .endif

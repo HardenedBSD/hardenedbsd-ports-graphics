@@ -416,6 +416,7 @@
     SUBDIR += p5-Dancer-Session-Memcached
     SUBDIR += p5-Dancer2-Plugin-DBIC
     SUBDIR += p5-Dancer2-Plugin-Database
+    SUBDIR += p5-Dancer2-Session-DBIC
     SUBDIR += p5-Data-Page
     SUBDIR += p5-Data-Pageset
     SUBDIR += p5-Exception-Class-DBI
@@ -426,6 +427,7 @@
     SUBDIR += p5-GraphViz-DBI
     SUBDIR += p5-HTML-FormHandler-Model-DBIC
     SUBDIR += p5-Ima-DBI
+    SUBDIR += p5-Interchange6-Schema
     SUBDIR += p5-Iterator-DBI
     SUBDIR += p5-Jifty-DBI
     SUBDIR += p5-KyotoCabinet
@@ -972,6 +974,7 @@
     SUBDIR += tokyocabinet
     SUBDIR += tokyotyrant
     SUBDIR += tora
+    SUBDIR += tsearch_extras
     SUBDIR += tuning-primer
     SUBDIR += twemproxy
     SUBDIR += unixODBC

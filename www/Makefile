@@ -824,6 +824,7 @@
     SUBDIR += p5-Dancer2
     SUBDIR += p5-Dancer2-Plugin-Ajax
     SUBDIR += p5-Dancer2-Plugin-Deferred
+    SUBDIR += p5-Dancer2-Plugin-Interchange6
     SUBDIR += p5-Dancer2-Plugin-Path-Class
     SUBDIR += p5-Data-TreeDumper-Renderer-DHTML
     SUBDIR += p5-Data-Validate-URI
@@ -1014,6 +1015,7 @@
     SUBDIR += p5-I18N-AcceptLanguage
     SUBDIR += p5-IMDB-Film
     SUBDIR += p5-Image-Delivery
+    SUBDIR += p5-Interchange6
     SUBDIR += p5-JE
     SUBDIR += p5-Jemplate
     SUBDIR += p5-Jifty
@@ -1523,6 +1525,7 @@
     SUBDIR += py-django-extensions
     SUBDIR += py-django-filer
     SUBDIR += py-django-formtools
+    SUBDIR += py-django-guardian
     SUBDIR += py-django-happenings
     SUBDIR += py-django-haystack
     SUBDIR += py-django-htmlmin
@@ -1603,6 +1606,7 @@
     SUBDIR += py-flask-oauthlib
     SUBDIR += py-flask-restful
     SUBDIR += py-flask-restplus
+    SUBDIR += py-flask-restplus08
     SUBDIR += py-flask-sockets
     SUBDIR += py-flask-uploads
     SUBDIR += py-flask-wtf
@@ -1630,6 +1634,7 @@
     SUBDIR += py-imdbpy
     SUBDIR += py-jonpy
     SUBDIR += py-jswebkit
+    SUBDIR += py-kallithea
     SUBDIR += py-mechanize
     SUBDIR += py-meld
     SUBDIR += py-meld3
@@ -1742,6 +1747,9 @@
     SUBDIR += py-recaptcha
     SUBDIR += py-requestbuilder
     SUBDIR += py-requests
+    SUBDIR += py33-requests
+    SUBDIR += py34-requests
+    SUBDIR += py35-requests
     SUBDIR += py-requests-futures
     SUBDIR += py-requests-oauthlib
     SUBDIR += py-requests-toolbelt
@@ -1762,6 +1770,7 @@
     SUBDIR += py-slimit
     SUBDIR += py-slimmer
     SUBDIR += py-slumber
+    SUBDIR += py-sockjs-tornado
     SUBDIR += py-splinter
     SUBDIR += py-spyne
     SUBDIR += py-surl

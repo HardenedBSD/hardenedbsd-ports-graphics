@@ -2,13 +2,12 @@
 # $FreeBSD$
 
 PORTNAME=	firefox
-DISTVERSION=	45.2.0
-PORTREVISION=	2
+DISTVERSION=	45.3.0
 DISTVERSIONSUFFIX=esr.source
 PORTEPOCH=	1
 CATEGORIES=	www ipv6
 MASTER_SITES=	MOZILLA/${PORTNAME}/releases/${DISTVERSION}esr/source \
-		MOZILLA/${PORTNAME}/candidates/${DISTVERSION}esr-candidates/build2/source
+		MOZILLA/${PORTNAME}/candidates/${DISTVERSION}esr-candidates/build1/source
 PKGNAMESUFFIX=	-esr
 
 MAINTAINER=	gecko@FreeBSD.org
@@ -28,8 +27,7 @@ BUILD_DEPENDS=	nspr>=4.12:devel/nspr \
 		v4l_compat>0:multimedia/v4l_compat \
 		autoconf-2.13:devel/autoconf213 \
 		yasm:devel/yasm \
-		zip:archivers/zip \
-		unzip:archivers/unzip
+		zip:archivers/zip
 
 LIB_DEPENDS=	libv4l2.so:multimedia/libv4l
 

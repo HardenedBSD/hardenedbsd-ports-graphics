@@ -370,6 +370,7 @@
     SUBDIR += libechonest
     SUBDIR += libfilteraudio
     SUBDIR += libfishsound
+    SUBDIR += libg722
     SUBDIR += libgig
     SUBDIR += libgme
     SUBDIR += libgpod
@@ -633,6 +634,7 @@
     SUBDIR += py-pyliblo
     SUBDIR += py-shout
     SUBDIR += py-soundcloud
+    SUBDIR += py-speechrecognition
     SUBDIR += py-speex
     SUBDIR += py-tagpy
     SUBDIR += py-vorbis
@@ -696,6 +698,7 @@
     SUBDIR += smasher
     SUBDIR += snack
     SUBDIR += snd
+    SUBDIR += sndio
     SUBDIR += solfege
     SUBDIR += sonata
     SUBDIR += sooperlooper

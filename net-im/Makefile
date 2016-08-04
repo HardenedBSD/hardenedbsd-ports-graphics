@@ -131,6 +131,7 @@
     SUBDIR += py-libturpial
     SUBDIR += py-nbxmpp
     SUBDIR += py-punjab
+    SUBDIR += py-python-telegram-bot
     SUBDIR += py-pyxmpp
     SUBDIR += py-skype4py
     SUBDIR += py-slackclient
@@ -175,6 +176,7 @@
     SUBDIR += telepathy-mission-control
     SUBDIR += telepathy-python
     SUBDIR += telepathy-qt4
+    SUBDIR += telepathy-qt5
     SUBDIR += telepathy-rakia
     SUBDIR += telepathy-salut
     SUBDIR += telepathy-sofiasip
