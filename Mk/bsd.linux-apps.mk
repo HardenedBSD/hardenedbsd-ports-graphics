@@ -61,10 +61,10 @@ WEB_AUTH=			nvu
 # Non-version specific components
 _LINUX_APPS_ALL=	allegro alsalib alsa-plugins-oss alsa-plugins-pulseaudio \
 					arts aspell atk avahi-libs cairo cups-libs curl dri devtools esound expat \
-					flac fontconfig freealut gdkpixbuf gdkpixbuf2 gnutls gtk2 hicontheme imlib jpeg libaudiofile \
+					flac fontconfig freealut gdkpixbuf gdkpixbuf2 gnutls gtk2 hicontheme imlib jasper jpeg libaudiofile \
 					libasyncns libg2c libgcrypt libglade2 libglu libgpg-error libmng libogg \
-					libpciaccess libsigcpp20 libsndfile libtasn1 libtheora libvorbis libxml2 mikmod \
-					naslibs ncurses-base openal openmotif openssl openssl-compat pango png \
+					libpciaccess libsigcpp20 libsndfile libtasn1 libthai libtheora libvorbis libxml2 mikmod \
+					naslibs ncurses-base openal openmotif openssl openssl-compat pango pixman png \
 					pulseaudio-libs scimgtk scimlibs sdl12 sdlimage sdlmixer sdlttf tiff \
 					tcp_wrappers-libs xorglibs ucl ungif upx webauth
 
@@ -259,6 +259,11 @@ imlib_f10_FILE=		${LINUXBASE}/usr/lib/libgdk_imlib.so.1.9.15
 imlib_DETECT=		${imlib${LINUX_DIST_SUFFIX:S/-/_/}_FILE}
 imlib_PORT=			graphics/linux${LINUX_BASEPORT_NAME}-imlib
 
+jasper_c6_FILE=		${LINUXBASE}/usr/lib/libjasper.so.1.0.0
+jasper_c6_64_FILE=	${LINUXBASE}/usr/lib64/libjasper.so.1.0.0
+jasper_DETECT=		${jasper${LINUX_DIST_SUFFIX:S/-/_/}_FILE}
+jasper_PORT=		graphics/linux${LINUX_BASEPORT_NAME}-jasper
+
 jpeg_f10_FILE=		${LINUXBASE}/usr/lib/libjpeg.so.62.0.0
 jpeg_c6_FILE=		${LINUXBASE}/usr/lib/libjpeg.so.62.0.0
 jpeg_c6_64_FILE=	${LINUXBASE}/usr/lib64/libjpeg.so.62.0.0
@@ -355,6 +360,11 @@ libtasn1_c6_64_FILE=	${LINUXBASE}/usr/lib64/libtasn1.so.3.1.6
 libtasn1_DETECT=	${libtasn1${LINUX_DIST_SUFFIX:S/-/_/}_FILE}
 libtasn1_PORT=		security/linux${LINUX_BASEPORT_NAME}-libtasn1
 
+libthai_c6_FILE=	${LINUXBASE}/usr/lib/libthai.so.0.1.4
+libthai_c6_64_FILE=	${LINUXBASE}/usr/lib64/libthai.so.0.1.4
+libthai_DETECT=		${libthai${LINUX_DIST_SUFFIX:S/-/_/}_FILE}
+libthai_PORT=		devel/linux${LINUX_BASEPORT_NAME}-libthai
+
 libtheora_f10_FILE=	${LINUXBASE}/usr/lib/libtheora.so.0.3.3
 libtheora_c6_FILE=	${LINUXBASE}/usr/lib/libtheora.so.0.3.9
 libtheora_c6_64_FILE=	${LINUXBASE}/usr/lib64/libtheora.so.0.3.9
@@ -448,6 +458,11 @@ pango_c6_64_FILE=	${LINUXBASE}/usr/lib64/libpango-1.0.so.0.2800.1
 pango_DETECT=		${pango${LINUX_DIST_SUFFIX:S/-/_/}_FILE}
 pango_PORT=			x11-toolkits/linux${LINUX_BASEPORT_NAME}-pango
 pango_DEPENDS=		cairo expat fontconfig xorglibs
+
+pixman_c6_FILE=		${LINUXBASE}/usr/lib/libpixman-1.so.0.32.8
+pixman_c6_64_FILE=	${LINUXBASE}/usr/lib64/libpixman-1.so.0.32.8
+pixman_DETECT=		${pixman${LINUX_DIST_SUFFIX:S/-/_/}_FILE}
+pixman_PORT=		x11/linux${LINUX_BASEPORT_NAME}-pixman
 
 png_f10_FILE=		${LINUXBASE}/usr/lib/libpng.so.3.37.0
 png_c6_FILE=		${LINUXBASE}/usr/lib/libpng.so.3.49.0

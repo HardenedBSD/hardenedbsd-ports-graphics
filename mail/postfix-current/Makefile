@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	postfix
-DISTVERSION=	3.2-20160625
-PORTREVISION=	2
+DISTVERSION=	3.2-20160730
 PORTEPOCH=	4
 CATEGORIES=	mail ipv6
 MASTER_SITES=	ftp://ftp.porcupine.org/mirrors/postfix-release/ \
@@ -47,7 +46,7 @@ OPTIONS_RADIO=		RG1
 OPTIONS_RADIO_RG1=	SASLKRB5 SASLKMIT
 OPTIONS_DEFAULT=	PCRE TLS
 
-BDB_USE=		BDB=yes
+BDB_USES=		bdb
 CDB_LIB_DEPENDS=	libcdb.so:databases/tinycdb
 LDAP_USE=		OPENLDAP=yes
 LMDB_LIB_DEPENDS=	liblmdb.so:databases/lmdb

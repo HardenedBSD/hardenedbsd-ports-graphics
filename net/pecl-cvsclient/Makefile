@@ -3,12 +3,13 @@
 
 PORTNAME=	cvsclient
 PORTVERSION=	0.2
+PORTREVISION=	1
 CATEGORIES=	net pear
 MASTER_SITES=	http://pecl.php.net/get/
 PKGNAMEPREFIX=	pecl-
 DIST_SUBDIR=	PECL
 
-MAINTAINER=	miwi@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	PHP extension for CVS pserver client
 
 LICENSE=	PHP202

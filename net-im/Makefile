@@ -131,10 +131,12 @@
     SUBDIR += py-libturpial
     SUBDIR += py-nbxmpp
     SUBDIR += py-punjab
+    SUBDIR += py-python-telegram-bot
     SUBDIR += py-pyxmpp
     SUBDIR += py-skype4py
     SUBDIR += py-slackclient
     SUBDIR += py-sleekxmpp
+    SUBDIR += py-telepot
     SUBDIR += py-twistedWords
     SUBDIR += py-xmpppy
     SUBDIR += py-xmpppy-irc

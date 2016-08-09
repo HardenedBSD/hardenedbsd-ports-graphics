@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	nginx
-PORTVERSION=	1.11.2
-PORTREVISION=	1
+PORTVERSION=	1.11.3
 CATEGORIES=	www
 MASTER_SITES=	http://nginx.org/download/
 MASTER_SITES+=	LOCAL/osa
@@ -334,7 +333,7 @@ CONFIGURE_ARGS+=--with-http_addition_module
 .endif
 
 .if ${PORT_OPTIONS:MHTTP_AUTH_DIGEST}
-GIT_AUTH_DIGEST_VERSION=	4edfb18
+GIT_AUTH_DIGEST_VERSION=	cc61b4a
 GH_ACCOUNT+=	atomx:auth_digest
 GH_PROJECT+=	nginx-http-auth-digest:auth_digest
 GH_TAGNAME+=	${GIT_AUTH_DIGEST_VERSION}:auth_digest
@@ -436,7 +435,7 @@ USE_HTTP_SSL=	yes
 .endif
 
 .if ${PORT_OPTIONS:MECHO}
-NGINX_ECHO_VERSION=	4f7aa50
+NGINX_ECHO_VERSION=	46334b3
 GH_ACCOUNT+=	openresty:echo
 GH_PROJECT+=	echo-nginx-module:echo
 GH_TAGNAME+=	${NGINX_ECHO_VERSION}:echo
@@ -579,7 +578,7 @@ USES+=		perl5
 .endif
 
 .if ${PORT_OPTIONS:MHTTP_PUSH}
-GIT_PUSH_VERSION=	0.99.15
+GIT_PUSH_VERSION=	0.99.16
 GH_ACCOUNT+=	slact:push
 GH_PROJECT+=	nchan:push
 GH_TAGNAME+=	v${GIT_PUSH_VERSION}:push
@@ -633,9 +632,12 @@ LIB_DEPENDS+=	libmsgpuck.so:devel/msgpuck \
 		libyajl.so:devel/yajl
 GH_ACCOUNT+=	tarantool:nginx_tarantool
 GH_PROJECT+=	nginx_upstream_module:nginx_tarantool
-GH_TAGNAME+=	b852195:nginx_tarantool
-CFLAGS+=	-I${LOCALBASE}/include/msgpuck
+GH_TAGNAME+=	1278ee5:nginx_tarantool
+.if !empty(PORT_OPTIONS:MDSO)
+CONFIGURE_ARGS+=--add-dynamic-module=${WRKSRC_nginx_tarantool}
+.else
 CONFIGURE_ARGS+=--add-module=${WRKSRC_nginx_tarantool}
+.endif
 EXTRA_PATCHES+=	${PATCHDIR}/extra-patch-ngx_http_tarantool-config
 .endif
 
@@ -760,7 +762,7 @@ EXTRA_PATCHES+=	${PATCHDIR}/extra-patch-ngx_inet_slab.c
 .endif
 
 .if ${PORT_OPTIONS:MARRAYVAR} || ${PORT_OPTIONS:MENCRYPTSESSION} || ${PORT_OPTIONS:MFORMINPUT} || ${PORT_OPTIONS:MICONV} || ${PORT_OPTIONS:MLUA} || ${PORT_OPTIONS:MSET_MISC}
-NGINX_DEVEL_KIT_VERSION=	0.2.19
+NGINX_DEVEL_KIT_VERSION=	0.3.0
 GH_ACCOUNT+=	simpl:devel_kit
 GH_PROJECT+=	ngx_devel_kit:devel_kit
 GH_TAGNAME+=	v${NGINX_DEVEL_KIT_VERSION}:devel_kit
@@ -768,7 +770,7 @@ CONFIGURE_ARGS+=--add-module=${WRKSRC_devel_kit}
 .endif
 
 .if ${PORT_OPTIONS:MENCRYPTSESSION}
-NGINX_ENCRYPTSESSION_VERSION=	0.03
+NGINX_ENCRYPTSESSION_VERSION=	0.05
 GH_ACCOUNT+=	openresty:encryptsession
 GH_PROJECT+=	encrypted-session-nginx-module:encryptsession
 GH_TAGNAME+=	v${NGINX_ENCRYPTSESSION_VERSION}:encryptsession
@@ -796,7 +798,7 @@ CONFIGURE_ARGS+=--add-module=${WRKSRC_let}
 LIB_DEPENDS+=	libluajit-5.1.so:lang/luajit
 CONFIGURE_ENV+=	"LUAJIT_INC=${LOCALBASE}/include/luajit-2.0"
 CONFIGURE_ENV+=	"LUAJIT_LIB=${LOCALBASE}/lib"
-NGINX_LUA_VERSION=	0.10.5
+NGINX_LUA_VERSION=	0.10.6rc1
 GH_ACCOUNT+=	openresty:lua
 GH_PROJECT+=	lua-nginx-module:lua
 GH_TAGNAME+=	v${NGINX_LUA_VERSION}:lua
@@ -848,7 +850,7 @@ CONFIGURE_ARGS+=--without-http_rewrite_module \
 .endif
 
 .if ${PORT_OPTIONS:MPASSENGER}
-PASSENGER_VERSION=	5.0.29
+PASSENGER_VERSION=	5.0.30
 MASTER_SITES+=	http://s3.amazonaws.com/phusion-passenger/releases/:passenger
 DISTFILES+=	passenger-${PASSENGER_VERSION}.tar.gz:passenger
 .if !empty(PORT_OPTIONS:MDSO)
@@ -898,16 +900,15 @@ CONFIGURE_ARGS+=--add-module=${WRKSRC_redis2}
 .endif
 
 .if ${PORT_OPTIONS:MRTMP}
-NGINX_RTMP_VERSION=	1.1.7
+NGINX_RTMP_VERSION=	1.1.8
 GH_ACCOUNT+=	arut:rtmp
 GH_PROJECT+=	nginx-rtmp-module:rtmp
 GH_TAGNAME+=	v${NGINX_RTMP_VERSION}:rtmp
 CONFIGURE_ARGS+=--add-module=${WRKSRC_rtmp}
-EXTRA_PATCHES+=	${PATCHDIR}/extra-patch-ngx_rtmp_core_module.c
 .endif
 
 .if ${PORT_OPTIONS:MSET_MISC}
-NGINX_SET_MISC_VERSION=	6582fb4
+NGINX_SET_MISC_VERSION=	f808ef4
 GH_ACCOUNT+=	openresty:setmisc
 GH_PROJECT+=	set-misc-nginx-module:setmisc
 GH_TAGNAME+=	${NGINX_SET_MISC_VERSION}:setmisc
@@ -919,10 +920,10 @@ CONFIGURE_ARGS+=--add-module=${WRKSRC_setmisc}
 .endif
 
 .if ${PORT_OPTIONS:MSFLOW}
-NGINX_SFLOW_VERSION=	0.9.7
-MASTER_SITES+=	http://nginx-sflow-module.googlecode.com/files/:sflow
-DISTFILES+=	nginx-sflow-module-${NGINX_SFLOW_VERSION}.tar.gz:sflow
-CONFIGURE_ARGS+=--add-module=${WRKDIR}/nginx-sflow-module-${NGINX_SFLOW_VERSION}
+NGINX_SFLOW_VERSION=	543c72a
+GH_ACCOUNT+=	sflow:sflow
+GH_PROJECT+=	nginx-sflow-module:sflow
+GH_TAGNAME+=	${NGINX_SFLOW_VERSION}:sflow
 EXTRA_PATCHES+=	${PATCHDIR}/extra-patch-ngx_http_sflow_config.c \
 		${PATCHDIR}/extra-patch-ngx_http_sflow_config.h \
 		${PATCHDIR}/extra-patch-ngx_http_sflow_module.c
@@ -944,7 +945,7 @@ CONFIGURE_ARGS+=--add-module=${WRKDIR}/ngx_slowfs_cache-${NGINX_SLOWFS_CACHE_VER
 .endif
 
 .if ${PORT_OPTIONS:MSMALL_LIGHT}
-NGINX_SMALL_LIGHT_VERSION=	0.6.15
+NGINX_SMALL_LIGHT_VERSION=	0.8.0
 LIB_DEPENDS+=	libMagickCore-6.so:graphics/ImageMagick \
 		libMagickWand-6.so:graphics/ImageMagick \
 		libpcre.so:devel/pcre
@@ -991,7 +992,7 @@ CONFIGURE_ARGS+=--add-module=${WRKSRC_xrid}
 .endif
 
 .if ${PORT_OPTIONS:MXSS}
-NGINX_XSS_VERSION=	0.04
+NGINX_XSS_VERSION=	0.05
 GH_ACCOUNT+=	openresty:xss
 GH_PROJECT+=	xss-nginx-module:xss
 GH_TAGNAME+=	v${NGINX_XSS_VERSION}:xss
@@ -1070,7 +1071,7 @@ CONFIGURE_ARGS+=--with-http_ssl_module
 .endif
 
 .if ${PORT_OPTIONS:MARRAYVAR}
-NGINX_ARRAYVAR_VERSION=	0.03
+NGINX_ARRAYVAR_VERSION=	0.05
 GH_ACCOUNT+=	openresty:arrayvar
 GH_PROJECT+=	array-var-nginx-module:arrayvar
 GH_TAGNAME+=	v${NGINX_ARRAYVAR_VERSION}:arrayvar
@@ -1092,7 +1093,7 @@ CONFIGURE_ARGS+=--add-module=${WRKSRC_brotli}
 .endif
 
 .if ${PORT_OPTIONS:MFORMINPUT}
-NGINX_FORMINPUT_VERSION=	0.07
+NGINX_FORMINPUT_VERSION=	0.12
 GH_ACCOUNT+=	calio:forminput
 GH_PROJECT+=	form-input-nginx-module:forminput
 GH_TAGNAME+=	v${NGINX_FORMINPUT_VERSION}:forminput
@@ -1101,7 +1102,7 @@ CONFIGURE_ARGS+=--add-module=${WRKSRC_forminput}
 
 .if ${PORT_OPTIONS:MICONV}
 USES+=		iconv
-NGINX_ICONV_VERSION=	0.10
+NGINX_ICONV_VERSION=	0.14
 GH_ACCOUNT+=	calio:iconv
 GH_PROJECT+=	iconv-nginx-module:iconv
 GH_TAGNAME+=	v${NGINX_ICONV_VERSION}:iconv

@@ -655,6 +655,7 @@
     SUBDIR += p5-Net-OpenID-Server
     SUBDIR += p5-Net-Radius-Server
     SUBDIR += p5-Net-SAML
+    SUBDIR += p5-Net-SSH-AuthorizedKeysFile
     SUBDIR += p5-Net-SSL-ExpireDate
     SUBDIR += p5-Net-SSLGlue
     SUBDIR += p5-Net-SSLeay
@@ -1007,7 +1008,9 @@
     SUBDIR += rubygem-rack-oauth2
     SUBDIR += rubygem-razorback-scriptNugget
     SUBDIR += rubygem-recog
+    SUBDIR += rubygem-rex-arch
     SUBDIR += rubygem-rex-java
+    SUBDIR += rubygem-rex-ole
     SUBDIR += rubygem-rex-powershell
     SUBDIR += rubygem-rex-random_identifier
     SUBDIR += rubygem-rex-registry
