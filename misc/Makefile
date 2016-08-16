@@ -29,7 +29,6 @@
     SUBDIR += bogosort
     SUBDIR += bottlerocket
     SUBDIR += boxes
-    SUBDIR += boxquote.el
     SUBDIR += brs
     SUBDIR += buffer
     SUBDIR += cave
@@ -56,7 +55,6 @@
     SUBDIR += crosspad
     SUBDIR += cs
     SUBDIR += cstream
-    SUBDIR += cuecat
     SUBDIR += dahdi
     SUBDIR += dahdi-kmod
     SUBDIR += dahdi-kmod26
@@ -78,6 +76,7 @@
     SUBDIR += elixir-uuid
     SUBDIR += elscreen
     SUBDIR += erlang-mimerl
+    SUBDIR += erlang-mimetypes
     SUBDIR += esniper
     SUBDIR += estic
     SUBDIR += excel-writer
@@ -121,6 +120,7 @@
     SUBDIR += freebsd-doc-tr
     SUBDIR += freebsd-doc-zh_cn
     SUBDIR += freebsd-doc-zh_tw
+    SUBDIR += freebsd-release-manifests
     SUBDIR += freeguide
     SUBDIR += ftdi-eeprom
     SUBDIR += fxload
@@ -374,18 +374,20 @@
     SUBDIR += py-osd
     SUBDIR += py-pexpect
     SUBDIR += py-powerline-status
+    SUBDIR += py-pyfiglet
+    SUBDIR += py-pyprind
     SUBDIR += py-progressbar
     SUBDIR += py-progressbar231
     SUBDIR += py-qt4-demo
     SUBDIR += py-qt4-doc
     SUBDIR += py-qt5-demo
     SUBDIR += py-qt5-doc
+    SUBDIR += py-socli
     SUBDIR += py-spdx
     SUBDIR += py-spdx-lookup
     SUBDIR += py-tqdm
     SUBDIR += py-yolk
     SUBDIR += pylize
-    SUBDIR += pypanda
     SUBDIR += qbrew
     SUBDIR += qlas
     SUBDIR += qmetro
@@ -397,7 +399,6 @@
     SUBDIR += qt5-examples
     SUBDIR += qt5-l10n
     SUBDIR += qt5ct
-    SUBDIR += quotes
     SUBDIR += raspberrypi-userland
     SUBDIR += raspbsd-led
     SUBDIR += ree
@@ -411,6 +412,7 @@
     SUBDIR += rubygem-mime-types
     SUBDIR += rubygem-mime-types-data
     SUBDIR += rubygem-mime-types1
+    SUBDIR += rubygem-mime-types29
     SUBDIR += rubygem-mimemagic
     SUBDIR += rubygem-rabbit
     SUBDIR += rubygem-vpim

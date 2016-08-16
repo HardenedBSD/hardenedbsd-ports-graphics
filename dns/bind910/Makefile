@@ -2,7 +2,7 @@
 # pkg-help formatted with fmt 59 63
 
 PORTNAME=	bind
-PORTVERSION=	${ISCVERSION:S/-P/P/:S/b/.b/}
+PORTVERSION=	${ISCVERSION:S/-P/P/:S/b/.b/:S/a/.a/}
 .if defined(BIND_TOOLS_SLAVE)
 # dns/bind-tools here
 PORTREVISION=	0
@@ -29,7 +29,7 @@ COMMENT=	BIND DNS suite with updated DNSSEC and DNS64
 LICENSE=	ISCL
 
 # ISC releases things like 9.8.0-P1, which our versioning doesn't like
-ISCVERSION=	9.10.4-P1
+ISCVERSION=	9.10.4-P2
 
 MAKE_JOBS_UNSAFE=	yes
 
@@ -56,7 +56,7 @@ CONFIGURE_ARGS+=	--disable-shared
 .endif
 ETCDIR=		${PREFIX}/etc/namedb
 
-CONFLICTS+=	bind9*-9.[456789].* bind9*-sdb-9.[456789].*
+CONFLICTS+=	bind9*-9.[456789].* bind911-* bind9*-sdb-9.[456789].*
 
 .if !defined(BIND_TOOLS_SLAVE)
 SUB_FILES=	pkg-message
@@ -127,7 +127,7 @@ CONFLICTS+=		bind-tools-9.*
 .endif	# BIND_TOOLS_SLAVE
 
 SSL_CONFIGURE_ON=	--with-openssl=${OPENSSLBASE}
-SSL_USE=		openssl=yes
+SSL_USES=		ssl
 SSL_CONFIGURE_OFF=	--disable-openssl-version-check --without-openssl
 
 NEWSTATS_CONFIGURE_ENABLE=	newstats
@@ -232,9 +232,9 @@ PORTDOCS=	*
 
 .include <bsd.port.pre.mk>
 
-.if ( ${PORT_OPTIONS:MGOST} || ${PORT_OPTIONS:MGOST_ASN1} ) && defined(WITH_OPENSSL_BASE)
+.if ( ${PORT_OPTIONS:MGOST} || ${PORT_OPTIONS:MGOST_ASN1} ) && ${SSL_DEFAULT} == base
 BROKEN=	OpenSSL from the base system does not support GOST, add \
-	WITH_OPENSSL_PORT=yes to your /etc/make.conf and rebuild everything \
+	DEFAULT_VERSIONS+=ssl=openssl to your /etc/make.conf and rebuild everything \
 	that needs SSL.
 .endif
 

@@ -91,11 +91,13 @@ BDB_DEFAULT=	${${BDB_UNIQUENAME:tu:S,-,_,}_WITH_BDB_VER}
 
 # Override _bdb_ARGS with global BDB_DEFAULT if the maintainer did not
 # ask for a more specific version.
-.if defined(BDB_DEFAULT)
-. if ${BDB_DEFAULT} != 1
+. if ${_bdb_ARGS} == yes
+.  if ${BDB_DEFAULT} != 1
 _bdb_ARGS=	${BDB_DEFAULT}
+.  else
+_bdb_ARGS:=	48+
+.  endif
 . endif
-.endif
 
 # Compatiblity hack:
 # upgrade older plussed versions to 48+
@@ -105,10 +107,6 @@ _BDB_OLDPLUSVERS=4+ 40+ 41+ 42+ 43+ 44+ 45+ 46+ 47+
 _bdb_ARGS:=	48+
 . endif
 .endfor
-
-.if ${_bdb_ARGS} == yes
-_bdb_ARGS:=	48+
-.endif
 
 # 1. detect installed versions
 _INST_BDB_VER=

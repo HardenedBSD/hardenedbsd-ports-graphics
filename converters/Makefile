@@ -4,6 +4,7 @@
     COMMENT = Character code converters
 
     SUBDIR += R-cran-RJSONIO
+    SUBDIR += R-cran-base64enc
     SUBDIR += R-cran-jsonlite
     SUBDIR += R-cran-rjson
     SUBDIR += aish
@@ -146,6 +147,7 @@
     SUBDIR += psiconv
     SUBDIR += py-bencode
     SUBDIR += py-bencoder
+    SUBDIR += py-better-bencode
     SUBDIR += py-bsdconv
     SUBDIR += py-iconv
     SUBDIR += py-pisa

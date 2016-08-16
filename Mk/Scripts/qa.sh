@@ -98,6 +98,7 @@ shebang() {
 
 baselibs() {
 	local rc
+	local found_openssl
 	[ "${PKGBASE}" = "pkg" -o "${PKGBASE}" = "pkg-devel" ] && return
 	while read f; do
 		case ${f} in
@@ -109,12 +110,20 @@ baselibs() {
 			err "Bad linking on ${f##* } please add USES=libedit"
 			rc=1
 			;;
+		*NEEDED*\[libcrypto.so.*]|*NEEDED*\[libssl.so.*])
+			found_openssl=1
+			;;
 		esac
 	done <<-EOF
 	$(find ${STAGEDIR}${PREFIX}/bin ${STAGEDIR}${PREFIX}/sbin \
 		${STAGEDIR}${PREFIX}/lib ${STAGEDIR}${PREFIX}/libexec \
 		-type f -exec readelf -d {} + 2>/dev/null)
 	EOF
+	if [ -z "${USESSSL}" -a -n "${found_openssl}" ]; then
+		warn "you need USES=ssl"
+	elif [ -n "${USESSSL}" -a -z "${found_openssl}" ]; then
+		warn "you may not need USES=ssl"
+	fi
 	return ${rc}
 }
 
@@ -133,6 +142,16 @@ symlinks() {
 			${STAGEDIR}*)
 				err "Bad symlink '${l#${STAGEDIR}${PREFIX}/}' pointing inside the stage directory"
 				rc=1
+				;;
+			/*)
+				# Only warn for symlinks within the package.
+				if [ -e "${STAGEDIR}${link}" ]; then
+					warn "Bad symlink '${l#${STAGEDIR}}' pointing to an absolute pathname '${link}'"
+				fi
+				# Also warn if the symlink exists nowhere.
+				if [ ! -e "${STAGEDIR}${link}" -a ! -e "${link}" ]; then
+					warn "Symlink '${l#${STAGEDIR}}' pointing to '${link}' which does not exist in the stage directory or in localbase"
+				fi
 				;;
 		esac
 	# Use heredoc to avoid losing rc from find|while subshell.
@@ -332,7 +351,7 @@ proxydeps_suggest_uses() {
 
 	# miscellaneous USE clauses
 	if [ ${pkg} = 'devel/gettext-runtime' ]; then
-		warn "you need USES+=gettext"
+		warn "you need USES+=gettext-runtime"
 	elif [ ${pkg} = 'databases/sqlite3' ]; then
 		warn "you need USES+=sqlite"
 	elif [ ${pkg} = 'databases/sqlite2' ]; then
@@ -513,6 +532,11 @@ proxydeps_suggest_uses() {
 	# readline
 	elif [ ${pkg} = "devel/readline" ]; then
 		warn "you need USES+=readline"
+	# ssl
+	elif [ ${pkg} = "security/openssl" -o ${pkg} = "security/openssl-devel" \
+	  -o ${pkg} = "security/libressl" -o ${pkg} = "security/libressl-devel" \
+	  ]; then
+		warn "you need USES=ssl"
 	# Tcl
 	elif expr ${pkg} : "^lang/tcl" > /dev/null; then
 		warn "you need USES+=tcl"
@@ -602,7 +626,9 @@ proxydeps() {
 	return ${rc}
 }
 
-checks="shebang symlinks paths stripped desktopfileutils sharedmimeinfo suidfiles libtool libperl prefixvar baselibs terminfo proxydeps"
+checks="shebang symlinks paths stripped desktopfileutils sharedmimeinfo"
+checks="$checks suidfiles libtool libperl prefixvar baselibs terminfo"
+checks="$checks proxydeps"
 
 ret=0
 cd ${STAGEDIR}

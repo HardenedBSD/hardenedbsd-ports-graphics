@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	curl
-PORTVERSION=	7.49.0
+PORTVERSION=	7.50.1
 CATEGORIES=	ftp www
 MASTER_SITES=	http://curl.haxx.se/download/ \
 		LOCAL/sunpoet
@@ -31,8 +31,9 @@ RESOLV_DESC=		DNS resolving options
 THREADED_RESOLVER_DESC=	Threaded DNS resolver
 TLS_SRP_DESC=		TLS-SRP (Secure Remote Password) support
 
-LOCALBASE?=	/usr/local
-.if defined(WITH_OPENSSL_PORT) || (!defined(WITH_OPENSSL_BASE) && exists(${LOCALBASE}/lib/libcrypto.so))
+.include <${.CURDIR}/../../Mk/bsd.default-versions.mk>
+
+.if ${SSL_DEFAULT} != base
 OPTIONS_DEFAULT+=	GSSAPI_NONE
 .else
 OPTIONS_DEFAULT+=	GSSAPI_BASE
@@ -124,7 +125,7 @@ OPENSSL_CONFIGURE_OFF=	--without-ssl
 OPENSSL_CONFIGURE_ON=	--with-ssl=${OPENSSLBASE}
 OPENSSL_CPPFLAGS=	-I${OPENSSLINC}
 OPENSSL_LDFLAGS=	-L${OPENSSLLIB}
-OPENSSL_USE=		OPENSSL=yes
+OPENSSL_USES=		ssl
 POLARSSL_CONFIGURE_WITH=polarssl
 POLARSSL_LIB_DEPENDS=	libmbedtls.so.9:security/polarssl13
 PROXY_CONFIGURE_ENABLE=	proxy
@@ -138,7 +139,7 @@ TLS_SRP_CONFIGURE_ENABLE=	tls-srp
 WOLFSSL_CONFIGURE_WITH=	cyassl
 WOLFSSL_LIB_DEPENDS=	libwolfssl.so:security/wolfssl
 
-.include <bsd.port.options.mk>
+.include <bsd.port.pre.mk>
 
 .if !${PORT_OPTIONS:MGNUTLS} && !${PORT_OPTIONS:MOPENSSL} && ${PORT_OPTIONS:MTLS_SRP}
 IGNORE=		only supports TLS-SRP with either OpenSSL or GnuTLS
@@ -148,11 +149,11 @@ IGNORE=		only supports TLS-SRP with either OpenSSL or GnuTLS
 IGNORE=		only supports LDAPS with SSL
 .endif
 
-.if ${PORT_OPTIONS:MGSSAPI_BASE} && ${PORT_OPTIONS:MOPENSSL} && (defined(WITH_OPENSSL_PORT) || (!defined(WITH_OPENSSL_BASE) && exists(${LOCALBASE}/lib/libcrypto.so)))
+.if ${PORT_OPTIONS:MGSSAPI_BASE} && ${PORT_OPTIONS:MOPENSSL} && ${SSL_DEFAULT} != base
 IGNORE=		GSSAPI_BASE is not compatible with OpenSSL from ports. Use other GSSAPI options or OpenSSL from base system
 .endif
 
-.if defined(OPENSSL_PORT) && ${OPENSSL_PORT} == "security/libressl"
+.if ${SSL_DEFAULT} == libressl
 .if ${PORT_OPTIONS:MGSSAPI_BASE} && ${PORT_OPTIONS:MOPENSSL}
 IGNORE=		GSSAPI_BASE is not compatible with LibreSSL. Use other GSSAPI options
 .endif
@@ -188,4 +189,4 @@ pre-test-PROXY-off:
 	@${ECHO_MSG} "* This is being addressed.               *"
 	@${ECHO_MSG} "******************************************"
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

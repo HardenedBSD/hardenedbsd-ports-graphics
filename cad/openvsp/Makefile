@@ -2,9 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	openvsp
-PORTVERSION=	3.6.1
+PORTVERSION=	3.8.1
 DISTVERSIONPREFIX=	${GH_PROJECT}_
-PORTREVISION=	0
 CATEGORIES=	cad
 MASTER_SITES=	GH
 
@@ -40,6 +39,7 @@ GH_ACCOUNT=	${GH_PROJECT}
 WRKSRC=		${WRKDIR}/${GH_PROJECT}-${GH_PROJECT}_${PORTVERSION}
 
 CMAKE_SOURCE_PATH=	${WRKSRC}/SuperProject
+CMAKE_INSTALL_PREFIX=	${STAGEDIR}${PREFIX}
 USES=		cmake:outsource compiler:gcc-c++11-lib
 CMAKE_ARGS=	-DVSP_USE_SYSTEM_CMINPACK:BOOLEAN=yes \
 		-DVSP_USE_SYSTEM_CPPTEST:BOOLEAN=yes \
@@ -51,7 +51,8 @@ CMAKE_ARGS=	-DVSP_USE_SYSTEM_CMINPACK:BOOLEAN=yes \
 		-DVSP_USE_SYSTEM_GLEW:BOOLEAN=yes
 USE_XORG=	ice sm x11 xau xcb xdamage xdmcp xext xfixes xft \
 		xinerama xrender xxf86vm
-USE_GL=		glu
+USE_GL=		gl glu
+
 USE_GNOME=	libxml2
 CFLAGS+=	-I${LOCALBASE}/include/openNURBS
 
@@ -59,6 +60,7 @@ BUILD_PREFIX=	OpenVSP-prefix/src/OpenVSP-build/_CPack_Packages/FreeBSD/ZIP/OpenV
 
 do-install:
 	${INSTALL_PROGRAM} ${BUILD_WRKSRC}/${BUILD_PREFIX}/vsp* ${STAGEDIR}${PREFIX}/bin
+	${STRIP_CMD} ${STAGEDIR}/${PREFIX}/vsp*
 	${MKDIR} ${STAGEDIR}${DATADIR}
 .for d in CustomScripts airfoil matlab scripts textures
 	(cd ${BUILD_WRKSRC}/${BUILD_PREFIX}/${d} && ${COPYTREE_SHARE} . ${STAGEDIR}${DATADIR})

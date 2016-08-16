@@ -62,7 +62,6 @@ dcl-*-C.tar.gz		science/cdcl		No commercial use
 dcl-*.tar.gz		science/dcl		No commercial use
 defcon*			games/linux-defcon	Redistribution is limited, see license
 djbdns*			dns/djbdns		No license -- see http://cr.yp.to/softwarelaw.html
-djbdns-1.05.tar.gz	mail/qmail-conf		No license -- see http://cr.yp.to/softwarelaw.html
 djbfft-*		math/djbfft		No license -- see http://cr.yp.to/softwarelaw.html
 dlv			lang/dlv		Not sure if we can redistribute it
 dmd-*			lang/dmd1		No redistribution of non validated binaries
@@ -84,7 +83,6 @@ etqw*			games/linux-etqw-demo-server Redistribution limited
 etqw*			games/linux-etqw-server Redistribution limited
 ezmlm-*			mail/ezmlm		No license -- see http://cr.yp.to/softwarelaw.html
 ezmlm-*			mail/ezmlm-idx		No license -- see http://cr.yp.to/softwarelaw.html
-faac*			audio/faac		Restrictive copyright (do not sell for profit)
 fasta2*			biology/fasta		May not be sold or incorporated into a commercial product
 fasta3*			biology/fasta3		May not be sold or incorporated into a commercial product
 festival/festlex_OALD*	audio/festlex-oald	No commercial use
@@ -188,7 +186,6 @@ perforce/*/p4d		devel/p4d		Restricted distribution
 perforce/*/p4ftpd	devel/p4ftpd		Restricted distribution
 perforce/*/p4p		devel/p4p		Restricted distribution
 perforce/*/p4web	devel/p4web		Restricted distribution
-platon*			biology/platon		$5000 USD for commercial users, free for academic
 ppsmall-*		archivers/ppunpack	No commercial redistribution
 qtools-*		mail/qtools		No license -- see http://cr.yp.to/softwarelaw.html
 quake4-linux-*		games/linux-quake4	Redistribution is limited; see the license
@@ -232,7 +229,6 @@ TrueCrypt*		security/truecrypt	May not be redistributed.  Must accept license to
 tuc-*			converters/tuc		Author does not allow CD-ROM distribution
 tw_cli-*		sysutils/tw_cli		Redistribution forbidden by license
 ue*dev.zip		editors/uemacs		Resale allowed for media cost only
-unifi-3*/UniFi.unix.zip	net-mgmt/unifi3		Redistribution of bundled firmware images is not permitted
 unifi-4*/UniFi.unix.zip	net-mgmt/unifi4		Redistribution of bundled firmware images is not permitted
 unifi-5*/UniFi.unix.zip	net-mgmt/unifi5		Redistribution of bundled firmware images is not permitted
 uplink-demo*		games/linux-uplink-demo	Redistribution is limited, see license
@@ -252,7 +248,6 @@ xchada01.lzh		games/xchadance		Contains commercial character data
 xephem-*		astro/xephem		Personal use only
 XFrisk-*.tar.gz		games/xfrisk		Possible trademark infringement
 xGate/*			japanese/xgate		Requested by Orangesoft Inc.
-xgobi.sh.gz		math/xgobi		Restrictive copyright (do not sell for profit)
 xhime*.tgz		games/xhime		Contains commercial character data
 xinvaders-*		games/xinvaders		Do not sell for profit
 xmdiary-*		deskutils/xmdiary	Do not sell for profit

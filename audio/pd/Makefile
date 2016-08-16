@@ -2,9 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	pd
-DISTVERSION=	0.47-0
+DISTVERSION=	0.47-1
 DISTVERSIONSUFFIX=	.src
-PORTREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	http://msp.ucsd.edu/Software/
 
@@ -34,6 +33,7 @@ LDFLAGS+=	-L${LOCALBASE}/lib -pthread
 DESKTOP_ENTRIES="Pd" "" "${PREFIX}/lib/pd/tcl/pd.ico" "pd" "" ${FALSE}
 
 OPTIONS_DEFINE=		ALSA DOCS JACK
+OPTIONS_DEFAULT=	JACK
 
 ALSA_CONFIGURE_ENABLE=	alsa
 ALSA_LIB_DEPENDS=	libasound.so:audio/alsa-lib
@@ -79,7 +79,7 @@ do-install:
 .for i in LICENSE.txt README.txt
 	(cd ${WRKSRC} && ${INSTALL_DATA} ${i} ${STAGEDIR}${DOCSDIR})
 .endfor
-	${LN} -sf ${DOCSDIR} ${STAGEDIR}${PREFIX}/lib/pd/doc
+	${LN} -sf ../../${DOCSDIR_REL} ${STAGEDIR}${PREFIX}/lib/pd/doc
 	${FIND} ${STAGEDIR}${PREFIX}/lib/pd -name "*.pd_linux" | ${XARGS} \
 		${STRIP_CMD}
 

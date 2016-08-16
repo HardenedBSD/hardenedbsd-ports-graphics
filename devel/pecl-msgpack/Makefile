@@ -3,6 +3,7 @@
 
 PORTNAME=	msgpack
 PORTVERSION=	0.5.7
+PORTREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	http://pecl.php.net/get/
 PKGNAMEPREFIX=	pecl-
@@ -15,10 +16,7 @@ LICENSE=	BSD3CLAUSE
 
 BROKEN_powerpc64=	Does not build
 
-USES=		tar:tgz
-USE_PHP=	session
-USE_PHPEXT=	yes
-USE_PHP_BUILD=	yes
+USES=		php:ext tar:tgz
 IGNORE_WITH_PHP=	70
 
 .include <bsd.port.mk>

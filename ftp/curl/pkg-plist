@@ -32,6 +32,7 @@ man/man3/CURLINFO_FTP_ENTRY_PATH.3.gz
 man/man3/CURLINFO_HEADER_SIZE.3.gz
 man/man3/CURLINFO_HTTPAUTH_AVAIL.3.gz
 man/man3/CURLINFO_HTTP_CONNECTCODE.3.gz
+man/man3/CURLINFO_HTTP_VERSION.3.gz
 man/man3/CURLINFO_LASTSOCKET.3.gz
 man/man3/CURLINFO_LOCAL_IP.3.gz
 man/man3/CURLINFO_LOCAL_PORT.3.gz
@@ -337,6 +338,7 @@ man/man3/curl_multi_remove_handle.3.gz
 man/man3/curl_multi_setopt.3.gz
 man/man3/curl_multi_socket.3.gz
 man/man3/curl_multi_socket_action.3.gz
+man/man3/curl_multi_socket_all.3.gz
 man/man3/curl_multi_strerror.3.gz
 man/man3/curl_multi_timeout.3.gz
 man/man3/curl_multi_wait.3.gz

@@ -260,9 +260,6 @@ _PYTHON_RUN_DEP=	yes
 _PYTHON_TEST_DEP=	yes
 .endif
 
-# Determine version number of Python to use
-.include "${PORTSDIR}/Mk/bsd.default-versions.mk"
-
 .if defined(PYTHON_DEFAULT_VERSION)
 WARNING+=	"PYTHON_DEFAULT_VERSION is defined, consider using DEFAULT_VERSIONS=python=${PYTHON_DEFAULT_VERSION:S/^python//} instead"
 .endif
@@ -407,8 +404,13 @@ PYTHON_REL=	${PYTHON_PORTVERSION:C/^([0-9]+\.[0-9]+\.[0-9]+).*/\1/:C/\.([0-9]+)$
 
 # Might be overridden by calling ports
 PYTHON_CMD?=		${_PYTHON_BASECMD}${_PYTHON_VERSION}
-.if exists(${PYTHON_CMD}-config) && ${PYTHON_VER} != 2.7
+.if ${PYTHON_VER} != 2.7
+.if exists(${PYTHON_CMD}-config)
 PYTHON_ABIVER!=		${PYTHON_CMD}-config --abiflags
+.else
+# Default ABI flags for lang/python3x ports
+PYTHON_ABIVER=		m
+.endif
 .endif
 
 .if !defined(PYTHONBASE)

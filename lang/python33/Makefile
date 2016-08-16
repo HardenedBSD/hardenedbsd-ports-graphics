@@ -2,7 +2,7 @@
 
 PORTNAME=	python33
 PORTVERSION=	${PYTHON_PORTVERSION}
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	lang python ipv6
 MASTER_SITES=	PYTHON/ftp/python/${PORTVERSION}
 DISTNAME=	Python-${PORTVERSION}
@@ -16,14 +16,12 @@ LICENSE=	PSFL
 DEPRECATED=	No longer receives bug fixes, only security updates. Please update to Python 3.5
 EXPIRATION_DATE=	2017-09-01
 
-USES=		cpe ncurses pkgconfig readline tar:xz
-USE_OPENSSL=	yes
+USES=		cpe ncurses pkgconfig readline ssl tar:xz
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
 
 CPE_VENDOR=	python
 CPE_PRODUCT=	${CPE_VENDOR}
-CPE_VERSION=	${PORTVERSION}
 
 CONFIGURE_ARGS+=	--enable-shared
 CONFIGURE_ENV+=		OPT=""							# Null out OPT to respect user CFLAGS and remove optimizations
@@ -115,7 +113,7 @@ post-patch:
 
 post-install:
 .if ! ${PORT_OPTIONS:MDEBUG}
-	${RM} -f ${STAGEDIR}${PREFIX}/lib/libpython3.so						# Upstream Issue: http://bugs.python.org/issue17975
+	${RM} ${STAGEDIR}${PREFIX}/lib/libpython3.so						# Upstream Issue: http://bugs.python.org/issue17975
 .endif
 	for i in ${STAGEDIR}${PREFIX}/lib/python3.3/lib-dynload/*.so; do \
 		${STRIP_CMD} $$i; done								# Strip shared extensions

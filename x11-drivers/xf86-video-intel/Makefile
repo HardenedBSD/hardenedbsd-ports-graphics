@@ -12,7 +12,7 @@ COMMENT=	Driver for Intel integrated graphics chipsets
 
 LIB_DEPENDS=	libxcb-util.so:x11/xcb-util \
 		libpciaccess.so:devel/libpciaccess \
-		libdrm.so:devel/libdrm
+		libdrm.so:graphics/libdrm
 
 ONLY_FOR_ARCHS=	amd64 i386
 USE_GL=		gl

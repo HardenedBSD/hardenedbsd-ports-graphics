@@ -3,11 +3,9 @@
 PORTNAME=	xen
 PKGNAMESUFFIX=	-tools
 PORTVERSION=	4.7.0
-PORTREVISION=   0
-RCVERSION=	4
-DISTNAME=	${PORTNAME}-${DISTVERSION}-rc${RCVERSION}
+PORTREVISION=   4
 CATEGORIES=	sysutils emulators
-MASTER_SITES=	http://bits.xensource.com/oss-xen/release/${DISTVERSION}-rc${RCVERSION}/
+MASTER_SITES=	http://bits.xensource.com/oss-xen/release/${PORTVERSION}/
 
 MAINTAINER=	royger@FreeBSD.org
 COMMENT=	Xen management tool, based on LibXenlight

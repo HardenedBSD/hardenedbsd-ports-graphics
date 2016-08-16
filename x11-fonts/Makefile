@@ -88,7 +88,6 @@
     SUBDIR += fontconfig-reference
     SUBDIR += fontmatrix
     SUBDIR += fonts-indic
-    SUBDIR += fonts-te
     SUBDIR += fontsproto
     SUBDIR += fonttosfnt
     SUBDIR += freefont-ttf
@@ -102,6 +101,7 @@
     SUBDIR += gnu-unifont
     SUBDIR += gnu-unifont-ttf
     SUBDIR += gohufont
+    SUBDIR += hack-font
     SUBDIR += hanazono-fonts-ttf
     SUBDIR += hasklig
     SUBDIR += inconsolata-lgc-ttf
@@ -137,6 +137,7 @@
     SUBDIR += mkitalic
     SUBDIR += mondulkiri
     SUBDIR += montecarlo_fonts
+    SUBDIR += montserrat
     SUBDIR += moveable-type-fonts
     SUBDIR += nexfontsel
     SUBDIR += noto

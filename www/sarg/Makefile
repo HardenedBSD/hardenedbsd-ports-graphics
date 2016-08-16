@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	sarg
-PORTVERSION=	2.3.9
+PORTVERSION=	2.3.10
+PORTREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTNAME}-${PORTVERSION}
 
@@ -18,7 +19,7 @@ OPTIONS_SUB=	yes
 
 PHP_DESC=	Install PHP for reporting generating
 
-USES=		gmake
+USES=		autoreconf gmake
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--sysconfdir="${ETCDIR}" \
 		--enable-fontdir="${ETCDIR}/fonts" \

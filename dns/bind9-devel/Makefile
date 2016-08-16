@@ -2,8 +2,8 @@
 # pkg-help formatted with fmt 59 63
 
 PORTNAME=	bind
-PORTVERSION=	${ISCVERSION:S/-P/P/:S/b/.b/}
-PORTREVISION=	1
+PORTVERSION=	${ISCVERSION:S/-P/P/:S/b/.b/:S/a/.a/}
+PORTREVISION=	0
 CATEGORIES=	dns net ipv6
 MASTER_SITES=	LOCAL/mat/bind
 #MASTER_SITES=	https://source.isc.org/cgi-bin/gitweb.cgi?p=bind9.git;a=snapshot;h=${HASH};sf=tgz;/
@@ -13,11 +13,11 @@ DISTNAME=	${PORTNAME}9-${HASH}
 MAINTAINER=	mat@FreeBSD.org
 COMMENT=	BIND DNS suite with updated DNSSEC and DNS64
 
-LICENSE=	ISCL
+LICENSE=	MPL
 
 # ISC releases things like 9.8.0-P1, which our versioning doesn't like
-ISCVERSION=	9.11.0.a20160604
-HASH=		e211ffb
+ISCVERSION=	9.12.0a.2016.08.08
+HASH=		3146be6
 
 MAKE_JOBS_UNSAFE=	yes
 
@@ -41,7 +41,7 @@ CONFIGURE_ARGS+=	--localstatedir=/var --disable-linux-caps \
 		--sysconfdir=${ETCDIR}
 ETCDIR=		${PREFIX}/etc/namedb
 
-CONFLICTS+=	bind9*-9.[456789].* bind9*-sdb-9.[456789].*
+CONFLICTS+=	bind9*-9.[456789].* bind910-* bind911-*  bind9*-sdb-9.[456789].*
 
 SUB_FILES=	pkg-message
 
@@ -54,7 +54,7 @@ OPTIONS_RADIO_GOSTDEF=	GOST GOST_ASN1
 
 OPTIONS_DEFAULT+=	RRL
 OPTIONS_DEFINE+=	LINKS RPZ_NSIP RPZ_NSDNAME RRL DOCS NEWSTATS GEOIP \
-			MINCACHE PORTREVISION FETCHLIMIT QUERYTRACE
+			MINCACHE PORTREVISION FETCHLIMIT QUERYTRACE LMDB
 OPTIONS_GROUP=		DLZ
 OPTIONS_GROUP_DLZ=	DLZ_POSTGRESQL DLZ_MYSQL DLZ_BDB \
 			DLZ_LDAP DLZ_FILESYSTEM DLZ_STUB
@@ -80,6 +80,7 @@ MINCACHE_DESC=		Use the mincachettl patch
 PORTREVISION_DESC=	Show PORTREVISION in the version string
 FETCHLIMIT_DESC=	Enable the query quotas for resolvers
 QUERYTRACE_DESC=	Enable the very verbose query tracelogging
+LMDB_DESC=		Use LMDB for zone management
 
 LINKS_DESC=		Create conf file symlinks in ${PREFIX}
 NEWSTATS_DESC=		Enable alternate xml statistics channel format
@@ -102,8 +103,11 @@ FETCHLIMIT_CONFIGURE_ENABLE=	fetchlimit
 QUERYTRACE_CONFIGURE_ENABLE=	querytrace
 
 SSL_CONFIGURE_ON=	--with-openssl=${OPENSSLBASE}
-SSL_USE=		openssl=yes
+SSL_USES=		ssl
 SSL_CONFIGURE_OFF=	--disable-openssl-version-check --without-openssl
+
+LMDB_CONFIGURE_WITH=	lmdb
+LMDB_LIB_DEPENDS=	liblmdb.so:databases/lmdb
 
 NEWSTATS_CONFIGURE_ENABLE=	newstats
 
@@ -207,9 +211,9 @@ PORTDOCS=	*
 
 .include <bsd.port.pre.mk>
 
-.if ( ${PORT_OPTIONS:MGOST} || ${PORT_OPTIONS:MGOST_ASN1} ) && defined(WITH_OPENSSL_BASE)
+.if ( ${PORT_OPTIONS:MGOST} || ${PORT_OPTIONS:MGOST_ASN1} ) && ${SSL_DEFAULT} == base
 BROKEN=	OpenSSL from the base system does not support GOST, add \
-	WITH_OPENSSL_PORT=yes to your /etc/make.conf and rebuild everything \
+	DEFAULT_VERSIONS+=ssl=openssl to your /etc/make.conf and rebuild everything \
 	that needs SSL.
 .endif
 

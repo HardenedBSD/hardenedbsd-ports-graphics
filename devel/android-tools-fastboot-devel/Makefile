@@ -1,14 +1,14 @@
 # $FreeBSD$
 
-# Hint: git describe --abbrev=12 --match android-n-preview-3
-DISTVERSION=	n-preview-3-101
-DISTVERSIONSUFFIX=	-g35d84096e9a5
+# Hint: git describe --abbrev=12 --match android-n-preview-5
+DISTVERSION=	n-preview-5-126
+DISTVERSIONSUFFIX=	-g2f21b7cecda2
 PORTREVISION=	0
 PKGNAMESUFFIX=	-devel
 
 GH_MYTAG=	${DISTVERSIONPREFIX}${DISTVERSION:C/-[0-9]*$//}
-GH_TAGNAME=	${GH_MYTAG}-45-g86bebf8:extras \
-		${GH_MYTAG}:libselinux
+GH_TAGNAME=	${GH_MYTAG}-64-g8cd939bd7af7:extras \
+		${GH_MYTAG}-1-g1fdb726:libselinux
 
 CONFLICTS_INSTALL=	${PORTNAME}-[0-9]*
 

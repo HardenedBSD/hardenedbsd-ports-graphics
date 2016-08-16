@@ -108,10 +108,9 @@ PLIST_SUB+=	LDAP="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MLDAP_SSL} && ${PORT_OPTIONS:MLDAP}
-USE_OPENSSL=	yes
+USES+=		ssl
 CONFIGURE_ARGS+=--with-ldapcrypto
 LIBS+=		-lssl
-.include "${PORTSDIR}/Mk/bsd.openssl.mk"
 .endif
 
 .if ${PORT_OPTIONS:MIPV6}
@@ -168,8 +167,6 @@ do-install:
 	${INSTALL_MAN} ${LDAP_README} ${STAGEDIR}${DOCSDIR}
 .endif
 .endif
-
-post-install:
 .if ${SUBSYS} == client
 	${INSTALL_SCRIPT} ${WRKSRC}/client/scripts/freebsd ${STAGEDIR}${PREFIX}/sbin/dhclient-script
 .elif ${SUBSYS} == server

@@ -3,7 +3,7 @@
 
 PORTNAME=	php5-snappy
 PORTVERSION=	0.0.2
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	archivers
 MASTER_SITES=	GOOGLE_CODE
 PROJECTHOST=	php-snappy
@@ -17,8 +17,7 @@ LICENSE=	BSD2CLAUSE
 LIB_DEPENDS+=	libsnappy.so:archivers/snappy
 CONFIGURE_ARGS+=	--with-snappy-includedir=${LOCALBASE}/include
 
-USE_PHP=	yes
-USE_PHPEXT=	yes
+USES=		php:ext
 PHP_MODNAME=	snappy
 WRKSRC=		${WRKDIR}/${PROJECTHOST}
 OPTIONS_DEFINE=	TEST

@@ -68,6 +68,7 @@
     SUBDIR += cf
     SUBDIR += chrony
     SUBDIR += citrix_ica
+    SUBDIR += cjdns
     SUBDIR += clamz
     SUBDIR += cloud-init
     SUBDIR += clusterit
@@ -169,6 +170,8 @@
     SUBDIR += go-amqp
     SUBDIR += go-cs
     SUBDIR += go-geoip
+    SUBDIR += go-httppath
+    SUBDIR += go-httptreemux
     SUBDIR += go.net
     SUBDIR += gofish
     SUBDIR += gogoc
@@ -246,6 +249,7 @@
     SUBDIR += ifstat
     SUBDIR += ifstated
     SUBDIR += igmpproxy
+    SUBDIR += iipsrv
     SUBDIR += ilbc
     SUBDIR += imapproxy
     SUBDIR += intel-ixl-kmod
@@ -294,7 +298,6 @@
     SUBDIR += l2tpd
     SUBDIR += l4ip
     SUBDIR += ladvd
-    SUBDIR += lam
     SUBDIR += lambdamoo
     SUBDIR += latd
     SUBDIR += ldap-stats
@@ -360,6 +363,7 @@
     SUBDIR += libunp
     SUBDIR += libutp
     SUBDIR += libvncserver
+    SUBDIR += libwebsockets
     SUBDIR += libzapojit
     SUBDIR += libzmq2
     SUBDIR += libzmq3
@@ -398,6 +402,7 @@
     SUBDIR += miredo
     SUBDIR += miruo
     SUBDIR += mlvpn
+    SUBDIR += mobile-broadband-provider-info
     SUBDIR += mono-zeroconf
     SUBDIR += mopd
     SUBDIR += morebalance
@@ -454,7 +459,6 @@
     SUBDIR += nss-pam-ldapd-sasl
     SUBDIR += nss_ldap
     SUBDIR += nsscache
-    SUBDIR += nstxd
     SUBDIR += ntimed
     SUBDIR += ntlmaps
     SUBDIR += ntop
@@ -943,7 +947,9 @@
     SUBDIR += py-amqplib
     SUBDIR += py-avahi
     SUBDIR += py-beanstalkc
+    SUBDIR += py-cjdns
     SUBDIR += py-cloudfiles
+    SUBDIR += py-coherence
     SUBDIR += py-dpkt
     SUBDIR += py-dugong
     SUBDIR += py-ec2-cli-tools
@@ -963,6 +969,7 @@
     SUBDIR += py-libcloud
     SUBDIR += py-libdnet
     SUBDIR += py-libnet
+    SUBDIR += py-magic-wormhole
     SUBDIR += py-matrix-synapse
     SUBDIR += py-maxminddb
     SUBDIR += py-miniupnpc
@@ -989,16 +996,19 @@
     SUBDIR += py-pynsq
     SUBDIR += py-pypcap
     SUBDIR += py-pysendfile
+    SUBDIR += py-pyshark
     SUBDIR += py-pysmb
     SUBDIR += py-pysocks
     SUBDIR += py-pystun
     SUBDIR += py-python-bitcoinrpc
+    SUBDIR += py-python-ntlm
     SUBDIR += py-pyvmomi
     SUBDIR += py-pyzmq
     SUBDIR += py-qt4-network
     SUBDIR += py-qt5-network
     SUBDIR += py-radix
     SUBDIR += py-raet
+    SUBDIR += py-rainbowstream
     SUBDIR += py-ripe.atlas.cousteau
     SUBDIR += py-ripe.atlas.sagan
     SUBDIR += py-ripe.atlas.tools
@@ -1018,7 +1028,9 @@
     SUBDIR += py-twitter-tools
     SUBDIR += py-txamqp
     SUBDIR += py-txrestapi
+    SUBDIR += py-upnp-inspector
     SUBDIR += py-uritemplate
+    SUBDIR += py-uritemplate.py
     SUBDIR += py-urllib3
     SUBDIR += py-wolframalpha
     SUBDIR += py-xmlrpc
@@ -1033,7 +1045,6 @@
     SUBDIR += qjsonrpc
     SUBDIR += qoauth
     SUBDIR += qt4-network
-    SUBDIR += qt5-enginio
     SUBDIR += qt5-network
     SUBDIR += qtweetlib
     SUBDIR += quagga
@@ -1090,6 +1101,8 @@
     SUBDIR += rubygem-amqp-utils
     SUBDIR += rubygem-aws-s3
     SUBDIR += rubygem-aws-ses
+    SUBDIR += rubygem-azure
+    SUBDIR += rubygem-azure-core
     SUBDIR += rubygem-bunny
     SUBDIR += rubygem-connection_pool
     SUBDIR += rubygem-dogapi
@@ -1103,6 +1116,7 @@
     SUBDIR += rubygem-fog-aliyun
     SUBDIR += rubygem-fog-atmos
     SUBDIR += rubygem-fog-aws
+    SUBDIR += rubygem-fog-azure
     SUBDIR += rubygem-fog-brightbox
     SUBDIR += rubygem-fog-cloudatcost
     SUBDIR += rubygem-fog-dynect
@@ -1177,6 +1191,7 @@
     SUBDIR += rubygem-twitter
     SUBDIR += rubygem-twitter-stream
     SUBDIR += rubygem-twitter4r
+    SUBDIR += rubygem-u2f
     SUBDIR += rubygem-uri-redis
     SUBDIR += rubygem-whois
     SUBDIR += rude
@@ -1238,7 +1253,6 @@
     SUBDIR += spread
     SUBDIR += spread-j
     SUBDIR += spread4
-    SUBDIR += sprinkle
     SUBDIR += sqtop
     SUBDIR += srelay
     SUBDIR += ss5
@@ -1295,6 +1309,7 @@
     SUBDIR += thcrut
     SUBDIR += throttled
     SUBDIR += tigervnc
+    SUBDIR += tigervnc-devel
     SUBDIR += tightvnc
     SUBDIR += tintin++
     SUBDIR += tiny-network-utilities
@@ -1310,7 +1325,6 @@
     SUBDIR += trafshow3
     SUBDIR += tramp
     SUBDIR += trickle
-    SUBDIR += tridiavnc
     SUBDIR += tsclient
     SUBDIR += tshark
     SUBDIR += tshark-lite
@@ -1383,7 +1397,6 @@
     SUBDIR += xipmsg
     SUBDIR += xisp
     SUBDIR += xmlrpc-c
-    SUBDIR += xmlrpc-c-devel
     SUBDIR += xmlrpc-epi
     SUBDIR += xorp
     SUBDIR += xprobe

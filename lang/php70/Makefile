@@ -2,20 +2,20 @@
 # $FreeBSD$
 
 PORTNAME=	php70
-PORTVERSION=	7.0.7
-PORTREVISION?=	0
+PORTVERSION=	7.0.9
+PORTREVISION?=	2
 CATEGORIES?=	lang devel www
 MASTER_SITES=	PHP/distributions
 DISTNAME=	php-${PORTVERSION}
 
-MAINTAINER=	miwi@FreeBSD.org
+MAINTAINER=	tz@FreeBSD.org
 COMMENT=	PHP Scripting Language
 
 LICENSE=	PHP301
 
 BROKEN_powerpc64=	Does not build
 
-USES=		tar:bzip2 cpe
+USES+=		tar:xz cpe
 CPE_PRODUCT=	php
 NO_OPTIONS_SORT=yes
 .if !defined(PKGNAMESUFFIX)
@@ -83,8 +83,8 @@ CONFIGURE_ARGS+=--enable-fpm \
 .endif
 
 .if defined(PKGNAMEPREFIX)
-USE_PHP=	yes
-PHP_DEFAULT=	7.0
+USES+=	php
+PHP_VER=	70
 IGNORE_WITH_PHP=	55 56
 USE_APACHE=	22+
 .include "${PORTSDIR}/Mk/bsd.apache.mk"
@@ -169,12 +169,12 @@ post-patch:
 		${WRKSRC}/sapi/fpm/php-fpm.conf.in
 .endif
 
+# Work around issues with newer (>=2.64) autoconf
 pre-configure:
 	@${REINPLACE_CMD} -E 's:^((m4_)?divert)[(]([0-9]*)[)]:\1(600\3):' \
 		${WRKSRC}/configure.in `${FIND} ${WRKSRC} -name '*.m4'`
 	@${RM} ${WRKSRC}/configure
 	@${CAT} ${WRKSRC}/acinclude.m4 ${WRKSRC}/build/libtool.m4 > ${WRKSRC}/aclocal.m4
-
 
 .if !defined(PKGNAMEPREFIX)
 post-build:
@@ -182,12 +182,14 @@ post-build:
 	@${ECHO_CMD} "PHP_VERSION=${PORTVERSION}" >> ${WRKDIR}/php.conf
 	@${ECHO_CMD} "PHP_SAPI=${PHP_SAPI}" >> ${WRKDIR}/php.conf
 	@${ECHO_CMD} "PHP_EXT_INC=pcre spl" >> ${WRKDIR}/php.conf
+	@${ECHO_CMD} -n "PHP_EXT_DIR=" >> ${WRKDIR}/php.conf
+	@${SH} ${WRKSRC}/scripts/php-config --extension-dir | ${SED} -ne 's,^${PREFIX}/lib/php/,,p' >> ${WRKDIR}/php.conf
 
 test: build
 	@(cd ${WRKSRC} && ${MAKE} test)
 
 post-install:
-	@${INSTALL_DATA} ${WRKSRC}/php.ini-development ${WRKSRC}/php.ini-production \
+	${INSTALL_DATA} ${WRKSRC}/php.ini-development ${WRKSRC}/php.ini-production \
 		${WRKDIR}/php.conf ${STAGEDIR}/${PREFIX}/etc
 .else
 do-install:

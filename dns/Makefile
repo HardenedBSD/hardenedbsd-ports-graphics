@@ -11,6 +11,7 @@
     SUBDIR += bind-tools
     SUBDIR += bind9-devel
     SUBDIR += bind910
+    SUBDIR += bind911
     SUBDIR += bind99
     SUBDIR += bindgraph
     SUBDIR += bundy
@@ -81,7 +82,6 @@
     SUBDIR += knot2
     SUBDIR += ldapdns
     SUBDIR += ldns
-    SUBDIR += ldnsm
     SUBDIR += libasr
     SUBDIR += libasr-devel
     SUBDIR += libbind
@@ -105,6 +105,7 @@
     SUBDIR += opendd
     SUBDIR += opendnssec
     SUBDIR += opendnssec13
+    SUBDIR += opendnssec2
     SUBDIR += openresolv
     SUBDIR += p5-AnyEvent-CacheDNS
     SUBDIR += p5-AnyEvent-DNS-EtcHosts

@@ -11,7 +11,7 @@
 #					  Valid values for "fedora": all version numbers
 #					  e.g. 10 for fedora 10
 #					  Valid values for "centos": all version numbers
-#					  e.g. 6.7 for centos 6.7
+#					  e.g. 6.8 for centos 6.8
 #					  This is used to set MASTER_SITE_{,SRC_}SUBDIR
 #					  if it isn't already set.
 # MASTER_SITE_SRC_SUBDIR
@@ -63,7 +63,7 @@ LINUX_DIST=	fedora
 LINUX_DIST_VER=	10
 .else			# default to CentOS
 LINUX_DIST=	centos
-LINUX_DIST_VER=	6.7
+LINUX_DIST_VER=	6.8
 .endif
 
 .if defined(LINUX_DIST)
@@ -156,7 +156,7 @@ EXTRACT_BEFORE_ARGS?=	<
 EXTRACT_AFTER_ARGS?=	| ${TAR} xf - --no-same-permissions --no-same-owner
 .endif
 
-DISTINFO_FILE?=				${MASTERDIR}/distinfo.${LINUX_RPM_ARCH}
+DISTINFO_FILE?=				${MASTERDIR}/distinfo.${LINUX_REPO_ARCH}
 
 BRANDELF_DIRS?=
 BRANDELF_FILES?=
@@ -176,7 +176,7 @@ linux-rpm-clean-portdocs:
 .  endif
 
 .  if ${USE_LINUX} != "f10"
-PLIST?=		${MASTERDIR}/pkg-plist.${LINUX_RPM_ARCH}
+PLIST?=		${MASTERDIR}/pkg-plist.${LINUX_REPO_ARCH}
 .  endif
 
 .  if defined(AUTOMATIC_PLIST)

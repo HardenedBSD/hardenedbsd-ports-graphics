@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME?=	xorg-server
-PORTVERSION=	1.18.3
+PORTVERSION=	1.18.4
 PORTREVISION?=	0
 PORTEPOCH?=	1
 CATEGORIES=	x11-servers
@@ -38,7 +38,7 @@ OPTIONS_EXCLUDE_sparc64=	HAL
 
 .include <bsd.port.options.mk>
 
-USES=		gmake libtool perl5 tar:bzip2
+USES=		gmake libtool perl5 ssl tar:bzip2
 USE_PERL5=	build
 USE_GL=		gbm egl gl
 USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
@@ -49,7 +49,6 @@ USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
 		videoproto compositeproto trapproto presentproto recordproto \
 		xineramaproto xinerama evieproto xfont fontenc xkbui pixman \
 		pciaccess xshmfence
-USE_OPENSSL=	yes
 CONFIGURE_ARGS?=--disable-dmx --disable-xvfb --disable-xnest \
 		--without-xmlto --disable-docs --disable-devel-docs \
 		--localstatedir=/var --without-dtrace --disable-xephyr \
@@ -74,7 +73,7 @@ CONFIGURE_ARGS+=	 --disable-dri3
 
 .include <bsd.port.pre.mk>
 
-.if defined(WITH_OPENSSL_BASE)
+.if ${SSL_DEFAULT} == base
 # The reason why I use this is cause openssl from base doesn't install a .pc file
 # and configure will fail trying to find it. Setting both of those variables to
 # a *non-empty* value by-passes the pkg-config check.

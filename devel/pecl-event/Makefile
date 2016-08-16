@@ -3,6 +3,7 @@
 
 PORTNAME=	event
 PORTVERSION=	2.0.4
+PORTREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://pecl.php.net/get/
 PKGNAMEPREFIX=	pecl-
@@ -18,11 +19,9 @@ LIB_DEPENDS=	libevent.so:devel/libevent2
 
 BROKEN_powerpc64=	does not build
 
-USES=		tar:tgz
+USES=		php:ext tar:tgz
 USE_OPENSSL=	yes
 CONFIGURE_ARGS=	--with-openssl-dir=${OPENSSLBASE}
-USE_PHP=	sockets
-USE_PHP_BUILD=	yes
-USE_PHPEXT=	yes
+USE_PHP=	sockets:build
 
 .include <bsd.port.mk>

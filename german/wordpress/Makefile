@@ -2,12 +2,12 @@
 # $FreeBSD$
 
 PORTNAME=	wordpress
-PORTVERSION=	4.5.2
+PORTVERSION=	4.5.3
 DISTVERSIONSUFFIX=	-de_DE
 CATEGORIES=	german www
 MASTER_SITES=	http://de.wordpress.org/
 
-MAINTAINER=	miwi@FreeBSD.org
+MAINTAINER=	joneum@bsdproject.de
 COMMENT=	State-of-the-art semantic personal publishing platform
 
 LICENSE=	GPLv2 GPLv3

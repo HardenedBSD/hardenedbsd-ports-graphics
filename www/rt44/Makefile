@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	rt
-DISTVERSION=	4.4.0
+DISTVERSION=	4.4.1
 CATEGORIES=	www
 MASTER_SITES=	http://download.bestpractical.com/pub/rt/release/
 PKGNAMESUFFIX=	44
@@ -10,6 +10,7 @@ MAINTAINER=	mikael.urankar@gmail.com
 COMMENT=	Industrial-grade ticketing system written in Perl
 
 LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/COPYING
 
 CONFLICTS_INSTALL=	rt40-4.0* rt42-4.2* brlcad-[0-9]*
 
