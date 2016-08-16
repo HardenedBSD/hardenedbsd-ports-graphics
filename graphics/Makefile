@@ -776,6 +776,7 @@
     SUBDIR += phplot
     SUBDIR += picpuz
     SUBDIR += piddle
+    SUBDIR += piglit
     SUBDIR += pikopixel
     SUBDIR += pinpoint
     SUBDIR += pixelize

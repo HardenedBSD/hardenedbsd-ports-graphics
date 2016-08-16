@@ -37,6 +37,7 @@ include/libdrm/vc4_drm.h
 %%VC4_DRIVERS%%include/libdrm/vc4_packet.h
 %%VC4_DRIVERS%%include/libdrm/vc4_qpu_defines.h
 include/libdrm/via_drm.h
+include/libdrm/virtgpu_drm.h
 %%KMS%%include/libkms/libkms.h
 include/xf86drm.h
 include/xf86drmMode.h
