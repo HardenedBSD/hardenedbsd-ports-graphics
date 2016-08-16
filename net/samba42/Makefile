@@ -19,7 +19,7 @@ EXTRA_PATCHES=		${PATCHDIR}/extra-patch-progress:-p1
 
 SAMBA4_BASENAME=	samba
 SAMBA4_PORTNAME=	${SAMBA4_BASENAME}4
-SAMBA4_VERSION=		4.2.12
+SAMBA4_VERSION=		4.2.14
 SAMBA4_DISTNAME=	${SAMBA4_BASENAME}-${SAMBA4_VERSION:S|.p|pre|:S|.r|rc|:S|.t|tp|:S|.a|alpha|}
 
 WRKSRC?=		${WRKDIR}/${DISTNAME}
@@ -477,7 +477,7 @@ pre-configure:
 
 # XXX: Gross hack to allow build newer Samba while old one is installed.
 # This implies that LINKFLAGS_PYEMBED contains flags which are already
-# used in other parts of LINKFLAGS, namely -L$(LOCALBASE)/lib and -pthread
+# used in other parts of LINKFLAGS, namely -L${LOCALBASE}/lib and -pthread
 post-configure:
 	-${REINPLACE_CMD} -e 's|LINKFLAGS_PYEMBED.*|LINKFLAGS_PYEMBED = []|' \
 		${CONFIGURE_WRKSRC}/bin/c4che/default.cache.py

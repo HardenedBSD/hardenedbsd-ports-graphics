@@ -294,6 +294,7 @@
     SUBDIR += freera
     SUBDIR += freesweep
     SUBDIR += freesynd
+    SUBDIR += freetennis
     SUBDIR += fretsonfire
     SUBDIR += fretsonfire-data
     SUBDIR += frikqcc
@@ -671,6 +672,7 @@
     SUBDIR += openmortal
     SUBDIR += openmsx
     SUBDIR += openmw
+    SUBDIR += openomf
     SUBDIR += openpref
     SUBDIR += openra
     SUBDIR += opensfx
@@ -1157,6 +1159,7 @@
     SUBDIR += zangband
     SUBDIR += zatacka
     SUBDIR += zaz
+    SUBDIR += zdoom
     SUBDIR += zephulor
     SUBDIR += zhlt
     SUBDIR += znibbles

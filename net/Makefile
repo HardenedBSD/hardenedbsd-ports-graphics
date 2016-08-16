@@ -68,6 +68,7 @@
     SUBDIR += cf
     SUBDIR += chrony
     SUBDIR += citrix_ica
+    SUBDIR += cjdns
     SUBDIR += clamz
     SUBDIR += cloud-init
     SUBDIR += clusterit
@@ -169,6 +170,8 @@
     SUBDIR += go-amqp
     SUBDIR += go-cs
     SUBDIR += go-geoip
+    SUBDIR += go-httppath
+    SUBDIR += go-httptreemux
     SUBDIR += go.net
     SUBDIR += gofish
     SUBDIR += gogoc
@@ -295,7 +298,6 @@
     SUBDIR += l2tpd
     SUBDIR += l4ip
     SUBDIR += ladvd
-    SUBDIR += lam
     SUBDIR += lambdamoo
     SUBDIR += latd
     SUBDIR += ldap-stats
@@ -361,6 +363,7 @@
     SUBDIR += libunp
     SUBDIR += libutp
     SUBDIR += libvncserver
+    SUBDIR += libwebsockets
     SUBDIR += libzapojit
     SUBDIR += libzmq2
     SUBDIR += libzmq3
@@ -944,7 +947,9 @@
     SUBDIR += py-amqplib
     SUBDIR += py-avahi
     SUBDIR += py-beanstalkc
+    SUBDIR += py-cjdns
     SUBDIR += py-cloudfiles
+    SUBDIR += py-coherence
     SUBDIR += py-dpkt
     SUBDIR += py-dugong
     SUBDIR += py-ec2-cli-tools
@@ -996,12 +1001,14 @@
     SUBDIR += py-pysocks
     SUBDIR += py-pystun
     SUBDIR += py-python-bitcoinrpc
+    SUBDIR += py-python-ntlm
     SUBDIR += py-pyvmomi
     SUBDIR += py-pyzmq
     SUBDIR += py-qt4-network
     SUBDIR += py-qt5-network
     SUBDIR += py-radix
     SUBDIR += py-raet
+    SUBDIR += py-rainbowstream
     SUBDIR += py-ripe.atlas.cousteau
     SUBDIR += py-ripe.atlas.sagan
     SUBDIR += py-ripe.atlas.tools
@@ -1021,6 +1028,7 @@
     SUBDIR += py-twitter-tools
     SUBDIR += py-txamqp
     SUBDIR += py-txrestapi
+    SUBDIR += py-upnp-inspector
     SUBDIR += py-uritemplate
     SUBDIR += py-uritemplate.py
     SUBDIR += py-urllib3
@@ -1037,7 +1045,6 @@
     SUBDIR += qjsonrpc
     SUBDIR += qoauth
     SUBDIR += qt4-network
-    SUBDIR += qt5-enginio
     SUBDIR += qt5-network
     SUBDIR += qtweetlib
     SUBDIR += quagga
@@ -1094,6 +1101,8 @@
     SUBDIR += rubygem-amqp-utils
     SUBDIR += rubygem-aws-s3
     SUBDIR += rubygem-aws-ses
+    SUBDIR += rubygem-azure
+    SUBDIR += rubygem-azure-core
     SUBDIR += rubygem-bunny
     SUBDIR += rubygem-connection_pool
     SUBDIR += rubygem-dogapi
@@ -1107,6 +1116,7 @@
     SUBDIR += rubygem-fog-aliyun
     SUBDIR += rubygem-fog-atmos
     SUBDIR += rubygem-fog-aws
+    SUBDIR += rubygem-fog-azure
     SUBDIR += rubygem-fog-brightbox
     SUBDIR += rubygem-fog-cloudatcost
     SUBDIR += rubygem-fog-dynect
@@ -1181,6 +1191,7 @@
     SUBDIR += rubygem-twitter
     SUBDIR += rubygem-twitter-stream
     SUBDIR += rubygem-twitter4r
+    SUBDIR += rubygem-u2f
     SUBDIR += rubygem-uri-redis
     SUBDIR += rubygem-whois
     SUBDIR += rude
@@ -1314,7 +1325,6 @@
     SUBDIR += trafshow3
     SUBDIR += tramp
     SUBDIR += trickle
-    SUBDIR += tridiavnc
     SUBDIR += tsclient
     SUBDIR += tshark
     SUBDIR += tshark-lite

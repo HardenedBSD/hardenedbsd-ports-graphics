@@ -180,6 +180,7 @@
     SUBDIR += libxkbui
     SUBDIR += libxklavier
     SUBDIR += libxshmfence
+    SUBDIR += linux-c6-pixman
     SUBDIR += linux-c6-xorg-libs
     SUBDIR += linux-f10-xorg-libs
     SUBDIR += listres
@@ -235,6 +236,7 @@
     SUBDIR += props
     SUBDIR += py-qt4-opengl
     SUBDIR += py-qt5-opengl
+    SUBDIR += py-xdot
     SUBDIR += qimageblitz
     SUBDIR += qt4-graphicssystems-opengl
     SUBDIR += qt4-inputmethods
@@ -265,6 +267,7 @@
     SUBDIR += setlayout
     SUBDIR += setxkbmap
     SUBDIR += simdock
+    SUBDIR += simplestroke
     SUBDIR += sisctrl
     SUBDIR += slim
     SUBDIR += slock
@@ -319,6 +322,7 @@
     SUBDIR += xautomation
     SUBDIR += xbacklight
     SUBDIR += xballoon
+    SUBDIR += xbanish
     SUBDIR += xbanner
     SUBDIR += xbelld
     SUBDIR += xbiff

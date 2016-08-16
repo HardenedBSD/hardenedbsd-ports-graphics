@@ -219,7 +219,6 @@
     SUBDIR += linux-f10-libv4l
     SUBDIR += linux-realplayer
     SUBDIR += linux-tsmuxer
-    SUBDIR += linux-xmovie
     SUBDIR += linux_dvbwrapper-kmod
     SUBDIR += lives
     SUBDIR += livestreamer
@@ -322,6 +321,7 @@
     SUBDIR += py-kaa-metadata
     SUBDIR += py-librtmp
     SUBDIR += py-mlt
+    SUBDIR += py-moviepy
     SUBDIR += py-openlp
     SUBDIR += py-periscope
     SUBDIR += py-qt4-multimedia

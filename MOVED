@@ -962,7 +962,6 @@ devel/radrails||2010-01-20|Has expired: has been broken for 3 months
 devel/rubygem-rtags||2010-01-20|Has expired: has been broken for 5 months
 games/hattrickorganizer||2010-01-20|Has expired: Has been broken for a while
 games/laughingman||2010-01-20|Has expired: has been broken for 3 months
-devel/aunit||2010-01-20|Has expired: has been broken for 3 months
 devel/gdb53||2010-01-20|Has expired: has been broken for 3 months
 lang/ccscript||2010-01-20|Has expired: has been broken for 4 months
 lang/gnat-glade||2010-01-20|Has expired: has been broken for 3 months
@@ -5325,7 +5324,6 @@ textproc/referrercop||2014-01-01|Has expired: distfile unfetchable
 www/notftp||2014-01-01|Has expired: distfile unfetchable
 www/mod_lisp2||2014-01-01|Has expired: distfile unfetchable
 irc/xchat-gnome||2014-01-02|Has expired: broken and no release since 2009
-net-mgmt/unifi|net-mgmt/unifi3|2014-01-02|Rename to unifi3; unifi2 is coming to ports tree as well
 sysutils/rubygem-rubyimpi|sysutils/rubygem-rubyipmi|2014-01-02|Renamed
 www/codeigniter17|www/codeigniter|2014-01-04|Unsupported upstream, consider using newer version
 net-im/xfce4-messenger-plugin||2014-01-04|Has expired: Deprecated and no update for 7 years
@@ -8596,9 +8594,6 @@ ftp/fget||2016-07-04|Has expired: Broken for more than 6 months
 net-mgmt/netmond||2016-07-04|Has expired: Broken for more than 6 months
 net-mgmt/ipfm||2016-07-04|Has expired: Broken for more than 6 months
 textproc/py-dbf|databases/py-dbf|2016-07-05|Duplicate port deleted
-games/freetennis||2016-07-05|Depends on expired graphics/ocaml-images
-graphics/ocaml-images||2016-07-05|Has expired: Depends on expiring devel/omake
-devel/omake||2016-07-05|Has expired: Broken for more than 6 months
 www/yahoo-ui||2016-07-05|Has expired: Broken for more than 6 months
 sysutils/moosefs-cgi|sysutils/moosefs2-cgi|2016-07-07|Moved to a numbered port name
 sysutils/moosefs-cgiserv|sysutils/moosefs2-cgiserv|2016-07-07|Moved to a numbered port name
@@ -8609,3 +8604,12 @@ sysutils/moosefs-master|sysutils/moosefs2-master|2016-07-07|Moved to a numbered 
 sysutils/moosefs-metalogger|sysutils/moosefs2-metalogger|2016-07-07|Moved to a numbered port name
 sysutils/moosefs-netdump|sysutils/moosefs2-netdump|2016-07-07|Moved to a numbered port name
 devel/gmake-lite|devel/gmake|2016-07-08|No longer needed
+devel/capstone|devel/capstone3|2016-07-10|Moved to a numbered port name to make place for capstone4
+net-mgmt/unifi3|net-mgmt/unifi4|2016-07-10|Has expired: Unifi 3.x is EoL. Please upgrade to net-mgmt/unifi4
+net/lam||2016-07-12|Has expired: Broken for more than 6 months
+java/wildfly82||2016-07-17|Has expired: Fully EOL when version 10.0 was released
+print/tex|print/texlive-base|2016-07-30|Superceeded by texlive
+net/tridiavnc|net/tigervnc|2016-08-01|No upstream 2005
+lang/pypy3-devel|lang/pypy3|2016-08-04|Renamed to lang/pypy3
+net/qt5-enginio||2016-08-06|Has expired: Deprecated by upstream from Qt 5.6 on, do not use for development
+multimedia/linux-xmovie||2016-08-08|Has expired: Not maintained upstream, contains security issues

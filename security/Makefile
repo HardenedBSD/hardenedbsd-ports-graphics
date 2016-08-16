@@ -189,6 +189,7 @@
     SUBDIR += hackbot
     SUBDIR += hamachi
     SUBDIR += hashcat
+    SUBDIR += hashcat-legacy
     SUBDIR += heimdal
     SUBDIR += hitch
     SUBDIR += hlfl
@@ -290,6 +291,7 @@
     SUBDIR += letsencrypt.sh
     SUBDIR += letskencrypt
     SUBDIR += libadacrypt
+    SUBDIR += libargon2
     SUBDIR += libassuan
     SUBDIR += libbeid
     SUBDIR += libbf
@@ -653,6 +655,7 @@
     SUBDIR += p5-Net-OpenID-Server
     SUBDIR += p5-Net-Radius-Server
     SUBDIR += p5-Net-SAML
+    SUBDIR += p5-Net-SSH-AuthorizedKeysFile
     SUBDIR += p5-Net-SSL-ExpireDate
     SUBDIR += p5-Net-SSLGlue
     SUBDIR += p5-Net-SSLeay
@@ -844,6 +847,7 @@
     SUBDIR += py-gnupg
     SUBDIR += py-gnutls
     SUBDIR += py-gpsoauth
+    SUBDIR += py-halberd
     SUBDIR += py-hkdf
     SUBDIR += py-htpasswd
     SUBDIR += py-itsdangerous
@@ -895,6 +899,7 @@
     SUBDIR += py-rekall_gui
     SUBDIR += py-requests-kerberos
     SUBDIR += py-rsa
+    SUBDIR += py-safe
     SUBDIR += py-scrypt
     SUBDIR += py-service_identity
     SUBDIR += py-signedjson
@@ -909,6 +914,7 @@
     SUBDIR += py-twistedConch
     SUBDIR += py-twofish
     SUBDIR += py-volatility
+    SUBDIR += py-vulndb
     SUBDIR += py-xmlsec
     SUBDIR += py-yara
     SUBDIR += py-yara-editor
@@ -982,6 +988,7 @@
     SUBDIR += rubygem-metasploit-model
     SUBDIR += rubygem-metasploit-payloads
     SUBDIR += rubygem-metasploit_data_models
+    SUBDIR += rubygem-metasploit_payloads-mettle
     SUBDIR += rubygem-net-scp
     SUBDIR += rubygem-net-sftp
     SUBDIR += rubygem-net-ssh
@@ -1001,6 +1008,15 @@
     SUBDIR += rubygem-rack-oauth2
     SUBDIR += rubygem-razorback-scriptNugget
     SUBDIR += rubygem-recog
+    SUBDIR += rubygem-rex-arch
+    SUBDIR += rubygem-rex-java
+    SUBDIR += rubygem-rex-ole
+    SUBDIR += rubygem-rex-powershell
+    SUBDIR += rubygem-rex-random_identifier
+    SUBDIR += rubygem-rex-registry
+    SUBDIR += rubygem-rex-struct2
+    SUBDIR += rubygem-rex-text
+    SUBDIR += rubygem-rex-zip
     SUBDIR += rubygem-roauth
     SUBDIR += rubygem-ruby-hmac
     SUBDIR += rubygem-ruby-rc4

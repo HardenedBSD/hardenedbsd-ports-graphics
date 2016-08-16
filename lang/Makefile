@@ -66,6 +66,7 @@
     SUBDIR += erlang-runtime16
     SUBDIR += erlang-runtime17
     SUBDIR += erlang-runtime18
+    SUBDIR += erlang-runtime19
     SUBDIR += erlang-wx
     SUBDIR += execline
     SUBDIR += expect
@@ -261,7 +262,7 @@
     SUBDIR += py-prolog
     SUBDIR += py-qt5-qml
     SUBDIR += pypy
-    SUBDIR += pypy3-devel
+    SUBDIR += pypy3
     SUBDIR += python
     SUBDIR += python-doc-html
     SUBDIR += python-doc-pdf-a4

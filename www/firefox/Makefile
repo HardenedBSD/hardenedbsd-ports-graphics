@@ -27,8 +27,7 @@ BUILD_DEPENDS=	nspr>=4.12:devel/nspr \
 		v4l_compat>0:multimedia/v4l_compat \
 		autoconf-2.13:devel/autoconf213 \
 		yasm:devel/yasm \
-		zip:archivers/zip \
-		unzip:archivers/unzip
+		zip:archivers/zip
 
 LIB_DEPENDS=	libv4l2.so:multimedia/libv4l
 
@@ -38,8 +37,6 @@ MOZ_PKGCONFIG_FILES=	# empty
 USE_MOZILLA=	# empty
 MOZILLA_NAME=	Firefox
 
-USE_QT5=	# empty
-QT_NONSTANDARD=	yes
 USE_GL=		gl
 USES=		tar:xz
 
@@ -59,6 +56,8 @@ OPTIONS_DEFAULT_FreeBSD_10_amd64=	RUST
 OPTIONS_DEFAULT_FreeBSD_10_i386=	RUST
 OPTIONS_DEFAULT_FreeBSD_11_amd64=	RUST
 OPTIONS_DEFAULT_FreeBSD_11_i386=	RUST
+OPTIONS_DEFAULT_FreeBSD_12_amd64=	RUST
+OPTIONS_DEFAULT_FreeBSD_12_i386=	RUST
 
 OPTIONS_SINGLE+=	TOOLKIT
 OPTIONS_SINGLE_TOOLKIT=	GTK2 GTK3

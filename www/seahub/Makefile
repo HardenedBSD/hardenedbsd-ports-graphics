@@ -1,9 +1,10 @@
 # $FreeBSD$
 
 PORTNAME=	seahub
-PORTVERSION=	5.1.8
+PORTVERSION=	5.1.10
 DISTVERSIONPREFIX=	v
 DISTVERSIONSUFFIX=	-pro
+PORTREVISION=	1
 CATEGORIES=	www
 
 MAINTAINER=	ultima1252@gmail.com
@@ -37,6 +38,7 @@ USES=		python:-2.7 shebangfix
 SHEBANG_FILES=	*.sh tests/*.sh *.template *.py tools/*.py seahub/*.py
 
 NO_BUILD=	yes
+NO_ARCH=	yes
 
 OPTIONS_DEFINE=		SEAFOBJ SEAFDAV NLS
 OPTIONS_DEFAULT=	SEAFOBJ SEAFDAV
@@ -59,6 +61,7 @@ SEAFILE_SERVER=	${HAIWENDIR}/seafile-server
 SEAHUBDIR=	${SEAFILE_SERVER}/seahub
 SEALIB=		${SEAFILE_SERVER}/seafile/lib
 SITEPACKAGEDIR=	${SEAHUBDIR}/thirdpart
+SEAFILE_VER=	`${CAT} ${.CURDIR}/../../net-mgmt/seafile/Makefile | ${GREP} -Eom1 '[0-9]+\.[0-9]+\.[0-9]+'`
 SEAHUB_DATA_DIR=	${HAIWENDIR}/seahub-data
 
 USERS=		seafile
@@ -84,7 +87,7 @@ do-patch:
 	echo "${WRKSRC}..."
 	@${MKDIR} ${WRKSRC}/runtime
 	${CP} ${FILESDIR}/runtime_seahub.conf ${WRKSRC}/runtime/seahub.conf
-	${REINPLACE_CMD} -e "s|SEAFILE_VERSION = '[0-9].[0-9].[0-9]'|SEAFILE_VERSION = '${PORTVERSION}'|" \
+	${REINPLACE_CMD} -Ee "s|SEAFILE_VERSION = '[0-9]+\.[0-9]+\.[0-9]+'|SEAFILE_VERSION = '${SEAFILE_VER}'|" \
 			 ${WRKSRC}/seahub/settings.py
 	${REINPLACE_CMD} -e 's|##FIX_WWWDIR##|${PREFIX}/${HAIWENDIR}|' ${WRKSRC}/*.template
 	${REINPLACE_CMD} -e 's|##FIX_SEALIB##|${PREFIX}/${SEALIB}|' ${WRKSRC}/*.template
