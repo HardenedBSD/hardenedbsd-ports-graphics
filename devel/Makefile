@@ -144,6 +144,7 @@
     SUBDIR += avro-cpp
     SUBDIR += awscli
     SUBDIR += b2
+    SUBDIR += babeltrace
     SUBDIR += bam
     SUBDIR += bbfreeze
     SUBDIR += bbfreeze-loader
@@ -737,6 +738,7 @@
     SUBDIR += go-protobuf
     SUBDIR += go-raw
     SUBDIR += go-runewidth
+    SUBDIR += go-shellwords
     SUBDIR += go-slices
     SUBDIR += go-sql-driver
     SUBDIR += go-termbox
@@ -765,6 +767,7 @@
     SUBDIR += gputils
     SUBDIR += gradle
     SUBDIR += grantlee
+    SUBDIR += grantlee5
     SUBDIR += gsettings-desktop-schemas
     SUBDIR += gsoap
     SUBDIR += gstreamer-plugins-gconf
@@ -1423,6 +1426,7 @@
     SUBDIR += linux-f10-ncurses-base
     SUBDIR += linux-f10-nspr
     SUBDIR += linux-f10-sdl12
+    SUBDIR += linux-kernel
     SUBDIR += linux_kdump
     SUBDIR += linux_libusb
     SUBDIR += lion
@@ -4225,6 +4229,7 @@
     SUBDIR += py-louie
     SUBDIR += py-lxml
     SUBDIR += py-magic
+    SUBDIR += py-mailcap-fix
     SUBDIR += py-manuel
     SUBDIR += py-matrix-angular-sdk
     SUBDIR += py-mccabe
@@ -5173,6 +5178,7 @@
     SUBDIR += rubygem-ruby-progressbar
     SUBDIR += rubygem-ruby-sdl-ffi
     SUBDIR += rubygem-ruby2ruby
+    SUBDIR += rubygem-ruby_dep
     SUBDIR += rubygem-ruby_parser
     SUBDIR += rubygem-rubygame
     SUBDIR += rubygem-rubygems-mirror
