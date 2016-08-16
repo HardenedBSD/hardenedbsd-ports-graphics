@@ -947,6 +947,7 @@
     SUBDIR += py-amqplib
     SUBDIR += py-avahi
     SUBDIR += py-beanstalkc
+    SUBDIR += py-cjdns
     SUBDIR += py-cloudfiles
     SUBDIR += py-coherence
     SUBDIR += py-dpkt
@@ -1007,6 +1008,7 @@
     SUBDIR += py-qt5-network
     SUBDIR += py-radix
     SUBDIR += py-raet
+    SUBDIR += py-rainbowstream
     SUBDIR += py-ripe.atlas.cousteau
     SUBDIR += py-ripe.atlas.sagan
     SUBDIR += py-ripe.atlas.tools
@@ -1324,7 +1326,6 @@
     SUBDIR += trafshow3
     SUBDIR += tramp
     SUBDIR += trickle
-    SUBDIR += tridiavnc
     SUBDIR += tsclient
     SUBDIR += tshark
     SUBDIR += tshark-lite

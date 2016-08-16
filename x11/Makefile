@@ -166,6 +166,7 @@
     SUBDIR += libgnome-reference
     SUBDIR += libgnomekbd
     SUBDIR += libgnomemm26
+    SUBDIR += libinput
     SUBDIR += libkonq
     SUBDIR += libmatekbd
     SUBDIR += liboldX
@@ -266,6 +267,7 @@
     SUBDIR += setlayout
     SUBDIR += setxkbmap
     SUBDIR += simdock
+    SUBDIR += simplestroke
     SUBDIR += sisctrl
     SUBDIR += slim
     SUBDIR += slock
