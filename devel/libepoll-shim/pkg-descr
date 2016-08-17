@@ -1,0 +1,6 @@
+#
+# libepoll-shim
+# https://github.com/jiixyj/epoll-shim
+#
+# Used by Wayland and libinput
+#
