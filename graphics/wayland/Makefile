@@ -2,19 +2,18 @@
 # $FreeBSD$
 
 PORTNAME=	wayland
-PORTVERSION=	1.10.0
+PORTVERSION=	1.11.0
 CATEGORIES=	graphics
-MASTER_SITES=	http://rainbow-runner.nl/freebsd/
-#http://wayland.freedesktop.org/releases/
+MASTER_SITES= http://wayland.freedesktop.org/releases/
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Wayland composite "server"
 
-LIB_DEPENDS=	libexpat.so:textproc/expat2 \
-		libffi.so:devel/libffi
-
+LIB_DEPENDS=	libexpat.so:${PORTSDIR}/textproc/expat2 \
+				libffi.so:${PORTSDIR}/devel/libffi \
+				libepoll-shim.so:${PORTSDIR}/devel/libepoll-shim
 WITH_DEBUG=	1
-USES=		gmake libtool pathfix pkgconfig tar:xz
+USES=		autoreconf gmake libtool pathfix pkgconfig tar:xz
 USE_GNOME=	libxslt:build
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
