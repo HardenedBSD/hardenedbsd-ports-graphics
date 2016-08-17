@@ -22,6 +22,6 @@ EXTRACT_AFTER_ARGS=	${DISTNAME}/include/QtSql \
 QMAKE_SOURCE_PATH=	${WRKSRC}/src/plugins/sqldrivers/${DB}/${DB}.pro
 
 PLIST_FILES=	${QT_PLUGINDIR_REL}/sqldrivers/libqsql${DB:tl:C/^sql//}.so \
-		%%DEBUG%%${QT_PLUGINDIR_REL}/sqldrivers/libq${DB:tl:C/^sql//}.so.debug
+		%%DEBUG%%${QT_PLUGINDIR_REL}/sqldrivers/libsql${DB:tl:C/^sql//}.so.debug
 
 .include <bsd.port.mk>
