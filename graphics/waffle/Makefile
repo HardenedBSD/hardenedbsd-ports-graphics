@@ -20,7 +20,7 @@ DOCSDIR=	${PREFIX}/share/doc/waffle1
 
 CMAKE_ARGS+=	-Dwaffle_has_glx=ON \
 		-Dwaffle_has_x11_egl=ON
-#CMAKE_ARGS+=	-Dwaffle_has_gbm=ON # FIXME: Required udev
+CMAKE_ARGS+=	-Dwaffle_has_gbm=ON # FIXME: Required udev
 
 PLIST_SUB+=	PORTVERSION=${PORTVERSION}
 
