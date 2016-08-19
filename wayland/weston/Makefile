@@ -1,0 +1,93 @@
+# Created by: yohanesu75@gmail.com
+# $FreeBSD$
+
+PORTNAME=	weston
+PORTVERSION=	1.11.0
+CATEGORIES=	wayland
+MASTER_SITES=	http://wayland.freedesktop.org/releases/
+MAINTAINER=	x11@freebsd.org
+COMMENT=	Wayland Reference Compositor
+
+LICENSE=	MIT
+
+USES=		autoreconf alias execinfo gmake jpeg libtool pkgconfig tar:xz
+CPPFLAGS+=	-I${LOCALBASE}/include
+LDFLAGS+=	-L${LOCALBASE}/lib
+
+USE_XORG=	x11 xcb xcursor
+USE_GL=		egl gbm
+
+#OPTIONS_DEFINE=	CLIENTS
+#OPTIONS_SINGLE=	CAIRO
+#OPTIONS_SINGLE_CAIRO=	CAIROIMAGE CAIROGL CAIROGLESV2
+#CAIRO_DESC=	Cairo renderer
+#CAIROIMAGE_DESC	= Image
+#CAIROGL_DESC	= GL (enabled in cairo by default)
+#CAIROGLESV2_DESC	= GLESv2 (requires cairo built with --enable-glesv2)
+#CLIENTS_DESC = Build Weston clients
+#OPTIONS_DEFAULT=CAIROIMAGE CLIENTS
+
+LIB_DEPENDS= \
+		libxkbcommon.so:${PORTSDIR}/x11/libxkbcommon		\
+		libpixman-1.so:${PORTSDIR}/x11/pixman				\
+		libcairo.so:${PORTSDIR}/graphics/cairo				\
+		libcolord.so:${PORTSDIR}/graphics/colord			\
+		libfontconfig.so:${PORTSDIR}/x11-fonts/fontconfig	\
+		libfreetype.so:${PORTSDIR}/print/freetype2			\
+		libwayland-server.so:${PORTSDIR}/wayland/wayland	\
+		libwayland-client.so:${PORTSDIR}/wayland/wayland	\
+		libwayland-cursor.so:${PORTSDIR}/wayland/wayland	\
+		libevent.so:${PORTSDIR}/devel/libevent2				\
+		libdrm.so:${PORTSDIR}/graphics/libdrm				\
+		libpng.so:${PORTSDIR}/graphics/png					\
+		libwebp.so:${PORTSDIR}/graphics/webp				\
+		libffi.so:${PORTSDIR}/devel/libffi					\
+		libepoll-shim.so:${PORTSDIR}/wayland/libepoll-shim	\
+		libudev.so:${PORTSDIR}/wayland/libudev-devd			\
+		libunwind.so:${PORTSDIR}/devel/libunwind			\
+		libevdev.so:${PORTSDIR}/devel/libevdev				\
+		libkbdev.so:${PORTSDIR}/wayland/libkbdev
+
+BUILD_DEPENDS+=	${NONEXISTENT}:${PORTSDIR}/wayland/wayland-protocols
+BUILD_DEPENDS+=	wayland-scanner:${PORTSDIR}/wayland/wayland
+
+RUN_DEPENDS=	${LOCALBASE}/lib/libglapi.so.0:${PORTSDIR}/graphics/libglapi
+
+CPPFLAGS+=	-I${LOCALBASE}/include
+LDFLAGS+=	-L${LOCALBASE}/lib
+
+GNU_CONFIGURE=	YES
+
+CONFIGURE_ARGS+=	--enable-setuid-install
+CONFIGURE_ARGS+=	--enable-wayland-compositor
+CONFIGURE_ARGS+=	--enable-x11-compositor
+CONFIGURE_ARGS+=	--enable-drm-compositor
+CONFIGURE_ARGS+=	--enable-rpi-compositor
+CONFIGURE_ARGS+=	--enable-weston-launch
+CONFIGURE_ARGS+=	--enable-xwayland
+CONFIGURE_ARGS+=	--disable-xwayland-test
+CONFIGURE_ARGS+=	--enable-clients
+CONFIGURE_ARGS+=	--enable-demo-clients-install
+
+CONFIGURE_ARGS+=	--disable-fbdev-compositor
+CONFIGURE_ARGS+=	--disable-vaapi-recorder
+
+CONFIGURE_ENV+= LIBS="-lepoll-shim -lrt -lkbdev"
+
+# CONFIGURE_ENV+= XWAYLAND_CLIENT_LIBS="-lepoll-shim -lrt"
+# CONFIGURE_ENV+= EGL_CLIENT_LIBS="-lepoll-shim -lrt"
+
+#CLIENTS_CONFIGURE_ENABLE=	clients
+
+#.include <bsd.port.options.mk>
+# .if ${PORT_OPTIONS:MCAIROIMAGE}
+# CONFIGURE_ARGS+=	--with-cairo=image
+# .endif
+# .if ${PORT_OPTIONS:MCAIROGL}
+# CONFIGURE_ARGS+=	--with-cairo=gl
+# .endif
+# .if ${PORT_OPTIONS:MCAIROGLESV2}
+# CONFIGURE_ARGS+=	--with-cairo=glesv2 --with-cairo-glesv2
+# .endif
+
+.include <bsd.port.mk>

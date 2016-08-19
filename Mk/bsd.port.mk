@@ -551,7 +551,7 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				- Similiar to INSTALL_PROGRAM and INSTALL_DATA commands but
 #				  working on whole trees of directories, takes 3 arguments,
 #				  last one is find(1) arguments and optional.
-#				  Example use: 
+#				  Example use:
 #				  cd ${WRKSRC}/doc && ${COPYTREE_SHARE} . ${DOCSDIR} "! -name *\.bak"
 #
 #				  Installs all directories and files from ${WRKSRC}/doc
@@ -2544,7 +2544,7 @@ VALID_CATEGORIES+= accessibility afterstep arabic archivers astro audio \
 	print python ruby rubygems russian \
 	scheme science security shells spanish sysutils \
 	tcl textproc tk \
-	ukrainian vietnamese windowmaker www \
+	ukrainian vietnamese wayland windowmaker www \
 	x11 x11-clocks x11-drivers x11-fm x11-fonts x11-servers x11-themes \
 	x11-toolkits x11-wm xfce zope
 
@@ -3352,7 +3352,7 @@ identify-install-conflicts:
 
 .if !target(check-install-conflicts)
 check-install-conflicts:
-.if ( defined(CONFLICTS) || defined(CONFLICTS_INSTALL) || ( defined(CONFLICTS_BUILD) && defined(DEFER_CONFLICTS_CHECK) ) ) && !defined(DISABLE_CONFLICTS) 
+.if ( defined(CONFLICTS) || defined(CONFLICTS_INSTALL) || ( defined(CONFLICTS_BUILD) && defined(DEFER_CONFLICTS_CHECK) ) ) && !defined(DISABLE_CONFLICTS)
 .if defined(DEFER_CONFLICTS_CHECK)
 	@conflicts_with=$$( \
 	{ ${PKG_QUERY} -g "%n-%v %p %o" ${CONFLICTS:C/.+/'&'/} ${CONFLICTS_BUILD:C/.+/'&'/} ${CONFLICTS_INSTALL:C/.+/'&'/} 2>/dev/null || : ; } \
@@ -4012,7 +4012,7 @@ DEPENDS-LIST= \
 
 ALL-DEPENDS-LIST=			${DEPENDS-LIST} -r ${_UNIFIED_DEPENDS:Q}
 TEST-DEPENDS-LIST=			${DEPENDS-LIST} ${TEST_DEPENDS:Q}
-CLEAN-DEPENDS-LIST=			${DEPENDS-LIST} -wr ${_UNIFIED_DEPENDS:Q} 
+CLEAN-DEPENDS-LIST=			${DEPENDS-LIST} -wr ${_UNIFIED_DEPENDS:Q}
 CLEAN-DEPENDS-LIMITED-LIST=	${DEPENDS-LIST} -w ${_UNIFIED_DEPENDS:Q}
 
 .if !target(clean-depends)
