@@ -87,7 +87,7 @@ CONFIGURE_ARGS+=	--enable-gbm
 # libEGL, dri and clover need gallium enabled.
 # the third option in --with-egl-platforms is wayland.
 # XXX revise this to a BUILD_DEPENDS and only LIBS_DEPEND for ports that need it.
-LIB_DEPENDS+=		libwayland-client.so:${PORTSDIR}/graphics/wayland
+LIB_DEPENDS+=		libwayland-client.so:${PORTSDIR}/wayland/wayland
 CONFIGURE_ARGS+=	--enable-egl --with-egl-platforms=x11,drm,wayland
 #CONFIGURE_ARGS+=	--enable-egl --with-egl-platforms=x11,drm
 
@@ -199,4 +199,3 @@ CONFIGURE_ARGS+=--with-gallium-drivers="${GALLIUM_DRIVERS:tl}"
 .if ${OPSYS} == DragonFly
 LIB_DEPENDS+= libelf.so:devel/libelf
 .endif
-

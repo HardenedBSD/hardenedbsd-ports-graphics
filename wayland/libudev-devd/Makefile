@@ -14,7 +14,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	wulf7
 GH_TAGNAME=	3fd2d11
 
-USES=		autoreconf gmake libtool
+USES=		autoreconf gmake libtool pkgconfig
 GNU_CONFIGURE=	yes
 CPPFLAGS+=	-I${LOCALBASE}/include
 INSTALL_TARGET=	install-strip

@@ -1,4 +1,4 @@
---- src/waffle/CMakeLists.txt.orig	2015-01-22 20:00:17 UTC
+--- src/waffle/CMakeLists.txt.orig	2015-08-25 21:05:10 UTC
 +++ src/waffle/CMakeLists.txt
 @@ -38,7 +38,7 @@ list(APPEND waffle_libdeps
      ${THREADS_LIBRARIES}

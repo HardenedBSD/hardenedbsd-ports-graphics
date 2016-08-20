@@ -1,4 +1,4 @@
---- cmake/Modules/WaffleFindDependencies.cmake.orig	2015-01-22 20:00:17 UTC
+--- cmake/Modules/WaffleFindDependencies.cmake.orig	2015-08-25 21:05:10 UTC
 +++ cmake/Modules/WaffleFindDependencies.cmake
 @@ -62,7 +62,7 @@ if(waffle_on_mac)
  endif()

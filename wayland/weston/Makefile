@@ -46,7 +46,8 @@ LIB_DEPENDS= \
 		libudev.so:${PORTSDIR}/wayland/libudev-devd			\
 		libunwind.so:${PORTSDIR}/devel/libunwind			\
 		libevdev.so:${PORTSDIR}/devel/libevdev				\
-		libkbdev.so:${PORTSDIR}/wayland/libkbdev
+		libkbdev.so:${PORTSDIR}/wayland/libkbdev			\
+		libinput.so:${PORTSDIR}/wayland/libinput
 
 BUILD_DEPENDS+=	${NONEXISTENT}:${PORTSDIR}/wayland/wayland-protocols
 BUILD_DEPENDS+=	wayland-scanner:${PORTSDIR}/wayland/wayland
