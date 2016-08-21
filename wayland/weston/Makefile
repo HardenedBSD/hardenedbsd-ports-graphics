@@ -10,12 +10,14 @@ COMMENT=	Wayland Reference Compositor
 
 LICENSE=	MIT
 
-USES=		autoreconf alias execinfo gmake jpeg libtool pkgconfig tar:xz
+USES=		autoreconf alias execinfo gmake pathfix jpeg libtool pkgconfig tar:xz
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 
 USE_XORG=	x11 xcb xcursor
-USE_GL=		egl gbm
+USE_GL=		egl gbm glesv2
+
+BROKEN=	Builds in ports but not in poudriere - fix paths for configure script.
 
 #OPTIONS_DEFINE=	CLIENTS
 #OPTIONS_SINGLE=	CAIRO
@@ -37,6 +39,9 @@ LIB_DEPENDS= \
 		libwayland-server.so:${PORTSDIR}/wayland/wayland	\
 		libwayland-client.so:${PORTSDIR}/wayland/wayland	\
 		libwayland-cursor.so:${PORTSDIR}/wayland/wayland	\
+		libwayland-egl.so:${PORTSDIR}/graphics/libEGL		\
+		libEGL.so:${PORTSDIR}/graphics/libEGL				\
+		libGLESv2.so:${PORTSDIR}/graphics/libGL				\
 		libevent.so:${PORTSDIR}/devel/libevent2				\
 		libdrm.so:${PORTSDIR}/graphics/libdrm				\
 		libpng.so:${PORTSDIR}/graphics/png					\
@@ -47,7 +52,8 @@ LIB_DEPENDS= \
 		libunwind.so:${PORTSDIR}/devel/libunwind			\
 		libevdev.so:${PORTSDIR}/devel/libevdev				\
 		libkbdev.so:${PORTSDIR}/wayland/libkbdev			\
-		libinput.so:${PORTSDIR}/wayland/libinput
+		libinput.so:${PORTSDIR}/wayland/libinput			\
+		libmtdev.so:${PORTSDIR}/devel/libmtdev
 
 BUILD_DEPENDS+=	${NONEXISTENT}:${PORTSDIR}/wayland/wayland-protocols
 BUILD_DEPENDS+=	wayland-scanner:${PORTSDIR}/wayland/wayland
@@ -66,17 +72,21 @@ CONFIGURE_ARGS+=	--enable-drm-compositor
 CONFIGURE_ARGS+=	--enable-rpi-compositor
 CONFIGURE_ARGS+=	--enable-weston-launch
 CONFIGURE_ARGS+=	--enable-xwayland
-CONFIGURE_ARGS+=	--disable-xwayland-test
 CONFIGURE_ARGS+=	--enable-clients
 CONFIGURE_ARGS+=	--enable-demo-clients-install
 
 CONFIGURE_ARGS+=	--disable-fbdev-compositor
 CONFIGURE_ARGS+=	--disable-vaapi-recorder
+CONFIGURE_ARGS+=	--disable-xwayland-test
 
 CONFIGURE_ENV+= LIBS="-lepoll-shim -lrt -lkbdev"
+#CONFIGURE_ENV+=	PKG_CONFIG_PATH="${PREFIX}/libdata/pkgconfig"
 
 # CONFIGURE_ENV+= XWAYLAND_CLIENT_LIBS="-lepoll-shim -lrt"
 # CONFIGURE_ENV+= EGL_CLIENT_LIBS="-lepoll-shim -lrt"
+
+CONFIGURE_ENV+= EGL_TESTS_LIBS="-lwayland-client -lGLESv2 -lwayland-egl -lwayland-client"
+CONFIGURE_ENV+= EGL_TESTS_CFLAGS="-L${STAGEDIR}${PREFIX}/lib -I${STAGEDIR}${PREFIX}/include"
 
 #CLIENTS_CONFIGURE_ENABLE=	clients
 
@@ -90,5 +100,11 @@ CONFIGURE_ENV+= LIBS="-lepoll-shim -lrt -lkbdev"
 # .if ${PORT_OPTIONS:MCAIROGLESV2}
 # CONFIGURE_ARGS+=	--with-cairo=glesv2 --with-cairo-glesv2
 # .endif
+
+# post-patch:
+# 	@${REINPLACE_CMD} -e 's|$$(libdir)/pkgconfig|$$(prefix)/libdata/pkgconfig|g' \
+# 		${WRKSRC}/Makefile.am
+
+PATHFIX_MAKEFILEIN?=	Makefile.am
 
 .include <bsd.port.mk>

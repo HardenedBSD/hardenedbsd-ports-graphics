@@ -16,11 +16,7 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 
 LIB_DEPENDS=	libudev.so:${PORTSDIR}/wayland/libudev-devd
 
-# libudev does not provide pkgconfig file.
-CONFIGURE_ENV+= LIBUDEV_LIBS="-ludev"
-CONFIGURE_ENV+= LIBUDEV_CFLAGS="-I/usr/local/include -L/usr/local/lib"
-
-USES=		gmake libtool pkgconfig
+USES=		gmake libtool pkgconfig pathfix
 USE_GNOME=	glib20 introspection gnomedocutils
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes

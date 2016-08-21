@@ -9,5 +9,5 @@ lib/girepository-1.0/GUdev-1.0.typelib
 lib/libgudev-1.0.so
 lib/libgudev-1.0.so.0
 lib/libgudev-1.0.so.0.2.0
-lib/pkgconfig/gudev-1.0.pc
+libdata/pkgconfig/gudev-1.0.pc
 share/gir-1.0/GUdev-1.0.gir

@@ -11,7 +11,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	SirCmpwn
 GH_TAGNAME=	0.9
 
-USES=		cmake pkgconfig
+USES=		cmake pkgconfig pathfix
 USE_GCC=	any
 
 LIB_DEPENDS= \
@@ -43,6 +43,6 @@ CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-lepoll-shim -lrt
 
 post-install:
-	@chmod a+s ${PREFIX}/bin/sway
+	@chmod a+s ${STAGEDIR}${PREFIX}/bin/sway
 
 .include <bsd.port.mk>

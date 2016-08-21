@@ -6,4 +6,4 @@ include/wlc/wlc.h
 lib/libwlc.so
 lib/libwlc.so.0
 lib/libwlc.so.0.0.5
-lib/pkgconfig/wlc.pc
+libdata/pkgconfig/wlc.pc

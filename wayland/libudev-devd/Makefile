@@ -14,9 +14,13 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	wulf7
 GH_TAGNAME=	3fd2d11
 
-USES=		autoreconf gmake libtool pkgconfig
+USES=		autoreconf gmake libtool pkgconfig pathfix
 GNU_CONFIGURE=	yes
 CPPFLAGS+=	-I${LOCALBASE}/include
 INSTALL_TARGET=	install-strip
+
+post-patch:
+	@${REINPLACE_CMD} -e 's|$$(libdir)/pkgconfig|$$(prefix)/libdata/pkgconfig|g' \
+		${WRKSRC}/Makefile.am
 
 .include <bsd.port.mk>
