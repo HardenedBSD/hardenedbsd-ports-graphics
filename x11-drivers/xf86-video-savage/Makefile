@@ -2,6 +2,7 @@
 
 PORTNAME=	xf86-video-savage
 PORTVERSION=	2.3.8
+PORTREVISION=	1
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

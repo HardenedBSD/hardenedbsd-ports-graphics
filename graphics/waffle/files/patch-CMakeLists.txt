@@ -1,4 +1,4 @@
---- CMakeLists.txt.orig	2015-01-22 20:00:17 UTC
+--- CMakeLists.txt.orig	2015-08-25 21:05:10 UTC
 +++ CMakeLists.txt
 @@ -136,7 +136,7 @@ configure_file(waffle.pc.in ${waffle_lib
  

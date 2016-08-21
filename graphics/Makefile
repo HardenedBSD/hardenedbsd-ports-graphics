@@ -776,6 +776,7 @@
     SUBDIR += phplot
     SUBDIR += picpuz
     SUBDIR += piddle
+    SUBDIR += piglit
     SUBDIR += pikopixel
     SUBDIR += pinpoint
     SUBDIR += pixelize
@@ -847,6 +848,8 @@
     SUBDIR += py-gvgen
     SUBDIR += py-imageio
     SUBDIR += py-imagesize
+    SUBDIR += py-imgurpython
+    SUBDIR += py-mayavi
     SUBDIR += py-mcomix
     SUBDIR += py-ming
     SUBDIR += py-nwdiag

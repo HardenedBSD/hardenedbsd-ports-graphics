@@ -11,7 +11,8 @@ BUILD_DEPENDS=	v4l_compat>=0:${PORTSDIR}/multimedia/v4l_compat
 LIB_DEPENDS=	libevdev.so:${PORTSDIR}/devel/libevdev \
 				libepoll-shim.so:${PORTSDIR}/wayland/libepoll-shim \
 				libwacom.so:${PORTSDIR}/wayland/libwacom \
-				libudev.so:${PORTSDIR}/wayland/libudev-devd
+				libudev.so:${PORTSDIR}/wayland/libudev-devd \
+				libmtdev.so:${PORTSDIR}/devel/libmtdev
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	jiixyj

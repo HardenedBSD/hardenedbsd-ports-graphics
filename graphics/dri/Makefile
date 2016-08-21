@@ -17,6 +17,10 @@ USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto \
 OPTIONS_DEFINE=	TEXTURE
 OPTIONS_DEFAULT=TEXTURE
 
+OPTIONS_DEFINE_amd64=	DRI3
+OPTIONS_DEFINE_i386=	DRI3
+DRI3_DESC=	Experimental: Enable DRI3 support.
+
 TEXTURE_DESC=	Enable texture-float support (patent encumbered)
 VDPAU_DESC=	VDPAU (GPU video acceleration) support (needs Gallium)
 

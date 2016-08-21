@@ -540,8 +540,8 @@
     SUBDIR += npapi-xine
     SUBDIR += npc
     SUBDIR += npm
-    SUBDIR += npm2
     SUBDIR += npm012
+    SUBDIR += npm2
     SUBDIR += nspluginwrapper
     SUBDIR += obhttpd
     SUBDIR += ocaml-net
@@ -1404,7 +1404,6 @@
     SUBDIR += pear-XML_GRDDL
     SUBDIR += pear-twig
     SUBDIR += pebble
-    SUBDIR += pecl-APC
     SUBDIR += pecl-amfext
     SUBDIR += pecl-http
     SUBDIR += pecl-http1
@@ -1482,6 +1481,7 @@
     SUBDIR += py-bjoern
     SUBDIR += py-bleach
     SUBDIR += py-blogofile
+    SUBDIR += py-boto3
     SUBDIR += py-bottle
     SUBDIR += py-bottle-cork
     SUBDIR += py-cachecontrol
@@ -1581,6 +1581,7 @@
     SUBDIR += py-django18
     SUBDIR += py-django19
     SUBDIR += py-django_compressor
+    SUBDIR += py-django_polymorphic
     SUBDIR += py-djangorestframework
     SUBDIR += py-djangorestframework-csv
     SUBDIR += py-djangorestframework-filters
@@ -1727,6 +1728,7 @@
     SUBDIR += py-prewikka
     SUBDIR += py-puppetboard
     SUBDIR += py-py-restclient
+    SUBDIR += py-pySmartDL
     SUBDIR += py-pyjwt
     SUBDIR += py-pylons
     SUBDIR += py-pyocclient
@@ -1734,7 +1736,6 @@
     SUBDIR += py-pyramid
     SUBDIR += py-pyramid_rpc
     SUBDIR += py-pysearch
-    SUBDIR += py-pySmartDL
     SUBDIR += py-python-digitalocean
     SUBDIR += py-pywebdav
     SUBDIR += py-pywikibot
@@ -1747,9 +1748,6 @@
     SUBDIR += py-recaptcha
     SUBDIR += py-requestbuilder
     SUBDIR += py-requests
-    SUBDIR += py33-requests
-    SUBDIR += py34-requests
-    SUBDIR += py35-requests
     SUBDIR += py-requests-futures
     SUBDIR += py-requests-oauthlib
     SUBDIR += py-requests-toolbelt
@@ -1806,6 +1804,9 @@
     SUBDIR += py-wsgiauth
     SUBDIR += py-wsgidav
     SUBDIR += py-zope.app.wsgi
+    SUBDIR += py33-requests
+    SUBDIR += py34-requests
+    SUBDIR += py35-requests
     SUBDIR += pyblosxom
     SUBDIR += pycarddav
     SUBDIR += pydio
@@ -2081,8 +2082,8 @@
     SUBDIR += smb_auth
     SUBDIR += snarf
     SUBDIR += sogo2
-    SUBDIR += sogo3
     SUBDIR += sogo2-activesync
+    SUBDIR += sogo3
     SUBDIR += sogo3-activesync
     SUBDIR += spawn-fcgi
     SUBDIR += spdylay

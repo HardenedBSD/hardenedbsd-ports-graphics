@@ -18,9 +18,11 @@ USE_XORG=	x11 xcb
 
 DOCSDIR=	${PREFIX}/share/doc/waffle1
 
+LIB_DEPENDS=	libudev.so:${PORTSDIR}/wayland/libudev-devd
+
 CMAKE_ARGS+=	-Dwaffle_has_glx=ON \
-		-Dwaffle_has_x11_egl=ON
-#CMAKE_ARGS+=	-Dwaffle_has_gbm=ON # FIXME: Required udev
+				-Dwaffle_has_x11_egl=ON
+CMAKE_ARGS+=	-Dwaffle_has_gbm=ON
 
 PLIST_SUB+=	PORTVERSION=${PORTVERSION}
 

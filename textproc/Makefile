@@ -204,6 +204,7 @@
     SUBDIR += fpc-libxml2
     SUBDIR += freexl
     SUBDIR += fy-aspell
+    SUBDIR += fzf
     SUBDIR += ga-aspell
     SUBDIR += gastex
     SUBDIR += gd-aspell
@@ -410,8 +411,6 @@
     SUBDIR += libsoldout
     SUBDIR += libsphinxclient
     SUBDIR += libstree
-    SUBDIR += libtext-charwidth-perl
-    SUBDIR += libtext-wrapi18n-perl
     SUBDIR += libtextcat
     SUBDIR += libtranslate
     SUBDIR += libtre
@@ -1329,8 +1328,8 @@
     SUBDIR += py-zope.tal
     SUBDIR += py-zpt
     SUBDIR += py2html
-    SUBDIR += py3-asciinema
     SUBDIR += py3-MarkupSafe
+    SUBDIR += py3-asciinema
     SUBDIR += py3-chardet
     SUBDIR += py3-libxml2
     SUBDIR += pychm

@@ -56,9 +56,9 @@
     SUBDIR += acsccid
     SUBDIR += activitymail
     SUBDIR += ada-util
-    SUBDIR += adaid
     SUBDIR += adabooch
     SUBDIR += adacurses
+    SUBDIR += adaid
     SUBDIR += adime
     SUBDIR += aegis
     SUBDIR += afay
@@ -144,6 +144,7 @@
     SUBDIR += avro-cpp
     SUBDIR += awscli
     SUBDIR += b2
+    SUBDIR += babeltrace
     SUBDIR += bam
     SUBDIR += bbfreeze
     SUBDIR += bbfreeze-loader
@@ -737,6 +738,7 @@
     SUBDIR += go-protobuf
     SUBDIR += go-raw
     SUBDIR += go-runewidth
+    SUBDIR += go-shellwords
     SUBDIR += go-slices
     SUBDIR += go-sql-driver
     SUBDIR += go-termbox
@@ -765,6 +767,7 @@
     SUBDIR += gputils
     SUBDIR += gradle
     SUBDIR += grantlee
+    SUBDIR += grantlee5
     SUBDIR += gsettings-desktop-schemas
     SUBDIR += gsoap
     SUBDIR += gstreamer-plugins-gconf
@@ -1423,6 +1426,7 @@
     SUBDIR += linux-f10-ncurses-base
     SUBDIR += linux-f10-nspr
     SUBDIR += linux-f10-sdl12
+    SUBDIR += linux-kernel
     SUBDIR += linux_kdump
     SUBDIR += linux_libusb
     SUBDIR += lion
@@ -1439,6 +1443,7 @@
     SUBDIR += llvm36
     SUBDIR += llvm37
     SUBDIR += llvm38
+    SUBDIR += llvm39
     SUBDIR += lm4tools
     SUBDIR += lmdbg
     SUBDIR += lndir
@@ -3849,6 +3854,7 @@
     SUBDIR += plan9port
     SUBDIR += pmccabe
     SUBDIR += pmd
+    SUBDIR += pocl
     SUBDIR += poco
     SUBDIR += poco-devel
     SUBDIR += poco-ssl
@@ -4217,12 +4223,13 @@
     SUBDIR += py-lock_file
     SUBDIR += py-lockfile
     SUBDIR += py-log4py
-    SUBDIR += py-logbook
     SUBDIR += py-logan
+    SUBDIR += py-logbook
     SUBDIR += py-logilab-common
     SUBDIR += py-louie
     SUBDIR += py-lxml
     SUBDIR += py-magic
+    SUBDIR += py-mailcap-fix
     SUBDIR += py-manuel
     SUBDIR += py-matrix-angular-sdk
     SUBDIR += py-mccabe
@@ -5171,6 +5178,7 @@
     SUBDIR += rubygem-ruby-progressbar
     SUBDIR += rubygem-ruby-sdl-ffi
     SUBDIR += rubygem-ruby2ruby
+    SUBDIR += rubygem-ruby_dep
     SUBDIR += rubygem-ruby_parser
     SUBDIR += rubygem-rubygame
     SUBDIR += rubygem-rubygems-mirror
@@ -5303,6 +5311,7 @@
     SUBDIR += sfml1
     SUBDIR += sgb
     SUBDIR += shapelib
+    SUBDIR += shedskin
     SUBDIR += shflags
     SUBDIR += shiboken
     SUBDIR += shmap
@@ -5317,8 +5326,8 @@
     SUBDIR += simian
     SUBDIR += simple_components
     SUBDIR += skalibs
-    SUBDIR += slibtool
     SUBDIR += slf4j
+    SUBDIR += slibtool
     SUBDIR += smack
     SUBDIR += smake
     SUBDIR += smc

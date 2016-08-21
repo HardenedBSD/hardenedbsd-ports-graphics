@@ -19,6 +19,7 @@
     SUBDIR += xf86-input-vmmouse
     SUBDIR += xf86-input-void
     SUBDIR += xf86-input-wacom
+    SUBDIR += xf86-video-amdgpu
     SUBDIR += xf86-video-apm
     SUBDIR += xf86-video-ark
     SUBDIR += xf86-video-ati
@@ -33,6 +34,7 @@
     SUBDIR += xf86-video-mach64
     SUBDIR += xf86-video-mga
     SUBDIR += xf86-video-neomagic
+    SUBDIR += xf86-video-nouveau
     SUBDIR += xf86-video-nv
     SUBDIR += xf86-video-openchrome
     SUBDIR += xf86-video-r128

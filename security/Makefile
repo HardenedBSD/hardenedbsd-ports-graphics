@@ -655,6 +655,7 @@
     SUBDIR += p5-Net-OpenID-Server
     SUBDIR += p5-Net-Radius-Server
     SUBDIR += p5-Net-SAML
+    SUBDIR += p5-Net-SSH-AuthorizedKeysFile
     SUBDIR += p5-Net-SSL-ExpireDate
     SUBDIR += p5-Net-SSLGlue
     SUBDIR += p5-Net-SSLeay
@@ -754,6 +755,7 @@
     SUBDIR += pecl-crack
     SUBDIR += pecl-crypto
     SUBDIR += pecl-gnupg
+    SUBDIR += pecl-libsodium
     SUBDIR += pecl-pam
     SUBDIR += pecl-scrypt
     SUBDIR += pecl-ssh2
@@ -891,8 +893,8 @@
     SUBDIR += py-pysha3
     SUBDIR += py-python-gnupg
     SUBDIR += py-python-openid
-    SUBDIR += py-python-social-auth
     SUBDIR += py-python-registry
+    SUBDIR += py-python-social-auth
     SUBDIR += py-rekall
     SUBDIR += py-rekall-core
     SUBDIR += py-rekall_gui
@@ -910,6 +912,7 @@
     SUBDIR += py-stix
     SUBDIR += py-tlslite
     SUBDIR += py-trustedpickle
+    SUBDIR += py-tuf
     SUBDIR += py-twistedConch
     SUBDIR += py-twofish
     SUBDIR += py-volatility

@@ -1,0 +1,10 @@
+pocl
+
+Portable Computing Language
+
+Portable Computing Language (pocl) aims to become a MIT-licensed 
+open source implementation of the OpenCL standard which can be 
+easily adapted for new targets and devices, both for homogeneous 
+CPU and heterogenous GPUs/accelerators.
+
+WWW: http://portablecl.org/

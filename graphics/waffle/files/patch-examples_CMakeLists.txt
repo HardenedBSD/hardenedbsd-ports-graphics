@@ -1,4 +1,4 @@
---- examples/CMakeLists.txt.orig	2015-01-22 20:00:17 UTC
+--- examples/CMakeLists.txt.orig	2015-08-25 21:05:10 UTC
 +++ examples/CMakeLists.txt
 @@ -11,7 +11,7 @@ install(
  # Target: simple-x11-egl (executable)

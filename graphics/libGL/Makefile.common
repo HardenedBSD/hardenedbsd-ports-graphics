@@ -18,7 +18,7 @@
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
-MESABASEVERSION=	11.2.2
+MESABASEVERSION=	12.0.1
 # if there is a subversion, don't include the '-' between 7.11-rc2.
 MESASUBVERSION=
 
@@ -87,8 +87,14 @@ CONFIGURE_ARGS+=	--enable-gbm
 # libEGL, dri and clover need gallium enabled.
 # the third option in --with-egl-platforms is wayland.
 # XXX revise this to a BUILD_DEPENDS and only LIBS_DEPEND for ports that need it.
-LIB_DEPENDS+=		libwayland-client.so:${PORTSDIR}/graphics/wayland
+LIB_DEPENDS+=		libwayland-client.so:${PORTSDIR}/wayland/wayland \
+					libwayland-server.so:${PORTSDIR}/wayland/wayland
+
+CONFIGURE_ENV+= WAYLAND_LIBS="-lwayland-server -lwayland-client"
+CONFIGURE_ENV+= WAYLAND_CFLAGS="-I/usr/local/include -L/usr/local/lib"
+
 CONFIGURE_ARGS+=	--enable-egl --with-egl-platforms=x11,drm,wayland
+#CONFIGURE_ARGS+=	--enable-egl --with-egl-platforms=x11,drm
 
 # we don't care about GLes v1
 CONFIGURE_ARGS+=	--disable-gles1
@@ -132,6 +138,7 @@ RUN_DEPENDS+=   llvm${MESA_LLVM_VER}>=3.7.1_1:devel/llvm${MESA_LLVM_VER}
 .endif
 
 CONFIGURE_ENV+= LLVM_CONFIG=${LOCALBASE}/bin/llvm-config${MESA_LLVM_VER}
+#CONFIGURE_ENV+= PKG_CONFIG_PATH=/usr/local/libdata/pkgconfig
 
 CONFIGURE_ARGS+=--enable-gallium-llvm \
                 --enable-xvmc
@@ -198,4 +205,3 @@ CONFIGURE_ARGS+=--with-gallium-drivers="${GALLIUM_DRIVERS:tl}"
 .if ${OPSYS} == DragonFly
 LIB_DEPENDS+= libelf.so:devel/libelf
 .endif
-

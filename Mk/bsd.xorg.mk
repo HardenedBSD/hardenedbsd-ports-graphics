@@ -66,6 +66,7 @@ USE_XORG+=	xorg-server xproto randrproto xi renderproto xextproto \
 .  if ${ARCH} == i386
 CFLAGS+=	-fno-optimize-sibling-calls
 .  endif
+CPPFLAGS+=	-Werror=uninitialized
 CONFIGURE_ENV+=	DRIVER_MAN_SUFFIX=4x DRIVER_MAN_DIR='$$(mandir)/man4'
 USES+=		libtool
 . endif
@@ -97,6 +98,7 @@ USES+=	pathfix
 DISTFILES?=	xorg-server-${PORTVERSION}.tar.bz2
 WRKSRC=		${WRKDIR}/xorg-server-${PORTVERSION}
 USES+=	pathfix
+CPPFLAGS+=	-Werror=uninitialized
 CONFIGURE_ARGS+=	--with-xkb-path=${LOCALBASE}/share/X11/xkb \
 					--with-fontrootdir=${LOCALBASE}/share/fonts
 

@@ -1,4 +1,4 @@
---- cmake/Modules/WaffleDefineOS.cmake.orig	2015-01-22 20:00:17 UTC
+--- cmake/Modules/WaffleDefineOS.cmake.orig	2015-08-25 21:05:10 UTC
 +++ cmake/Modules/WaffleDefineOS.cmake
 @@ -25,6 +25,8 @@
  
