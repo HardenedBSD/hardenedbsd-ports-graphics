@@ -1,3 +1,4 @@
+# Created by Johannes Lundberg <yohanesu75@gmail.com>
 # $FreeBSD$
 
 PORTNAME=	sway
@@ -11,7 +12,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	SirCmpwn
 GH_TAGNAME=	0.9
 
-USES=		cmake pkgconfig pathfix
+USES=		cmake:outsource pkgconfig pathfix
 USE_GCC=	any
 
 LIB_DEPENDS= \
@@ -31,16 +32,10 @@ LIB_DEPENDS= \
 # For video capture
 #		libavutil.so:${PORTSDIR}/multimedia/ffmpeg
 
-
-#BUILD_DEPENDS+=	${NONEXISTENT}:${PORTSDIR}/wayland/wayland-protocols
-#BUILD_DEPENDS+=	wayland-scanner:${PORTSDIR}/wayland/wayland
 BUILD_DEPENDS+=	a2x:${PORTSDIR}/textproc/asciidoc
 
-#RUN_DEPENDS=	${LOCALBASE}/lib/libglapi.so.0:${PORTSDIR}/graphics/libglapi
-
-CPPFLAGS+=	-I${LOCALBASE}/include
-
-LDFLAGS+=	-lepoll-shim -lrt
+CMAKE_ARGS+= -DLIBEPOLL_INCLUDE_DIR=${PREFIX}/include/libepoll-shim
+CMAKE_ARGS+= -DLIBEPOLL_LIBRARIES=-lepoll-shim -lrt
 
 post-install:
 	@chmod a+s ${STAGEDIR}${PREFIX}/bin/sway

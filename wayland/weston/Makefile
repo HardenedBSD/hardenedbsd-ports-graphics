@@ -60,7 +60,7 @@ BUILD_DEPENDS+=	wayland-scanner:${PORTSDIR}/wayland/wayland
 
 RUN_DEPENDS=	${LOCALBASE}/lib/libglapi.so.0:${PORTSDIR}/graphics/libglapi
 
-CPPFLAGS+=	-I${LOCALBASE}/include
+CPPFLAGS+=	-I${LOCALBASE}/include -I${LOCALBASE}/include/libepoll-shim
 LDFLAGS+=	-L${LOCALBASE}/lib
 
 GNU_CONFIGURE=	YES
@@ -80,8 +80,10 @@ CONFIGURE_ARGS+=	--disable-vaapi-recorder
 CONFIGURE_ARGS+=	--disable-xwayland-test
 
 CONFIGURE_ENV+= LIBS="-lepoll-shim -lrt -lkbdev"
-#CONFIGURE_ENV+=	PKG_CONFIG_PATH="${PREFIX}/libdata/pkgconfig"
 
+# TODO: Fix include paths and libraries
+
+# CONFIGURE_ENV+=	PKG_CONFIG_PATH="${PREFIX}/libdata/pkgconfig"
 # CONFIGURE_ENV+= XWAYLAND_CLIENT_LIBS="-lepoll-shim -lrt"
 # CONFIGURE_ENV+= EGL_CLIENT_LIBS="-lepoll-shim -lrt"
 

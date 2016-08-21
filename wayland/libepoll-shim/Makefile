@@ -1,4 +1,4 @@
-# Created by yohanesu75@gmail.com
+# Created by Johannes Lundberg <yohanesu75@gmail.com>
 # $FreeBSD$
 
 PORTNAME=	libepoll-shim
