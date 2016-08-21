@@ -21,7 +21,7 @@ USES=		autoreconf gmake libtool pathfix pkgconfig
 GNU_CONFIGURE=	yes
 PATHFIX_MAKEFILEIN?=	Makefile.am
 
-CPPFLAGS+=	-I${LOCALBASE}/include
+CPPFLAGS+=	-I${LOCALBASE}/include/libepoll-shim
 INSTALL_TARGET=	install-strip
 
 .include <bsd.port.mk>
