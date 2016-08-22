@@ -1,3 +1,5 @@
-TIMESTAMP = 1471413433
-SHA256 (jiixyj-libinput-1.4.0-67c9796_GH0.tar.gz) = 05a2ad401b4969d80af3495e1e8f7577a185ae2f14e21b3d3194f98f34fac911
-SIZE (jiixyj-libinput-1.4.0-67c9796_GH0.tar.gz) = 731516
+TIMESTAMP = 1471651628
+SHA256 (cloudef-wlc-0.0.5-fa780ce_GH0.tar.gz) = bf22b99b52cc2fb4ecc27da90ee47f516f8d5d1a02afdc495488c14d01788bc8
+SIZE (cloudef-wlc-0.0.5-fa780ce_GH0.tar.gz) = 120603
+SHA256 (cloudef-chck-3f27d2a_GH0.tar.gz) = fa3765dbaad52e968aae8b9a06a8ace24fab0d9ca53cc08a1f5543ff33959ebd
+SIZE (cloudef-chck-3f27d2a_GH0.tar.gz) = 119955
