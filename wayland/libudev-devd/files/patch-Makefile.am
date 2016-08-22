@@ -1,0 +1,9 @@
+--- Makefile.am.orig	2015-11-10 19:56:22 UTC
++++ Makefile.am
+@@ -22,5 +22,5 @@ libudev_la_LDFLAGS =	-pthread
+ libudev_la_CFLAGS =	-I$(top_srcdir) -fvisibility=hidden	\
+ 			$(LIBEVDEV_CFLAGS)
+ 
+-pkgconfigdir = $(libdir)/pkgconfig
++pkgconfigdir = $(prefix)/libdata/pkgconfig
+ pkgconfig_DATA = libudev.pc

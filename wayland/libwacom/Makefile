@@ -13,10 +13,12 @@ COMMENT=	Adds tablet support to libinput
 
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-BUILD_DEPENDS=	v4l_compat>=0:${PORTSDIR}/multimedia/v4l_compat
 LIB_DEPENDS=	libgudev-1.0.so:${PORTSDIR}/wayland/libgudev
 
-USES=		gmake libtool pkgconfig gnome
+CONFIGURE_ENV+=	PKG_CONFIG_PATH=${STAGEDIR}${PREFIX}/libdata/pkgconfig
+
+USES=		gmake libtool pkgconfig pathfix
+USE_GNOME=	glib20
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
 CPPFLAGS+=	-I${LOCALBASE}/include

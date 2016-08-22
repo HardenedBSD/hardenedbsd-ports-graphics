@@ -1,4 +1,4 @@
---- cmake/Modules/WaffleValidateOptions.cmake.orig	2015-01-22 20:00:17 UTC
+--- cmake/Modules/WaffleValidateOptions.cmake.orig	2015-08-25 21:05:10 UTC
 +++ cmake/Modules/WaffleValidateOptions.cmake
 @@ -44,7 +44,7 @@ if(DEFINED waffle_install_docdir)
              "details.")

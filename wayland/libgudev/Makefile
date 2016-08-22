@@ -16,7 +16,8 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 
 LIB_DEPENDS=	libudev.so:${PORTSDIR}/wayland/libudev-devd
 
-USES=		gmake libtool pkgconfig
+USES=		gmake libtool pkgconfig pathfix
+USE_GNOME=	glib20 introspection gnomedocutils
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
 INSTALL_TARGET=	install-strip

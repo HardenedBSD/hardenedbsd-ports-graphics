@@ -4,4 +4,4 @@ lib/libwacom.a
 lib/libwacom.so
 lib/libwacom.so.2
 lib/libwacom.so.2.5.0
-lib/pkgconfig/libwacom.pc
+libdata/pkgconfig/libwacom.pc
