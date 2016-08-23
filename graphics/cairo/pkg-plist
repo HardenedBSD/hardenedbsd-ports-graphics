@@ -4,6 +4,7 @@ include/cairo/cairo-deprecated.h
 include/cairo/cairo-features.h
 include/cairo/cairo-ft.h
 %%OPENGL%%include/cairo/cairo-gl.h
+%%GLESV2%%include/cairo/cairo-gl.h
 %%GLIB%%include/cairo/cairo-gobject.h
 include/cairo/cairo-pdf.h
 include/cairo/cairo-ps.h
@@ -41,11 +42,12 @@ lib/libcairo.so
 lib/libcairo.so.2
 lib/libcairo.so.%%LIBVER%%
 libdata/pkgconfig/cairo.pc
-%%OPENGL%%libdata/pkgconfig/cairo-egl.pc
 libdata/pkgconfig/cairo-fc.pc
 libdata/pkgconfig/cairo-ft.pc
+%%EGL%%libdata/pkgconfig/cairo-egl.pc
 %%OPENGL%%libdata/pkgconfig/cairo-gl.pc
 %%OPENGL%%libdata/pkgconfig/cairo-glx.pc
+%%GLESV2%%libdata/pkgconfig/cairo-glesv2.pc
 %%GLIB%%libdata/pkgconfig/cairo-gobject.pc
 libdata/pkgconfig/cairo-pdf.pc
 libdata/pkgconfig/cairo-png.pc

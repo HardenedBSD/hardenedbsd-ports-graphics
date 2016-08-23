@@ -22,23 +22,7 @@ RUN_DEPENDS+=	xkeyboard-config>=2.5:x11/xkeyboard-config \
 XORG_CAT=	xserver
 SLAVE_PORT?=	no
 
-OPTIONS_SUB=	yes
-OPTIONS_DEFINE=	SUID 
-OPTIONS_RADIO=	CONF
-OPTIONS_RADIO_CONF=	HAL DEVD
-OPTIONS_DEFINE_amd64=	DRI3
-OPTIONS_DEFINE_i386=	DRI3
-SUID_DESC=	Install the Xorg server with setuid bit set
-HAL_DESC=	Compile with HAL config support
-DEVD_DESC=	Use devd for autoconfiguration of input devices
-DRI3_DESC=	Experimental: Enable DRI3 support
-OPTIONS_DEFAULT=SUID DEVD
-
-OPTIONS_EXCLUDE_sparc64=	HAL
-
-.include <bsd.port.options.mk>
-
-USES=		gmake libtool perl5 ssl tar:bzip2
+USES=		gmake libtool pkgconfig perl5 ssl tar:bzip2
 USE_PERL5=	build
 USE_GL=		gbm egl gl
 USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
@@ -49,12 +33,31 @@ USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
 		videoproto compositeproto trapproto presentproto recordproto \
 		xineramaproto xinerama evieproto xfont fontenc xkbui pixman \
 		pciaccess xshmfence
-CONFIGURE_ARGS?=--disable-dmx --disable-xvfb --disable-xnest \
+CONFIGURE_ARGS?= --disable-dmx --disable-xvfb --disable-xnest \
 		--without-xmlto --disable-docs --disable-devel-docs \
 		--localstatedir=/var --without-dtrace --disable-xephyr \
-		--enable-record=yes --disable-xwayland \
-		--enable-glamor
+		--enable-record=yes --enable-glamor
 INSTALL_TARGET=	install-strip
+
+OPTIONS_SUB=	yes
+OPTIONS_DEFINE=	SUID XWL
+OPTIONS_RADIO=	CONF
+OPTIONS_RADIO_CONF=	HAL DEVD UDEV
+OPTIONS_DEFINE_amd64=	DRI3
+OPTIONS_DEFINE_i386=	DRI3
+SUID_DESC=	Install the Xorg server with setuid bit set
+HAL_DESC=	Compile with HAL config support
+DEVD_DESC=	Use devd for autoconfiguration of input devices
+DRI3_DESC=	Experimental: Enable DRI3 support
+XWL_DESC=	XWayland support.
+UDEV_DESC=	Use udev for input devices.
+OPTIONS_DEFAULT=SUID DEVD
+# CONFIGURE_ENABLE write to CONFIGURE_ARGS so we have to move it
+# below CONFIGURE_ARGS?=... otherwise args are never assigned!!
+XWL_CONFIGURE_ENABLE=	xwayland
+OPTIONS_EXCLUDE_sparc64=	HAL
+
+.include <bsd.port.options.mk>
 
 .if ${SLAVE_PORT} == "no"
 SUB_FILES=	pkg-install pkg-deinstall
@@ -66,9 +69,20 @@ PLIST=		${.CURDIR}/pkg-plist
 
 .if ${PORT_OPTIONS:MDRI3}
 USE_XORG+=	dri3proto
-CONFIGURE_ARGS+=	 --enable-dri3 
+CONFIGURE_ARGS+=	 --enable-dri3
 .else
-CONFIGURE_ARGS+=	 --disable-dri3 
+CONFIGURE_ARGS+=	 --disable-dri3
+.endif
+
+.if ${PORT_OPTIONS:MUDEV}
+LIB_DEPENDS+=	libudev.so:${PORTSDIR}/wayland/libudev-devd
+CONFIGURE_ARGS+= --enable-config-udev --disable-config-udev-kms --disable-systemd-logind
+.endif
+
+.if ${PORT_OPTIONS:MXWL}
+BUILD_DEPENDS+=	${NONEXISTENT}:${PORTSDIR}/wayland/wayland-protocols
+BUILD_DEPENDS+=	wayland-scanner:${PORTSDIR}/wayland/wayland
+LIB_DEPENDS+=	libwayland-client.so:${PORTSDIR}/wayland/wayland
 .endif
 
 .include <bsd.port.pre.mk>
@@ -77,7 +91,7 @@ CONFIGURE_ARGS+=	 --disable-dri3
 # The reason why I use this is cause openssl from base doesn't install a .pc file
 # and configure will fail trying to find it. Setting both of those variables to
 # a *non-empty* value by-passes the pkg-config check.
-CONFIGURE_ENV=	SHA1_LIB="-L/usr/lib -lcrypto" SHA1_CFLAGS="-I/usr/include"
+CONFIGURE_ENV+=	SHA1_LIB="-L/usr/lib -lcrypto" SHA1_CFLAGS="-I/usr/include"
 .endif
 
 .if ${PORT_OPTIONS:MHAL}

@@ -14,7 +14,7 @@ LIB_DEPENDS+=	libdrm.so:graphics/libdrm \
 
 # stuff not needed by libglesv2 but configure wants it
 USE_XORG+=	glproto dri2proto xext xdamage xfixes presentproto \
-		xshmfence
+		xshmfence dri3proto
 
 .include <bsd.port.options.mk>
 .include "${.CURDIR}/../../graphics/libGL/Makefile.common"

@@ -24,8 +24,16 @@ PORTSCOUT=	ignore:1
 .else
 PORTSCOUT=	limit:1,even
 
-BUILD_DEPENDS+=	at-spi2-atk>=0:accessibility/at-spi2-atk
-LIB_DEPENDS=	libepoxy.so:graphics/libepoxy
+BUILD_DEPENDS+=	at-spi2-atk>=0:accessibility/at-spi2-atk \
+		v4l_compat>=0:multimedia/v4l_compat
+
+LIB_DEPENDS=	libepoxy.so:graphics/libepoxy \
+		libxkbcommon.so:x11/libxkbcommon \
+		libwayland-cursor.so:wayland/wayland \
+		libwayland-egl.so:graphics/libEGL \
+		libwayland-client.so:wayland/wayland \
+		libcairo.so:graphics/cairo
+
 RUN_DEPENDS+=	hicolor-icon-theme>=0:misc/hicolor-icon-theme \
 		adwaita-icon-theme>=0:x11-themes/adwaita-icon-theme \
 		at-spi2-atk>=0:accessibility/at-spi2-atk
@@ -39,7 +47,6 @@ USES+=		gettext gmake gnome libtool pathfix perl5 pkgconfig
 USE_XORG=	xext xrender x11 xinerama xi xrandr xcursor xfixes xdamage \
 		xcomposite
 CONFIGURE_ARGS=	--enable-x11-backend \
-		--disable-wayland-backend \
 		--enable-introspection
 CPPFLAGS+=	-I${LOCALBASE}/include -fno-omit-frame-pointer
 LIBS+=		-L${LOCALBASE}/lib
@@ -54,12 +61,15 @@ GLIB_SCHEMAS=	org.gtk.Demo.gschema.xml \
 		org.gtk.Settings.Debug.gschema.xml \
 		org.gtk.Settings.FileChooser.gschema.xml
 
-OPTIONS_DEFINE=	CUPS CLOUDPRINT COLORD DEBUG BROADWAY
-OPTIONS_DEFAULT=CUPS COLORD BROADWAY
+OPTIONS_DEFINE=	CUPS CLOUDPRINT COLORD DEBUG BROADWAY WAYLAND
+OPTIONS_DEFAULT=CUPS COLORD BROADWAY WAYLAND
 OPTIONS_SUB=	yes
 
 BROADWAY_DESC=	Enable GDK Broadway backend for showing GTK+ in the webbrowser using HTML5 and web sockets.
 BROADWAY_CONFIGURE_ENABLE=	broadway-backend
+
+WAYLAND_DESC=	Enable Wayland backend backend.
+WAYLAND_CONFIGURE_ENABLE=	wayland-backend
 
 COLORD_DESC=	Color profile support
 COLORD_LIB_DEPENDS=	libcolord.so:graphics/colord

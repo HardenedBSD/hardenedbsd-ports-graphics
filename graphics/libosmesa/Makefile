@@ -11,7 +11,7 @@ COMMENT=	Off-Screen Mesa implementation of the OpenGL API
 LIB_DEPENDS=	libexpat.so:textproc/expat2 \
 		libglapi.so:graphics/libglapi
 
-USE_XORG=	x11 xau xcb xdmcp xvmc
+USE_XORG=	x11 xau xcb xdmcp xvmc presentproto
 # libosmesa doesn't link agains libGL but osmesa.h needs GL/gl.h
 # and both headers are intalled by libGL ....
 USE_GL=		gl

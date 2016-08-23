@@ -15,6 +15,11 @@ GH_TAGNAME=	0.9
 USES=		cmake:outsource pkgconfig pathfix
 USE_GCC=	any
 
+OPTIONS_SUB=	yes
+OPTIONS_DEFINE=	SUID
+SUID_DESC=	Install sway binary with setuid bit set
+OPTIONS_DEFAULT=SUID
+
 LIB_DEPENDS= \
 		libwlc.so:${PORTSDIR}/wayland/wlc					\
 		libwayland-server.so:${PORTSDIR}/wayland/wayland	\
@@ -36,8 +41,5 @@ BUILD_DEPENDS+=	a2x:${PORTSDIR}/textproc/asciidoc
 
 CMAKE_ARGS+= -DLIBEPOLL_INCLUDE_DIR=${PREFIX}/include/libepoll-shim
 CMAKE_ARGS+= -DLIBEPOLL_LIBRARIES=-lepoll-shim -lrt
-
-post-install:
-	@chmod a+s ${STAGEDIR}${PREFIX}/bin/sway
 
 .include <bsd.port.mk>

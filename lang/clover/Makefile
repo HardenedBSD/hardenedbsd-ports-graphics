@@ -14,7 +14,7 @@ LIB_DEPENDS=	libdrm.so:graphics/libdrm \
 RUN_DEPENDS=	opencl>=0:devel/opencl
 
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto \
-		presentproto xvmc xshmfence
+		presentproto xvmc xshmfence dri3proto
 
 ONLY_FOR_ARCHS=	i386 amd64
 ONLY_FOR_ARCHS_REASON=	Clover needs a graphics driver supported by the Radeon KMS driver

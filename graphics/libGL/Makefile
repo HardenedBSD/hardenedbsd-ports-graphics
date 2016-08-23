@@ -13,7 +13,7 @@ LIB_DEPENDS+=	libdrm.so:graphics/libdrm \
 		libexpat.so:textproc/expat2
 
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto:both \
-		presentproto xshmfence xcb
+		presentproto xshmfence xcb dri3proto:both
 
 .include <bsd.port.options.mk>
 .include "${.CURDIR}/Makefile.common"

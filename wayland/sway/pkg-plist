@@ -1,4 +1,5 @@
-bin/sway
+%%SUID%%@(,,4755) bin/sway
+%%NO_SUID%%bin/sway
 bin/swaybar
 bin/swaybg
 bin/swaygrab

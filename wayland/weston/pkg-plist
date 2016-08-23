@@ -1,5 +1,6 @@
 bin/wcap-decode
-bin/weston
+%%SUID%%@(,,4755) bin/weston
+%%NO_SUID%%bin/weston
 bin/weston-calibrator
 bin/weston-clickdot
 bin/weston-cliptest
@@ -12,6 +13,8 @@ bin/weston-image
 bin/weston-info
 bin/weston-launch
 bin/weston-multi-resource
+bin/weston-nested
+bin/weston-nested-client
 bin/weston-presentation-shm
 bin/weston-resizor
 bin/weston-scaler
@@ -40,7 +43,6 @@ include/weston/platform.h
 include/weston/timeline-object.h
 include/weston/version.h
 include/weston/zalloc.h
-lib/pkgconfig/weston.pc
 lib/weston/cms-colord.so
 lib/weston/cms-static.so
 lib/weston/desktop-shell.so
@@ -53,6 +55,7 @@ lib/weston/ivi-shell.so
 lib/weston/wayland-backend.so
 lib/weston/x11-backend.so
 lib/weston/xwayland.so
+libdata/pkgconfig/weston.pc
 libexec/weston-desktop-shell
 libexec/weston-ivi-shell-user-interface
 libexec/weston-keyboard

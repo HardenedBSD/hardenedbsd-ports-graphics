@@ -12,7 +12,7 @@ LIB_DEPENDS=	libdrm.so:graphics/libdrm \
 		libexpat.so:textproc/expat2
 
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto \
-		presentproto xvmc xshmfence
+		presentproto xvmc xshmfence dri3proto
 
 OPTIONS_DEFINE=	TEXTURE
 OPTIONS_DEFAULT=TEXTURE
