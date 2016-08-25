@@ -38,21 +38,26 @@ INSTALL_TARGET=	install-strip
 CONFIGURE_ARGS=	--with-html-dir=${DOCSDIR} \
 		--disable-directfb \
 		--disable-gallium \
-		--disable-glesv2 \
 		--disable-wgl \
 		--enable-tee
 
-OPTIONS_DEFINE=	OPENGL XCB GLIB X11
-OPTIONS_DEFAULT=OPENGL XCB GLIB X11
+OPTIONS_DEFINE=	OPENGL GLESV2 EGL XCB GLIB X11
+OPTIONS_DEFAULT=GLESV2 EGL XCB GLIB X11
 OPTIONS_SLAVE=	${ARCH:tu}
 XCB_DESC=	Enable XCB (X C-language Binding) Support
 GLIB_DESC=	Enable GObject Functions Feature
+GLESV2_DESC=2D/3D rendering support via GLESv2
+EGL_DESC=	Enable EGL functions
 OPTIONS_SUB=	yes
 X11_USE=	xorg=x11,xext,xrender
 X11_CONFIGURE_ENABLE=xlib
-OPENGL_USE=	gl=gl,egl xorg=glproto:both,dri2proto:both
-OPENGL_CONFIGURE_ENABLE=gl egl
+OPENGL_USE=	gl=gl xorg=glproto:both,dri2proto:both,dri3proto:both
+OPENGL_CONFIGURE_ENABLE=gl
 OPENGL_IMPLIES=	X11
+GLESV2_USE=	gl=glesv2
+GLESV2_CONFIGURE_ENABLE=glesv2
+EGL_USE=	gl=egl
+EGL_CONFIGURE_ENABLE=egl
 GLIB_USE=	gnome=glib20
 GLIB_CONFIGURE_ENABLE=	gobject
 XCB_BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/xcb-renderutil.pc:x11/xcb-util-renderutil

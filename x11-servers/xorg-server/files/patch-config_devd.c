@@ -1,4 +1,4 @@
---- config/devd.c.orig	2015-05-19 19:41:49 UTC
+--- config/devd.c.orig	2016-08-23 05:51:43 UTC
 +++ config/devd.c
 @@ -0,0 +1,531 @@
 +/*

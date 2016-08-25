@@ -1,4 +1,4 @@
---- protocol/input-method-unstable-v1.xml.orig	2016-08-18 19:50:37 UTC
+--- protocol/input-method-unstable-v1.xml.orig	2016-08-23 21:55:40 UTC
 +++ protocol/input-method-unstable-v1.xml
 @@ -0,0 +1,302 @@
 +<?xml version="1.0" encoding="UTF-8"?>

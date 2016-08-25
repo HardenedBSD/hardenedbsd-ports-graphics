@@ -22,7 +22,7 @@ USE_XORG=	x11 xau xcb xdmcp
 
 # stuff not needed by libEGL but configure wants it
 USE_XORG+=	glproto dri2proto xext xdamage xfixes presentproto \
-		xshmfence
+		xshmfence dri3proto
 
 .include <bsd.port.options.mk>
 .include "${.CURDIR}/../../graphics/libGL/Makefile.common"

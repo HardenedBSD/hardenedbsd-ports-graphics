@@ -34,7 +34,7 @@ USE_XORG=	glproto \
 USES+=		cpe
 CPE_VENDOR=	x
 
-CONFIGURE_ARGS+=	--with-default-accel=sna
+CONFIGURE_ARGS+=	--with-default-accel=sna 
 
 INSTALL_TARGET=	install-strip
 

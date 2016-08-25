@@ -44,13 +44,21 @@ CONFIGURE_ARGS=	--with-gtk=3.0 \
 		--enable-svg-fonts \
 		--enable-geolocation \
 		--enable-webkit2 \
-		--enable-introspection
+		--enable-introspection \
+		--enable-egl \
+		--enable-webgl \
+		--enable-gles2 \
+		--enable-wayland-target \
+		--enable-accelerated-compositing \
+		--enable-x11-target
+#		--enable-glx \
+
 MAKEFILE=	GNUmakefile
 MAKE_ENV=	XDG_CACHE_HOME=${WRKDIR}
 
 #CONFIGURE_ARGS+=--disable-silent-rules
-CONFIGURE_ARGS+=--disable-egl \
-		--disable-gles2
+#CONFIGURE_ARGS+=--disable-egl \
+#		--disable-gles2
 #		--with-acceleration-backend=opengl # clutter broken?
 # opengl, clutter, none (clutter unsupported)
 

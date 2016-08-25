@@ -1,0 +1,5 @@
+This package contains the X.Org xf86-input-libinput driver.
+
+Check ${prefix}/share/X11/xorg.conf.d/60-libinput.conf for conf example.
+
+WWW: http://www.x.org

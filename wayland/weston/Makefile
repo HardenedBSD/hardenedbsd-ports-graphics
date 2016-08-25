@@ -17,7 +17,8 @@ LDFLAGS+=	-L${LOCALBASE}/lib
 USE_XORG=	x11 xcb xcursor
 USE_GL=		egl gbm glesv2
 
-BROKEN=	Builds in ports but not in poudriere - fix paths for configure script.
+#BROKEN=	Can build all clients but compositor does not work.
+#TODO: Start a new port based on original code, not Dragonfly port.
 
 #OPTIONS_DEFINE=	CLIENTS
 #OPTIONS_SINGLE=	CAIRO
@@ -29,10 +30,17 @@ BROKEN=	Builds in ports but not in poudriere - fix paths for configure script.
 #CLIENTS_DESC = Build Weston clients
 #OPTIONS_DEFAULT=CAIROIMAGE CLIENTS
 
+OPTIONS_SUB=	yes
+OPTIONS_DEFINE=	SUID
+SUID_DESC=	Install weston binary with setuid bit set
+OPTIONS_DEFAULT=SUID
+SUID_CONFIGURE_ENABLE=setuid-install
+
 LIB_DEPENDS= \
 		libxkbcommon.so:${PORTSDIR}/x11/libxkbcommon		\
 		libpixman-1.so:${PORTSDIR}/x11/pixman				\
 		libcairo.so:${PORTSDIR}/graphics/cairo				\
+		libpango-1.0.so:${PORTSDIR}/x11-toolkits/pango		\
 		libcolord.so:${PORTSDIR}/graphics/colord			\
 		libfontconfig.so:${PORTSDIR}/x11-fonts/fontconfig	\
 		libfreetype.so:${PORTSDIR}/print/freetype2			\
@@ -65,7 +73,6 @@ LDFLAGS+=	-L${LOCALBASE}/lib
 
 GNU_CONFIGURE=	YES
 
-CONFIGURE_ARGS+=	--enable-setuid-install
 CONFIGURE_ARGS+=	--enable-wayland-compositor
 CONFIGURE_ARGS+=	--enable-x11-compositor
 CONFIGURE_ARGS+=	--enable-drm-compositor
@@ -79,7 +86,9 @@ CONFIGURE_ARGS+=	--disable-fbdev-compositor
 CONFIGURE_ARGS+=	--disable-vaapi-recorder
 CONFIGURE_ARGS+=	--disable-xwayland-test
 
-CONFIGURE_ENV+= LIBS="-lepoll-shim -lrt -lkbdev"
+CONFIGURE_ARGS+=	--with-cairo=glesv2 --with-cairo-glesv2
+
+CONFIGURE_ENV+= LIBS="-lepoll-shim -lrt -lkbdev -lEGL"
 
 # TODO: Fix include paths and libraries
 

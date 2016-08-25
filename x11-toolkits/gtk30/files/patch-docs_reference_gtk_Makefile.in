@@ -1,6 +1,6 @@
---- docs/reference/gtk/Makefile.in.orig	2014-10-14 15:50:07.675435846 +0200
-+++ docs/reference/gtk/Makefile.in	2014-10-14 15:50:49.218431589 +0200
-@@ -820,7 +820,6 @@
+--- docs/reference/gtk/Makefile.in.orig	2016-08-23 06:52:46 UTC
++++ docs/reference/gtk/Makefile.in
+@@ -987,7 +987,6 @@ GTK_DOC_V_PDF_0 = @echo "  DOC   Buildin
  ########################################################################
  man_MANS = \
  	gtk-query-immodules-3.0.1	\

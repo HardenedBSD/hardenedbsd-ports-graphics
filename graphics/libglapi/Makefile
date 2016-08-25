@@ -14,7 +14,7 @@ USE_XORG=	x11 xau xcb xdmcp xvmc
 
 # stuff not needed by libglapi but configure wants it
 USE_XORG+=	glproto dri2proto xext xdamage xfixes presentproto \
-		xshmfence
+		xshmfence dri3proto
 LIB_DEPENDS+=	libexpat.so:textproc/expat2 \
 		libdrm.so:graphics/libdrm
 

@@ -1,5 +1,14 @@
 --- Makefile.am.orig	2016-02-29 23:30:58 UTC
 +++ Makefile.am
+@@ -19,7 +19,7 @@ dist_pkgdata_DATA =				\
+ 	protocol/wayland.xml			\
+ 	protocol/wayland.dtd
+ 
+-pkgconfigdir = $(libdir)/pkgconfig
++pkgconfigdir = $(prefix)/libdata/pkgconfig
+ pkgconfig_DATA =
+ 
+ bin_PROGRAMS = wayland-scanner
 @@ -73,7 +73,7 @@ nodist_include_HEADERS =			\
  	protocol/wayland-client-protocol.h
  
