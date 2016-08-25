@@ -1,4 +1,4 @@
---- src/launcher-util.h.orig	2016-08-18 19:51:23 UTC
+--- src/launcher-util.h.orig	2016-05-19 21:36:04 UTC
 +++ src/launcher-util.h
 @@ -55,4 +55,7 @@ weston_launcher_restore(struct weston_la
  void

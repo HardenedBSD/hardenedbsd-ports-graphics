@@ -1,4 +1,4 @@
---- Makefile.am.orig	2016-05-19 21:36:04 UTC
+--- Makefile.am.orig	2016-08-23 21:55:40 UTC
 +++ Makefile.am
 @@ -65,7 +65,7 @@ weston_LDFLAGS = -export-dynamic
  weston_CPPFLAGS = $(AM_CPPFLAGS) -DIN_WESTON

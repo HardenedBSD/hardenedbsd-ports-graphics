@@ -17,7 +17,8 @@ LDFLAGS+=	-L${LOCALBASE}/lib
 USE_XORG=	x11 xcb xcursor
 USE_GL=		egl gbm glesv2
 
-#BROKEN=	Builds in ports but not in poudriere - fix paths for configure script.
+#BROKEN=	Can build all clients but compositor does not work.
+#TODO: Start a new port based on original code, not Dragonfly port.
 
 #OPTIONS_DEFINE=	CLIENTS
 #OPTIONS_SINGLE=	CAIRO
@@ -39,6 +40,7 @@ LIB_DEPENDS= \
 		libxkbcommon.so:${PORTSDIR}/x11/libxkbcommon		\
 		libpixman-1.so:${PORTSDIR}/x11/pixman				\
 		libcairo.so:${PORTSDIR}/graphics/cairo				\
+		libpango-1.0.so:${PORTSDIR}/x11-toolkits/pango		\
 		libcolord.so:${PORTSDIR}/graphics/colord			\
 		libfontconfig.so:${PORTSDIR}/x11-fonts/fontconfig	\
 		libfreetype.so:${PORTSDIR}/print/freetype2			\

@@ -1,4 +1,4 @@
---- src/launcher-util.c.orig	2016-08-18 19:51:18 UTC
+--- src/launcher-util.c.orig	2016-05-19 21:36:04 UTC
 +++ src/launcher-util.c
 @@ -115,3 +115,9 @@ weston_setup_vt_switch_bindings(struct w
  						  switch_vt_binding,
