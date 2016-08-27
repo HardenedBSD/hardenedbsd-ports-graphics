@@ -39,30 +39,36 @@ CONFIGURE_ARGS=	--with-html-dir=${DOCSDIR} \
 		--disable-directfb \
 		--disable-gallium \
 		--disable-wgl \
+		--enable-xlib-xcb \
 		--enable-tee
 
-OPTIONS_DEFINE=	OPENGL GLESV2 EGL XCB GLIB X11
-OPTIONS_DEFAULT=GLESV2 EGL XCB GLIB X11
+OPTIONS_SUB=yes
+OPTIONS_DEFINE=	EGL XCB GLIB X11
+OPTIONS_DEFAULT=GL EGL XCB GLIB X11
 OPTIONS_SLAVE=	${ARCH:tu}
-XCB_DESC=	Enable XCB (X C-language Binding) Support
-GLIB_DESC=	Enable GObject Functions Feature
-GLESV2_DESC=2D/3D rendering support via GLESv2
-EGL_DESC=	Enable EGL functions
-OPTIONS_SUB=	yes
+OPTIONS_SINGLE=	OPENGL
+OPTIONS_SINGLE_OPENGL= NOGL GL GLESV2
+OPENGL_DESC=OpenGL backend
+NOGL_DESC= 	None
 X11_USE=	xorg=x11,xext,xrender
 X11_CONFIGURE_ENABLE=xlib
-OPENGL_USE=	gl=gl xorg=glproto:both,dri2proto:both,dri3proto:both
-OPENGL_CONFIGURE_ENABLE=gl
-OPENGL_IMPLIES=	X11
+GL_USE=	gl=gl xorg=glproto:both,dri2proto:both,dri3proto:both
+GL_DESC=	2D/3D rendering support via OpenGL
+GL_IMPLIES=	X11
+GL_CONFIGURE_ENABLE=gl
 GLESV2_USE=	gl=glesv2
+GLESV2_DESC=2D/3D rendering support via OpenGL ES 2
 GLESV2_CONFIGURE_ENABLE=glesv2
 EGL_USE=	gl=egl
+EGL_DESC=	Enable EGL functions
 EGL_CONFIGURE_ENABLE=egl
 GLIB_USE=	gnome=glib20
+GLIB_DESC=	Enable GObject Functions Feature
 GLIB_CONFIGURE_ENABLE=	gobject
+XCB_USE=	xorg=xcb
+XCB_DESC=	Enable XCB (X C-language Binding) Support
 XCB_BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/xcb-renderutil.pc:x11/xcb-util-renderutil
 XCB_RUN_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/xcb-renderutil.pc:x11/xcb-util-renderutil
-XCB_USE=	xorg=xcb
 XCB_CONFIGURE_ENABLE=	xcb
 # this has another option --enable-xlib-xcb=auto but it is buggy.
 MIPS_BUILD_DEPENDS=	${LOCALBASE}/include/atomic_ops.h:devel/libatomic_ops

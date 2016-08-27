@@ -21,7 +21,7 @@ USE_GL=		egl gbm glesv2
 #TODO: Start a new port based on original code, not Dragonfly port.
 
 #OPTIONS_DEFINE=	CLIENTS
-#OPTIONS_SINGLE=	CAIRO
+# OPTIONS_SINGLE=	CAIRO
 #OPTIONS_SINGLE_CAIRO=	CAIROIMAGE CAIROGL CAIROGLESV2
 #CAIRO_DESC=	Cairo renderer
 #CAIROIMAGE_DESC	= Image
@@ -86,7 +86,7 @@ CONFIGURE_ARGS+=	--disable-fbdev-compositor
 CONFIGURE_ARGS+=	--disable-vaapi-recorder
 CONFIGURE_ARGS+=	--disable-xwayland-test
 
-CONFIGURE_ARGS+=	--with-cairo=glesv2 --with-cairo-glesv2
+CONFIGURE_ARGS+=	--with-cairo=image
 
 CONFIGURE_ENV+= LIBS="-lepoll-shim -lrt -lkbdev -lEGL"
 
