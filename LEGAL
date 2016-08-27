@@ -39,7 +39,6 @@ apache2/mod_h264_streaming-*	www/mod_h264_streaming	No commercial use
 armyops*-linux.run	games/linux-americasarmy Redistribution is limited
 astah-community-*.zip	devel/astah-community	License restrictions -- See http://astah.net/faq/community/enduser-license-agreement
 atari800/*		emulators/atari800	xf25 contains copyright ROMs and cannot be distributed
-bamg*			math/bamg		Contact author personally regarding commercial use
 baudline_*		audio/baudline		No redistribution allowed
 BCWipe-*		security/bcwipe		Non-commercial distribution and use only
 bdc*			security/bdc		License does not allow redistribution
@@ -194,7 +193,6 @@ Radiator/*		net/radiator		Commercial software
 RakNet-*		devel/raknet		Special authorization granted to distribute version 3.x under GPLv3
 rapid-*			math/rapid		For any commercial purpose, you must request a license from http://www.cs.unc.edu/~geom/OBB/OBBT.html
 rarbsd-*		archivers/rar		only unmodified original package can be distributed
-RealPlayer-*.rpm	multimedia/linux-realplayer Redistribution not allowed
 ricty-*			japanese/font-ricty	Redistribution not allowed
 ringtonetools-*		misc/ringtonetools	Not free for commercial organizations
 savage/SFE*		games/linux-savage	Freeware, but license terms are unclear

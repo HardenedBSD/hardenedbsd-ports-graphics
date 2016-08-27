@@ -3,7 +3,6 @@
 
 PORTNAME=	llvm
 PORTVERSION=	${LLVM_MAJOR}.d${SNAPDATE}
-PORTREVISION=	1
 CATEGORIES=	devel lang
 PKGNAMESUFFIX=	-devel
 
@@ -24,6 +23,7 @@ SUB_FILES=	llvm-wrapper.sh
 SUB_LIST=	LLVM_PREFIX="${LLVM_PREFIX}" LLVM_SUFFIX="${LLVM_SUFFIX}"
 
 CMAKE_INSTALL_PREFIX=	${LLVM_PREFIX}
+#CMAKE_ARGS=	-DBUILD_SHARED_LIBS=ON
 CMAKE_ARGS=
 
 USE_GITHUB=	yes
@@ -72,6 +72,7 @@ LLDB_DESC=		Install lldb, the LLVM debugger (ignored on 9.x)
 LLDB_BUILD_DEPENDS=	swig:devel/swig13
 LLDB_GH_PROJECT=	lldb:lldb
 LLDB_GH_TAGNAME=	${LLDB_COMMIT}:lldb
+LLDB_USES=		execinfo
 OPENMP_DESC=		Install libomp, the LLVM OpenMP runtime library
 OPENMP_CONFLICTS_INSTALL=	libiomp5-devel-*
 OPENMP_GH_PROJECT=	openmp:openmp
@@ -125,10 +126,12 @@ STRIP_LIBS=	BugpointPasses.so \
 
 EXTRAS_COMMANDS= \
 		clang-apply-replacements \
+		clang-include-fixer \
 		clang-modernize \
 		clang-query \
 		clang-rename \
 		clang-tidy \
+		find-all-symbols \
 		modularize
 EXTRAS_LIBS=	\
 		libclangApplyReplacements \
