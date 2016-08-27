@@ -389,10 +389,6 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 # USE_WX		- If set, this port uses the WxWidgets library and related
 #				  components. See bsd.wx.mk for more details.
 ##
-# USE_KDE4		- A list of the KDE 4 dependencies the port has (e.g.,
-#				  kdelibs, kdebase).  Implies that the port needs KDE.
-#				  Implies inclusion of bsd.kde4.mk.  See bsd.kde4.mk
-#				  for more details.
 #
 # USE_QT4		- A list of the Qt 4 dependencies the port has (e.g,
 #				  corelib, webkit).  Implies that the port needs Qt.
@@ -1404,10 +1400,6 @@ USES+=	gnome
 USES+=	mate
 .endif
 
-.if defined(USE_BDB)
-USES+=bdb:${USE_BDB}
-.endif
-
 .if defined(USE_MYSQL)
 USE_MYSQL:=		${USE_MYSQL:N[yY][eE][sS]:Nclient}
 .if defined(WANT_MYSQL_VER)
@@ -1430,10 +1422,6 @@ USES+=mysql:${USE_MYSQL}
 
 .if defined(USE_SDL)
 .include "${PORTSDIR}/Mk/bsd.sdl.mk"
-.endif
-
-.if defined(USE_KDE4) || defined(KDE4_BUILDENV)
-.include "${PORTSDIR}/Mk/bsd.kde4.mk"
 .endif
 
 .if !defined(UID)
@@ -1604,13 +1592,18 @@ SUB_LIST+=	PREFIX=${PREFIX} LOCALBASE=${LOCALBASE} \
 		WWWDIR=${WWWDIR} ETCDIR=${ETCDIR}
 # This is used for check-stagedir.sh and check_leftover.sh to replace
 # directories/files with PLIST_SUB %%KEYS%%.
+# Remove VARS which values are PLIST_SUB_SED_MIN long or shorter
+PLIST_SUB_SED_MIN?=	2
+PLIST_SUB_SED_tmp1= ${PLIST_SUB:C/.*=.{1,${PLIST_SUB_SED_MIN}}$//g}
 #  Remove VARS that are too generic
 #  Remove empty values
 #  Remove @comment values
+PLIST_SUB_SED_tmp2= ${PLIST_SUB_SED_tmp1:NEXTRACT_SUFX=*:NOSREL=*:NLIB32DIR=*:NPREFIX=*:NLOCALBASE=*:NRESETPREFIX=*:N*="":N*="@comment*}
+#  Handle VARS for which there is a _regex entry
+PLIST_SUB_SED_tmp3?= ${PLIST_SUB_SED_tmp2:C/(${PLIST_SUB:M*_regex=*:C/_regex=.*/=.*/:Q:S/\\ /|/g:S/\\//g})//:C/(.*)_regex=(.*)/\1=\2/}
 #  Remove quotes
 #  Replace . with \. for later sed(1) usage
-PLIST_SUB_SED_MIN?=	2
-PLIST_SUB_SED?= ${PLIST_SUB:C/.*=.{1,${PLIST_SUB_SED_MIN}}$//g:NEXTRACT_SUFX=*:NOSREL=*:NLIB32DIR=*:NPREFIX=*:NLOCALBASE=*:NRESETPREFIX=*:N*="":N*="@comment*:C/([^=]*)="?([^"]*)"?/s!\2!%%\1%%!g;/g:C/\./\\./g}
+PLIST_SUB_SED?= ${PLIST_SUB_SED_tmp3:C/([^=]*)="?([^"]*)"?/s!\2!%%\1%%!g;/g:C/\./\\./g}
 
 # kludge to strip trailing whitespace from CFLAGS;
 # sub-configure will not # survive double space
@@ -1946,10 +1939,6 @@ _USES_POST+=	php
 
 .if defined(USE_GECKO)
 .include "${PORTSDIR}/Mk/bsd.gecko.mk"
-.endif
-
-.if defined(USE_KDE4)
-.include "${PORTSDIR}/Mk/bsd.kde4.mk"
 .endif
 
 .if exists(${PORTSDIR}/Makefile.inc)
@@ -4007,10 +3996,12 @@ DEPENDS-LIST= \
 			PORTSDIR="${PORTSDIR}" \
 			dp_MAKE="${MAKE}" \
 			dp_PKGNAME="${PKGNAME}" \
+			dp_PKG_INFO="${PKG_INFO}" \
 			dp_SCRIPTSDIR="${SCRIPTSDIR}" \
 			${SH} ${SCRIPTSDIR}/depends-list.sh
 
 ALL-DEPENDS-LIST=			${DEPENDS-LIST} -r ${_UNIFIED_DEPENDS:Q}
+MISSING-DEPENDS-LIST=		${DEPENDS-LIST} -m ${_UNIFIED_DEPENDS:Q}
 TEST-DEPENDS-LIST=			${DEPENDS-LIST} ${TEST_DEPENDS:Q}
 CLEAN-DEPENDS-LIST=			${DEPENDS-LIST} -wr ${_UNIFIED_DEPENDS:Q} 
 CLEAN-DEPENDS-LIMITED-LIST=	${DEPENDS-LIST} -w ${_UNIFIED_DEPENDS:Q}
@@ -4290,12 +4281,8 @@ package-recursive: package
 
 # Show missing dependencies
 missing:
-	@_origins=$$(${PKG_INFO} -aoq); \
-	for dir in $$(${ALL-DEPENDS-LIST}); do \
-		_origin=$${dir##${PORTSDIR}/}; \
-		if ! $$(${ECHO_CMD} $${_origins} | ${GREP} -q $${_origin}); then \
-			${ECHO_CMD} $${_origin}; \
-		fi; \
+	@for dir in $$(${MISSING-DEPENDS-LIST}); do \
+		echo $${dir#${PORTSDIR}/}; \
 	done
 
 # Show missing dependencies by name
@@ -4458,8 +4445,7 @@ generate-plist: ${WRKDIR}
 		${SED} ${PLIST_SUB:S/$/!g/:S/^/ -e s!%%/:S/=/%%!/} ${PLIST} >> ${TMPPLIST}; \
 	fi
 
-# Keep PLIST_DIRSTRY as compatibility
-.for dir in ${PLIST_DIRS} ${PLIST_DIRSTRY}
+.for dir in ${PLIST_DIRS}
 	@${ECHO_CMD} ${dir} | ${SED} ${PLIST_SUB:S/$/!g/:S/^/ -e s!%%/:S/=/%%!/} -e 's,^,@dir ,' >> ${TMPPLIST}
 .endfor
 
@@ -5290,7 +5276,7 @@ _EXTRACT_SEQ=	010:check-build-conflicts 050:extract-message 100:checksum \
 				150:extract-depends 190:clean-wrkdir 200:${EXTRACT_WRKDIR} \
 				300:pre-extract 450:pre-extract-script 500:do-extract \
 				700:post-extract 850:post-extract-script \
-				${_OPTIONS_extract} ${_USES_extract}
+				${_OPTIONS_extract} ${_USES_extract} ${_SITES_extract}
 _PATCH_DEP=		extract
 _PATCH_SEQ=		050:ask-license 100:patch-message 150:patch-depends \
 				300:pre-patch 450:pre-patch-script 500:do-patch \
