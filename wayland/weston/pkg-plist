@@ -13,8 +13,6 @@ bin/weston-image
 bin/weston-info
 bin/weston-launch
 bin/weston-multi-resource
-bin/weston-nested
-bin/weston-nested-client
 bin/weston-presentation-shm
 bin/weston-resizor
 bin/weston-scaler
