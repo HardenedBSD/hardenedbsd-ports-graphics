@@ -40,4 +40,7 @@ LDFLAGS+=	-L${LOCALBASE}/lib
 
 SUB_FILES=	pkg-message
 
+DATADIR=	${PREFIX}/lib/piglit
+PORTDATA=	*
+
 .include <bsd.port.mk>
