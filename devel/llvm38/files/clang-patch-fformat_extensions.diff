@@ -24,6 +24,25 @@ diff -ruN tools/clang/include/clang/Driver/Options.td tools/clang/include/clang/
 diff -ruN tools/clang/lib/Driver/Tools.cpp tools/clang/lib/Driver/Tools.cpp
 --- tools/clang/lib/Driver/Tools.cpp	2015-07-30 22:47:41 UTC
 +++ tools/clang/lib/Driver/Tools.cpp
+@@ -2733,12 +2733,18 @@ static void addOpenMPRuntime(ArgStringLi
+ 
+   switch (getOpenMPRuntime(TC, Args)) {
+   case OMPRT_OMP:
++    // Automatically find linomp from ports
++    CmdArgs.push_back("-LCMAKE_INSTALL_PREFIX/lib");
+     CmdArgs.push_back("-lomp");
+     break;
+   case OMPRT_GOMP:
++    // Automatically find linomp from ports
++    CmdArgs.push_back("-LCMAKE_INSTALL_PREFIX/lib");
+     CmdArgs.push_back("-lgomp");
+     break;
+   case OMPRT_IOMP5:
++    // Automatically find linomp from ports
++    CmdArgs.push_back("-LCMAKE_INSTALL_PREFIX/lib");
+     CmdArgs.push_back("-liomp5");
+     break;
+   case OMPRT_Unknown:
 @@ -4045,6 +4045,7 @@
  
    // Forward -f (flag) options which we can pass directly.
