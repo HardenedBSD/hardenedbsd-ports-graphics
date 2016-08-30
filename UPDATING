@@ -5,6 +5,51 @@ they are unavoidable.
 You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
+20160829:
+  AFFECTS: users of x11/nvidia-driver
+  AUTHOR: cem@FreeBSD.org
+
+  The Nvidia driver has been updated to 367.35.  In this version of the driver,
+  some important functionality has been broken out into a separate
+  nvidia-modeset.ko.
+
+  Users that experience a hang starting X or observe
+
+    [    43.243] (II) NVIDIA(0): Validated MetaModes:
+    [    43.243] (II) NVIDIA(0):     "NULL"
+
+  in their Xorg.logs should replace 'nvidia.ko' with 'nvidia-modeset.ko' in
+  their loader.conf or rc.conf configurations.  (nvidia-modeset.ko has a
+  MODULE_DEPENDS relationship to nvidia.ko and will bring it in automatically.)
+
+20160829:
+  AFFECTS: users of security/sshguard
+  AUTHOR: feld@FreeBSD.org
+
+  Sshguard has been updated to 1.7.0. There have been several changes to
+  this release. Notably the hosts and ipfilter backends are no longer
+  supported. If you need these backends to be supported and you missed
+  the survey sent out by upstream I urge you to contact upstream.
+
+  The hosts backend was previously served by security/sshguard directly. 
+  The additional backends were slave ports with package name suffixes. I
+  have opted to keep the master/slave port relationship but not choose a
+  specific backend for security/sshguard. Instead it is now a metaport
+  which will prompt you for which backend you prefer. If no backend is
+  configured it will depend on security/sshguard-ipfw, which is the
+  native FreeBSD firewall. This my be surprising to users who depended
+  on security/sshguard which only provided hosts/TCP Wrappers blocking,
+  but there is no replacement at this time.
+
+  I would also like to document that sshguard no longer accepts the -e
+  argument which allowed external scripts to run when sshguard finds a
+  match. As a result the null backend can no longer be used to create
+  custom blocking functionality; it only serves as a detection backend.
+
+  If the removed backends return due to user demand they will be added
+  as slave ports for consistency. I apologize for any inconvenience and
+  lack of notice on the deprecation of these features.
+
 20160815:
   AFFECTS: users of mail/rspamd*
   AUTHOR: vsevolod@FreeBSD.org
