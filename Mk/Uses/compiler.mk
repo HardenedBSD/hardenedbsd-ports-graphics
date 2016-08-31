@@ -103,9 +103,15 @@ ALT_COMPILER_TYPE=	gcc
 CHOSEN_COMPILER_TYPE=	${COMPILER_TYPE}
 
 .if ${_COMPILER_ARGS:Mopenmp}
-.if ${COMPILER_TYPE} == clang
-USE_GCC=	yes
-CHOSEN_COMPILER_TYPE=	gcc
+.if ${COMPILER_TYPE} == clang && ${ARCH} == amd64
+BUILD_DEPENDS+= ${LOCALBASE}/bin/clang38:devel/llvm38
+CPP=    ${LOCALBASE}/bin/clang-cpp38
+CC=     ${LOCALBASE}/bin/clang38
+CXX=    ${LOCALBASE}/bin/clang++38
+CHOSEN_COMPILER_TYPE=   clang
+.else
+USE_GCC=        yes
+CHOSEN_COMPILER_TYPE=   gcc
 .endif
 .endif
 
