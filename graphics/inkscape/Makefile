@@ -35,7 +35,7 @@ SHEBANG_FILES=	cxxtest/cxxtestgen.pl share/extensions/*.p[lm] \
 		share/extensions/*.py share/extensions/genpofiles.sh
 
 OPTIONS_DEFINE=	POPPLER OPENMP VISIO CDR DBUS WPG
-OPTIONS_DEFAULT=POPPLER VISIO CDR WPG
+OPTIONS_DEFAULT=POPPLER OPENMP VISIO CDR WPG
 OPTIONS_SUB=	yes
 
 CDR_DESC=		Support for CorelDRAW diagrams
