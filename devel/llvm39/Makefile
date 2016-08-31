@@ -288,6 +288,7 @@ post-patch:
 	    -e 's|from lit|from lit${LLVM_SUFFIX}|' \
 	    -e 's|lit\.|lit${LLVM_SUFFIX}.|' \
 	    ${WRKSRC}/utils/lit/lit.py ${WRKSRC}/utils/lit/lit/*.py
+	${REINPLACE_CMD} -e 's|CMAKE_INSTALL_PREFIX|${CMAKE_INSTALL_PREFIX}|g' ${WRKSRC}/tools/clang/lib/Driver/Tools.cpp
 
 post-build-COMPILER_RT-on:
 	${MKDIR} ${WRKDIR}/compiler-rt-build
