@@ -244,6 +244,7 @@
     SUBDIR += chruby
     SUBDIR += cil
     SUBDIR += cityhash
+    SUBDIR += cjose
     SUBDIR += cl-alexandria
     SUBDIR += cl-alexandria-sbcl
     SUBDIR += cl-asdf
@@ -491,6 +492,7 @@
     SUBDIR += erlang-exmpp
     SUBDIR += erlang-folsom
     SUBDIR += erlang-gen_leader
+    SUBDIR += erlang-gen_rpc
     SUBDIR += erlang-gen_smtp
     SUBDIR += erlang-getopt
     SUBDIR += erlang-goldrush
@@ -518,6 +520,7 @@
     SUBDIR += erlang-syslog
     SUBDIR += es-eric6
     SUBDIR += etcd
+    SUBDIR += etcd3
     SUBDIR += etl
     SUBDIR += euca2ools
     SUBDIR += eventxx
@@ -1346,6 +1349,7 @@
     SUBDIR += librolegen
     SUBDIR += libruin
     SUBDIR += libs11n
+    SUBDIR += libscca
     SUBDIR += libsearpc
     SUBDIR += libserialport
     SUBDIR += libserver
@@ -4227,6 +4231,7 @@
     SUBDIR += py-libzfs
     SUBDIR += py-ll-core
     SUBDIR += py-llfuse
+    SUBDIR += py-llvmlite
     SUBDIR += py-lock_file
     SUBDIR += py-lockfile
     SUBDIR += py-log4py
