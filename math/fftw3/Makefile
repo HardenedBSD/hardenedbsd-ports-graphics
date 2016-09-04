@@ -41,7 +41,7 @@ OPTIONS_DEFINE=		G77_WRAPPERS OPENMP OPTIMIZED_CFLAGS
 G77_WRAPPERS_DESC=	Alter Fortran wrappers for use with g77
 OPENMP_DESC=		Build OpenMP multithreaded libraries
 
-OPTIONS_DEFAULT=	OPTIMIZED_CFLAGS
+OPTIONS_DEFAULT=	OPENMP OPTIMIZED_CFLAGS
 
 .include <bsd.port.options.mk>
 

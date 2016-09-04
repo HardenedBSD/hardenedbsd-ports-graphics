@@ -305,6 +305,7 @@ post-patch:
 	    -e 's|from lit|from lit${LLVM_SUFFIX}|' \
 	    -e 's|lit\.|lit${LLVM_SUFFIX}.|' \
 	    ${WRKSRC}/utils/lit/lit.py ${WRKSRC}/utils/lit/lit/*.py
+	${REINPLACE_CMD} -e 's|CMAKE_INSTALL_PREFIX|${CMAKE_INSTALL_PREFIX}|g' ${WRKSRC}/tools/clang/lib/Driver/Tools.cpp
 
 post-patch-CLANG-on:
 	${REINPLACE_CMD} -e 's|%%LLVM_PREFIX%%|${LLVM_PREFIX}|' \
