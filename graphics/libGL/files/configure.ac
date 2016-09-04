@@ -1,5 +1,5 @@
---- configure.ac.orig	2016-06-21 14:31:09.000000000 +0200
-+++ configure.ac	2016-07-08 13:05:53.236433000 +0200
+--- configure.ac.orig	2016-07-07 17:12:34.000000000 +0200
++++ configure.ac	2016-08-27 22:20:52.428180000 +0200
 @@ -79,6 +79,7 @@
  DRI3PROTO_REQUIRED=1.0
  PRESENTPROTO_REQUIRED=1.0
@@ -17,7 +17,7 @@
      dri3_default=yes
      ;;
  *)
-@@ -1311,6 +1312,9 @@
+@@ -1312,6 +1313,9 @@
  PKG_CHECK_MODULES([LIBUDEV], [libudev >= $LIBUDEV_REQUIRED],
                    have_libudev=yes, have_libudev=no)
  
@@ -27,7 +27,7 @@
  AC_ARG_ENABLE([sysfs],
      [AS_HELP_STRING([--enable-sysfs],
          [enable /sys PCI identification @<:@default=disabled@:>@])],
-@@ -1408,6 +1412,10 @@
+@@ -1409,6 +1413,10 @@
      DEFINES="$DEFINES -DHAVE_LIBUDEV"
      have_pci_id=yes
  fi
@@ -38,7 +38,9 @@
  
  if test "$have_sysfs" = yes; then
      DEFINES="$DEFINES -DHAVE_SYSFS"
-@@ -1540,6 +1548,23 @@
+@@ -1536,9 +1544,31 @@
+             ;;
+         esac
          ;;
      gnu*)
          DEFINES="$DEFINES -DHAVE_ALIAS"
@@ -60,9 +62,7 @@
 +            ;;
 +        esac
          ;;
-     cygwin*)
-         if test "x$with_dri_drivers" = "xyes"; then
-@@ -1746,6 +1771,8 @@
+@@ -1747,6 +1777,8 @@
  AM_CONDITIONAL(HAVE_GBM, test "x$enable_gbm" = xyes)
  if test "x$need_pci_id$have_libudev" = xyesyes; then
      GBM_PC_REQ_PRIV="libudev >= $LIBUDEV_REQUIRED"
@@ -71,7 +71,7 @@
  else
      GBM_PC_REQ_PRIV=""
  fi
-@@ -1921,9 +1948,19 @@
+@@ -1922,9 +1954,19 @@
          AC_MSG_ERROR([cannot enable OpenCL without Gallium])
      fi
  
@@ -91,7 +91,7 @@
  
      if test "x$have_libclc" = xno; then
          AC_MSG_ERROR([pkg-config cannot find libclc.pc which is required to build clover.
-@@ -2102,9 +2139,9 @@
+@@ -2103,9 +2145,9 @@
  strip_unwanted_llvm_flags() {
      # Use \> (marks the end of the word)
      echo `$1` | sed \
@@ -104,7 +104,7 @@
  	-e 's/-DNDEBUG\>//g' \
  	-e 's/-D_GNU_SOURCE\>//g' \
  	-e 's/-pedantic\>//g' \
-@@ -2196,8 +2233,6 @@
+@@ -2197,8 +2239,6 @@
                  CLANG_LIBDIR=${LLVM_LIBDIR}
              fi
              CLANG_RESOURCE_DIR=$CLANG_LIBDIR/clang/${LLVM_VERSION}

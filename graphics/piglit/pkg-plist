@@ -56,7 +56,7 @@ bin/piglit
 @dir %%DATADIR%%/tests/spec/arb_compute_shader/compiler
 @dir %%DATADIR%%/tests/spec/arb_copy_buffer
 @dir %%DATADIR%%/tests/spec/arb_copy_image
-@dir %%DATADIR%%/tests/spec/arb_debug_output
+@dir %%DATADIR%%/tests/spec/arb_%%CMAKE_BUILD_TYPE%%_output
 @dir %%DATADIR%%/tests/spec/arb_depth_clamp
 @dir %%DATADIR%%/tests/spec/arb_direct_state_access
 @dir %%DATADIR%%/tests/spec/arb_draw_buffers
@@ -152,7 +152,7 @@ bin/piglit
 @dir %%DATADIR%%/tests/spec/glx_ext_import_context
 @dir %%DATADIR%%/tests/spec/glx_mesa_query_renderer
 @dir %%DATADIR%%/tests/spec/glx_oml_sync_control
-@dir %%DATADIR%%/tests/spec/khr_debug
+@dir %%DATADIR%%/tests/spec/khr_%%CMAKE_BUILD_TYPE%%
 @dir %%DATADIR%%/tests/spec/mesa_pack_invert
 @dir %%DATADIR%%/tests/spec/nv_conditional_render
 @dir %%DATADIR%%/tests/spec/nv_texture_barrier
