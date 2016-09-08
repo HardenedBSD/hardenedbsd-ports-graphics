@@ -4784,6 +4784,7 @@
     SUBDIR += relx
     SUBDIR += remake
     SUBDIR += renpy
+    SUBDIR += renpy6
     SUBDIR += replay
     SUBDIR += rhtvision
     SUBDIR += rlog

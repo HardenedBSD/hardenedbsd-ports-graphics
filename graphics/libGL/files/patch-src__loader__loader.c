@@ -1,6 +1,6 @@
---- src/loader/loader.c.orig	2015-08-22 12:01:00.000000000 +0200
-+++ src/loader/loader.c	2015-08-24 10:50:05.251081000 +0200
-@@ -70,7 +70,7 @@
+--- src/loader/loader.c.orig	2016-06-21 18:26:10.000000000 +0200
++++ src/loader/loader.c	2016-09-08 21:04:02.301424000 +0200
+@@ -70,11 +70,12 @@
  #include <stdarg.h>
  #include <stdio.h>
  #include <string.h>
@@ -9,7 +9,75 @@
  #include <assert.h>
  #include <dlfcn.h>
  #include <unistd.h>
-@@ -505,6 +505,54 @@ sysfs_get_pci_id_for_fd(int fd, int *ven
+ #include <stdlib.h>
++#include <limits.h>
+ #ifdef USE_DRICONF
+ #include "xmlconfig.h"
+ #include "xmlpool.h"
+@@ -104,16 +105,60 @@ static void default_logger(int level, co
+ 
+ static void (*log_)(int level, const char *fmt, ...) = default_logger;
+ 
++/*
++ * XXX temporary workaround, because FreeBSD doesn't provide 
++ * pcibus device sysctl trees for renderD and controlD nodes (yet)
++ * Copied from our patch in libdrm.
++ */
++static char *
++drmBSDDeviceNameHack(const char *path)
++{
++  int i, size;
++  long val;
++  char *hacked_path;
++
++  for (i = 0; i < strlen(path); i++)
++  {
++    val = strtol(&path[i], NULL, 10);
++
++    if (val != 0)
++      break;
++  }
++
++
++  if (val >= 64 && val < 128) // controlD node
++  {
++    val = val - 64;
++  }else if (val >= 128 && val < 256) // renderD node
++  {
++    val = val - 128;
++  }
++
++  size = sizeof(DRM_DIR_NAME) + sizeof("/card") + sizeof(val);
++  hacked_path = malloc(size);
++
++  snprintf(hacked_path, size, DRM_DIR_NAME "/card%li", val);
++
++//  printf("path: %s, hacked_path: %s, val: %li\n", path, hacked_path, val);
++
++  return hacked_path;
++}
++
++
+ int
+ loader_open_device(const char *device_name)
+ {
+    int fd;
++   char hacked_name[PATH_MAX + 1];
++
++   snprintf(hacked_name, PATH_MAX, "%s", drmBSDDeviceNameHack(device_name));
++
+ #ifdef O_CLOEXEC
+-   fd = open(device_name, O_RDWR | O_CLOEXEC);
++   fd = open(hacked_name, O_RDWR | O_CLOEXEC);
+    if (fd == -1 && errno == EINVAL)
+ #endif
+    {
+-      fd = open(device_name, O_RDWR);
++      fd = open(hacked_name, O_RDWR);
+       if (fd != -1)
+          fcntl(fd, F_SETFD, fcntl(fd, F_GETFD) | FD_CLOEXEC);
+    }
+@@ -507,6 +552,54 @@ sysfs_get_pci_id_for_fd(int fd, int *ven
  }
  #endif
  
@@ -64,7 +132,7 @@
  #if defined(HAVE_LIBDRM)
  /* for i915 */
  #include <i915_drm.h>
-@@ -588,6 +636,10 @@ loader_get_pci_id_for_fd(int fd, int *ve
+@@ -590,6 +683,10 @@ loader_get_pci_id_for_fd(int fd, int *ve
     if (sysfs_get_pci_id_for_fd(fd, vendor_id, chip_id))
        return 1;
  #endif
@@ -75,8 +143,8 @@
  #if HAVE_LIBDRM
     if (drm_get_pci_id_for_fd(fd, vendor_id, chip_id))
        return 1;
-@@ -685,6 +737,13 @@ loader_get_device_name_for_fd(int fd)
-    if ((result = sysfs_get_device_name_for_fd(fd)))
+@@ -709,6 +806,13 @@ loader_get_device_name_for_fd(int fd)
+    if ((result = drm_get_device_name_for_fd(fd)))
        return result;
  #endif
 +#if HAVE_LIBDEVQ
