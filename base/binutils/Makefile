@@ -24,8 +24,6 @@ CONFIGURE_ARGS+=	--host=${BUTARGET} \
 			--disable-host-shared
 PREFIX=	/usr
 
-STRIP=	# doesn't work
-
 .include "${MASTERDIR}/Makefile"
 .include "${LOCALBASE}/share/toolchains/${CROSS_TOOLCHAIN}.mk"
 
@@ -35,5 +33,8 @@ CXXFLAGS+=	--sysroot=${CROSS_SYSROOT}
 CC=	${XCC}
 CXX=	${XCXX}
 .for tool in AS AR LD NM OBJCOPY RANLIB SIZE STRINGS
-${tool}=	${CROSS_BINUTILS_PREFIX}/${tool}
+${tool}=	${CROSS_BINUTILS_PREFIX}${tool:tl}
 .endfor
+STRIP_CMD=	${CROSS_BINUTILS_PREFIX}strip
+STRIPBIN=	${STRIP_CMD}
+.export.env	STRIPBIN

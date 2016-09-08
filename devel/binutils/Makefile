@@ -3,6 +3,7 @@
 
 PORTNAME=	binutils
 PORTVERSION=	2.27
+PORTREVISION=	3
 PORTEPOCH?=	1
 CATEGORIES?=	devel
 MASTER_SITES=	SOURCEWARE/binutils/releases
@@ -37,6 +38,14 @@ INFO_PATH=	${PKGNAMEPREFIX:S/-$//}/info
 CONFIGURE_ARGS+=	--disable-shared \
 			--target=${BUTARGET}
 .else
+BUREMOVE=	coffdump \
+		dlltool \
+		dllwrap \
+		nlmconv \
+		srconv \
+		sysdump \
+		windmc \
+		windres
 CFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 CONFIGURE_ARGS+=	--with-system-zlib \
@@ -66,11 +75,15 @@ NLS_CONFIGURE_ENABLE=	nls
 .include <bsd.port.pre.mk>
 
 # Actual earliest version may differ slightly
-.if ${ARCH} != ia64 && ${ARCH} != i386 && ${ARCH} != mips && ${ARCH} != mips64 && !defined(PKGNAMEPREFIX) && (${COMPILER_TYPE} == clang && ${COMPILER_VERSION} >= 34 || ${COMPILER_TYPE} == gcc)
+.if ${ARCH} != powerpc && ${ARCH} != powerpc64 && ${ARCH} != ia64 && ${ARCH} != i386 && ${ARCH} != mips && ${ARCH} != mips64 && !defined(PKGNAMEPREFIX) && (${COMPILER_TYPE} == clang && ${COMPILER_VERSION} >= 34 || ${COMPILER_TYPE} == gcc)
 CONFIGURE_ARGS+=	--enable-gold --enable-plugins
 PLIST_SUB+=	GOLD=""
 .else
 PLIST_SUB+=	GOLD="@comment "
+.endif
+
+.if ${OPSYS} == FreeBSD && ${OSVERSION} < 1000000
+CONFIGURE_ARGS+=	--disable-initfini-array
 .endif
 
 .if ${ARCH} == "amd64"
@@ -100,7 +113,6 @@ post-install:
 .endfor
 .if defined(BUREMOVE) && ${BUREMOVE:Mld}
 	@${RM} -rf ${STAGEDIR}${PREFIX}/${BUTARGET}/lib/ldscripts
-	@${FIND} ${STAGEDIR}${PREFIX}/${BUTARGET}/lib -empty -delete
 .endif
 
 .include <bsd.port.post.mk>

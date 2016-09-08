@@ -84,6 +84,7 @@
     SUBDIR += antlr3
     SUBDIR += antlr4
     SUBDIR += apache-ant
+    SUBDIR += apache-rat
     SUBDIR += api-sanity-autotest
     SUBDIR += apiextractor
     SUBDIR += appstream-glib
@@ -243,6 +244,7 @@
     SUBDIR += chruby
     SUBDIR += cil
     SUBDIR += cityhash
+    SUBDIR += cjose
     SUBDIR += cl-alexandria
     SUBDIR += cl-alexandria-sbcl
     SUBDIR += cl-asdf
@@ -490,6 +492,7 @@
     SUBDIR += erlang-exmpp
     SUBDIR += erlang-folsom
     SUBDIR += erlang-gen_leader
+    SUBDIR += erlang-gen_rpc
     SUBDIR += erlang-gen_smtp
     SUBDIR += erlang-getopt
     SUBDIR += erlang-goldrush
@@ -517,6 +520,7 @@
     SUBDIR += erlang-syslog
     SUBDIR += es-eric6
     SUBDIR += etcd
+    SUBDIR += etcd3
     SUBDIR += etl
     SUBDIR += euca2ools
     SUBDIR += eventxx
@@ -1130,6 +1134,7 @@
     SUBDIR += kdevplatform
     SUBDIR += kickassembler
     SUBDIR += kimwitu
+    SUBDIR += kore
     SUBDIR += kyra
     SUBDIR += kyua
     SUBDIR += lasi
@@ -1345,6 +1350,7 @@
     SUBDIR += librolegen
     SUBDIR += libruin
     SUBDIR += libs11n
+    SUBDIR += libscca
     SUBDIR += libsearpc
     SUBDIR += libserialport
     SUBDIR += libserver
@@ -2191,6 +2197,7 @@
     SUBDIR += p5-Devel-GlobalDestruction
     SUBDIR += p5-Devel-GlobalDestruction-XS
     SUBDIR += p5-Devel-Hide
+    SUBDIR += p5-Devel-InheritNamespace
     SUBDIR += p5-Devel-KYTProf
     SUBDIR += p5-Devel-Leak
     SUBDIR += p5-Devel-Leak-Cb
@@ -4224,6 +4231,7 @@
     SUBDIR += py-libzfs
     SUBDIR += py-ll-core
     SUBDIR += py-llfuse
+    SUBDIR += py-llvmlite
     SUBDIR += py-lock_file
     SUBDIR += py-lockfile
     SUBDIR += py-log4py
@@ -4266,6 +4274,7 @@
     SUBDIR += py-noseofyeti
     SUBDIR += py-notifier
     SUBDIR += py-notify
+    SUBDIR += py-numba
     SUBDIR += py-ocempgui
     SUBDIR += py-ode
     SUBDIR += py-odfpy
@@ -4774,6 +4783,7 @@
     SUBDIR += relx
     SUBDIR += remake
     SUBDIR += renpy
+    SUBDIR += renpy6
     SUBDIR += replay
     SUBDIR += rhtvision
     SUBDIR += rlog
@@ -5286,6 +5296,7 @@
     SUBDIR += rubygem-wdm
     SUBDIR += rubygem-web-console
     SUBDIR += rubygem-webby
+    SUBDIR += rubygem-windows_error
     SUBDIR += rubygem-wmi-lite
     SUBDIR += rubygem-xpath
     SUBDIR += rubygem-yajl-ruby
