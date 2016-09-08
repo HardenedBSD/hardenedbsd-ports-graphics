@@ -1,5 +1,5 @@
---- xf86drm.c.orig	2016-07-24 20:50:03.999898000 +0200
-+++ xf86drm.c	2016-07-24 20:53:31.587058000 +0200
+--- xf86drm.c.orig	2016-09-08 21:04:36.283417000 +0200
++++ xf86drm.c	2016-09-08 21:10:16.495306000 +0200
 @@ -62,6 +62,10 @@
  #endif
  #include <math.h>
@@ -78,7 +78,7 @@
  static int drmParsePciBusInfo(int maj, int min, drmPciBusInfoPtr info)
  {
  #ifdef __linux__
-@@ -2901,6 +2927,66 @@ static int drmParsePciBusInfo(int maj, i
+@@ -2901,6 +2927,75 @@ static int drmParsePciBusInfo(int maj, i
      return -EINVAL;
  #endif
  }
@@ -91,23 +91,32 @@
 +static char *
 +drmBSDDeviceNameHack(const char *path)
 +{
-+    int start;
-+    const char *errstr;
-+    int number;
-+    char hacked_path[PATH_MAX + 1];
++    int i, size;
++    long val;
++    char *hacked_path;
 +
-+    if (strcmp(path, DRM_DIR_NAME "/controlD") > 0) 
-+    {
-+      start = 17;
-+      number = strtonum(&path[start], 0, 256, &errstr) - 64;
-+      snprintf(hacked_path, PATH_MAX, DRM_DIR_NAME "/card%i", number);
-+    }else if (strcmp(path, DRM_DIR_NAME "/renderD") > 0)
-+    {
-+      start = 16;
-+      number = strtonum(&path[start], 0, 256, &errstr) - 128;
-+      snprintf(hacked_path, PATH_MAX, DRM_DIR_NAME "/card%i", number);
-+    }else
-+      snprintf(hacked_path, PATH_MAX, "%s", path);
++  for (i = 0; i < strlen(path); i++)
++  {
++    val = strtol(&path[i], NULL, 10);
++   
++    if (val != 0)
++      break;
++  }
++
++  if (val >= 64 && val < 128) // controlD node
++  {
++    val = val - 64;
++  }else if (val >= 128 && val < 256) // renderD node
++  {
++    val = val - 128;
++  }
++
++  size = sizeof(DRM_DIR_NAME) + sizeof("/card") + sizeof(val);
++
++  if ((hacked_path = malloc(size)) == NULL)
++    return NULL;
++
++  snprintf(hacked_path, size, DRM_DIR_NAME "/card%li", val);
 +
 +  return hacked_path;
 +}
@@ -145,7 +154,7 @@
  
  static int drmCompareBusInfo(drmDevicePtr a, drmDevicePtr b)
  {
-@@ -2971,6 +3057,32 @@ static int drmParsePciDeviceInfo(const c
+@@ -2971,6 +3066,32 @@ static int drmParsePciDeviceInfo(const c
      device->subdevice_id = config[46] | (config[47] << 8);
  
      return 0;
@@ -178,7 +187,7 @@
  #else
  #warning "Missing implementation of drmParsePciDeviceInfo"
      return -EINVAL;
-@@ -3029,7 +3141,12 @@ static int drmProcessPciDevice(drmDevice
+@@ -3030,7 +3151,12 @@ static int drmProcessPciDevice(drmDevice
  
      (*device)->businfo.pci = (drmPciBusInfoPtr)addr;
  
