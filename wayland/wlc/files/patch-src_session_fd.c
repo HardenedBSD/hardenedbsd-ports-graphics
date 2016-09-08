@@ -27,7 +27,7 @@
  #define FILTER(x, m) { x, (sizeof(x) > 32 ? 32 : sizeof(x)) - 1, m }
     static struct {
        const char *base;
-@@ -186,12 +189,13 @@ fd_open(const char *path, int flags, enu
+@@ -186,14 +189,15 @@ fd_open(const char *path, int flags, enu
        wlc_log(WLC_LOG_WARN, "Denying open from: %s", path);
        return -1;
     }
@@ -35,10 +35,14 @@
  
     struct stat st;
     if (stat(path, &st) < 0)
- 	  return -1;
+-	  return -1;
++      return -1;
  
 -#ifdef __linux__
 +#if !defined(__FreeBSD__)
     if (major(st.st_rdev) != allow[type].major)
-    	  return -1;
+-   	  return -1;
++      return -1;
  #endif
+ 
+    int fd;
