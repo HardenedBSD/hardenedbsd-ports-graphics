@@ -64,14 +64,13 @@
     SUBDIR += jzintv
     SUBDIR += kcemu
     SUBDIR += klh10
-    SUBDIR += kqemu-kmod
-    SUBDIR += kqemu-kmod-devel
     SUBDIR += lib765
     SUBDIR += libdsk
     SUBDIR += libspectrum
     SUBDIR += linux-c6
     SUBDIR += linux-f10
     SUBDIR += linux_base-c6
+    SUBDIR += linux_base-c7
     SUBDIR += linux_base-f10
     SUBDIR += lisaem
     SUBDIR += loemu

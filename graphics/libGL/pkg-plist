@@ -5,6 +5,7 @@ include/GL/glext.h
 include/GL/glx.h
 include/GL/glx_mangle.h
 include/GL/glxext.h
+include/GL/mesa_glinterop.h
 @comment include/GL/osmesa.h
 include/GL/wglext.h
 lib/.mesa/libGL.so

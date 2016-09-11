@@ -13,6 +13,9 @@ COMMENT=	C++ Portable Components library
 
 LICENSE=	BSL
 
+DEPRECATED=	older than stable devel/poco
+EXPIRATION_DATE=	2016-09-18
+
 BUILD_DEPENDS=	bash:shells/bash
 LIB_DEPENDS=	libpcre.so:devel/pcre \
 		libexpat.so:textproc/expat2
@@ -33,8 +36,8 @@ OPTIONS_RADIO=	ODBC
 OPTIONS_RADIO_ODBC=	UODBC IODBC
 ODBC_DESC=	ODBC Driver
 
-GNU_CONFIGURE=	yes
-CONFIGURE_ARGS=	--config=FreeBSD --unbundled --no-tests --no-samples
+HAS_CONFIGURE=	yes
+CONFIGURE_ARGS=	--config=FreeBSD --unbundled --no-tests --no-samples --prefix="${PREFIX}"
 USES=		gmake
 USE_LDCONFIG=	yes
 USE_OPENSSL=	yes

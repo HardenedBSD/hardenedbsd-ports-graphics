@@ -14,7 +14,6 @@
     SUBDIR += 54321
     SUBDIR += 7kaa
     SUBDIR += CaribbeanStud
-    SUBDIR += cockatrice
     SUBDIR += HeroesOfMightAndMagic
     SUBDIR += KnightCap
     SUBDIR += abbayedesmorts
@@ -118,6 +117,7 @@
     SUBDIR += bugsquish
     SUBDIR += bugsx
     SUBDIR += bumprace
+    SUBDIR += bunnysay
     SUBDIR += burgerspace
     SUBDIR += burrtools
     SUBDIR += bygfoot
@@ -145,6 +145,7 @@
     SUBDIR += chromium-bsu
     SUBDIR += circuslinux
     SUBDIR += cleanq3
+    SUBDIR += cockatrice
     SUBDIR += colorcode
     SUBDIR += columns
     SUBDIR += concentration
@@ -421,6 +422,7 @@
     SUBDIR += ioquake3-devel
     SUBDIR += ioquake3-devel-server
     SUBDIR += ioquake3-server
+    SUBDIR += iortcw
     SUBDIR += iourbanterror
     SUBDIR += iourbanterror-server
     SUBDIR += irrlamb

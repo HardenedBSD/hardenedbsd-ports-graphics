@@ -2,11 +2,11 @@
 # $FreeBSD$
 
 PORTNAME?=	postgresql
-DISTVERSION?=	9.2.17
-PORTREVISION=	2
+DISTVERSION?=	9.2.18
+PORTREVISION?=	0
 CATEGORIES?=	databases
 MASTER_SITES=	PGSQL/source/v${DISTVERSION}
-PKGNAMESUFFIX?=	${DISTVERSION:R:S/.//}${COMPONENT}
+PKGNAMESUFFIX?=	${PORTVERSION:R:S/.//}${COMPONENT}
 
 MAINTAINER?=	pgsql@FreeBSD.org
 COMMENT?=	The most advanced open-source database available anywhere
@@ -19,7 +19,7 @@ CONFLICTS?=	${PORTNAME}[^${PORTVERSION:R:R}]?-client* \
 WRKSRC=		${WRKDIR}/postgresql-${DISTVERSION}
 DIST_SUBDIR=	postgresql
 
-ICU_PATCHFILE?=	pg-929-icu-2015-04-18.diff.gz
+ICU_PATCHFILE?=	pg-9218-icu-2016-08-10.diff.gz
 
 OPTIONS_SUB=	yes
 
@@ -30,9 +30,9 @@ USES+=	gmake
 GNU_CONFIGURE=	yes
 .endif
 
-PG_USER=	pgsql
-PG_GROUP=	pgsql
-PG_UID=	70
+PG_USER?=	pgsql
+PG_GROUP?=	pgsql
+PG_UID?=	70
 
 LDFLAGS+=	-L${LOCALBASE}/lib
 INCLUDES+=	-I${LOCALBASE}/include
@@ -89,7 +89,7 @@ ICU_DESC=	Use ICU for unicode collation
 # (requires dump/restore if modified.)
 OPTIONS_DEFINE+=	INTDATE
 INTDATE_DESC=	Builds with 64-bit date/time type
-OPTIONS_DEFAULT=	XML TZDATA INTDATE
+OPTIONS_DEFAULT+=	XML TZDATA INTDATE
 .endif
 
 .if !defined(SLAVE_ONLY)
@@ -119,7 +119,7 @@ LIBEDIT_USES=		libedit
 LIBEDIT_USES_OFF=		readline
 .endif # CLIENT_ONLY
 
-SSL_USE=	OPENSSL=yes
+SSL_USES=	ssl
 SSL_CONFIGURE_WITH=openssl
 
 PAM_CONFIGURE_WITH=	pam
@@ -243,7 +243,9 @@ do-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/etc/periodic/daily ;\
 	${INSTALL_SCRIPT} ${WRKDIR}/502.pgsql \
 			${STAGEDIR}${PREFIX}/etc/periodic/daily
-	${MKDIR} ${STAGEDIR}${PREFIX}/${PG_USER}
+.	if ${PORTVERSION:M9.[2345].*}
+		${MKDIR} ${STAGEDIR}${PREFIX}/${PG_USER}
+.	endif	
 .  endif # SERVER_ONLY
 .  if defined(CLIENT_ONLY)
 	@ cd ${WRKSRC}/src && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${MAKE_ARGS} install-local

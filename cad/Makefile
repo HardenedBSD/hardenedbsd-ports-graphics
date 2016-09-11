@@ -3,6 +3,7 @@
 
     COMMENT = CAD tools
 
+    SUBDIR += NASTRAN-95
     SUBDIR += admesh
     SUBDIR += adms
     SUBDIR += alliance
@@ -24,6 +25,7 @@
     SUBDIR += elmerfem
     SUBDIR += feappv
     SUBDIR += fidocadj
+    SUBDIR += freecad
     SUBDIR += freehdl
     SUBDIR += fritzing
     SUBDIR += gdsreader

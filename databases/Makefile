@@ -136,6 +136,7 @@
     SUBDIR += leofs
     SUBDIR += leveldb
     SUBDIR += levigo
+    SUBDIR += libcouchbase
     SUBDIR += libdbi
     SUBDIR += libdbi-drivers
     SUBDIR += libdrizzle
@@ -168,6 +169,7 @@
     SUBDIR += libpbl
     SUBDIR += libpqtypes
     SUBDIR += libsdb
+    SUBDIR += libzbxpgsql
     SUBDIR += libzdb
     SUBDIR += linux-c6-sqlite3
     SUBDIR += linux-f10-sqlite3
@@ -235,6 +237,7 @@
     SUBDIR += nagios-check_postgres_replication
     SUBDIR += nagios-check_redis
     SUBDIR += namazu2
+    SUBDIR += neo4j
     SUBDIR += ntdb
     SUBDIR += ocaml-dbm
     SUBDIR += ocaml-mysql
@@ -697,6 +700,14 @@
     SUBDIR += postgresql95-plpython
     SUBDIR += postgresql95-pltcl
     SUBDIR += postgresql95-server
+    SUBDIR += postgresql96-client
+    SUBDIR += postgresql96-contrib
+    SUBDIR += postgresql96-docs
+    SUBDIR += postgresql96-pgtcl
+    SUBDIR += postgresql96-plperl
+    SUBDIR += postgresql96-plpython
+    SUBDIR += postgresql96-pltcl
+    SUBDIR += postgresql96-server
     SUBDIR += powerarchitect
     SUBDIR += proftpd-mod_sql_mysql
     SUBDIR += proftpd-mod_sql_odbc

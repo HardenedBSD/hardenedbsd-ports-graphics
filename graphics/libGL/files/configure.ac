@@ -1,5 +1,5 @@
---- configure.ac.orig	2016-05-09 14:51:42.000000000 +0200
-+++ configure.ac	2016-06-18 18:04:02.659246000 +0200
+--- configure.ac.orig	2016-07-07 17:12:34.000000000 +0200
++++ configure.ac	2016-08-27 22:20:52.428180000 +0200
 @@ -79,6 +79,7 @@
  DRI3PROTO_REQUIRED=1.0
  PRESENTPROTO_REQUIRED=1.0
@@ -8,7 +8,7 @@
  GLPROTO_REQUIRED=1.4.14
  LIBOMXIL_BELLAGIO_REQUIRED=0.0
  LIBVA_REQUIRED=0.38.0
-@@ -838,7 +839,7 @@
+@@ -871,7 +872,7 @@
      [enable_dri=yes])
  
  case "$host_os" in
@@ -17,7 +17,7 @@
      dri3_default=yes
      ;;
  *)
-@@ -1244,6 +1245,9 @@
+@@ -1312,6 +1313,9 @@
  PKG_CHECK_MODULES([LIBUDEV], [libudev >= $LIBUDEV_REQUIRED],
                    have_libudev=yes, have_libudev=no)
  
@@ -27,7 +27,7 @@
  AC_ARG_ENABLE([sysfs],
      [AS_HELP_STRING([--enable-sysfs],
          [enable /sys PCI identification @<:@default=disabled@:>@])],
-@@ -1341,6 +1345,10 @@
+@@ -1409,6 +1413,10 @@
      DEFINES="$DEFINES -DHAVE_LIBUDEV"
      have_pci_id=yes
  fi
@@ -38,7 +38,7 @@
  
  if test "$have_sysfs" = yes; then
      DEFINES="$DEFINES -DHAVE_SYSFS"
-@@ -1468,9 +1476,31 @@
+@@ -1536,9 +1544,31 @@
              ;;
          esac
          ;;
@@ -71,7 +71,7 @@
      gnu*)
          DEFINES="$DEFINES -DHAVE_ALIAS"
          ;;
-@@ -1629,6 +1659,8 @@
+@@ -1747,6 +1777,8 @@
  AM_CONDITIONAL(HAVE_GBM, test "x$enable_gbm" = xyes)
  if test "x$need_pci_id$have_libudev" = xyesyes; then
      GBM_PC_REQ_PRIV="libudev >= $LIBUDEV_REQUIRED"
@@ -80,7 +80,7 @@
  else
      GBM_PC_REQ_PRIV=""
  fi
-@@ -1798,9 +1830,19 @@
+@@ -1922,9 +1954,19 @@
          AC_MSG_ERROR([cannot enable OpenCL without Gallium])
      fi
  
@@ -100,7 +100,20 @@
  
      if test "x$have_libclc" = xno; then
          AC_MSG_ERROR([pkg-config cannot find libclc.pc which is required to build clover.
-@@ -2067,8 +2109,6 @@
+@@ -2103,9 +2145,9 @@
+ strip_unwanted_llvm_flags() {
+     # Use \> (marks the end of the word)
+     echo `$1` | sed \
+-	-e 's/-march=\S*//g' \
+-	-e 's/-mtune=\S*//g' \
+-	-e 's/-mcpu=\S*//g' \
++	-e 's/-march=[[:graph:]]* //g' \
++	-e 's/-mtune=[[:graph:]]* //g' \
++	-e 's/-mcpu=[[:graph:]]* //g' \
+ 	-e 's/-DNDEBUG\>//g' \
+ 	-e 's/-D_GNU_SOURCE\>//g' \
+ 	-e 's/-pedantic\>//g' \
+@@ -2197,8 +2239,6 @@
                  CLANG_LIBDIR=${LLVM_LIBDIR}
              fi
              CLANG_RESOURCE_DIR=$CLANG_LIBDIR/clang/${LLVM_VERSION}

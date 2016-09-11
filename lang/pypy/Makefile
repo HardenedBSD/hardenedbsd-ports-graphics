@@ -2,15 +2,13 @@
 # $FreeBSD$
 
 PORTNAME?=	pypy
-DISTVERSION?=	5.3.1	# Also update bsd.pypy.cffi.mk
+DISTVERSION?=	5.4.1	# Also update bsd.pypy.cffi.mk
 CATEGORIES=	lang python
 MASTER_SITES=	https://bitbucket.org/pypy/pypy/downloads/
 DISTNAME?=	${PORTNAME}2-v${PORTVERSION}-src
 
 MAINTAINER=	python@FreeBSD.org
 COMMENT=	Fast, compliant implementation of the Python language
-
-BROKEN_powerpc64=	Does not build
 
 LIB_DEPENDS=	libexpat.so:textproc/expat2 \
 		libffi.so:devel/libffi
