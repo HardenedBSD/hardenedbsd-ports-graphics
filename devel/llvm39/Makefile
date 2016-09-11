@@ -1,7 +1,8 @@
 # $FreeBSD$
 
 PORTNAME=	llvm
-DISTVERSION=	3.9.0rc1
+DISTVERSION=	3.9.0rc2
+PORTREVISION=	1
 CATEGORIES=	devel lang
 MASTER_SITES=	http://llvm.org/${PRE_}releases/${LLVM_RELEASE}/${RCDIR}
 DISTNAME=	${PORTNAME}-${DISTVERSION}.src
@@ -123,10 +124,12 @@ STRIP_LIBS=	BugpointPasses.so \
 
 EXTRAS_COMMANDS+= \
 		clang-apply-replacements \
+		clang-include-fixer \
 		clang-modernize \
 		clang-query \
 		clang-rename \
 		clang-tidy \
+		find-all-symbols \
 		modularize
 EXTRAS_LIBS=	libclangApplyReplacements \
 		libclangIncludeFixer \
@@ -200,7 +203,7 @@ NOT_FOR_ARCH=	ia64
 
 .include <bsd.port.pre.mk>
 
-_CRTLIBDIR=    ${LLVM_PREFIX:S|${PREFIX}/||}/lib/freebsd
+_CRTLIBDIR=    ${LLVM_PREFIX:S|${PREFIX}/||}/lib/clang/${LLVM_RELEASE}/lib
 .if ${ARCH} == "amd64"
 _COMPILER_RT_LIBS= \
 	libclang_rt.asan-preinit-x86_64.a \
@@ -340,6 +343,10 @@ post-install-COMPILER_RT-on:
 .if ${ARCH} == "amd64"
 	${RM} ${STAGEDIR}${LLVM_PREFIX}/lib/freebsd/libclang_rt*i386*
 .endif
+	${MKDIR} ${STAGEDIR}${PREFIX}/${_CRTLIBDIR}
+	mv ${STAGEDIR}${LLVM_PREFIX}/lib/freebsd/* \
+	    ${STAGEDIR}${PREFIX}/${_CRTLIBDIR}
+	${RMDIR} ${STAGEDIR}${LLVM_PREFIX}/lib/freebsd
 
 post-install-LIT-on:
 	${INSTALL_SCRIPT} ${PATCH_WRKSRC}/utils/lit/lit.py \

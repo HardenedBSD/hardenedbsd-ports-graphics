@@ -168,6 +168,7 @@
     SUBDIR += libpbl
     SUBDIR += libpqtypes
     SUBDIR += libsdb
+    SUBDIR += libzbxpgsql
     SUBDIR += libzdb
     SUBDIR += linux-c6-sqlite3
     SUBDIR += linux-f10-sqlite3
@@ -235,6 +236,7 @@
     SUBDIR += nagios-check_postgres_replication
     SUBDIR += nagios-check_redis
     SUBDIR += namazu2
+    SUBDIR += neo4j
     SUBDIR += ntdb
     SUBDIR += ocaml-dbm
     SUBDIR += ocaml-mysql

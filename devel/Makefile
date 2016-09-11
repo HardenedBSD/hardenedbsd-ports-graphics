@@ -144,6 +144,7 @@
     SUBDIR += avro-cpp
     SUBDIR += awscli
     SUBDIR += b2
+    SUBDIR += babeltrace
     SUBDIR += bam
     SUBDIR += bbfreeze
     SUBDIR += bbfreeze-loader
@@ -454,6 +455,7 @@
     SUBDIR += elixir-hex
     SUBDIR += elixir-inflex
     SUBDIR += elixir-lager_logger
+    SUBDIR += elixir-math
     SUBDIR += elixir-msgpax
     SUBDIR += elixir-nadia
     SUBDIR += elixir-nimble_csv
@@ -462,7 +464,10 @@
     SUBDIR += elixir-poison
     SUBDIR += elixir-quantum
     SUBDIR += elixir-red_black_tree
+    SUBDIR += elixir-simple_bayes
     SUBDIR += elixir-sorted_set
+    SUBDIR += elixir-stemmer
+    SUBDIR += elixir-swarm
     SUBDIR += elixir-timex
     SUBDIR += elixir-tirexs
     SUBDIR += elixir-tzdata
@@ -737,6 +742,7 @@
     SUBDIR += go-protobuf
     SUBDIR += go-raw
     SUBDIR += go-runewidth
+    SUBDIR += go-shellwords
     SUBDIR += go-slices
     SUBDIR += go-sql-driver
     SUBDIR += go-termbox
@@ -747,6 +753,7 @@
     SUBDIR += gobject-introspection
     SUBDIR += godep
     SUBDIR += godot
+    SUBDIR += godot-tools
     SUBDIR += goffice
     SUBDIR += goffice010
     SUBDIR += google-gdata
@@ -765,6 +772,7 @@
     SUBDIR += gputils
     SUBDIR += gradle
     SUBDIR += grantlee
+    SUBDIR += grantlee5
     SUBDIR += gsettings-desktop-schemas
     SUBDIR += gsoap
     SUBDIR += gstreamer-plugins-gconf
@@ -1423,6 +1431,7 @@
     SUBDIR += linux-f10-ncurses-base
     SUBDIR += linux-f10-nspr
     SUBDIR += linux-f10-sdl12
+    SUBDIR += linux-kernel
     SUBDIR += linux_kdump
     SUBDIR += linux_libusb
     SUBDIR += lion
@@ -4225,6 +4234,7 @@
     SUBDIR += py-louie
     SUBDIR += py-lxml
     SUBDIR += py-magic
+    SUBDIR += py-mailcap-fix
     SUBDIR += py-manuel
     SUBDIR += py-matrix-angular-sdk
     SUBDIR += py-mccabe
@@ -4266,6 +4276,7 @@
     SUBDIR += py-omnijson
     SUBDIR += py-omniorb
     SUBDIR += py-omniorb-3
+    SUBDIR += py-opster
     SUBDIR += py-optik
     SUBDIR += py-option_merge
     SUBDIR += py-orbit
@@ -4396,6 +4407,7 @@
     SUBDIR += py-qt5-dbussupport
     SUBDIR += py-qt5-designer
     SUBDIR += py-qt5-designerplugin
+    SUBDIR += py-qt5-help
     SUBDIR += py-qt5-qscintilla2
     SUBDIR += py-qt5-test
     SUBDIR += py-rauth
@@ -4434,6 +4446,7 @@
     SUBDIR += py-scripttest
     SUBDIR += py-sdl2
     SUBDIR += py-selection
+    SUBDIR += py-selectors34
     SUBDIR += py-semantic_version
     SUBDIR += py-serpent
     SUBDIR += py-setproctitle
@@ -5173,6 +5186,7 @@
     SUBDIR += rubygem-ruby-progressbar
     SUBDIR += rubygem-ruby-sdl-ffi
     SUBDIR += rubygem-ruby2ruby
+    SUBDIR += rubygem-ruby_dep
     SUBDIR += rubygem-ruby_parser
     SUBDIR += rubygem-rubygame
     SUBDIR += rubygem-rubygems-mirror
