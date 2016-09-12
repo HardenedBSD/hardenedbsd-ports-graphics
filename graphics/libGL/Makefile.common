@@ -18,7 +18,7 @@
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
-MESABASEVERSION=	12.0.1
+MESABASEVERSION=	12.0.2
 # if there is a subversion, don't include the '-' between 7.11-rc2.
 MESASUBVERSION=
 
@@ -74,6 +74,7 @@ CONFIGURE_ARGS+=	--with-sha1=libcrypto
 # DRI3 needs PRIME support in the kernel to work
 # XXX this is for testing only, in ports we probably should autoconfig this
 # if the kernel is new enough.
+# dragonfly doesn't have dmabuf so when this gets converted, don't enable there.
 .if ${PORT_OPTIONS:MDRI3}
 USE_XORG+=	dri3proto presentproto xshmfence
 LIB_DEPENDS+=	libxcb.so:x11/libxcb
