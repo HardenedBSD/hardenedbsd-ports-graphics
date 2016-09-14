@@ -18,13 +18,13 @@ BUILD_DEPENDS=	clang${LLVMVER}:devel/llvm${LLVMVER} \
 USE_GITHUB=	yes
 GH_ACCOUNT=	llvm-mirror
 # newer snapshot needs llvm 3.9+
-GH_TAGNAME=	b518692
+GH_TAGNAME=	4ece229
 
 USES=		gmake python:2,build ninja
 USE_LDCONFIG=	yes
 MAKE_ENV=	MAKE=${GMAKE} DESTDIR=${STAGEDIR}
 
-LLVMVER=	37
+LLVMVER=	39
 
 ALL_TARGET=
 
