@@ -18,7 +18,7 @@
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
-MESABASEVERSION=	12.0.1
+MESABASEVERSION=	12.0.2
 # if there is a subversion, don't include the '-' between 7.11-rc2.
 MESASUBVERSION=
 
@@ -72,7 +72,9 @@ MESA_LLVM_VER=37
 CONFIGURE_ARGS+=	--with-sha1=libcrypto
 
 # DRI3 needs PRIME support in the kernel to work
-#CONFIGURE_ARGS+=	--disable-dri3
+USE_XORG+=	dri3proto presentproto xshmfence
+LIB_DEPENDS+=	libxcb.so:x11/libxcb
+CONFIGURE_ARGS+=	--enable-dri3
 
 CONFIGURE_ARGS+=	--enable-gbm
 
