@@ -2,6 +2,7 @@
 
 PORTNAME=	libkolab
 PORTVERSION=	0.6.3
+PORTREVISION=	1
 CATEGORIES=	devel kde
 MASTER_SITES=	http://mirror.kolabsys.com/pub/releases/
 
@@ -11,6 +12,8 @@ COMMENT=	Advanced Kolab Object Handling Library
 # The code in kolabformatV2 is LGPL21, but we consider the library
 # itself to be LGPL3-licensed (and so are all the installed headers).
 LICENSE=	LGPL3
+
+PORTSCOUT=	limit:^0\.
 
 LIB_DEPENDS=	libboost_system.so:devel/boost-libs \
 		libcurl.so:ftp/curl \
@@ -27,6 +30,8 @@ USE_KDE=	automoc4 kdelibs pimlibs
 USE_LDCONFIG=	yes
 USE_QT4=	corelib dbus gui network svg xml \
 		moc_build qmake_build rcc_build uic_build
+# Fix build of desktuils/kdepim4-runtime:
+CXXFLAGS+=	-DMAKE_KOLAB_LIB
 
 PLIST_SUB=	SHLIB_VER=${PORTVERSION}
 

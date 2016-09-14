@@ -43,6 +43,7 @@
     SUBDIR += R-cran-reshape2
     SUBDIR += R-cran-rngtools
     SUBDIR += R-cran-rstudioapi
+    SUBDIR += R-cran-sourcetools
     SUBDIR += R-cran-tibble
     SUBDIR += R-cran-tidyr
     SUBDIR += SpecTcl
@@ -3817,7 +3818,6 @@
     SUBDIR += php5-dav
     SUBDIR += php5-geshi
     SUBDIR += php5-ice
-    SUBDIR += php5-msgpack
     SUBDIR += php5-pinba
     SUBDIR += php5-thrift
     SUBDIR += php55-gettext
@@ -4098,7 +4098,6 @@
     SUBDIR += py-docker-py
     SUBDIR += py-docopt
     SUBDIR += py-dogpile.cache
-    SUBDIR += py-dogpile.core
     SUBDIR += py-doit
     SUBDIR += py-durus
     SUBDIR += py-dynrules
