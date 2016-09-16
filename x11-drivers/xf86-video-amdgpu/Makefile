@@ -30,4 +30,8 @@ CONFIGURE_ARGS+=--disable-glamor
 IGNORE=		Not support on 9.x, no kernel support
 .endif
 
+post-install:
+	${MKDIR} ${STAGEDIR}${PREFIX}/share/X11/xorg.conf.d/
+	${INSTALL_DATA} ${WRKSRC}/conf/10-amdgpu.conf ${STAGEDIR}${PREFIX}/share/X11/xorg.conf.d/10-amdgpu.conf
+
 .include <bsd.port.mk>
