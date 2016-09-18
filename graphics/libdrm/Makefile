@@ -3,7 +3,7 @@
 
 PORTNAME=	libdrm
 PORTVERSION=	2.4.70
-PORTREVISION=	1
+PORTREVISION=	2
 PORTEPOCH=	1
 CATEGORIES=	graphics x11
 MASTER_SITES=	http://dri.freedesktop.org/libdrm/
@@ -19,6 +19,7 @@ LIB_DEPENDS=	libpciaccess.so:devel/libpciaccess \
 USES=		libtool pkgconfig tar:bzip2
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
+CPPFLAGS+=	-Werror=uninitialized
 INSTALL_TARGET=	install-strip
 
 OPTIONS_DEFINE=	MANPAGES
