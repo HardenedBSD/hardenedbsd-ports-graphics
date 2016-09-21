@@ -102,6 +102,7 @@
     SUBDIR += d0_blind_id
     SUBDIR += dcetest
     SUBDIR += ddos_scan
+    SUBDIR += dehydrated
     SUBDIR += denyhosts
     SUBDIR += destroy
     SUBDIR += digest
@@ -290,7 +291,6 @@
     SUBDIR += l5
     SUBDIR += lasso
     SUBDIR += lastpass-cli
-    SUBDIR += letsencrypt.sh
     SUBDIR += libadacrypt
     SUBDIR += libargon2
     SUBDIR += libassuan
@@ -840,7 +840,9 @@
     SUBDIR += py-cryptkit
     SUBDIR += py-cryptography
     SUBDIR += py-cybox
+    SUBDIR += py-dfdatetime
     SUBDIR += py-dfvfs
+    SUBDIR += py-dfwinreg
     SUBDIR += py-ecdsa
     SUBDIR += py-ed25519ll
     SUBDIR += py-fail2ban
@@ -935,6 +937,7 @@
     SUBDIR += py-zope.security
     SUBDIR += py-zope.securitypolicy
     SUBDIR += py-zope.session
+    SUBDIR += py3-libnacl
     SUBDIR += qtkeychain-qt4
     SUBDIR += qtkeychain-qt5
     SUBDIR += quantis
@@ -1014,12 +1017,18 @@
     SUBDIR += rubygem-razorback-scriptNugget
     SUBDIR += rubygem-recog
     SUBDIR += rubygem-rex-arch
+    SUBDIR += rubygem-rex-bin_tools
+    SUBDIR += rubygem-rex-core
     SUBDIR += rubygem-rex-java
     SUBDIR += rubygem-rex-mime
+    SUBDIR += rubygem-rex-nop
     SUBDIR += rubygem-rex-ole
     SUBDIR += rubygem-rex-powershell
     SUBDIR += rubygem-rex-random_identifier
     SUBDIR += rubygem-rex-registry
+    SUBDIR += rubygem-rex-rop_builder
+    SUBDIR += rubygem-rex-socket
+    SUBDIR += rubygem-rex-sslscan
     SUBDIR += rubygem-rex-struct2
     SUBDIR += rubygem-rex-text
     SUBDIR += rubygem-rex-zip

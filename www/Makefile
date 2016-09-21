@@ -154,6 +154,7 @@
     SUBDIR += erwn
     SUBDIR += eventum
     SUBDIR += extjs
+    SUBDIR += fabio
     SUBDIR += fancybox
     SUBDIR += faup
     SUBDIR += fcgi
@@ -389,7 +390,6 @@
     SUBDIR += mathjax
     SUBDIR += mathopd
     SUBDIR += mediawiki123
-    SUBDIR += mediawiki124
     SUBDIR += mediawiki125
     SUBDIR += mediawiki126
     SUBDIR += mediawiki127
@@ -508,7 +508,6 @@
     SUBDIR += monast
     SUBDIR += mongoose
     SUBDIR += mongrel2
-    SUBDIR += moodle28
     SUBDIR += moodle29
     SUBDIR += moodle30
     SUBDIR += moodle31
@@ -1161,8 +1160,11 @@
     SUBDIR += p5-RPC-ExtDirect
     SUBDIR += p5-RT-Authen-ExternalAuth
     SUBDIR += p5-RT-Client-REST
+    SUBDIR += p5-RT-Extension-CommandByMail
+    SUBDIR += p5-RT-Extension-Gravatar
     SUBDIR += p5-RT-Extension-LDAPImport
     SUBDIR += p5-RT-Extension-MandatoryOnTransition
+    SUBDIR += p5-RT-Extension-QuickAssign
     SUBDIR += p5-RT-Extension-SLA
     SUBDIR += p5-RTx-Calendar
     SUBDIR += p5-Reaction
@@ -1764,6 +1766,7 @@
     SUBDIR += py-rfc3986
     SUBDIR += py-rfc3987
     SUBDIR += py-rhodecode
+    SUBDIR += py-rollbar
     SUBDIR += py-routes
     SUBDIR += py-scgi
     SUBDIR += py-scrapy

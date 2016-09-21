@@ -43,6 +43,7 @@
     SUBDIR += R-cran-reshape2
     SUBDIR += R-cran-rngtools
     SUBDIR += R-cran-rstudioapi
+    SUBDIR += R-cran-sourcetools
     SUBDIR += R-cran-tibble
     SUBDIR += R-cran-tidyr
     SUBDIR += SpecTcl
@@ -1406,6 +1407,7 @@
     SUBDIR += libvmdk
     SUBDIR += libvolume_id
     SUBDIR += libvshadow
+    SUBDIR += libvslvm
     SUBDIR += libvterm
     SUBDIR += libwfut
     SUBDIR += libx86
@@ -3817,7 +3819,6 @@
     SUBDIR += php5-dav
     SUBDIR += php5-geshi
     SUBDIR += php5-ice
-    SUBDIR += php5-msgpack
     SUBDIR += php5-pinba
     SUBDIR += php5-thrift
     SUBDIR += php55-gettext
@@ -3868,7 +3869,6 @@
     SUBDIR += pmccabe
     SUBDIR += pmd
     SUBDIR += poco
-    SUBDIR += poco-devel
     SUBDIR += poco-ssl
     SUBDIR += ponscripter-sekai
     SUBDIR += popt
@@ -4097,7 +4097,6 @@
     SUBDIR += py-docker-py
     SUBDIR += py-docopt
     SUBDIR += py-dogpile.cache
-    SUBDIR += py-dogpile.core
     SUBDIR += py-doit
     SUBDIR += py-durus
     SUBDIR += py-dynrules
@@ -4358,6 +4357,7 @@
     SUBDIR += py-pykde4
     SUBDIR += py-pykdeuic4
     SUBDIR += py-pyke
+    SUBDIR += py-pylru-cache
     SUBDIR += py-pymarc
     SUBDIR += py-pympler
     SUBDIR += py-pymtbl
@@ -4678,6 +4678,7 @@
     SUBDIR += py3-libpeas
     SUBDIR += py3-nose
     SUBDIR += py3-pyicu
+    SUBDIR += py3-pylru-cache
     SUBDIR += py3-python-magic
     SUBDIR += py3-pytz
     SUBDIR += py3-vcversioner
@@ -4757,6 +4758,7 @@
     SUBDIR += qt5-qdbus
     SUBDIR += qt5-qdbusviewer
     SUBDIR += qt5-qdoc
+    SUBDIR += qt5-qdoc-data
     SUBDIR += qt5-script
     SUBDIR += qt5-scripttools
     SUBDIR += qt5-testlib

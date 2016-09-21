@@ -62,6 +62,7 @@ INSTALL_TARGET=	install-pyldns
 CONFIGURE_ARGS+=--with-pyldns
 LIB_DEPENDS+=	libldns.so:dns/ldns
 BUILD_DEPENDS+=	${LOCALBASE}/bin/swig:devel/swig13
+CFLAGS+=	-I${OPENSSLINC}
 
 post-patch:
 	@${REINPLACE_CMD} \
@@ -85,6 +86,8 @@ ALL_TARGET=	all
 INSTALL_TARGET=	install-lib install-h install-config
 
 .endif # BUILD_PYLDNS || BUILD_P5PERL
+
+.include <bsd.port.pre.mk>
 
 .if ${PORT_OPTIONS:MGOST}
 .  if !defined(SSL_DEFAULT) || ${SSL_DEFAULT} == "base"
@@ -134,4 +137,4 @@ post-install:
 
 .endif # BUILD_PYLDNS || BUILD_P5PERL
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

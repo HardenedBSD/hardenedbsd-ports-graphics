@@ -5,6 +5,36 @@ they are unavoidable.
 You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
+20160919:
+  AFFECTS: users of net/vtun
+  AUTHOR: cy@FreeBSD.org
+
+  The VTUN_EXTENDED_MODE option has been replaced by -e command line
+  option.
+
+20160914:
+  AFFECTS: users of www/nginx-devel
+  AUTHOR: osa@FreeBSD.org
+
+  Nginx now creates logs under /var/log/nginx/ and changes default log
+  names from "nginx-access.log" and "nginx-error.log" to "access.log" and
+  "error.log" respectively.  This is important for the error log because
+  the location is encoded and touched by nginx during startup regardless
+  of the configured location for the error log.
+
+  See http://trac.nginx.org/nginx/ticket/147 for additional information
+  on why this happens.
+
+20160914:
+  AFFECTS: users of deskutils/xfce4-volumed-pulse
+  AUTHOR: olivierd@FreeBSD.org
+
+  The port has been updated to the latest stable version 0.2.2.
+  Support of xfce4-mixer has been removed, so you can delete
+  its properties with the following command:
+
+  xfconf-query -c xfce4-mixer -p / -rR
+
 20160910:
   AFFECTS: users of security/letsencrypt.sh
   AUTHOR: riggs@FreeBSD.org

@@ -26,7 +26,6 @@
     SUBDIR += arprelease
     SUBDIR += asio
     SUBDIR += aslookup
-    SUBDIR += asterisk
     SUBDIR += asterisk-chan_sccp
     SUBDIR += asterisk-g72x
     SUBDIR += asterisk11
@@ -423,6 +422,7 @@
     SUBDIR += nanomsg
     SUBDIR += nast
     SUBDIR += nats
+    SUBDIR += nats-streaming-server
     SUBDIR += nats-top
     SUBDIR += nbd-server
     SUBDIR += nc
