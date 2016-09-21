@@ -65,6 +65,9 @@ include/GL/internal/dri_interface.h
 @comment lib/libglapi.so
 @comment lib/libglapi.so.0
 @comment lib/libglapi.so.0.0.0
+@comment lib/libwayland-egl.so
+@comment lib/libwayland-egl.so.1
+@comment lib/libwayland-egl.so.1.0.0
 %%VDPAU%%lib/vdpau/libvdpau_r300.so
 %%VDPAU%%lib/vdpau/libvdpau_r300.so.1
 %%VDPAU%%lib/vdpau/libvdpau_r300.so.1.0
@@ -83,3 +86,4 @@ libdata/pkgconfig/dri.pc
 @comment libdata/pkgconfig/gl.pc
 @comment libdata/pkgconfig/glesv2.pc
 @comment libdata/pkgconfig/osmesa.pc
+@comment libdata/pkgconfig/wayland-egl.pc
