@@ -5,6 +5,39 @@ they are unavoidable.
 You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
+20160921:
+  AFFECTS: users of mail/sieve-connect
+  AUTHOR: alexey@renatasystems.org
+
+  Version 0.88 contains two breaking changes:
+  1.  If the Sieve server does not offer STARTTLS, then connections should now
+      fail.
+  2.  When deriving a remote script name from the local filename, use the
+      basename and strip off directories.
+
+  For additional information see:
+  http://mail.globnix.net/pipermail/sieve-connect-announce/2016/000012.html
+
+20160919:
+  AFFECTS: users of net/vtun
+  AUTHOR: cy@FreeBSD.org
+
+  The VTUN_EXTENDED_MODE option has been replaced by -e command line
+  option.
+
+20160914:
+  AFFECTS: users of www/nginx-devel
+  AUTHOR: osa@FreeBSD.org
+
+  Nginx now creates logs under /var/log/nginx/ and changes default log
+  names from "nginx-access.log" and "nginx-error.log" to "access.log" and
+  "error.log" respectively.  This is important for the error log because
+  the location is encoded and touched by nginx during startup regardless
+  of the configured location for the error log.
+
+  See http://trac.nginx.org/nginx/ticket/147 for additional information
+  on why this happens.
+
 20160914:
   AFFECTS: users of deskutils/xfce4-volumed-pulse
   AUTHOR: olivierd@FreeBSD.org
