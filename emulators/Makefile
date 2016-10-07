@@ -109,6 +109,8 @@
     SUBDIR += pipelight
     SUBDIR += playonbsd
     SUBDIR += ppsspp
+    SUBDIR += ppsspp-qt4
+    SUBDIR += ppsspp-qt5
     SUBDIR += py-gns3-converter
     SUBDIR += q4wine
     SUBDIR += qemu
@@ -149,8 +151,9 @@
     SUBDIR += virtio-kmod
     SUBDIR += virtualbox-ose
     SUBDIR += virtualbox-ose-additions
+    SUBDIR += virtualbox-ose-additions-nox11
     SUBDIR += virtualbox-ose-kmod
-    SUBDIR += virtualbox-ose-lite
+    SUBDIR += virtualbox-ose-nox11
     SUBDIR += visualboyadvance-m
     SUBDIR += vmips
     SUBDIR += vmsbackup

@@ -20,6 +20,7 @@
     SUBDIR += R-cran-caTools
     SUBDIR += R-cran-caret
     SUBDIR += R-cran-chron
+    SUBDIR += R-cran-crayon
     SUBDIR += R-cran-doParallel
     SUBDIR += R-cran-evaluate
     SUBDIR += R-cran-foreach
@@ -176,6 +177,7 @@
     SUBDIR += boost-libs
     SUBDIR += boost-python-libs
     SUBDIR += boost_build
+    SUBDIR += bossa
     SUBDIR += bouml-doc
     SUBDIR += bpython
     SUBDIR += bsdbuild
@@ -458,9 +460,11 @@
     SUBDIR += elixir-hex
     SUBDIR += elixir-inflex
     SUBDIR += elixir-lager_logger
+    SUBDIR += elixir-libring
     SUBDIR += elixir-math
     SUBDIR += elixir-msgpax
     SUBDIR += elixir-nadia
+    SUBDIR += elixir-nats
     SUBDIR += elixir-nimble_csv
     SUBDIR += elixir-paratize
     SUBDIR += elixir-plug
@@ -499,6 +503,7 @@
     SUBDIR += erlang-goldrush
     SUBDIR += erlang-gpb
     SUBDIR += erlang-gproc
+    SUBDIR += erlang-hut
     SUBDIR += erlang-jobs
     SUBDIR += erlang-jsx
     SUBDIR += erlang-jsxd
@@ -742,6 +747,7 @@
     SUBDIR += go-json-rest
     SUBDIR += go-logrus
     SUBDIR += go-metrics
+    SUBDIR += go-nuid
     SUBDIR += go-pflag
     SUBDIR += go-pretty
     SUBDIR += go-protobuf
@@ -763,7 +769,6 @@
     SUBDIR += goffice010
     SUBDIR += google-gdata
     SUBDIR += google-perftools
-    SUBDIR += google-sparsehash
     SUBDIR += google-styleguide
     SUBDIR += googlemock
     SUBDIR += googletest
@@ -1157,6 +1162,7 @@
     SUBDIR += libassa
     SUBDIR += libassetml
     SUBDIR += libast
+    SUBDIR += libastylej
     SUBDIR += libatomic_ops
     SUBDIR += libaura
     SUBDIR += libavl
@@ -1255,6 +1261,7 @@
     SUBDIR += libglademm24
     SUBDIR += libgpc
     SUBDIR += libgpkg
+    SUBDIR += libgrading
     SUBDIR += libgsf
     SUBDIR += libgta
     SUBDIR += libgtop
@@ -2915,6 +2922,7 @@
     SUBDIR += p5-Params-Util
     SUBDIR += p5-Params-Validate
     SUBDIR += p5-Params-Validate-Dependencies
+    SUBDIR += p5-Params-ValidationCompiler
     SUBDIR += p5-Paranoid
     SUBDIR += p5-Parse-CPAN-Meta
     SUBDIR += p5-Parse-CPAN-Packages
@@ -3361,6 +3369,7 @@
     SUBDIR += p5-Test-YAML-Meta
     SUBDIR += p5-Test-YAML-Valid
     SUBDIR += p5-Test-utf8
+    SUBDIR += p5-Test2-Plugin-NoWarnings
     SUBDIR += p5-Test2-Suite
     SUBDIR += p5-Text-Levenshtein
     SUBDIR += p5-Text-Levenshtein-Damerau
@@ -4154,6 +4163,7 @@
     SUBDIR += py-gflags
     SUBDIR += py-git-up
     SUBDIR += py-gitdb
+    SUBDIR += py-gitless
     SUBDIR += py-gitosis
     SUBDIR += py-gitpython
     SUBDIR += py-glob2
@@ -4183,6 +4193,7 @@
     SUBDIR += py-ioflo
     SUBDIR += py-ipaddr
     SUBDIR += py-ipdb
+    SUBDIR += py-ipython_genutils
     SUBDIR += py-iso8601
     SUBDIR += py-isodate
     SUBDIR += py-iterpipes
@@ -4296,6 +4307,7 @@
     SUBDIR += py-parsedatetime
     SUBDIR += py-path.py
     SUBDIR += py-pathlib
+    SUBDIR += py-pathlib2
     SUBDIR += py-pathtools
     SUBDIR += py-paver
     SUBDIR += py-pbr
@@ -4535,6 +4547,7 @@
     SUBDIR += py-tw.forms
     SUBDIR += py-twext
     SUBDIR += py-twiggy
+    SUBDIR += py-twilio
     SUBDIR += py-twine
     SUBDIR += py-twisted
     SUBDIR += py-twisted152
@@ -4548,7 +4561,6 @@
     SUBDIR += py-ujson
     SUBDIR += py-uncompyle2
     SUBDIR += py-unipath
-    SUBDIR += py-unittest2
     SUBDIR += py-unpaddedbase64
     SUBDIR += py-update_checker
     SUBDIR += py-urlimport
@@ -4672,6 +4684,7 @@
     SUBDIR += py-zope.viewlet
     SUBDIR += py3-Jinja2
     SUBDIR += py3-babel
+    SUBDIR += py3-click
     SUBDIR += py3-dbus
     SUBDIR += py3-gobject3
     SUBDIR += py3-jsonschema
@@ -4681,8 +4694,10 @@
     SUBDIR += py3-pylru-cache
     SUBDIR += py3-python-magic
     SUBDIR += py3-pytz
+    SUBDIR += py3-threema-msgapi
     SUBDIR += py3-vcversioner
     SUBDIR += py3-xdg
+    SUBDIR += py3-yaml
     SUBDIR += py_static_check
     SUBDIR += pybugz
     SUBDIR += pychecker
@@ -5365,6 +5380,7 @@
     SUBDIR += sparc64-gcc
     SUBDIR += sparc64-xtoolchain-gcc
     SUBDIR += spark
+    SUBDIR += sparsehash
     SUBDIR += spatialindex
     SUBDIR += spdict
     SUBDIR += spice-protocol

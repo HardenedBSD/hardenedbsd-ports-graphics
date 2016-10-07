@@ -273,6 +273,7 @@
     SUBDIR += keychain
     SUBDIR += keynote
     SUBDIR += keyprint
+    SUBDIR += kdbx-viewer
     SUBDIR += kgpg-kde4
     SUBDIR += knock
     SUBDIR += knocker
@@ -380,10 +381,6 @@
     SUBDIR += nacl
     SUBDIR += ncrack
     SUBDIR += ncrypt
-    SUBDIR += nessus
-    SUBDIR += nessus-libnasl
-    SUBDIR += nessus-libraries
-    SUBDIR += nessus-plugins
     SUBDIR += netpgp
     SUBDIR += nettle
     SUBDIR += nikto
@@ -1019,6 +1016,7 @@
     SUBDIR += rubygem-rex-arch
     SUBDIR += rubygem-rex-bin_tools
     SUBDIR += rubygem-rex-core
+    SUBDIR += rubygem-rex-encoder
     SUBDIR += rubygem-rex-java
     SUBDIR += rubygem-rex-mime
     SUBDIR += rubygem-rex-nop
