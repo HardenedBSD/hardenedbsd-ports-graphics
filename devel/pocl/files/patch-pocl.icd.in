@@ -1,0 +1,5 @@
+--- ./pocl.icd.in.orig	2014-06-20 18:21:22.000000000 +0200
++++ ./pocl.icd.in	2014-06-20 18:21:36.000000000 +0200
+@@ -1 +1 @@
+-@libdir@/libpocl.so.VER
++@libdir@/libpocl.so

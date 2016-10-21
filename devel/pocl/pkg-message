@@ -1,0 +1,24 @@
+
+When using ICD, make sure you have set the environment variable
+
+OCL_ICD_VENDORS=${PREFIX}/etc/OpenCL/vendors/
+
+properly. Usually, this should point to 
+${PREFIX}/etc/OpenCL/vendors/
+with ${PREFIX} set to /usr/local in the standard environment.
+
+Deadlocks (freezes) on FreeBSD:
+
+OpenCL applications using pocl on FreeBSD must be compiled with 
+options CFLAGS+=-pthread or CXXFLAGS+=-pthread, otherwise someone risk
+that a library may not initialize the threading on BSD independently, 
+even if an ICD loader is used.
+
+See: 
+	http://www.freebsd.org/cgi/query-pr.cgi?pr=163512
+
+(Source: http://portablecl.org/docs/html/faq.html?highlight=freebsd)
+
+For documentation, please consult
+
+	http://portablecl.org/docs/html/

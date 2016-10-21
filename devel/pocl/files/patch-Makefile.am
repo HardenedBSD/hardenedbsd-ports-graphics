@@ -1,0 +1,23 @@
+--- Makefile.am.orig	2014-01-07 09:50:56.000000000 +0100
++++ Makefile.am	2014-06-20 17:07:10.000000000 +0200
+@@ -26,7 +26,11 @@
+ 
+ ACLOCAL_AMFLAGS = -I m4
+ 
++if FREEBSD_HOST_OS
++pkgconfigdir = $(PKGCONFIGDIR)
++else
+ pkgconfigdir = $(libdir)/pkgconfig
++endif
+ pkgconfig_DATA = pocl.pc
+ 
+ CLEANFILES = install-paths.h
+@@ -67,7 +71,7 @@
+ 	echo "#define PKGDATADIR \"${pkgdatadir}\"" > $@.new
+ 	echo "#define PKGLIBEXECDIR \"${pkglibexecdir}\"" >> $@.new
+ 	echo "#define PKGINCLUDEDIR \"${pkgincludedir}\"" >> $@.new
+-	@if cmp --quiet $@.new $@ ; then \
++	@if cmp $@.new $@ ; then \
+ 		: "Paths not changed" ;\
+ 		$(RM) $@.new ;\
+ 	else \

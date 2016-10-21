@@ -1,0 +1,11 @@
+--- configure.ac.orig	2016-03-04 16:26:07.000000000 +0100
++++ configure.ac	2016-03-06 11:46:14.420446000 +0100
+@@ -79,7 +79,7 @@
+ # LLVM configuration
+ #
+ AC_ARG_VAR([LLVM_CONFIG], [Program used to retrieve LLVM options and binaries])
+-AC_PATH_PROGS([LLVM_CONFIG], [llvm-config llvm-config-mp-3.7 llvm-config-3.7 llvm-config37 llvm-config-mp-3.6 llvm-config-3.6 llvm-config36])
++AC_PATH_PROGS([LLVM_CONFIG], [llvm-config llvm-config-mp-3.8 llvm-config-3.8 llvm-config-mp-3.7 llvm-config-3.7 llvm-config37 llvm-config-mp-3.6 llvm-config-3.6 llvm-config36])
+ test -z "$LLVM_CONFIG" && AC_MSG_FAILURE([no llvm-config found in \$PATH])
+ 
+ LLVM_VERSION=`$LLVM_CONFIG --version`
