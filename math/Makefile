@@ -55,6 +55,7 @@
     SUBDIR += R-cran-nloptr
     SUBDIR += R-cran-nnls
     SUBDIR += R-cran-nortest
+    SUBDIR += R-cran-numDeriv
     SUBDIR += R-cran-outliers
     SUBDIR += R-cran-pbkrtest
     SUBDIR += R-cran-psych
@@ -106,6 +107,7 @@
     SUBDIR += carve
     SUBDIR += cblas
     SUBDIR += ccmath
+    SUBDIR += ceres-solver
     SUBDIR += cgal
     SUBDIR += chaco
     SUBDIR += chryzodus
@@ -243,7 +245,6 @@
     SUBDIR += laspack
     SUBDIR += ldouble
     SUBDIR += levmar
-    SUBDIR += libR
     SUBDIR += libRmath
     SUBDIR += libflame
     SUBDIR += libjbigi
@@ -560,9 +561,8 @@
     SUBDIR += pecl-bitset
     SUBDIR += pecl-bitset2
     SUBDIR += pecl-stats
+    SUBDIR += pecl-stats2
     SUBDIR += pecl-trader
-    SUBDIR += php55-bcmath
-    SUBDIR += php55-gmp
     SUBDIR += php56-bcmath
     SUBDIR += php56-gmp
     SUBDIR += php70-bcmath

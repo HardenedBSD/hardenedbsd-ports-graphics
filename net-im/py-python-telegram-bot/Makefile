@@ -2,12 +2,12 @@
 # $FreeBSD$
 
 PORTNAME=	python-telegram-bot
-PORTVERSION=	5.1.0
+PORTVERSION=	5.1.1
 CATEGORIES=	net-im devel python
 MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
-MAINTAINER=	demon@FreeBSD.org
+MAINTAINER=	olgeni@FreeBSD.org
 COMMENT=	Not just a Python wrapper around the Telegram Bot API
 
 LICENSE=	LGPL3
