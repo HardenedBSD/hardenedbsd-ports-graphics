@@ -103,6 +103,7 @@
     SUBDIR += arduino-mk
     SUBDIR += arduino-sevseg
     SUBDIR += arduino-tools
+    SUBDIR += arduino16
     SUBDIR += argouml
     SUBDIR += argp-standalone
     SUBDIR += argtable
@@ -4206,6 +4207,7 @@
     SUBDIR += py-ipython_genutils
     SUBDIR += py-iso8601
     SUBDIR += py-isodate
+    SUBDIR += py-isort
     SUBDIR += py-iterpipes
     SUBDIR += py-itools
     SUBDIR += py-jaraco.classes
