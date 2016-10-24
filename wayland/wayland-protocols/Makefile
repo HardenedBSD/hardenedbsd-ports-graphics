@@ -10,6 +10,9 @@ COMMENT=	Wayland protocols
 
 BUILD_DEPENDS=	wayland-scanner:wayland/wayland
 
+LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/COPYING
+
 USES=		tar:xz
 GNU_CONFIGURE=	yes
 
