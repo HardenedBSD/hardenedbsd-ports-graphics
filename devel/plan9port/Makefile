@@ -15,6 +15,8 @@ LICENSE_NAME=	Lucent Public License Version 1.02
 LICENSE_FILE=	${WRKSRC}/LICENSE
 LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
+BROKEN=		Unfetchable (google code has gone away)
+
 BROKEN_ia64=	does not install: cleanname not found
 BROKEN_sparc64=	does not install: cleanname not found
 
@@ -77,8 +79,8 @@ do-build:
 
 # Dynamic PLIST sucks, but it's over 8K lines, which sucks even more :(
 post-build:
-	${RM} -rf `${FIND} ${WRKSRC}/dist -type f ! -regex ".*\.png"`
-	${RM} -rf `${FIND} ${WRKSRC} -name .hg -o -name .hgignore \
+	${RM} -r `${FIND} ${WRKSRC}/dist -type f ! -regex ".*\.png"`
+	${RM} -r `${FIND} ${WRKSRC} -name .hg -o -name .hgignore \
 		-o -name .hgtags -o -name .cvsignore`
 	@( cd ${WRKDIR} ; \
 	  ${FIND} plan9 -type f; \

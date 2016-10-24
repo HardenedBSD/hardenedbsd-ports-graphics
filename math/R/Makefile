@@ -3,7 +3,7 @@
 
 PORTNAME?=		R
 PORTVERSION=		3.3.1
-PORTREVISION=		3
+PORTREVISION=		4
 CATEGORIES=		math lang
 MASTER_SITES=		http://cran.r-project.org/%SUBDIR%/ \
 			ftp://cran.r-project.org/pub/R/%SUBDIR%/ \
@@ -21,7 +21,7 @@ MASTER_SITES=		http://cran.r-project.org/%SUBDIR%/ \
 			http://probability.ca/cran/%SUBDIR%/
 MASTER_SITE_SUBDIR=	src/base/R-${PORTVERSION:C|\..*||}
 
-MAINTAINER=		jrm@ftfl.ca
+MAINTAINER=		jrm@FreeBSD.org
 COMMENT=		Language for statistical computing and graphics
 
 LICENSE=		GPLv2
@@ -35,7 +35,7 @@ CONFIGURE_ARGS=		--disable-java \
 GNU_CONFIGURE=		yes
 INSTALL_TARGET=		install-strip
 ONLY_FOR_ARCHS=		i386 amd64
-USES=			fortran iconv libtool localbase objc:compiler perl5 \
+USES=			fortran iconv libtool localbase objc:compiler pathfix perl5 \
 			readline
 USE_PERL5=		build
 
@@ -147,9 +147,6 @@ USE_LDCONFIG=		${PREFIX}/lib/R/lib
 .endif
 
 post-patch:
-	@${REINPLACE_CMD} -e 's|(libdir)/pkgconfig|(prefix)/libdata/pkgconfig|g'\
-		${WRKSRC}/src/nmath/standalone/Makefile.in \
-		${WRKSRC}/src/unix/Makefile.in
 	@${REINPLACE_CMD} -e "s|/usr/local|${LOCALBASE}|g" \
 		${WRKSRC}/configure
 

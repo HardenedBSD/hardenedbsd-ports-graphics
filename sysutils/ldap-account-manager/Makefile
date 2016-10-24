@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	ldap-account-manager
-PORTVERSION=	5.3
+PORTVERSION=	5.5
 CATEGORIES=	sysutils www
 MASTER_SITES=	SF/${SHORTNAME}/LAM/${PORTVERSION}
 
@@ -10,8 +10,6 @@ COMMENT=	Webfrontend for managing accounts stored in an OpenLDAP server
 
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/COPYING
-
-BROKEN_powerpc64=	Does not build
 
 RUN_DEPENDS=	p5-Quota>=0:sysutils/p5-Quota \
 		p5-perl-ldap>=0:net/p5-perl-ldap
@@ -32,10 +30,10 @@ WRITEABLES=	config sess tmp
 OPTIONS_DEFINE=	DOCS
 
 do-install:
-	@${ECHO_CMD} '@exec if [ -f %D/${WWWDIR_REL}/config/shells ]; then ${RM} -f %D/${WWWDIR_REL}/config/shells; fi' >> ${TMPPLIST}
+	@${ECHO_CMD} '@exec if [ -f %D/${WWWDIR_REL}/config/shells ]; then ${RM} %D/${WWWDIR_REL}/config/shells; fi' >> ${TMPPLIST}
 .for CONFIG in ${CONFIGS}
 	@${ECHO_CMD} '@sample ${WWWDIR_REL}/config/${CONFIG}.sample' >> ${TMPPLIST}
-	@${ECHO_CMD} '@exec if [ -f %D/${WWWDIR_REL}/config/${CONFIG}_sample ]; then ${RM} -f %D/${WWWDIR_REL}/config/${CONFIG}_sample; fi' >> ${TMPPLIST}
+	@${ECHO_CMD} '@exec if [ -f %D/${WWWDIR_REL}/config/${CONFIG}_sample ]; then ${RM} %D/${WWWDIR_REL}/config/${CONFIG}_sample; fi' >> ${TMPPLIST}
 .endfor
 .for I in ${LAMDATA}
 	@${FIND} -s ${WRKSRC}/${I} -type f -not -name '*.sample' | ${SED} -e 's,^${WRKSRC},${WWWDIR_REL},' >> ${TMPPLIST}

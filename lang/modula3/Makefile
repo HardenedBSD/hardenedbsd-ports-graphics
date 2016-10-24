@@ -8,7 +8,7 @@ CATEGORIES=	lang
 MASTER_SITES=	http://downloads.dragonlace.net/m3/:boot
 DISTFILES=	${SRCDISTFILE} ${BOOTDIST}
 
-MAINTAINER=	marino@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Critical Mass Modula-3 compiler
 
 LICENSE=	DECM3
@@ -128,7 +128,7 @@ do-install:
 		${RM} cm3 && ${LN} -s ../../../bin/cm3 .)
 
 new-bootstrap:
-	@${RM} -rf ${NEWBOOTDIR}
+	@${RM} -r ${NEWBOOTDIR}
 	@${MKDIR} ${NEWBOOTDIR:H}
 	${CP} -a ${INTERMED}/min-dist ${NEWBOOTDIR}
 	@${FIND} ${NEWBOOTDIR} -type f -perm +111 | \

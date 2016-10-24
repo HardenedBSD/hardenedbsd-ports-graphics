@@ -2,8 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	e2fsprogs
-PORTVERSION=	1.43.1
-PORTREVISION?=	0
+PORTVERSION=	1.43.3
+PORTREVISION?=	3
 CATEGORIES?=	sysutils
 MASTER_SITES=	KERNEL_ORG/linux/kernel/people/tytso/${PORTNAME}/v${PORTVERSION}
 
@@ -38,9 +38,9 @@ OPTIONS_SINGLE=			SELFTEST
 OPTIONS_SINGLE_SELFTEST=	NOTESTS SMALLTESTS ALLTESTS
 OPTIONS_DEFAULT=		SMALLTESTS
 SELFTEST_DESC=	Choose which set of self-tests to run
-NOTESTS_DESC=	Do not run any self-tests (DISCOURAGED)
-SMALLTESTS_DESC=Run sets that fit into 500 MB disk space (DEFAULT)
-ALLTESTS_DESC=	Run all self-tests
+NOTESTS_DESC=	Do not run any self-tests (only Tier-1 & DISCOURAGED)
+SMALLTESTS_DESC=Run tests that fit into 500 MB disk space (DEFAULT)
+ALLTESTS_DESC=	Run most self-tests (requires more RAM & disk space)
 PARALLELTESTS_DESC=	Run self-tests in parallel (requires more disk space)
 
 post-extract:
@@ -50,10 +50,7 @@ post-extract:
 
 PKGDEINSTALL=	${PKGINSTALL}
 
-# get more details into tinderbox logs
-.if defined(PACKAGE_BUILDING)
 MAKE_ARGS+=	V=1
-.endif
 
 .include <bsd.port.options.mk>
 
@@ -91,7 +88,7 @@ post-patch::
 	@${REINPLACE_CMD} -e 's/<malloc\.h>/<stdlib.h>/' ${WRKSRC}/*/*.c
 .if empty(PORT_OPTIONS:MALLTESTS)
 .for i in \
-    		d_fallocate_blkmap \
+		d_fallocate_blkmap \
 		f_baddir \
 		f_bbfile \
 		f_convert_bmap \
@@ -137,9 +134,12 @@ post-patch::
 .endif
 .endif
 
+# Master port stuff that is not to be seen by the slave ports.
 .if ${MASTERDIR} == ${.CURDIR}
-.if ${OPSYS} == FreeBSD && ${OSVERSION} >= 1100000
-BROKEN=self-test failures on FreeBSD 11+ hint to data corruption issues.
+# NOTE: The previous .if block goes all the way to the end of the file.
+
+.if !empty(PORT_OPTIONS:MNOTESTS) && (${OPSYS} == FreeBSD) && (${OSVERSION} >= 1100000 || ((${ARCH} != i386) && (${ARCH} != amd64)))
+BROKEN=e2fsprogs has not been tested on your system by the maintainer. You must run self-tests.
 .endif
 
 pre-build:
@@ -162,7 +162,7 @@ post-build:
 # system are statically linked against anything that is outside the root fs,
 # else we're in trouble if e2fsck is needed for boot:
 # (we don't use e2fsck.static, since we can link libc.so dynamically)
-	cd ${WRKSRC}/e2fsck && ${RM} -f e2fsck \
+	cd ${WRKSRC}/e2fsck && ${RM} e2fsck \
 		&& ${MAKE_CMD} e2fsck \
 		STATIC_LIBS="../lib/libext2fs.a ../lib/libcom_err.a \
 		../lib/libblkid.a  ../lib/libuuid.a" \
@@ -195,14 +195,14 @@ post-build:
 	@${ECHO_CMD} '===>  Running e2fsprogs self-test suite'
 # do not add -j options unconditionally to ${MAKE_CMD} below, this might break
 # due to excessive disk space use.
-	cd ${WRKSRC}/tests && ${MKDIR} ${WRKDIR}/tmp && ${MAKE_CMD} check ${_CHECK_JOBS} ${_checkaddargs} \
+	cd ${WRKSRC}/tests && ulimit -t 60 && ${MKDIR} ${WRKDIR}/tmp && ${SETENV} e2fsprogs_inhibit_SIGINFO=1 ${MAKE_CMD} check ${_CHECK_JOBS} ${_checkaddargs} \
 	    || { head -n30000 ${WRKSRC}/tests/*.failed 2>/dev/null ; exit 1 ; }
 .else
 	@${ECHO_CMD} '===>  SKIPPING e2fsprogs self-test suite (DISCOURAGED!)'
 .endif
 
 post-install:
-	${RM} -f ${STAGEDIR}${PREFIX}/sbin/uuidd
+	${RM} ${STAGEDIR}${PREFIX}/sbin/uuidd
 	${INSTALL_PROGRAM} ${WRKSRC}/fsck_ext2fs ${STAGEDIR}${PREFIX}/sbin/
 	${INSTALL_MAN} ${FILESDIR}/fsck_ext2fs.8 ${STAGEDIR}${PREFIX}/man/man8/
 .if ${PORT_OPTIONS:MDOCS}
@@ -211,6 +211,7 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/${i} ${STAGEDIR}${DOCSDIR}
 .endfor
 .endif
+#
 # the next line closes .if ${MASTERDIR} == ${.CURDIR}
 .endif
 

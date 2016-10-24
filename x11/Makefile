@@ -182,6 +182,8 @@
     SUBDIR += libxshmfence
     SUBDIR += linux-c6-pixman
     SUBDIR += linux-c6-xorg-libs
+    SUBDIR += linux-c7-pixman
+    SUBDIR += linux-c7-xorg-libs
     SUBDIR += linux-f10-xorg-libs
     SUBDIR += listres
     SUBDIR += lsw
@@ -377,6 +379,7 @@
     SUBDIR += xfce4-conf
     SUBDIR += xfce4-dashboard
     SUBDIR += xfce4-embed-plugin
+    SUBDIR += xfce4-goodies
     SUBDIR += xfce4-quicklauncher-plugin
     SUBDIR += xfce4-screenshooter-plugin
     SUBDIR += xfce4-taskmanager

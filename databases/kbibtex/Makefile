@@ -3,11 +3,11 @@
 
 PORTNAME=	kbibtex
 DISTVERSION=	0.6
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	databases kde
 MASTER_SITES=	http://download.gna.org/${PORTNAME}/${PORTVERSION:C,(^[[:digit:]]\.[[:digit:]]).*,\1,}/
 
-MAINTAINER=	makc@FreeBSD.org
+MAINTAINER=	kde@FreeBSD.org
 COMMENT=	Bibliography editor for KDE
 
 LIB_DEPENDS=	libpoppler-qt4.so:graphics/poppler-qt4 \

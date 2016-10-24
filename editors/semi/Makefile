@@ -48,12 +48,12 @@ OPTIONS_DEFINE=	DOCS
 .include <bsd.port.options.mk>
 
 .if defined(EMACS_PORT_NAME)
-.if (${EMACS_PORT_NAME} == "emacs23") || (${EMACS_PORT_NAME} == "emacs24") || (${EMACS_PORT_NAME} == "emacs-devel")
+.if (${EMACS_PORT_NAME} == "emacs25") || (${EMACS_PORT_NAME} == "emacs-nox11") || (${EMACS_PORT_NAME} == "emacs-devel")
 DEPPORT_SUFFIX=
 .else
 DEPPORT_SUFFIX=	-${EMACS_PORT_NAME}
 .endif
-.if (${EMACS_PORT_NAME} == "emacs23") || (${EMACS_PORT_NAME} == "emacs24") || (${EMACS_PORT_NAME} == "emacs-devel")
+.if (${EMACS_PORT_NAME} == "emacs25") || (${EMACS_PORT_NAME} == "emacs-nox11") || (${EMACS_PORT_NAME} == "emacs-devel")
 PLIST=		${PKGDIR}/pkg-plist.emacs20
 .endif
 # depends on flim
@@ -176,7 +176,7 @@ info-package-install:
 	done)
 
 manifest-install:
-	@${RM} -f ${WRKDIR}/${MANIFEST}
+	@${RM} ${WRKDIR}/${MANIFEST}
 	@${CAT} ${PLIST} | ${GREP} -e "^%%EMACS_PACKAGESDIR%%" | \
 		${SED} -e "s;^%%EMACS_PACKAGESDIR%%/;;" > ${WRKDIR}/${MANIFEST}
 	@${INSTALL_DATA} ${WRKDIR}/${MANIFEST} \

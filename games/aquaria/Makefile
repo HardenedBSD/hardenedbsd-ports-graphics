@@ -2,8 +2,8 @@
 
 PORTNAME=	aquaria
 DISTVERSIONPREFIX=	OSE-v
-DISTVERSION=	1.002-20
-DISTVERSIONSUFFIX=	-g6971e78
+DISTVERSION=	1.002-22
+DISTVERSIONSUFFIX=	-g84366ad
 CATEGORIES=	games
 
 MAINTAINER=	jbeich@FreeBSD.org
@@ -21,7 +21,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	AquariaOSE
 GH_PROJECT=	Aquaria
 
-USES=		cmake lua:51 ninja openal pkgconfig
+USES=		cmake lua:51 openal pkgconfig
 EXCLUDE=	AL FTGL GL SDL* freetype2 glm glpng/png glpng/zlib \
 		libogg-* libvorbis-* lua-* tinyxml2*
 EXTRACT_AFTER_ARGS=${EXCLUDE:S,^,--exclude ExternalLibs/,}

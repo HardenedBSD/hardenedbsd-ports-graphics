@@ -7,7 +7,7 @@ CATEGORIES=	dns
 MASTER_SITES=	http://www.opensmtpd.org/archives/ \
 		http://distfiles.pirateparty.in/ashish/
 
-MAINTAINER=	ashish@FreeBSD.org
+MAINTAINER=	fluffy@FreeBSD.org
 COMMENT=	Asynchronous DNS resolver library
 
 LICENSE=	ISCL BSD4CLAUSE BSD3CLAUSE BSD2CLAUSE
@@ -18,7 +18,9 @@ CONFLICTS=	libasr-devel-[0-9]*
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
 
-USES=		libtool
+USES=		libtool ssl:build
 USE_LDCONFIG=	yes
+
+CFLAGS+=	-I${OPENSSLINC}
 
 .include <bsd.port.mk>

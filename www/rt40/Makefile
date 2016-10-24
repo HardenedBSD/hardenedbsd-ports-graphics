@@ -10,6 +10,9 @@ PKGNAMESUFFIX=	40
 MAINTAINER=	matthew@FreeBSD.org
 COMMENT=	RT is an industrial-grade ticketing system written in Perl
 
+DEPRECATED=	Upstream support EoL, please migrate to rt44
+EXPIRATION_DATE=	2017-02-15
+
 CONFLICTS_INSTALL=	rt42-4.2* rt44-4.4* brlcad-[0-9]*
 
 NO_ARCH=	yes
@@ -138,7 +141,6 @@ DB_TYPE=	Oracle
 DB_TYPE=	SQLite
 .endif
 
-
 .if ${PORT_OPTIONS:MPGSQL}
 DB_DBA_USER?=	pgsql
 .else
@@ -193,7 +195,7 @@ pre-fetch:
 .endif
 
 post-patch:
-	@${RM} -f ${WRKSRC}/lib/RT.pm.in.orig
+	@${RM} ${WRKSRC}/lib/RT.pm.in.orig
 	@${REINPLACE_CMD} -e 's!%%PREFIX%%!${PREFIX}!g' ${WRKSRC}/config.layout
 	@${REINPLACE_CMD} -e 's!%%SITE_PERL%%!${PREFIX}/${SITE_PERL_REL}!g' ${WRKSRC}/config.layout
 	@${REINPLACE_CMD} -e 's!/path/to/your/etc!${RT_ETC_PATH}!g' ${WRKSRC}/etc/RT_SiteConfig.pm
@@ -201,10 +203,10 @@ post-patch:
 	    ${RM} ${WRKSRC}/lib/RT/Interface/CLI.pm.bak
 
 pre-install:
-	@${RM} -f ${WRKSRC}/lib/RT.pm.in
+	@${RM} ${WRKSRC}/lib/RT.pm.in
 
 post-install:
-	@${RM} -rf ${STAGEDIR}/${WWWDIR}${PKGNAMESUFFIX}
+	@${RM} -r ${STAGEDIR}/${WWWDIR}${PKGNAMESUFFIX}
 	${MKDIR} ${STAGEDIR}${DOCSDIR}/upgrade
 	(cd ${WRKSRC}/etc && \
 	    ${COPYTREE_SHARE} upgrade ${STAGEDIR}${DOCSDIR} "! -name *\.in")

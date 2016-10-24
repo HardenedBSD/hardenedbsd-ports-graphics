@@ -2,8 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	toxcore
-PORTVERSION=	0.151112
-PORTREVISION=	3
+PORTVERSION=	0.160924
+PORTREVISION=	2
 CATEGORIES=	net-im net-p2p
 
 MAINTAINER=	thierry@FreeBSD.org
@@ -17,13 +17,12 @@ LIB_DEPENDS=	libvpx.so:multimedia/libvpx		\
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	irungentoo
-GH_TAGNAME=	22634a4
+GH_TAGNAME=	161ab46
 
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--enable-tests
 USES=		autoreconf compiler:c11 libtool pathfix pkgconfig
 USE_LDCONFIG=	yes
-PATHFIX_MAKEFILEIN=	Makefile.am
 INSTALL_TARGET=		install-strip
 
 OPTIONS_DEFINE=		DAEMON

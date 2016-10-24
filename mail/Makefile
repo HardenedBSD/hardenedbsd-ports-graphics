@@ -108,7 +108,6 @@
     SUBDIR += ecartis
     SUBDIR += elm
     SUBDIR += elmo
-    SUBDIR += elmo-devel
     SUBDIR += emailrelay
     SUBDIR += emil
     SUBDIR += enma
@@ -151,7 +150,6 @@
     SUBDIR += gmime24-sharp
     SUBDIR += gmime26
     SUBDIR += gmime26-sharp
-    SUBDIR += gml
     SUBDIR += gnarwl
     SUBDIR += gnome-gmail-notifier
     SUBDIR += gnubiff
@@ -485,14 +483,12 @@
     SUBDIR += pear-Net_Cyrus
     SUBDIR += pear-Net_IMAP
     SUBDIR += pear-Net_LMTP
-    SUBDIR += pecl-esmtp
     SUBDIR += pecl-mailparse
     SUBDIR += pecl-pop3
     SUBDIR += perdition
     SUBDIR += pflogsumm
     SUBDIR += pfqueue
     SUBDIR += pgpsendmail
-    SUBDIR += php55-imap
     SUBDIR += php56-imap
     SUBDIR += php70-imap
     SUBDIR += phplist
@@ -558,6 +554,7 @@
     SUBDIR += qmail-activedir
     SUBDIR += qmail-auditor
     SUBDIR += qmail-autoresponder
+    SUBDIR += qmail-conf
     SUBDIR += qmail-contrib
     SUBDIR += qmail-dk
     SUBDIR += qmail-ldap

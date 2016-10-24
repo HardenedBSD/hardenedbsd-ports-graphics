@@ -3,11 +3,11 @@
 
 PORTNAME=	foomatic-filters
 PORTVERSION=	4.0.17
-PORTREVISION=	8
+PORTREVISION=	9
 CATEGORIES=	print
 MASTER_SITES=	http://www.openprinting.org/download/foomatic/
 
-MAINTAINER=	jrm@ftfl.ca
+MAINTAINER=	jrm@FreeBSD.org
 COMMENT=	Foomatic wrapper scripts
 
 LICENSE=	GPLv2+
@@ -56,7 +56,7 @@ post-patch:
 	@${REINPLACE_CMD} -e 's|/bin/bash|${SH}|g' ${WRKSRC}/foomaticrip.c
 	@${REINPLACE_CMD} -e 's|%%LOCALBASE%%|${LOCALBASE}|g' \
 		   	  ${WRKSRC}/foomaticrip.c
-	@${REINPLACE_CMD} -e 's|ln -sf $$(BINDIR)|ln -sf ../../bin|g' \
+	@${REINPLACE_CMD} -e 's|ln -sf $$(BINDIR)|ln -sf ../../../bin|g' \
 			  -e '/filter.conf/ s|if.*||' \
 			  ${WRKSRC}/Makefile.am
 

@@ -167,6 +167,15 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  because it cannot be manually fetched, etc).  Error
 #				  logs will not appear on pointyhat, so this should be
 #				  used sparingly.
+# IGNORE_${ARCH} - Port should be ignored on ${ARCH}.
+# IGNORE_${OPSYS} - Port should be ignored on ${OPSYS}.
+# IGNORE_${OPSYS}_${OSREL:R} -  Port should be ignored on a single
+#				  release of ${OPSYS}, e.g IGNORE_FreeBSD_8
+#				  would affect all point releases of FreeBSD 8.
+# IGNORE_${OPSYS}_${OSREL:R}_${ARCH} -  Port should be ignored on a
+#				  single release of ${OPSYS} and specific architecture,
+#				  e.g IGNORE_FreeBSD_8_i386 would affect all point
+#				  releases of FreeBSD 8 in i386.
 # BROKEN		- Port is believed to be broken.  Package builds can
 # 				  still be attempted using TRYBROKEN to test this
 #				  assumption.
@@ -399,40 +408,15 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  core, webkit).  Implies that the port needs Qt.
 #				  Implies the inclusion of bsd.qt.mk.  See bsd.qt.mk
 #				  for more details.
-#
-# USE_LINUX		- Set to yes to say the port needs the default linux base port.
-#				  Set to value <X>, if the port needs emulators/linux_base-<X>.
-#				  Implies appropriate settings for STRIP and STRIP_CMD.
+##
 # USE_LINUX_PREFIX
-#				- controls the action of PREFIX (see above). Only use this
-#				  if the port is a linux infrastructure port (e.g. contains libs
+#				- Controls the action of PREFIX (see above).  Only use this
+#				  if the port is a Linux infrastructure port (e.g. contains libs
 #				  or a sound server which supports the FreeBSD native one),
-#				  use the default or the X11 prefix if it's a leaf port
-#				  (e.g. a game or program).
-#				  Implies NO_MTREE=yes, and, if USE_LDCONFIG is defined:
-#				    - USE_LINUX=yes
-#				    - appropriate invocation of the Linux ldconfig
-# USE_LINUX_RPM	- Set to yes to pull in variables and targets useful to Linux
-#				  RPM ports.
-# 				  Set to nolib if your port does not contain an architecture-
-#				  specific library.
-#				  Implies inclusion of bsd.linux-rpm.mk.
-#
-# LINUX_OSRELEASE	- Contains the value of compat.linux.osrelease sysctl.
-#				  Will be used to distinguish which linux
-#				  infrastructure ports should be used.
-#				  Valid values: 2.6.16.
-#
-# OVERRIDE_LINUX_BASE_PORT
-#				- This specifies the default linux base to use, for valid
-#				  values have a look at the description of USE_LINUX. This is
-#				  an user-only variable. Don't use it in any port, it's meant
-#				  to be used in make.conf.
-#
-# LINUX_BASE_PORT
-#				- This is a read-only variable, it gets set to a value which is
-#				  usable in *_DEPENDS (e.g. BUILD_DEPENDS=${LINUX_BASE_PORT}).
-#				  It honors USE_LINUX=foo and OVERRIDE_LINUX_BASE_PORT.
+#				  use the default prefix if it's a leaf port (e.g. a game or
+#				  program).
+#				  Implies NO_LICENSES_INSTALL=yes, NO_MTREE=yes, and causes
+#				  Linux ldconfig to be used when USE_LDCONFIG is defined.
 ##
 # USE_XORG			- Set to a list of X.org module dependencies.
 #				  Implies inclusion of bsd.xorg.mk.
@@ -1068,24 +1052,28 @@ MINIMAL_PKG_VERSION=	1.6.0
 
 .include "${PORTSDIR}/Mk/bsd.commands.mk"
 
-.if defined(X_BUILD_FOR)
+.if defined(CROSS_TOOLCHAIN)
 .if !defined(.PARSEDIR)
 IGNORE=	Cross building can only be done when using bmake(1) as make(1)
 .endif
+.if !defined(CROSS_SYSROOT)
+IGNORE=	CROSS_SYSROOT should be defined
+.endif
+.include "${LOCALBASE}/share/toolchains/${CROSS_TOOLCHAIN}.mk"
 # Do not define CPP on purpose
 .if !defined(HOSTCC)
 HOSTCC:=	${CC}
 HOSTCXX:=	${CXX}
 .endif
-.if !exists(/usr/${X_BUILD_FOR}/usr/bin/cc)
-X_SYSROOT=	${LOCALBASE}/${X_BUILD_FOR}
-.else
-X_SYSROOT=	/usr/${X_BUILD_FOR}
-.endif
-CC=		${X_SYSROOT}/usr/bin/cc
-CXX=	${X_SYSROOT}/usr/bin/c++
-NM=		${X_BUILD_FOR}-nm
-STRIP_CMD=	${X_BUILD_FOR}-strip
+CC=		${XCC}
+CXX=	${XCXX}
+CFLAGS+=	--sysroot=${CROSS_SYSROOT} -isystem ${CROSS_SYSROOT}/usr/include
+CXXFLAGS+=	--sysroot=${CROSS_SYSROOT} -isystem ${CROSS_SYSROOT}/usr/include/c++/v1 -nostdinc++
+LDFLAGS+=	--sysroot=${CROSS_SYSROOT}
+.for _tool in AS AR LD NM OBJCOPY RANLIB SIZE STRINGS
+${_tool}=	${CROSS_BINUTILS_PREFIX}${tool:tl}
+.endfor
+STRIP_CMD=	${CROSS_BINUTILS_PREFIX}strip
 # only bmake support the below
 STRIPBIN=	${STRIP_CMD}
 .export.env STRIPBIN
@@ -1303,20 +1291,6 @@ DISTNAME?=	${PORTNAME}-${DISTVERSIONFULL}
 
 INDEXFILE?=		INDEX-${OSVERSION:C/([0-9]*)[0-9]{5}/\1/}
 
-DOCSDIR?=		${PREFIX}/share/doc/${PORTNAME}
-EXAMPLESDIR?=		${PREFIX}/share/examples/${PORTNAME}
-DATADIR?=		${PREFIX}/share/${PORTNAME}
-WWWDIR?=		${PREFIX}/www/${PORTNAME}
-ETCDIR?=		${PREFIX}/etc/${PORTNAME}
-
-.if defined(USE_LINUX_RPM)
-.include "${PORTSDIR}/Mk/bsd.linux-rpm.mk"
-.endif
-
-.if defined(USE_LINUX_APPS)
-.include "${PORTSDIR}/Mk/bsd.linux-apps.mk"
-.endif
-
 .if defined(USE_XORG) || defined(XORG_CAT)
 .include "${PORTSDIR}/Mk/bsd.xorg.mk"
 .endif
@@ -1330,16 +1304,7 @@ FILESDIR?=		${MASTERDIR}/files
 SCRIPTDIR?=		${MASTERDIR}/scripts
 PKGDIR?=		${MASTERDIR}
 
-.if defined(USE_LINUX_PREFIX)
-PREFIX:=		${LINUXBASE}
-NO_MTREE=		yes
-.else
 PREFIX?=		${LOCALBASE}
-.endif
-
-.if defined(USE_LINUX_PREFIX)
-LDCONFIG_CMD?=			${LINUXBASE}/sbin/ldconfig -r ${LINUXBASE}
-.endif
 
 PKGCOMPATDIR?=		${LOCALBASE}/lib/compat/pkg
 
@@ -1448,6 +1413,14 @@ ${_f}_ARGS:=	${f:C/^[^\:]*(\:|\$)//:S/,/ /g}
 
 EXTRACT_SUFX?=			.tar.gz
 
+.if defined(USE_LINUX_PREFIX)
+PREFIX=					${LINUXBASE}
+DATADIR?=				${PREFIX}/usr/share/${PORTNAME}
+DOCSDIR?=				${PREFIX}/usr/share/doc/${PORTNAME}-${PORTVERSION}
+NO_LICENSES_INSTALL=	yes
+NO_MTREE=				yes
+.endif
+
 # You can force skipping these test by defining IGNORE_PATH_CHECKS
 .if !defined(IGNORE_PATH_CHECKS)
 .if ! ${PREFIX:M/*}
@@ -1457,6 +1430,12 @@ EXTRACT_SUFX?=			.tar.gz
 	@${FALSE}
 .endif
 .endif
+
+DATADIR?=		${PREFIX}/share/${PORTNAME}
+DOCSDIR?=		${PREFIX}/share/doc/${PORTNAME}
+ETCDIR?=		${PREFIX}/etc/${PORTNAME}
+EXAMPLESDIR?=	${PREFIX}/share/examples/${PORTNAME}
+WWWDIR?=		${PREFIX}/www/${PORTNAME}
 
 # Owner and group of the WWW user
 WWWOWN?=	www
@@ -1509,6 +1488,7 @@ QA_ENV+=		STAGEDIR=${STAGEDIR} \
 				LOCALBASE=${LOCALBASE} \
 				"STRIP=${STRIP}" \
 				TMPPLIST=${TMPPLIST} \
+				BUNDLE_LIBS=${BUNDLE_LIBS} \
 				LDCONFIG_DIR="${LDCONFIG_DIR}" \
 				PKGORIGIN=${PKGORIGIN} \
 				LIB_RUN_DEPENDS='${_LIB_RUN_DEPENDS:C,[^:]*:([^:]*):?.*,\1,}' \
@@ -1541,13 +1521,12 @@ CO_ENV+=		STAGEDIR=${STAGEDIR} \
 				PORT_OPTIONS="${PORT_OPTIONS}" \
 				PORTSDIR="${PORTSDIR}"
 
-.if defined(X_BUILD_FOR)
-BUILD_DEPENDS+=	${X_BUILD_FOR}-cc:devel/${X_BUILD_FOR}-xdev
-PKG_ENV+=		ABI_FILE=${X_SYSROOT}/usr/lib/crt1.o
+.if defined(CROSS_SYSROOT)
+PKG_ENV+=		ABI_FILE=${CROSS_SYSROOT}/bin/sh
 MAKE_ENV+=		NM=${NM} \
-				STRIPBIN=${X_BUILD_FOR}-strip \
-				PKG_CONFIG_SYSROOT_DIR="${X_SYSROOT}"
-CONFIGURE_ENV+=	PKG_CONFIG_SYSROOT_DIR="${X_SYSROOT}"
+				STRIPBIN=${STRIPBIN} \
+				PKG_CONFIG_SYSROOT_DIR="${CROSS_SYSROOT}"
+CONFIGURE_ENV+=	PKG_CONFIG_SYSROOT_DIR="${CROSS_SYSROOT}"
 .endif
 
 WRKDIR?=		${WRKDIRPREFIX}${.CURDIR}/work
@@ -1753,65 +1732,6 @@ USE_LDCONFIG=	${PREFIX}/lib
 IGNORE=			has USE_LDCONFIG32 set to yes, which is not correct
 .endif
 
-.if defined(USE_LINUX_PREFIX) && defined(USE_LDCONFIG)
-# we need ${LINUXBASE}/sbin/ldconfig
-USE_LINUX?=	yes
-.endif
-
-.if defined(USE_LINUX)
-
-.  if !defined(LINUX_OSRELEASE)
-LINUX_OSRELEASE!=	${ECHO_CMD} `${SYSCTL} -n compat.linux.osrelease 2>/dev/null`
-.  endif
-_EXPORTED_VARS+=	LINUX_OSRELEASE
-
-# install(1) also does a brandelf on strip, so don't strip with FreeBSD tools.
-STRIP=
-.	if exists(${LINUXBASE}/usr/bin/strip)
-STRIP_CMD=	${LINUXBASE}/usr/bin/strip
-.	else
-STRIP_CMD=	${TRUE}
-.	endif
-
-# Allow the user to specify another linux_base version.
-.	if defined(OVERRIDE_LINUX_BASE_PORT)
-.		if ${USE_LINUX:tl} == yes || (${USE_LINUX} == "c6" && ${OVERRIDE_LINUX_BASE_PORT} == "c6_64")
-USE_LINUX=	${OVERRIDE_LINUX_BASE_PORT}
-.		endif
-.	endif
-
-# NOTE: when you update the default linux_base version (case "yes"),
-# don't forget to update the Handbook!
-
-.	if exists(${PORTSDIR}/emulators/linux_base-${USE_LINUX})
-LINUX_BASE_PORT=	${LINUXBASE}/bin/sh:emulators/linux_base-${USE_LINUX}
-.	else
-.		if ${USE_LINUX:tl} == "yes"
-USE_LINUX=	c6
-LINUX_BASE_PORT=	${LINUXBASE}/etc/redhat-release:emulators/linux_base-c6
-.		elif ${USE_LINUX} == "c6_64"
-LINUX_BASE_PORT=	${LINUXBASE}/etc/redhat-release:emulators/linux_base-c6
-.		else
-IGNORE=		cannot be built: there is no emulators/linux_base-${USE_LINUX}, perhaps wrong use of USE_LINUX or OVERRIDE_LINUX_BASE_PORT
-.		endif
-.	endif
-
-.	if ${USE_LINUX} == "c6_64" || (defined(OVERRIDE_LINUX_BASE_PORT) && ${OVERRIDE_LINUX_BASE_PORT} == "c6_64")
-.		if ${ARCH} != "amd64"
-IGNORE=		Cannot install 64 bit Linux on non-64bit platforms
-.		endif
-LINUX_RPM_ARCH?=	x86_64
-LINUX_REPO_ARCH?=	x86_64
-.	elif ${USE_LINUX} == "c6" || ${USE_LINUX} == "yes" # default to CentOS
-LINUX_RPM_ARCH?=	i686
-LINUX_REPO_ARCH?=	i386
-.	elif ${USE_LINUX} == "f10"
-LINUX_RPM_ARCH?=	i386
-LINUX_REPO_ARCH?=	i386
-.	endif
-RUN_DEPENDS+=	${LINUX_BASE_PORT}
-.endif
-
 PKG_IGNORE_DEPENDS?=		'this_port_does_not_exist'
 
 _GL_gbm_LIB_DEPENDS=		libgbm.so:graphics/gbm
@@ -1898,14 +1818,6 @@ _FORCE_POST_PATTERNS=	rmdir kldxref mkfontscale mkfontdir fc-cache \
 
 .if defined(USE_OCAML)
 .include "${PORTSDIR}/Mk/bsd.ocaml.mk"
-.endif
-
-.if defined(USE_LINUX_RPM)
-.include "${PORTSDIR}/Mk/bsd.linux-rpm.mk"
-.endif
-
-.if defined(USE_LINUX_APPS)
-.include "${PORTSDIR}/Mk/bsd.linux-apps.mk"
 .endif
 
 .if defined(USE_QT4) || defined(USE_QT5)
@@ -2527,7 +2439,7 @@ VALID_CATEGORIES+= accessibility afterstep arabic archivers astro audio \
 	benchmarks biology cad chinese comms converters databases \
 	deskutils devel docs dns editors elisp emulators enlightenment finance french ftp \
 	games geography german gnome gnustep graphics hamradio haskell hebrew hungarian \
-	ipv6 irc japanese java kde kld korean lang linux lisp \
+	ipv6 irc japanese java kde ${_KDE_CATEGORIES_SUPPORTED} kld korean lang linux lisp \
 	mail mate math mbone misc multimedia net net-im net-mgmt net-p2p news \
 	palm parallel pear perl5 plan9 polish portuguese ports-mgmt \
 	print python ruby rubygems russian \
@@ -2579,8 +2491,9 @@ GNU_CONFIGURE_PREFIX?=	${PREFIX}
 GNU_CONFIGURE_MANPREFIX?=	${MANPREFIX}
 CONFIG_SITE?=		${PORTSDIR}/Templates/config.site
 CONFIGURE_ARGS+=	--prefix=${GNU_CONFIGURE_PREFIX} $${_LATE_CONFIGURE_ARGS}
-.if defined(X_BUILD_FOR)
-CONFIGURE_ARGS+=	--host=${X_BUILD_FOR}
+.if defined(CROSS_TOOLCHAIN)
+CROSS_HOST=		${CROSS_TOOLCHAIN:C,-.*$,,}-${OPSYS:tl}
+CONFIGURE_ARGS+=	--host=${CROSS_HOST}
 .endif
 CONFIGURE_ENV+=		CONFIG_SITE=${CONFIG_SITE} lt_cv_sys_max_cmd_len=${CONFIGURE_MAX_CMD_LEN}
 HAS_CONFIGURE=		yes
@@ -2593,6 +2506,9 @@ SET_LATE_CONFIGURE_ARGS= \
 	fi ; \
 	if [ ! -z "`${CONFIGURE_CMD} --help 2>&1 | ${GREP} -- '--mandir'`" ]; then \
 	    _LATE_CONFIGURE_ARGS="$${_LATE_CONFIGURE_ARGS} --mandir=${GNU_CONFIGURE_MANPREFIX}/man" ; \
+	fi ; \
+	if [ ! -z "`${CONFIGURE_CMD} --help 2>&1 | ${GREP} -- '--disable-silent-rules'`" ]; then \
+	    _LATE_CONFIGURE_ARGS="$${_LATE_CONFIGURE_ARGS} --disable-silent-rules" ; \
 	fi ; \
 	if [ ! -z "`${CONFIGURE_CMD} --help 2>&1 | ${GREP} -- '--infodir'`" ]; then \
 	    _LATE_CONFIGURE_ARGS="$${_LATE_CONFIGURE_ARGS} --infodir=${GNU_CONFIGURE_PREFIX}/${INFO_PATH}/${INFO_SUBDIR}" ; \
@@ -2741,6 +2657,14 @@ IGNORE=		may not be placed on a CDROM: ${NO_CDROM}
 IGNORE=		is restricted: ${RESTRICTED}
 .elif (defined(NO_PACKAGE) && defined(PACKAGE_BUILDING))
 IGNORE=		may not be packaged: ${NO_PACKAGE}
+.elif defined(IGNORE_${ARCH})
+IGNORE=		${IGNORE_${ARCH}}
+.elif defined(IGNORE_${OPSYS}_${OSREL:R}_${ARCH})
+IGNORE=		${IGNORE_${OPSYS}_${OSREL:R}_${ARCH}}
+.elif defined(IGNORE_${OPSYS}_${OSREL:R})
+IGNORE=		${IGNORE_${OPSYS}_${OSREL:R}}
+.elif defined(IGNORE_${OPSYS})
+IGNORE=		${IGNORE_${OPSYS}}
 .elif defined(BROKEN)
 .if !defined(TRYBROKEN)
 IGNORE=		is marked as broken: ${BROKEN}
@@ -2749,13 +2673,13 @@ IGNORE=		is marked as broken: ${BROKEN}
 .if !defined(TRYBROKEN)
 IGNORE=		is marked as broken on ${ARCH}: ${BROKEN_${ARCH}}
 .endif
-.elif defined(BROKEN_${OPSYS}_${OSREL:R})
-.if !defined(TRYBROKEN)
-IGNORE=		is marked as broken on ${OPSYS} ${OSREL}: ${BROKEN_${OPSYS}_${OSREL:R}}
-.endif
 .elif defined(BROKEN_${OPSYS}_${OSREL:R}_${ARCH})
 .if !defined(TRYBROKEN)
 IGNORE=		is marked as broken on ${OPSYS} ${OSREL} ${ARCH}: ${BROKEN_${OPSYS}_${OSREL:R}_${ARCH}}
+.endif
+.elif defined(BROKEN_${OPSYS}_${OSREL:R})
+.if !defined(TRYBROKEN)
+IGNORE=		is marked as broken on ${OPSYS} ${OSREL}: ${BROKEN_${OPSYS}_${OSREL:R}}
 .endif
 .elif defined(BROKEN_${OPSYS})
 .if !defined(TRYBROKEN)
@@ -2804,7 +2728,7 @@ ${target}:
 
 .endif
 
-.endif
+.endif # !defined(NO_IGNORE)
 
 .if defined(IGNORE) || defined(NO_PACKAGE)
 ignorelist: package-name
@@ -3119,7 +3043,7 @@ fetch-url-list: fetch-url-list-int
 # Extract
 
 clean-wrkdir:
-	@${RM} -rf ${WRKDIR}
+	@${RM} -r ${WRKDIR}
 
 .if !target(do-extract)
 do-extract:
@@ -3226,7 +3150,7 @@ run-autotools-fixup:
 			cmp -s $${f}.fbsd10bak $${f} || \
 			${ECHO_MSG} "===>   FreeBSD 10 autotools fix applied to $${f}"; \
 			${TOUCH} ${TOUCH_FLAGS} -mr $${f}.fbsd10bak $${f} ; \
-			${RM} -f $${f}.fbsd10bak ; \
+			${RM} $${f}.fbsd10bak ; \
 		done
 .endif
 .endif
@@ -3425,7 +3349,7 @@ do-package: ${TMPPLIST}
 		fi; \
 	fi
 	@for cat in ${CATEGORIES}; do \
-		${RM} -f ${PACKAGES}/$$cat/${PKGNAMEPREFIX}${PORTNAME}*${PKG_SUFX} ; \
+		${RM} ${PACKAGES}/$$cat/${PKGNAMEPREFIX}${PORTNAME}*${PKG_SUFX} ; \
 	done
 	@${MKDIR} ${WRKDIR}/pkg
 	@if ${SETENV} ${PKG_ENV} FORCE_POST="${_FORCE_POST_PATTERNS}" ${PKG_CREATE} ${PKG_CREATE_ARGS} -f ${PKG_SUFX:S/.//} -o ${WRKDIR}/pkg ${PKGNAME}; then \
@@ -3456,12 +3380,12 @@ do-package: ${TMPPLIST}
 delete-package:
 	@${ECHO_MSG} "===>  Deleting package for ${PKGNAME}"
 # When staging, the package may only be in the workdir if not root
-	@${RM} -f ${PKGFILE} ${WRKDIR_PKGFILE} 2>/dev/null || :
+	@${RM} ${PKGFILE} ${WRKDIR_PKGFILE} 2>/dev/null || :
 .endif
 
 .if !target(delete-package-list)
 delete-package-list:
-	@${ECHO_CMD} "[ -f ${PKGFILE} ] && (${ECHO_CMD} deleting ${PKGFILE}; ${RM} -f ${PKGFILE})"
+	@${ECHO_CMD} "[ -f ${PKGFILE} ] && (${ECHO_CMD} deleting ${PKGFILE}; ${RM} ${PKGFILE})"
 .endif
 
 # Used by scripts and users to install a package from local repository.
@@ -3594,7 +3518,7 @@ security-check: ${TMPPLIST}
 #   4.  startup scripts, in conjunction with 2.
 #   5.  world-writable files/dirs
 #
-	-@${RM} -f ${WRKDIR}/.PLIST.setuid ${WRKDIR}/.PLIST.writable ${WRKDIR}/.PLIST.objdump; \
+	-@${RM} ${WRKDIR}/.PLIST.setuid ${WRKDIR}/.PLIST.writable ${WRKDIR}/.PLIST.objdump; \
 	${AWK} -v prefix='${PREFIX}' ' \
 		match($$0, /^@cwd /) { prefix = substr($$0, RSTART + RLENGTH); if (prefix == "/") prefix=""; next; } \
 		/^@/ { next; } \
@@ -3697,13 +3621,13 @@ checkpatch:
 
 .if !target(reinstall)
 reinstall:
-	@${RM} -f ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
+	@${RM} ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
 	@cd ${.CURDIR} && DEPENDS_TARGET="${DEPENDS_TARGET}" ${MAKE} -DFORCE_PKG_REGISTER install
 .endif
 
 .if !target(restage)
 restage:
-	@${RM} -rf ${STAGEDIR} ${STAGE_COOKIE} ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
+	@${RM} -r ${STAGEDIR} ${STAGE_COOKIE} ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
 	@cd ${.CURDIR} && ${MAKE} stage
 .endif
 
@@ -3727,7 +3651,7 @@ deinstall:
 	else \
 		${ECHO_MSG} "===>   ${PKGBASE} not installed, skipping"; \
 	fi
-	@${RM} -f ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
+	@${RM} ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
 .endif
 .endif
 
@@ -3756,7 +3680,7 @@ deinstall-all:
 	else \
 		${ECHO_MSG} "===>   ${PKGORIGIN} not installed, skipping"; \
 	fi; \
-	${RM} -f ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
+	${RM} ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
 .endif
 .endif
 
@@ -3766,7 +3690,7 @@ deinstall-all:
 do-clean:
 	@if [ -d ${WRKDIR} ]; then \
 		if [ -w ${WRKDIR} ]; then \
-			${RM} -rf ${WRKDIR}; \
+			${RM} -r ${WRKDIR}; \
 		else \
 			${ECHO_MSG} "===>   ${WRKDIR} not writable, skipping"; \
 		fi; \
@@ -3804,7 +3728,7 @@ delete-distfiles:
 	@(if [ "X${RESTRICTED_FILES}" != "X" -a -d ${_DISTDIR} ]; then \
 		cd ${_DISTDIR}; \
 		for file in ${RESTRICTED_FILES}; do \
-			${RM} -f $${file}; \
+			${RM} $${file}; \
 			dir=$${file%/*}; \
 			if [ "$${dir}" != "$${file}" ]; then \
 				${RMDIR} -p $${dir} >/dev/null 2>&1 || :; \
@@ -3821,7 +3745,7 @@ delete-distfiles-list:
 	@${ECHO_CMD} "# ${PKGNAME}"
 	@if [ "X${RESTRICTED_FILES}" != "X" ]; then \
 		for file in ${RESTRICTED_FILES}; do \
-			${ECHO_CMD} "[ -f ${_DISTDIR}/$$file ] && (${ECHO_CMD} deleting ${_DISTDIR}/$$file; ${RM} -f ${_DISTDIR}/$$file)"; \
+			${ECHO_CMD} "[ -f ${_DISTDIR}/$$file ] && (${ECHO_CMD} deleting ${_DISTDIR}/$$file; ${RM} ${_DISTDIR}/$$file)"; \
 			dir=$${file%/*}; \
 			if [ "$${dir}" != "$${file}" ]; then \
 				${ECHO_CMD} "(cd ${_DISTDIR} && ${RMDIR} -p $${dir} 2>/dev/null)"; \
@@ -3924,7 +3848,7 @@ package-name:
 repackage: pre-repackage package
 
 pre-repackage:
-	@${RM} -f ${PACKAGE_COOKIE}
+	@${RM} ${PACKAGE_COOKIE}
 .endif
 
 # Build a package but don't check the cookie for installation, also don't
@@ -4358,7 +4282,7 @@ readmes:	readme
 
 .if !target(readme)
 readme:
-	@${RM} -f ${.CURDIR}/README.html
+	@${RM} ${.CURDIR}/README.html
 	@cd ${.CURDIR} && ${MAKE} ${.CURDIR}/README.html
 .endif
 
@@ -4451,8 +4375,9 @@ generate-plist: ${WRKDIR}
 
 .if defined(USE_LINUX_PREFIX)
 .if defined(USE_LDCONFIG)
-	@${ECHO_CMD} "@postexec ${LDCONFIG_CMD}" >> ${TMPPLIST}
-	@${ECHO_CMD} "@postunexec ${LDCONFIG_CMD}" >> ${TMPPLIST}
+	@${ECHO_CMD} '@preexec [ -n "`/sbin/sysctl -q compat.linux.osrelease`" ] || ( echo "Cannot install package: kernel missing Linux support"; exit 1 )' >> ${TMPPLIST}
+	@${ECHO_CMD} "@postexec ${LINUXBASE}/sbin/ldconfig" >> ${TMPPLIST}
+	@${ECHO_CMD} "@postunexec ${LINUXBASE}/sbin/ldconfig" >> ${TMPPLIST}
 .endif
 .else
 .if defined(USE_LDCONFIG)
@@ -4583,13 +4508,13 @@ compress-man:
 						${GZIP_CMD} $${f} ; \
 						continue ; \
 					fi ; \
-					${RM} -f $${f} ; \
+					${RM} $${f} ; \
 					(cd $${f%/*}; ${LN} -f $${ref##*/} $${f##*/}.gz) ; \
 				done ; \
 			done ; \
 		${FIND} $$dir -type l \! -name "*.gz" | while read link ; do \
 				${LN} -sf $$(readlink $$link).gz $$link.gz ;\
-				${RM} -f $$link ; \
+				${RM} $$link ; \
 		done; \
 	done
 .endif
@@ -4643,7 +4568,7 @@ fake-pkg: create-manifest
 .else
 	@${SETENV} ${PKG_ENV} FORCE_POST="${_FORCE_POST_PATTERNS}" ${PKG_CMD} ${STAGE_ARGS} -m ${METADIR} -f ${TMPPLIST}
 .endif
-	@${RM} -rf ${METADIR}
+	@${RM} -r ${METADIR}
 .endif
 .endif
 
@@ -4841,9 +4766,9 @@ do-config:
 	(${ECHO_MSG} "===> Cannot create $${optionsdir}, check permissions"; exit 1) ; \
 	fi
 	@TMPOPTIONSFILE=$$(mktemp -t portoptions); \
-	trap "${RM} -f $${TMPOPTIONSFILE}; exit 1" 1 2 3 5 10 13 15; \
+	trap "${RM} $${TMPOPTIONSFILE}; exit 1" 1 2 3 5 10 13 15; \
 	${SETENV} ${D4P_ENV} ${SH} ${SCRIPTSDIR}/dialog4ports.sh $${TMPOPTIONSFILE} || { \
-		${RM} -f $${TMPOPTIONSFILE}; \
+		${RM} $${TMPOPTIONSFILE}; \
 		${ECHO_MSG} "===> Options unchanged"; \
 		exit 0; \
 	}; \
@@ -4853,9 +4778,9 @@ do-config:
 		exit 0; \
 	fi; \
 	SELOPTIONS=$$(${CAT} $${TMPOPTIONSFILE}); \
-	${RM} -f $${TMPOPTIONSFILE}; \
+	${RM} $${TMPOPTIONSFILE}; \
 	TMPOPTIONSFILE=$$(mktemp -t portoptions); \
-	trap "${RM} -f $${TMPOPTIONSFILE}; exit 1" 1 2 3 5 10 13 15; \
+	trap "${RM} $${TMPOPTIONSFILE}; exit 1" 1 2 3 5 10 13 15; \
 	${ECHO_CMD} "# This file is auto-generated by 'make config'." > $${TMPOPTIONSFILE}; \
 	${ECHO_CMD} "# Options for ${PKGNAME}" >> $${TMPOPTIONSFILE}; \
 	${ECHO_CMD} "_OPTIONS_READ=${PKGNAME}" >> $${TMPOPTIONSFILE}; \
@@ -4875,7 +4800,7 @@ do-config:
 	else \
 		${CAT} $${TMPOPTIONSFILE} > ${OPTIONS_FILE}; \
 	fi; \
-	${RM} -f $${TMPOPTIONSFILE}
+	${RM} $${TMPOPTIONSFILE}
 	@cd ${.CURDIR} && ${MAKE} sanity-config
 .endif
 .endif # do-config
@@ -4960,11 +4885,11 @@ rmconfig:
 	optionsdir=${OPTIONS_FILE:H}; \
 	if [ ${UID} != 0 -a "x${INSTALL_AS_USER}" = "x" -a ! -w "${OPTIONS_FILE}" ]; then \
 		${ECHO_MSG} "===> Switching to root credentials to remove ${OPTIONS_FILE} and $${optionsdir}"; \
-		${SU_CMD} "${RM} -f ${OPTIONS_FILE} ; \
+		${SU_CMD} "${RM} ${OPTIONS_FILE} ; \
 			${RMDIR} $${optionsdir}"; \
 		${ECHO_MSG} "===> Returning to user credentials"; \
 	else \
-		${RM} -f ${OPTIONS_FILE}; \
+		${RM} ${OPTIONS_FILE}; \
 		${RMDIR} $${optionsdir} 2>/dev/null || return 0; \
 	fi
 .else

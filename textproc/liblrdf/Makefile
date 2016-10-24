@@ -3,7 +3,7 @@
 
 PORTNAME=	liblrdf
 PORTVERSION=	0.5.0
-PORTREVISION=	9
+PORTREVISION=	10
 CATEGORIES=	textproc
 MASTER_SITES=	GENTOO
 
@@ -24,7 +24,6 @@ USES=		autoreconf iconv libtool pathfix pkgconfig
 USE_GNOME=	libxml2 libxslt
 USE_LDCONFIG=	yes
 USE_OPENSSL=	yes
-PATHFIX_MAKEFILEIN=	Makefile.am
 INSTALL_TARGET=	install-strip
 
 CFLAGS+=	-I${OPENSSLINC}

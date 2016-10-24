@@ -1,9 +1,9 @@
 # $FreeBSD$
 
 PORTNAME=	phonon
-PORTVERSION=	0.8.2
+PORTVERSION=	0.9.0
 CATEGORIES=	multimedia
-MASTER_SITES=	KDE/stable/${PORTNAME}/${PORTNAME}-backend${PKGNAMESUFFIX}/${PORTVERSION}/src
+MASTER_SITES=	KDE/stable/${PORTNAME}/${PORTNAME}-backend${PKGNAMESUFFIX}/${PORTVERSION}
 PKGNAMEPREFIX=	qt5-
 PKGNAMESUFFIX=	-vlc
 DISTNAME=	${PORTNAME}-backend${PKGNAMESUFFIX}-${PORTVERSION}
@@ -12,9 +12,12 @@ DIST_SUBDIR=	KDE
 MAINTAINER=	kde@FreeBSD.org
 COMMENT=	VLC backend for Phonon 4 Qt 5
 
+BUILD_DEPENDS=	${LOCALBASE}/share/ECM/cmake/ECMConfig.cmake:devel/extra-cmake-modules
 LIB_DEPENDS=	libvlc.so:multimedia/vlc
 
-USES=		cmake pkgconfig tar:xz
+WRKSRC=		${WRKDIR}/${DISTNAME:S/-backend//}
+
+USES=		cmake:outsource pkgconfig tar:xz
 USE_QT5=	core gui widgets phonon4 \
 		buildtools_build qmake_build
 CMAKE_ARGS=	-DPHONON_BUILD_PHONON4QT5=ON

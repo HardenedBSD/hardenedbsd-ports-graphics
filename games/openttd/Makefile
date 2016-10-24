@@ -3,6 +3,7 @@
 
 PORTNAME=	openttd
 DISTVERSION=	1.6.1
+PORTREVISION=	1
 CATEGORIES=	games
 MASTER_SITES=	http://ca.binaries.openttd.org/binaries/releases/${DISTVERSION}/ \
 		http://cz.binaries.openttd.org/binaries/releases/${DISTVERSION}/ \
@@ -25,10 +26,7 @@ USES=		cpe gmake pkgconfig tar:xz
 HAS_CONFIGURE=	yes
 CONFIGURE_ENV=	STRIP="${STRIP_CMD} ${STRIP}"
 CONFIGURE_ARGS=	--prefix-dir="${PREFIX}" --data-dir="${DATADIR_REL}"
-
-.if defined(BATCH) || defined(PACKAGE_BUILDING)
 MAKE_ARGS=	VERBOSE=1
-.endif
 
 WRKSRC=		${WRKDIR}/${PORTNAME}-${DISTVERSION}
 CXXFLAGS=	# Set to empty as OpenTTD treats it as an addition to CFLAGS

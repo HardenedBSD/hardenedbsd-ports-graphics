@@ -19,6 +19,8 @@ USES=		cmake:outsource
 
 PLIST_SUB=	VERSION=${PORTVERSION}
 
+TEST_TARGET=	test test-api
+
 post-patch:
 	@${REINPLACE_CMD} -e "s,share/pkgconfig,libdata/pkgconfig,g" \
 		${WRKSRC}/src/CMakeLists.txt

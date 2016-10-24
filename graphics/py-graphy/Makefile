@@ -14,6 +14,8 @@ COMMENT=	Simple chart library for Python
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Unfetchable (google code has gone away)
+
 USES=		python:run tar:bzip2
 
 PORTDOCS=	README
@@ -28,7 +30,7 @@ post-patch:
 		${WRKSRC}/examples/*.py \
 		${WRKSRC}/${PORTNAME}/*.py
 	@${FIND} ${WRKSRC} -name '.svn' -or -name '*.bak' | \
-		${XARGS} ${RM} -rf
+		${XARGS} ${RM} -r
 
 do-install:
 	@${MKDIR} ${STAGEDIR}${PYTHON_SITELIBDIR}/${PORTNAME}

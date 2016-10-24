@@ -13,7 +13,7 @@ LICENSE=	GPLv2
 LIB_DEPENDS=	libqtermwidget5.so:x11-toolkits/qtermwidget
 RUN_DEPENDS=	liberation-fonts-ttf>=2.00:x11-fonts/liberation-fonts-ttf
 
-USES=		cmake:outsource compiler:c++11-lang gettext localbase \
+USES=		cmake:outsource compiler:c++11-lang gettext localbase:ldflags \
 		pkgconfig
 USE_QT5+=	buildtools_build core gui linguisttools_build qmake_build widgets
 USE_XORG+=	x11
@@ -23,6 +23,10 @@ CMAKE_ARGS+=	-DUSE_SYSTEM_QXT:BOOL=OFF -DUSE_QT5:BOOL=ON
 USE_GITHUB=	yes
 GH_ACCOUNT=	lxde
 
-LDFLAGS+=	-lulog
+.include <bsd.port.pre.mk>
 
-.include <bsd.port.mk>
+.if ${OPSYS} == FreeBSD
+LDFLAGS+=	-lulog
+.endif
+
+.include <bsd.port.post.mk>

@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	yaws
-PORTVERSION=	2.0.3
+PORTVERSION=	2.0.4
 CATEGORIES=	www devel
 MASTER_SITES=	http://yaws.hyber.org/download/
 
@@ -29,7 +29,6 @@ GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--localstatedir=/var
 CONFIGURE_ENV=	wwwdir=${WWWDIR} yawsdir=${APPDIR}
 INSTALL_TARGET=	install-strip
-PATHFIX_MAKEFILEIN=Makefile.am
 
 .include <bsd.port.options.mk>
 

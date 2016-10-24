@@ -59,6 +59,8 @@ U_OPTION_DESC=	include support for user .qpopper-options
 OPTIONS_DEFAULT=	APOP SSL U_OPTION
 OPTION_SUB=	yes
 
+SSL_USES=	ssl
+
 .include <bsd.port.pre.mk>
 
 .if empty(PORT_OPTIONS:MAPOP)
@@ -72,12 +74,6 @@ QPOPAUTH=	""
 .if ${PORT_OPTIONS:MAPOP_ONLY}
 OS_DEFS+=	-DAPOP_ONLY
 .endif
-.endif
-
-# Do not install documentation since it is in pdf format and normally
-# not used unless user wants it.
-.if empty(PORT_OPTIONS:MDOCUMENTATION)
-OPTIONS_UNSET+=	DOCS
 .endif
 
 # If WITH_DRAC variable present in the environment, qpopper builds
@@ -124,7 +120,6 @@ USE_RC_SUBR=	 ${PORTNAME}
 
 # The default is to build without SSL/TLS support.
 .if ${PORT_OPTIONS:MSSL}
-USE_OPENSSL=	yes
 CONFIGURE_ARGS+=	--with-openssl=${OPENSSLBASE}
 .endif
 
@@ -132,7 +127,7 @@ post-patch:
 .if ${COMPILER_TYPE} == clang
 	@${REINPLACE_CMD} -e 's|-freg-struct-return||' ${WRKSRC}/configure.in
 .endif
-	@${RM} -f ${WRKSRC}/popper/md5.h
+	@${RM} ${WRKSRC}/popper/md5.h
 	@${REINPLACE_CMD} -e 's|%%PREFIX%%|${PREFIX}|g' ${WRKSRC}/man/*
 	@${REINPLACE_CMD} -e \
 		's|\$${sbindir}/sendmail|${LOCALBASE}/sbin/sendmail|g' \
@@ -160,7 +155,7 @@ do-install:
 .if ${PORT_OPTIONS:MPOPPASSD}
 	@${INSTALL_PROGRAM} ${WRKSRC}/password/poppassd ${STAGEDIR}${PREFIX}/libexec/qpoppassd
 .endif
-.if ${PORT_OPTIONS:MDOCS}
+.if ${PORT_OPTIONS:MDOCUMENTATION}
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	@${INSTALL_DATA} ${WRKSRC}/GUIDE.pdf ${STAGEDIR}${DOCSDIR}
 .endif

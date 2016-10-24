@@ -3,7 +3,7 @@
 
 PORTNAME=	kdelibs
 PORTVERSION=	${KDE4_KDELIBS_VERSION}
-PORTREVISION=	6
+PORTREVISION=	7
 CATEGORIES=	x11 kde
 MASTER_SITES=   KDE/${KDE4_APPLICATIONS_BRANCH}/applications/${KDE4_APPLICATIONS_VERSION}/src
 DIST_SUBDIR=	KDE/${PORTVERSION}
@@ -76,10 +76,10 @@ SHEBANG_FILES=	kdecore/kconfig_compiler/checkkcfg.pl \
 OPTIONS_DEFINE=	AVAHI UPNP
 OPTIONS_DEFAULT=AVAHI
 
-AVAHI_LIB_DEPENDS=	libavahi-core.so:${PORTSDIR}/net/avahi-app
+AVAHI_LIB_DEPENDS=	libavahi-core.so:net/avahi-app
 
 UPNP_DESC=	UPnP backend for Solid (WARNING: Unstable)
-UPNP_LIB_DEPENDS=	libHUpnp.so:${PORTSDIR}/net/hupnp
+UPNP_LIB_DEPENDS=	libHUpnp.so:net/hupnp
 UPNP_CMAKE_ON=	-DHUPNP_ENABLED:BOOL=On
 
 post-patch:
