@@ -10,7 +10,7 @@ CATEGORIES=	mail
 # This is for release versions, leave it in please:
 MASTER_SITES=	SF/courier/${PORTNAME}/${PORTVERSION}
 
-MAINTAINER=	uffe@uffe.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Console based mail client with POP3/IMAP/SMAP support
 
 LICENSE=	GPLv3
@@ -39,7 +39,7 @@ post-install:
 		${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/mailtool
 		${STRIP_CMD} ${STAGEDIR}${PREFIX}/libexec/cone
 		${INSTALL_SCRIPT} ${WRKSRC}/sysconftool ${STAGEDIR}${PREFIX}/sbin/cone-sysconftool
-		${RM} -f ${STAGEDIR}${PREFIX}/share/cone/rootcerts/.0
+		${RM} ${STAGEDIR}${PREFIX}/share/cone/rootcerts/.0
 		@${MKDIR} ${STAGEDIR}${DOCSDIR}
 		${INSTALL_MAN} ${WRKSRC}/ChangeLog ${STAGEDIR}${DOCSDIR}
 

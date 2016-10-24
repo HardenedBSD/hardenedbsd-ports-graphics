@@ -16,6 +16,8 @@
     SUBDIR += catapult
     SUBDIR += cinc
     SUBDIR += cingb
+    SUBDIR += citra
+    SUBDIR += citra-qt5
     SUBDIR += cpmemu
     SUBDIR += cpmtools
     SUBDIR += cpmtools2
@@ -68,6 +70,7 @@
     SUBDIR += libdsk
     SUBDIR += libspectrum
     SUBDIR += linux-c6
+    SUBDIR += linux-c7
     SUBDIR += linux-f10
     SUBDIR += linux_base-c6
     SUBDIR += linux_base-c7
@@ -121,6 +124,7 @@
     SUBDIR += qemu-launcher
     SUBDIR += qemu-sbruno
     SUBDIR += qemu-user-static
+    SUBDIR += qemu-utils
     SUBDIR += qmc2
     SUBDIR += qtemu
     SUBDIR += quasi88

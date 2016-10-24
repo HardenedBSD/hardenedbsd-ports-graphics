@@ -76,12 +76,6 @@ OS_DEFS+=	-DAPOP_ONLY
 .endif
 .endif
 
-# Do not install documentation since it is in pdf format and normally
-# not used unless user wants it.
-.if empty(PORT_OPTIONS:MDOCUMENTATION)
-OPTIONS_UNSET+=	DOCS
-.endif
-
 # If WITH_DRAC variable present in the environment, qpopper builds
 # with Dynamic Relay Authorization Control support.
 .if ${PORT_OPTIONS:MDRAC}
@@ -133,7 +127,7 @@ post-patch:
 .if ${COMPILER_TYPE} == clang
 	@${REINPLACE_CMD} -e 's|-freg-struct-return||' ${WRKSRC}/configure.in
 .endif
-	@${RM} -f ${WRKSRC}/popper/md5.h
+	@${RM} ${WRKSRC}/popper/md5.h
 	@${REINPLACE_CMD} -e 's|%%PREFIX%%|${PREFIX}|g' ${WRKSRC}/man/*
 	@${REINPLACE_CMD} -e \
 		's|\$${sbindir}/sendmail|${LOCALBASE}/sbin/sendmail|g' \
@@ -161,7 +155,7 @@ do-install:
 .if ${PORT_OPTIONS:MPOPPASSD}
 	@${INSTALL_PROGRAM} ${WRKSRC}/password/poppassd ${STAGEDIR}${PREFIX}/libexec/qpoppassd
 .endif
-.if ${PORT_OPTIONS:MDOCS}
+.if ${PORT_OPTIONS:MDOCUMENTATION}
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	@${INSTALL_DATA} ${WRKSRC}/GUIDE.pdf ${STAGEDIR}${DOCSDIR}
 .endif

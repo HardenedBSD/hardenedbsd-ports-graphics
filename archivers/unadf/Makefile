@@ -8,7 +8,7 @@ CATEGORIES=	archivers
 MASTER_SITES=	http://lclevy.free.fr/adflib/
 DISTNAME=	adflib-${DISTVERSION}
 
-MAINTAINER=	uffe@uffe.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Extracts files from .adf-files used by Amiga emulators
 
 LICENSE=	GPLv2
@@ -18,7 +18,6 @@ GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--includedir=${PREFIX}/include/adflib
 INSTALL_TARGET=	install-strip
 USES=		autoreconf libtool pathfix tar:bzip2
-PATHFIX_MAKEFILEIN=	Makefile.am
 
 OPTIONS_DEFINE=	DOCS
 

@@ -39,6 +39,6 @@ PKGHELP=	${.CURDIR}/pkg-help
 .include "${.CURDIR}/../../graphics/libGL/Makefile.targets"
 
 post-install:
-	@${RM} -rf ${STAGEDIR}/etc/OpenCL
+	@${RM} -r ${STAGEDIR}/etc/OpenCL
 
 .include <bsd.port.mk>
