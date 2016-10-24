@@ -3,7 +3,7 @@
 
 PORTNAME=	libGL
 PORTVERSION=	${MESAVERSION}
-PORTREVISION=	2
+PORTREVISION=	0
 CATEGORIES=	graphics
 
 COMMENT=	OpenGL library that renders using GLX or DRI
@@ -12,8 +12,12 @@ LIB_DEPENDS+=	libdrm.so:graphics/libdrm \
 		libglapi.so:graphics/libglapi \
 		libexpat.so:textproc/expat2
 
+OPTIONS_DEFINE_amd64=	DRI3
+OPTIONS_DEFINE_i386=	DRI3
+DRI3_DESC=	Experimental: Enable DRI3 support.
+
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto:both \
-		presentproto xshmfence xcb dri3proto:both
+		presentproto xshmfence xcb
 
 .include <bsd.port.options.mk>
 .include "${.CURDIR}/Makefile.common"

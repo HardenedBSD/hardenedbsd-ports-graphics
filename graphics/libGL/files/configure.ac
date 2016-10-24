@@ -1,5 +1,5 @@
---- configure.ac.orig	2016-09-05 13:00:42.000000000 +0200
-+++ configure.ac	2016-09-12 16:31:50.702327000 +0200
+--- configure.ac.orig	2016-09-15 11:14:40.000000000 +0200
++++ configure.ac	2016-10-24 22:26:44.802619000 +0200
 @@ -79,6 +79,7 @@
  DRI3PROTO_REQUIRED=1.0
  PRESENTPROTO_REQUIRED=1.0
@@ -64,6 +64,9 @@
 +            fi
 +            ;;
 +        esac
++        ;;
+     gnu*)
+         DEFINES="$DEFINES -DHAVE_ALIAS"
          ;;
 @@ -1749,6 +1776,8 @@
  AM_CONDITIONAL(HAVE_GBM, test "x$enable_gbm" = xyes)
@@ -94,6 +97,17 @@
  
      if test "x$have_libclc" = xno; then
          AC_MSG_ERROR([pkg-config cannot find libclc.pc which is required to build clover.
+@@ -1999,8 +2038,8 @@
+     AC_MSG_ERROR([cannot build egl state tracker without EGL library])
+ fi
+ 
+-PKG_CHECK_MODULES([WAYLAND_SCANNER], [wayland_scanner],
+-        WAYLAND_SCANNER=`$PKG_CONFIG --variable=wayland_scanner wayland_scanner`,
++PKG_CHECK_MODULES([WAYLAND_SCANNER], [wayland-scanner],
++        WAYLAND_SCANNER=`$PKG_CONFIG --variable=wayland-scanner wayland-scanner`,
+         WAYLAND_SCANNER='')
+ if test "x$WAYLAND_SCANNER" = x; then
+     AC_PATH_PROG([WAYLAND_SCANNER], [wayland-scanner])
 @@ -2105,9 +2144,9 @@
  strip_unwanted_llvm_flags() {
      # Use \> (marks the end of the word)
