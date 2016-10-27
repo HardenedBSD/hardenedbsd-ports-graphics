@@ -1,23 +1,22 @@
 # Created by yohanesu75@gmail.com
 # $FreeBSD$
 
-MASTER_SITES= https://download.gnome.org/sources/libgudev/230/
 PORTNAME=	libgudev
 PORTVERSION=	230
 PORTREVISION=	1
 CATEGORIES=	wayland
-EXTRACT_SUFX=	.tar.xz
+MASTER_SITES=	https://download.gnome.org/sources/libgudev/${PORTVERSION}/
 
 MAINTAINER=	x11@FreeBSD.org
-COMMENT= GObject bindings for libudev.
+COMMENT=	GObject bindings for libudev.
 
-LICENSE= LGPL21
+LICENSE=	LGPL21
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-LIB_DEPENDS=	libudev.so:${PORTSDIR}/wayland/libudev-devd
+LIB_DEPENDS=	libudev.so:wayland/libudev-devd
 
-USES=		gmake libtool pkgconfig pathfix
-USE_GNOME=	glib20 introspection gnomedocutils
+USES=		gettext-runtime gmake libtool pathfix pkgconfig tar:xz
+USE_GNOME=	glib20 introspection:build
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
 INSTALL_TARGET=	install-strip
