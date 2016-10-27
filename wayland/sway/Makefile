@@ -2,44 +2,39 @@
 # $FreeBSD$
 
 PORTNAME=	sway
-PORTVERSION=0.9
+PORTVERSION=	0.9
 CATEGORIES=	wayland
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	i3-compatible Wayland compositor
 
+BUILD_DEPENDS=	a2x:textproc/asciidoc
+LIB_DEPENDS=	libwlc.so:wayland/wlc \
+		libwayland-server.so:wayland/wayland \
+		libepoll-shim.so:wayland/libepoll-shim \
+		libpcre.so:devel/pcre \
+		libjson-c.so:devel/json-c \
+		libxkbcommon.so:x11/libxkbcommon \
+		libinput.so:wayland/libinput
+
+# For image capture
+#		libMagickCore-6.so:graphics/ImageMagick
+# For video capture
+#		libavutil.so:multimedia/ffmpeg
+
 USE_GITHUB=	yes
 GH_ACCOUNT=	SirCmpwn
-GH_TAGNAME=	0.9
 
-USES=		cmake:outsource pkgconfig pathfix
+USES=		cmake:outsource gettext-runtime gnome pathfix pkgconfig
+USE_GNOME=	cairo pango gdkpixbuf2
 USE_GCC=	any
+
+CMAKE_ARGS=	-DLIBEPOLL_INCLUDE_DIR=${LOCALBASE}/include/libepoll-shim \
+		-DLIBEPOLL_LIBRARIES=-lepoll-shim -lrt
 
 OPTIONS_SUB=	yes
 OPTIONS_DEFINE=	SUID
-SUID_DESC=	Install sway binary with setuid bit set
 OPTIONS_DEFAULT=SUID
-
-LIB_DEPENDS= \
-		libwlc.so:${PORTSDIR}/wayland/wlc					\
-		libwayland-server.so:${PORTSDIR}/wayland/wayland	\
-		libwayland-client.so:${PORTSDIR}/wayland/wayland	\
-		libwayland-cursor.so:${PORTSDIR}/wayland/wayland	\
-		libepoll-shim.so:${PORTSDIR}/wayland/libepoll-shim	\
-		libcairo.so:${PORTSDIR}/graphics/cairo				\
-		libpango-1.0.so:${PORTSDIR}/x11-toolkits/pango		\
-		libpcre.so:${PORTSDIR}/devel/pcre					\
-		libjson-c.so:${PORTSDIR}/devel/json-c				\
-		libgdk_pixbuf-2.0.so:${PORTSDIR}/graphics/gdk-pixbuf2
-
-# For image capture
-#		libMagickCore-6.so:${PORTSDIR}/graphics/ImageMagick
-# For video capture
-#		libavutil.so:${PORTSDIR}/multimedia/ffmpeg
-
-BUILD_DEPENDS+=	a2x:${PORTSDIR}/textproc/asciidoc
-
-CMAKE_ARGS+= -DLIBEPOLL_INCLUDE_DIR=${PREFIX}/include/libepoll-shim
-CMAKE_ARGS+= -DLIBEPOLL_LIBRARIES=-lepoll-shim -lrt
+SUID_DESC=	Install sway binary with setuid bit set
 
 .include <bsd.port.mk>
