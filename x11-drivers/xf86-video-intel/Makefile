@@ -3,6 +3,7 @@
 
 PORTNAME=	xf86-video-intel
 PORTVERSION=	2.99.917.20160614
+PORTREVISION=	1
 CATEGORIES=	x11-drivers
 MASTER_SITES=	LOCAL/kwm \
 		http://rainbow-runner.nl/freebsd/
