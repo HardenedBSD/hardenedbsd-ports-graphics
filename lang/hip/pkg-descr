@@ -1,0 +1,8 @@
+hip
+
+convert CUDA to portable C++ code
+
+HIP allows developers to convert CUDA code to portable C++.
+The same source code can be compiled to run on NVIDIA or AMD GPUs. 
+
+WWW: https://github.com/RadeonOpenCompute/HIP

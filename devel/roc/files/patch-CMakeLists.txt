@@ -1,0 +1,11 @@
+--- CMakeLists.txt.orig	2016-11-01 02:52:22 UTC
++++ CMakeLists.txt
+@@ -85,7 +85,7 @@ else ()
+ endif()
+ 
+ target_link_libraries ( ${HSAKMT_TARGET}
+-  dl pthread rt
++  c pthread rt
+ )
+ 
+ ## If the library is a release, strip the target library
