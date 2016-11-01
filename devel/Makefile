@@ -4858,6 +4858,7 @@
     SUBDIR += rlwrap
     SUBDIR += roboctl
     SUBDIR += robodoc
+    SUBDIR += roc
     SUBDIR += root-doc
     SUBDIR += rote
     SUBDIR += rpc2

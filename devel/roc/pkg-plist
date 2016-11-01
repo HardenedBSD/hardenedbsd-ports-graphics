@@ -1,0 +1,9 @@
+include/libhsakmt
+lib/libhsakmt.so
+libhsakmt/LICENSE.md
+libhsakmt/include/libhsakmt/hsakmt.h
+libhsakmt/include/libhsakmt/hsakmttypes.h
+libhsakmt/include/libhsakmt/linux/kfd_ioctl.h
+libhsakmt/lib/libhsakmt.so
+libhsakmt/lib/libhsakmt.so.2
+libhsakmt/lib/libhsakmt.so.2.0.1

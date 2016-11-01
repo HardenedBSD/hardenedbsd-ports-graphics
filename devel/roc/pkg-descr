@@ -1,0 +1,9 @@
+roc
+
+Boltzmann Thunk Library
+
+User-mode API interfaces used to interact with the Boltzmann KFD driver.
+Currently supported agents include only the AMD/ATI Fiji family of
+discrete GPUs.
+
+WWW: https://github.com/RadeonOpenCompute/ROCT-Thunk-Interface
