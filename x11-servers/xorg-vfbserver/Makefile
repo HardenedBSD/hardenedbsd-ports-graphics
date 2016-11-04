@@ -12,6 +12,8 @@ DIST_SUBDIR=	xorg/xserver
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X virtual framebuffer server from X.Org
 
+LICENSE=	MIT
+
 USES=		tar:bzip2 pkgconfig ssl
 INSTALL_WRKSRC=	${WRKSRC}/hw/vfb
 GNU_CONFIGURE=	yes
