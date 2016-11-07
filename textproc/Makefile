@@ -482,6 +482,7 @@
     SUBDIR += mifluz
     SUBDIR += miller
     SUBDIR += minised
+    SUBDIR += minixmlto
     SUBDIR += mk-aspell
     SUBDIR += mkcatalog
     SUBDIR += ml-aspell
@@ -928,6 +929,7 @@
     SUBDIR += p5-Text-SpellChecker-GUI
     SUBDIR += p5-Text-Striphigh
     SUBDIR += p5-Text-Table
+    SUBDIR += p5-Text-Table-Manifold
     SUBDIR += p5-Text-Tabs+Wrap
     SUBDIR += p5-Text-TabularDisplay
     SUBDIR += p5-Text-Tags
