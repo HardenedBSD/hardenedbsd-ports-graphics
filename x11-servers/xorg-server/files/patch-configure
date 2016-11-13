@@ -17,7 +17,7 @@
 +	archive_expsym_cmds='echo "{ global:" > $lib-ver~		 sed -e "s|$|;|" < $export_symbols >> $lib-ver~	 echo "local: *; };" >> $lib-ver~$CC -shared $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname $wl-version-script $wl$lib-ver -o $lib'
        fi
        ;;
-
+ 
 @@ -18337,7 +18337,7 @@ _LT_EOF
  _LT_EOF
        elif $LD --help 2>&1 | $GREP ': supported targets:.* elf' > /dev/null; then
@@ -72,7 +72,7 @@
    test -z "$old_striplib" && old_striplib="$STRIP --strip-debug"
    test -z "$striplib" && striplib="$STRIP --strip-unneeded"
    { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-@@ -21738,7 +21738,7 @@ if test `${RAWCPP} < conftest.$ac_ext |
+@@ -21738,7 +21738,7 @@ if test `${RAWCPP} < conftest.$ac_ext | 
  	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
  $as_echo "no" >&6; }
  else
@@ -81,8 +81,12 @@
  		TRADITIONALCPPFLAGS="-traditional"
  		RAWCPPFLAGS="${RAWCPPFLAGS} -traditional"
  		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-@@ -23171,6 +23171,11 @@ $as_echo "#define USE_ALPHA_PIO 1" >>con
-   arm*)
+@@ -23168,9 +23168,14 @@ $as_echo "#define USE_ALPHA_PIO 1" >>con
+ 	esac
+ 	GLX_ARCH_DEFINES="-D__GLX_ALIGN64 -mieee"
+ 	;;
+-  arm*)
++  arm*|aarch64*)
  	ARM_VIDEO=yes
  	DEFAULT_INT10="stub"
 +	case $host_os in
