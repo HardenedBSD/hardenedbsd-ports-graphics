@@ -1465,6 +1465,16 @@ PKG_NOTES+=	no_provide_shlib
 PKG_NOTE_no_provide_shlib=	yes
 .endif
 
+.if defined(DEPRECATED)
+PKG_NOTES+=	deprecated
+PKG_NOTE_deprecated=${DEPRECATED}
+.endif
+
+.if defined(EXPIRATION_DATE)
+PKG_NOTES+=	expiration_date
+PKG_NOTE_expiration_date=	${EXPIRATION_DATE}
+.endif
+
 TEST_ARGS?=		${MAKE_ARGS}
 TEST_ENV?=		${MAKE_ENV}
 
@@ -1492,6 +1502,7 @@ QA_ENV+=		STAGEDIR=${STAGEDIR} \
 				LDCONFIG_DIR="${LDCONFIG_DIR}" \
 				PKGORIGIN=${PKGORIGIN} \
 				LIB_RUN_DEPENDS='${_LIB_RUN_DEPENDS:C,[^:]*:([^:]*):?.*,\1,}' \
+				UNIFIED_DEPENDS=${_UNIFIED_DEPENDS:C,([^:]*:[^:]*):?.*,\1,:O:u:Q} \
 				PKGBASE=${PKGBASE}
 .if !empty(USES:Mssl)
 QA_ENV+=		USESSSL=yes
@@ -2046,14 +2057,15 @@ MAKE_ENV+=	${INSTALL_MACROS}
 SCRIPTS_ENV+=	${INSTALL_MACROS}
 
 # Macro for copying entire directory tree with correct permissions
-COPYTREE_BIN=	${SH} -c '(${FIND} -d $$0 $$2 | ${CPIO} -dumpl $$1 >/dev/null \
-					2>&1) && \
-					${FIND} -d $$0 $$2 -type d -exec chmod 755 $$1/{} \; && \
-					${FIND} -d $$0 $$2 -type f -exec chmod ${BINMODE} $$1/{} \;' --
-COPYTREE_SHARE=	${SH} -c '(${FIND} -d $$0 $$2 | ${CPIO} -dumpl $$1 >/dev/null \
-					2>&1) && \
-					${FIND} -d $$0 $$2 -type d -exec chmod 755 $$1/{} \; && \
-					${FIND} -d $$0 $$2 -type f -exec chmod ${SHAREMODE} $$1/{} \;' --
+# In the -exec shell commands, we add add a . as the first argument, it would
+# end up being $0 aka the script name, which is not part of $@, so we force it
+# to be able to use $@ directly.
+COPYTREE_BIN=	${SH} -c '(${FIND} -Ed $$0 $$2 | ${CPIO} -dumpl $$1 >/dev/null 2>&1) && \
+						   ${FIND} -Ed $$0 $$2 \(   -type d -exec ${SH} -c '\''cd '\''$$1'\'' && chmod 755 "$$@"'\'' -- . {} + \
+												 -o -type f -exec ${SH} -c '\''cd '\''$$1'\'' && chmod ${BINMODE} "$$@"'\'' -- . {} + \)' --
+COPYTREE_SHARE=	${SH} -c '(${FIND} -Ed $$0 $$2 | ${CPIO} -dumpl $$1 >/dev/null 2>&1) && \
+						   ${FIND} -Ed $$0 $$2 \(   -type d -exec ${SH} -c '\''cd '\''$$1'\'' && chmod 755 "$$@"'\'' -- . {} + \
+												 -o -type f -exec ${SH} -c '\''cd '\''$$1'\'' && chmod ${SHAREMODE} "$$@"'\'' -- . {} + \)' --
 
 # The user can override the NO_PACKAGE by specifying this from
 # the make command line
@@ -3830,6 +3842,17 @@ checksum: fetch
 .endif
 .endif
 
+# Some port's archives contains files modes that are a bit too restrictive for
+# some usage.  For example:
+# BUILD_DEPENDS=		${NONEXISTENT}:foo/bar:configure
+# When building as a regular user, dependencies are installed/built as root, so
+# if the archive contains files that have a mode of, say, 600, they will not be
+# readable by the port requesting the dependency.
+# This will also fix broken distribution files where directories don't have the
+# executable bit on.
+extract-fixup-modes:
+	@${CHMOD} -R u+w,a+rX ${WRKDIR}
+
 ################################################################
 # The special package-building targets
 # You probably won't need to touch these
@@ -5201,6 +5224,7 @@ _EXTRACT_SEQ=	010:check-build-conflicts 050:extract-message 100:checksum \
 				150:extract-depends 190:clean-wrkdir 200:${EXTRACT_WRKDIR} \
 				300:pre-extract 450:pre-extract-script 500:do-extract \
 				700:post-extract 850:post-extract-script \
+				999:extract-fixup-modes \
 				${_OPTIONS_extract} ${_USES_extract} ${_SITES_extract}
 _PATCH_DEP=		extract
 _PATCH_SEQ=		050:ask-license 100:patch-message 150:patch-depends \

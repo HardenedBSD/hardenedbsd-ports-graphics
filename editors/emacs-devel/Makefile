@@ -13,9 +13,6 @@ COMMENT=	GNU editing macros
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-BROKEN_sparc64=	Emacs does not currently build on sparc64
-BROKEN_ia64=	Emacs does not currently build on ia64
-
 CONFLICTS=	emacs25-[0-9]* emacs-nox11-[0-9]*
 
 USE_GITHUB=	yes
@@ -27,7 +24,6 @@ EMACS_REV=	20161001
 GNU_CONFIGURE=	yes
 USES=		autoreconf cpe gmake makeinfo ncurses pkgconfig
 INFO_PATH=	${DATADIR_REL}/info
-WRKSRC=		${WRKDIR}/${PORTNAME}-${GH_TAGNAME}
 CPE_VENDOR=	gnu
 
 SUB_FILES+=	sources.el

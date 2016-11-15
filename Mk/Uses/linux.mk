@@ -83,7 +83,9 @@ linux_gdkpixbuf2_DEP=		linux-${linux_ARGS}-gtk2>0:x11-toolkits/linux-${linux_ARG
 linux_gdkpixbuf2_DEP=		linux-${linux_ARGS}-gdk-pixbuf2>0:graphics/linux-${linux_ARGS}-gdk-pixbuf2
 .endif
 linux_gnutls_DEP=		linux-${linux_ARGS}-gnutls>0:security/linux-${linux_ARGS}-gnutls
+linux_graphite2_DEP=		linux-${linux_ARGS}-graphite2>0:graphics/linux-${linux_ARGS}-graphite2
 linux_gtk2_DEP=			linux-${linux_ARGS}-gtk2>0:x11-toolkits/linux-${linux_ARGS}-gtk2
+linux_harfbuzz_DEP=		linux-${linux_ARGS}-harfbuzz>0:print/linux-${linux_ARGS}-harfbuzz
 linux_hicontheme_DEP=		linux-${linux_ARGS}-hicolor-icon-theme>0:x11-themes/linux-${linux_ARGS}-hicolor-icon-theme
 linux_jasper_DEP=		linux-${linux_ARGS}-jasper>0:graphics/linux-${linux_ARGS}-jasper
 linux_jbigkit_DEP=		linux-${linux_ARGS}-jbigkit>0:graphics/linux-${linux_ARGS}-jbigkit
@@ -94,9 +96,9 @@ linux_libaudiofile_DEP=		linux-${linux_ARGS}-libaudiofile>0:audio/linux-${linux_
 .else
 linux_libaudiofile_DEP=		linux-${linux_ARGS}-audiofile>0:audio/linux-${linux_ARGS}-audiofile
 .endif
+linux_libelf_DEP=		linux-${linux_ARGS}-libelf>0:devel/linux-${linux_ARGS}-libelf
 linux_libgcrypt_DEP=		linux-${linux_ARGS}-libgcrypt>0:security/linux-${linux_ARGS}-libgcrypt
 linux_libgfortran_DEP=		linux-${linux_ARGS}-libgfortran>0:devel/linux-${linux_ARGS}-libgfortran
-linux_libglu_DEP=		linux-${linux_ARGS}-libGLU>0:graphics/linux-${linux_ARGS}-libGLU
 linux_libgpg-error_DEP=		linux-${linux_ARGS}-libgpg-error>0:security/linux-${linux_ARGS}-libgpg-error
 linux_libmng_DEP=		linux-${linux_ARGS}-libmng>0:graphics/linux-${linux_ARGS}-libmng
 linux_libogg_DEP=		linux-${linux_ARGS}-libogg>0:audio/linux-${linux_ARGS}-libogg

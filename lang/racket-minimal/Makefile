@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	racket
-PORTVERSION=	6.6
+PORTVERSION=	6.7
 CATEGORIES=	lang scheme
 MASTER_SITES=	http://mirror.racket-lang.org/installers/${PORTVERSION}/ \
 		http://www.cs.utah.edu/plt/installers/${PORTVERSION}/ \
@@ -20,6 +20,9 @@ COMMENT=	Interactive, integrated, graphical Scheme programming environment
 LICENSE=	LGPL3
 
 LIB_DEPENDS=	libffi.so:devel/libffi
+
+BROKEN_aarch64=	does not build: error: Unported platform
+BROKEN_sparc64=	does not build
 
 MAKE_JOBS_UNSAFE=yes
 

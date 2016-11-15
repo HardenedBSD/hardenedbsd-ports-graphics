@@ -1,4 +1,4 @@
---- t/porting/customized.dat.orig	2016-10-24 00:11:39 UTC
+--- t/porting/customized.dat.orig	2016-11-14 00:17:42 UTC
 +++ t/porting/customized.dat
 @@ -4,6 +4,7 @@ CPAN cpan/CPAN/scripts/cpan 22610ed0301d
  Digest cpan/Digest/Digest.pm 43f7f544cb11842b2f55c73e28930da50774e081

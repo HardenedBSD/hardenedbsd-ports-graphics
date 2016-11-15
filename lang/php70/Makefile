@@ -50,7 +50,6 @@ EMBED_DESC=	Build embedded library
 DEBUG_DESC=	Enable debug
 PHPDBG_DESC=	Interactive PHP debugger
 DTRACE_DESC=	Enable DTrace support
-IPV6_DESC=	Enable ipv6 support
 LINKTHR_DESC=	Link thread lib (for threaded extensions)
 ZTS_DESC=	Force Zend Thread Safety (ZTS) build
 
@@ -83,7 +82,7 @@ CONFIGURE_ARGS+=--enable-fpm \
 .if defined(PKGNAMEPREFIX)
 USES+=	php
 PHP_VER=	70
-IGNORE_WITH_PHP=	55 56
+IGNORE_WITH_PHP=	56
 USE_APACHE=	22+
 .include "${PORTSDIR}/Mk/bsd.apache.mk"
 .if ${PORT_OPTIONS:MAP2FILTER}

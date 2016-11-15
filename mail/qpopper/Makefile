@@ -3,7 +3,7 @@
 
 PORTNAME=	qpopper
 PORTVERSION=	4.1.0
-PORTREVISION=	5
+PORTREVISION=	6
 CATEGORIES=	mail ipv6
 MASTER_SITES=	ftp://ftp.qualcomm.com/eudora/servers/unix/popper/ \
 		http://core.ring.gr.jp/archives/net/mail/qpopper/
@@ -41,7 +41,7 @@ PKGDEINSTALL=	${PKGINSTALL}
 
 OPTIONS_DEFINE=	APOP_ONLY APOP DOCUMENTATION DRAC FULL_POPD_DEBUG PAM \
 	POPPASSD SAMPLE_POPUSERS SHY_ENABLED \
-	SSL STANDALONE_MODE U_OPTION
+	OPENSSL STANDALONE_MODE U_OPTION
 
 APOP_ONLY_DESC=	build with APOP authentication only
 APOP_DESC=	build with APOP
@@ -52,14 +52,13 @@ PAM_DESC=	build with PAM authentication
 POPPASSD_DESC=	build the poppassd daemon
 SAMPLE_POPUSERS_DESC=	build a default reject file
 SHY_ENABLED_DESC=	hide qpopper version in POP3 banner
-SSL_DESC=	build with SSL/TLS support
 STANDALONE_MODE_DESC=	build qpopper to be run without inetd
 U_OPTION_DESC=	include support for user .qpopper-options
 
-OPTIONS_DEFAULT=	APOP SSL U_OPTION
-OPTION_SUB=	yes
+OPTIONS_DEFAULT=	APOP OPENSSL U_OPTION
+OPTIONS_SUB=	yes
 
-SSL_USES=	ssl
+OPENSSL_USES=	ssl
 
 .include <bsd.port.pre.mk>
 
@@ -119,7 +118,7 @@ USE_RC_SUBR=	 ${PORTNAME}
 .endif
 
 # The default is to build without SSL/TLS support.
-.if ${PORT_OPTIONS:MSSL}
+.if ${PORT_OPTIONS:MOPENSSL}
 CONFIGURE_ARGS+=	--with-openssl=${OPENSSLBASE}
 .endif
 
@@ -141,23 +140,20 @@ post-patch:
 		${WRKSRC}/popper/main.c
 .endif
 
-pre-configure:
-	@(cd ${WRKSRC}; ${CHMOD} u+w configure*)
-
 do-install:
 .if ${PORT_OPTIONS:MAPOP}
-	@${INSTALL_PROGRAM} ${WRKSRC}/popper/popauth ${STAGEDIR}${PREFIX}/bin/qpopauth
-	@${INSTALL_MAN} ${WRKSRC}/man/popauth.8 ${STAGEDIR}${PREFIX}/man/man8/qpopauth.8
-	@${LN} -sf ${PREFIX}/bin/qpopauth ${STAGEDIR}${PREFIX}/bin/qapopauth
+	${INSTALL_PROGRAM} ${WRKSRC}/popper/popauth ${STAGEDIR}${PREFIX}/bin/qpopauth
+	${INSTALL_MAN} ${WRKSRC}/man/popauth.8 ${STAGEDIR}${PREFIX}/man/man8/qpopauth.8
+	${LN} -sf qpopauth ${STAGEDIR}${PREFIX}/bin/qapopauth
 .endif
-	@${INSTALL_PROGRAM} ${WRKSRC}/popper/popper ${STAGEDIR}${PREFIX}/libexec/qpopper
-	@${INSTALL_MAN} ${WRKSRC}/man/popper.8 ${STAGEDIR}${PREFIX}/man/man8/qpopper.8
+	${INSTALL_PROGRAM} ${WRKSRC}/popper/popper ${STAGEDIR}${PREFIX}/libexec/qpopper
+	${INSTALL_MAN} ${WRKSRC}/man/popper.8 ${STAGEDIR}${PREFIX}/man/man8/qpopper.8
 .if ${PORT_OPTIONS:MPOPPASSD}
-	@${INSTALL_PROGRAM} ${WRKSRC}/password/poppassd ${STAGEDIR}${PREFIX}/libexec/qpoppassd
+	${INSTALL_PROGRAM} ${WRKSRC}/password/poppassd ${STAGEDIR}${PREFIX}/libexec/qpoppassd
 .endif
 .if ${PORT_OPTIONS:MDOCUMENTATION}
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
-	@${INSTALL_DATA} ${WRKSRC}/GUIDE.pdf ${STAGEDIR}${DOCSDIR}
+	${INSTALL_DATA} ${WRKSRC}/GUIDE.pdf ${STAGEDIR}${DOCSDIR}
 .endif
 
 # based on original from op port, written by Cyrille Lefevre

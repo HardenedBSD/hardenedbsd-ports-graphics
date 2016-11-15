@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME?=	mariadb
-PORTVERSION=	5.5.52
+PORTVERSION=	5.5.53
 CATEGORIES=	databases ipv6
 MASTER_SITES=	http://ftp.osuosl.org/pub/mariadb/${PORTNAME}-${PORTVERSION}/source/ \
 		http://mirrors.supportex.net/mariadb/${PORTNAME}-${PORTVERSION}/source/ \
@@ -50,7 +50,9 @@ CMAKE_ARGS+=	-DINSTALL_DOCDIR="share/doc/mysql" \
 
 DATADIR=	${PREFIX}/share/mysql
 
-BROKEN_armv6=		Does not compile on arm
+BROKEN_aarch64=		Fails to link: missing sbrk
+BROKEN_armv6=		Does not compile on armv6
+BROKEN_sparc64=		Does not compile: Unsupported platform
 
 .if defined(USE_MYSQL)
 .error You have 'USE_MYSQL' variable defined either in environment or in make(1) arguments. Please undefine and try again.

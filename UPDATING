@@ -5,6 +5,213 @@ they are unavoidable.
 You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
+20161113:
+  AFFECTS: users of devel/libosinfo
+  AUTHOR: novel@FreeBSD.org
+
+  The libosinfo port was separated into three different ports
+  to follow the upstream split:
+
+   - sysutils/osinfo-db-tools: contains the CLI tools
+   - misc/osinfo-db: contains database with OS data
+   - devel/libosinfo: the library
+
+  As osinfo-db-tools now ships binaries that previously were 
+  part of libosinfo, it's required to delete the old libosinfo
+  package to prevent conflict because of same files installation:
+
+  # pkg delete libosinfo
+
+  And then install the new version.
+
+20161112:
+  AFFECTS: users of security/heimdal
+  AUTHOR: hrs@FreeBSD.org
+
+  Heimdal in the base system and security/heimdal <= 1.5.3_6 use
+  Berkeley DB to store principals into /var/heimdal/heimdal.db and
+  the database format is version 3 by default.  On the other hand,
+  security/heimdal 1.5.3_7 or newer use the newer version of
+  Berkeley DB and the database format is version 9.
+  These two versions are not compatible with each other.  If there is
+  a mismatch between Heimdal utilities and its database format,
+  you will get an error like the following:
+
+  # /usr/local/sbin/kadmin -l dump
+  BDB0641 __db_meta_setup: /var/heimdal/heimdal.db: unexpected file type or format
+  kadmin: hdb_open: opening /var/heimdal/heimdal: Invalid argument
+
+  This mismatch can occur in the following three cases:
+
+  1. You used Heimdal in the base system and switch to use security/heimdal
+     after creating /var/db/heimdal.db.
+
+  2. You used security/heimdal >= 1.5.3_7 and switch to use one in the
+     base system.
+
+  3. You used security/heimdal < 1.5.3_7 and upgrade it to 1.5.3_7 or later.
+
+  To fix this mismatch, you need to dump contents of heimdal.db and
+  rebuild the database by using kadmin(8) utility.
+
+  If you use Heimdal in the base system or older versions of
+  security/heimdal, and plan to switch to use
+  security/heimdal >= 1.5.3_7, execute the following command
+  *after* creating a backup copy of /var/heimdal and installing
+  security/heimdal:
+
+  # /usr/bin/kadmin -l dump /var/heimdal/heimdal.db.dump
+  # rm /var/heimdal/heimdal.db
+  # /usr/local/sbin/kadmin -l load /var/heimdal/heimdal.db.dump
+  # rm /var/heimdal/heimdal.db.dump
+
+  The above example assumes security/heimdal is installed into
+  /usr/local.  If your base system is compiled with WITHOUT_KERBEROS
+  use the following instead:
+
+  # db_dump185-5 /var/heimdal/heimdal.db | db_load-5 /var/heimdal/heimdal.db.new
+  # chown 0600 /var/heimdal/heimdal.db.new
+  # mv /var/heimdal/heimdal.db.new /var/heimdal/heimdal.db
+
+  db_dump and db_load utilitites are installed by database/db5 as
+  dependency of security/heimdal.
+
+  If you want to switch from security/heimdal to Heimdal in the base
+  system, use the following:
+
+  # /usr/local/sbin/kadmin -l dump /var/heimdal/heimdal.db.dump
+  # rm /var/heimdal/heimdal.db
+  # /usr/bin/kadmin -l load /var/heimdal/heimdal.db.dump
+  # rm /var/heimdal/heimdal.db.dump
+
+20161105:
+  AFFECTS: users of security/heimdal
+  AUTHOR: hrs@FreeBSD.org
+
+  kadmin(8) in heimdal-1.5.3_5 and prior did not create a database
+  in /var/heimdal in Berkeley DB format which kdc(8) required.  This
+  problem has been fixed in heimdal-1.5.3_6.
+
+20161104:
+  AFFECTS: users of mail/mu4e and mail/mu4e-maildirs
+  AUTHOR: hrs@FreeBSD.org
+
+  The package name of mail/mu4e* have been changed from mu4e* to
+  mu4e*-emacsNN.  When upgrading the older versions, this change can
+  cause the following error which prevents it from upgrading:
+
+   pkg-static: mu4e-emacs25-0.9.16 conflicts with mu4e-0.9.16 (installs files into the same place).
+
+  If this error occurs, please remove the old packages by using
+  "pkg delete" manually:
+
+   # pkg delete mu4e-0.9.16 mu4e-maildirs-0.8.20160126_1
+
+20161103:
+  AFFECTS: users of lang/perl5*
+  AUTHOR: mat@FreeBSD.org
+
+  The default Perl version has been switched to Perl 5.24.  If you are using
+  binary packages to upgrade your system, you do not have anything to do, pkg
+  upgrade will do the right thing.  For the other people, assuming you are
+  migrating from 5.20 to 5.24, do:
+
+  First, add to /etc/make.conf:
+
+  DEFAULT_VERSIONS+=  perl5=5.24
+
+  Portupgrade users:
+	portupgrade -o lang/perl5.24 -f lang/perl5.20
+
+	  You can now remove the DEFAULT_VERSIONS line added earlier
+	  from /etc/make.conf
+
+	  Then you will need to rebuild everything that uses libperl.so, you
+	  can do so with:
+
+	portupgrade -f `pkg shlib -qR libperl.so.5.20`
+
+  Portmaster users:
+	portmaster -o lang/perl5.24 lang/perl5.20
+
+	  You can now remove the DEFAULT_VERSIONS line added earlier
+	  from /etc/make.conf
+
+	  Then you will need to rebuild everything that uses libperl.so, you
+	  can do so with:
+
+	portmaster -f `pkg shlib -qR libperl.so.5.20`
+
+20161102:
+  AFFECTS: users of security/acme-client
+  AUTHOR: brnrd@FreeBSD.org
+
+  The default configuration paths have changed from 'letsencrypt' to
+  'acme'. Rename the directories used accordingly
+
+        mv /usr/local/etc/letsencrypt /usr/local/etc/acme
+        mv /usr/local/etc/ssl/letsencrypt /usr/local/etc/ssl/acme
+        mv /usr/local/www/letsencrypt /usr/local/www/acme
+
+  Check your scripts to ensure proper operation.
+
+20161030:
+  AFFECTS: users of mail/squirrelmail
+  AUTHOR: adamw@FreeBSD.org
+
+  For better php70 support, the squirrelmail port has switched from
+  PEAR database access to PDO. If you are using squirrelmail with
+  a database backend, you'll need to install a corresponding PDO
+  database module, such as php56-pdo_sqlite.
+
+20161030:
+  AFFECTS: users of security/srm
+  AUTHOR: rakuco@FreeBSD.org
+
+  srm has been updated from 1.2.12 to 1.2.15. Since version 1.2.14,
+  srm defaults to using its "simple" mode to overwrite files (one pass
+  writing 0x00 to the files) instead of the 35-pass Gutmann method.
+
+20161029:
+  AFFECTS: users of irc/quassel
+  AUTHOR: woodsb02@freebsd.org
+
+  Quassel is now split into two ports / packages; one for providing
+  the server backend (irc/quassel-core), and one for providing the
+  client front-end (irc/quassel). Alternatively, the irc/quassel
+  port can be built with the MONO option enabled to also install
+  the client and server combined into a single monolithic binary.
+
+20161028:
+  AFFECTS: users of security/openssl and security/openssl-devel
+  AUTHOR: brnrd@freebsd.org
+
+  The shared library versions of OpenSSL have been bumped to avoid
+  issues with ports' and base's OpenSSL not being binary compatible.
+
+  Please rebuild all ports that depend on OpenSSL if you use OpenSSL
+  from ports.
+
+  If you use portmaster:
+        portmaster -r openssl
+  If you use portupgrade:
+        portupgrade -fr security/openssl
+
+20161026:
+  AFFECTS: users of net-p2p/deluge
+  AUTHOR: rm@FreeBSD.org
+
+  Deluge port has been split out onto CLI part and GUI part. So if user
+  only needs deluged, net-p2p/deluge-cli should be installed. For full
+  deluge installation, including GTK+ GUI client, net-p2p/deluge should
+  be installed as a usual.
+
+  Old deluge package should be removed manually first:
+
+  # pkg delete deluge
+
+  After that install preferred deluge package as usual.
+
 20161018:
   AFFECTS: users of x11/xfce4-terminal
   AUTHOR: olivierd@FreeBSD.org

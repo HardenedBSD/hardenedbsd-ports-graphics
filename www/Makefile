@@ -310,7 +310,6 @@
     SUBDIR += httpsqs
     SUBDIR += httptunnel
     SUBDIR += httrack
-    SUBDIR += hydra
     SUBDIR += hypermail
     SUBDIR += igal2
     SUBDIR += ikiwiki
@@ -337,6 +336,10 @@
     SUBDIR += kannel-sqlbox
     SUBDIR += kcgi
     SUBDIR += kdewebdev4
+    SUBDIR += kf5-kdewebkit
+    SUBDIR += kf5-khtml
+    SUBDIR += kf5-kjs
+    SUBDIR += kf5-kjsembed
     SUBDIR += kohana
     SUBDIR += kpartsplugin
     SUBDIR += kplaylist
@@ -369,8 +372,10 @@
     SUBDIR += links-hacked
     SUBDIR += links1
     SUBDIR += linux-c6-flashplugin11
+    SUBDIR += linux-c6-flashplugin24
     SUBDIR += linux-c6-qt47-webkit
     SUBDIR += linux-c7-flashplugin11
+    SUBDIR += linux-c7-flashplugin24
     SUBDIR += linux-c7-qtwebkit
     SUBDIR += linux-f10-flashplugin11
     SUBDIR += linux-firefox
@@ -403,6 +408,7 @@
     SUBDIR += midori
     SUBDIR += mimetex
     SUBDIR += mini_httpd
+    SUBDIR += minio
     SUBDIR += mitmproxy
     SUBDIR += mkapachepw
     SUBDIR += mknmz-wwwoffle
@@ -1381,6 +1387,7 @@
     SUBDIR += pear-Horde_Http
     SUBDIR += pear-Horde_Routes
     SUBDIR += pear-Horde_Service_Facebook
+    SUBDIR += pear-Horde_Service_Gravatar
     SUBDIR += pear-Horde_Service_Twitter
     SUBDIR += pear-Horde_Service_UrlShortener
     SUBDIR += pear-Horde_Service_Weather
@@ -1396,7 +1403,6 @@
     SUBDIR += pear-Services_GeoNames
     SUBDIR += pear-Services_Google
     SUBDIR += pear-Services_OpenSearch
-    SUBDIR += pear-Services_SharedBook
     SUBDIR += pear-Services_ShortURL
     SUBDIR += pear-Services_TinyURL
     SUBDIR += pear-Services_TwitPic
@@ -1556,7 +1562,6 @@
     SUBDIR += py-django-picklefield
     SUBDIR += py-django-pipeline
     SUBDIR += py-django-pipeline13
-    SUBDIR += py-django-piston
     SUBDIR += py-django-post_office
     SUBDIR += py-django-profiles
     SUBDIR += py-django-recaptcha
@@ -2268,11 +2273,13 @@
     SUBDIR += uwsgitop
     SUBDIR += uzbl
     SUBDIR += validator
+    SUBDIR += varnish-libvmod-awsrest
     SUBDIR += varnish-libvmod-digest
     SUBDIR += varnish-libvmod-maxminddb
     SUBDIR += varnish-modules
     SUBDIR += varnish-nagios
     SUBDIR += varnish4
+    SUBDIR += varnish5
     SUBDIR += vdr-plugin-live
     SUBDIR += vdradmin-am
     SUBDIR += vee
@@ -2406,6 +2413,7 @@
     SUBDIR += xpi-togglewordwrap
     SUBDIR += xpi-torbutton
     SUBDIR += xpi-twitterfox
+    SUBDIR += xpi-u2f4moz
     SUBDIR += xpi-uBlock_origin
     SUBDIR += xpi-unplug
     SUBDIR += xpi-urllink

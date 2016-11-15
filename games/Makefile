@@ -103,9 +103,11 @@
     SUBDIR += braincurses
     SUBDIR += brainparty
     SUBDIR += brainworkshop
+    SUBDIR += brickout
     SUBDIR += brickshooter
     SUBDIR += brikx
     SUBDIR += briquolo
+    SUBDIR += brumbrumrally
     SUBDIR += brutalchess
     SUBDIR += bs
     SUBDIR += bsdgames
@@ -166,6 +168,7 @@
     SUBDIR += crafty-open-medium
     SUBDIR += crafty-tablebase-no-pawn
     SUBDIR += crafty-tablebase-pawn
+    SUBDIR += crashtest
     SUBDIR += cre
     SUBDIR += cretan-hubris
     SUBDIR += crimson
@@ -230,6 +233,7 @@
     SUBDIR += el
     SUBDIR += el-data
     SUBDIR += ember
+    SUBDIR += emptyepsilon
     SUBDIR += endgame-singularity
     SUBDIR += endgame-singularity-music
     SUBDIR += endless-sky
@@ -355,6 +359,7 @@
     SUBDIR += gnomekiss
     SUBDIR += gnono
     SUBDIR += gnubg
+    SUBDIR += gnubik
     SUBDIR += gnuchess
     SUBDIR += gnudoku
     SUBDIR += gnugo
@@ -365,6 +370,7 @@
     SUBDIR += gnustep-ladder
     SUBDIR += gnustep-sudoku
     SUBDIR += golddig
+    SUBDIR += goldencheetah
     SUBDIR += golly
     SUBDIR += gomoku
     SUBDIR += gondola
@@ -1018,6 +1024,8 @@
     SUBDIR += vodovod
     SUBDIR += volleyball
     SUBDIR += vor
+    SUBDIR += voxelands
+    SUBDIR += voxelands-server
     SUBDIR += vultures-eye
     SUBDIR += wanderer
     SUBDIR += wargus

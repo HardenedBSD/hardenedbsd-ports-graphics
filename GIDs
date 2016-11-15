@@ -104,7 +104,7 @@ nocat:*:159:
 _ypldap:*:160:
 solr:*:161:
 octoprint:*:162:
-# free: 163
+_iked:*:163:
 # free: 164
 # free: 165
 # free: 166
@@ -118,7 +118,7 @@ polipo:*:173:
 flowtools:*:174:
 twms:*:175:
 mlvpn:*:176:
-# free: 177
+_mdnsd:*:177:
 otpw:*:178:
 gdnsd:*:179:
 rt:*:180:
@@ -132,7 +132,7 @@ swift:*:187:
 netxms:*:188:
 leofs:*:189:
 keystone:*:190:
-# free: 191
+glance:*:191:
 moinmoin:*:192:
 cups:*:193:
 saned:*:194:
@@ -219,7 +219,7 @@ meta1:*:264:
 haclient:*:275:
 frontbase:*:276:
 # free: 277
-# free: 278
+rtg:*:278:
 mrtg:*:279:
 xymon:*:280:
 prelude:*:281:
@@ -254,7 +254,7 @@ backuppc:*:300:
 # free: 310
 # free: 311
 _sphinx:*:312:
-# free: 313
+_fastdfs:*:313:
 # free: 314
 # free: 315
 # free: 316
@@ -516,7 +516,7 @@ polkitd:*:565:
 # free: 572
 # free: 573
 # free: 574
-# free: 575
+nexus:*:575:
 # free: 576
 # free: 577
 # free: 578

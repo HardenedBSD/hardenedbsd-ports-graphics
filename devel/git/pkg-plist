@@ -6,6 +6,7 @@ bin/git-shell
 bin/git-upload-archive
 bin/git-upload-pack
 %%GUI%%bin/gitk
+etc/bash_completion.d/git.sh
 %%PERL%%%%SITE_PERL%%/Git.pm
 %%PERL%%%%SITE_PERL%%/Git/I18N.pm
 %%PERL%%%%SITE_PERL%%/Git/IndexInfo.pm
@@ -19,8 +20,6 @@ bin/git-upload-pack
 %%PERL%%%%SITE_PERL%%/Git/SVN/Prompt.pm
 %%PERL%%%%SITE_PERL%%/Git/SVN/Ra.pm
 %%PERL%%%%SITE_PERL%%/Git/SVN/Utils.pm
-lib/xemacs/site-lisp/git/git-blame.el
-lib/xemacs/site-lisp/git/git.el
 libexec/git-core/git
 libexec/git-core/git-add
 libexec/git-core/git-add--interactive
@@ -1445,4 +1444,5 @@ share/git-core/templates/info/exclude
 %%NLS%%share/locale/sv/LC_MESSAGES/git.mo
 %%NLS%%share/locale/vi/LC_MESSAGES/git.mo
 %%NLS%%share/locale/zh_CN/LC_MESSAGES/git.mo
+share/zsh/site-functions/_git
 @dir share/git-core/templates/branches

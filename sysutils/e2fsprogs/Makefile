@@ -14,6 +14,8 @@ LICENSE=	GPLv2
 
 PORTSCOUT=	ignore	# cannot handle the version in the directory
 
+BROKEN_aarch64=	Fails to link: missing sbrk
+
 USES=		cpe gmake pkgconfig tar:xz
 CPE_VENDOR=	e2fsprogs_project
 USE_CSTD=	gnu99
@@ -42,10 +44,6 @@ NOTESTS_DESC=	Do not run any self-tests (only Tier-1 & DISCOURAGED)
 SMALLTESTS_DESC=Run tests that fit into 500 MB disk space (DEFAULT)
 ALLTESTS_DESC=	Run most self-tests (requires more RAM & disk space)
 PARALLELTESTS_DESC=	Run self-tests in parallel (requires more disk space)
-
-post-extract:
-	@${CHMOD} u+w ${WRKSRC}/po/*.po ${WRKSRC}/po/*.pot \
-		${WRKSRC}/${CONFIGURE_SCRIPT}
 .endif
 
 PKGDEINSTALL=	${PKGINSTALL}
@@ -139,7 +137,7 @@ post-patch::
 # NOTE: The previous .if block goes all the way to the end of the file.
 
 .if !empty(PORT_OPTIONS:MNOTESTS) && (${OPSYS} == FreeBSD) && (${OSVERSION} >= 1100000 || ((${ARCH} != i386) && (${ARCH} != amd64)))
-BROKEN=e2fsprogs has not been tested on your system by the maintainer. You must run self-tests.
+BROKEN=	it was not tested on your system by the maintainer; you must run self-tests
 .endif
 
 pre-build:

@@ -165,6 +165,7 @@
     SUBDIR += kdemultimedia4-ffmpegthumbs
     SUBDIR += kdemultimedia4-mplayerthumbs
     SUBDIR += kdenlive
+    SUBDIR += kf5-kmediaplayer
     SUBDIR += kissdx
     SUBDIR += kmplayer-kde4
     SUBDIR += kodi
@@ -193,7 +194,6 @@
     SUBDIR += libmatroska
     SUBDIR += libmediaart
     SUBDIR += libmediainfo
-    SUBDIR += libmovtar
     SUBDIR += libmpeg2
     SUBDIR += libmpeg3
     SUBDIR += libmtp
