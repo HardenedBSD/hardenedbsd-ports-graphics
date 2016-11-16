@@ -4,7 +4,7 @@
 PORTNAME=	seamonkey
 DISTVERSION=	2.40
 MOZILLA_VER=	43 # above + 3
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES?=	www mail news editors irc ipv6
 MASTER_SITES=	MOZILLA/${PORTNAME}/releases/${DISTVERSION}/source \
 		MOZILLA/${PORTNAME}/candidates/${DISTVERSION}-candidates/build1/source
@@ -48,7 +48,7 @@ MOZ_OPTIONS+=	--program-transform-name='s/seamonkey/${MOZILLA}/' \
 USE_MOZILLA=	# empty
 MOZ_PKGCONFIG_FILES=
 
-NOT_FOR_ARCHS=	ia64
+BROKEN_aarch64=		Fails to link: error adding symbols: File in wrong format
 
 OPTIONS_DEFINE=	CHATZILLA COMPOSER ENIGMAIL LDAP LIGHTNING MAILNEWS RUST
 OPTIONS_SINGLE=	TOOLKIT

@@ -3,6 +3,7 @@
 
 PORTNAME=	libxul
 DISTVERSION=	45.5.0
+PORTREVISION=	1
 CATEGORIES?=	www devel
 MASTER_SITES=	MOZILLA/firefox/releases/${DISTVERSION}esr/source \
 		MOZILLA/firefox/candidates/${DISTVERSION}esr-candidates/build1/source
@@ -37,6 +38,8 @@ USES=		pathfix tar:xz
 MAKE_ENV=	SKIP_GRE_REGISTRATION=1 mozappdir=${PREFIX}/lib/${MOZILLA}
 LDFLAGS+=	-Wl,-rpath,${PREFIX}/lib/${MOZ_RPATH}
 USE_LDCONFIG=	${PREFIX}/lib/${MOZILLA}
+
+BROKEN_aarch64=		Fails to link: error adding symbols: File in wrong format
 
 MOZ_OPTIONS?=	--enable-application=xulrunner
 USE_GECKO=	gecko
