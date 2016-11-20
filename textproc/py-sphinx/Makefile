@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	sphinx
-PORTVERSION=	1.4.6
-PORTREVISION=	1
+PORTVERSION=	1.4.8
 CATEGORIES=	textproc python
 MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
@@ -37,11 +36,5 @@ post-build:
 	cd ${WRKSRC}/build/lib && \
 	${SETENV} PYTHONPATH=${WRKSRC}/build/lib:${PYTHONPREFIX_SITELIBDIR} \
 	${PYTHON_CMD} -m sphinx.pycode.pgen2.driver -c 'import load_grammar'
-
-post-install:
-	${INSTALL_DATA} ${WRKSRC}/build/lib/sphinx/pycode/Grammar-py${PYTHON_VER:R}-${PORTNAME}${PORTVERSION:R}.pickle \
-	${STAGEDIR}/${PYTHONPREFIX_SITELIBDIR}/sphinx/pycode/
-
-	@${ECHO_CMD} ${PYTHON_SITELIBDIR:S;${PYTHONBASE}/;;}/sphinx/pycode/Grammar-py${PYTHON_VER:R}-${PORTNAME}${PORTVERSION:R}.pickle >> ${TMPPLIST}
 
 .include <bsd.port.mk>

@@ -185,6 +185,7 @@
     SUBDIR += nawk
     SUBDIR += nbc
     SUBDIR += nbfc
+    SUBDIR += neko
     SUBDIR += nesasm
     SUBDIR += newlisp
     SUBDIR += newlisp-devel
