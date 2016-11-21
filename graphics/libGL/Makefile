@@ -31,7 +31,7 @@ post-install:
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/.mesa
 	@${MV} ${STAGEDIR}${PREFIX}/lib/libGL* \
 		${STAGEDIR}${PREFIX}/lib/.mesa/
-	@cd ${WRKSRC}/src/mesa && ${SETENV} DESTDIR=${STAGEDIR} \
-		${MAKE_CMD} install-pkgconfigDATA install-glHEADERS
+	@cd ${WRKSRC}/src && ${SETENV} DESTDIR=${STAGEDIR} \
+		${MAKE_CMD} install-pkgconfigDATA install-glHEADERS install-glxHEADERS install-osmesaHEADERS
 
 .include <bsd.port.mk>
