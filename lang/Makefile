@@ -257,6 +257,7 @@
     SUBDIR += php_doc
     SUBDIR += picoc
     SUBDIR += pike78
+    SUBDIR += pocl
     SUBDIR += polyml
     SUBDIR += ptoc
     SUBDIR += pure
