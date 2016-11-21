@@ -41,11 +41,9 @@ USE_GITHUB=	yes
 USE_LDCONFIG=	yes
 
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS+=	--disable-silent-rules
 
 GH_ACCOUNT=	vstakhov
 
-PATHFIX_MAKEFILEIN=	Makefile.am
 CONFLICTS_INSTALL=	ucl
 
 INSTALL_TARGET=	install-strip

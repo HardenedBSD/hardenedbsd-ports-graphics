@@ -1,8 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	maven33
-DISTVERSION=	3.3.3
-PORTREVISION=	1
+DISTVERSION=	3.3.9
 CATEGORIES=	devel java
 MASTER_SITES=	APACHE/maven/maven-3/${DISTVERSION}/binaries
 DISTNAME=	apache-maven-${DISTVERSION}-bin
@@ -29,7 +28,7 @@ INSTANCE_FILE=	030303-${PORTNAME}-${PORTVERSION}
 INSTANCES_DIR=	etc/maven-wrapper/instances.d/
 
 post-extract:
-	${RM} -f ${WRKSRC}/bin/*.bat
+	${RM} ${WRKSRC}/bin/*.bat
 	${ECHO_CMD} "${DATADIR}" > ${WRKSRC}/${INSTANCE_FILE}
 
 do-install:

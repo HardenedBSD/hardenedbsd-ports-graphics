@@ -14,13 +14,12 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 LIB_DEPENDS=	liblog4cplus.so:devel/log4cplus \
 		libboost_system.so:devel/boost-libs
 
-USES=		libtool python:3.3+ autoreconf
+USES=		autoreconf libtool pathfix python:3.3+
 USE_LDCONFIG=	yes
 USE_OPENSSL=	yes
 USE_RC_SUBR=	${PORTNAME}
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS=	--disable-silent-rules \
-		--with-openssl=${OPENSSLBASE} \
+CONFIGURE_ARGS=	--with-openssl=${OPENSSLBASE} \
 		--with-log4cplus=${LOCALBASE} \
 		--with-boost-include=${LOCALBASE}/include \
 		--with-boost-lib-dir=${LOCALBASE}/lib \

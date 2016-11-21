@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	certificate-transparency
-PORTVERSION=	20160102
+PORTVERSION=	20161015
+PORTREVISION=	1
 CATEGORIES=	security
 
 MAINTAINER=	ports@FreeBSD.org
@@ -31,7 +32,7 @@ CONFIGURE_ENV+=	"CFLAGS+=-I${LOCALBASE}/include CXXFLAGS+=-lgtest CXXFLAGS+=-lgm
 MAKE_FLAGS+=	"V=1"
 USE_GITHUB=	yes
 GH_ACCOUNT=	google
-GH_TAGNAME=	1cdd6b5
+GH_TAGNAME=	28478cb
 
 CPPFLAGS+=	"-I${LOCALBASE}/include"
 CPPFLAGS+=	"-I${LOCALBASE}/include/evhtp"

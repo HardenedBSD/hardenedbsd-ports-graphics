@@ -26,7 +26,6 @@
     SUBDIR += arprelease
     SUBDIR += asio
     SUBDIR += aslookup
-    SUBDIR += asterisk
     SUBDIR += asterisk-chan_sccp
     SUBDIR += asterisk-g72x
     SUBDIR += asterisk11
@@ -43,6 +42,7 @@
     SUBDIR += axa
     SUBDIR += babeld
     SUBDIR += balance
+    SUBDIR += bctoolbox
     SUBDIR += beacon
     SUBDIR += beanstalkd
     SUBDIR += belle-sip
@@ -108,7 +108,6 @@
     SUBDIR += dictd
     SUBDIR += dictd-database
     SUBDIR += dimes
-    SUBDIR += dosdetector
     SUBDIR += dpdk
     SUBDIR += dpinger
     SUBDIR += drawterm
@@ -160,6 +159,7 @@
     SUBDIR += glflow
     SUBDIR += glib-networking
     SUBDIR += glusterfs
+    SUBDIR += gnatsd
     SUBDIR += gnet2
     SUBDIR += gnetcat
     SUBDIR += gnome-nettool
@@ -172,6 +172,7 @@
     SUBDIR += go-geoip
     SUBDIR += go-httppath
     SUBDIR += go-httptreemux
+    SUBDIR += go-nats
     SUBDIR += go.net
     SUBDIR += gofish
     SUBDIR += gogoc
@@ -187,6 +188,7 @@
     SUBDIR += grilo
     SUBDIR += grilo-plugins
     SUBDIR += grive
+    SUBDIR += grive2
     SUBDIR += grsync
     SUBDIR += gsk
     SUBDIR += gspoof
@@ -252,6 +254,7 @@
     SUBDIR += iipsrv
     SUBDIR += ilbc
     SUBDIR += imapproxy
+    SUBDIR += intel-em-kmod
     SUBDIR += intel-ixl-kmod
     SUBDIR += iodine
     SUBDIR += ip2location
@@ -374,6 +377,9 @@
     SUBDIR += linux-c6-avahi-libs
     SUBDIR += linux-c6-openldap
     SUBDIR += linux-c6-tcp_wrappers-libs
+    SUBDIR += linux-c7-avahi-libs
+    SUBDIR += linux-c7-openldap
+    SUBDIR += linux-c7-tcp_wrappers-libs
     SUBDIR += linux-f10-nss_ldap
     SUBDIR += linux-f10-openldap
     SUBDIR += linuxigd
@@ -418,10 +424,11 @@
     SUBDIR += msend
     SUBDIR += mtr
     SUBDIR += mtr-nox11
+    SUBDIR += multicat
     SUBDIR += nakenchat
     SUBDIR += nanomsg
     SUBDIR += nast
-    SUBDIR += nats
+    SUBDIR += nats-streaming-server
     SUBDIR += nats-top
     SUBDIR += nbd-server
     SUBDIR += nc
@@ -604,9 +611,11 @@
     SUBDIR += p5-Net-Finger
     SUBDIR += p5-Net-Flow
     SUBDIR += p5-Net-Frame
+    SUBDIR += p5-Net-Frame-Device
     SUBDIR += p5-Net-Frame-Dump
     SUBDIR += p5-Net-Frame-Layer-ICMPv6
     SUBDIR += p5-Net-Frame-Layer-IPv6
+    SUBDIR += p5-Net-Frame-Simple
     SUBDIR += p5-Net-GitHub
     SUBDIR += p5-Net-Gnats
     SUBDIR += p5-Net-Google
@@ -648,6 +657,7 @@
     SUBDIR += p5-Net-LDAP-posixAccount
     SUBDIR += p5-Net-LDAP-posixGroup
     SUBDIR += p5-Net-Libdnet
+    SUBDIR += p5-Net-Libdnet6
     SUBDIR += p5-Net-LimeLight-Purge
     SUBDIR += p5-Net-MAC
     SUBDIR += p5-Net-MAC-Vendor
@@ -854,10 +864,10 @@
     SUBDIR += pear-Net_Finger
     SUBDIR += pear-Net_Geo
     SUBDIR += pear-Net_GeoIP
+    SUBDIR += pear-Net_Growl
     SUBDIR += pear-Net_IDNA
     SUBDIR += pear-Net_IPv4
     SUBDIR += pear-Net_IPv6
-    SUBDIR += pear-Net_Growl
     SUBDIR += pear-Net_Ident
     SUBDIR += pear-Net_LDAP
     SUBDIR += pear-Net_LDAP2
@@ -887,12 +897,12 @@
     SUBDIR += pear-XML_RPC2
     SUBDIR += pecl-amqp
     SUBDIR += pecl-apn
-    SUBDIR += pecl-cvsclient
     SUBDIR += pecl-geoip
     SUBDIR += pecl-gupnp
     SUBDIR += pecl-ip2location
     SUBDIR += pecl-mosquitto
     SUBDIR += pecl-oauth
+    SUBDIR += pecl-oauth2
     SUBDIR += pecl-radius
     SUBDIR += pecl-smbclient
     SUBDIR += pecl-yaz
@@ -901,10 +911,6 @@
     SUBDIR += pen
     SUBDIR += pfinger
     SUBDIR += phamm
-    SUBDIR += php55-ldap
-    SUBDIR += php55-soap
-    SUBDIR += php55-sockets
-    SUBDIR += php55-xmlrpc
     SUBDIR += php56-ldap
     SUBDIR += php56-soap
     SUBDIR += php56-sockets
@@ -950,6 +956,7 @@
     SUBDIR += py-amqplib
     SUBDIR += py-avahi
     SUBDIR += py-beanstalkc
+    SUBDIR += py-cinderclient
     SUBDIR += py-cjdns
     SUBDIR += py-cloudfiles
     SUBDIR += py-coherence
@@ -957,6 +964,7 @@
     SUBDIR += py-dugong
     SUBDIR += py-ec2-cli-tools
     SUBDIR += py-eventlet
+    SUBDIR += py-glanceclient
     SUBDIR += py-gntp
     SUBDIR += py-gspread
     SUBDIR += py-gspreadsheet
@@ -965,6 +973,7 @@
     SUBDIR += py-ipaddress
     SUBDIR += py-iplib
     SUBDIR += py-kafka-python
+    SUBDIR += py-keystoneclient
     SUBDIR += py-kombu
     SUBDIR += py-ldap
     SUBDIR += py-ldap3
@@ -983,11 +992,13 @@
     SUBDIR += py-netifaces
     SUBDIR += py-netlib
     SUBDIR += py-netstring
+    SUBDIR += py-neutronclient
     SUBDIR += py-nnpy
     SUBDIR += py-novaclient
     SUBDIR += py-ntplib
     SUBDIR += py-oauth
     SUBDIR += py-oauth2
+    SUBDIR += py-openstackclient
     SUBDIR += py-paho-mqtt
     SUBDIR += py-pcap
     SUBDIR += py-pcapy
@@ -1023,6 +1034,7 @@
     SUBDIR += py-soappy
     SUBDIR += py-socketio-client
     SUBDIR += py-speedtest-cli
+    SUBDIR += py-sshuttle
     SUBDIR += py-suds
     SUBDIR += py-terminado
     SUBDIR += py-tofu
@@ -1034,7 +1046,6 @@
     SUBDIR += py-txrestapi
     SUBDIR += py-upnp-inspector
     SUBDIR += py-uritemplate
-    SUBDIR += py-uritemplate.py
     SUBDIR += py-urllib3
     SUBDIR += py-wolframalpha
     SUBDIR += py-xmlrpc
@@ -1066,6 +1077,7 @@
     SUBDIR += radsecproxy
     SUBDIR += radvd
     SUBDIR += raggle
+    SUBDIR += rclone
     SUBDIR += rdapper
     SUBDIR += rdesktop
     SUBDIR += rdist6
@@ -1302,6 +1314,7 @@
     SUBDIR += tcpslice
     SUBDIR += tcpsplit
     SUBDIR += tcpstat
+    SUBDIR += tcptestsuite
     SUBDIR += tcptrace
     SUBDIR += tcptraceroute
     SUBDIR += tcptraceroute-devel

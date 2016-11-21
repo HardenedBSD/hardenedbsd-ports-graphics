@@ -14,11 +14,9 @@ LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/COPYING
 
 USES=		autoreconf pathfix libtool
-PATHFIX_MAKEFILEIN=	Makefile.am
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
-CONFIGURE_ARGS=	--disable-silent-rules \
-		--program-suffix=sa
+CONFIGURE_ARGS=	--program-suffix=sa
 INSTALL_TARGET=	install-strip
 
 PORTDOCS=	ChangeLog README AUTHORS TODO NEWS

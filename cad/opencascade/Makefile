@@ -3,7 +3,7 @@
 
 PORTNAME=	opencascade
 PORTVERSION=	6.9.1
-PORTREVISION=	1
+PORTREVISION=	4
 CATEGORIES=	cad science
 MASTER_SITES=	LOCAL/thierry
 
@@ -21,8 +21,8 @@ RUN_DEPENDS=	bash:shells/bash
 
 # Check ${WRKSRC}/dox/overview/Overview.md
 # and ${WRKSRC}/dox/dev_guides/building
-USES=		alias:10 bison cmake compiler dos2unix gmake shebangfix tk \
-		tar:tgz
+USES=		alias:10 bison cmake compiler:c++11-lib dos2unix gmake \
+		shebangfix tk tar:tgz
 USE_XORG=	xmu
 DOS2UNIX_FILES=	adm/templates/*
 SHEBANG_FILES=	adm/templates/env.sh.in adm/templates/draw.sh		\
@@ -124,7 +124,7 @@ post-install:
 	done)
 	${MKDIR} ${STAGEDIR}${PREFIX}/include/OpenCASCADE
 	(cd ${STAGEDIR}${OCCROOT}/inc && ${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/include/OpenCASCADE)
-	${RM} -rf ${STAGEDIR}${OCCROOT}/inc
+	${RM} -r ${STAGEDIR}${OCCROOT}/inc
 	${LN} -sf ${PREFIX}/include/OpenCASCADE ${STAGEDIR}${OCCROOT}/inc
 	(cd ${WRKSRC} && ${COPYTREE_SHARE} tests ${STAGEDIR}${OCCROOT})
 post-install-DOCS-on:

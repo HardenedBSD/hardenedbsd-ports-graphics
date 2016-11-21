@@ -13,8 +13,6 @@ COMMENT=	Webmail system which accesses mail over IMAP
 
 LICENSE=	GPLv2
 
-BROKEN_powerpc64=	Does not build
-
 # This snapshot tarball contains php 5.4 and 5.5 compatibility
 # patches, but the only guaranteed compatibility is with php 5.3.
 # If you encounter problems, downgrade to php 5.3.
@@ -71,10 +69,10 @@ do-build:
 			${MV} $$f doc/`dirname $$f`; \
 		done)
 	@${MV} ${WRKSRC}/doc/plugins/squirrelspell/doc/README ${WRKSRC}/doc/plugins/squirrelspell
-	@${RM} -rf ${WRKSRC}/doc/plugins/squirrelspell/doc
+	@${RM} -r ${WRKSRC}/doc/plugins/squirrelspell/doc
 	@${MV} ${WRKSRC}/plugins/squirrelspell/doc/* ${WRKSRC}/doc/plugins/squirrelspell
-	@${RM} -f ${WRKSRC}/doc/plugins/squirrelspell/index.php
-	@${RM} -rf ${WRKSRC}/plugins/squirrelspell/doc
+	@${RM} ${WRKSRC}/doc/plugins/squirrelspell/index.php
+	@${RM} -r ${WRKSRC}/plugins/squirrelspell/doc
 
 	@${ECHO} "left_refresh=300" >> ${WRKSRC}/data/default_pref
 	@${MV} ${WRKSRC}/config/config_local.php ${WRKSRC}/config/config_local.php.sample

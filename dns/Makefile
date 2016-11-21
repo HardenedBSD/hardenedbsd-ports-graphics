@@ -91,6 +91,7 @@
     SUBDIR += libidn2
     SUBDIR += libpsl
     SUBDIR += linux-c6-libasyncns
+    SUBDIR += linux-c7-libasyncns
     SUBDIR += linux-f10-libasyncns
     SUBDIR += mDNSResponder_nss
     SUBDIR += maradns
@@ -179,6 +180,7 @@
     SUBDIR += py-pywdns
     SUBDIR += py-tldextract
     SUBDIR += py-twistedNames
+    SUBDIR += py3-dnspython
     SUBDIR += radns
     SUBDIR += rbldnsd
     SUBDIR += rbllookup

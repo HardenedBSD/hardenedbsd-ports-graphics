@@ -125,6 +125,7 @@
     SUBDIR += liberation-fonts-ttf
     SUBDIR += libfontenc
     SUBDIR += linux-c6-fontconfig
+    SUBDIR += linux-c7-fontconfig
     SUBDIR += linux-f10-fontconfig
     SUBDIR += linuxlibertine
     SUBDIR += linuxlibertine-g
@@ -144,6 +145,7 @@
     SUBDIR += noto
     SUBDIR += noto-lite
     SUBDIR += nucleus
+    SUBDIR += oldschool-pc-fonts
     SUBDIR += p5-Font-AFM
     SUBDIR += p5-Font-TTF
     SUBDIR += p5-Font-TTFMetrics

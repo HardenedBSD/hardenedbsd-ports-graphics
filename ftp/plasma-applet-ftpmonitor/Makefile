@@ -7,8 +7,10 @@ CATEGORIES=	ftp kde
 MASTER_SITES=	GOOGLE_CODE
 PKGNAMEPREFIX=	plasma-applet-
 
-MAINTAINER=	makc@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	KDE4 Plasma applet, which monitors connections to ftp daemons
+
+BROKEN=		Unfetchable (google code has gone away)
 
 USES=		cmake kde:4 tar:bzip2
 USE_KDE=	kdelibs automoc4

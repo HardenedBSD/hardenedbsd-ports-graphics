@@ -1,17 +1,20 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-ati
-PORTVERSION=	7.7.0
+PORTVERSION=	7.7.1
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org ati display driver
+
+LIB_DEPENDS=	libdrm_radeon.so:graphics/libdrm
 
 USE_GL=		gl
 XORG_CAT=	driver
 USE_XORG=	xf86driproto \
 		xineramaproto \
 		xf86miscproto \
+		pciaccess \
 		glproto \
 		presentproto
 INSTALL_TARGET=	install-strip

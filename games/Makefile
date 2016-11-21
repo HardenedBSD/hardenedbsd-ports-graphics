@@ -217,6 +217,7 @@
     SUBDIR += dungeon
     SUBDIR += dungeoncrawl
     SUBDIR += dustrac
+    SUBDIR += easyrpg-player
     SUBDIR += eboard
     SUBDIR += edge
     SUBDIR += editss
@@ -232,6 +233,7 @@
     SUBDIR += endgame-singularity
     SUBDIR += endgame-singularity-music
     SUBDIR += endless-sky
+    SUBDIR += endless-sky-high-dpi
     SUBDIR += enigma
     SUBDIR += ensemblist
     SUBDIR += entombed
@@ -254,7 +256,6 @@
     SUBDIR += farblazer
     SUBDIR += fargoal
     SUBDIR += fbg2
-    SUBDIR += fgrun
     SUBDIR += fightorperish
     SUBDIR += fillets-ng
     SUBDIR += filters
@@ -307,6 +308,7 @@
     SUBDIR += funnyboat
     SUBDIR += galaxis
     SUBDIR += galaxyhack
+    SUBDIR += garden-of-coloured-lights
     SUBDIR += garith
     SUBDIR += gbottler
     SUBDIR += gbrainy
@@ -356,6 +358,7 @@
     SUBDIR += gnuchess
     SUBDIR += gnudoku
     SUBDIR += gnugo
+    SUBDIR += gnujump
     SUBDIR += gnurobbo
     SUBDIR += gnurobots
     SUBDIR += gnushogi
@@ -512,6 +515,7 @@
     SUBDIR += libggz
     SUBDIR += libkdegames
     SUBDIR += libkmahjongg
+    SUBDIR += liblcf
     SUBDIR += libmaitretarot
     SUBDIR += libmt_client
     SUBDIR += libretro-cores
@@ -683,6 +687,7 @@
     SUBDIR += openssn
     SUBDIR += opensurge
     SUBDIR += openttd
+    SUBDIR += opentyrian
     SUBDIR += openxcom
     SUBDIR += openyahtzee
     SUBDIR += optimax
@@ -986,6 +991,7 @@
     SUBDIR += twitch
     SUBDIR += tycho
     SUBDIR += typespeed
+    SUBDIR += tyrian-data
     SUBDIR += ufoai
     SUBDIR += ufoai-data
     SUBDIR += uhexen
@@ -1032,6 +1038,7 @@
     SUBDIR += wolfpack
     SUBDIR += wop
     SUBDIR += wordplay
+    SUBDIR += wordwarvi
     SUBDIR += worldofpadman
     SUBDIR += wtf
     SUBDIR += wxlauncher

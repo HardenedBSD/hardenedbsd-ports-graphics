@@ -2,8 +2,8 @@
 
 PORTNAME=	ppsspp
 DISTVERSIONPREFIX=	v
-DISTVERSION?=	1.2.2
-PORTREVISION?=	0
+DISTVERSION?=	1.3
+PORTREVISION?=	2
 CATEGORIES=	emulators
 # XXX Get from Debian once #697821 lands
 MASTER_SITES=	https://bazaar.launchpad.net/~sergio-br2/${PORTNAME}/debian-sdl/download/5/${PORTNAME}.1-20140802045408-dd26dik367ztj5xg-8/:manpage
@@ -21,13 +21,13 @@ LIB_DEPENDS=	libzip.so:archivers/libzip \
 RUN_DEPENDS=	xdg-open:devel/xdg-utils
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	hrydgard:DEFAULT,lang Kingcom:ext_armips
-GH_PROJECT=	${PORTNAME}-lang:lang armips:ext_armips
-GH_TAGNAME?=	16a50e3:lang 9b225d9:ext_armips
+GH_ACCOUNT=	hrydgard
+GH_TUPLE?=	hrydgard:${PORTNAME}-lang:cdf4a8d:lang/lang \
+		Kingcom:armips:1ffab37:armips/ext/armips
 
-CONFLICTS_INSTALL?=	${PORTNAME}-devel-[0-9]*
+CONFLICTS_INSTALL=	${PORTNAME}-*
 
-USES=		compiler:c++11-lib localbase pkgconfig
+USES=		compiler:c++11-lib localbase:ldflags pkgconfig
 EXCLUDE=	glew snappy libzip zlib
 EXTRACT_AFTER_ARGS=${EXCLUDE:S,^,--exclude ,}
 USE_GL=		glew glu
@@ -35,7 +35,6 @@ USE_SDL=	sdl2 # joystick
 CMAKE_ARGS=	-DUSE_SYSTEM_FFMPEG=on
 QMAKE_SOURCE_PATH=	${WRKSRC}/Qt/PPSSPPQt.pro
 QMAKE_ARGS=	CONFIG+="system_ffmpeg" LREL_TOOL="${LRELEASE}"
-NINJA_VERBOSE=	yes
 NO_INSTALL=	yes # ports/202949
 
 DESKTOP_ENTRIES="PPSSPP" \
@@ -45,25 +44,19 @@ DESKTOP_ENTRIES="PPSSPP" \
 		"Game;Emulator;" \
 		""
 
-OPTIONS_DEFAULT=QT5
 OPTIONS_SINGLE=	GUI
 OPTIONS_SINGLE_GUI=	QT4 QT5 SDL
+OPTIONS_SLAVE?=	SDL
+OPTIONS_EXCLUDE:=	${OPTIONS_SINGLE_GUI}
 
 QT4_USES=	qmake:outsource
 QT4_USE=	QT4=qmake_build,moc_build,rcc_build,uic_build,linguisttools_build,gui,opengl
 QT5_USES=	qmake:outsource
 QT5_USE=	QT5=qmake_build,buildtools_build,linguisttools_build,gui,opengl,widgets
-SDL_USES=	cmake:outsource ninja
+SDL_USES=	cmake:outsource
 SDL_BUILD_DEPENDS=	png>=1.6:graphics/png
 SDL_LIB_DEPENDS=	libpng.so:graphics/png
 SDL_VARS=	PORTDATA+="assets ${PORTNAME}"
-
-post-extract:
-# Convert USE_GITHUB groups to git-submodule(1) paths
-.for group in ${GH_PROJECT:C/.*://}
-	@${RMDIR} ${WRKSRC}/${group:S,_,/,g}
-	@${MV} ${WRKSRC_${group}} ${WRKSRC}/${group:S,_,/,g}
-.endfor
 
 post-patch:
 	@${REINPLACE_CMD} -e 's,/usr/share,${PREFIX}/share,' \

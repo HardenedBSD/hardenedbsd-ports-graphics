@@ -142,12 +142,8 @@
     SUBDIR += pecl-lzf
     SUBDIR += pecl-phk
     SUBDIR += pecl-rar
+    SUBDIR += pecl-snappy
     SUBDIR += php-horde_lz4
-    SUBDIR += php5-snappy
-    SUBDIR += php55-bz2
-    SUBDIR += php55-phar
-    SUBDIR += php55-zip
-    SUBDIR += php55-zlib
     SUBDIR += php56-bz2
     SUBDIR += php56-phar
     SUBDIR += php56-zip

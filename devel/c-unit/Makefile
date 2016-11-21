@@ -12,6 +12,8 @@ COMMENT=	Unit testing framework for C
 
 LICENSE=	LGPL20
 
+BROKEN=		Unfetchable (google code has gone away)
+
 CONFLICTS=	cunit-[0-9]*
 
 GNU_CONFIGURE=	yes
@@ -21,8 +23,6 @@ INSTALL_TARGET=	install-strip
 
 DATADIR=	${PREFIX}/share/CUnit
 EXAMPLESDIR=	${PREFIX}/share/examples/CUnit
-
-PATHFIX_MAKEFILEIN=	Makefile.am
 
 OPTIONS_DEFINE=		AUT BAS CON CUR DEB EXA ITE MEM
 OPTIONS_DEFAULT=	AUT BAS CON

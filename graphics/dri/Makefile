@@ -3,7 +3,7 @@
 
 PORTNAME=	dri
 PORTVERSION=	${MESAVERSION}
-PORTREVISION=	1
+PORTREVISION=	0
 PORTEPOCH=	2
 CATEGORIES=	graphics
 
@@ -12,6 +12,7 @@ COMMENT=	OpenGL hardware acceleration drivers for the DRI
 LIB_DEPENDS=	libdrm.so:graphics/libdrm \
 		libexpat.so:textproc/expat2
 
+USES=		ssl
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto \
 		presentproto xvmc xshmfence
 
@@ -38,6 +39,6 @@ PKGHELP=	${.CURDIR}/pkg-help
 .include "${.CURDIR}/../../graphics/libGL/Makefile.targets"
 
 post-install:
-	@${RM} -rf ${STAGEDIR}/etc/OpenCL
+	@${RM} -r ${STAGEDIR}/etc/OpenCL
 
 .include <bsd.port.mk>

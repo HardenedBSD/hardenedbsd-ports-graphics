@@ -8,7 +8,7 @@ PORTVERSION=	${ISCVERSION:S/-P/P/:S/b/.b/:S/a/.a/:S/rc/.rc/}
 PORTREVISION=	0
 .else
 # dns/bind9xx here
-PORTREVISION=	1
+PORTREVISION=	0
 .endif
 CATEGORIES=	dns net ipv6
 MASTER_SITES=	LOCAL/mat/bind
@@ -30,10 +30,8 @@ COMMENT=	BIND DNS suite with updated DNSSEC and DNS64
 LICENSE=	MPL
 
 # ISC releases things like 9.8.0-P1, which our versioning doesn't like
-ISCVERSION=	9.12.0a.2016.09.02
-HASH=		1a49346
-
-MAKE_JOBS_UNSAFE=	yes
+ISCVERSION=	9.12.0a.2016.10.20
+HASH=		bcbacc4
 
 USES=	cpe libedit
 
@@ -57,6 +55,7 @@ CONFIGURE_ARGS+=	--localstatedir=/var --disable-linux-caps \
 CONFIGURE_ARGS+=	--disable-shared
 .endif
 ETCDIR=		${PREFIX}/etc/namedb
+LDFLAGS+=	-L${LOCALBASE}/lib	# for ports-based libedit
 
 CONFLICTS+=	bind9*-9.[456789].* bind910-* bind911-*  bind9*-sdb-9.[456789].*
 
@@ -235,6 +234,7 @@ SUB_LIST+=	NOBASE="@comment " BASE=""
 
 PKGDEINSTALL=	${PKGINSTALL}
 
+MAKE_JOBS_UNSAFE=	yes
 
 PORTDOCS=	*
 

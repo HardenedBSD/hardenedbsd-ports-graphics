@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	qtpass
-PORTVERSION=	1.1.3
+PORTVERSION=	1.1.5
 DISTVERSIONPREFIX=v
 CATEGORIES=	sysutils
 
@@ -27,10 +27,7 @@ DESKTOP_ENTRIES=	"QtPass" "" \
 			"${PREFIX}/bin/qtpass" \
 			"Security;Utility;" true
 
-post-patch:
-# The project file assumes PREFIX is the bin-dir. We pass PREFIX=${LOCALBASE}
-# so we have to append bin to target.path.
-	${REINPLACE_CMD} -e '/target.path/s,$$,bin,' ${WRKSRC}/qtpass.pro
+WRKSRC=		${WRKDIR}/QtPass-${PORTVERSION}
 
 # Install the icon of the port.
 post-install:

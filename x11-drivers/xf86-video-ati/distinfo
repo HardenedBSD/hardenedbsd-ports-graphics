@@ -1,2 +1,3 @@
-SHA256 (xorg/driver/xf86-video-ati-7.7.0.tar.bz2) = 844d1c577b145c90dc8ef027678f0c27f554363f782cd696a3aea26415b2c1c3
-SIZE (xorg/driver/xf86-video-ati-7.7.0.tar.bz2) = 836902
+TIMESTAMP = 1474474168
+SHA256 (xorg/driver/xf86-video-ati-7.7.1.tar.bz2) = 00a58588db62ee309095c5c5920bbd248d965e8627f88affe68a73b18865078d
+SIZE (xorg/driver/xf86-video-ati-7.7.1.tar.bz2) = 837869

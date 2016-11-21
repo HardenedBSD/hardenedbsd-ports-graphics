@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	opendnssec
-PORTVERSION=	1.4.10
+PORTVERSION=	1.4.12
 CATEGORIES=	dns
 MASTER_SITES=	http://dist.opendnssec.org/source/
 
@@ -69,6 +69,10 @@ RUN_DEPENDS+=	softhsm>=1.2.0:security/softhsm
 SCRIPTDATA+=	convert_database.pl
 
 PKGMESSAGE=	${WRKSRC}/MIGRATION
+
+post-patch:
+	${REINPLACE_CMD} -e "s|\(-lcrypto\)|-L${OPENSSLLIB} \1|g" \
+		${WRKSRC}/configure
 
 pre-install:
 .if ${PORT_OPTIONS:MMYSQL}

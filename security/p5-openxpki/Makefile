@@ -103,7 +103,7 @@ post-patch:
 	${CAT} filelist | ${XARGS} -0 -I % ${REINPLACE_CMD} -e 's|/etc/openxpki|${PREFIX}/etc/openxpki|g' "%"; \
 	${CAT} filelist | ${XARGS} -0 -I % ${REINPLACE_CMD} -e 's|/var/run/openxpkid.pid|/var/openxpki/openxpkid.pid|g' "%"; \
 	${CAT} filelist | ${XARGS} -0 -I % ${REINPLACE_CMD} -e 's|/var/openxpki/\([^\.]*\)\.log|/var/log/openxpki/\1\.log|g' "%"; \
-	${CAT} filelist | ${XARGS} -0 -I % ${RM} -f "%.bak"; \
+	${CAT} filelist | ${XARGS} -0 -I % ${RM} "%.bak"; \
 	${RM} filelist; \
 	)
 	@${MKDIR} ${WRKSRC}/t/var/log/openxpki
@@ -115,7 +115,7 @@ post-stage:
 
 .include <bsd.port.pre.mk>
 
-.if ${SSL_DEFAULT} == libressl
+.if ${SSL_DEFAULT:Mlibressl*}
 IGNORE=	this version of OpenXPKI is not fully functional with LibreSSL library, use OpenSSL instead
 .endif
 

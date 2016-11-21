@@ -2,7 +2,7 @@
 
 PORTNAME=	clover
 PORTVERSION=	${MESAVERSION}
-PORTREVISION=	1
+PORTREVISION=	0
 CATEGORIES=	lang
 
 COMMENT=	Mesa "Clover" OpenCL library
@@ -13,6 +13,7 @@ LIB_DEPENDS=	libdrm.so:graphics/libdrm \
 		libexpat.so:textproc/expat2
 RUN_DEPENDS=	opencl>=0:devel/opencl
 
+USES=		ssl
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto \
 		presentproto xvmc xshmfence
 USES=		ssl

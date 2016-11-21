@@ -46,6 +46,7 @@
     SUBDIR += dkns
     SUBDIR += drjava
     SUBDIR += e3
+    SUBDIR += ecce
     SUBDIR += edith
     SUBDIR += editorconfig-core-c
     SUBDIR += emacs
@@ -255,7 +256,6 @@
     SUBDIR += vile
     SUBDIR += vim
     SUBDIR += vim-lite
-    SUBDIR += winefish
     SUBDIR += with-editor
     SUBDIR += wordgrinder
     SUBDIR += xcoral

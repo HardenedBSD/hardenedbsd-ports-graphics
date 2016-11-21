@@ -1052,24 +1052,28 @@ MINIMAL_PKG_VERSION=	1.6.0
 
 .include "${PORTSDIR}/Mk/bsd.commands.mk"
 
-.if defined(X_BUILD_FOR)
+.if defined(CROSS_TOOLCHAIN)
 .if !defined(.PARSEDIR)
 IGNORE=	Cross building can only be done when using bmake(1) as make(1)
 .endif
+.if !defined(CROSS_SYSROOT)
+IGNORE=	CROSS_SYSROOT should be defined
+.endif
+.include "${LOCALBASE}/share/toolchains/${CROSS_TOOLCHAIN}.mk"
 # Do not define CPP on purpose
 .if !defined(HOSTCC)
 HOSTCC:=	${CC}
 HOSTCXX:=	${CXX}
 .endif
-.if !exists(/usr/${X_BUILD_FOR}/usr/bin/cc)
-X_SYSROOT=	${LOCALBASE}/${X_BUILD_FOR}
-.else
-X_SYSROOT=	/usr/${X_BUILD_FOR}
-.endif
-CC=		${X_SYSROOT}/usr/bin/cc
-CXX=	${X_SYSROOT}/usr/bin/c++
-NM=		${X_BUILD_FOR}-nm
-STRIP_CMD=	${X_BUILD_FOR}-strip
+CC=		${XCC}
+CXX=	${XCXX}
+CFLAGS+=	--sysroot=${CROSS_SYSROOT} -isystem ${CROSS_SYSROOT}/usr/include
+CXXFLAGS+=	--sysroot=${CROSS_SYSROOT} -isystem ${CROSS_SYSROOT}/usr/include/c++/v1 -nostdinc++
+LDFLAGS+=	--sysroot=${CROSS_SYSROOT}
+.for _tool in AS AR LD NM OBJCOPY RANLIB SIZE STRINGS
+${_tool}=	${CROSS_BINUTILS_PREFIX}${tool:tl}
+.endfor
+STRIP_CMD=	${CROSS_BINUTILS_PREFIX}strip
 # only bmake support the below
 STRIPBIN=	${STRIP_CMD}
 .export.env STRIPBIN
@@ -1517,13 +1521,12 @@ CO_ENV+=		STAGEDIR=${STAGEDIR} \
 				PORT_OPTIONS="${PORT_OPTIONS}" \
 				PORTSDIR="${PORTSDIR}"
 
-.if defined(X_BUILD_FOR)
-BUILD_DEPENDS+=	${X_BUILD_FOR}-cc:devel/${X_BUILD_FOR}-xdev
-PKG_ENV+=		ABI_FILE=${X_SYSROOT}/usr/lib/crt1.o
+.if defined(CROSS_SYSROOT)
+PKG_ENV+=		ABI_FILE=${CROSS_SYSROOT}/bin/sh
 MAKE_ENV+=		NM=${NM} \
-				STRIPBIN=${X_BUILD_FOR}-strip \
-				PKG_CONFIG_SYSROOT_DIR="${X_SYSROOT}"
-CONFIGURE_ENV+=	PKG_CONFIG_SYSROOT_DIR="${X_SYSROOT}"
+				STRIPBIN=${STRIPBIN} \
+				PKG_CONFIG_SYSROOT_DIR="${CROSS_SYSROOT}"
+CONFIGURE_ENV+=	PKG_CONFIG_SYSROOT_DIR="${CROSS_SYSROOT}"
 .endif
 
 WRKDIR?=		${WRKDIRPREFIX}${.CURDIR}/work
@@ -2436,7 +2439,7 @@ VALID_CATEGORIES+= accessibility afterstep arabic archivers astro audio \
 	benchmarks biology cad chinese comms converters databases \
 	deskutils devel docs dns editors elisp emulators enlightenment finance french ftp \
 	games geography german gnome gnustep graphics hamradio haskell hebrew hungarian \
-	ipv6 irc japanese java kde kld korean lang linux lisp \
+	ipv6 irc japanese java kde ${_KDE_CATEGORIES_SUPPORTED} kld korean lang linux lisp \
 	mail mate math mbone misc multimedia net net-im net-mgmt net-p2p news \
 	palm parallel pear perl5 plan9 polish portuguese ports-mgmt \
 	print python ruby rubygems russian \
@@ -2488,8 +2491,9 @@ GNU_CONFIGURE_PREFIX?=	${PREFIX}
 GNU_CONFIGURE_MANPREFIX?=	${MANPREFIX}
 CONFIG_SITE?=		${PORTSDIR}/Templates/config.site
 CONFIGURE_ARGS+=	--prefix=${GNU_CONFIGURE_PREFIX} $${_LATE_CONFIGURE_ARGS}
-.if defined(X_BUILD_FOR)
-CONFIGURE_ARGS+=	--host=${X_BUILD_FOR}
+.if defined(CROSS_TOOLCHAIN)
+CROSS_HOST=		${CROSS_TOOLCHAIN:C,-.*$,,}-${OPSYS:tl}
+CONFIGURE_ARGS+=	--host=${CROSS_HOST}
 .endif
 CONFIGURE_ENV+=		CONFIG_SITE=${CONFIG_SITE} lt_cv_sys_max_cmd_len=${CONFIGURE_MAX_CMD_LEN}
 HAS_CONFIGURE=		yes
@@ -2502,6 +2506,9 @@ SET_LATE_CONFIGURE_ARGS= \
 	fi ; \
 	if [ ! -z "`${CONFIGURE_CMD} --help 2>&1 | ${GREP} -- '--mandir'`" ]; then \
 	    _LATE_CONFIGURE_ARGS="$${_LATE_CONFIGURE_ARGS} --mandir=${GNU_CONFIGURE_MANPREFIX}/man" ; \
+	fi ; \
+	if [ ! -z "`${CONFIGURE_CMD} --help 2>&1 | ${GREP} -- '--disable-silent-rules'`" ]; then \
+	    _LATE_CONFIGURE_ARGS="$${_LATE_CONFIGURE_ARGS} --disable-silent-rules" ; \
 	fi ; \
 	if [ ! -z "`${CONFIGURE_CMD} --help 2>&1 | ${GREP} -- '--infodir'`" ]; then \
 	    _LATE_CONFIGURE_ARGS="$${_LATE_CONFIGURE_ARGS} --infodir=${GNU_CONFIGURE_PREFIX}/${INFO_PATH}/${INFO_SUBDIR}" ; \
@@ -3036,7 +3043,7 @@ fetch-url-list: fetch-url-list-int
 # Extract
 
 clean-wrkdir:
-	@${RM} -rf ${WRKDIR}
+	@${RM} -r ${WRKDIR}
 
 .if !target(do-extract)
 do-extract:
@@ -3143,7 +3150,7 @@ run-autotools-fixup:
 			cmp -s $${f}.fbsd10bak $${f} || \
 			${ECHO_MSG} "===>   FreeBSD 10 autotools fix applied to $${f}"; \
 			${TOUCH} ${TOUCH_FLAGS} -mr $${f}.fbsd10bak $${f} ; \
-			${RM} -f $${f}.fbsd10bak ; \
+			${RM} $${f}.fbsd10bak ; \
 		done
 .endif
 .endif
@@ -3342,7 +3349,7 @@ do-package: ${TMPPLIST}
 		fi; \
 	fi
 	@for cat in ${CATEGORIES}; do \
-		${RM} -f ${PACKAGES}/$$cat/${PKGNAMEPREFIX}${PORTNAME}*${PKG_SUFX} ; \
+		${RM} ${PACKAGES}/$$cat/${PKGNAMEPREFIX}${PORTNAME}*${PKG_SUFX} ; \
 	done
 	@${MKDIR} ${WRKDIR}/pkg
 	@if ${SETENV} ${PKG_ENV} FORCE_POST="${_FORCE_POST_PATTERNS}" ${PKG_CREATE} ${PKG_CREATE_ARGS} -f ${PKG_SUFX:S/.//} -o ${WRKDIR}/pkg ${PKGNAME}; then \
@@ -3373,12 +3380,12 @@ do-package: ${TMPPLIST}
 delete-package:
 	@${ECHO_MSG} "===>  Deleting package for ${PKGNAME}"
 # When staging, the package may only be in the workdir if not root
-	@${RM} -f ${PKGFILE} ${WRKDIR_PKGFILE} 2>/dev/null || :
+	@${RM} ${PKGFILE} ${WRKDIR_PKGFILE} 2>/dev/null || :
 .endif
 
 .if !target(delete-package-list)
 delete-package-list:
-	@${ECHO_CMD} "[ -f ${PKGFILE} ] && (${ECHO_CMD} deleting ${PKGFILE}; ${RM} -f ${PKGFILE})"
+	@${ECHO_CMD} "[ -f ${PKGFILE} ] && (${ECHO_CMD} deleting ${PKGFILE}; ${RM} ${PKGFILE})"
 .endif
 
 # Used by scripts and users to install a package from local repository.
@@ -3511,7 +3518,7 @@ security-check: ${TMPPLIST}
 #   4.  startup scripts, in conjunction with 2.
 #   5.  world-writable files/dirs
 #
-	-@${RM} -f ${WRKDIR}/.PLIST.setuid ${WRKDIR}/.PLIST.writable ${WRKDIR}/.PLIST.objdump; \
+	-@${RM} ${WRKDIR}/.PLIST.setuid ${WRKDIR}/.PLIST.writable ${WRKDIR}/.PLIST.objdump; \
 	${AWK} -v prefix='${PREFIX}' ' \
 		match($$0, /^@cwd /) { prefix = substr($$0, RSTART + RLENGTH); if (prefix == "/") prefix=""; next; } \
 		/^@/ { next; } \
@@ -3614,13 +3621,13 @@ checkpatch:
 
 .if !target(reinstall)
 reinstall:
-	@${RM} -f ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
+	@${RM} ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
 	@cd ${.CURDIR} && DEPENDS_TARGET="${DEPENDS_TARGET}" ${MAKE} -DFORCE_PKG_REGISTER install
 .endif
 
 .if !target(restage)
 restage:
-	@${RM} -rf ${STAGEDIR} ${STAGE_COOKIE} ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
+	@${RM} -r ${STAGEDIR} ${STAGE_COOKIE} ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
 	@cd ${.CURDIR} && ${MAKE} stage
 .endif
 
@@ -3644,7 +3651,7 @@ deinstall:
 	else \
 		${ECHO_MSG} "===>   ${PKGBASE} not installed, skipping"; \
 	fi
-	@${RM} -f ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
+	@${RM} ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
 .endif
 .endif
 
@@ -3673,7 +3680,7 @@ deinstall-all:
 	else \
 		${ECHO_MSG} "===>   ${PKGORIGIN} not installed, skipping"; \
 	fi; \
-	${RM} -f ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
+	${RM} ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
 .endif
 .endif
 
@@ -3683,7 +3690,7 @@ deinstall-all:
 do-clean:
 	@if [ -d ${WRKDIR} ]; then \
 		if [ -w ${WRKDIR} ]; then \
-			${RM} -rf ${WRKDIR}; \
+			${RM} -r ${WRKDIR}; \
 		else \
 			${ECHO_MSG} "===>   ${WRKDIR} not writable, skipping"; \
 		fi; \
@@ -3721,7 +3728,7 @@ delete-distfiles:
 	@(if [ "X${RESTRICTED_FILES}" != "X" -a -d ${_DISTDIR} ]; then \
 		cd ${_DISTDIR}; \
 		for file in ${RESTRICTED_FILES}; do \
-			${RM} -f $${file}; \
+			${RM} $${file}; \
 			dir=$${file%/*}; \
 			if [ "$${dir}" != "$${file}" ]; then \
 				${RMDIR} -p $${dir} >/dev/null 2>&1 || :; \
@@ -3738,7 +3745,7 @@ delete-distfiles-list:
 	@${ECHO_CMD} "# ${PKGNAME}"
 	@if [ "X${RESTRICTED_FILES}" != "X" ]; then \
 		for file in ${RESTRICTED_FILES}; do \
-			${ECHO_CMD} "[ -f ${_DISTDIR}/$$file ] && (${ECHO_CMD} deleting ${_DISTDIR}/$$file; ${RM} -f ${_DISTDIR}/$$file)"; \
+			${ECHO_CMD} "[ -f ${_DISTDIR}/$$file ] && (${ECHO_CMD} deleting ${_DISTDIR}/$$file; ${RM} ${_DISTDIR}/$$file)"; \
 			dir=$${file%/*}; \
 			if [ "$${dir}" != "$${file}" ]; then \
 				${ECHO_CMD} "(cd ${_DISTDIR} && ${RMDIR} -p $${dir} 2>/dev/null)"; \
@@ -3841,7 +3848,7 @@ package-name:
 repackage: pre-repackage package
 
 pre-repackage:
-	@${RM} -f ${PACKAGE_COOKIE}
+	@${RM} ${PACKAGE_COOKIE}
 .endif
 
 # Build a package but don't check the cookie for installation, also don't
@@ -4275,7 +4282,7 @@ readmes:	readme
 
 .if !target(readme)
 readme:
-	@${RM} -f ${.CURDIR}/README.html
+	@${RM} ${.CURDIR}/README.html
 	@cd ${.CURDIR} && ${MAKE} ${.CURDIR}/README.html
 .endif
 
@@ -4501,13 +4508,13 @@ compress-man:
 						${GZIP_CMD} $${f} ; \
 						continue ; \
 					fi ; \
-					${RM} -f $${f} ; \
+					${RM} $${f} ; \
 					(cd $${f%/*}; ${LN} -f $${ref##*/} $${f##*/}.gz) ; \
 				done ; \
 			done ; \
 		${FIND} $$dir -type l \! -name "*.gz" | while read link ; do \
 				${LN} -sf $$(readlink $$link).gz $$link.gz ;\
-				${RM} -f $$link ; \
+				${RM} $$link ; \
 		done; \
 	done
 .endif
@@ -4561,7 +4568,7 @@ fake-pkg: create-manifest
 .else
 	@${SETENV} ${PKG_ENV} FORCE_POST="${_FORCE_POST_PATTERNS}" ${PKG_CMD} ${STAGE_ARGS} -m ${METADIR} -f ${TMPPLIST}
 .endif
-	@${RM} -rf ${METADIR}
+	@${RM} -r ${METADIR}
 .endif
 .endif
 
@@ -4759,9 +4766,9 @@ do-config:
 	(${ECHO_MSG} "===> Cannot create $${optionsdir}, check permissions"; exit 1) ; \
 	fi
 	@TMPOPTIONSFILE=$$(mktemp -t portoptions); \
-	trap "${RM} -f $${TMPOPTIONSFILE}; exit 1" 1 2 3 5 10 13 15; \
+	trap "${RM} $${TMPOPTIONSFILE}; exit 1" 1 2 3 5 10 13 15; \
 	${SETENV} ${D4P_ENV} ${SH} ${SCRIPTSDIR}/dialog4ports.sh $${TMPOPTIONSFILE} || { \
-		${RM} -f $${TMPOPTIONSFILE}; \
+		${RM} $${TMPOPTIONSFILE}; \
 		${ECHO_MSG} "===> Options unchanged"; \
 		exit 0; \
 	}; \
@@ -4771,9 +4778,9 @@ do-config:
 		exit 0; \
 	fi; \
 	SELOPTIONS=$$(${CAT} $${TMPOPTIONSFILE}); \
-	${RM} -f $${TMPOPTIONSFILE}; \
+	${RM} $${TMPOPTIONSFILE}; \
 	TMPOPTIONSFILE=$$(mktemp -t portoptions); \
-	trap "${RM} -f $${TMPOPTIONSFILE}; exit 1" 1 2 3 5 10 13 15; \
+	trap "${RM} $${TMPOPTIONSFILE}; exit 1" 1 2 3 5 10 13 15; \
 	${ECHO_CMD} "# This file is auto-generated by 'make config'." > $${TMPOPTIONSFILE}; \
 	${ECHO_CMD} "# Options for ${PKGNAME}" >> $${TMPOPTIONSFILE}; \
 	${ECHO_CMD} "_OPTIONS_READ=${PKGNAME}" >> $${TMPOPTIONSFILE}; \
@@ -4793,7 +4800,7 @@ do-config:
 	else \
 		${CAT} $${TMPOPTIONSFILE} > ${OPTIONS_FILE}; \
 	fi; \
-	${RM} -f $${TMPOPTIONSFILE}
+	${RM} $${TMPOPTIONSFILE}
 	@cd ${.CURDIR} && ${MAKE} sanity-config
 .endif
 .endif # do-config
@@ -4878,11 +4885,11 @@ rmconfig:
 	optionsdir=${OPTIONS_FILE:H}; \
 	if [ ${UID} != 0 -a "x${INSTALL_AS_USER}" = "x" -a ! -w "${OPTIONS_FILE}" ]; then \
 		${ECHO_MSG} "===> Switching to root credentials to remove ${OPTIONS_FILE} and $${optionsdir}"; \
-		${SU_CMD} "${RM} -f ${OPTIONS_FILE} ; \
+		${SU_CMD} "${RM} ${OPTIONS_FILE} ; \
 			${RMDIR} $${optionsdir}"; \
 		${ECHO_MSG} "===> Returning to user credentials"; \
 	else \
-		${RM} -f ${OPTIONS_FILE}; \
+		${RM} ${OPTIONS_FILE}; \
 		${RMDIR} $${optionsdir} 2>/dev/null || return 0; \
 	fi
 .else

@@ -30,10 +30,6 @@ CONFIGURE_ARGS=	--with-rundir=/var/run/knot \
 		--with-storage=/var/db/knot \
 		--with-pkgconfigdir=${PREFIX}/libdata/pkgconfig
 
-.if defined(BATCH) || defined(PACKAGE_BUILDING)
-CONFIGURE_ARGS+=	--disable-silent-rules
-.endif
-
 INSTALL_TARGET=	install-strip
 
 USE_RC_SUBR=	${PORTNAME}
@@ -68,7 +64,7 @@ post-patch:
 		${WRKSRC}/src/Makefile.in
 	@${REINPLACE_CMD} 's|$$(INSTALL) -d $$(DESTDIR)/\@storage_dir\@|#$$(INSTALL) -d $$(DESTDIR)/\@storage_dir\@|' \
 		${WRKSRC}/src/Makefile.in
-	@${RM} -rf ${WRKSRC}/src/zscanner/scanner.c
+	@${RM} -r ${WRKSRC}/src/zscanner/scanner.c
 
 post-install:
 	${MV} ${STAGEDIR}${ETCDIR}/knot.sample.conf \

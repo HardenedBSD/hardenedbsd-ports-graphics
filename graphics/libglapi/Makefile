@@ -3,7 +3,7 @@
 
 PORTNAME=	libglapi
 PORTVERSION=	${MESAVERSION}
-PORTREVISION=	1
+PORTREVISION=	0
 CATEGORIES=	graphics
 
 COMMENT=	Common GL api library used by Mesa based ports
@@ -27,8 +27,8 @@ MESA_INSTALL_WRKSRC=	src/mapi
 .include "${.CURDIR}/../../graphics/libGL/Makefile.targets"
 
 post-install:
-	@${RM} -rf ${STAGEDIR}${PREFIX}/include/GLES*
-	@${RM} -f ${STAGEDIR}${PREFIX}/lib/libGLESv2.so*
-	@${RM} -f ${STAGEDIR}${PREFIX}/libdata/pkgconfig/glesv2.pc
+	@${RM} -r ${STAGEDIR}${PREFIX}/include/GLES*
+	@${RM} ${STAGEDIR}${PREFIX}/lib/libGLESv2.so*
+	@${RM} ${STAGEDIR}${PREFIX}/libdata/pkgconfig/glesv2.pc
 
 .include <bsd.port.mk>

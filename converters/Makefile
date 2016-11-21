@@ -59,6 +59,7 @@
     SUBDIR += ocaml-jsonm
     SUBDIR += osm2mp
     SUBDIR += osm2pgsql
+    SUBDIR += p5-Bencode
     SUBDIR += p5-Boulder
     SUBDIR += p5-Convert-ASCII-Armour
     SUBDIR += p5-Convert-ASN1
@@ -135,9 +136,6 @@
     SUBDIR += pecl-fribidi
     SUBDIR += pecl-igbinary
     SUBDIR += php5-bsdconv
-    SUBDIR += php55-iconv
-    SUBDIR += php55-mbstring
-    SUBDIR += php55-recode
     SUBDIR += php56-iconv
     SUBDIR += php56-mbstring
     SUBDIR += php56-recode

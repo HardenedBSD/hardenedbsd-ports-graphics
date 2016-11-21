@@ -3,6 +3,7 @@
 
 PORTNAME=	syslog-ng
 DISTVERSION=	3.8.1
+PORTREVISION=	1
 PKGNAMESUFFIX=	-devel
 CATEGORIES=	sysutils
 DISTFILES=	syslog-ng-${DISTVERSION}.tar.gz
@@ -11,7 +12,6 @@ MASTER_SITES=	https://github.com/balabit/syslog-ng/releases/download/syslog-ng-$
 MAINTAINER=	cy@FreeBSD.org
 COMMENT=	Powerful syslogd replacement
 
-BROKEN_powerpc64=	Does not build
 BROKEN_sparc64=		Does not compile on sparc64: gcc core dump
 
 LIB_DEPENDS=	libevtlog.so:sysutils/eventlog \
@@ -100,10 +100,10 @@ JAVA_PLIST_FILES= 		lib/syslog-ng/libmod-java.so \
 JAVA_MOD_CONFIGURE_ENABLE=	java-modules
 JAVA_MOD_BROKEN=		Unsupported maven downloads.
 JAVA_MOD_USE_JAVA=		yes
-JAVA_MOD_BUILD_DEPENDS=		gradle:devel/gradle
-JAVA_MOD_BUILD_DEPENDS=		bash:shells/bash
+JAVA_MOD_BUILD_DEPENDS=		gradle:devel/gradle \
+				bash:shells/bash
+JAVA_MOD_PLIST_DIRS=		lib/syslog-ng/java-modules/elastic-jest-client
 JAVA_MOD_PLIST_FILES=		lib/syslog-ng/java-modules/log4j-1.2.16.jar \
-				lib/syslog-ng/java-modules/elastic-jest-client \
 				lib/syslog-ng/java-modules/elastic-jest-client/jest-2.0.2.jar \
 				lib/syslog-ng/java-modules/elastic-jest-client/jest-common-2.0.2.jar \
 				lib/syslog-ng/java-modules/elastic-jest-client/httpcore-nio-4.4.4.jar \

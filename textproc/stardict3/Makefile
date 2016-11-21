@@ -8,8 +8,10 @@ CATEGORIES=	textproc
 MASTER_SITES=	GOOGLE_CODE
 DIST_SUBDIR=	stardict
 
-MAINTAINER=	makc@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Dictionary lookup program written in Gtk2
+
+BROKEN=		Unfetchable (google code has gone away)
 
 LIB_DEPENDS=	libsigc-2.0.so:devel/libsigc++20 \
 		libenchant.so:textproc/enchant

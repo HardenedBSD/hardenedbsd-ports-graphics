@@ -12,8 +12,6 @@ COMMENT=	Web based test management and test execution system
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BROKEN_powerpc64=	Does not build
-
 USES=		cpe
 CPE_VENDOR=	teamst
 USE_PHP=	gd iconv mbstring session xml
@@ -63,7 +61,7 @@ post-patch:
 	@${REINPLACE_CMD} -e 's|/var/testlink|${WWWDIR}|' ${WRKSRC}/config.inc.php
 	@${FIND} ${WRKSRC} -name "\.*" -delete
 	@${FIND} ${WRKSRC} -name "*.orig" -delete
-	@${RM} -rf ${WRKSRC}/.idea
+	@${RM} -r ${WRKSRC}/.idea
 
 do-install:
 	@${MKDIR} ${STAGEDIR}${WWWDIR}

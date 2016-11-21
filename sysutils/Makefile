@@ -27,10 +27,14 @@
     SUBDIR += aimage
     SUBDIR += aird
     SUBDIR += am-utils
+    SUBDIR += amazon-ssm-agent
     SUBDIR += amrstat
     SUBDIR += amtc
     SUBDIR += anacron
     SUBDIR += and
+    SUBDIR += android-file-transfer
+    SUBDIR += android-file-transfer-qt4
+    SUBDIR += android-file-transfer-qt5
     SUBDIR += ansible
     SUBDIR += ansible1
     SUBDIR += apachetop
@@ -143,6 +147,7 @@
     SUBDIR += cfengine38
     SUBDIR += cfengine39
     SUBDIR += chgrep
+    SUBDIR += chyves
     SUBDIR += cinnamon-control-center
     SUBDIR += cinnamon-settings-daemon
     SUBDIR += ciso
@@ -643,6 +648,7 @@
     SUBDIR += nfsping
     SUBDIR += nitrogen
     SUBDIR += no-login
+    SUBDIR += node_exporter
     SUBDIR += nomad
     SUBDIR += npadmin
     SUBDIR += nrg2iso
@@ -777,8 +783,6 @@
     SUBDIR += pftables
     SUBDIR += pftop
     SUBDIR += phantom
-    SUBDIR += php55-fileinfo
-    SUBDIR += php55-posix
     SUBDIR += php56-fileinfo
     SUBDIR += php56-posix
     SUBDIR += php70-fileinfo
@@ -831,6 +835,7 @@
     SUBDIR += py-crontab
     SUBDIR += py-danzfs
     SUBDIR += py-diffoscope
+    SUBDIR += py-dirsync
     SUBDIR += py-dlipower
     SUBDIR += py-drmaa
     SUBDIR += py-execnet
@@ -858,6 +863,7 @@
     SUBDIR += py-queuelib
     SUBDIR += py-ranger
     SUBDIR += py-salt
+    SUBDIR += py-scandir
     SUBDIR += py-shutilwhich
     SUBDIR += py-stdiff
     SUBDIR += py-supervisor
@@ -911,7 +917,6 @@
     SUBDIR += rsnapshot
     SUBDIR += rsyncbackup
     SUBDIR += rsyncrypto
-    SUBDIR += rsyslog7
     SUBDIR += rsyslog8
     SUBDIR += rtty
     SUBDIR += ruby-quota
@@ -999,6 +1004,7 @@
     SUBDIR += scan_ffs
     SUBDIR += scanbuttond
     SUBDIR += scanmem
+    SUBDIR += scct
     SUBDIR += schedutils
     SUBDIR += scprotect
     SUBDIR += screen
@@ -1122,6 +1128,7 @@
     SUBDIR += u-boot-pine64
     SUBDIR += u-boot-rpi
     SUBDIR += u-boot-rpi2
+    SUBDIR += u-boot-rpi3
     SUBDIR += u-boot-sinovoip-bpi-m3
     SUBDIR += u-boot-utilite
     SUBDIR += u-boot-wandboard

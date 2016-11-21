@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	doublecmd
-PORTVERSION=	0.7.4
+PORTVERSION=	0.7.5
 CATEGORIES=	x11-fm
 MASTER_SITES=	SF/${PORTNAME}/Double%20Commander%20Source
 DISTNAME=	${PORTNAME}-${PORTVERSION}-src
@@ -212,10 +212,10 @@ do-build:
 		${LAZBUILD_CMD} --ws=${LCL_PLATFORM} --bm="${BUILD_MODE}" --lazarusdir=${LAZARUS_DIR} ${PROJECT_FILE}
 
 post-build:
-	@${RM} -rf ${DOCSRC}/*/dev-help
+	@${RM} -r ${DOCSRC}/*/dev-help
 
 pre-install:
-	@${RM} -f ${PLIST}
+	@${RM} ${PLIST}
 
 	@${ECHO_CMD} "@dir %%DATADIR%%/plugins/wcx" >> ${PLIST}
 	@${ECHO_CMD} "@dir %%DATADIR%%/plugins/wdx" >> ${PLIST}

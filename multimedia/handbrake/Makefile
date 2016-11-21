@@ -3,6 +3,7 @@
 
 PORTNAME=	handbrake
 PORTVERSION=	0.10.5
+PORTREVISION=	2
 CATEGORIES=	multimedia
 MASTER_SITES=	http://download.handbrake.fr/releases/${PORTVERSION}/ \
 		http://download.handbrake.fr/handbrake/contrib/:contrib \
@@ -51,7 +52,7 @@ LIB_DEPENDS+=	libdvdcss.so.2:multimedia/libdvdcss
 
 GNU_CONFIGURE=	yes
 USES=		autoreconf:build compiler:features gmake iconv \
-		libtool:build localbase pkgconfig python:build
+		libtool:build localbase:ldflags pkgconfig python:build
 
 WRKSRC=		${WRKDIR}/HandBrake-${PORTVERSION}
 PLIST_FILES=	bin/HandBrakeCLI

@@ -1,9 +1,15 @@
-These functions are copied from the xorg-server.
-http://lists.x.org/archives/xorg-devel/2016-January/048421.html
-
---- src/intel_list.h.orig	2014-08-29 11:33:11.000000000 +0200
-+++ src/intel_list.h	2016-01-06 14:03:26.792064000 +0100
-@@ -326,12 +326,14 @@
+--- src/intel_list.h.orig	2015-12-10 23:29:35.000000000 +0100
++++ src/intel_list.h	2016-10-24 10:22:57.280379000 +0200
+@@ -306,7 +306,7 @@
+     list_entry((ptr)->prev, type, member)
+ 
+ #define __container_of(ptr, sample, member)				\
+-    (void *)((char *)(ptr) - ((char *)&(sample)->member - (char *)(sample)))
++    (typeof(sample))((char *)(ptr) - (offsetof(typeof(*sample),member)))
+ /**
+  * Loop through the list given by head and set pos to struct in the list.
+  *
+@@ -325,12 +325,14 @@
   *
   */
  #define list_for_each_entry(pos, head, member)				\
@@ -21,7 +27,7 @@ http://lists.x.org/archives/xorg-devel/2016-January/048421.html
  	 &pos->member != (head);					\
  	 pos = __container_of(pos->member.prev, pos, member))
  
-@@ -343,7 +345,8 @@
+@@ -342,7 +344,8 @@
   * See list_for_each_entry for more details.
   */
  #define list_for_each_entry_safe(pos, tmp, head, member)		\

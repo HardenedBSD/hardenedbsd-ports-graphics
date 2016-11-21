@@ -30,6 +30,7 @@
     SUBDIR += cfortran
     SUBDIR += chibi-scheme
     SUBDIR += chicken
+    SUBDIR += cilkplus
     SUBDIR += cint
     SUBDIR += cjs
     SUBDIR += clang-devel
@@ -154,6 +155,7 @@
     SUBDIR += librep
     SUBDIR += libstdc++_stldoc_4.2.2
     SUBDIR += linux-c6-tcl85
+    SUBDIR += linux-c7-tcl85
     SUBDIR += linux-f10-libg2c
     SUBDIR += linux-f10-tcl85
     SUBDIR += linux-j
@@ -245,8 +247,6 @@
     SUBDIR += pharo
     SUBDIR += phc
     SUBDIR += php-mode.el
-    SUBDIR += php55
-    SUBDIR += php55-extensions
     SUBDIR += php56
     SUBDIR += php56-extensions
     SUBDIR += php70
@@ -283,6 +283,7 @@
     SUBDIR += racket
     SUBDIR += racket-minimal
     SUBDIR += ratfor
+    SUBDIR += referenceassemblies-pcl
     SUBDIR += rexx-imc
     SUBDIR += rexx-regina
     SUBDIR += rexx-regutil
@@ -317,7 +318,6 @@
     SUBDIR += smalltalk
     SUBDIR += smlnj
     SUBDIR += snobol4
-    SUBDIR += spark
     SUBDIR += spidermonkey17
     SUBDIR += spidermonkey170
     SUBDIR += spidermonkey185

@@ -7,8 +7,10 @@ PORTREVISION=	12
 CATEGORIES=	games
 MASTER_SITES=	GOOGLE_CODE
 
-MAINTAINER=	makc@FreeBSD.org
+MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Side-scroller game similar to Super Mario Brothers
+
+BROKEN=		Unfetchable (google code has gone away)
 
 USES=		gmake tar:bzip2
 USE_SDL=	image mixer

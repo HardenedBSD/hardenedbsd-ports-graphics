@@ -151,6 +151,8 @@ include/clc/math/fmod.h
 include/clc/math/fmod.inc
 include/clc/math/fract.h
 include/clc/math/fract.inc
+include/clc/math/frexp.h
+include/clc/math/frexp.inc
 include/clc/math/gentype.inc
 include/clc/math/half_rsqrt.h
 include/clc/math/half_sqrt.h
@@ -167,6 +169,8 @@ include/clc/math/log2.h
 include/clc/math/log2.inc
 include/clc/math/mad.h
 include/clc/math/mad.inc
+include/clc/math/modf.h
+include/clc/math/modf.inc
 include/clc/math/native_cos.h
 include/clc/math/native_divide.h
 include/clc/math/native_exp.h
@@ -244,12 +248,15 @@ lib/clc/aruba-r600--.bc
 lib/clc/barts-r600--.bc
 lib/clc/bonaire-amdgcn--.bc
 lib/clc/caicos-r600--.bc
+lib/clc/carrizo-amdgcn--.bc
 lib/clc/cayman-r600--.bc
 lib/clc/cedar-r600--.bc
 lib/clc/cypress-r600--.bc
+lib/clc/fiji-amdgcn--.bc
 lib/clc/hainan-amdgcn--.bc
 lib/clc/hawaii-amdgcn--.bc
 lib/clc/hemlock-r600--.bc
+lib/clc/iceland-amdgcn--.bc
 lib/clc/juniper-r600--.bc
 lib/clc/kabini-amdgcn--.bc
 lib/clc/kaveri-amdgcn--.bc
@@ -260,11 +267,13 @@ lib/clc/oland-amdgcn--.bc
 lib/clc/palm-r600--.bc
 lib/clc/pitcairn-amdgcn--.bc
 lib/clc/redwood-r600--.bc
+lib/clc/stoney-amdgcn--.bc
 lib/clc/subnormal_disable.bc
 lib/clc/subnormal_use_default.bc
 lib/clc/sumo-r600--.bc
 lib/clc/sumo2-r600--.bc
 lib/clc/tahiti-amdgcn--.bc
+lib/clc/tonga-amdgcn--.bc
 lib/clc/turks-r600--.bc
 lib/clc/verde-amdgcn--.bc
 libdata/pkgconfig/libclc.pc

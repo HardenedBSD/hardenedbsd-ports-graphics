@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	phpbb
-PORTVERSION=	3.1.9
+PORTVERSION=	3.1.10
 CATEGORIES=	www
 MASTER_SITES=	https://www.phpbb.com/files/release/
 PKGNAMESUFFIX=	3
@@ -17,6 +17,7 @@ CONFLICTS=	phpbb-tw-[0-9]* phpbb-devel-[0-9]* \
 		phpbb-[0-2]*
 
 USES=		php tar:bzip2
+USE_PHP=	ctype hash json
 
 OPTIONS_DEFINE=	DOCS
 

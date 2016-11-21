@@ -19,11 +19,11 @@ BUILD_DEPENDS=	${LOCALBASE}/share/ECM/cmake/ECMConfig.cmake:devel/extra-cmake-mo
 
 WRKSRC=		${WRKDIR}/${DISTNAME:S/-backend//}
 
-USES=		cmake pkgconfig tar:xz
+USES=		cmake:outsource pkgconfig tar:xz
 USE_GL=		gl
 USE_GNOME=	glib20 libxml2
 USE_GSTREAMER1=	yes
-USE_QT5=	buildtools_build qmake_build core gui opengl phonon widgets \
+USE_QT5=	buildtools_build qmake_build core gui opengl phonon4 widgets \
 		x11extras
 CMAKE_ARGS=	-DPHONON_BUILD_PHONON4QT5=ON
 
