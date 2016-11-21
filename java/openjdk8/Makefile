@@ -25,7 +25,8 @@ PATCHFILES=	patch-8u05-b13.xz \
 		patch-8u74-b02.xz \
 		patch-8u77-b03.xz \
 		patch-8u92-b14.xz \
-		patch-8u102-b14.xz
+		patch-8u102-b14.xz \
+		patch-8u112-b16.xz
 
 MAINTAINER=	java@FreeBSD.org
 COMMENT?=	Java Development Kit ${JDK_MAJOR_VERSION}
@@ -203,8 +204,8 @@ NO_CCACHE=		yes
 NOPRECIOUSMAKEVARS=	yes
 
 JDK_MAJOR_VERSION=	8
-JDK_UPDATE_VERSION=	102
-JDK_BUILD_NUMBER=	14
+JDK_UPDATE_VERSION=	112
+JDK_BUILD_NUMBER=	16
 DIST_BUILD_NUMBER=	132
 JTREG_VERSION=		4.1
 JTREG_BUILD_NUMBER=	b08
@@ -417,7 +418,7 @@ post-build:
 
 post-build-TZUPDATE-on:
 	@# Update time zones
-	@${RM} -rf ${JRE_IMAGEDIR}/lib/zi
+	@${RM} -r ${JRE_IMAGEDIR}/lib/zi
 	@${LN} -sf ${LOCALBASE}/share/java/zi ${JRE_IMAGEDIR}/lib
 
 do-install:

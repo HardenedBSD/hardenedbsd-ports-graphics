@@ -20,7 +20,6 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	wojtekka
 
 USES=		autoreconf gmake libtool localbase pathfix pkgconfig
-PATHFIX_MAKEFILEIN=	Makefile.am
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--enable-shared --disable-static --with-pthread \
 		--disable-tests --without-gnutls
@@ -37,7 +36,7 @@ OPTIONS_DEFINE=	OPENSSL
 OPTIONS_DEFAULT=OPENSSL
 
 OPENSSL_CONFIGURE_WITH=	openssl
-OPENSSL_USE=		OPENSSL=yes
+OPENSSL_USES=		ssl
 
 pre-install-OPENSSL-on:
 # OpenSSL from base system lacks .pc file for pkgconfig

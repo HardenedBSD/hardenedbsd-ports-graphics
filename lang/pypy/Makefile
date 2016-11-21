@@ -2,9 +2,10 @@
 # $FreeBSD$
 
 PORTNAME?=	pypy
-DISTVERSION?=	5.3.1	# Also update bsd.pypy.cffi.mk
+DISTVERSION?=	5.4.1	# Also update bsd.pypy.cffi.mk
+PORTREVISION?=	1
 CATEGORIES=	lang python
-MASTER_SITES=	https://bitbucket.org/pypy/pypy/downloads/
+MASTER_SITES=	https://bitbucket.org/pypy/pypy/downloads/ http://buildbot.pypy.org/mirror/
 DISTNAME?=	${PORTNAME}2-v${PORTVERSION}-src
 
 MAINTAINER=	python@FreeBSD.org
@@ -52,13 +53,18 @@ PYPY_VARS=	PYTHON_CMD=${LOCALBASE}/bin/pypy
 PYPY_MINMEM_VARS=	PYTHON_CMD="${SETENV} PYPY_GC_MAX_DELTA=200MB ${LOCALBASE}/bin/pypy --jit loop_longevity=300"
 PYTHON_USES=	python:2,build
 
+DESCR=		${.CURDIR}/pkg-descr
 DISTINFO_FILE=	${.CURDIR}/distinfo
 MASTERDIR?=	${.CURDIR}
 PATCHDIR=	${.CURDIR}/files
 PLIST=		${.CURDIR}/pkg-plist
 
 .include "${MASTERDIR}/bsd.pypy.mk"
-.include <bsd.port.options.mk>
+.include <bsd.port.pre.mk>
+
+.if ${SSL_DEFAULT:Mlibressl*}
+IGNORE=	Detected LibreSSL which is interpreted as unsupported OpenSSL > v1.1
+.endif
 
 .if ${ARCH} == "i386" || ${ARCH} == "armv6"
 PYPY_BITS=	32
@@ -116,4 +122,4 @@ pkg-plist: build
 	${SORT} ${WRKDIR}/.plist-files-gen >> ${WRKDIR}/pkg-plist
 	${CP} ${WRKDIR}/pkg-plist ${.CURDIR}/pkg-plist
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

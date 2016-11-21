@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	nginx
-PORTVERSION=	1.10.1
+PORTVERSION=	1.10.2
 PORTREVISION=	1
 PORTEPOCH=	2
 CATEGORIES=	www
@@ -78,6 +78,7 @@ OPTIONS_DEFINE=	\
 	HTTP_EVAL \
 	HTTP_FANCYINDEX \
 	HTTP_FOOTER \
+	HTTP_GEOIP2 \
 	HTTP_JSON_STATUS \
 	HTTP_MOGILEFS \
 	HTTP_MP4_H264 \
@@ -122,6 +123,7 @@ OPTIONS_DEFINE=	\
 	SRCACHE \
 	STATSD \
 	UDPLOG \
+	X11 \
 	XRID_HEADER \
 	XSS
 
@@ -185,6 +187,7 @@ HTTP_DAV_EXT_DESC=		3rd party webdav_ext module
 HTTP_EVAL_DESC=			3rd party eval module
 HTTP_FANCYINDEX_DESC=		3rd party http_fancyindex module
 HTTP_FOOTER_DESC=		3rd party http_footer module
+HTTP_GEOIP2_DESC=		3rd party geoip2 module
 HTTP_JSON_STATUS_DESC=		3rd party http_json_status module
 HTTP_MOGILEFS_DESC=		3rd party mogilefs module
 HTTP_MP4_H264_DESC=		3rd party mp4/h264 module
@@ -229,6 +232,7 @@ SMALL_LIGHT_DESC=		3rd party small_light module
 SRCACHE_DESC=			3rd party srcache module
 STATSD_DESC=			3rd party statsd module
 UDPLOG_DESC=			3rd party udplog (syslog) module
+X11_DESC=			graphics/ImageMagick[-nox11] dependency
 XRID_HEADER_DESC=		3rd party x-rid header module
 XSS_DESC=			3rd party xss module
 VIDEO_DESC=			Video module support
@@ -236,6 +240,12 @@ VIDEO_DESC=			Video module support
 WANT_GNOME=	yes
 
 .include <bsd.port.options.mk>
+
+.if ${PORT_OPTIONS:MX11}
+IMAGEMAGICK_LIB_DEPENDS= libMagickWand-6.so:graphics/ImageMagick
+.else
+IMAGEMAGICK_LIB_DEPENDS= libMagickWand-6.so:graphics/ImageMagick-nox11
+.endif
 
 .if ${PORT_OPTIONS:MPASSENGER}
 CATEGORIES+=	ruby
@@ -245,13 +255,13 @@ RAKE_BIN=	${LOCALBASE}/bin/rake
 .endif
 
 NGINX_VARDIR?=	/var
-NGINX_LOGDIR?=	${NGINX_VARDIR}/log
+NGINX_LOGDIR?=	${NGINX_VARDIR}/log/nginx
 NGINX_RUNDIR?=	${NGINX_VARDIR}/run
 NGINX_TMPDIR?=	${NGINX_VARDIR}/tmp/nginx
 HTTP_PORT?=	80
 
-NGINX_ACCESSLOG?=	${NGINX_LOGDIR}/nginx-access.log
-NGINX_ERRORLOG?=	${NGINX_LOGDIR}/nginx-error.log
+NGINX_ACCESSLOG?=	${NGINX_LOGDIR}/access.log
+NGINX_ERRORLOG?=	${NGINX_LOGDIR}/error.log
 
 CONFLICTS?=	nginx-devel-1.*
 USE_RC_SUBR=	nginx
@@ -446,7 +456,7 @@ CONFIGURE_ARGS+=--add-module=${WRKSRC_echo}
 .endif
 
 .if ${PORT_OPTIONS:MHEADERS_MORE}
-NGINX_HEADERS_MORE_VERSION=	f5559ec
+NGINX_HEADERS_MORE_VERSION=	84241e4
 GH_ACCOUNT+=	openresty:headers_more
 GH_PROJECT+=	headers-more-nginx-module:headers_more
 GH_TAGNAME+=	${NGINX_HEADERS_MORE_VERSION}:headers_more
@@ -499,12 +509,26 @@ GH_TAGNAME+=	${NGINX_FOOTER_VERSION}:footer
 CONFIGURE_ARGS+=--add-module=${WRKSRC_footer}
 .endif
 
+.if ${PORT_OPTIONS:MHTTP_GEOIP2}
+# WWW: https://github.com/leev/ngx_http_geoip2_module
+NGINX_HTTP_GEOIP2_VERSION=	2.0
+GH_ACCOUNT+=	leev:geoip2
+GH_PROJECT+=	ngx_http_geoip2_module:geoip2
+GH_TAGNAME+=	${NGINX_HTTP_GEOIP2_VERSION}:geoip2
+.if !empty(PORT_OPTIONS:MDSO)
+CONFIGURE_ARGS+=--add-dynamic-module=${WRKSRC_geoip2}
+.else
+CONFIGURE_ARGS+=--add-module=${WRKSRC_geoip2}
+.endif
+LIB_DEPENDS+=	libmaxminddb.so:net/libmaxminddb
+.endif
+
 .if ${PORT_OPTIONS:MHTTP_FLV}
 CONFIGURE_ARGS+=--with-http_flv_module
 .endif
 
 .if ${PORT_OPTIONS:MHTTP_JSON_STATUS}
-NGINX_JSON_STATUS_VERSION= 1d2f303
+NGINX_JSON_STATUS_VERSION=	1d2f303
 GH_ACCOUNT+=	nginx-modules:json_status
 GH_PROJECT+=	ngx_http_json_status_module:json_status
 GH_TAGNAME+=	${NGINX_JSON_STATUS_VERSION}:json_status
@@ -657,7 +681,7 @@ CONFIGURE_ARGS+=--with-http_sub_module
 .endif
 
 .if ${PORT_OPTIONS:MHTTP_UPLOAD}
-GIT_UPLOAD_VERSION= aba1e3f34c
+GIT_UPLOAD_VERSION=	aba1e3f34c
 GH_ACCOUNT+=	vkholodkov:upload
 GH_PROJECT+=	nginx-upload-module:upload
 GH_TAGNAME+=	${GIT_UPLOAD_VERSION}:upload
@@ -698,10 +722,10 @@ EXTRA_PATCHES+=	${PATCHDIR}/extra-patch-ngx_http_upstream_fair_module.c
 
 .if ${PORT_OPTIONS:MHTTP_UPSTREAM_STICKY}
 USE_HTTP_SSL=	yes
-NGINX_UPSTREAM_STICKY_VERSION=	1.2.4
+NGINX_UPSTREAM_STICKY_VERSION=	08a395c66e42
 MASTER_SITES+=	https://bitbucket.org/nginx-goodies/nginx-sticky-module-ng/get/:upstreamsticky
 DISTFILES+=	${NGINX_UPSTREAM_STICKY_VERSION}.tar.gz:upstreamsticky
-CONFIGURE_ARGS+=--add-module=${WRKDIR}/nginx-goodies-nginx-sticky-module-ng-c825ea7c5c91/
+CONFIGURE_ARGS+=--add-module=${WRKDIR}/nginx-goodies-nginx-sticky-module-ng-${NGINX_UPSTREAM_STICKY_VERSION}/
 .endif
 
 .if ${PORT_OPTIONS:MHTTP_VIDEO_THUMBEXTRACTOR}
@@ -711,7 +735,7 @@ LIB_DEPENDS+= 	libjpeg.so:graphics/jpeg \
 		libavcodec.so:multimedia/ffmpeg \
 		libavutil.so:multimedia/ffmpeg \
 		libswscale.so:multimedia/ffmpeg \
-		libMagickWand-6.so:graphics/ImageMagick
+		${IMAGEMAGICK_LIB_DEPENDS}
 GH_ACCOUNT+=	wandenberg:vte
 GH_PROJECT+=	nginx-video-thumbextractor-module:vte
 GH_TAGNAME+=	${NGINX_VIDEO_THUMBEXTRACTOR_VERSION}:vte
@@ -729,9 +753,10 @@ CONFIGURE_ARGS+=--with-http_xslt_module
 .endif
 
 .if ${PORT_OPTIONS:MHTTP_ZIP}
-NGINX_ZIP_VERSION=	1.1.6
-MASTER_SITES+=	http://mod-zip.googlecode.com/files/:zip
-DISTFILES+=	mod_zip-${NGINX_ZIP_VERSION}.tar.gz:zip
+NGINX_ZIP_VERSION=	ca0b345
+GH_ACCOUNT+=	evanmiller:mod_zip
+GH_PROJECT+=	mod_zip:mod_zip
+GH_TAGNAME+=	${NGINX_ZIP_VERSION}:mod_zip
 CONFIGURE_ARGS+=--add-module=${WRKDIR}/mod_zip-${NGINX_ZIP_VERSION}
 .endif
 
@@ -794,7 +819,7 @@ CONFIGURE_ARGS+=--add-module=${WRKSRC_let}
 LIB_DEPENDS+=	libluajit-5.1.so:lang/luajit
 CONFIGURE_ENV+=	"LUAJIT_INC=${LOCALBASE}/include/luajit-2.0"
 CONFIGURE_ENV+=	"LUAJIT_LIB=${LOCALBASE}/lib"
-NGINX_LUA_VERSION=	0.10.6rc1
+NGINX_LUA_VERSION=	0.10.6
 GH_ACCOUNT+=	openresty:lua
 GH_PROJECT+=	lua-nginx-module:lua
 GH_TAGNAME+=	v${NGINX_LUA_VERSION}:lua
@@ -806,7 +831,7 @@ CONFIGURE_ARGS+=--add-module=${WRKSRC_lua}
 .endif
 
 .if ${PORT_OPTIONS:MMEMC}
-NGINX_MEMC_VERSION=	0.16
+NGINX_MEMC_VERSION=	0.17
 GH_ACCOUNT+=	openresty:memc
 GH_PROJECT+=	memc-nginx-module:memc
 GH_TAGNAME+=	v${NGINX_MEMC_VERSION}:memc
@@ -942,8 +967,7 @@ CONFIGURE_ARGS+=--add-module=${WRKDIR}/ngx_slowfs_cache-${NGINX_SLOWFS_CACHE_VER
 
 .if ${PORT_OPTIONS:MSMALL_LIGHT}
 NGINX_SMALL_LIGHT_VERSION=	0.8.0
-LIB_DEPENDS+=	libMagickCore-6.so:graphics/ImageMagick \
-		libMagickWand-6.so:graphics/ImageMagick \
+LIB_DEPENDS+=	${IMAGEMAGICK_LIB_DEPENDS} \
 		libpcre.so:devel/pcre
 GH_ACCOUNT+=	cubicdaiya:small_light
 GH_PROJECT+=	ngx_small_light:small_light
@@ -1106,7 +1130,7 @@ CONFIGURE_ARGS+=--add-module=${WRKSRC_iconv}
 EXTRA_PATCHES+=	${PATCHDIR}/extra-patch-calio-iconv-nginx-module-config
 .endif
 
-PLIST_SUB+=	NGINX_TMPDIR=${NGINX_TMPDIR} WWWOWN=${WWWOWN} WWWGRP=${WWWGRP}
+PLIST_SUB+=	NGINX_TMPDIR=${NGINX_TMPDIR} NGINX_LOGDIR=${NGINX_LOGDIR} WWWOWN=${WWWOWN} WWWGRP=${WWWGRP}
 
 USERS?=	${WWWOWN}
 GROUPS?=${WWWGRP}
@@ -1136,7 +1160,8 @@ post-extract:
 
 post-patch:
 	@${REINPLACE_CMD} 's!%%HTTP_PORT%%!${HTTP_PORT}!; \
-		s!%%PREFIX%%!${PREFIX}!' \
+		s!%%PREFIX%%!${PREFIX}!; \
+		s!%%NGINX_ERRORLOG%%!${NGINX_ERRORLOG}!' \
 		${WRKSRC}/conf/nginx.conf
 .if ${PORT_OPTIONS:MHTTP_ACCESSKEY}
 	@${REINPLACE_CMD} \
@@ -1242,6 +1267,7 @@ do-install:
 	${MKDIR} ${STAGEDIR}${MODULESDIR}
 .endif
 	${MKDIR} ${STAGEDIR}${NGINX_TMPDIR}
+	${MKDIR} ${STAGEDIR}${NGINX_LOGDIR}
 	${INSTALL_PROGRAM} ${WRKSRC}/objs/nginx ${STAGEDIR}${PREFIX}/sbin
 .for i in koi-utf koi-win win-utf
 	${INSTALL_DATA} ${WRKSRC}/conf/${i} ${STAGEDIR}${ETCDIR}

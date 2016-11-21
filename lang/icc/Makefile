@@ -21,16 +21,18 @@ EXTRACT_DEPENDS=	rpm2cpio.pl:archivers/rpm2cpio
 
 RESTRICTED=	Intel forbids any redistribution.
 
+USES=		linux
+USE_LINUX=	base
+
 PATCHLEVEL=	${PORTVERSION:C/(.+p)(.+)$/pe\2/}
 .if ${PORTVERSION} != ${PATCHLEVEL}
 DISTFILES+=	${DISTNAME} ${PATCHLEVEL}${EXTRACT_SUFX}
-PATCH_DEPENDS=	${LINUX_BASE_PORT}
+USE_LINUX+=	base:patch
 .endif
 
 ONLY_FOR_ARCHS=	i386
 
 USE_LDCONFIG=	yes
-USE_LINUX=	yes
 
 COMPILERDIR=	intel_cc_80
 PLIST_SUB=	COMPILERDIR=${COMPILERDIR}
@@ -69,7 +71,7 @@ IGNORE=	go to Intel Premier Support \(https://premier.intel.com/\) to obtain ${D
 .endfor
 
 .if exists(${LINUXBASE}/boot/kernel.h)
-BROKEN=	Cannot coexist with linux_devtools.
+BROKEN=	cannot coexist with linux_devtools
 .endif
 
 post-extract:
@@ -86,14 +88,12 @@ intel-patch: extract
 pre-patch: intel-patch
 # Remove files we do not need on FreeBSD.
 	for i in `${CAT} ${FILESDIR}/exclude`; do \
-		${RM} -rf ${WRKSRC}/opt/${COMPILERDIR}/$$i; done
+		${RM} -r ${WRKSRC}/opt/${COMPILERDIR}/$$i; done
 .if ! ${PORT_OPTIONS:MDOCS}
 # Remove docs.
 	for i in `${CAT} ${FILESDIR}/exclude_noportdocs`; do \
-		${RM} -rf ${WRKSRC}/opt/${COMPILERDIR}/$$i; done
+		${RM} -r ${WRKSRC}/opt/${COMPILERDIR}/$$i; done
 .endif
-# Allow everyone to use it.
-	${CHMOD} a+rx ${WRKSRC}/opt
 # Remove unneeded/unsafe access rights.
 .for i in doc include lib
 	${FIND} ${WRKSRC}/opt/${COMPILERDIR}/${i} -type f -print0 | \
@@ -162,7 +162,6 @@ do-build:
 	${CC} ${CFLAGS} -o \
 		${WRKSRC}/opt/${COMPILERDIR}/bin/ldwrapper/ld \
 		${FILESDIR}/ld.c
-# We can't use STRIP_CMD, since we need the FreeBSD one, not the Linux one.
 	${STRIP_CMD} ${WRKSRC}/opt/${COMPILERDIR}/bin/ldwrapper/ld
 	${CHMOD} 755 ${WRKSRC}/opt/${COMPILERDIR}/bin/ldwrapper/ld
 # Make ICC happy with regards to crtbegin.o, crtend.o and libgcc.a which it
@@ -179,17 +178,17 @@ do-install:
 		${CPIO} -pdu --quiet ${STAGEDIR}${PREFIX}
 
 	${MV} ${STAGEDIR}${PREFIX}/${COMPILERDIR}/man/man1/icc.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
-	${RM} -rf ${STAGEDIR}${PREFIX}/${COMPILERDIR}/man
+	${RM} -r ${STAGEDIR}${PREFIX}/${COMPILERDIR}/man
 
 .if ${PORT_OPTIONS:MDOCS}
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	cd ${WRKSRC} && ${INSTALL_DATA} ${DOCS} ${STAGEDIR}${DOCSDIR}
 	${MV} ${STAGEDIR}${PREFIX}/${COMPILERDIR}/doc/* ${STAGEDIR}${DOCSDIR}
-	${RM} -rf ${STAGEDIR}${PREFIX}/${COMPILERDIR}/doc
+	${RM} -r ${STAGEDIR}${PREFIX}/${COMPILERDIR}/doc
 .else
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${MV} ${STAGEDIR}${PREFIX}/${COMPILERDIR}/doc/* ${STAGEDIR}${DOCSDIR}
-	${RM} -rf ${STAGEDIR}${PREFIX}/${COMPILERDIR}/doc
+	${RM} -r ${STAGEDIR}${PREFIX}/${COMPILERDIR}/doc
 .endif
 
 .include <bsd.port.post.mk>

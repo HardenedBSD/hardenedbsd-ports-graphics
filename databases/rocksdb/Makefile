@@ -15,8 +15,6 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 LIB_DEPENDS=	libgflags.so:devel/gflags \
 		libsnappy.so:archivers/snappy
 
-BROKEN_powerpc64=	does not build
-
 OPTIONS_DEFINE=	DEBUG
 
 ALL_TARGET=	shared_lib static_lib all
@@ -24,7 +22,7 @@ CPPFLAGS+=	-DOS_FREEBSD
 MAKE_ENV=	CXX=${CXX}
 USE_CXXSTD=	c++11
 USE_LDCONFIG=	yes
-USES=		compiler:c++11-lib gmake localbase
+USES=		compiler:c++11-lib gmake localbase:ldflags
 
 PORTDATA=	make_config.mk
 
@@ -32,7 +30,10 @@ GH_ACCOUNT=	facebook
 USE_GITHUB=	yes
 
 BROKEN_DragonFly=	does not build on DragonFly BSD using GCC with -Werror
-BROKEN_sparc64=	cannot build: uses unknown compiler flags
+BROKEN_aarch64=		does not build: the clang compiler does not support -march=native
+BROKEN_armv6=		does not build: the clang compiler does not support -march=native
+BROKEN_powerpc64=	does not build
+BROKEN_sparc64=		cannot build: uses unknown compiler flags
 
 BENCHMARKS=	cache_bench db_bench memtablerep_bench table_reader_bench
 TOOLS=		db_repl_stress db_sanity_test db_stress ldb rocksdb_dump rocksdb_undump sst_dump write_stress

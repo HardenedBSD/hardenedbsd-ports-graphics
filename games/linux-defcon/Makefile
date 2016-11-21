@@ -3,6 +3,7 @@
 
 PORTNAME=	defcon
 PORTVERSION=	1.42
+PORTREVISION=	2
 CATEGORIES=	games linux
 MASTER_SITES=	http://download.introversion.co.uk/defcon/linux/
 PKGNAMEPREFIX=	linux-
@@ -12,35 +13,22 @@ MAINTAINER=	mva@FreeBSD.org
 COMMENT=	Defcon for Linux
 
 ONLY_FOR_ARCHS=	i386 amd64
-USE_LINUX=	yes
-USE_LINUX_APPS=	sdl12 libogg libvorbis xorglibs
+USES=		linux
+USE_LINUX=	dri libogg libvorbis sdl12 xorglibs
 NO_CDROM=	Redistribution is limited, see license
 NO_BUILD=	yes
 
 DATADIR=	${PREFIX}/lib/${PKGNAMEPREFIX}${PORTNAME}
 SUB_FILES=	defcon
 
-OPTIONS_DEFINE=	NVIDIA DOCS
-NVIDIA_DESC=	support for nvidia
-
-.include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MNVIDIA}
-RUN_DEPENDS+=	${LINUXBASE}/usr/lib/libGL.so.1:x11/nvidia-driver
-USE_LINUX_APPS+=libglu
-.else
-USE_LINUX_APPS+=dri
-.endif
-
-do-build:
-	${BRANDELF} -t Linux ${WRKSRC}/lib/defcon.bin.x86
+OPTIONS_DEFINE=	DOCS
 
 do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	@cd ${WRKSRC}/lib && \
 		${INSTALL_PROGRAM} defcon.bin.x86 ${STAGEDIR}${DATADIR} && \
 		${INSTALL_DATA} *.dat open-www.sh ${STAGEDIR}${DATADIR}
-	${INSTALL_PROGRAM} ${WRKDIR}/defcon \
+	${INSTALL_SCRIPT} ${WRKDIR}/defcon \
 		${STAGEDIR}${PREFIX}/bin/${PKGNAMEPREFIX}defcon
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_DATA} ${WRKSRC}/license.txt ${STAGEDIR}${DOCSDIR}/license.txt

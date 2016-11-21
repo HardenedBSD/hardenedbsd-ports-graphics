@@ -154,6 +154,7 @@
     SUBDIR += erwn
     SUBDIR += eventum
     SUBDIR += extjs
+    SUBDIR += fabio
     SUBDIR += fancybox
     SUBDIR += faup
     SUBDIR += fcgi
@@ -208,6 +209,7 @@
     SUBDIR += google-appengine
     SUBDIR += google-sitemapgen
     SUBDIR += googlebook_dl
+    SUBDIR += googler
     SUBDIR += goose
     SUBDIR += gotty
     SUBDIR += gpx2map
@@ -308,7 +310,6 @@
     SUBDIR += httpsqs
     SUBDIR += httptunnel
     SUBDIR += httrack
-    SUBDIR += hydra
     SUBDIR += hypermail
     SUBDIR += igal2
     SUBDIR += ikiwiki
@@ -335,6 +336,10 @@
     SUBDIR += kannel-sqlbox
     SUBDIR += kcgi
     SUBDIR += kdewebdev4
+    SUBDIR += kf5-kdewebkit
+    SUBDIR += kf5-khtml
+    SUBDIR += kf5-kjs
+    SUBDIR += kf5-kjsembed
     SUBDIR += kohana
     SUBDIR += kpartsplugin
     SUBDIR += kplaylist
@@ -350,13 +355,13 @@
     SUBDIR += libhpack
     SUBDIR += libhtp-suricata
     SUBDIR += libhubbub
+    SUBDIR += libjwt
     SUBDIR += libmicrohttpd
     SUBDIR += libsocialweb
     SUBDIR += libwww
     SUBDIR += libxul
     SUBDIR += lightsquid
     SUBDIR += lighttpd
-    SUBDIR += lighttpd-mod_geoip
     SUBDIR += lighttpd-mod_h264_streaming
     SUBDIR += lilurl
     SUBDIR += limesurvey
@@ -367,7 +372,11 @@
     SUBDIR += links-hacked
     SUBDIR += links1
     SUBDIR += linux-c6-flashplugin11
+    SUBDIR += linux-c6-flashplugin24
     SUBDIR += linux-c6-qt47-webkit
+    SUBDIR += linux-c7-flashplugin11
+    SUBDIR += linux-c7-flashplugin24
+    SUBDIR += linux-c7-qtwebkit
     SUBDIR += linux-f10-flashplugin11
     SUBDIR += linux-firefox
     SUBDIR += linux-opera
@@ -389,8 +398,6 @@
     SUBDIR += mathjax
     SUBDIR += mathopd
     SUBDIR += mediawiki123
-    SUBDIR += mediawiki124
-    SUBDIR += mediawiki125
     SUBDIR += mediawiki126
     SUBDIR += mediawiki127
     SUBDIR += mergelog
@@ -401,6 +408,7 @@
     SUBDIR += midori
     SUBDIR += mimetex
     SUBDIR += mini_httpd
+    SUBDIR += minio
     SUBDIR += mitmproxy
     SUBDIR += mkapachepw
     SUBDIR += mknmz-wwwoffle
@@ -411,6 +419,7 @@
     SUBDIR += mod_auth_cas
     SUBDIR += mod_auth_cookie_mysql2
     SUBDIR += mod_auth_external2
+    SUBDIR += mod_auth_gssapi
     SUBDIR += mod_auth_imap2
     SUBDIR += mod_auth_kerb2
     SUBDIR += mod_auth_mysql2
@@ -470,7 +479,6 @@
     SUBDIR += mod_myvhost
     SUBDIR += mod_ntlm2
     SUBDIR += mod_perl2
-    SUBDIR += mod_php55
     SUBDIR += mod_php56
     SUBDIR += mod_php70
     SUBDIR += mod_proctitle
@@ -507,7 +515,6 @@
     SUBDIR += monast
     SUBDIR += mongoose
     SUBDIR += mongrel2
-    SUBDIR += moodle28
     SUBDIR += moodle29
     SUBDIR += moodle30
     SUBDIR += moodle31
@@ -533,7 +540,6 @@
     SUBDIR += nginx-devel
     SUBDIR += nibbleblog
     SUBDIR += node
-    SUBDIR += node010
     SUBDIR += node012
     SUBDIR += node4
     SUBDIR += nostromo
@@ -790,12 +796,14 @@
     SUBDIR += p5-Catalyst-View-REST-XML
     SUBDIR += p5-Catalyst-View-RRDGraph
     SUBDIR += p5-Catalyst-View-TT
+    SUBDIR += p5-Catalyst-View-TT-Alloy
     SUBDIR += p5-Catalyst-View-TT-ControllerLocal
     SUBDIR += p5-Catalyst-View-Template-Declare
     SUBDIR += p5-Catalyst-View-Templated
     SUBDIR += p5-Catalyst-View-XML-Feed
     SUBDIR += p5-Catalyst-View-XML-Simple
     SUBDIR += p5-Catalyst-View-XSLT
+    SUBDIR += p5-CatalystX-AppBuilder
     SUBDIR += p5-CatalystX-Component-Traits
     SUBDIR += p5-CatalystX-InjectComponent
     SUBDIR += p5-CatalystX-LeakChecker
@@ -803,6 +811,7 @@
     SUBDIR += p5-CatalystX-REPL
     SUBDIR += p5-CatalystX-RoleApplicator
     SUBDIR += p5-CatalystX-SimpleLogin
+    SUBDIR += p5-CatalystX-VirtualComponents
     SUBDIR += p5-Class-DBI-FromForm
     SUBDIR += p5-ClearSilver
     SUBDIR += p5-Compress-LeadingBlankSpaces
@@ -1157,8 +1166,11 @@
     SUBDIR += p5-RPC-ExtDirect
     SUBDIR += p5-RT-Authen-ExternalAuth
     SUBDIR += p5-RT-Client-REST
+    SUBDIR += p5-RT-Extension-CommandByMail
+    SUBDIR += p5-RT-Extension-Gravatar
     SUBDIR += p5-RT-Extension-LDAPImport
     SUBDIR += p5-RT-Extension-MandatoryOnTransition
+    SUBDIR += p5-RT-Extension-QuickAssign
     SUBDIR += p5-RT-Extension-SLA
     SUBDIR += p5-RTx-Calendar
     SUBDIR += p5-Reaction
@@ -1375,6 +1387,7 @@
     SUBDIR += pear-Horde_Http
     SUBDIR += pear-Horde_Routes
     SUBDIR += pear-Horde_Service_Facebook
+    SUBDIR += pear-Horde_Service_Gravatar
     SUBDIR += pear-Horde_Service_Twitter
     SUBDIR += pear-Horde_Service_UrlShortener
     SUBDIR += pear-Horde_Service_Weather
@@ -1390,7 +1403,6 @@
     SUBDIR += pear-Services_GeoNames
     SUBDIR += pear-Services_Google
     SUBDIR += pear-Services_OpenSearch
-    SUBDIR += pear-Services_SharedBook
     SUBDIR += pear-Services_ShortURL
     SUBDIR += pear-Services_TinyURL
     SUBDIR += pear-Services_TwitPic
@@ -1424,9 +1436,6 @@
     SUBDIR += php-plurk-api
     SUBDIR += php-screw
     SUBDIR += php-templates
-    SUBDIR += php55-opcache
-    SUBDIR += php55-session
-    SUBDIR += php55-tidy
     SUBDIR += php56-opcache
     SUBDIR += php56-session
     SUBDIR += php56-tidy
@@ -1484,6 +1493,7 @@
     SUBDIR += py-bjoern
     SUBDIR += py-bleach
     SUBDIR += py-blogofile
+    SUBDIR += py-bokeh
     SUBDIR += py-boto3
     SUBDIR += py-bottle
     SUBDIR += py-bottle-cork
@@ -1552,7 +1562,6 @@
     SUBDIR += py-django-picklefield
     SUBDIR += py-django-pipeline
     SUBDIR += py-django-pipeline13
-    SUBDIR += py-django-piston
     SUBDIR += py-django-post_office
     SUBDIR += py-django-profiles
     SUBDIR += py-django-recaptcha
@@ -1579,6 +1588,7 @@
     SUBDIR += py-django-threaded-multihost
     SUBDIR += py-django-tinymce
     SUBDIR += py-django-voting
+    SUBDIR += py-django110
     SUBDIR += py-django16
     SUBDIR += py-django16-tastypie
     SUBDIR += py-django18
@@ -1601,6 +1611,7 @@
     SUBDIR += py-feedgenerator
     SUBDIR += py-flask
     SUBDIR += py-flask-admin
+    SUBDIR += py-flask-assets
     SUBDIR += py-flask-bootstrap
     SUBDIR += py-flask-cache
     SUBDIR += py-flask-compress
@@ -1608,6 +1619,7 @@
     SUBDIR += py-flask-flatpages
     SUBDIR += py-flask-login
     SUBDIR += py-flask-oauthlib
+    SUBDIR += py-flask-principal
     SUBDIR += py-flask-restful
     SUBDIR += py-flask-restplus
     SUBDIR += py-flask-restplus08
@@ -1644,6 +1656,7 @@
     SUBDIR += py-meld3
     SUBDIR += py-mt
     SUBDIR += py-nevow
+    SUBDIR += py-octoprint
     SUBDIR += py-pafy
     SUBDIR += py-paste
     SUBDIR += py-pastedeploy
@@ -1730,6 +1743,7 @@
     SUBDIR += py-praw
     SUBDIR += py-prewikka
     SUBDIR += py-puppetboard
+    SUBDIR += py-puppetboard02
     SUBDIR += py-py-restclient
     SUBDIR += py-pySmartDL
     SUBDIR += py-pyjwt
@@ -1759,6 +1773,7 @@
     SUBDIR += py-rfc3986
     SUBDIR += py-rfc3987
     SUBDIR += py-rhodecode
+    SUBDIR += py-rollbar
     SUBDIR += py-routes
     SUBDIR += py-scgi
     SUBDIR += py-scrapy
@@ -1924,6 +1939,7 @@
     SUBDIR += rubygem-haml-contrib
     SUBDIR += rubygem-haml-rails
     SUBDIR += rubygem-haml-rails-rails4
+    SUBDIR += rubygem-hamlit
     SUBDIR += rubygem-hashicorp-checkpoint
     SUBDIR += rubygem-heroku
     SUBDIR += rubygem-heroku-api
@@ -2042,6 +2058,8 @@
     SUBDIR += rubygem-totoridipjp
     SUBDIR += rubygem-tumblr_client
     SUBDIR += rubygem-turbolinks
+    SUBDIR += rubygem-turbolinks-classic
+    SUBDIR += rubygem-turbolinks-source
     SUBDIR += rubygem-typhoeus
     SUBDIR += rubygem-uglifier
     SUBDIR += rubygem-underscore-rails
@@ -2255,10 +2273,13 @@
     SUBDIR += uwsgitop
     SUBDIR += uzbl
     SUBDIR += validator
+    SUBDIR += varnish-libvmod-awsrest
+    SUBDIR += varnish-libvmod-digest
     SUBDIR += varnish-libvmod-maxminddb
-    SUBDIR += varnish-libvmod-saintmode
+    SUBDIR += varnish-modules
     SUBDIR += varnish-nagios
     SUBDIR += varnish4
+    SUBDIR += varnish5
     SUBDIR += vdr-plugin-live
     SUBDIR += vdradmin-am
     SUBDIR += vee
@@ -2392,6 +2413,7 @@
     SUBDIR += xpi-togglewordwrap
     SUBDIR += xpi-torbutton
     SUBDIR += xpi-twitterfox
+    SUBDIR += xpi-u2f4moz
     SUBDIR += xpi-uBlock_origin
     SUBDIR += xpi-unplug
     SUBDIR += xpi-urllink

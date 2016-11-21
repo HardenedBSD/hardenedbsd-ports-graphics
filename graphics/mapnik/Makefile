@@ -4,7 +4,7 @@
 PORTNAME=	mapnik
 PORTVERSION=	3.0.9
 DISTVERSIONPREFIX=	v
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	graphics geography
 MASTER_SITES=	http://mapnik.s3.amazonaws.com/dist/v${PORTVERSION}/
 
@@ -78,7 +78,7 @@ CAIRO_MAKE_ARGS_OFF=	CAIRO=False
 
 .include <bsd.port.pre.mk>
 
-.if ${COMPILER_TYPE} == gcc
+.if ${CHOSEN_COMPILER_TYPE} == gcc
 CXXFLAGS+=	-D_GLIBCXX_USE_C99 # gcc c++11 support is broken on FreeBSD
 .endif
 

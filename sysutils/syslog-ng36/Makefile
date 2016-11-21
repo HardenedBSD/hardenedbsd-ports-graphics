@@ -15,7 +15,6 @@ MASTER_SITES=	https://github.com/balabit/${PORTNAME}/releases/download/${PORTNAM
 MAINTAINER=	cy@FreeBSD.org
 COMMENT=	Powerful syslogd replacement
 
-BROKEN_powerpc64=	Does not build
 BROKEN_sparc64=		Does not compile on sparc64: gcc core dump
 
 LIB_DEPENDS=	libevtlog.so:sysutils/eventlog \
@@ -32,7 +31,6 @@ OPTIONS_DEFAULT=	OPENSSL JSON
 TCP_WRAPPERS_DESC=	Build with TCP Wrappers
 SQL_DESC=		Build with database (libdbi) support
 SPOOF_DESC=		Build with spoof source support
-IPV6_DESC=		Build with IPV6 support
 SMTP_DESC=		Build with SMTP support
 JSON_DESC=		Build with JSON-C support
 GEOIP_DESC=		Build with GeoIP support

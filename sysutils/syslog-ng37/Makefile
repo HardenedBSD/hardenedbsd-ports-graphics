@@ -3,7 +3,7 @@
 
 PORTNAME=	syslog-ng
 PORTVERSION=	3.7.3
-PORTREVISION=	6
+PORTREVISION=	7
 .if !defined(MASTERDIR)
 PKGNAMESUFFIX=	37
 .endif
@@ -17,7 +17,6 @@ MASTER_SITES=   http://peter.czanik.hu/freebsd/
 MAINTAINER=	cy@FreeBSD.org
 COMMENT=	Powerful syslogd replacement
 
-BROKEN_powerpc64=	Does not build
 BROKEN_sparc64=		Does not compile on sparc64: gcc core dump
 
 LIB_DEPENDS=	libevtlog.so:sysutils/eventlog \
@@ -36,7 +35,6 @@ OPTIONS_DEFAULT=	JSON
 TCP_WRAPPERS_DESC=	Build with TCP Wrappers
 SQL_DESC=		Build with database (libdbi) support
 SPOOF_DESC=		Build with spoof source support
-IPV6_DESC=		Build with IPV6 support
 SMTP_DESC=		Build with SMTP support
 JSON_DESC=		Build with JSON-C support
 GEOIP_DESC=		Build with GeoIP support
@@ -81,11 +79,11 @@ SMTP_CONFIGURE_OFF=		--disable-smtp
 SMTP_LIB_DEPENDS=		libesmtp.so:mail/libesmtp
 SMTP_PLIST_FILES=		lib/syslog-ng/libafsmtp.so
 
-MSQL_CONFIGURE_ENABLE=		sql
-MSQL_LIB_DEPENDS=		libdbi.so:databases/libdbi
-MSQL_CONFIGURE_ENV=		LIBDBI_LIBS="-ldbi"
-MSQL_LDFLAGS=			-L${LOCALBASE}/lib
-MSQL_PLIST_FILES=		lib/syslog-ng/libafsql.so
+SQL_CONFIGURE_ENABLE=		sql
+SQL_LIB_DEPENDS=		libdbi.so:databases/libdbi
+SQL_CONFIGURE_ENV=		LIBDBI_LIBS="-ldbi"
+SQL_LDFLAGS=			-L${LOCALBASE}/lib
+SQL_PLIST_FILES=		lib/syslog-ng/libafsql.so
 
 MONGO_CONFIGURE_ENABLE=		mongodb
 MONGO_BUILD_DEPENDS=		mongo:databases/mongodb
@@ -97,6 +95,7 @@ JSON_LIB_DEPENDS=		libjson-c.so:devel/json-c
 JSON_PLIST_FILES= 		lib/syslog-ng/libjson-plugin.so
 
 JAVA_CONFIGURE_ENABLE=		java
+JAVA_BROKEN=			Unsupported maven downloads.
 JAVA_USE_JAVA=			yes
 JAVA_BUILD_DEPENDS=		gradle:devel/gradle
 JAVA_BUILD_DEPENDS=		bash:shells/bash

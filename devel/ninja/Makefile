@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	ninja
-PORTVERSION=	1.7.1
+PORTVERSION=	1.7.2
 DISTVERSIONPREFIX=	v
 PORTEPOCH=	2
 CATEGORIES=	devel
@@ -14,10 +14,10 @@ LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/COPYING
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	martine
+GH_ACCOUNT=	ninja-build
 
 CONFLICTS=	irc/ninja-[0-9]*
-USES=		python:build
+USES=		python
 
 PLIST_FILES=	bin/ninja
 PORTDOCS=	HACKING.md README manual.asciidoc
@@ -37,5 +37,8 @@ do-install:
 	(cd ${WRKSRC} && \
 	    ${INSTALL_DATA} HACKING.md README doc/manual.asciidoc \
 	    ${STAGEDIR}${DOCSDIR})
+
+do-test: build
+	cd ${WRKSRC} && ./ninja ninja_test && ./ninja_test
 
 .include <bsd.port.mk>

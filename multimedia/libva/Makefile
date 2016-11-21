@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	libva
-PORTVERSION=	1.7.1
+PORTVERSION=	1.7.2
 CATEGORIES=	multimedia
 MASTER_SITES=	http://cgit.freedesktop.org/${PORTNAME}/snapshot/
 
@@ -36,10 +36,6 @@ CFLAGS+=	-DNDEBUG
 .endif
 
 .include <bsd.port.pre.mk>
-
-.if ${ARCH} == "sparc64"
-BROKEN=		glXCreateContext fails during configure
-.endif
 
 .if defined(STRIP) && ${STRIP} != ""
 INSTALL_TARGET=	install-strip

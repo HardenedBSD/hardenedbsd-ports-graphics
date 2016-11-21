@@ -2,14 +2,14 @@
 # $FreeBSD$
 
 PORTNAME=	slurm
-PORTVERSION=	16.05.4
+PORTVERSION=	16.05.6
 CATEGORIES=	sysutils
 MASTER_SITES=	http://www.schedmd.com/download/latest/ \
 		http://www.schedmd.com/download/archive/ \
 		http://www.schedmd.com/download/development/
 PKGNAMESUFFIX=	-wlm
 
-MAINTAINER=	jrm@ftfl.ca
+MAINTAINER=	jrm@FreeBSD.org
 COMMENT=	Simple Linux Utility for Resource Management
 
 LICENSE=	GPLv2+
@@ -27,8 +27,10 @@ USE_LDCONFIG=	yes
 USE_RC_SUBR=	slurmctld slurmd
 PLIST_SUB=	PORTVERSION="${PORTVERSION}"
 INSTALL_TARGET=	install-strip
-USES=		gmake libtool pkgconfig python:build ssl tar:bz2
+USES=		gmake libtool pkgconfig python:build readline shebangfix ssl \
+		tar:bz2
 USE_PERL5=	configure
+SHEBANG_FILES=	doc/html/shtml2html.py doc/man/man2html.py
 
 OPTIONS_DEFINE=	CURL DOCS GTK2 HDF5 HWLOC IPMI MYSQL RRD
 OPTIONS_DEFAULT=HDF5 HWLOC
@@ -76,10 +78,6 @@ LDFLAGS+=	-L${LOCALBASE}/lib -lsysinfo -lkvm
 # add a pty.h for the build.
 post-patch:
 	${CP} ${FILESDIR}/pty.h ${WRKSRC}/slurm
-	${REINPLACE_CMD} \
-		-e 's|/usr/bin/env python|${PYTHON_CMD}|g' \
-		${WRKSRC}/doc/html/shtml2html.py \
-		${WRKSRC}/doc/man/man2html.py
 
 post-install:
 	${INSTALL_DATA} ${FILESDIR}/slurm.conf.sample ${STAGEDIR}${PREFIX}/etc/

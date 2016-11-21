@@ -13,6 +13,8 @@ COMMENT=	BitDefender Console Antivirus for FreeBSD
 
 LIB_DEPENDS=	libc.so.5:misc/compat5x
 
+BROKEN=		download link is dead: 404
+
 WRKSRC=		${WRKDIR}/${PORTNAME}
 NO_BUILD=	yes
 
@@ -45,7 +47,7 @@ do-install:
 
 	${MV} ${STAGEDIR}${PREFIX}/bdc/doc ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${STAGEDIR}${PREFIX}/bdc/man/bdc.1 ${STAGEDIR}${MANPREFIX}/man/man1
-	${RM} -f ${STAGEDIR}${PREFIX}/bdc/man
+	${RM} ${STAGEDIR}${PREFIX}/bdc/man
 
 	${INSTALL_SCRIPT} ${WRKDIR}/bdc ${STAGEDIR}${PREFIX}/bin
 

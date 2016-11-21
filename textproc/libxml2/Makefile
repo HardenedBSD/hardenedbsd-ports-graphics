@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	libxml2
-PORTVERSION=	2.9.3
+PORTVERSION=	2.9.4
 PORTREVISION?=	0
 CATEGORIES?=	textproc gnome
 MASTER_SITES=	ftp://xmlsoft.org/libxml2/ \
@@ -63,7 +63,7 @@ post-patch:
 
 .if !defined(MASTERDIR)
 post-install:
-	@${RM} -rf ${STAGEDIR}${PREFIX}/share/gtk-doc
+	@${RM} -r ${STAGEDIR}${PREFIX}/share/gtk-doc
 .endif
 
 .include <bsd.port.mk>

@@ -16,6 +16,7 @@ GH_ACCOUNT=	jgm
 
 USES=		cmake:outsource python:3,test
 USE_LDCONFIG=	yes
+
 TEST_TARGET=	test
 
 CMAKE_ARGS=	-DCMAKE_INSTALL_MANDIR=${MANPREFIX}/man

@@ -78,6 +78,7 @@ MAKE_ARGS+=STAGE1_CXXFLAGS=-fbracket-depth=512
 . endif
 .endif
 
+BROKEN_sparc64=	Does not build: bootstrap comparison failure
 LANGUAGES:=	c,c++,objc,fortran
 TARGLIB=	${PREFIX}/lib/gcc${SUFFIX}
 LIBEXEC=	${PREFIX}/libexec/gcc${SUFFIX}
@@ -151,7 +152,7 @@ pre-everything::
 
 pre-configure:
 	cd ${WRKSRC} ; contrib/gcc_update --touch
-	@${RM} -f ${WRKSRC}/gcc/*/*.info*
+	@${RM} ${WRKSRC}/gcc/*/*.info*
 
 .if defined(MAINTAINER_MODE)
 full-regression-test: build
@@ -160,11 +161,11 @@ full-regression-test: build
 .endif
 
 post-stage:
-	${RM} -f ${STAGEDIR}${PREFIX}/man/man7/*
-	${RM} -f ${STAGEDIR}${PREFIX}/bin/rebuild-gcj-db${SUFFIX} \
+	${RM} ${STAGEDIR}${PREFIX}/man/man7/*
+	${RM} ${STAGEDIR}${PREFIX}/bin/rebuild-gcj-db${SUFFIX} \
 	         ${STAGEDIR}${PREFIX}/man/man1/rebuild-gcj-db${SUFFIX}.1
 	# Add target libraries and include files to packaging list.
-	${RM} -f ${WRKDIR}/PLIST.lib
+	${RM} ${WRKDIR}/PLIST.lib
 .for d in ${TARGLIB:S/^${PREFIX}\///} ${LIBEXEC:S/^${PREFIX}\///} include/gcj include/gnu include/java include/javax
 	cd ${STAGEDIR}${PREFIX} ; if [ -d $d ]; then \
 	    ${FIND} $d -type f -o -type l >>${WRKDIR}/PLIST.lib ;\

@@ -3,6 +3,7 @@
 
 PORTNAME=	binutils
 PORTVERSION=	2.27
+PORTREVISION=	4
 PORTEPOCH?=	1
 CATEGORIES?=	devel
 MASTER_SITES=	SOURCEWARE/binutils/releases
@@ -37,6 +38,14 @@ INFO_PATH=	${PKGNAMEPREFIX:S/-$//}/info
 CONFIGURE_ARGS+=	--disable-shared \
 			--target=${BUTARGET}
 .else
+BUREMOVE=	coffdump \
+		dlltool \
+		dllwrap \
+		nlmconv \
+		srconv \
+		sysdump \
+		windmc \
+		windres
 CFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 CONFIGURE_ARGS+=	--with-system-zlib \
@@ -66,11 +75,15 @@ NLS_CONFIGURE_ENABLE=	nls
 .include <bsd.port.pre.mk>
 
 # Actual earliest version may differ slightly
-.if ${ARCH} != ia64 && ${ARCH} != i386 && ${ARCH} != mips && ${ARCH} != mips64 && !defined(PKGNAMEPREFIX) && (${COMPILER_TYPE} == clang && ${COMPILER_VERSION} >= 34 || ${COMPILER_TYPE} == gcc)
+.if ${ARCH} != powerpc && ${ARCH} != powerpc64 && ${ARCH} != ia64 && ${ARCH} != i386 && ${ARCH} != mips && ${ARCH} != mips64 && !defined(PKGNAMEPREFIX) && (${COMPILER_TYPE} == clang && ${COMPILER_VERSION} >= 34 || ${COMPILER_TYPE} == gcc)
 CONFIGURE_ARGS+=	--enable-gold --enable-plugins
 PLIST_SUB+=	GOLD=""
 .else
 PLIST_SUB+=	GOLD="@comment "
+.endif
+
+.if ${OPSYS} == FreeBSD && ${OSVERSION} < 1000000
+CONFIGURE_ARGS+=	--disable-initfini-array
 .endif
 
 .if ${ARCH} == "amd64"
@@ -88,19 +101,18 @@ post-install:
 	${REINPLACE_CMD} '/#include "ansidecl.h"/d' ${STAGEDIR}${PREFIX}/include/bfd.h
 .else
 .if ${PKGNAMEPREFIX:S/-$//} != ${BUTARGET}
-	${RM} -rf ${STAGEDIR}${PREFIX}/${PKGNAMEPREFIX:S/-$//}
+	${RM} -r ${STAGEDIR}${PREFIX}/${PKGNAMEPREFIX:S/-$//}
 .endif
 	@if [ -d ${STAGEDIR}${PREFIX}/${INFO_PATH} ] ; then rm -rf ${STAGEDIR}${PREFIX}/${INFO_PATH}; fi
 	${LN} -fs ../../bin/${BUTARGET}-size ${STAGEDIR}${PREFIX}/${BUTARGET}/bin/size
 .endif
 .for tool in ${BUREMOVE}
-	@${RM} -f ${STAGEDIR}${PREFIX}/bin/${BUTARGET}-${tool} \
+	@${RM} ${STAGEDIR}${PREFIX}/bin/${BUTARGET}-${tool} \
 	    ${STAGEDIR}${PREFIX}/man/man1/${BUTARGET}-${tool}.1 \
 	    ${STAGEDIR}${PREFIX}/${BUTARGET}/bin/${tool}
 .endfor
 .if defined(BUREMOVE) && ${BUREMOVE:Mld}
-	@${RM} -rf ${STAGEDIR}${PREFIX}/${BUTARGET}/lib/ldscripts
-	@${FIND} ${STAGEDIR}${PREFIX}/${BUTARGET}/lib -empty -delete
+	@${RM} -r ${STAGEDIR}${PREFIX}/${BUTARGET}/lib/ldscripts
 .endif
 
 .include <bsd.port.post.mk>

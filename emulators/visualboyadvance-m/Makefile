@@ -12,6 +12,8 @@ LICENSE=	GPLv2
 
 LIB_DEPENDS=	libpng.so:graphics/png
 
+BROKEN_aarch64=	Fails to build: regparm is not valid on this platform
+
 USE_GITHUB=	yes
 GH_TAGNAME=	VBA-M_Beta_2
 
@@ -134,7 +136,7 @@ maint-gen-distfile:
 	svn export -r${SVN_REV} \
 		 https://svn.code.sf.net/p/vbam/code/trunk/ ${DISTNAME}
 	${TAR} jcf ${DISTDIR}/${DISTNAME}${EXTRACT_SUFX} ${DISTNAME}
-	${RM} -rf ${DISTNAME}
+	${RM} -r ${DISTNAME}
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/vbam

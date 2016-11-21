@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=		openvpn
-DISTVERSION=		2.3.12
+DISTVERSION=		2.3.13
 PORTREVISION=		1
 CATEGORIES=		security net
 MASTER_SITES=		http://swupdate.openvpn.net/community/releases/ \
@@ -32,8 +32,8 @@ LDFLAGS+=		-L${LOCALBASE}/lib
 CPPFLAGS+=		-DPLUGIN_LIBDIR=\\\"${PREFIX}/lib/openvpn/plugins\\\"
 
 OPTIONS_DEFINE=		PKCS11 EASYRSA DOCS EXAMPLES X509ALTUSERNAME \
-			TUNNELBLICK TEST
-OPTIONS_DEFAULT=	EASYRSA OPENSSL TEST
+			TUNNELBLICK TEST FIXSUBNET
+OPTIONS_DEFAULT=	EASYRSA OPENSSL TEST FIXSUBNET
 OPTIONS_SINGLE=		SSL
 OPTIONS_SINGLE_SSL=	OPENSSL POLARSSL
 # The following feature is always enabled since 2.3.9 and no longer optional.
@@ -43,6 +43,7 @@ EASYRSA_DESC=		Install security/easy-rsa RSA helper package
 POLARSSL_DESC=		SSL/TLS via mbedTLS 1.3.X (not 2.x)
 TUNNELBLICK_DESC=	Tunnelblick XOR scramble patch (READ HELP!)
 X509ALTUSERNAME_DESC=	Enable --x509-username-field (OpenSSL only)
+FIXSUBNET_DESC=		Enable 'topology subnet' fix (experimental)
 
 EASYRSA_RUN_DEPENDS=	easy-rsa>=0:security/easy-rsa
 
@@ -50,6 +51,8 @@ PKCS11_LIB_DEPENDS=	libpkcs11-helper.so:security/pkcs11-helper
 PKCS11_CONFIGURE_ENABLE=	pkcs11
 
 TUNNELBLICK_EXTRA_PATCHES=	${FILESDIR}/extra-tunnelblick-openvpn_xorpatch
+
+FIXSUBNET_EXTRA_PATCHES=	${FILESDIR}/extra-patch-fix-subnet
 
 X509ALTUSERNAME_CONFIGURE_ENABLE=	x509-alt-username
 
@@ -79,7 +82,8 @@ LIB_DEPENDS+=		liblzo2.so:archivers/lzo2
 PORTDOCS=		*
 PORTEXAMPLES=		*
 
-TEST_TARGET=		check
+TEST_ALL_TARGET=	check
+TEST_TEST_TARGET_OFF=	check
 
 # XXX Please remove this compatibility wrapper after 2017Q2 is branched.
 .ifdef(WITHOUT_CHECK)
@@ -103,8 +107,6 @@ post-configure:
 	${REINPLACE_CMD} '/^CFLAGS =/s/$$/ -fPIC/' \
 	    ${WRKSRC}/src/plugins/auth-pam/Makefile \
 	    ${WRKSRC}/src/plugins/down-root/Makefile
-
-post-build-TEST-on: test
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/openvpn/plugins/openvpn-plugin-auth-pam.so

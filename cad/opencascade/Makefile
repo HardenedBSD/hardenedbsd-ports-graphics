@@ -3,7 +3,7 @@
 
 PORTNAME=	opencascade
 PORTVERSION=	6.9.1
-PORTREVISION=	1
+PORTREVISION=	4
 CATEGORIES=	cad science
 MASTER_SITES=	LOCAL/thierry
 
@@ -21,8 +21,8 @@ RUN_DEPENDS=	bash:shells/bash
 
 # Check ${WRKSRC}/dox/overview/Overview.md
 # and ${WRKSRC}/dox/dev_guides/building
-USES=		alias:10 bison cmake compiler dos2unix gmake shebangfix tk \
-		tar:tgz
+USES=		alias:10 bison cmake compiler:c++11-lib dos2unix gmake \
+		shebangfix tk tar:tgz
 USE_XORG=	xmu
 DOS2UNIX_FILES=	adm/templates/*
 SHEBANG_FILES=	adm/templates/env.sh.in adm/templates/draw.sh		\
@@ -55,7 +55,7 @@ USE_LDCONFIG=	yes
 
 LOCCROOT=	OpenCAS
 OCCROOT=	${PREFIX}/${LOCCROOT}
-PLIST_SUB=	OCCROOT="${LOCCROOT}" BITS=${BITS} CC=${COMPILER_TYPE}
+PLIST_SUB=	OCCROOT="${LOCCROOT}" BITS=${BITS} CC=${CHOSEN_COMPILER_TYPE}
 
 VIS_CMAKE_ON=		-DUSE_FREEIMAGE:BOOL=ON -DUSE_GL2PS:BOOL=ON	\
 			-DUSE_FREETYPE:BOOL=ON
@@ -110,21 +110,21 @@ post-build-DOCS-on:
 	(cd ${WRKSRC} && ./gendoc -overview)
 
 post-install:
-	${MV} ${STAGEDIR}${OCCROOT}/bsd${BITS}/${COMPILER_TYPE}/bin/DRAWEXE	\
+	${MV} ${STAGEDIR}${OCCROOT}/bsd${BITS}/${CHOSEN_COMPILER_TYPE}/bin/DRAWEXE	\
 		${STAGEDIR}${PREFIX}/bin/
 	(cd ${STAGEDIR}${PREFIX}/bin &&							\
-	${LN} -sf DRAWEXE ${STAGEDIR}${OCCROOT}/bsd${BITS}/${COMPILER_TYPE}/bin/DRAWEXE)
-	${MV} ${STAGEDIR}${OCCROOT}/bsd${BITS}/${COMPILER_TYPE}/lib/lib*.so	\
+	${LN} -sf DRAWEXE ${STAGEDIR}${OCCROOT}/bsd${BITS}/${CHOSEN_COMPILER_TYPE}/bin/DRAWEXE)
+	${MV} ${STAGEDIR}${OCCROOT}/bsd${BITS}/${CHOSEN_COMPILER_TYPE}/lib/lib*.so	\
 		${STAGEDIR}${PREFIX}/lib/
 	(cd ${STAGEDIR}${PREFIX}/lib							\
 	&& for l in lib*.so; do								\
 	${MV} $${l} $${l}.0;								\
 	${LN} -sf $${l}.0 $${l};							\
-	${LN} -sf $${l}.0 ${STAGEDIR}${OCCROOT}/bsd${BITS}/${COMPILER_TYPE}/lib/$${l};	\
+	${LN} -sf $${l}.0 ${STAGEDIR}${OCCROOT}/bsd${BITS}/${CHOSEN_COMPILER_TYPE}/lib/$${l};	\
 	done)
 	${MKDIR} ${STAGEDIR}${PREFIX}/include/OpenCASCADE
 	(cd ${STAGEDIR}${OCCROOT}/inc && ${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/include/OpenCASCADE)
-	${RM} -rf ${STAGEDIR}${OCCROOT}/inc
+	${RM} -r ${STAGEDIR}${OCCROOT}/inc
 	${LN} -sf ${PREFIX}/include/OpenCASCADE ${STAGEDIR}${OCCROOT}/inc
 	(cd ${WRKSRC} && ${COPYTREE_SHARE} tests ${STAGEDIR}${OCCROOT})
 post-install-DOCS-on:

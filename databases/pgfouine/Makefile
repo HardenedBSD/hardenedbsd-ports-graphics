@@ -10,8 +10,6 @@ MASTER_SITES=	http://pgfoundry.org/frs/download.php/2575/ \
 MAINTAINER=	pea@raveland.org
 COMMENT=	PostgreSQL log analyzer
 
-BROKEN_powerpc64=	Does not build
-
 NO_BUILD=	Yes
 USE_PHP=	gd pcre
 
@@ -21,7 +19,7 @@ pre-configure:
 	${REINPLACE_CMD} -e 's,/usr/bin/php,${LOCALBASE}/bin/php,g;' \
 		-e 's,!!PREFIX!!,${PREFIX},g' \
 		${WRKSRC}/pgfouine.php ${WRKSRC}/pgfouine_vacuum.php
-	${FIND} -d ${WRKSRC} -type d -name 'CVS' -exec ${RM} -rf {} \;
+	${FIND} -d ${WRKSRC} -type d -name 'CVS' -exec ${RM} -r {} \;
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/pgfouine.php ${STAGEDIR}${PREFIX}/bin/pgfouine

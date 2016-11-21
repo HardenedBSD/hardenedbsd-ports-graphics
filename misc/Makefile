@@ -30,6 +30,7 @@
     SUBDIR += bottlerocket
     SUBDIR += boxes
     SUBDIR += brs
+    SUBDIR += bsod
     SUBDIR += buffer
     SUBDIR += cave
     SUBDIR += cdcollect
@@ -184,7 +185,6 @@
     SUBDIR += iso-codes
     SUBDIR += jargon
     SUBDIR += jbidwatcher
-    SUBDIR += jive
     SUBDIR += kbdscan
     SUBDIR += kcd
     SUBDIR += kde-thumbnailer-chm
@@ -283,6 +283,7 @@
     SUBDIR += opencyc
     SUBDIR += openr2
     SUBDIR += orville-write
+    SUBDIR += osinfo-db
     SUBDIR += ossp-uuid
     SUBDIR += otter
     SUBDIR += p5-Acme-ButFirst
@@ -361,7 +362,6 @@
     SUBDIR += pear-Text_Figlet
     SUBDIR += pecl-timezonedb
     SUBDIR += pfm
-    SUBDIR += php55-calendar
     SUBDIR += php56-calendar
     SUBDIR += php70-calendar
     SUBDIR += phraze
@@ -372,6 +372,7 @@
     SUBDIR += proxyper
     SUBDIR += pspresent
     SUBDIR += py-YABT
+    SUBDIR += py-glance
     SUBDIR += py-osd
     SUBDIR += py-pexpect
     SUBDIR += py-powerline-status
@@ -450,6 +451,7 @@
     SUBDIR += terraform
     SUBDIR += teseq
     SUBDIR += teslams
+    SUBDIR += timediff
     SUBDIR += tkcron
     SUBDIR += tkinfo
     SUBDIR += tkregexp

@@ -169,6 +169,8 @@ lib/slurm/mpi_pmi2.a
 lib/slurm/mpi_pmi2.so
 lib/slurm/node_features_knl_cray.a
 lib/slurm/node_features_knl_cray.so
+lib/slurm/node_features_knl_generic.a
+lib/slurm/node_features_knl_generic.so
 lib/slurm/power_none.a
 lib/slurm/power_none.so
 lib/slurm/preempt_job_prio.a
@@ -577,6 +579,7 @@ sbin/slurmstepd
 %%PORTDOCS%%%%DOCSDIR%%-%%PORTVERSION%%/html/sponsors.gif
 %%PORTDOCS%%%%DOCSDIR%%-%%PORTVERSION%%/html/sprio.html
 %%PORTDOCS%%%%DOCSDIR%%-%%PORTVERSION%%/html/squeue.html
+%%PORTDOCS%%%%DOCSDIR%%-%%PORTVERSION%%/html/squeue_color.png
 %%PORTDOCS%%%%DOCSDIR%%-%%PORTVERSION%%/html/sreport.html
 %%PORTDOCS%%%%DOCSDIR%%-%%PORTVERSION%%/html/srun.html
 %%PORTDOCS%%%%DOCSDIR%%-%%PORTVERSION%%/html/srun_cr.html

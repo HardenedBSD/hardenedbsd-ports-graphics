@@ -12,8 +12,6 @@ COMMENT=	Small php webapp to manage your recipes
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/docs/LICENSE.TXT
 
-BROKEN_powerpc64=	Does not build
-
 WRKSRC=		${WRKDIR}/${PORTNAME}
 NO_BUILD=	yes
 NO_ARCH=	yes
@@ -32,9 +30,6 @@ MYSQL_USES=	mysql
 MYSQL_VARS=	IGNORE_WITH_PHP+=70
 PGSQL_USE=	PHP=pgsql
 PGSQL_USES=	pgsql
-
-post-extract:
-	@${CHMOD} -R u+w ${WRKSRC}
 
 do-install:
 	${MV} ${WRKSRC}/custom_inc.php ${WRKSRC}/custom_inc.php.sample

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	phpminiadmin
-PORTVERSION=	1.9.150917
+PORTVERSION=	1.9.160630
 CATEGORIES=	databases www
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/${PORTNAME}-${PORTVERSION}
 DISTNAME=	${PORTNAME}
@@ -16,12 +16,10 @@ COMMENT=	Lightweight alternative to phpMyAdmin
 LICENSE=	GPLv2 MIT
 LICENSE_COMB=	dual
 
-BROKEN_powerpc64=	Does not build
-
 NO_WRKSUBDIR=	yes
 NO_BUILD=	yes
-USE_PHP=	mysql pcre session
-IGNORE_WITH_PHP=	70
+USES=		php
+USE_PHP=	mysqli pcre session
 NO_ARCH=	yes
 
 PLIST_FILES=	${WWWDIR_REL}/phpminiadmin.php

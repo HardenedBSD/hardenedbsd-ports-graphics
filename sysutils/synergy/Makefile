@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	synergy
-PORTVERSION=	1.8.2
+PORTVERSION=	1.8.5
 CATEGORIES=	sysutils
 
 MAINTAINER=	kevlo@FreeBSD.org
@@ -9,8 +9,6 @@ COMMENT=	Mouse and keyboard sharing utility
 
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE
-
-BROKEN_powerpc64=	Does not build
 
 USES=		cmake cpe
 CPE_VENDOR=	synergy-foss

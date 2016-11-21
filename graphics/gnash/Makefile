@@ -3,7 +3,7 @@
 
 PORTNAME=	gnash
 PORTVERSION=	0.8.10
-PORTREVISION=	16
+PORTREVISION=	17
 CATEGORIES=	graphics
 MASTER_SITES=	GNU/${PORTNAME}/${PORTVERSION}/
 
@@ -36,8 +36,7 @@ CONFIGURE_ARGS=	--with-boost-incl="${LOCALBASE}/include" \
 		--with-plugins-install=prefix \
 		--sysconfdir="${SYSCONFIGDIR}" \
 		--disable-kparts3 \
-		--disable-jemalloc \
-		--disable-silent-rules
+		--disable-jemalloc
 
 GNASHVER=	${PORTVERSION}
 CONFIG_FILES=	gnashpluginrc gnashrc

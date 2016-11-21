@@ -477,14 +477,10 @@ INSTALL_TARGET=	installservers installbin installscripts installdat \
 INSTALL_TARGET+=installswat
 .endif
 
-pre-configure:
-	@${FIND} ${WRKDIR}/${DISTNAME} -type d | ${XARGS} ${CHMOD} u+w,a+rx
-	@${FIND} ${WRKDIR}/${DISTNAME} -type f | ${XARGS} ${CHMOD} u+w,a+r
-
 post-configure:
 # It's in another port
-	@${RM} -f ${WRKDIR}/${DISTNAME}/docs/htmldocs/manpages/libsmbclient.7.html
-	@${RM} -rf ${WRKDIR}/${DISTNAME}/examples/libsmbclient
+	@${RM} ${WRKDIR}/${DISTNAME}/docs/htmldocs/manpages/libsmbclient.7.html
+	@${RM} -r ${WRKDIR}/${DISTNAME}/examples/libsmbclient
 
 pre-install:
 	-@${FIND} "${STAGEDIR}${SAMBA_MODULEDIR}" -type f -o -type l 2>/dev/null | ${SORT} | ${SED} -E 's|^${STAGEDIR}${PREFIX}/?||;' > ${WRKDIR}/.PLIST.exclude
@@ -494,7 +490,7 @@ pre-install:
 .endif
 
 post-install:
-	@${RM} -f ${STAGEDIR}/${PREFIX}/bin/findsmb
+	@${RM} ${STAGEDIR}/${PREFIX}/bin/findsmb
 .for sect in 1 3 5 7 8
 	@${MKDIR} ${STAGEDIR}${MAN${sect}PREFIX}/man/man${sect}
 .	for man in ${SAMBA_MAN${sect}}

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	knot
-PORTVERSION=	2.3.0
+PORTVERSION=	2.3.1
 CATEGORIES=	dns ipv6
 MASTER_SITES=	https://secure.nic.cz/files/knot-dns/ \
 		http://dns-lab.com/downloads/knot-dns/
@@ -29,10 +29,6 @@ GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--with-rundir=/var/run/knot \
 		--with-storage=/var/db/knot \
 		--with-pkgconfigdir=${PREFIX}/libdata/pkgconfig
-
-.if defined(BATCH) || defined(PACKAGE_BUILDING)
-CONFIGURE_ARGS+=	--disable-silent-rules
-.endif
 
 INSTALL_TARGET=	install-strip
 
@@ -68,7 +64,7 @@ post-patch:
 		${WRKSRC}/src/Makefile.in
 	@${REINPLACE_CMD} 's|$$(INSTALL) -d $$(DESTDIR)/\@storage_dir\@|#$$(INSTALL) -d $$(DESTDIR)/\@storage_dir\@|' \
 		${WRKSRC}/src/Makefile.in
-	@${RM} -rf ${WRKSRC}/src/zscanner/scanner.c
+	@${RM} -r ${WRKSRC}/src/zscanner/scanner.c
 
 post-install:
 	${MV} ${STAGEDIR}${ETCDIR}/knot.sample.conf \

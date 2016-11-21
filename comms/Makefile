@@ -70,6 +70,7 @@
     SUBDIR += ibp
     SUBDIR += java-commapi
     SUBDIR += java-commapi-freebsd
+    SUBDIR += java-simple-serial-connector
     SUBDIR += jerm
     SUBDIR += jsdr
     SUBDIR += kb
@@ -145,6 +146,7 @@
     SUBDIR += qsstv
     SUBDIR += qt5-connectivity
     SUBDIR += qt5-sensors
+    SUBDIR += qt5-serialbus
     SUBDIR += qt5-serialport
     SUBDIR += qtel
     SUBDIR += quisk
@@ -178,6 +180,7 @@
     SUBDIR += twpsk
     SUBDIR += uarduno
     SUBDIR += uartlirc
+    SUBDIR += uhd
     SUBDIR += uird
     SUBDIR += unixcw
     SUBDIR += usbmuxd

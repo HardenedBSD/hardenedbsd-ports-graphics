@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	xorg-vfbserver
-PORTVERSION=	1.18.3
+PORTVERSION=	1.18.4
 PORTEPOCH=	1
 CATEGORIES=	x11-servers
 MASTER_SITES=	XORG/individual/xserver
@@ -12,7 +12,9 @@ DIST_SUBDIR=	xorg/xserver
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X virtual framebuffer server from X.Org
 
-USES=		tar:bzip2 pkgconfig
+LICENSE=	MIT
+
+USES=		tar:bzip2 pkgconfig ssl
 INSTALL_WRKSRC=	${WRKSRC}/hw/vfb
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--disable-dmx \

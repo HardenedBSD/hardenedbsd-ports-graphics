@@ -25,6 +25,7 @@
     SUBDIR += elmerfem
     SUBDIR += feappv
     SUBDIR += fidocadj
+    SUBDIR += freecad
     SUBDIR += freehdl
     SUBDIR += fritzing
     SUBDIR += gdsreader
@@ -67,6 +68,7 @@
     SUBDIR += py-gdspy
     SUBDIR += py-lcapy
     SUBDIR += py-pycam
+    SUBDIR += python-gdsii
     SUBDIR += pythoncad
     SUBDIR += qcad
     SUBDIR += qelectrotech
@@ -77,6 +79,8 @@
     SUBDIR += rubygem-gdsii
     SUBDIR += sceptre
     SUBDIR += scotch
+    SUBDIR += solvespace
+    SUBDIR += sp2sp
     SUBDIR += spice
     SUBDIR += stepcode
     SUBDIR += sweethome3d

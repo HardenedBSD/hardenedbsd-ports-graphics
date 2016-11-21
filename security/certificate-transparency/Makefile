@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	certificate-transparency
-PORTVERSION=	20160102
+PORTVERSION=	20161015
+PORTREVISION=	3
 CATEGORIES=	security
 
 MAINTAINER=	ports@FreeBSD.org
@@ -16,6 +17,7 @@ LIB_DEPENDS?=	libevent.so:devel/libevent2 \
 		libgflags.so:devel/gflags \
 		libglog.so:devel/glog \
 		libgmock.so:devel/googlemock \
+		libicuuc.so:devel/icu \
 		libjson-c.so:devel/json-c \
 		libleveldb.so:databases/leveldb \
 		libobjecthash.so:devel/objecthash \
@@ -31,7 +33,7 @@ CONFIGURE_ENV+=	"CFLAGS+=-I${LOCALBASE}/include CXXFLAGS+=-lgtest CXXFLAGS+=-lgm
 MAKE_FLAGS+=	"V=1"
 USE_GITHUB=	yes
 GH_ACCOUNT=	google
-GH_TAGNAME=	1cdd6b5
+GH_TAGNAME=	28478cb
 
 CPPFLAGS+=	"-I${LOCALBASE}/include"
 CPPFLAGS+=	"-I${LOCALBASE}/include/evhtp"

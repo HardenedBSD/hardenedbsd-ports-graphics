@@ -12,6 +12,10 @@ fi
 LF=$(printf '\nX')
 LF=${LF%X}
 
+notice() {
+	echo "Notice: $@" >&2
+}
+
 warn() {
 	echo "Warning: $@" >&2
 }
@@ -20,15 +24,19 @@ err() {
 	echo "Error: $@" >&2
 }
 
+list_stagedir_elfs() {
+	cd ${STAGEDIR} && find -s . -type f \( -perm +111 -o -name '*.so*' \) "$@"
+}
+
 shebangonefile() {
 	local f interp rc
 
 	f="$@"
 	rc=0
 
-	# blacklist of files which are not intended to be runnable
-	case "${f##*/}" in
-	*.pm|*.pod|*.txt)
+	# whitelist some files
+	case "${f}" in
+	*.pm|*.pod|*.txt|${STAGEDIR}${LINUXBASE}/*)
 		return 0
 		;;
 	esac
@@ -60,7 +68,7 @@ shebang() {
 	local f l link rc
 
 	rc=0
-	
+
 	while read f; do
 		# No results presents a blank line from heredoc.
 		[ -z "${f}" ] && continue
@@ -115,9 +123,7 @@ baselibs() {
 			;;
 		esac
 	done <<-EOF
-	$(find ${STAGEDIR}${PREFIX}/bin ${STAGEDIR}${PREFIX}/sbin \
-		${STAGEDIR}${PREFIX}/lib ${STAGEDIR}${PREFIX}/libexec \
-		-type f -exec readelf -d {} + 2>/dev/null)
+	$(list_stagedir_elfs -exec readelf -d {} + 2>/dev/null)
 	EOF
 	if [ -z "${USESSSL}" -a -n "${found_openssl}" ]; then
 		warn "you need USES=ssl"
@@ -306,7 +312,7 @@ libperl() {
 }
 
 prefixvar() {
-	if test -d ${STAGEDIR}${PREFIX}/var; then
+	if [ ${PREFIX} != ${LINUXBASE} -a -d ${STAGEDIR}${PREFIX}/var ]; then
 		warn "port uses ${PREFIX}/var instead of /var"
 	fi
 }
@@ -472,6 +478,32 @@ proxydeps_suggest_uses() {
 	elif [ ${pkg} = "x11/qimageblitz" ]; then warn "you need to use USE_KDE+=qimageblitz"
 	elif [ ${pkg} = "textproc/soprano" ]; then warn "you need to use USE_KDE+=soprano"
 	elif [ ${pkg} = "deskutils/libstreamanalyzer" ]; then warn "you need to use USE_KDE+=strigi"
+	# KDE Frameworks
+	elif [ ${pkg} = "devel/kf5-extra-cmake-modules" ]; then warn "you need to use USE_KDE+=ecm"
+	elif [ ${pkg} = "devel/kf5-kcmutils" ]; then warn "you need to use USE_KDE+=kcmutils"
+	elif [ ${pkg} = "devel/kf5-kdeclarative" ]; then warn "you need to use USE_KDE+=kdeclarative"
+	elif [ ${pkg} = "devel/kf5-kfilemetadata" ]; then warn "you need to use USE_KDE+=filemetadata5"
+	elif [ ${pkg} = "devel/kf5-kio" ]; then warn "you need to use USE_KDE+=kio"
+	elif [ ${pkg} = "devel/kf5-solid" ]; then warn "you need to use USE_KDE+=solid"
+	elif [ ${pkg} = "devel/kf5-threadweaver" ]; then warn "you need to use USE_KDE+=threadweaver"
+	elif [ ${pkg} = "devel/kio-extras-kf5" ]; then warn "you need to use USE_KDE+=kio-extras"
+	elif [ ${pkg} = "graphics/kf5-kimageformats" ]; then warn "you need to use USE_KDE+=kimageformats"
+	elif [ ${pkg} = "lang/kf5-kross" ]; then warn "you need to use USE_KDE+=kross"
+	elif [ ${pkg} = "security/kf5-kdesu" ]; then warn "you need to use USE_KDE+=kdesu"
+	elif [ ${pkg} = "sysutils/kf5-baloo" ]; then warn "you need to use USE_KDE+=baloo5"
+	elif [ ${pkg} = "sysutils/kf5-bluez-qt" ]; then warn "you need to use USE_KDE+=bluez-qt"
+	elif [ ${pkg} = "textproc/kf5-sonnet" ]; then warn "you need to use USE_KDE+=sonnet"
+	elif [ ${pkg} = "www/kf5-kdewebkit" ]; then warn "you need to use USE_KDE+=kdewebkit"
+	elif [ ${pkg} = "www/kf5-khtml" ]; then warn "you need to use USE_KDE+=khtml"
+	elif [ ${pkg} = "x11-themes/kf5-breeze-icons" ]; then warn "you need to use USE_KDE+=breeze-icons"
+	elif [ ${pkg} = "x11-themes/kf5-oxygen-icons5" ]; then warn "you need to use USE_KDE+=oxygen-icons5"
+	elif [ ${pkg} = "x11-toolkits/kf5-attica" ]; then warn "you need to use USE_KDE+=attica5"
+	elif [ ${pkg} = "x11/kf5-frameworkintegration" ]; then warn "you need to use USE_KDE+=frameworkintegration"
+	elif [ ${pkg} = "x11/kf5-kded" ]; then warn "you need to use USE_KDE+=kded"
+	elif [ ${pkg} = "x11/kf5-kdelibs4support" ]; then warn "you need to use USE_KDE+=kdelibs4support"
+	elif [ ${pkg} = "x11/kf5-plasma-framework" ]; then warn "you need to use USE_KDE+=plasma-framework"
+	elif expr ${pkg} : '.*/kf5-.*' > /dev/null; then
+		warn "you need USE_KDE+=$(echo ${pkg} | sed -E 's|.*/kf5-k||')"
 	# sdl-related
 	elif [ ${pkg} = 'devel/sdl12' ]; then
 		warn "you need USE_SDL+=sdl"
@@ -556,6 +588,9 @@ proxydeps_suggest_uses() {
 	# motif
 	elif [ ${pkg} = "x11-toolkits/lesstif" -o ${pkg} = "x11-toolkits/open-motif" ]; then
 		warn "you need USES+=motif"
+	# ncurses
+	elif [ ${pkg} = "devel/ncurses" ]; then
+		warn "you need USES+=ncurses"
 	# objc
 	elif [ ${pkg} = "lang/libobjc2" ]; then
 		warn "you need USES+=objc"
@@ -627,11 +662,21 @@ proxydeps() {
 			# No results presents a blank line from heredoc.
 			[ -z "${dep_file}" ] && continue
 			dep_file=$(subst_dep_file ${dep_file})
+			# Skip files we already checked.
 			if listcontains ${dep_file} "${already}"; then
 				continue
 			fi
 			if $(pkg which -q ${dep_file} > /dev/null 2>&1); then
 				dep_file_pkg=$(pkg which -qo ${dep_file})
+
+				# Check that the .so we need has a SONAME
+				if [ "${dep_file_pkg}" != "${PKGORIGIN}" ]; then
+					if ! readelf -d "${dep_file}" | grep -q SONAME; then
+						err "${file} is linked to ${dep_file} which does not have a SONAME.  ${dep_file_pkg} needs to be fixed."
+					fi
+				fi
+
+				# If we don't already depend on it, and we don't provide it
 				if ! listcontains ${dep_file_pkg} "${LIB_RUN_DEPENDS} ${PKGORIGIN}"; then
 					err "${file} is linked to ${dep_file} from ${dep_file_pkg} but it is not declared as a dependency"
 					proxydeps_suggest_uses ${dep_file_pkg} ${dep_file}
@@ -643,16 +688,16 @@ proxydeps() {
 			fi
 			already="${already} ${dep_file}"
 		done <<-EOT
-		$(LD_LIBRARY_PATH=${LOCALBASE}/lib ldd -a "${STAGEDIR}${file}" | \
+		$(ldd -a "${STAGEDIR}${file}" | \
 			awk '\
 			BEGIN {section=0}\
 			/^\// {section++}\
 			!/^\// && section<=1 && ($3 ~ "^'${PREFIX}'" || $3 ~ "^'${LOCALBASE}'") {print $3}')
 		EOT
 	done <<-EOT
-	$(cd ${STAGEDIR} && find -s . -type f \( -perm +111 -o -name '*.so*' \) | \
+	$(list_stagedir_elfs | \
 		file -F $'\1' -f - | \
-		grep -a 'ELF.*dynamically linked' | \
+		grep -a 'ELF.*FreeBSD.*dynamically linked' | \
 		cut -f 1 -d $'\1'| \
 		sed -e 's/^\.//')
 	EOT
@@ -662,9 +707,79 @@ proxydeps() {
 	return ${rc}
 }
 
+sonames() {
+	[ -n "${BUNDLE_LIBS}" ] && return 0
+	while read f; do
+		# No results presents a blank line from heredoc.
+		[ -z "${f}" ] && continue
+		# Ignore symlinks
+		[ -f "${f}" -a ! -L "${f}" ] || continue
+		if ! readelf -d ${f} | grep -q SONAME; then
+			warn "${f} doesn't have a SONAME."
+			warn "pkg(8) will not register it as being provided by the port."
+			warn "If another port depend on it, pkg will not be able to know where it comes from."
+			case "${f}" in
+				${STAGEDIR}${PREFIX}/lib/*/*)
+					warn "It is in a subdirectory, it may not be used in another port."
+					;;
+				*)
+					warn "It is directly in ${PREFIX}/lib, it is probably used by other ports."
+					;;
+			esac
+		fi
+	# Use heredoc to avoid losing rc from find|while subshell
+	done <<-EOT
+	$(find ${STAGEDIR}${PREFIX}/lib -name '*.so.*')
+	EOT
+}
+
+perlcore() {
+	local portname version module gotsome
+	[ -x "${LOCALBASE}/bin/corelist" ] || return 0
+	for dep in ${UNIFIED_DEPENDS}; do
+		portname=$(expr "${dep}" : ".*/p5-\(.*\)")
+		if [ -n "${portname}" ]; then
+			gotsome=1
+			module=$(echo ${portname}|sed -e 's/-/::/g')
+			version=$(expr "${dep}" : ".*>=*\([^:<]*\)")
+
+			while read l; do
+				case "${l}" in
+					*was\ not\ in\ CORE*)
+						# This never was with Perl
+						# CORE, so nothing to do here
+						;;
+					*and\ removed*)
+						# This was in Perl CORE but has
+						# been removed since.
+						warn "${dep##*:} was in Perl CORE.  Check with \`corelist ${module} ${version}\` and \`corelist -a ${module}\` if it should be conditionally added depending on PERL_LEVEL"
+						;;
+					*deprecated*in*)
+						# This is in Perl CORE but is
+						# deprecated.
+						warn "${dep##*:} is in Perl CORE but deprecated.  Check with \`corelist ${module} ${version}\` and \`corelist -a ${module}\` if the dependency is really needed or if it should be conditionally added depending on PERL_LEVEL"
+						;;
+					*was\ first\ released*)
+						# This is in Perl CORE and is
+						# maybe not needed.
+						warn "${dep##*:} is present in Perl CORE.  Check with \`corelist ${module} ${version}\` and \`corelist -a ${module}\` if the dependency is really needed or if it should be conditionally added depending on PERL_LEVEL"
+						;;
+					*)
+						err "This line is not handled: \"${l}\""
+				esac
+			done <<-EOT
+			$(${LOCALBASE}/bin/corelist "${module}"|tail -1)
+			EOT
+		fi
+	done
+	if [ -n "${gotsome}" ] && ! pkg info -e devel/p5-Module-CoreList; then
+		notice "You have some Perl modules as dependencies but you do not have devel/p5-Module-CoreList installed, the perlcore QA check gets better results when using it, especially with older Perl versions."
+	fi
+}
+
 checks="shebang symlinks paths stripped desktopfileutils sharedmimeinfo"
 checks="$checks suidfiles libtool libperl prefixvar baselibs terminfo"
-checks="$checks proxydeps"
+checks="$checks proxydeps sonames perlcore"
 
 ret=0
 cd ${STAGEDIR}

@@ -13,10 +13,9 @@ COMMENT=	Multipurpose relay and more
 
 LICENSE=	GPLv2
 
-USES=		compiler cpe tar:bzip2
+USES=		compiler cpe ssl tar:bzip2
 GNU_CONFIGURE=	yes
 USE_RC_SUBR=	socat
-USE_OPENSSL=	yes
 
 CPE_VENDOR=	dest-unreach
 
@@ -45,9 +44,5 @@ do-install:
 	${INSTALL_MAN} ${WRKSRC}/doc/${PORTNAME}.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	cd ${WRKSRC} && ${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}
-
-.if ${ARCH} == "arm"
-BROKEN=		Does not configure on arm
-.endif
 
 .include <bsd.port.post.mk>

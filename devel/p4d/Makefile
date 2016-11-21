@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	p4d
-PORTVERSION=	2016.1.1411799
+PORTVERSION=	2016.1.1454320
 CATEGORIES=	devel
 MASTER_SITES=	ftp://ftp.perforce.com/perforce/${P4VERSION}/bin.${PLATFORM}/ \
 		http://filehost.perforce.com/perforce/${P4VERSION}/bin.${PLATFORM}/
@@ -14,6 +14,8 @@ MAINTAINER=	gordon@FreeBSD.org
 COMMENT=	Perforce server
 
 RUN_DEPENDS=	p4:devel/p4
+
+BROKEN=		checksum mismatch
 
 RESTRICTED=	Restricted distribution
 

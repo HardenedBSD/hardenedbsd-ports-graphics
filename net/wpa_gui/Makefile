@@ -3,6 +3,7 @@
 
 PORTNAME=	wpa_gui
 PORTVERSION=	2.5
+PORTREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	http://w1.fi/releases/ \
 		http://partmedia.users.sourceforge.net/dist/:icons \
@@ -16,20 +17,36 @@ COMMENT=	Qt-based frontend for wpa_supplicant
 
 LICENSE=	BSD3CLAUSE
 
+PATCH_WRKSRC=	${WRKDIR}/${DISTNAME}
 WRKSRC_SUBDIR=	wpa_supplicant/wpa_gui-qt4
 
-PLIST_FILES=	sbin/wpa_gui \
+PLIST_FILES=	"@mode 4555" \
+		sbin/wpa_gui \
+		"@mode" \
 		share/applications/wpa_gui.desktop \
 		share/icons/hicolor/16x16/apps/wpa_gui.png \
-		share/icons/hicolor/scalable/apps/wpa_gui.svg
+		share/icons/hicolor/scalable/apps/wpa_gui.svgz \
+		man/man8/wpa_gui.8.gz
 
-USE_QT4=	gui moc_build rcc_build uic_build
+SUB_FILES=	pkg-message
+SUB_LIST=	LOCALBASE=${LOCALBASE}
+
+USE_QT4=	corelib gui moc_build rcc_build uic_build \
+		imageformats_run
 USES=		qmake
+INSTALLS_ICONS=	yes
+
+OPTIONS_DEFINE=	DEBUG
 
 post-patch:
 	@${REINPLACE_CMD} -e \
 		'/^Exec/s|=.*|=${PREFIX}/sbin/wpa_gui|' \
 		${WRKSRC}/wpa_gui.desktop
+
+post-patch-DEBUG-on:
+	@${REINPLACE_CMD} -e \
+		's| release| debug|' \
+		${WRKSRC}/wpa_gui.pro
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/sbin
@@ -38,7 +55,9 @@ do-install:
 	${INSTALL_DATA} ${WRKDIR}/icons/hicolor/16x16/apps/wpa_gui.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/16x16/apps
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/scalable/apps
-	${INSTALL_DATA} ${WRKSRC}/icons/wpa_gui.svg \
-		${STAGEDIR}${PREFIX}/share/icons/hicolor/scalable/apps
+	@${GZIP_CMD} < ${WRKSRC}/icons/wpa_gui.svg \
+		> ${STAGEDIR}${PREFIX}/share/icons/hicolor/scalable/apps/wpa_gui.svgz
+	@${GZIP_CMD} < ${WRKSRC}/../doc/docbook/wpa_gui.8 \
+		> ${STAGEDIR}${PREFIX}/man/man8/wpa_gui.8.gz
 
 .include <bsd.port.mk>

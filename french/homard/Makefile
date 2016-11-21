@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	homard
-DISTVERSION=	11.2-1
+DISTVERSION=	11.7-1
 CATEGORIES=	french cad linux
 
 MAINTAINER=	thierry@FreeBSD.org
@@ -17,8 +17,7 @@ RESTRICTED=	The free downloading of HOMARD software is only allowed for coupling
 
 ONLY_FOR_ARCHS=	i386 amd64
 
-USE_LINUX=	yes
-USES=		python
+USES=		linux python
 REINPLACE_ARGS=	-i ""
 
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION:R}

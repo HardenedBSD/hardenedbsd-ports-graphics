@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	unbound
-PORTVERSION=	1.5.9
-PORTREVISION=	1
+PORTVERSION=	1.5.10
 CATEGORIES=	dns
 MASTER_SITES=	http://unbound.net/downloads/
 
@@ -12,6 +11,8 @@ COMMENT=	Validating, recursive, and caching DNS resolver
 
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
+
+BROKEN_aarch64=	Fails to link: missing sbrk
 
 USES+=		autoreconf cpe libtool ssl
 CPE_VENDOR=	nlnetlabs

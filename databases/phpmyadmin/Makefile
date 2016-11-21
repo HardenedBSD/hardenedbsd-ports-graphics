@@ -13,15 +13,12 @@ COMMENT=	Set of PHP-scripts to manage MySQL over the web
 
 LICENSE=	GPLv2
 
-BROKEN_powerpc64=	Does not build
-
 USES=		cpe php:web tar:xz
 CPE_PRODUCT=	${PORTNAME:tl}
 
 NO_ARCH=	yes
 NO_BUILD=	yes
 .if !defined(WITHOUT_PHP_DEPENDS)
-IGNORE_WITH_PHP=5 54
 USE_PHP=	ctype session filter mbstring json spl mysqli
 .endif
 

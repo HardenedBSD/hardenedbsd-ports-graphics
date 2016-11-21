@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	cfitsio
-PORTVERSION=	3.370
-PORTREVISION=	1
+PORTVERSION=	3.390
 CATEGORIES=	astro
 MASTER_SITES=	http://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/ \
 		http://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/oldvers/ \
@@ -33,8 +32,10 @@ PLIST_SUB=	SHLIB_MAJOR_VER=${SHLIB_MAJOR_VER} \
 		SHLIB_MINOR_VER=${SHLIB_MINOR_VER}
 PORTDOCS=	*
 
-SHLIB_MAJOR_VER=2
+SHLIB_MAJOR_VER=5
 SHLIB_MINOR_VER=${PORTVERSION:S|0$||}
+
+BROKEN_sparc64=	Fails to compile: malloc.h has been replaced by stdlib.h
 
 do-install:
 	cd ${WRKSRC}/ && ${INSTALL_DATA} drvrsmem.h fitsio.h fitsio2.h longnam.h ${STAGEDIR}${PREFIX}/include/

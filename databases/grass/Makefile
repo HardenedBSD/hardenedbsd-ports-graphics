@@ -2,8 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	grass
-PORTVERSION=	6.4.5
-PORTREVISION=	3
+PORTVERSION=	6.4.6
+PORTREVISION=	1
 PORTEPOCH=	2
 CATEGORIES=	databases geography
 MASTER_SITES=	http://grass.osgeo.org/%SUBDIR%/ \

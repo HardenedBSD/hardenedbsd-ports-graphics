@@ -64,7 +64,7 @@ DEBUG_CMAKE_OFF=	-DCMAKE_BUILD_TYPE=Release
 
 GRASS_BUILD_DEPENDS=	grass64:databases/grass
 GRASS_RUN_DEPENDS=	grass64:databases/grass
-GRASS_CMAKE_ON=		-DWITH_GRASS:BOOL=TRUE -DGRASS_PREFIX=${LOCALBASE}/grass-6.4.5
+GRASS_CMAKE_ON=		-DWITH_GRASS:BOOL=TRUE -DGRASS_PREFIX=${LOCALBASE}/grass-6.4.6
 GRASS_CMAKE_OFF=	-DWITH_GRASS:BOOL=FALSE
 GRASS_FORCE_MAKE_JOBS=	NO
 
@@ -91,7 +91,7 @@ PYTHON_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}future>=0.14.3:devel/py-future \
 			${PYTHON_PKGNAMEPREFIX}gdal>=2.0.1:graphics/py-gdal \
 			${PYTHON_PKGNAMEPREFIX}matplotlib>=1.4.3:math/py-matplotlib \
 			${PYTHON_PKGNAMEPREFIX}mock>=1.3.0:devel/py-mock \
-			${PYTHON_PKGNAMEPREFIX}numpy>=1.9.1:math/py-numpy \
+			${PYTHON_PKGNAMEPREFIX}numpy>=1.9.1,1:math/py-numpy \
 			${PYTHON_PKGNAMEPREFIX}pip>=8.0.2:devel/py-pip \
 			${PYTHON_PKGNAMEPREFIX}psycopg2>=2.5.3:databases/py-psycopg2 \
 			${PYTHON_PKGNAMEPREFIX}pyspatialite>=3.0.1:databases/pyspatialite \

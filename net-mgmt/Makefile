@@ -69,6 +69,7 @@
     SUBDIR += flowviewer
     SUBDIR += fprobe
     SUBDIR += glpi-plugins-fusioninventory-server
+    SUBDIR += gnu-ipcalc
     SUBDIR += grepcidr
     SUBDIR += grepip
     SUBDIR += gsnmp
@@ -257,7 +258,6 @@
     SUBDIR += pandorafms_server
     SUBDIR += percona-monitoring-plugins
     SUBDIR += pftabled
-    SUBDIR += php55-snmp
     SUBDIR += php56-snmp
     SUBDIR += php70-snmp
     SUBDIR += phpip
@@ -270,6 +270,7 @@
     SUBDIR += pnp-icinga
     SUBDIR += pnp-icinga2
     SUBDIR += portmon
+    SUBDIR += prometheus
     SUBDIR += py-flowtools
     SUBDIR += py-ipcalc
     SUBDIR += py-ipy
@@ -279,6 +280,7 @@
     SUBDIR += py-snmp4
     SUBDIR += py-snmp4-apps
     SUBDIR += py-snmp4-mibs
+    SUBDIR += py-snmp_passpersist
     SUBDIR += py-yapsnmp
     SUBDIR += qkismet
     SUBDIR += rackmonkey
@@ -289,6 +291,7 @@
     SUBDIR += remarp
     SUBDIR += resource-agents
     SUBDIR += riemann
+    SUBDIR += riemann-c-client
     SUBDIR += rotorouter
     SUBDIR += routers2
     SUBDIR += routers2-extensions
@@ -354,5 +357,9 @@
     SUBDIR += zabbix3-frontend
     SUBDIR += zabbix3-proxy
     SUBDIR += zabbix3-server
+    SUBDIR += zabbix32-agent
+    SUBDIR += zabbix32-frontend
+    SUBDIR += zabbix32-proxy
+    SUBDIR += zabbix32-server
 
 .include <bsd.port.subdir.mk>

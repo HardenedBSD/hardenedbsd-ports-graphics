@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	virtualbox-ose
-PORTVERSION=	5.0.26
-PORTREVISION=	1
+PORTVERSION=	5.1.8
 CATEGORIES=	emulators
 MASTER_SITES=	http://download.virtualbox.org/virtualbox/${PORTVERSION}/
 PKGNAMESUFFIX=	-kmod
@@ -75,6 +74,13 @@ KMK_ARCH=	freebsd.${ARCH}
 
 .include <bsd.port.pre.mk>
 
+.if ${OSREL:R} >= 11
+SYMBOLSUFFIX=	debug
+.else
+SYMBOLSUFFIX=	symbols
+.endif
+PLIST_SUB+=	SYMBOLSUFFIX=${SYMBOLSUFFIX}
+
 post-patch:
 	@${ECHO} 'VBOX_WITH_VBOXDRV = 1' > ${WRKSRC}/LocalConfig.kmk
 	@${ECHO} 'VBOX_WITH_NETFLT = 1' >> ${WRKSRC}/LocalConfig.kmk
@@ -84,20 +90,21 @@ post-patch:
 	@${ECHO} 'VBOX_WITH_NETFLT_VIMAGE = 1' >> ${WRKSRC}/LocalConfig.kmk
 .endif
 	@${REINPLACE_CMD} -e 's|/usr/local|${LOCALBASE}|g' \
-		${WRKSRC}/Config.kmk \
-		${WRKSRC}/configure
-	@${REINPLACE_CMD} -e 's|\$$KBUILDDIR_BIN/kmk_sed|${LOCALBASE}/bin/kmk_sed|g' ${WRKSRC}/configure
+	    ${WRKSRC}/Config.kmk ${WRKSRC}/configure
+	@${REINPLACE_CMD} \
+	    -e 's|\$$KBUILDDIR_BIN/kmk_sed|${LOCALBASE}/bin/kmk_sed|g' \
+	    ${WRKSRC}/configure
 
 pre-build:
-	cd ${WRKSRC}/src/VBox/HostDrivers && \
-	    ${SH} -c '. ${WRKSRC}/env.sh && ${KMK_CONFIG} ${LOCALBASE}/bin/kmk ${KMK_FLAGS}'
+	cd ${WRKSRC}/src/VBox/HostDrivers && ${SH} -c \
+	    '. ${WRKSRC}/env.sh && ${KMK_CONFIG} ${LOCALBASE}/bin/kmk ${KMK_FLAGS}'
 
 do-install:
 	${MKDIR} ${STAGEDIR}${KMODDIR}
 .for i in ${VBOX_KMODS}
 	${INSTALL_KLD} ${VBOX_BIN}/${i}/${i}.ko ${STAGEDIR}${KMODDIR}
 .if ${PORT_OPTIONS:MDEBUG}
-	${INSTALL_KLD} ${VBOX_BIN}/${i}/${i}.ko.symbols ${STAGEDIR}${KMODDIR}
+	${INSTALL_KLD} ${VBOX_BIN}/${i}/${i}.ko.${SYMBOLSUFFIX} ${STAGEDIR}${KMODDIR}
 .endif
 .endfor
 

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	elasticsearch
-PORTVERSION=	2.3.0
+PORTVERSION=	2.4.1
 PORTREVISION=	1
 CATEGORIES=	textproc java devel
 MASTER_SITES=	http://download.elasticsearch.org/${PORTNAME}/${PORTNAME}/ \
@@ -14,7 +14,7 @@ COMMENT=	Full-text search engine for Java
 
 LICENSE=	APACHE20
 
-CONFLICTS=	elasticsearch-[0-9]*
+CONFLICTS=	elasticsearch-[0-9]* elasticsearch5-[0-9]*
 
 USES=		cpe
 NO_ARCH=	yes
@@ -27,7 +27,7 @@ OPTIONS_DEFINE=	DOCS
 
 .include <bsd.port.options.mk>
 
-LUCENEVER=	5.5.0
+LUCENEVER=	5.5.2
 CONFIG_FILES=	elasticsearch.yml logging.yml
 BINS=		elasticsearch.in.sh \
 		elasticsearch \
@@ -73,6 +73,7 @@ do-install:
 	(cd ${WRKSRC}/lib && ${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/lib/elasticsearch/lib/ "-name *\.jar")
 
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/elasticsearch/modules
+	(cd ${WRKSRC}/modules && ${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/lib/elasticsearch/modules/)
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/elasticsearch/plugins
 	@${MKDIR} ${STAGEDIR}${PREFIX}/libexec/elasticsearch
 	@${MKDIR} ${STAGEDIR}${ELASTIC_DBDIR} ${STAGEDIR}${ELASTIC_LOGDIR}
@@ -83,6 +84,5 @@ do-install-DOCS-on:
 .for f in ${DOCS}
 	${INSTALL_DATA} ${WRKSRC}/${f} ${STAGEDIR}${DOCSDIR}
 .endfor
-
 
 .include <bsd.port.mk>

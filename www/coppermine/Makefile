@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	coppermine
-PORTVERSION=	1.5.42
+PORTVERSION=	1.5.44
 CATEGORIES=	www
 MASTER_SITES=	SF/${PORTNAME}/Coppermine/1.5.x/
 DISTNAME=	cpg${PORTVERSION}
@@ -11,15 +11,13 @@ COMMENT=	Web picture gallery script
 
 LICENSE=	GPLv3
 
-BROKEN_powerpc64=	Does not build
-
 OPTIONS_DEFINE=	DOCS IMAGEMAGICK
 IMAGEMAGICK_DESC=	Use ImageMagick instead of PHP GD extension
 
 IMAGEMAGICK_RUN_DEPENDS+=	convert:graphics/ImageMagick
 
 USE_PHP=	mysql pcre ctype
-USES=		zip
+USES=		php zip
 
 NO_BUILD=	yes
 NO_ARCH=	yes
@@ -39,9 +37,6 @@ pre-everything::
 	@${ECHO_MSG} "By default, coppermine depends on PHP with GD support."
 	@${ECHO_MSG} "You may select IMAGEMAGICK to depend on ImageMagick instead of GD."
 	@${ECHO_MSG} ""
-
-post-extract:
-	@${CHMOD} -R o-w ${WRKSRC}/
 
 pre-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}/

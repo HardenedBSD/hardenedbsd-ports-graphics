@@ -3,6 +3,7 @@
 
 PORTNAME=	yourls
 PORTVERSION=	1.7.1
+PORTREVISION=	1
 CATEGORIES=	www
 
 MAINTAINER=	ports@FreeBSD.org
@@ -10,8 +11,6 @@ COMMENT=	Your Own URL Shortener
 
 LICENSE=	ISCL MIT
 LICENSE_COMB=	multi
-
-BROKEN_powerpc64=	Does not build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	${PORTNAME:tu}
@@ -21,7 +20,7 @@ NO_BUILD=	yes
 NO_ARCH=	yes
 
 USES=		cpe
-USE_PHP=	bcmath curl json mysql pcre xml
+USE_PHP=	bcmath curl json mysqli pcre xml
 
 SUB_LIST+=	PKGNAME=${PKGNAME}
 SUB_FILES+=	pkg-message

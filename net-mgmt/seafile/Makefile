@@ -40,8 +40,6 @@ GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
 CONFIGURE_ENV=	SSL_CFLAGS="${OPENSSLINC}" SSL_LIBS="-L${OPENSSLLIB} -lssl -lcrypto"
 
-PATHFIX_MAKEFILEIN=	Makefile.am
-
 CONFIGURE_ARGS=	--enable-server
 INSTALL_TARGET=	install-strip
 CPPFLAGS+=	-I${LOCALBASE}/include -I${LOCALBASE}/include/evhtp
@@ -83,9 +81,7 @@ RIAK_CONFIGURE_ENABLE=	riak
 RIAK_RUN_DEPENDS=	riak:databases/riak
 
 OPTIONS_DEFAULT=	FUSE
-.if defined(DFLYVERSION)
-OPTIONS_DEFAULT=
-.endif
+OPTIONS_EXCLUDE_DragonFly=	FUSE
 
 .include <bsd.port.options.mk>
 
@@ -119,7 +115,7 @@ post-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/scripts/seaf-cli-wrapper.sh ${STAGEDIR}${PREFIX}/bin/seaf-cli
 	(cd ${STAGEDIR}${PREFIX}/lib && \
 		${COPYTREE_SHARE} ${PYTHON_VERSION} ${STAGEDIR}${PREFIX}/${SEALIB})
-	@${RM} -rf ${STAGEDIR}${PREFIX}/lib/${PYTHON_VERSION} \
+	@${RM} -r ${STAGEDIR}${PREFIX}/lib/${PYTHON_VERSION} \
 		${WRKSRC}/scripts/seaf-cli-wrapper.sh \
 		${WRKSRC}/scripts/sqlite2mysql.[ps][yh] \
 		${WRKSRC}/scripts/setup-seafile.sh \

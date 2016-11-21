@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	qTox
-PORTVERSION=	1.5.1
+PORTVERSION=	1.5.2
 DISTVERSIONPREFIX=	v
 CATEGORIES=	net-im net-p2p
 
@@ -13,8 +13,8 @@ LICENSE=	GPLv3
 
 BUILD_DEPENDS=	${LOCALBASE}/include/linux/videodev2.h:multimedia/v4l_compat
 LIB_DEPENDS=	libtoxcore.so:net-im/tox \
-		libopencv_highgui.so:graphics/opencv \
-		libopencv_core.so:graphics/opencv-core \
+		libopencv_highgui.so:graphics/opencv2 \
+		libopencv_core.so:graphics/opencv2-core \
 		libavcodec.so:multimedia/ffmpeg \
 		libvpx.so:multimedia/libvpx \
 		libfilteraudio.so:audio/libfilteraudio \
@@ -45,6 +45,13 @@ PLIST_FILES=	bin/qtox \
 PLIST_FILES+=	share/icons/hicolor/${SZ}/apps/qtox.png
 .endfor
 
+.include <bsd.port.pre.mk>
+
+.if ${CHOSEN_COMPILER_TYPE} == "gcc" && ${ARCH} == i386 && !${CFLAGS:M-march=*}
+# Needed for __atomic_fetch_add_8
+CFLAGS+=	-march=i586
+.endif
+
 pre-everything::
 	@${ECHO_MSG}
 	@${ECHO_MSG} "Warning: qTox won't build if the option NaCl was selected for Tox!"
@@ -73,4 +80,4 @@ post-install:
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${SZ}/apps/qtox.png
 .endfor
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

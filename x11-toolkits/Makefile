@@ -11,7 +11,6 @@
     SUBDIR += blt
     SUBDIR += bwidget
     SUBDIR += c++-gtk-utils
-    SUBDIR += elementary
     SUBDIR += flowcanvas
     SUBDIR += fltk
     SUBDIR += fltk-devel
@@ -83,6 +82,17 @@
     SUBDIR += irrlicht
     SUBDIR += itk
     SUBDIR += iwidgets
+    SUBDIR += kf5-attica
+    SUBDIR += kf5-kcompletion
+    SUBDIR += kf5-kconfigwidgets
+    SUBDIR += kf5-kdesignerplugin
+    SUBDIR += kf5-kguiaddons
+    SUBDIR += kf5-kitemviews
+    SUBDIR += kf5-kjobwidgets
+    SUBDIR += kf5-ktextwidgets
+    SUBDIR += kf5-kwidgetsaddons
+    SUBDIR += kf5-kxmlgui
+    SUBDIR += kirigami
     SUBDIR += lesstif
     SUBDIR += libXaw
     SUBDIR += libXmu
@@ -109,6 +119,11 @@
     SUBDIR += linux-c6-pango
     SUBDIR += linux-c6-qt47-x11
     SUBDIR += linux-c6-tk85
+    SUBDIR += linux-c7-gtk2
+    SUBDIR += linux-c7-openmotif
+    SUBDIR += linux-c7-pango
+    SUBDIR += linux-c7-qt-x11
+    SUBDIR += linux-c7-tk85
     SUBDIR += linux-f10-blt
     SUBDIR += linux-f10-gtk2
     SUBDIR += linux-f10-openmotif
@@ -202,8 +217,6 @@
     SUBDIR += py-sexy
     SUBDIR += py-tkinter
     SUBDIR += py-tktreectrl
-    SUBDIR += py-traitsbackendwx
-    SUBDIR += py-traitsgui
     SUBDIR += py-vte
     SUBDIR += py-wax
     SUBDIR += py-wxPython-common
@@ -223,9 +236,9 @@
     SUBDIR += qt5-gui
     SUBDIR += qt5-quick
     SUBDIR += qt5-quickcontrols
+    SUBDIR += qt5-quickcontrols2
     SUBDIR += qt5-uiplugin
     SUBDIR += qt5-widgets
-    SUBDIR += qtada
     SUBDIR += qtermwidget
     SUBDIR += qwt5
     SUBDIR += qwt5-designerplugin

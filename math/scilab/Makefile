@@ -3,7 +3,7 @@
 
 PORTNAME=	scilab
 PORTVERSION=	5.5.2
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	math cad java
 MASTER_SITES=	http://www.scilab.org/download/${PORTVERSION}/
 DISTFILES=	${DISTNAME}-src${EXTRACT_SUFX}
@@ -115,6 +115,7 @@ TK_CONFIGURE_ON=	--with-tk-library=${LOCALBASE}/lib \
 			--with-tcl-include=${TCL_INCLUDEDIR}
 TK_USES=	tk
 TK_USE=		XORG=x11
+TK_RUN_DEPENDS=	${LOCALBASE}/lib/bwidget/init.tcl:x11-toolkits/bwidget
 
 .if !exists(/usr/include/omp.h)
 CONFIGURE_ARGS+=	--without-openmp

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	piwigo
-PORTVERSION=	2.8.1
+PORTVERSION=	2.8.2
 CATEGORIES=	www
 MASTER_SITES=	http://piwigo.org/download/dlcounter.php?code=${PORTVERSION}&/
 
@@ -13,6 +13,7 @@ LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/doc/COPYING
 
 NO_BUILD=	yes
+NO_ARCH=	yes
 USE_PHP=	calendar ctype dom exif filter gd gettext hash iconv json \
 		mbstring mcrypt mysql mysqli openssl pcre pdf pdo posix \
 		session simplexml sockets spl tokenizer xml xmlreader \
@@ -49,10 +50,6 @@ RUN_DEPENDS+=	${LOCALBASE}/bin/convert:graphics/ImageMagick-nox11
 .endif
 .endif
 
-post-extract:
-	@${FIND} -d ${WRKSRC} -type d -exec ${CHMOD} 755 {} \;
-	@${FIND} -d ${WRKSRC} -type f -exec ${CHMOD} ${SHAREMODE} {} \;
-
 pre-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}/
 	@cd ${WRKSRC}/doc/ && ${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}/
@@ -63,7 +60,7 @@ pre-install-EXAMPLES-on:
 
 do-install:
 	@cd ${WRKSRC}/doc/ && ${RM} ${PORTDOCS}
-	@${RM} -fr ${WRKSRC}/tools ${WRKSRC}/_data/dummy.txt
+	@${RM} -r ${WRKSRC}/tools ${WRKSRC}/_data/dummy.txt
 	@${INSTALL} -d ${STAGEDIR}${WWWDIR}
 	@${TAR} -C ${WRKSRC} -cf - . | \
 	${TAR} --unlink -C ${STAGEDIR}${WWWDIR} -xf -

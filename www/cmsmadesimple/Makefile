@@ -12,8 +12,6 @@ COMMENT=	Simple Open Source CMS
 
 LICENSE=	GPLv2
 
-BROKEN_powerpc64=	Does not build
-
 USE_PHP=	mysql tokenizer gd
 
 NO_BUILD=	yes
@@ -28,7 +26,7 @@ WRITABLE_DIRS=	tmp tmp/templates_c tmp/cache \
 		uploads uploads/images modules
 
 post-extract:
-	cd ${WRKSRC} && ${RM} -f config.php
+	cd ${WRKSRC} && ${RM} config.php
 
 do-install:
 .for i in ${CMS_DIRS}

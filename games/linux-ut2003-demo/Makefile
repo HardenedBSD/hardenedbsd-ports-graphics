@@ -3,6 +3,7 @@
 
 PORTNAME=	ut2003-demo
 PORTVERSION=	2206
+PORTREVISION=	2
 CATEGORIES=	games linux
 MASTER_SITES=	GENTOO
 PKGNAMEPREFIX=	linux-
@@ -12,8 +13,8 @@ EXTRACT_SUFX=	.sh.bin
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Unreal Tournament 2003 demo
 
-USE_LINUX=	yes
-USE_LINUX_APPS=	sdl12 xorglibs
+USES=		linux
+USE_LINUX=	dri sdl12 xorglibs
 RESTRICTED=	Redistribution is limited, see license
 NO_BUILD=	yes
 NO_WRKSUBDIR=	yes
@@ -34,15 +35,7 @@ PORTDOCS=	*
 LIBDIRS=	Animations Benchmark ForceFeedback KarmaData Maps Music \
 		Sounds StaticMeshes System Textures Web
 
-OPTIONS_DEFINE=	DOCS NVIDIA_GL
-
-NVIDIA_GL_RUN_DEPENDS=	${LINUXBASE}/usr/lib/libGL.so.1:x11/nvidia-driver
-
-.include <bsd.port.options.mk>
-
-.if ! ${PORT_OPTIONS:MNVIDIA_GL}
-USE_LINUX_APPS+=dri
-.endif
+OPTIONS_DEFINE=	DOCS
 
 do-extract:
 	@${MKDIR} ${WRKSRC}
@@ -51,7 +44,7 @@ do-extract:
 	@cd ${WRKSRC} && ${TAR} zxf setupstuff.tar.gz
 
 pre-install:
-	@${RM} -f ${PLIST}
+	@${RM} ${PLIST}
 	@cd ${WRKSRC} && \
 	${FIND} ${LIBDIRS} -type f | ${SORT} \
 		| ${SED} -e 's|^|${UTDIR_REL}/|' >> ${PLIST}

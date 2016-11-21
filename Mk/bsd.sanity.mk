@@ -31,10 +31,6 @@ DEV_WARNING+=	"Not validating first entry in CATEGORIES due to being outside of 
 #WARNING+=	"WITHOUT_X11 is deprecated use X11 option instead"
 #.endif
 
-#.if !defined(LICENSE)
-#DEV_WARNING+=	"No license is defined consider adding one"
-#.endif
-
 .if defined(USE_PERL5) && ${USE_PERL5} == yes
 DEV_ERROR+=	"USE_PERL5=yes is unsupported, please use USES=perl5 instead"
 .endif
@@ -120,6 +116,8 @@ DEV_ERROR+=	"USE_DOS2UNIX is no longer supported, please use USES=dos2unix"
 .if ${LICENSE:MBSD}
 DEV_WARNING+=	"LICENSE must not contain BSD, instead use BSD[234]CLAUSE"
 .endif
+.else
+DEV_WARNING+=	"Please set LICENSE for this port"
 .endif
 
 .if defined(USE_PYDISTUTILS) && ${USE_PYDISTUTILS} == "easy_install"

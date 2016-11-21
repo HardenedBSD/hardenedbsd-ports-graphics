@@ -48,6 +48,7 @@ fi
 start_precmd=${name}_prestart
 stop_precmd=${name}_prestop
 stop_cmd=${name}_stop
+status_cmd="${name}_status"
 reload_cmd=${name}_reload
 extra_commands="reload"
 
@@ -57,10 +58,15 @@ command_args="&"
 
 cbsdd_prestart() {
 	%%PREFIX%%/bin/cbsd task mode=flushall > /dev/null 2>&1
+
+	. ${distdir}/initenv.subr
+	. ${inventory}
+
 	%%PREFIX%%/bin/cbsd sysinv mode=update
 	%%PREFIX%%/bin/cbsd netinv
-
-	. ${inventory}
+	update_hwinfo
+	update_netinfo
+	env sqlcolnames="1" ${miscdir}/sqlcli ${dbdir}/local.sqlite "SELECT * FROM local" > ${inventory}
 
 	[ -n "$nat_enable" ] && %%PREFIX%%/bin/cbsd naton
 	/usr/sbin/daemon -f ${rcddir}/jails-astart start
@@ -74,14 +80,31 @@ cbsdd_prestop()
 
 cbsdd_stop()
 {
-	[ -f "${pidfile}" ] && kill -9 $( cat ${pidfile} )
+	if [ -f "${pidfile}" ]; then
+		kill -9 $( /bin/cat ${pidfile} )
+		/bin/rm -f ${pidfile}
+	fi
 }
 
 cbsdd_reload()
 {
-	[ -f "${pidfile}" ] && kill -9 $( cat ${pidfile} ) > /dev/null 2>&1
+	if [ -f "${pidfile}" ]; then
+		kill -9 $( /bin/cat ${pidfile} ) > /dev/null 2>&1
+		/bin/rm -f ${pidfile}
+	fi
 	run_rc_command "start"
 	exit 0
+}
+
+cbsdd_status()
+{
+	if [ -f "${pidfile}" ]; then
+		pids=$( /bin/cat ${pidfile} )
+		echo "${name} is running as pid ${pids}."
+	else
+		echo "${name} is not running."
+		return 1
+	fi
 }
 
 run_rc_command "$1"

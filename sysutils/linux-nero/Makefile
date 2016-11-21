@@ -15,17 +15,11 @@ COMMENT=	CD/DVD disk burner
 
 RESTRICTED=	Must be downloaded from their website and a serial number must be bought
 
-ONLY_FOR_ARCHS=	i386 amd64
-USE_LINUX_RPM=	yes
-USE_LINUX_APPS=	gtk2
+USES=		linux
 USE_LDCONFIG=	yes
-BRANDELF_DIRS=	usr/bin
+USE_LINUX=	gtk2
+USE_LINUX_RPM=	nolib
 SRC_DISTFILES=
-PLIST=		${MASTERDIR}/pkg-plist
-
-# normalize permissions of symbolic links to prevent a package with
-# missing files
-post-extract:
-	${FIND} ${WRKSRC} -type l -exec ${CHMOD} -h 0755 {} \;
+PLIST=		${PKGDIR}/pkg-plist
 
 .include <bsd.port.mk>

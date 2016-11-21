@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	thunderbird
-DISTVERSION=	45.2.0
+DISTVERSION=	45.4.0
+PORTREVISION=	2
 CATEGORIES=	mail news net-im ipv6
 MASTER_SITES=	MOZILLA/${PORTNAME}/releases/${DISTVERSION}/source \
 		MOZILLA/${PORTNAME}/candidates/${DISTVERSION}-candidates/build1/source
@@ -30,8 +31,8 @@ BUILD_DEPENDS=	nspr>=4.12:devel/nspr \
 
 LIB_DEPENDS=	libv4l2.so:multimedia/libv4l
 
-EM_VERSION=	1.9.3
-L_VERSION=	4.7.2
+EM_VERSION=	1.9.5
+L_VERSION=	4.7.4
 
 SSP_UNSAFE=	yes
 USE_GECKO=	gecko
@@ -53,7 +54,6 @@ PORTNAME_ICON_SRC=	${PREFIX}/lib/${MOZILLA}/chrome/icons/default/default48.png
 SYSTEM_PREFS=	${FAKEDIR}/lib/${PORTNAME}/defaults/pref/${PORTNAME}.js
 MOZ_PIS_SCRIPTS=moz_pis_S50cleanhome
 
-OPTIONS_EXCLUDE=GSTREAMER LOGGING
 OPTIONS_DEFINE=	ENIGMAIL LIGHTNING RUST
 OPTIONS_SINGLE=	TOOLKIT
 OPTIONS_SINGLE_TOOLKIT=	GTK2 GTK3
@@ -144,7 +144,7 @@ post-install:
 	@${CHMOD} -R a+rX,go-w ${STAGEDIR}${XPI_LIBDIR}/${XPI_ID}
 	@${LN} -sf ${XPI_LIBDIR}/${XPI_ID} ${STAGEDIR}${XPI_LIBDIR}/symlinks/thunderbird 2>/dev/null || true
 	@${ECHO_CMD} '@exec ${LN} -sf %D/lib/xpi/${XPI_ID} ${LOCALBASE}/lib/thunderbird/extensions 2>/dev/null || true' >> ${TMPPLIST}
-	@${ECHO_CMD} '@unexec ${RM} -f ${LOCALBASE}/lib/thunderbird/extensions/${XPI_ID}' >> ${TMPPLIST}
+	@${ECHO_CMD} '@unexec ${RM} ${LOCALBASE}/lib/thunderbird/extensions/${XPI_ID}' >> ${TMPPLIST}
 .endif
 .if ${PORT_OPTIONS:MENIGMAIL}
 	@${MKDIR} ${STAGEDIR}${XPI_LIBDIR}/${EM_ID} ${STAGEDIR}${XPI_LIBDIR}/symlinks/${PORTNAME}
@@ -153,7 +153,7 @@ post-install:
 	@${CHMOD} -R a+rX,go-w ${STAGEDIR}${XPI_LIBDIR}/${EM_ID}
 	@${LN} -sf ${XPI_LIBDIR}/${EM_ID} ${STAGEDIR}${XPI_LIBDIR}/symlinks/${PORTNAME} 2>/dev/null || true
 	@${ECHO_CMD} '@exec ${LN} -sf %D/lib/xpi/${EM_ID} ${LOCALBASE}/lib/${PORTNAME}/extensions 2>/dev/null || true' >> ${TMPPLIST}
-	@${ECHO_CMD} '@unexec ${RM} -f ${LOCALBASE}/lib/${PORTNAME}/extensions/${EM_ID}' >> ${TMPPLIST}
+	@${ECHO_CMD} '@unexec ${RM} ${LOCALBASE}/lib/${PORTNAME}/extensions/${EM_ID}' >> ${TMPPLIST}
 .endif
 
 .include <bsd.port.post.mk>

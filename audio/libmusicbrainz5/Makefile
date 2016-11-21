@@ -2,6 +2,7 @@
 
 PORTNAME=	libmusicbrainz
 PORTVERSION=	5.1.0
+PORTREVISION=	1
 DISTVERSIONPREFIX=	release-
 CATEGORIES=	audio
 PKGNAMESUFFIX=	5
@@ -25,6 +26,6 @@ post-patch:
 		 ${WRKSRC}/src/CMakeLists.txt
 	${REINPLACE_CMD} -e 's|/usr/local|${LOCALBASE}|g' \
 		 ${WRKSRC}/cmake/modules/*.cmake
-	${RM} -f ${WRKSRC}/cmake/modules/FindLibXml2.cmake
+	${RM} ${WRKSRC}/cmake/modules/FindLibXml2.cmake
 
 .include <bsd.port.mk>

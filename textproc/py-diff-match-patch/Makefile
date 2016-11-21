@@ -2,11 +2,9 @@
 # $FreeBSD$
 
 PORTNAME=	diff-match-patch
-PORTVERSION=	0.0.0.20121119
-PORTREVISION=	1
+PORTVERSION=	20121119
 CATEGORIES=	textproc python
 MASTER_SITES=	CHEESESHOP
-DISTNAME=	${PORTNAME}-${PORTVERSION:E}
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
 MAINTAINER=	rene@FreeBSD.org
@@ -22,10 +20,7 @@ USE_PYTHON=	autoplist distutils
 
 NO_ARCH=	yes
 
-post-extract:
-	@${CHMOD} -R a+rX ${WRKSRC}
-
-regression-test: build
+do-test: build
 	@cd ${WRKSRC} && ${PYTHON_CMD} ${PYDISTUTILS_SETUP} test
 
 .include <bsd.port.mk>

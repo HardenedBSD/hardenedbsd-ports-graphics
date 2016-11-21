@@ -11,7 +11,7 @@ DISTNAME=	Audacity-${PORTVERSION}
 MAINTAINER=	xxjack12xx@gmail.com
 COMMENT=	GUI editor for digital audio waveforms
 
-LICENSE=	GPLv2
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 BUILD_DEPENDS=	autogen:devel/autogen \
@@ -47,7 +47,6 @@ OPTIONS_DEFINE_i386=	SSE
 OPTIONS_DEFAULT_amd64=	SSE
 OPTIONS_DEFAULT_i386=	${MACHINE_CPU:tu:MSSE}
 
-DEBUG_DESC=	Enable debug support
 DYNLOAD_DESC=	Enable dynamic loading of lame and FFmpeg
 LAME_DESC=	Use lame for import and export support
 LV2_DESC=	Add LV2 plug-in support
@@ -143,8 +142,10 @@ CXXFLAGS+=	-std=c++11
 .endif
 
 post-install:
+	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/${PORTNAME}
+
+post-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	cd ${WRKSRC} && ${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/${PORTNAME}
 
 .include <bsd.port.post.mk>

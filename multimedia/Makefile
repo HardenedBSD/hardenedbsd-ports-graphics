@@ -12,7 +12,9 @@
     SUBDIR += assimp
     SUBDIR += atomicparsley
     SUBDIR += audacious
+    SUBDIR += audacious-gtk3
     SUBDIR += audacious-plugins
+    SUBDIR += audacious-plugins-gtk3
     SUBDIR += audiopreview
     SUBDIR += avbin
     SUBDIR += avidemux
@@ -24,6 +26,7 @@
     SUBDIR += bangarang
     SUBDIR += banshee
     SUBDIR += bino
+    SUBDIR += bitstream
     SUBDIR += bombono
     SUBDIR += bsdbktr_tvtune
     SUBDIR += camserv
@@ -53,7 +56,6 @@
     SUBDIR += dvdstyler
     SUBDIR += dvts
     SUBDIR += emby-server
-    SUBDIR += emotion_generic_players-vlc
     SUBDIR += emovix
     SUBDIR += ffdec
     SUBDIR += ffmpeg
@@ -144,6 +146,7 @@
     SUBDIR += gstreamer1-plugins-x264
     SUBDIR += gstreamer1-plugins-x265
     SUBDIR += gstreamer1-qt4
+    SUBDIR += gstreamer1-qt5
     SUBDIR += gstreamer1-rtsp-server
     SUBDIR += gstreamer1-vaapi
     SUBDIR += gstreamer1-validate
@@ -162,10 +165,12 @@
     SUBDIR += kdemultimedia4-ffmpegthumbs
     SUBDIR += kdemultimedia4-mplayerthumbs
     SUBDIR += kdenlive
+    SUBDIR += kf5-kmediaplayer
     SUBDIR += kissdx
     SUBDIR += kmplayer-kde4
     SUBDIR += kodi
     SUBDIR += kplayer-kde4
+    SUBDIR += kvazaar
     SUBDIR += l-smash
     SUBDIR += libaacs
     SUBDIR += libass
@@ -189,7 +194,6 @@
     SUBDIR += libmatroska
     SUBDIR += libmediaart
     SUBDIR += libmediainfo
-    SUBDIR += libmovtar
     SUBDIR += libmpeg2
     SUBDIR += libmpeg3
     SUBDIR += libmtp
@@ -215,6 +219,8 @@
     SUBDIR += libzen
     SUBDIR += linux-c6-libtheora
     SUBDIR += linux-c6-libv4l
+    SUBDIR += linux-c7-libtheora
+    SUBDIR += linux-c7-libv4l
     SUBDIR += linux-f10-libtheora
     SUBDIR += linux-f10-libv4l
     SUBDIR += linux-tsmuxer
@@ -244,6 +250,7 @@
     SUBDIR += motion
     SUBDIR += mp3cd
     SUBDIR += mp4v2
+    SUBDIR += mpc-qt
     SUBDIR += mpeg2codec
     SUBDIR += mpeg2play
     SUBDIR += mpeg4ip

@@ -13,7 +13,7 @@ COMMENT=	Open source Remote Desktop Protocol (RDP) server
 
 LICENSE=	GPLv2
 
-USES=		autoreconf:build jpeg libtool pkgconfig
+USES=		autoreconf:build jpeg libtool pkgconfig ssl
 USE_XORG=	x11 xfixes
 GNU_CONFIGURE=	yes
 USE_RC_SUBR=	xrdp
@@ -24,8 +24,8 @@ GH_TAGNAME=	64e2291
 
 CONFIGURE_ARGS=	--localstatedir=/var \
 		--enable-jpeg
-CPPFLAGS+=	-I${LOCALBASE}/include
-LIBS+=		-L${LOCALBASE}/lib
+CPPFLAGS+=	-I${LOCALBASE}/include -I${OPENSSLINC}
+LIBS+=		-L${LOCALBASE}/lib -L${OPENSSLLIB}
 CONFLICTS=	xrdp-[0-9]*
 # xrdp v0.7 is not compatible with current net/freerdp (1.0.2)
 #BUILD_DEPENDS+=	freerdp>=1.0.2:net/freerdp
@@ -36,8 +36,7 @@ OPTIONS_DEFAULT=	TIGERVNC JP106
 OPTIONS_GROUP=	KEYMAP
 OPTIONS_GROUP_KEYMAP= JP106
 OPTIONS_RADIO=	XVNC
-OPTIONS_RADIO_XVNC=	REALVNC TIGERVNC TIGHTVNC TRIDIAVNC
-REALVNC_DESC=	Use RealVNC
+OPTIONS_RADIO_XVNC=	TIGERVNC TIGHTVNC TRIDIAVNC
 TIGERVNC_DESC=	Use TigerVNC (recommended)
 TIGHTVNC_DESC=	Use TightVNC
 TRIDIAVNC_DESC=	Use TridiaVNC
@@ -47,9 +46,6 @@ JP106_DESC=	Install Japanese JP106 keymap
 .include <bsd.port.options.mk>
 
 # Which Xserver to use
-.if ${PORT_OPTIONS:MREALVNC}
-RUN_DEPENDS=	Xvnc:net/vnc
-.endif
 .if ${PORT_OPTIONS:MTIGERVNC}
 RUN_DEPENDS=	Xvnc:net/tigervnc
 .endif

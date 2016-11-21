@@ -2,9 +2,9 @@
 
 PORTNAME=	libreoffice
 PORTVERSION=	4.3.7
-PORTREVISION=	5
+PORTREVISION=	8
 CATEGORIES=	editors
-MASTER_SITES=	http://download.documentfoundation.org/libreoffice/ \
+MASTER_SITES=	http://download.documentfoundation.org/libreoffice/src/${PORTVERSION}/ \
 		http://dev-www.libreoffice.org/extern/:ext \
 		http://dev-www.libreoffice.org/src/:src
 PKGNAMESUFFIX=	4
@@ -359,7 +359,7 @@ post-configure:
 
 do-install:
 	@cd ${WRKSRC} && ${MAKE_CMD} ${MAKE_ARGS} distro-pack-install
-	@${RM} -f ${PLISTD} ${PLISTF}
+	@${RM} ${PLISTD} ${PLISTF}
 	@cd ${STAGEDIR}${PREFIX} && ${FIND} -d lib/libreoffice -type d \
 	    -empty -exec ${ECHO_CMD} "@dir {}" \; >> ${PLISTD}
 	@cd ${STAGEDIR}${PREFIX} && ${FIND} -H -s bin etc lib man \

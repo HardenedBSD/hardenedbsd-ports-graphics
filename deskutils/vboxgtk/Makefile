@@ -10,11 +10,13 @@ MASTER_SITES=	GOOGLE_CODE
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	GTK frontend for VirtualBox
 
+BROKEN=		Unfetchable (google code has gone away)
+
 RUN_DEPENDS=	${PYTHON_SITELIBDIR}/xpcom/vboxxpcom.py:emulators/virtualbox-ose
 
 USES=		python
 USE_PYTHON=	distutils autoplist
-USE_GNOME=	gtk30 intltool pygtk2
+USE_GNOME=	gtk30 intltool
 INSTALLS_ICONS=	yes
 
 OPTIONS_DEFINE=	NLS

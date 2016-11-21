@@ -124,6 +124,16 @@
     SUBDIR += keyboardcast
     SUBDIR += keylaunch
     SUBDIR += keynav
+    SUBDIR += kf5-frameworkintegration
+    SUBDIR += kf5-frameworks
+    SUBDIR += kf5-kactivities
+    SUBDIR += kf5-kded
+    SUBDIR += kf5-kdelibs4support
+    SUBDIR += kf5-kglobalaccel
+    SUBDIR += kf5-kinit
+    SUBDIR += kf5-krunner
+    SUBDIR += kf5-kwindowsystem
+    SUBDIR += kf5-plasma-framework
     SUBDIR += kgamma
     SUBDIR += konsole
     SUBDIR += leechcraft
@@ -182,6 +192,8 @@
     SUBDIR += libxshmfence
     SUBDIR += linux-c6-pixman
     SUBDIR += linux-c6-xorg-libs
+    SUBDIR += linux-c7-pixman
+    SUBDIR += linux-c7-xorg-libs
     SUBDIR += linux-f10-xorg-libs
     SUBDIR += listres
     SUBDIR += lsw
@@ -377,6 +389,7 @@
     SUBDIR += xfce4-conf
     SUBDIR += xfce4-dashboard
     SUBDIR += xfce4-embed-plugin
+    SUBDIR += xfce4-goodies
     SUBDIR += xfce4-quicklauncher-plugin
     SUBDIR += xfce4-screenshooter-plugin
     SUBDIR += xfce4-taskmanager

@@ -5,7 +5,6 @@ PORTNAME=	openvpn-auth-ldap
 PORTVERSION=	2.0.4.0.s1379
 PORTREVISION=	1
 CATEGORIES=	security
-#MASTER_SITES=	GOOGLE_CODE
 MASTER_SITES=	LOCAL/mandree
 DISTNAME=	auth-ldap-${PORTVERSION}
 
@@ -61,13 +60,14 @@ CC+=		${DEBUG_FLAGS}
 
 # this is a local target to build a tarball from SVN
 # and another target to upload it
+# Note that googlecode.com is gone.
 build-tarball: ${DISTFILES}
 ${DISTFILES}:
-	${RM} -rf ${WRKSRC}
+	${RM} -r ${WRKSRC}
 	svn export -r${PORTVERSION:E:C/^s//} \
 	    http://openvpn-auth-ldap.googlecode.com/svn/trunk/ ${WRKSRC}
 	tar -C ${WRKSRC}/.. -cvf - ${WRKSRC:T} | ${XZ_CMD} -vvc >${DISTFILES} || \
-	    { ${RM} -f ${DISTFILES} ; exit 1 ; }
+	    { ${RM} ${DISTFILES} ; exit 1 ; }
 
 upload-tarball: build-tarball
 	scp ${DISTFILES} freefall.freebsd.org:public_distfiles/

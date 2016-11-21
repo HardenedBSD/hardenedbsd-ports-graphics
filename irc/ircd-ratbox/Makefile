@@ -15,6 +15,9 @@ LICENSE=	GPLv2
 
 CONFLICTS=	ircd-ratbox-devel-[0-9]* charybdis-[0-9]*
 
+BROKEN_FreeBSD_9=	does not build
+BROKEN_aarch64=		Fails to link: missing sbrk
+
 USES=		cpe libtool sqlite tar:bzip2
 CPE_VENDOR=	ratbox
 USE_RC_SUBR=	ircd-ratbox
@@ -49,8 +52,6 @@ PORTDOCS=	[^i]*.txt README.* technical/[^i]*.txt Tao-of-IRC.*
 
 OPTIONS_DEFINE=		OPENSSL IPV6 ZIPLINKS SHARED_MODS ASSERT SMALL_NET	\
 			SERVICES SHORTCUTS
-OPENSSL_DESC=		Support OpenSSL encrypted connections
-IPV6_DESC=		Enable IPv6 support
 ZIPLINKS_DESC=		Support compressed server links
 SHARED_MODS_DESC=	Support shared modules
 ASSERT_DESC=		Enable debugging code

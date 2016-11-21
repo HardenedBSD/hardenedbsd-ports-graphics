@@ -19,7 +19,7 @@ LIB_DEPENDS=	libGeoIP.so:net/GeoIP
 
 EXTRACT_AFTER_ARGS=	${DISTNAME}/aux/broccoli
 
-USES=		cmake:outsource
+USES=		cmake:outsource ssl
 USE_LDCONFIG=	yes
 CMAKE_SOURCE_PATH=	${WRKSRC}/aux/broccoli
 
@@ -32,13 +32,13 @@ PLIST_SUB+=	CLEANUP_PREFIX="@comment "
 .endif
 CMAKE_ARGS+=	-D CMAKE_INSTALL_PREFIX:PATH=${PREFIX} \
 		-D BRO_ETC_INSTALL_DIR:PATH=${PREFIX}/etc
+CFLAGS+=	-I${OPENSSLINC}
 
 OPTIONS_DEFINE=	DEBUG PYTHON RUBY
 OPTIONS_SUB=
 
 OPTIONS_DEFAULT=	PYTHON
 
-DEBUG_DESC=	Compile in debugging mode
 PYTHON_DESC=	Build python bindings for broccoli
 RUBY_DESC=	Build ruby bindings for broccoli
 

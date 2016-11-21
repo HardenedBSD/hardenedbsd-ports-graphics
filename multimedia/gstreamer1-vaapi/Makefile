@@ -15,8 +15,7 @@ LICENSE=	LGPL21
 LIB_DEPENDS=	libva.so:multimedia/libva
 
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS=	--disable-wayland \
-		--disable-silent-rules
+CONFIGURE_ARGS=	--disable-wayland
 INSTALL_TARGET=	install-strip
 USES=		compiler:c11 gmake libtool pkgconfig tar:xz
 USE_LDCONFIG=	yes
@@ -26,10 +25,5 @@ USE_XORG=	x11 xrandr xrender xproto:build
 
 # drm backend needs libudev so disable it for now.
 CONFIGURE_ARGS+=--disable-drm
-
-# manual since pathfix doesn't work.
-post-patch:
-	@${REINPLACE_CMD} -e 's|[{]libdir[}]/pkgconfig|{prefix}/libdata/pkgconfig|g' \
-		${WRKSRC}/configure
 
 .include <bsd.port.mk>

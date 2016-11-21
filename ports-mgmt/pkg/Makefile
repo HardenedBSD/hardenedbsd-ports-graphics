@@ -1,9 +1,8 @@
 # $FreeBSD$
 
 PORTNAME=	pkg
-DISTVERSION=	1.8.7
+DISTVERSION=	1.9.3
 _PKG_VERSION=	${DISTVERSION}
-PORTREVISION=	1
 CATEGORIES=	ports-mgmt
 MASTER_SITES=	\
 		http://files.etoilebsd.net/${PORTNAME}/ \
@@ -20,6 +19,7 @@ USES=		libtool tar:xz
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--disable-maintainer-mode
 INSTALL_TARGET=	install-strip
+PORTDOCS=	NEWS
 
 # Use a submake as 'deinstall install' needs to reevaluate PKG_CMD
 # so that pkg-static is used from the wrkdir
@@ -72,6 +72,8 @@ PKG_DEPENDS=
 PKG_BIN=	${WRKSRC}/src/pkg-static
 
 post-install:
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
+	${INSTALL_DATA} ${WRKSRC}/NEWS ${STAGEDIR}${DOCSDIR}/NEWS
 	@${MV} ${STAGEDIR}${PREFIX}/lib/libpkg_static.a \
 		${STAGEDIR}${PREFIX}/lib/libpkg.a
 

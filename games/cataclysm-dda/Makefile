@@ -9,10 +9,8 @@ CATEGORIES=	games
 MAINTAINER=	ports@FreeBSD.org
 COMMENT=	Fork/variant of Cataclysm Roguelike by Whales
 
-LICENSE=	CCPL.BY-SA.30
-LICENSE_NAME=	Creative Commons Attribution-ShareAlike 3.0 Unported License
+LICENSE=	CC-BY-SA-3.0
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
-LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
 USES=		alias compiler:c++11-lib execinfo gmake shebangfix
 SHEBANG_FILES=	lang/*.sh
@@ -60,6 +58,8 @@ SOUND_MAKE_ARGS=	SOUND=1
 SOUND_IMPLIES=		SDL
 
 SOUND_FILES=	cataclysmthemeREV6.ogg Dark_Days_Ahead_demo_2.ogg
+
+BROKEN_aarch64=		Fails to compile: error: comparison of integers of different signs: wchar_t and const int
 
 .include <bsd.port.pre.mk>
 

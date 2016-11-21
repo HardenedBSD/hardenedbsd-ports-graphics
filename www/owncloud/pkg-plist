@@ -3208,6 +3208,7 @@
 %%WWWDIR%%/apps/dav/lib/Files/Sharing/PublicLinkCheckPlugin.php
 %%WWWDIR%%/apps/dav/lib/HookManager.php
 %%WWWDIR%%/apps/dav/lib/Migration/Classification.php
+%%WWWDIR%%/apps/dav/lib/Migration/FixBirthdayCalendarComponent.php
 %%WWWDIR%%/apps/dav/lib/Migration/GenerateBirthdays.php
 %%WWWDIR%%/apps/dav/lib/RootCollection.php
 %%WWWDIR%%/apps/dav/lib/Server.php
@@ -6540,6 +6541,7 @@
 %%WWWDIR%%/apps/files_trashbin/lib/Capabilities.php
 %%WWWDIR%%/apps/files_trashbin/lib/Command/CleanUp.php
 %%WWWDIR%%/apps/files_trashbin/lib/Command/Expire.php
+%%WWWDIR%%/apps/files_trashbin/lib/Command/ExpireTrash.php
 %%WWWDIR%%/apps/files_trashbin/lib/Exceptions/CopyRecursiveException.php
 %%WWWDIR%%/apps/files_trashbin/lib/Expiration.php
 %%WWWDIR%%/apps/files_trashbin/lib/Helper.php
@@ -6706,6 +6708,7 @@
 %%WWWDIR%%/apps/files_versions/lib/Capabilities.php
 %%WWWDIR%%/apps/files_versions/lib/Command/CleanUp.php
 %%WWWDIR%%/apps/files_versions/lib/Command/Expire.php
+%%WWWDIR%%/apps/files_versions/lib/Command/ExpireVersions.php
 %%WWWDIR%%/apps/files_versions/lib/Expiration.php
 %%WWWDIR%%/apps/files_versions/lib/Hooks.php
 %%WWWDIR%%/apps/files_versions/lib/Storage.php
@@ -8024,6 +8027,7 @@
 %%WWWDIR%%/apps/user_ldap/lib/Command/ShowConfig.php
 %%WWWDIR%%/apps/user_ldap/lib/Command/ShowRemnants.php
 %%WWWDIR%%/apps/user_ldap/lib/Command/TestConfig.php
+%%WWWDIR%%/apps/user_ldap/lib/Command/UpdateGroup.php
 %%WWWDIR%%/apps/user_ldap/lib/Configuration.php
 %%WWWDIR%%/apps/user_ldap/lib/Connection.php
 %%WWWDIR%%/apps/user_ldap/lib/FilesystemHelper.php
@@ -8246,6 +8250,8 @@
 %%WWWDIR%%/core/doc/admin/_images/google-drive6.png
 %%WWWDIR%%/core/doc/admin/_images/google-drive8.png
 %%WWWDIR%%/core/doc/admin/_images/google-drive9.png
+%%WWWDIR%%/core/doc/admin/_images/import-ssl-cert-1.png
+%%WWWDIR%%/core/doc/admin/_images/import-ssl-cert-2.png
 %%WWWDIR%%/core/doc/admin/_images/install-wizard-a.png
 %%WWWDIR%%/core/doc/admin/_images/install-wizard-a1.png
 %%WWWDIR%%/core/doc/admin/_images/install-wizard-a2.png
@@ -8275,11 +8281,6 @@
 %%WWWDIR%%/core/doc/admin/_images/phpinfo.png
 %%WWWDIR%%/core/doc/admin/_images/preview_images.png
 %%WWWDIR%%/core/doc/admin/_images/rackspace.png
-%%WWWDIR%%/core/doc/admin/_images/scaling-1.png
-%%WWWDIR%%/core/doc/admin/_images/scaling-2.png
-%%WWWDIR%%/core/doc/admin/_images/scaling-3.png
-%%WWWDIR%%/core/doc/admin/_images/scaling-4.png
-%%WWWDIR%%/core/doc/admin/_images/scaling-5.png
 %%WWWDIR%%/core/doc/admin/_images/security-setup-warning-1.png
 %%WWWDIR%%/core/doc/admin/_images/sharepoint-1.png
 %%WWWDIR%%/core/doc/admin/_images/sharepoint-2.png
@@ -8298,6 +8299,7 @@
 %%WWWDIR%%/core/doc/admin/_images/smtp-config-php-sendmail.png
 %%WWWDIR%%/core/doc/admin/_images/smtp-config-smtp.png
 %%WWWDIR%%/core/doc/admin/_images/smtp-config-wizard.png
+%%WWWDIR%%/core/doc/admin/_images/trashbin-1.png
 %%WWWDIR%%/core/doc/admin/_images/upgrade-1.png
 %%WWWDIR%%/core/doc/admin/_images/upgrade-2.png
 %%WWWDIR%%/core/doc/admin/_images/user_mounts.png
@@ -8315,6 +8317,7 @@
 %%WWWDIR%%/core/doc/admin/_images/workflow-2.png
 %%WWWDIR%%/core/doc/admin/_images/workflow-3.png
 %%WWWDIR%%/core/doc/admin/_images/workflow-4.png
+%%WWWDIR%%/core/doc/admin/_images/workflow-5.png
 %%WWWDIR%%/core/doc/admin/_sources/configuration_database/db_conversion.txt
 %%WWWDIR%%/core/doc/admin/_sources/configuration_database/index.txt
 %%WWWDIR%%/core/doc/admin/_sources/configuration_database/linux_database_configuration.txt
@@ -8341,6 +8344,7 @@
 %%WWWDIR%%/core/doc/admin/_sources/configuration_files/files_locking_transactional.txt
 %%WWWDIR%%/core/doc/admin/_sources/configuration_files/index.txt
 %%WWWDIR%%/core/doc/admin/_sources/configuration_files/previews_configuration.txt
+%%WWWDIR%%/core/doc/admin/_sources/configuration_files/trashbin_options.txt
 %%WWWDIR%%/core/doc/admin/_sources/configuration_mimetypes/index.txt
 %%WWWDIR%%/core/doc/admin/_sources/configuration_mimetypes/mimetype_aliases.txt
 %%WWWDIR%%/core/doc/admin/_sources/configuration_mimetypes/mimetype_mapping.txt
@@ -8354,7 +8358,9 @@
 %%WWWDIR%%/core/doc/admin/_sources/configuration_server/email_configuration.txt
 %%WWWDIR%%/core/doc/admin/_sources/configuration_server/external_sites.txt
 %%WWWDIR%%/core/doc/admin/_sources/configuration_server/harden_server.txt
+%%WWWDIR%%/core/doc/admin/_sources/configuration_server/import_ssl_cert.txt
 %%WWWDIR%%/core/doc/admin/_sources/configuration_server/index.txt
+%%WWWDIR%%/core/doc/admin/_sources/configuration_server/index_php_less_urls.txt
 %%WWWDIR%%/core/doc/admin/_sources/configuration_server/js_css_asset_management_configuration.txt
 %%WWWDIR%%/core/doc/admin/_sources/configuration_server/knowledgebase_configuration.txt
 %%WWWDIR%%/core/doc/admin/_sources/configuration_server/language_configuration.txt
@@ -8411,7 +8417,6 @@
 %%WWWDIR%%/core/doc/admin/_sources/installation/installation_wizard.txt
 %%WWWDIR%%/core/doc/admin/_sources/installation/linux_installation.txt
 %%WWWDIR%%/core/doc/admin/_sources/installation/nginx_examples.txt
-%%WWWDIR%%/core/doc/admin/_sources/installation/nginx_owncloud_9x.txt
 %%WWWDIR%%/core/doc/admin/_sources/installation/php_54_installation.txt
 %%WWWDIR%%/core/doc/admin/_sources/installation/php_55_installation.txt
 %%WWWDIR%%/core/doc/admin/_sources/installation/selinux_configuration.txt
@@ -8429,10 +8434,6 @@
 %%WWWDIR%%/core/doc/admin/_sources/maintenance/restore.txt
 %%WWWDIR%%/core/doc/admin/_sources/maintenance/update.txt
 %%WWWDIR%%/core/doc/admin/_sources/maintenance/upgrade.txt
-%%WWWDIR%%/core/doc/admin/_sources/operations/considerations_on_monitoring.txt
-%%WWWDIR%%/core/doc/admin/_sources/operations/index.txt
-%%WWWDIR%%/core/doc/admin/_sources/operations/scaling_multiple_machines.txt
-%%WWWDIR%%/core/doc/admin/_sources/operations/theming.txt
 %%WWWDIR%%/core/doc/admin/_sources/release_notes.txt
 %%WWWDIR%%/core/doc/admin/_sources/whats_new_admin.txt
 %%WWWDIR%%/core/doc/admin/_static/ajax-loader.gif
@@ -8542,6 +8543,7 @@
 %%WWWDIR%%/core/doc/admin/configuration_files/files_locking_transactional.html
 %%WWWDIR%%/core/doc/admin/configuration_files/index.html
 %%WWWDIR%%/core/doc/admin/configuration_files/previews_configuration.html
+%%WWWDIR%%/core/doc/admin/configuration_files/trashbin_options.html
 %%WWWDIR%%/core/doc/admin/configuration_mimetypes/index.html
 %%WWWDIR%%/core/doc/admin/configuration_mimetypes/mimetype_aliases.html
 %%WWWDIR%%/core/doc/admin/configuration_mimetypes/mimetype_mapping.html
@@ -8555,7 +8557,9 @@
 %%WWWDIR%%/core/doc/admin/configuration_server/email_configuration.html
 %%WWWDIR%%/core/doc/admin/configuration_server/external_sites.html
 %%WWWDIR%%/core/doc/admin/configuration_server/harden_server.html
+%%WWWDIR%%/core/doc/admin/configuration_server/import_ssl_cert.html
 %%WWWDIR%%/core/doc/admin/configuration_server/index.html
+%%WWWDIR%%/core/doc/admin/configuration_server/index_php_less_urls.html
 %%WWWDIR%%/core/doc/admin/configuration_server/js_css_asset_management_configuration.html
 %%WWWDIR%%/core/doc/admin/configuration_server/knowledgebase_configuration.html
 %%WWWDIR%%/core/doc/admin/configuration_server/language_configuration.html
@@ -8613,7 +8617,6 @@
 %%WWWDIR%%/core/doc/admin/installation/installation_wizard.html
 %%WWWDIR%%/core/doc/admin/installation/linux_installation.html
 %%WWWDIR%%/core/doc/admin/installation/nginx_examples.html
-%%WWWDIR%%/core/doc/admin/installation/nginx_owncloud_9x.html
 %%WWWDIR%%/core/doc/admin/installation/php_54_installation.html
 %%WWWDIR%%/core/doc/admin/installation/php_55_installation.html
 %%WWWDIR%%/core/doc/admin/installation/selinux_configuration.html
@@ -8632,10 +8635,6 @@
 %%WWWDIR%%/core/doc/admin/maintenance/update.html
 %%WWWDIR%%/core/doc/admin/maintenance/upgrade.html
 %%WWWDIR%%/core/doc/admin/objects.inv
-%%WWWDIR%%/core/doc/admin/operations/considerations_on_monitoring.html
-%%WWWDIR%%/core/doc/admin/operations/index.html
-%%WWWDIR%%/core/doc/admin/operations/scaling_multiple_machines.html
-%%WWWDIR%%/core/doc/admin/operations/theming.html
 %%WWWDIR%%/core/doc/admin/release_notes.html
 %%WWWDIR%%/core/doc/admin/search.html
 %%WWWDIR%%/core/doc/admin/searchindex.js
@@ -10012,6 +10011,7 @@
 %%WWWDIR%%/lib/private/Repair/RepairInvalidShares.php
 %%WWWDIR%%/lib/private/Repair/RepairLegacyStorages.php
 %%WWWDIR%%/lib/private/Repair/RepairMimeTypes.php
+%%WWWDIR%%/lib/private/Repair/RepairUnmergedShares.php
 %%WWWDIR%%/lib/private/Repair/SearchLuceneTables.php
 %%WWWDIR%%/lib/private/Repair/SharePropagation.php
 %%WWWDIR%%/lib/private/Repair/SqliteAutoincrement.php
@@ -10346,7 +10346,7 @@
 %%WWWDIR%%/lib/public/User.php
 %%WWWDIR%%/lib/public/UserInterface.php
 %%WWWDIR%%/lib/public/Util.php
-@(%%OWNCLOUD_USERNAME%%,%%OWNCLOUD_GROUPNAME%%,750) %%WWWDIR%%/occ
+%%WWWDIR%%/occ
 %%WWWDIR%%/ocs-provider/index.php
 %%WWWDIR%%/ocs/providers.php
 %%WWWDIR%%/ocs/routes.php
@@ -10669,6 +10669,7 @@
 %%WWWDIR%%/updater/src/Formatter/HtmlOutputFormatter.php
 %%WWWDIR%%/updater/src/Http/Request.php
 %%WWWDIR%%/updater/src/Resources/views/base.php
+%%WWWDIR%%/updater/src/Resources/views/partials/error.php
 %%WWWDIR%%/updater/src/Resources/views/partials/inner.php
 %%WWWDIR%%/updater/src/Resources/views/partials/login.php
 %%WWWDIR%%/updater/src/Tests/Controller/DownloadControllerTest.php
@@ -10705,16 +10706,12 @@
 %%WWWDIR%%/updater/vendor/composer/autoload_psr4.php
 %%WWWDIR%%/updater/vendor/composer/autoload_real.php
 %%WWWDIR%%/updater/vendor/composer/installed.json
-%%WWWDIR%%/updater/vendor/guzzlehttp/guzzle/.editorconfig
-%%WWWDIR%%/updater/vendor/guzzlehttp/guzzle/.gitignore
 %%WWWDIR%%/updater/vendor/guzzlehttp/guzzle/.travis.yml
 %%WWWDIR%%/updater/vendor/guzzlehttp/guzzle/CHANGELOG.md
 %%WWWDIR%%/updater/vendor/guzzlehttp/guzzle/LICENSE
 %%WWWDIR%%/updater/vendor/guzzlehttp/guzzle/README.md
 %%WWWDIR%%/updater/vendor/guzzlehttp/guzzle/UPGRADING.md
-%%WWWDIR%%/updater/vendor/guzzlehttp/guzzle/build/packager.php
 %%WWWDIR%%/updater/vendor/guzzlehttp/guzzle/composer.json
-%%WWWDIR%%/updater/vendor/guzzlehttp/guzzle/phpunit.xml.dist
 %%WWWDIR%%/updater/vendor/guzzlehttp/guzzle/src/BatchResults.php
 %%WWWDIR%%/updater/vendor/guzzlehttp/guzzle/src/Client.php
 %%WWWDIR%%/updater/vendor/guzzlehttp/guzzle/src/ClientInterface.php

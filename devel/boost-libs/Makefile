@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	boost-libs
-PORTREVISION=	12
+PORTREVISION=	13
 
 COMMENT=	Free portable C++ libraries (without Boost.Python)
 
@@ -36,6 +36,8 @@ PLIST_SUB+=	COROUTINE="@comment " CONTEXT="@comment " \
 .else
 PLIST_SUB+=	COROUTINE="" CONTEXT="" LOCALE="" LOG=""
 .endif
+
+BROKEN_aarch64=		Fails to compile: multiple instances of error: platform not supported
 
 do-build:
 	@cd ${WRKSRC} && \

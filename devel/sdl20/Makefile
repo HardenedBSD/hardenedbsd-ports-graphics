@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	sdl2
-PORTVERSION=	2.0.4
+PORTVERSION=	2.0.5
 CATEGORIES=	devel
 MASTER_SITES=	http://www.libsdl.org/release/
 DISTNAME=	SDL2-${PORTVERSION}
@@ -13,7 +13,7 @@ LICENSE=	ZLIB
 LICENSE_FILE=	${WRKSRC}/COPYING.txt
 
 GNU_CONFIGURE=	yes
-USES=		gmake iconv libtool localbase pathfix pkgconfig
+USES=		gmake iconv libtool localbase:ldflags pathfix pkgconfig
 USE_LDCONFIG=	yes
 
 CONFIGURE_ARGS+=	--disable-video-opengles \
@@ -45,6 +45,8 @@ CONFIGURE_ARGS+=	--enable-sse2
 .else
 CONFIGURE_ARGS+=	--disable-sse2
 .endif
+
+MAKE_ENV=	V=1
 
 OPTIONS_DEFINE=		ALSA ASM DLOPEN ESOUND NAS OSS \
 			PULSEAUDIO SNDIO PTHREADS SDL_ATOMIC SDL_AUDIO \

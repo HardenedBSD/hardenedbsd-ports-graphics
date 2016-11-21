@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	mailman
-DISTVERSION=	2.1.22
+DISTVERSION=	2.1.23
 CATEGORIES=	mail
 MASTER_SITES=	GNU \
 		SF/${PORTNAME}/Mailman%202.1%20%28stable%29/${PORTVERSION} \
@@ -111,11 +111,11 @@ MAIL_GID?=	_smtpd
 .if ${PORT_OPTIONS:MHTDIG}
 PKGNAMESUFFIX+=	-with-htdig
 # how to create PATCHFILES:
-#X fetch http://bazaar.launchpad.net/~msapiro/mailman/htdig/tarball/1643
+#X fetch http://bazaar.launchpad.net/~msapiro/mailman/htdig/tarball/1668
 #X unpack this tarball, and the original distfile
-#X diff -NEur original-unpack bazaar-unpack | xz --best -c >msapiro-htdig-1643.patch.xz
+#X diff -NEur original-unpack bazaar-unpack | xz --best -c >msapiro-htdig-1668.patch.xz
 #X upload the latter with mode 0644 or similar to freefall's public_distfiles/ directory
-PATCHFILES+=	msapiro-htdig-1643.patch.xz
+PATCHFILES+=	msapiro-htdig-1668.patch.xz
 RUN_DEPENDS+=	htdig:textproc/htdig
 PLIST_SUB+=	SUB_HTDIG=""
 .else
@@ -179,10 +179,10 @@ post-install:
 	    && ${PYTHON_CMD} ${PYTHON_LIBDIR}/compileall.py \
 	    -d ${MAILMANDIR}/${dir} ${dir})
 .endfor
-	@${RM} -f ${STAGEDIR}${MAILMANDIR}/pythonlib/*.egg-info
+	@${RM} ${STAGEDIR}${MAILMANDIR}/pythonlib/*.egg-info
 	@# mm_cfg.py is handled by pkg-plist, no need to archive a copy:
-	@${RM} -f ${STAGEDIR}${MAILMANDIR}/Mailman/mm_cfg.py
-	@${RM} -f ${STAGEDIR}${MAILMANDIR}/Mailman/mm_cfg.pyc
+	@${RM} ${STAGEDIR}${MAILMANDIR}/Mailman/mm_cfg.py
+	@${RM} ${STAGEDIR}${MAILMANDIR}/Mailman/mm_cfg.pyc
 	@${MKDIR} ${STAGEDIR}${PREFIX}/${IMGDIR}
 	${CP} -p ${STAGEDIR}${MAILMANDIR}/icons/* ${STAGEDIR}${PREFIX}/${IMGDIR}
 	${INSTALL_DATA} ${FILESDIR}/powerlogo.png \

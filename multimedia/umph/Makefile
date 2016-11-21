@@ -5,8 +5,7 @@ PORTNAME=	umph
 PORTVERSION=	0.2.5
 PORTREVISION=	1
 CATEGORIES=	multimedia
-MASTER_SITES=	GOOGLE_CODE \
-		LOCAL/sunpoet
+MASTER_SITES=	LOCAL/sunpoet
 
 MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	YouTube video playlist parser for cclive and alike tools

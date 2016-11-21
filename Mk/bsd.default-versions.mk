@@ -15,6 +15,15 @@ _INCLUDE_BSD_DEFAULT_VERSIONS_MK=	yes
 
 LOCALBASE?=	/usr/local
 
+.for lang in APACHE BDB FIREBIRD FPC GCC GHOSTSCRIPT LINUX LUA MYSQL PERL5 \
+	PGSQL PHP PYTHON PYTHON2 PYTHON3 RUBY SSL TCLTK
+.if defined(${lang}_DEFAULT)
+WARNING+=	"The variable ${lang}_DEFAULT is set and it should only be defined through DEFAULT_VERSIONS+=${lang:tl}=${${lang}_DEFAULT} in /etc/make.conf"
+WARNING+=	"This behaviour has never been supported and will be removed on 2017-01-31"
+.endif
+#.undef ${lang}_DEFAULT
+.endfor
+
 .for lang in ${DEFAULT_VERSIONS}
 _l=		${lang:C/=.*//g}
 ${_l:tu}_DEFAULT=	${lang:C/.*=//g}
@@ -32,6 +41,12 @@ FPC_DEFAULT?=		3.0.0
 GCC_DEFAULT?=		4.8
 # Possible values: 7, 8, 9, agpl
 GHOSTSCRIPT_DEFAULT?=	agpl
+# Possible values: f10, c6, c6_64, c7, c7_64
+LINUX_DEFAULT?=		c6
+.if defined(OVERRIDE_LINUX_BASE_PORT)
+LINUX_DEFAULT:=		${OVERRIDE_LINUX_BASE_PORT}
+WARNING+=		"OVERRIDE_LINUX_BASE_PORT is deprecated, please use DEFAULT_VERSIONS+=linux=${OVERRIDE_LINUX_BASE_PORT}."
+.endif
 # Possible values: 5.1, 5.2, 5.3
 LUA_DEFAULT?=		5.2
 # Possible values: 5.1, 5.5, 5.6, 5.7, 5.5m, 10.0m, 10.1m, 5.5p, 5.6p
@@ -39,7 +54,7 @@ MYSQL_DEFAULT?=		5.6
 # Possible values: 5.18, 5.20, 5.22, devel
 .if !exists(${LOCALBASE}/bin/perl) || (!defined(_PORTS_ENV_CHECK) && \
     defined(PACKAGE_BUILDING))
-PERL5_DEFAULT?=		5.20
+PERL5_DEFAULT?=		5.24
 .elif !defined(PERL5_DEFAULT)
 # There's no need to replace development versions, like "5.23" with "devel"
 # because 1) nobody is supposed to use it outside of poudriere, and 2) it must
@@ -51,16 +66,16 @@ _PERL5_FROM_BIN!=	perl -e 'printf "%vd\n", $$^V;'
 _EXPORTED_VARS+=	_PERL5_FROM_BIN
 PERL5_DEFAULT:=		${_PERL5_FROM_BIN:R}
 .endif
-# Possible values: 9.1, 9.2, 9.3, 9.4, 9.5
+# Possible values: 9.2, 9.3, 9.4, 9.5, 9.6
 PGSQL_DEFAULT?=		9.3
-# Possible values: 5.5, 5.6, 7.0
+# Possible values: 5.6, 7.0
 PHP_DEFAULT?=		5.6
 # Possible values: 2.7, 3.3, 3.4, 3.5
 PYTHON_DEFAULT?=	2.7
 # Possible values: 2.7
 PYTHON2_DEFAULT?=	2.7
 # Possible values: 3.3, 3.4, 3.5
-PYTHON3_DEFAULT?=	3.4
+PYTHON3_DEFAULT?=	3.5
 # Possible values: 2.0, 2.1, 2.2, 2.3
 RUBY_DEFAULT?=		2.2
 # Possible values: base, openssl, openssl-devel, libressl, libressl-devel
@@ -114,6 +129,9 @@ SSL_DEFAULT?=	base
 .endif
 # Possible values: 8.4, 8.5, 8.6
 TCLTK_DEFAULT?=		8.6
+
+# Possible values: 4, 5
+VARNISH_DEFAULT?=	4
 
 # Version of lang/gcc.  Do not override!
 LANG_GCC_IS=		4.8

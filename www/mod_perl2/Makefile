@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	mod_perl
-PORTVERSION=	2.0.9
+PORTVERSION=	2.0.10
 PORTEPOCH=	3
 CATEGORIES=	www perl5
 MASTER_SITES=	APACHE/perl
@@ -31,11 +31,6 @@ APMOD_FILE=	260_${PORTNAME}.conf.sample
 PLIST_SUB+=	APMOD_FILE=${APMOD_FILE}
 
 .include <bsd.port.pre.mk>
-
-.if ${PERL_VER} >= 5.22
-BROKEN=		PERL ${PERL_VER} is not supported by upstream,\
-		see http://svn.apache.org/viewvc/perl/modperl/trunk/README?view=markup
-.endif
 
 # Provider is build iff apache24 is in use
 .if ${APACHE_VERSION:M22}

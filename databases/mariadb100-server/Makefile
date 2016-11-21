@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME?=	mariadb
-PORTVERSION=	10.0.26
+PORTVERSION=	10.0.27
 CATEGORIES=	databases ipv6
 MASTER_SITES=	http://ftp.osuosl.org/pub/${SITESDIR}/ \
 		http://mirrors.supportex.net/${SITESDIR}/ \
@@ -21,13 +21,14 @@ LICENSE_NAME_PerconaFT=	PerconaFT patents license
 LICENSE_FILE_PerconaFT=	${WRKSRC}/storage/tokudb/PerconaFT/PATENTS
 LICENSE_PERMS_PerconaFT=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
+BROKEN_aarch64=		Fails to link: missing sbrk
 BROKEN_powerpc64=	Does not build
 
 SUB_FILES=	pkg-message
 PKGMESSAGE=	${WRKDIR}/pkg-message
 
 SLAVEDIRS=	databases/mariadb100-client
-USES=		bison:build cmake compiler:c++11-lib cpe execinfo gmake shebangfix
+USES=		bison:build cmake compiler:c++11-lib cpe execinfo gmake shebangfix ssl
 USE_LDCONFIG=	${PREFIX}/lib/mysql ${PREFIX}/lib/mysql/plugin
 SHEBANG_FILES=	scripts/*.sh
 SITESDIR=	mariadb/mariadb-${PORTVERSION}/source
@@ -92,7 +93,6 @@ OPTIONS_SUB=	yes
 .endif
 
 FASTMTX_CMAKE_ON=	-DWITH_FAST_MUTEXES=1
-USE_OPENSSL=		yes
 # See PR209419, MariaDB 10.0 fails to build with base SSL libs
 WITH_OPENSSL_PORT=	yes
 
@@ -146,7 +146,7 @@ CMAKE_ARGS+=	-DWITH_JEMALLOC="no"
 .if ${PORT_OPTIONS:MTOKUDB}
 NOT_FOR_ARCHS=  i386
 NOT_FOR_ARCHS_REASON=   TokuDB not supported on 32-bit platforms, see \
-                        https://github.com/percona/PerconaFT/blob/master/README.md
+			https://github.com/percona/PerconaFT/blob/master/README.md
 .endif
 
 .if ${ARCH} == 'i386' && ${OSVERSION} >= 1001000
@@ -155,7 +155,7 @@ USE_GCC=	yes
 .endif
 
 post-extract-OQGRAPH-off:
-	@${RM} -rf ${WRKSRC}/storage/oqgraph
+	@${RM} -r ${WRKSRC}/storage/oqgraph
 
 post-patch:
 	@${REINPLACE_CMD} 's/*.1/${MAN1}/' ${WRKSRC}/man/CMakeLists.txt

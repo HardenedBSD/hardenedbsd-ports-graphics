@@ -4,6 +4,7 @@ PORTNAME=	mu4e
 PORTVERSION=	0.9.16
 DISTVERSIONPREFIX=	v
 CATEGORIES=	mail
+PKGNAMESUFFIX=	-${EMACS_PORT_NAME}
 
 MAINTAINER=	hrs@FreeBSD.org
 COMMENT=	Emacs frontend for Mu
@@ -18,8 +19,7 @@ GH_PROJECT=	mu
 GH_ACCOUNT=	djcb
 USE_EMACS=	yes
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS=	--disable-silent-rules \
-		--disable-gtk \
+CONFIGURE_ARGS=	--disable-gtk \
 		--disable-webkit \
 		--disable-guile \
 		--docdir="${DOCSDIR}" \

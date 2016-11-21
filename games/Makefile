@@ -103,9 +103,11 @@
     SUBDIR += braincurses
     SUBDIR += brainparty
     SUBDIR += brainworkshop
+    SUBDIR += brickout
     SUBDIR += brickshooter
     SUBDIR += brikx
     SUBDIR += briquolo
+    SUBDIR += brumbrumrally
     SUBDIR += brutalchess
     SUBDIR += bs
     SUBDIR += bsdgames
@@ -117,6 +119,7 @@
     SUBDIR += bugsquish
     SUBDIR += bugsx
     SUBDIR += bumprace
+    SUBDIR += bunnysay
     SUBDIR += burgerspace
     SUBDIR += burrtools
     SUBDIR += bygfoot
@@ -165,6 +168,7 @@
     SUBDIR += crafty-open-medium
     SUBDIR += crafty-tablebase-no-pawn
     SUBDIR += crafty-tablebase-pawn
+    SUBDIR += crashtest
     SUBDIR += cre
     SUBDIR += cretan-hubris
     SUBDIR += crimson
@@ -216,6 +220,7 @@
     SUBDIR += dungeon
     SUBDIR += dungeoncrawl
     SUBDIR += dustrac
+    SUBDIR += easyrpg-player
     SUBDIR += eboard
     SUBDIR += edge
     SUBDIR += editss
@@ -228,9 +233,11 @@
     SUBDIR += el
     SUBDIR += el-data
     SUBDIR += ember
+    SUBDIR += emptyepsilon
     SUBDIR += endgame-singularity
     SUBDIR += endgame-singularity-music
     SUBDIR += endless-sky
+    SUBDIR += endless-sky-high-dpi
     SUBDIR += enigma
     SUBDIR += ensemblist
     SUBDIR += entombed
@@ -253,7 +260,6 @@
     SUBDIR += farblazer
     SUBDIR += fargoal
     SUBDIR += fbg2
-    SUBDIR += fgrun
     SUBDIR += fightorperish
     SUBDIR += fillets-ng
     SUBDIR += filters
@@ -306,6 +312,7 @@
     SUBDIR += funnyboat
     SUBDIR += galaxis
     SUBDIR += galaxyhack
+    SUBDIR += garden-of-coloured-lights
     SUBDIR += garith
     SUBDIR += gbottler
     SUBDIR += gbrainy
@@ -352,15 +359,18 @@
     SUBDIR += gnomekiss
     SUBDIR += gnono
     SUBDIR += gnubg
+    SUBDIR += gnubik
     SUBDIR += gnuchess
     SUBDIR += gnudoku
     SUBDIR += gnugo
+    SUBDIR += gnujump
     SUBDIR += gnurobbo
     SUBDIR += gnurobots
     SUBDIR += gnushogi
     SUBDIR += gnustep-ladder
     SUBDIR += gnustep-sudoku
     SUBDIR += golddig
+    SUBDIR += goldencheetah
     SUBDIR += golly
     SUBDIR += gomoku
     SUBDIR += gondola
@@ -511,6 +521,7 @@
     SUBDIR += libggz
     SUBDIR += libkdegames
     SUBDIR += libkmahjongg
+    SUBDIR += liblcf
     SUBDIR += libmaitretarot
     SUBDIR += libmt_client
     SUBDIR += libretro-cores
@@ -682,6 +693,7 @@
     SUBDIR += openssn
     SUBDIR += opensurge
     SUBDIR += openttd
+    SUBDIR += opentyrian
     SUBDIR += openxcom
     SUBDIR += openyahtzee
     SUBDIR += optimax
@@ -985,6 +997,7 @@
     SUBDIR += twitch
     SUBDIR += tycho
     SUBDIR += typespeed
+    SUBDIR += tyrian-data
     SUBDIR += ufoai
     SUBDIR += ufoai-data
     SUBDIR += uhexen
@@ -1011,6 +1024,8 @@
     SUBDIR += vodovod
     SUBDIR += volleyball
     SUBDIR += vor
+    SUBDIR += voxelands
+    SUBDIR += voxelands-server
     SUBDIR += vultures-eye
     SUBDIR += wanderer
     SUBDIR += wargus
@@ -1031,6 +1046,7 @@
     SUBDIR += wolfpack
     SUBDIR += wop
     SUBDIR += wordplay
+    SUBDIR += wordwarvi
     SUBDIR += worldofpadman
     SUBDIR += wtf
     SUBDIR += wxlauncher

@@ -18,11 +18,14 @@ USE_RC_SUBR=	bozohttpd
 OPTIONS_DEFINE=		HTPASSWD SSL CGI
 OPTIONS_DEFAULT=	SSL CGI
 
+SSL_USES=	ssl
+SSL_CFLAGS=	-I${OPENSSLINC}
+SSL_LDFLAGS=	-L${OPENSSLLIB}
+
 USES=		cpe uidfix tar:bzip2
 CPE_VENDOR=	eterna
 
 HTPASSWD_DESC=		Enable htpassword support
-SSL_DESC=		Enable SSL support
 CGI_DESC=		Enable CGI support
 
 .include <bsd.port.options.mk>
@@ -35,7 +38,6 @@ MAKE_ARGS+=	'COPTS+=	-UDO_HTPASSWD'
 .endif
 
 .if ${PORT_OPTIONS:MSSL}
-USE_OPENSSL=	yes
 MAKE_ARGS+=	'COPTS+=	-UNO_SSL_SUPPORT'
 .else
 MAKE_ARGS+=	'COPTS+=	-DNO_SSL_SUPPORT' \

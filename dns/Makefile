@@ -78,6 +78,8 @@
     SUBDIR += inadyn-mt
     SUBDIR += ipcheck
     SUBDIR += ironsides
+    SUBDIR += kf5-kdnssd
+    SUBDIR += knot-resolver
     SUBDIR += knot1
     SUBDIR += knot2
     SUBDIR += ldapdns
@@ -90,6 +92,7 @@
     SUBDIR += libidn2
     SUBDIR += libpsl
     SUBDIR += linux-c6-libasyncns
+    SUBDIR += linux-c7-libasyncns
     SUBDIR += linux-f10-libasyncns
     SUBDIR += mDNSResponder_nss
     SUBDIR += maradns
@@ -106,6 +109,7 @@
     SUBDIR += opendnssec
     SUBDIR += opendnssec13
     SUBDIR += opendnssec2
+    SUBDIR += openmdns
     SUBDIR += openresolv
     SUBDIR += p5-AnyEvent-CacheDNS
     SUBDIR += p5-AnyEvent-DNS-EtcHosts
@@ -178,6 +182,7 @@
     SUBDIR += py-pywdns
     SUBDIR += py-tldextract
     SUBDIR += py-twistedNames
+    SUBDIR += py3-dnspython
     SUBDIR += radns
     SUBDIR += rbldnsd
     SUBDIR += rbllookup

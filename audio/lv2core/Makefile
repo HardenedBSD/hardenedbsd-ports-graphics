@@ -12,11 +12,12 @@ COMMENT=	LV2 Core Package
 LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-USES=		pkgconfig python:build tar:bzip2 waf
+CONFLICTS_INSTALL=	lv2
 
-.if defined(BATCH) || defined(PACKAGE_BUILDING)
-MAKE_ARGS+=	--verbose
-.endif
+DEPRECATED=	Superseded by audio/lv2
+EXPIRATION_DATE=	2016-11-30
+
+USES=		pkgconfig python:build tar:bzip2 waf
 
 post-patch:
 	@${REINPLACE_CMD} -e '/autowaf.build_pc/s|^|#|' ${WRKSRC}/wscript

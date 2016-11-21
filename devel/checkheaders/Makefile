@@ -3,20 +3,24 @@
 
 PORTNAME=	checkheaders
 PORTVERSION=	1.0.1
+PORTREVISION=	1
 CATEGORIES=	devel
-MASTER_SITES=	GOOGLE_CODE
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	anastasios@mageirias.com
 COMMENT=	Checks headers in C/C++ programs
 
-USES=		gmake zip
+LICENSE=	GPLv3
+LICENSE_FILE=	${WRKSRC}/COPYING
+
+USE_GITHUB=	yes
+GH_ACCOUNT=	anastmag
+
+USES=		gmake
 MAKE_ARGS=	CXX="${CXX}"
 
 PLIST_FILES=	bin/${PORTNAME}
 
-LICENSE=	GPLv3
-
 do-install:
-	@${INSTALL_PROGRAM} ${WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 
 .include <bsd.port.mk>

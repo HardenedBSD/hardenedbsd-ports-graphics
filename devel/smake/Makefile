@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	smake
-PORTVERSION=	1.2.3
+PORTVERSION=	1.2.5
 CATEGORIES=	devel
 MASTER_SITES=	SF/s-make
 
@@ -21,14 +21,12 @@ USES=		gmake tar:bzip2
 MAKE_ENV=	CCOM="${CC}"
 MAKE_ARGS=	INS_BASE=${PREFIX} DEFMANBASE=. CC="${CC}" CCOM="${CC}"
 
-RULEUSED=	"`${WRKSRC}/conf/oarch.sh`"
-PLIST_SUB=	RULESUSED="${RULEUSED}"
+PLIST_SUB=	RULESUSED="${ARCH}-freebsd-cc"
 
 MKLINKS=	${WRKSRC}/RULES/MKLINKS
 GCCRULE=	${WRKSRC}/RULES/cc-gcc.rul
 
 pre-build:
-	@${CHMOD} +w ${MKLINKS} ${GCCRULE}
 	@${REINPLACE_CMD} -e 's|gcc$$|${CC}|' ${GCCRULE}
 	@${ECHO_CMD} "\$$symlink i386-freebsd-cc.rul ${ARCH}-freebsd-${CC}.rul" >> ${MKLINKS}
 
