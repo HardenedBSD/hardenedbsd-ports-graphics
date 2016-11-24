@@ -3,7 +3,7 @@
 # this port is for future amdgpu kernel support testing.
 
 PORTNAME=	xf86-video-amdgpu
-PORTVERSION=	1.1.2
+PORTVERSION=	1.2.0
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
