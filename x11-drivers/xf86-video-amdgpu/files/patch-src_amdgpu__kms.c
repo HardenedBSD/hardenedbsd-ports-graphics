@@ -1,11 +1,11 @@
---- src/amdgpu_kms.c.orig	2016-09-21 22:32:09 UTC
+--- src/amdgpu_kms.c.orig	2016-11-17 06:07:48 UTC
 +++ src/amdgpu_kms.c
-@@ -238,7 +238,7 @@ static void redisplay_dirty(ScreenPtr sc
- static void amdgpu_dirty_update(ScreenPtr screen)
+@@ -723,7 +723,7 @@ amdgpu_dirty_update(ScrnInfoPtr scrn)
  {
- 	RegionPtr region;
+ 	AMDGPUInfoPtr info = AMDGPUPTR(scrn);
+ 	ScreenPtr screen = scrn->pScreen;
 -	PixmapDirtyUpdatePtr ent;
 +	PixmapDirtyUpdatePtr ent = NULL;
+ 	RegionPtr region;
  
- 	if (xorg_list_is_empty(&screen->pixmap_dirty_list))
- 		return;
+ 	xorg_list_for_each_entry(ent, &screen->pixmap_dirty_list, ent) {

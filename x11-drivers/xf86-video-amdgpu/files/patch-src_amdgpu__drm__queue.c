@@ -1,4 +1,4 @@
---- src/amdgpu_drm_queue.c.orig	2016-09-16 09:01:22 UTC
+--- src/amdgpu_drm_queue.c.orig	2016-09-20 08:19:15 UTC
 +++ src/amdgpu_drm_queue.c
 @@ -61,7 +61,7 @@ amdgpu_drm_queue_handler(int fd, unsigne
  			 unsigned int usec, void *user_ptr)
@@ -9,7 +9,7 @@
  
  	xorg_list_for_each_entry_safe(e, tmp, &amdgpu_drm_queue, list) {
  		if (e->seq == seq) {
-@@ -132,7 +132,7 @@ amdgpu_drm_abort_one(struct amdgpu_drm_q
+@@ -133,7 +133,7 @@ amdgpu_drm_abort_one(struct amdgpu_drm_q
  void
  amdgpu_drm_abort_client(ClientPtr client)
  {
@@ -18,7 +18,7 @@
  
  	xorg_list_for_each_entry(e, &amdgpu_drm_queue, list) {
  		if (e->client == client)
-@@ -146,7 +146,7 @@ amdgpu_drm_abort_client(ClientPtr client
+@@ -147,7 +147,7 @@ amdgpu_drm_abort_client(ClientPtr client
  void
  amdgpu_drm_abort_entry(uintptr_t seq)
  {
@@ -27,7 +27,7 @@
  
  	xorg_list_for_each_entry_safe(e, tmp, &amdgpu_drm_queue, list) {
  		if (e->seq == seq) {
-@@ -162,7 +162,7 @@ amdgpu_drm_abort_entry(uintptr_t seq)
+@@ -163,7 +163,7 @@ amdgpu_drm_abort_entry(uintptr_t seq)
  void
  amdgpu_drm_abort_id(uint64_t id)
  {
@@ -36,7 +36,7 @@
  
  	xorg_list_for_each_entry_safe(e, tmp, &amdgpu_drm_queue, list) {
  		if (e->id == id) {
-@@ -190,7 +190,7 @@ amdgpu_drm_queue_init()
+@@ -191,7 +191,7 @@ amdgpu_drm_queue_init()
  void
  amdgpu_drm_queue_close(ScrnInfoPtr scrn)
  {
