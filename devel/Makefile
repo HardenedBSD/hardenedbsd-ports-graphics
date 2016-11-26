@@ -758,7 +758,6 @@
     SUBDIR += go-protobuf
     SUBDIR += go-raw
     SUBDIR += go-runewidth
-    SUBDIR += go-shellwords
     SUBDIR += go-slices
     SUBDIR += go-sql-driver
     SUBDIR += go-tools
@@ -4621,6 +4620,7 @@
     SUBDIR += py-thriftpy
     SUBDIR += py-timelib
     SUBDIR += py-tinyarray
+    SUBDIR += py-tinyrpc
     SUBDIR += py-tipper
     SUBDIR += py-total-ordering
     SUBDIR += py-tox
