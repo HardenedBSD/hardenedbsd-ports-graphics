@@ -18,7 +18,6 @@ INSTALL_TARGET=	install-strip
 ONLY_FOR_ARCHS=	i386 amd64
 
 CONFIGURE_ARGS+=--disable-udev
-CONFIGURE_ARGS+=--disable-glamor
 
 .include <bsd.port.options.mk>
 
