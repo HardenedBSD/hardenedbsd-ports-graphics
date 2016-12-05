@@ -17,6 +17,8 @@ USE_GL=		egl gl
 USE_LDCONFIG=	yes
 USE_XORG=	x11 xcb
 
+NOPIE_PORTS=	yes
+
 DOCSDIR=	${PREFIX}/share/doc/waffle1
 
 LIB_DEPENDS=	libudev.so:${PORTSDIR}/wayland/libudev-devd

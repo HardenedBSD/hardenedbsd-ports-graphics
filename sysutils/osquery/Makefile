@@ -41,6 +41,8 @@ GH_PROJECT=	third-party:tp
 GH_SUBDIR=	third-party:tp
 MAKE_JOBS_UNSAFE=	yes
 
+NOPIE_PORTS=	yes
+
 .include <bsd.port.pre.mk>
 
 .if ${OSVERSION} <= 1000000

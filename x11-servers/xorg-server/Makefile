@@ -23,6 +23,12 @@ XORG_CAT=	xserver
 SLAVE_PORT?=	no
 
 USES=		gmake libtool pkgconfig perl5 ssl tar:bzip2
+	#
+# HardenedBSD note:
+# Due to how xorg handles loadable modules, it cannot be compiled
+# with RELRO + BIND_NOW.
+NORELRO_PORTS=	yes
+
 USE_PERL5=	build
 USE_GL=		gbm egl gl
 USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
