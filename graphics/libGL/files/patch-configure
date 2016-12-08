@@ -38,8 +38,8 @@
  LIBOMXIL_BELLAGIO_REQUIRED=0.0
  LIBVA_REQUIRED=0.38.0
 @@ -21721,7 +21730,7 @@
- 
- 
+
+
  case "$host_os" in
 -linux*)
 +linux*|freebsd*)
@@ -49,7 +49,7 @@
 @@ -22849,6 +22858,78 @@
  	have_libudev=yes
  fi
- 
+
 +
 +pkg_failed=no
 +{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for LIBDEVQ" >&5
@@ -133,11 +133,23 @@
 +    DEFINES="$DEFINES -DHAVE_LIBDEVQ"
 +    have_pci_id=yes
 +fi
- 
+
  if test "$have_sysfs" = yes; then
      DEFINES="$DEFINES -DHAVE_SYSFS"
-@@ -23793,6 +23878,22 @@
+@@ -23907,11 +23992,33 @@ if test "x$enable_dri" = xyes; then
+             ;;
+         esac
          ;;
+-    *freebsd* | dragonfly* | *netbsd* | openbsd*)
++    dragonfly* | *netbsd* | openbsd*)
+         DEFINES="$DEFINES -DHAVE_ALIAS"
+         ;;
++    *freebsd*)
++        DEFINES="$DEFINES -DHAVE_ALIAS"
++        if test "x$enable_dri3" = xyes; then
++            DEFINES="$DEFINES -DHAVE_DRI3"
++        fi
++        ;;
      gnu*)
          DEFINES="$DEFINES -DHAVE_ALIAS"
 +        if test "x$enable_dri3" = xyes; then
@@ -160,7 +172,7 @@
      cygwin*)
          if test "x$with_dri_drivers" = "xyes"; then
 @@ -24646,6 +24747,8 @@
- 
+
  if test "x$need_pci_id$have_libudev" = xyesyes; then
      GBM_PC_REQ_PRIV="libudev >= $LIBUDEV_REQUIRED"
 +elif test "x$need_libdevq" = xyes; then
@@ -171,7 +183,7 @@
 @@ -25581,9 +25684,19 @@
          as_fn_error $? "cannot enable OpenCL without Gallium" "$LINENO" 5
      fi
- 
+
 +    if test "x$acv_mesa_CLANG" = xno; then
 +
 +    GCC_VERSION=`$CC -dumpversion`
@@ -185,7 +197,7 @@
      fi
 +# end of clang test.
 +    fi
- 
+
      if test "x$have_libclc" = xno; then
          as_fn_error $? "pkg-config cannot find libclc.pc which is required to build clover.
 @@ -26112,9 +26225,9 @@
